@@ -1,0 +1,152 @@
+<header class="hero" id="top">
+  <h1>VLSI Mastery Notes</h1>
+  <p>Everything from your two note-sets, rebuilt from zero: semiconductors, the p–n junction, the BJT, the MOS capacitor and the MOSFET. Every idea is explained like you are 10, then taken all the way to exam-level maths with solved questions.</p>
+  <div class="legend">
+    <span class="chip src">From your class notes</span>
+    <span class="chip beyond">Added from standard textbooks (not in your notes)</span>
+    <span class="chip" style="background:var(--kid);color:var(--kid-ink);border-color:transparent">Explain like I'm 10</span>
+    <span class="chip" style="background:var(--formula);color:var(--formula-ink);border-color:transparent">Formula</span>
+    <span class="chip" style="background:var(--trap);color:var(--trap-ink);border-color:transparent">Exam trap</span>
+  </div>
+  <div class="callout mine"><span class="lbl">Read this first: what I covered and what I could not</span>
+    <p><b>Your notes:</b> 36 handwritten pages (semiconductor physics through the BJT) plus 8 pages (MOS capacitor and the MOSFET up to the linear-region current). I read every page and every worked question is reproduced and re-checked below.</p>
+    <p><b>The book:</b> no textbook file came through, only the two note PDFs. So the "reference" content is standard material from the usual texts (Neamen, Sedra &amp; Smith, Razavi, Kang &amp; Leblebici) written from my own knowledge, and it is marked with a teal <b>Beyond your notes</b> tag. Send me the book's title or the chapter list and I can line the sections up with it.</p>
+    <p><b>Where your notes stop:</b> the MOSFET pages end right after the linear-region formula. Saturation, channel-length modulation, the body effect and the CMOS inverter are not in your notes, so I added them (tagged) because an exam almost always asks them next.</p>
+  </div>
+</header>
+
+<section class="chapter" id="ch0">
+  <h2><span class="num">CHAPTER 0</span>The Big Picture: What Is VLSI?</h2>
+  <p class="tagline">Before any formulas: what are we even building, and why do we start with tiny bits of crystal?</p>
+  <span class="chip src">Your notes p.1 (header list)</span>
+
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Imagine building a huge city out of LEGO. If you glue each brick by hand, one at a time, a city with a billion bricks would take forever. An <b>integrated circuit (IC)</b> is like a machine that prints the whole LEGO city at once on a piece of sand the size of your fingernail. <b>VLSI</b> (Very Large Scale Integration) just means the city has a <i>very</i> huge number of tiny buildings (transistors).</p>
+    <p>A <b>transistor</b> is a tiny switch. Millions of switches, wired together, can add numbers, remember things and run games. To make good switches we need a special material that can be a wire <i>or</i> a wall whenever we choose: that material is a <b>semiconductor</b>. That is why the whole course starts with semiconductors.</p>
+  </div>
+
+  <h3>Discrete vs Integrated</h3>
+  <ul>
+    <li><b>Discrete circuit:</b> separate components (resistors, transistors, capacitors) soldered onto a board with wires. Big, slow, expensive to build in large numbers.</li>
+    <li><b>Integrated circuit (IC):</b> all those components made together, on one small piece of silicon, in one manufacturing process. Small, fast, cheap, low power.</li>
+  </ul>
+
+  <h3>SSI, MSI, LSI, VLSI: counting the switches</h3>
+  {{fig:ic_scale|Integration levels. Gate counts are the usual textbook boundaries.}}
+  <div class="tablewrap"><table>
+    <tr><th>Level</th><th>Name</th><th>Roughly how many gates / transistors</th><th>Example</th></tr>
+    <tr><td>SSI</td><td>Small-Scale Integration</td><td>fewer than 10 gates</td><td>a single logic-gate chip (7400 NAND)</td></tr>
+    <tr><td>MSI</td><td>Medium-Scale</td><td>10 to 100 gates</td><td>counters, multiplexers, decoders</td></tr>
+    <tr><td>LSI</td><td>Large-Scale</td><td>100 to about 10,000 gates</td><td>early microprocessors, small memories</td></tr>
+    <tr><td>VLSI</td><td>Very-Large-Scale</td><td>10,000 to about 1,000,000 gates</td><td>1980s-90s microprocessors</td></tr>
+    <tr><td>ULSI</td><td>Ultra-Large-Scale</td><td>above a million (today: billions of transistors)</td><td>modern phone / laptop chips</td></tr>
+  </table></div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes</span>
+    <p>Exact boundaries differ by textbook (some count transistors, some count gates). If a question asks "define VLSI", say "more than about 10<sup>4</sup> to 10<sup>6</sup> transistors/gates on a single chip" and mention the trend: the number of transistors per chip roughly doubles every two years (<b>Moore's law</b>).</p>
+  </div>
+
+  <h3>The road map of this course (your "Unit 1")</h3>
+  <p>Your notes list Unit 1 as two halves. Everything below follows exactly this order:</p>
+  <div class="two">
+    <div><h4>Half A: Material physics</h4><ol>
+      <li>Semiconductor materials, crystal structure</li>
+      <li>Energy bands, E–k diagram, effective mass, holes</li>
+      <li>Fermi–Dirac statistics, density of states</li>
+      <li>Doping and carrier concentration</li>
+      <li>Drift, diffusion, mobility, recombination</li></ol></div>
+    <div><h4>Half B: Devices</h4><ol>
+      <li>p–n junction diode</li>
+      <li>BJT (bipolar junction transistor)</li>
+      <li>MOS capacitor</li>
+      <li>MOSFET (the switch inside every VLSI chip)</li>
+      <li>CMOS (nMOS + pMOS together)</li></ol></div>
+  </div>
+  <div class="callout kid"><span class="lbl">The story in one breath</span>
+    <p>Crystals have energy "floors" (bands) → electrons and holes live on those floors → we control how many there are by adding impurities (doping) → they move by pushing (drift) and by spreading out (diffusion) → put a p-piece next to an n-piece and you get a one-way gate (diode) → stack three pieces and a small current controls a big one (BJT) → or use an electric field through an insulator to open and close a channel (MOSFET) → pair two kinds of MOSFET and you get a switch that uses almost no power when idle (CMOS), the building block of VLSI.</p>
+  </div>
+</section>
+
+<section class="chapter" id="ch1">
+  <h2><span class="num">CHAPTER 1</span>Semiconductors and Energy Bands</h2>
+  <p class="tagline">What makes a material a metal, an insulator or a semiconductor? The answer is a picture of energy shelves.</p>
+  <span class="chip src">Your notes p.1 to p.3</span>
+
+  <h3>1.1 What is a semiconductor?</h3>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p>A semiconductor is a material whose <b>conductivity can be tuned by many orders of magnitude</b>. Applications: (i) switch, (ii) amplifier, (iii) logic device, (iv) LED, solar cells, photodetectors, (v) the whole electronics industry.</p></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Copper is like a wide-open highway: cars (electrons) run freely. Glass is like a highway with a giant wall across it: nothing gets through. A semiconductor is a highway with a small gate. If you give it a tiny push (heat, light, a little chemical "seasoning" called doping, or a voltage) the gate opens. Because <i>we</i> decide when it opens, we can make switches and amplifiers.</p></div>
+  <p>Typical conductivity numbers (in S/cm), so you can feel "many orders of magnitude":</p>
+  <div class="tablewrap"><table>
+    <tr><th>Material type</th><th>Conductivity σ (S/cm)</th><th>Example</th></tr>
+    <tr><td>Metal</td><td>10<sup>4</sup> to 10<sup>6</sup></td><td>copper, aluminium</td></tr>
+    <tr><td>Semiconductor</td><td>10<sup>-8</sup> to 10<sup>3</sup> (tunable!)</td><td>silicon: from about 4×10<sup>-6</sup> pure to 10<sup>3</sup> heavily doped</td></tr>
+    <tr><td>Insulator</td><td>below 10<sup>-12</sup></td><td>glass, SiO<sub>2</sub></td></tr>
+  </table></div>
+
+  <h3>1.2 Elemental vs compound semiconductors</h3>
+  <div class="two">
+    <div><h4>Elemental</h4><p>Made of <b>one</b> kind of atom, from group IV of the periodic table.</p><p>Examples: <b>Si</b> (silicon), <b>Ge</b> (germanium).</p></div>
+    <div><h4>Compound</h4><p>Made of <b>two or more</b> elements, e.g. group III + group V.</p><p>Examples: <b>GaAs</b> (gallium arsenide), <b>GaN</b> (gallium nitride).</p></div>
+  </div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: crystal structure</span>
+    <p>Your Unit-1 list starts with "crystal structure". Silicon and germanium atoms sit in a <b>diamond cubic</b> lattice: every atom has 4 nearest neighbours and shares one electron with each (a <b>covalent bond</b>), so every atom "feels" it has 8 outer electrons. GaAs uses the very similar <b>zinc-blende</b> lattice (Ga and As alternate). A <b>crystal</b> means the atoms repeat in a perfectly regular pattern; this regularity is what creates energy bands.</p></div>
+
+  <h3>1.3 Energy bands: valence band, conduction band, band gap</h3>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Think of a two-storey building for electrons. The <b>ground floor</b> is the <b>valence band (VB)</b>: it is crowded, everybody is packed in and cannot move around. The <b>top floor</b> is the <b>conduction band (CB)</b>: it is empty and roomy, so anyone who gets up there can run about and carry electricity. Between the floors there is empty space where nobody can stand: the <b>energy band gap E<sub>g</sub></b>. To climb from ground floor to top floor an electron needs at least E<sub>g</sub> of energy (from heat or light).</p></div>
+  {{fig:bands3|Metal: no gap, so electrons already move freely. Semiconductor: small gap, easy to jump. Insulator: huge gap, nobody can jump.}}
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Metal</th><th>Semiconductor</th><th>Insulator</th></tr>
+    <tr><td>Band gap</td><td>none (bands overlap)</td><td>small (about 0.5 to 3.5 eV)</td><td>very large (more than about 4 to 5 eV)</td></tr>
+    <tr><td>Free electrons at room temperature</td><td>huge number</td><td>few, but adjustable</td><td>practically none</td></tr>
+    <tr><td>Resistivity when temperature rises</td><td>increases</td><td>decreases (more carriers)</td><td>decreases slightly</td></tr>
+  </table></div>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p>Metals: the VB and CB touch/overlap. Insulators: E<sub>g</sub> "very greater". Semiconductors: E<sub>g</sub> "lesser". <b>E<sub>g</sub></b> = energy difference between the <b>lowest level of the CB</b> and the <b>highest level of the VB</b>.</p></div>
+
+  <h3>1.4 Where do bands come from? (Formation of energy bands)</h3>
+  <p>Your notes use <b>carbon</b> as the example (silicon behaves the same way, just one shell down).</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>One lonely atom has its own private "rooms" (energy levels): exact, single rooms. Now bring many atoms close together. Electrons from neighbouring atoms start to influence each other, and the rules of quantum physics say two electrons can't have exactly the same energy. So the single room of every atom is nudged a tiny bit up or down from its neighbours', and a huge crowd of almost-identical rooms forms a smooth-looking <b>band</b>, like a stairway so finely stepped that it looks like a ramp.</p></div>
+  <h4>Step by step with carbon (Z = 6)</h4>
+  <ol class="steps">
+    <li>Electron configuration: 1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>2</sup>. Inner 1s stays tightly bound; the action is in the outer shell (2s and 2p).</li>
+    <li>Number of states: an s-level has <b>2</b> states (spin up/down), a p-level has <b>6</b> states (three orbitals × 2 spins). Your notes list 1s: 2, 2s: 2, 2p: 6.</li>
+    <li>Electrons available: 2s holds 2 electrons, 2p holds only 2 of its 6 states. So each atom has <b>4 outer electrons</b> and <b>8 outer states</b> (2 + 6).</li>
+    <li>For <b>N</b> atoms: <b>8N states</b> and <b>4N electrons</b>. (Your notes: "6N states, 2N electrons" for p, "2N states, 2N electrons" for s.)</li>
+    <li>As the atoms come closer, the 2s level and 2p level spread into bands, then <b>merge</b> and re-split into <b>two bands of 4N states each</b>. The lower one holds all 4N electrons: <b>full = valence band</b>. The upper one is <b>empty = conduction band</b>. The empty region between them is E<sub>g</sub>.</li>
+  </ol>
+  {{fig:band_formation|Your notes page 3: the 2s and 2p bands from N atoms; at the real crystal spacing they leave 4N filled states below and 4N empty states above.}}
+  <div class="eq"><span class="cap">Counting rule</span>
+    <div class="row">N atoms → 8N outer states, 4N outer electrons → VB: 4N states (full), CB: 4N states (empty at 0 K)</div></div>
+
+  <h3>1.5 Band-gap values you must remember</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Material</th><th>E<sub>g</sub> at 300 K (from your notes)</th><th>Type</th></tr>
+    <tr><td>Ge</td><td><b>0.7 eV</b></td><td>elemental, indirect</td></tr>
+    <tr><td>Si</td><td><b>1.1 eV</b> (more precisely 1.12)</td><td>elemental, indirect</td></tr>
+    <tr><td>GaAs</td><td><b>1.34 eV</b> (textbooks: 1.42)</td><td>compound, direct</td></tr>
+    <tr><td>GaN</td><td><b>3.4 eV</b></td><td>compound, direct</td></tr>
+  </table></div>
+  <p class="mnemonic">Order for exams: Ge (0.7) &lt; Si (1.1) &lt; GaAs (1.34) &lt; GaN (3.4).</p>
+  <p>GaN's big gap is why it emits blue light and handles high voltages; Ge's tiny gap is why Ge devices leak a lot and turn on at lower voltage.</p>
+
+  <h3>1.6 Thermal energy of an electron</h3>
+  <p>Heat gives electrons random kicks. The typical kick size is <b>k<sub>B</sub>T</b>.</p>
+  <div class="eq"><span class="cap">Thermal energy</span>
+    <div class="row">E<sub>thermal</sub> = k<sub>B</sub>T &nbsp;&nbsp; with k<sub>B</sub> = 1.38×10<sup>-23</sup> J/K (Boltzmann constant)</div>
+    <div class="row">At T = 300 K: E = [[300 × 1.38×10<sup>-23</sup> | 1.6×10<sup>-19</sup>]] ≈ <b>25.87 meV ≈ 26 meV ≈ 0.026 eV</b></div></div>
+  <p>The division by 1.6×10<sup>-19</sup> converts joules to electron-volts (1 eV = 1.6×10<sup>-19</sup> J).</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Silicon's gap is 1.1 eV but a typical heat kick is only 0.026 eV, roughly <b>42 times too small</b>. So heat alone almost never lifts an electron across the gap, and only a rare, lucky electron makes it. That is why pure silicon at room temperature is such a poor conductor, and why <i>doping</i> is needed.</p></div>
+  <details class="q" open><summary>Worked question. How many times bigger than k<sub>B</sub>T at 300 K is the silicon band gap? What if T = 600 K?</summary><div class="ans">
+    <p>E<sub>g</sub>/k<sub>B</sub>T = 1.1 / 0.02585 ≈ <b>42.6</b> at 300 K. At 600 K, k<sub>B</sub>T doubles to 0.0517 eV, so the ratio is 1.1/0.0517 ≈ <b>21.3</b>. The exponent in <i>n</i><sub>i</sub> ∝ e<sup>-E<sub>g</sub>/2k<sub>B</sub>T</sup> halves, so <i>n</i><sub>i</sub> grows enormously with temperature.</p></div></details>
+
+  <div class="callout trap"><span class="lbl">Exam traps for this chapter</span>
+    <ul>
+      <li>Don't say "electrons are in the band gap". The gap is <b>forbidden</b>: no allowed states.</li>
+      <li>Metals have <b>no</b> gap because bands overlap, not because the gap is zero-sized in a semiconductor sense.</li>
+      <li>Always convert: 1 eV = 1.6×10<sup>-19</sup> J. Forgetting this gives answers off by 10<sup>19</sup>.</li>
+    </ul></div>
+</section>

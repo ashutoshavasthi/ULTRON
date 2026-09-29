@@ -1,0 +1,139 @@
+<section class="chapter" id="ch8">
+  <h2><span class="num">CHAPTER 8</span>The Transistor and the BJT</h2>
+  <p class="tagline">A transistor is a valve for electricity: a small control signal governs a big flow.</p>
+  <span class="chip src">Your notes p.30 to p.36</span>
+
+  <h3>8.1 What are transistors used for, and what kinds exist?</h3>
+  <p>Applications (your list): <b>1. switch, 2. logic gates, 3. memory devices, 4. amplifiers</b>. Two big families:</p>
+  <div class="two">
+    <div><h4>1. Field-effect transistor (FET)</h4><p>An <b>electric field</b> applied at the control terminal C controls the current between two terminals A and B. Almost no current enters the control terminal.</p><p>Examples: <b>MOSFET</b>, MESFET, MISFET (Chapters 9 and 10).</p></div>
+    <div><h4>2. Junction transistor</h4><p>A <b>small amount of current injected</b> at the control terminal C controls the (much larger) current between A and B.</p><p>Examples: <b>BJT</b>, hetero-junction BJT (HBT).</p></div>
+  </div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A garden tap. In a <b>BJT</b> you push a small amount of water into the tap's handle and that lets a big river flow. In a <b>FET</b> you don't push any water; you just bring an invisible magnet close to the handle and it opens up. BJT: "current controls current". FET: "voltage (field) controls current".</p></div>
+
+  <h3>8.2 BJT structure</h3>
+  <p>BJT = <b>B</b>ipolar <b>J</b>unction <b>T</b>ransistor. "Bipolar" because <b>both</b> electrons and holes take part in conduction. It is a three-layer sandwich with two p–n junctions back-to-back:</p>
+  <ul>
+    <li><b>Emitter (E)</b>: emits (injects) carriers. Heavily doped.</li>
+    <li><b>Base (B)</b>: the very thin, lightly doped middle layer that controls the flow.</li>
+    <li><b>Collector (C)</b>: collects the carriers. Moderately doped, physically the largest.</li>
+    <li>Junctions: <b>EBJ</b> = emitter–base junction, <b>CBJ</b> = collector–base junction.</li>
+    <li>Two flavours: <b>npn</b> (n–p–n; electrons do the work) and <b>pnp</b> (p–n–p; holes do the work). Your notes draw the pnp first and then analyse the npn, the more common type.</li>
+  </ul>
+  {{fig:bjt|An npn BJT in active mode (your pages 35 and 36 combined).}}
+
+  <h3>8.3 Band diagram of an npn transistor</h3>
+  {{fig:bjt_bands|Your page 32. Two junctions form two barriers; the base sits between them, higher in energy.}}
+  <p>Read it exactly as you read the diode: E<sub>F</sub> is flat (equilibrium, no current), the bands bend at each junction (depletion regions), and the p-type base has its bands raised relative to the n-type emitter and collector. Electrons in the emitter must climb the EBJ barrier to get into the base, and electrons in the base slide down the CBJ slope into the collector.</p>
+
+  <h3>8.4 Modes of operation</h3>
+  <div class="tablewrap"><table>
+    <tr><th>EBJ</th><th>CBJ</th><th>Mode</th><th>Use</th></tr>
+    <tr><td>Forward biased (F.B.)</td><td>Reverse biased (R.B.)</td><td><b>Active</b></td><td>amplifier</td></tr>
+    <tr><td>Forward biased</td><td>Forward biased</td><td><b>Saturation</b></td><td>switch ON</td></tr>
+    <tr><td>Reverse biased</td><td>Reverse biased</td><td><b>Cut-off</b></td><td>switch OFF</td></tr>
+  </table></div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: the fourth (rarely used) mode</span>
+    <p>EBJ reverse and CBJ forward is called the <b>reverse-active</b> mode. The BJT works but with poor gain because the collector is not designed to inject efficiently.</p></div>
+  <p class="mnemonic">Active = F-R, Saturation = F-F, Cut-off = R-R.</p>
+
+  <h3>8.5 Configurations</h3>
+  <p>A BJT has three terminals but an amplifier needs an input pair and an output pair, so one terminal is shared (the "common" one):</p>
+  <div class="tablewrap"><table>
+    <tr><th>Configuration</th><th>Common terminal</th><th>Input port</th><th>Output port</th></tr>
+    <tr><td><b>CE</b> (Common Emitter)</td><td>Emitter (grounded)</td><td>B–E</td><td>C–E</td></tr>
+    <tr><td><b>CB</b> (Common Base)</td><td>Base (grounded)</td><td>E–B</td><td>C–B</td></tr>
+    <tr><td><b>CC</b> (Common Collector, emitter follower)</td><td>Collector (grounded)</td><td>B–C</td><td>E–C</td></tr>
+  </table></div>
+  <h4>Input and output characteristics</h4>
+  <ul><li><b>Input characteristic:</b> input current vs input voltage, with the <b>output voltage held constant</b>.</li>
+  <li><b>Output characteristic:</b> output current vs output voltage, with the <b>input current held constant</b>.</li></ul>
+  <div class="tablewrap"><table>
+    <tr><th>Config.</th><th>Input char.</th><th>Held constant</th><th>Output char.</th><th>Held constant</th></tr>
+    <tr><td>CE</td><td>I<sub>B</sub> vs V<sub>BE</sub></td><td>V<sub>CE</sub></td><td>I<sub>C</sub> vs V<sub>CE</sub></td><td>I<sub>B</sub></td></tr>
+    <tr><td>CB</td><td>I<sub>E</sub> vs V<sub>EB</sub></td><td>V<sub>CB</sub></td><td>I<sub>C</sub> vs V<sub>CB</sub></td><td>I<sub>E</sub></td></tr>
+    <tr><td>CC</td><td>I<sub>B</sub> vs V<sub>BC</sub></td><td>V<sub>EC</sub></td><td>I<sub>E</sub> vs V<sub>EC</sub></td><td>I<sub>B</sub></td></tr>
+  </table></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Think of an electric guitar plugged into an amp. Two wires go in and two come out, but there are only three "contacts" on the gadget, so one contact is shared between "in" and "out". Which contact is shared gives you the name: common emitter, common base or common collector. CE is the champion for amplification because it boosts both current and voltage.</p></div>
+
+  <h3>8.6 What happens inside an npn in active mode</h3>
+  <p>Voltages: <b>V<sub>BE</sub></b> forward-biases the EBJ, <b>V<sub>CB</sub></b> reverse-biases the CBJ. Follow the carriers (your circled numbers ①–⑤):</p>
+  <ol class="steps">
+    <li><b>Emitter → base.</b> The EBJ is forward, so electrons flow from the heavily-doped n-emitter into the p-base. This is the electron current <b>I<sub>En</sub></b> ①. Holes also flow the other way, from base into emitter: <b>I<sub>Ep</sub></b> ②. Total emitter current: <b>I<sub>E</sub> = I<sub>En</sub> + I<sub>Ep</sub></b>. The hole part is <b>not useful</b> (it doesn't reach the collector).</li>
+    <li><b>Through the base.</b> The base is very thin, so almost all the injected electrons (now minority carriers in the base) diffuse across without recombining. A few (1–2 %) recombine with holes in the base. Those lost holes must be replaced, and that replacement is the <b>base current I<sub>B,rec</sub></b> ③ that we supply.</li>
+    <li><b>Collector sweep.</b> The reverse-biased CBJ has a strong field that sweeps the electrons arriving at the base edge into the collector: the useful collector current <b>I<sub>Cn</sub></b> ④.</li>
+    <li><b>Leakage.</b> The reverse-biased CBJ also carries a tiny leakage current <b>I<sub>BC,rev</sub></b> ⑤ (minority carriers, like the diode's I<sub>s</sub>). It is usually neglected but exists.</li>
+  </ol>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p>"I<sub>C</sub> will increase if we increase the electrons going from emitter to base." "I<sub>Ep</sub> is not used for output current." "Due to recombination of electrons and holes in the p-region, holes are reduced, therefore we provide I<sub>B,rec</sub> (base current)."</p></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Kids (electrons) run from a huge crowded playground (emitter) across a very narrow bridge (base) into a big slide (collector) that carries them away. On the narrow bridge a couple of kids trip and get stuck (recombine); the teacher (base current) must send in a few replacements. The <b>tiny number the teacher sends controls the huge number of kids flowing</b>. That is amplification.</p></div>
+  <div class="eq"><span class="cap">Current relations</span>
+    <div class="row">I<sub>E</sub> = I<sub>C</sub> + I<sub>B</sub> &nbsp;&nbsp; I<sub>C</sub> ≈ I<sub>Cn</sub> &nbsp;&nbsp; I<sub>B</sub> = I<sub>B,rec</sub> + I<sub>Ep</sub> (+ leakage)</div></div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes</span>
+    <p>I<sub>C</sub> = I<sub>S</sub> e<sup>V<sub>BE</sub>/V<sub>T</sub></sup> (exponential, like the diode) and I<sub>B</sub> = I<sub>C</sub>/β. So V<sub>BE</sub> ≈ 0.7 V is the usual "on" voltage for silicon.</p></div>
+
+  <h3>8.7 The four figures of merit</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Name</th><th>Symbol</th><th>Definition</th><th>What it says</th><th>Ideal</th></tr>
+    <tr><td>Base transport factor</td><td>B (α<sub>T</sub>)</td><td>I<sub>Cn</sub> / I<sub>En</sub></td><td>fraction of electrons injected into the base that survive the trip and reach the collector</td><td>≈ 1</td></tr>
+    <tr><td>Emitter injection efficiency</td><td>γ<sub>E</sub></td><td>I<sub>En</sub> / (I<sub>En</sub> + I<sub>Ep</sub>)</td><td>how much of the total emitter current is the useful electron current</td><td>≈ 1</td></tr>
+    <tr><td>Current transfer ratio</td><td>α</td><td>I<sub>Cn</sub> / I<sub>E</sub></td><td>fraction of emitter current that reaches the collector (CB current gain)</td><td>0.98 to 0.998</td></tr>
+    <tr><td>Gain</td><td>β</td><td>I<sub>C</sub> / I<sub>B</sub></td><td>CE current gain (h<sub>FE</sub>)</td><td>50 to 300</td></tr>
+  </table></div>
+  <div class="eq"><span class="cap">Derivations</span>
+    <div class="row">α = [[ I<sub>Cn</sub> | I<sub>E</sub> ]] = [[ I<sub>Cn</sub> | I<sub>En</sub> ]] × [[ I<sub>En</sub> | I<sub>E</sub> ]] = <b>B × γ<sub>E</sub></b></div>
+    <div class="row">I<sub>E</sub> = I<sub>C</sub> + I<sub>B</sub> ⇒ I<sub>B</sub> = I<sub>E</sub>(1 − α) ⇒ β = [[ I<sub>C</sub> | I<sub>B</sub> ]] = [[ α I<sub>E</sub> | (1 − α) I<sub>E</sub> ]] ⇒ <b>β = [[ α | 1 − α ]]</b></div>
+    <div class="row">and the inverse: <b>α = [[ β | β + 1 ]]</b>, I<sub>E</sub> = (β + 1) I<sub>B</sub></div></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Out of 100 kids leaving the playground, γ tells you how many head the right way (the rest run backwards and are wasted), and B tells you how many of the right-way kids make it across the bridge without tripping. Multiply the two and you get α, the fraction that reaches the slide. Say α = 0.98: 98 arrive and 2 are the ones the teacher must replace, so the gain is β = 98/2 = 49.</p></div>
+  <p>Notice β is extremely sensitive to α: α = 0.98 ⇒ β = 49; α = 0.99 ⇒ β = 99; α = 0.995 ⇒ β = 199. Improving efficiency by half a percent doubles the gain.</p>
+
+  <h3>8.8 How to design a good BJT: base width and doping</h3>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <ol style="margin:0 0 8px"><li><b>Width of base should be small</b> to reduce recombination. W<sub>base</sub> ↓ ⇒ recombination ↓ ⇒ collector current ↑ (and B → 1).</li>
+    <li>Currents from the diode formulas: I<sub>En</sub> = q (D<sub>n</sub>/L<sub>n</sub>)(n<sub>i</sub>²/N<sub>A</sub>)(e<sup>V/V<sub>T</sub></sup> − 1) [base doping N<sub>AB</sub>] and I<sub>Ep</sub> = q (D<sub>p</sub>/L<sub>p</sub>)(n<sub>i</sub>²/N<sub>D</sub>)(e<sup>V/V<sub>T</sub></sup> − 1) [emitter doping N<sub>DE</sub>], with the same applied V<sub>BE</sub>. To make I<sub>En</sub> ≫ I<sub>Ep</sub> we need N<sub>DE</sub> ≫ N<sub>AB</sub>.</li>
+    <li>Therefore <b>base: lightly doped</b>, <b>emitter: heavily doped</b>.</li></ol></div>
+  <div class="tablewrap"><table>
+    <tr><th>Region</th><th>Doping</th><th>Width</th><th>Reason</th></tr>
+    <tr><td>Emitter</td><td><b>heavy</b> (n⁺)</td><td>medium</td><td>inject lots of electrons; I<sub>Ep</sub> is small ⇒ γ<sub>E</sub> ≈ 1</td></tr>
+    <tr><td>Base</td><td><b>light</b> (p)</td><td><b>very thin</b></td><td>few holes to recombine with ⇒ B ≈ 1; thin so electrons cross before recombining</td></tr>
+    <tr><td>Collector</td><td>moderate</td><td>largest</td><td>collects and dissipates power; lightly enough doped to withstand high reverse voltage</td></tr>
+  </table></div>
+  <details class="q" open><summary>Worked: emitter N<sub>DE</sub> = 10<sup>19</sup> cm<sup>-3</sup>, base N<sub>AB</sub> = 10<sup>17</sup> cm<sup>-3</sup>. Assume D<sub>p</sub>/D<sub>n</sub> = 0.4 and equal diffusion lengths. Find γ<sub>E</sub>. If B = 0.995, find α and β.</summary><div class="ans">
+    <ol class="steps">
+    <li>I<sub>Ep</sub>/I<sub>En</sub> = (D<sub>p</sub>/D<sub>n</sub>)(L<sub>n</sub>/L<sub>p</sub>)(N<sub>AB</sub>/N<sub>DE</sub>) = 0.4 × 1 × 10<sup>17</sup>/10<sup>19</sup> = 0.004.</li>
+    <li>γ<sub>E</sub> = 1/(1 + 0.004) = <b>0.996</b>.</li>
+    <li>α = B × γ<sub>E</sub> = 0.995 × 0.996 = <b>0.991</b>.</li>
+    <li>β = α/(1 − α) = 0.991/0.009 ≈ <b>110</b>.</li></ol>
+    <p>If someone lowered the emitter doping to 10<sup>17</sup> (equal to the base), the ratio would be 0.4, γ<sub>E</sub> = 0.71, and β would collapse to about 2.4. That's why the emitter must be heavily doped.</p></div></details>
+  <details class="q" open><summary>Worked: a BJT has I<sub>C</sub> = 2 mA and β = 100. Find I<sub>B</sub>, I<sub>E</sub>, α. Then the same transistor is replaced by one with β = 200: what changes if I<sub>B</sub> is kept fixed?</summary><div class="ans">
+    <p>I<sub>B</sub> = I<sub>C</sub>/β = 2 mA/100 = <b>20 μA</b>. I<sub>E</sub> = I<sub>C</sub> + I<sub>B</sub> = <b>2.02 mA</b>. α = I<sub>C</sub>/I<sub>E</sub> = 2/2.02 = <b>0.990</b> (also β/(β+1) = 100/101 ✔). With I<sub>B</sub> fixed at 20 μA and β = 200: I<sub>C</sub> = 200 × 20 μA = <b>4 mA</b>; I<sub>E</sub> = 4.02 mA; α = 0.995. The collector current doubles because β is a property of the device: a real design problem (β varies ±50 % between parts) that engineers fix with feedback.</p></div></details>
+
+  <h3>8.9 Metallurgical vs neutral base width</h3>
+  <ul>
+    <li><b>Metallurgical base width</b> = the physical (initial) distance between the two metallurgical junctions.</li>
+    <li><b>Neutral base width</b> = the part of the base that is <i>not</i> depleted: the region where recombination happens and carriers diffuse. It is smaller than the metallurgical width because each depletion region eats into the base.</li>
+  </ul>
+  <div class="eq"><div class="row">W<sub>neutral</sub> = W<sub>metallurgical</sub> − (depletion penetration into the base from EBJ) − (depletion penetration into the base from CBJ)</div></div>
+
+  <h3>8.10 Base-width modulation and the Early voltage</h3>
+  {{fig:bjt_curves|Your page 36. Ideal output curves are flat; real ones tilt upward. Extending the tilted lines backwards, they all meet the voltage axis at −V_A.}}
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Imagine the narrow bridge (the base) has walls that can slowly squeeze it. When you increase the collector voltage, the depletion region at the collector junction grows and <b>eats into the base</b>, so the bridge gets even shorter. A shorter bridge means fewer kids trip on it, so more of them reach the slide and the collector current creeps up. This slow rise of I<sub>C</sub> with voltage is the <b>Early effect</b> (base-width modulation).</p></div>
+  <ul>
+    <li><b>Ideal:</b> in the active region I<sub>C</sub> is independent of V<sub>CB</sub> (or V<sub>CE</sub>): horizontal lines, like a perfect current source.</li>
+    <li><b>Practical:</b> the neutral base width shrinks as V<sub>CB</sub> rises ⇒ recombination ↓ and the base gradient ↑ ⇒ I<sub>C</sub> ↑. The lines have a positive slope.</li>
+    <li>Extrapolate those sloping lines back to I<sub>C</sub> = 0: they all meet the voltage axis at the same point <b>−V<sub>A</sub></b>. <b>V<sub>A</sub> is the Early voltage</b> (typically 50 to 200 V).</li>
+  </ul>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: the formula</span>
+    <div class="eq"><div class="row">I<sub>C</sub> = I<sub>S</sub> e<sup>V<sub>BE</sub>/V<sub>T</sub></sup> ( 1 + [[ V<sub>CE</sub> | V<sub>A</sub> ]] ) &nbsp;&nbsp; output resistance r<sub>o</sub> = [[ V<sub>A</sub> + V<sub>CE</sub> | I<sub>C</sub> ]] ≈ [[ V<sub>A</sub> | I<sub>C</sub> ]]</div></div>
+    <p>A larger V<sub>A</sub> means flatter lines and a better current source. Example: V<sub>A</sub> = 100 V, I<sub>C</sub> = 1 mA ⇒ r<sub>o</sub> ≈ 100 kΩ.</p></div>
+  <div class="callout trap"><span class="lbl">Exam traps for the BJT</span>
+    <ul><li>Active mode means <b>EBJ forward, CBJ reverse</b>. Students often say "both forward".</li>
+    <li>The base current is <b>not</b> the input carriers of the collector current; it is only the small amount that replaces recombined carriers (plus the wasted hole current).</li>
+    <li>α is always &lt; 1; β is always ≫ 1. β = α/(1−α), not α/(1+α).</li>
+    <li>Emitter arrow: it points in the direction of conventional current in the emitter: <b>out of</b> the emitter for npn ("Not Pointing iN"), <b>into</b> the emitter for pnp.</li></ul></div>
+</section>
