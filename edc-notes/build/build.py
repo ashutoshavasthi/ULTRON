@@ -5,6 +5,7 @@ markdown (+ ::: boxes, {{fig}} tags, $math$) -> HTML, math via KaTeX (node), fig
 KaTeX fonts inlined as base64 -> one file that works offline.
 """
 import base64, glob, html, json, os, re, subprocess, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import markdown
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -16,9 +17,9 @@ OUT = os.path.join(ROOT, "EDC_Complete_Notes.html")
 BOX_LABEL = {
     "kid": "Explain it like I’m 10", "formula": "Formula box", "ex": "Worked example", "trap": "Exam trap",
     "try": "Try it yourself", "note": "Note", "class": "In your class notes", "flag": "Heads-up: check this",
-    "remember": "Remember",
+    "remember": "Remember", "words": "Words and symbols you need", "soln": "Answers and full solutions",
 }
-BOX_ICON = {"kid": "🧒", "formula": "∑", "ex": "✎", "trap": "⚠", "try": "?", "note": "i", "class": "📓", "flag": "⚑", "remember": "★"}
+BOX_ICON = {"kid": "🧒", "formula": "∑", "ex": "✎", "trap": "⚠", "try": "?", "note": "i", "class": "📓", "flag": "⚑", "remember": "★", "words": "Aa", "soln": "✔"}
 
 
 # ---------------------------------------------------------------- nested boxes -> variable-length fences
@@ -52,6 +53,41 @@ def fix_lists(text):
     return "\n".join(out)
 
 
+def add_abbr(text):
+    from glossary import G
+    terms = sorted(G, key=len, reverse=True)
+    chunks = re.split(r"(?m)^(?=# )", text)
+    res = []
+    for ch in chunks:
+        lines = ch.split("\n"); done = set(); inwords = False
+        for i, ln in enumerate(lines):
+            if ln.startswith(":::") and "words" in ln.split()[:2]: inwords = True; continue
+            if inwords:
+                if re.match(r"^:{3,}\s*$", ln): inwords = False
+                continue
+            if ln.startswith(("#", ":::", "{{fig", "<div", "</div")) or "<summary>" in ln or "<details" in ln: continue
+            parts = re.split(r"(<abbr[^>]*>.*?</abbr>|<[^>]+>)", ln)
+            for pi in range(0, len(parts), 2):
+                seg = parts[pi]
+                found = []
+                for t in terms:
+                    if t in done: continue
+                    m = re.search(r"(?<![\w@-])" + re.escape(t) + r"(?![\w-])", seg)
+                    if m: found.append((m.start(), m.end(), t))
+                found.sort(key=lambda x: (x[0], -(x[1] - x[0])))
+                out = []; pos = 0
+                for st, en, t in found:
+                    if st < pos: continue
+                    tip = G[t].replace('"', "'")
+                    out.append(seg[pos:st]); out.append(f'<abbr title="{tip}">{t}</abbr>'); pos = en; done.add(t)
+                out.append(seg[pos:])
+                parts[pi] = "".join(out)
+            ln = "".join(parts)
+            lines[i] = ln
+        res.append("\n".join(lines))
+    return "".join(res)
+
+
 def protect_math(text):
     store = []
 
@@ -73,7 +109,7 @@ def render_math(store):
     return json.loads(p.stdout)
 
 
-md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists", "md_in_html"])
+md = markdown.Markdown(extensions=["tables", "fenced_code", "attr_list", "sane_lists", "md_in_html", "nl2br"])
 
 
 def md_convert(text):
@@ -113,6 +149,7 @@ def build():
     raw = fix_nested_boxes(raw)
     raw = fix_lists(raw)
     raw, store = protect_math(raw)
+    raw = add_abbr(raw)
 
     stash_html = []
 
@@ -173,13 +210,18 @@ def build():
     body = parts[0] + "".join(f'<section class="chapter">{p}</section>' for p in parts[1:])
 
     math = render_math(store)
+    texmap = {m["id"]: m["tex"] for m in store}
+    nav_plain = {}
+    for (l, sl, i) in nav:
+        p = re.sub(r"<[^>]+>", "", i)
+        p = re.sub(r"@@(m\d+)@@", lambda m: texmap.get(m.group(1), ""), p)
+        nav_plain[sl] = re.sub(r"\\[a-z]+\s?|[{}_^]", lambda m: "" if m.group(0) in "{}" else ("" if m.group(0).startswith("\\") else "" if m.group(0) in "_^" else m.group(0)), p)
     for k, v in math.items():
         body = body.replace(f"@@{k}@@", v)
-        nav = [(l, s, i.replace(f"@@{k}@@", v)) for (l, s, i) in nav]
 
     navhtml = []
     for level, s, inner in nav:
-        plain = re.sub(r"<[^>]+>", "", inner)
+        plain = nav_plain.get(s, re.sub(r"<[^>]+>", "", inner))
         if level == 1:
             navhtml.append(f'<li class="n1"><label class="done" title="mark chapter as studied"><input type="checkbox" data-ch="{s}"><span></span></label><a href="#{s}">{plain}</a></li>')
         else:

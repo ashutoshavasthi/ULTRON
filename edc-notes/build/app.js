@@ -31,4 +31,12 @@
       var a=links[e.target.id];if(a){a.classList.add('on');var r=a.getBoundingClientRect(),sr=side.getBoundingClientRect();if(r.top<sr.top+40||r.bottom>sr.bottom-40)a.scrollIntoView({block:'center'})}}})},{rootMargin:'-60px 0px -75% 0px'});
     heads.forEach(function(h){io.observe(h)});
   }
+  // tap/hover definitions
+  var tip=document.createElement('div');tip.id='tip';document.body.appendChild(tip);
+  function showTip(el){tip.textContent=el.getAttribute('title')||el.dataset.t;var r=el.getBoundingClientRect();tip.style.display='block';
+    tip.style.left=Math.max(8,Math.min(innerWidth-310,r.left))+'px';tip.style.top=(r.bottom+6+tip.offsetHeight>innerHeight?r.top-tip.offsetHeight-6:r.bottom+6)+'px'}
+  document.querySelectorAll('abbr[title]').forEach(function(a){a.dataset.t=a.title;a.removeAttribute('title');
+    a.addEventListener('mouseenter',function(){showTip(a)});a.addEventListener('mouseleave',function(){tip.style.display='none'});
+    a.addEventListener('click',function(e){e.stopPropagation();showTip(a)})});
+  document.addEventListener('click',function(){tip.style.display='none'});
 })();
