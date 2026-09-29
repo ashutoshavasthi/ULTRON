@@ -1,0 +1,171 @@
+<section class="chapter" id="ch7">
+  <h2><span class="num">CHAPTER 7</span>The p–n Junction Diode</h2>
+  <p class="tagline">Glue a p-type piece to an n-type piece and something magical appears: a one-way street for current.</p>
+  <span class="chip src">Your notes p.19 to p.30</span>
+
+  <h3>7.1 Physical structure</h3>
+  <p>A p–n diode is one crystal, p-doped on one side and n-doped on the other, with a metal contact on each end. The <b>p-side terminal is the anode</b> and the <b>n-side terminal is the cathode</b>. The boundary is the <b>metallurgical junction</b>. The circuit symbol arrow points from anode to cathode, the direction conventional current is allowed to flow.</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Two neighbouring playgrounds. Playground P has lots of empty swings (holes). Playground N has lots of kids (electrons). A one-way turnstile in the fence lets kids pass in only one direction. That fence-with-turnstile is the diode.</p></div>
+
+  <h3>7.2 Open circuit: what happens the instant p meets n</h3>
+  {{fig:pn_structure|Your pages 19 to 22: carriers, fixed ions, the depletion region, the charge profile and the electric-field profile.}}
+  <ol class="steps">
+    <li><b>Concentration difference.</b> The p-side is full of holes (p ≫ n) and the n-side full of electrons (n ≫ p). Your notes: "p&gt;n" on the left and "n&gt;p" on the right.</li>
+    <li><b>Diffusion current I<sub>D</sub>.</b> Holes diffuse from p to n; electrons diffuse from n to p. Both carriers moving this way make a conventional current <b>from p to n</b>. Your notes: "Diffusion current: p → n".</li>
+    <li><b>A depletion region forms.</b> When a hole leaves the p-side it leaves behind a <b>fixed negative acceptor ion</b>; when an electron leaves the n-side it leaves a <b>fixed positive donor ion</b>. Near the junction these uncovered charges pile up: Q<sup>−</sup> on the p-side, Q<sup>+</sup> on the n-side. The region has almost no free carriers, hence <b>depletion region</b> (also called space-charge region).</li>
+    <li><b>Built-in electric field.</b> The + and − sheets create a field that points from the n-side to the p-side. This field is a hill (barrier) that opposes further diffusion. The voltage across it is the <b>barrier potential (built-in voltage) V<sub>0</sub></b>.</li>
+    <li><b>Drift current I<sub>drift</sub>.</b> The same field sweeps <b>minority</b> carriers across: electrons from the p-side to the n-side, holes from the n-side to the p-side. Drift current flows from n to p (conventional). Your notes: "Drift current is due to the movement of minority charge carriers"; it is also called the <b>saturation current I<sub>s</sub></b>. Majority carriers: p on the p-side, n on the n-side. Minority: n on the p-side, p on the n-side.</li>
+    <li><b>Equilibrium (open circuit).</b> Diffusion grows until the barrier is high enough that the two currents are equal and opposite:</li>
+  </ol>
+  <div class="eq"><span class="cap">Equilibrium</span><div class="row"><b>I<sub>diffusion</sub> = I<sub>drift</sub> = I<sub>s</sub></b> ⇒ net current = 0</div></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Kids from the N playground run into the P playground. But every kid who leaves makes the N side more "positive" (missing kids' friends) and every swing that gets filled makes the P side "negative". Soon there's an invisible wall of charge at the fence that pushes new kids back. When the pushback exactly equals the urge to run over, the traffic stops. That wall is the depletion region; its strength is V<sub>0</sub>.</p></div>
+
+  <h3>7.3 The built-in voltage V<sub>0</sub></h3>
+  <div class="eq"><span class="cap">Junction built-in voltage</span>
+    <div class="row"><b>V<sub>0</sub> = V<sub>T</sub> ln( [[ N<sub>A</sub> N<sub>D</sub> | n<sub>i</sub>² ]] )</b></div>
+    <div class="row">V<sub>T</sub> = k<sub>B</sub>T/q (thermal voltage), N<sub>A</sub>, N<sub>D</sub> = doping, n<sub>i</sub> = intrinsic concentration</div></div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: one-line derivation</span>
+    <p>At equilibrium the electron concentration on the n-side (n<sub>n0</sub> ≈ N<sub>D</sub>) and on the p-side (n<sub>p0</sub> = n<sub>i</sub>²/N<sub>A</sub>) differ by the Boltzmann factor of the barrier: n<sub>n0</sub>/n<sub>p0</sub> = e<sup>V<sub>0</sub>/V<sub>T</sub></sup>. Therefore V<sub>0</sub> = V<sub>T</sub> ln(N<sub>D</sub>N<sub>A</sub>/n<sub>i</sub>²).</p></div>
+  <ul><li>Typical Si diodes: V<sub>0</sub> ≈ 0.6 to 0.8 V; Ge: about 0.3 V. Heavier doping ⇒ larger V<sub>0</sub> (only logarithmically).</li>
+  <li>You <b>cannot measure V<sub>0</sub> with a voltmeter</b> across the open diode: the metal contacts create equal and opposite contact potentials.</li></ul>
+
+  <h3>7.4 Width of the depletion region and stored charge</h3>
+  <p>Let the depletion region extend x<sub>p</sub> into the p-side and x<sub>n</sub> into the n-side, so the total width is <b>W = x<sub>n</sub> + x<sub>p</sub></b> (your notes use ω).</p>
+  <h4>Step 1: the two charge sheets are equal (charge neutrality of the whole diode)</h4>
+  <div class="eq"><div class="row">|Q<sub>+</sub>| = q (A x<sub>n</sub>) N<sub>D</sub> &nbsp;&nbsp; |Q<sub>−</sub>| = q (A x<sub>p</sub>) N<sub>A</sub> &nbsp;&nbsp; (A = cross-section area)</div>
+    <div class="row">|Q<sub>+</sub>| = |Q<sub>−</sub>| ⇒ <b>[[ x<sub>n</sub> | x<sub>p</sub> ]] = [[ N<sub>A</sub> | N<sub>D</sub> ]]</b></div></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A see-saw again: the two sides must carry equal "weights". If one side has bricks packed 100× more densely, it only needs a layer 1/100 as thick. So <b>the depletion region sinks deeper into the lightly doped side</b>. If N<sub>A</sub> ≫ N<sub>D</sub> (a p⁺–n junction), then x<sub>n</sub> ≫ x<sub>p</sub>, and W ≈ x<sub>n</sub>.</p></div>
+  <h4>Step 2: the width (given in your notes)</h4>
+  <div class="eq"><span class="cap">Depletion width (zero bias)</span>
+    <div class="row"><b>W = x<sub>n</sub> + x<sub>p</sub> = √( [[ 2ε<sub>s</sub> | q ]] ( [[1 | N<sub>A</sub>]] + [[1 | N<sub>D</sub>]] ) V<sub>0</sub> )</b></div>
+    <div class="row">ε<sub>s</sub> = permittivity of the semiconductor; for Si: <b>1.04×10<sup>-12</sup> F/cm</b> (= 11.7 ε<sub>0</sub>)</div></div>
+  <h4>Step 3: splitting W into x<sub>n</sub> and x<sub>p</sub> (your derivation)</h4>
+  <ol class="steps"><li>From x<sub>n</sub>/x<sub>p</sub> = N<sub>A</sub>/N<sub>D</sub>, add 1 to both sides: (x<sub>p</sub> + x<sub>n</sub>)/x<sub>p</sub> = (N<sub>D</sub> + N<sub>A</sub>)/N<sub>D</sub>.</li>
+  <li>Since x<sub>p</sub> + x<sub>n</sub> = W:</li></ol>
+  <div class="eq"><div class="row"><b>x<sub>p</sub> = W · [[ N<sub>D</sub> | N<sub>A</sub> + N<sub>D</sub> ]]</b> &nbsp;&nbsp;&nbsp; <b>x<sub>n</sub> = W · [[ N<sub>A</sub> | N<sub>A</sub> + N<sub>D</sub> ]]</b></div></div>
+  <p>Notice the "crossover": x<sub>p</sub> carries N<sub>D</sub> (the <i>other</i> side's doping) in the numerator. A great way to remember it: <i>the region on the lightly doped side is the wider one</i>.</p>
+  <h4>Step 4: charge stored on either side</h4>
+  <div class="eq"><span class="cap">Junction charge Q<sub>J</sub> = |Q<sub>+</sub>| = |Q<sub>−</sub>|</span>
+    <div class="row">Q<sub>J</sub> = A q ( [[ N<sub>A</sub> N<sub>D</sub> | N<sub>A</sub> + N<sub>D</sub> ]] ) W</div>
+    <div class="row"><b>Q<sub>J</sub> = A √( 2 ε<sub>s</sub> q ( [[ N<sub>A</sub> N<sub>D</sub> | N<sub>A</sub> + N<sub>D</sub> ]] ) V<sub>0</sub> )</b></div></div>
+  <details class="q" open><summary>Worked (typical exam problem): a Si p–n junction has N<sub>A</sub> = 10<sup>18</sup>, N<sub>D</sub> = 10<sup>16</sup> cm<sup>-3</sup>, n<sub>i</sub> = 1.5×10<sup>10</sup>, A = 10<sup>-4</sup> cm², T = 300 K. Find V<sub>0</sub>, W, x<sub>n</sub>, x<sub>p</sub>, Q<sub>J</sub>. Then find W when 5 V reverse bias is applied.</summary><div class="ans">
+    <ol class="steps">
+    <li>V<sub>0</sub> = 0.0259 × ln(10<sup>18</sup>×10<sup>16</sup> / 2.25×10<sup>20</sup>) = 0.0259 × ln(4.44×10<sup>13</sup>) = 0.0259 × 31.43 = <b>0.814 V</b>.</li>
+    <li>W = √[ (2×1.04×10<sup>-12</sup> / 1.6×10<sup>-19</sup>) × (10<sup>-18</sup> + 10<sup>-16</sup>) × 0.814 ] = √[1.3×10<sup>7</sup> × 1.01×10<sup>-16</sup> × 0.814] = <b>3.27×10<sup>-5</sup> cm = 0.327 μm</b>.</li>
+    <li>x<sub>n</sub> = W N<sub>A</sub>/(N<sub>A</sub>+N<sub>D</sub>) = 0.327 × 0.9901 = <b>0.323 μm</b>, x<sub>p</sub> = 0.327 × 0.0099 = <b>0.0032 μm</b>. Almost the whole region is on the lightly doped n-side, as predicted.</li>
+    <li>Q<sub>J</sub> = A q [N<sub>A</sub>N<sub>D</sub>/(N<sub>A</sub>+N<sub>D</sub>)] W = 10<sup>-4</sup> × 1.6×10<sup>-19</sup> × 9.9×10<sup>15</sup> × 3.27×10<sup>-5</sup> ≈ <b>5.2×10<sup>-12</sup> C</b> (5.2 pC).</li>
+    <li>Reverse bias V<sub>R</sub> = 5 V: replace V<sub>0</sub> by V<sub>0</sub> + V<sub>R</sub> = 5.814 V. W scales with √(barrier): W = 0.327 × √(5.814/0.814) = 0.327 × 2.673 = <b>0.873 μm</b>.</li></ol></div></details>
+
+  <h3>7.5 Energy-band diagram of the p–n junction</h3>
+  {{fig:pn_bands|Your pages 23 to 24. E_F is flat (no net current) while E_c and E_v bend across the depletion region (electric field).}}
+  <ol class="steps">
+    <li>Far from the junction, the p-side has E<sub>F</sub> near E<sub>v</sub>, the n-side has E<sub>F</sub> near E<sub>c</sub>.</li>
+    <li>At equilibrium E<sub>F</sub> must be <b>one flat line</b> across the device (your note: "E<sub>F</sub> const ⇒ no current in the device").</li>
+    <li>To keep E<sub>F</sub> flat, the p-side bands sit <b>higher</b> than the n-side bands. The bands bend through the depletion region. The bending is qV<sub>0</sub> (your note: "slope in E<sub>c</sub> and E<sub>v</sub> ⇒ an electric field exists").</li>
+    <li>Electrons on the n-side see a hill of height qV<sub>0</sub> if they try to go to the p-side, and likewise holes.</li>
+  </ol>
+  <h4>Field from the band bending (your derivation)</h4>
+  <div class="eq"><div class="row">Field: 𝓔 = − dV/dx &nbsp;(1) &nbsp;&nbsp; Electron energy: E<sub>c</sub> = −qV ⇒ V = −E<sub>c</sub>/q &nbsp;(2)</div>
+    <div class="row">Substitute (2) in (1): <b>𝓔 = [[1 | q]] · [[ dE<sub>c</sub> | dx ]]</b></div></div>
+  <p>The steeper E<sub>c</sub>(x), the stronger the field. Zero slope ⇒ zero field (as in the neutral regions).</p>
+
+  <h3>7.6 Applying a bias</h3>
+  {{fig:pn_bias|Your pages 24 to 25: forward bias lowers the barrier and shrinks the depletion region; reverse bias raises it and widens it.}}
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Forward bias</th><th>Reverse bias</th></tr>
+    <tr><td>Connection</td><td>+ to p (anode), − to n (cathode)</td><td>+ to n, − to p</td></tr>
+    <tr><td>Barrier</td><td>V<sub>0</sub> − V<sub>F</sub> (smaller)</td><td>V<sub>0</sub> + V<sub>R</sub> (larger)</td></tr>
+    <tr><td>Depletion width</td><td>narrower (ω ↓)</td><td>wider (ω ↑)</td></tr>
+    <tr><td>Currents</td><td><b>I<sub>diffusion</sub> &gt; I<sub>drift</sub></b></td><td><b>I<sub>drift</sub> &gt; I<sub>diffusion</sub></b></td></tr>
+    <tr><td>Net current</td><td>large, grows exponentially</td><td>tiny: −I<sub>s</sub>, saturates</td></tr>
+  </table></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p><b>Forward:</b> you lower the wall at the fence, so lots of kids pour across, and the current explodes as the wall gets lower. <b>Reverse:</b> you raise the wall even higher. Now nobody can cross except a rare few kids who are pushed across by the wall itself (the minority carriers), which gives a tiny, constant leakage current.</p></div>
+  <div class="eq"><span class="cap">With reverse bias V<sub>R</sub> (in your notes)</span>
+    <div class="row"><b>W = √( [[ 2ε<sub>s</sub> | q ]] ( [[1 | N<sub>A</sub>]] + [[1 | N<sub>D</sub>]] ) (V<sub>0</sub> + V<sub>R</sub>) )</b></div>
+    <div class="row"><b>Q<sub>J</sub> = A √( 2 ε<sub>s</sub> q [[ N<sub>A</sub> N<sub>D</sub> | N<sub>A</sub> + N<sub>D</sub> ]] (V<sub>0</sub> + V<sub>R</sub>) )</b></div>
+    <div class="row">(For forward bias replace V<sub>0</sub> + V<sub>R</sub> by V<sub>0</sub> − V<sub>F</sub>.)</div></div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: junction capacitance</span>
+    <p>Because Q<sub>J</sub> changes with V<sub>R</sub>, a reverse-biased diode acts as a voltage-controlled capacitor: C<sub>j</sub> = dQ<sub>J</sub>/dV<sub>R</sub> = εs A / W = C<sub>j0</sub> / √(1 + V<sub>R</sub>/V<sub>0</sub>). Wider W ⇒ smaller C. Used in varactor (tuning) diodes.</p></div>
+
+  <h3>7.7 The current–voltage relation (deriving the diode equation)</h3>
+  <p>Your notes derive this in five moves. Follow the story:</p>
+  <ol class="steps">
+    <li><b>Lower the barrier.</b> Forward bias V reduces the barrier to V<sub>0</sub> − V.</li>
+    <li><b>Majority carriers diffuse over</b> (electrons n → p side, holes p → n side).</li>
+    <li><b>They become minority carriers on the other side: "injection of minority carriers".</b> Let n<sub>p0</sub> = equilibrium electron concentration on the p-side (n<sub>p0</sub> = n<sub>i</sub>²/N<sub>A</sub>) and p<sub>n0</sub> = n<sub>i</sub>²/N<sub>D</sub> on the n-side.</li>
+    <li><b>Concentration right at the edge of the depletion region</b> is boosted by the Boltzmann factor:</li>
+  </ol>
+  <div class="eq"><span class="cap">Edge-of-depletion-region concentrations (steady state)</span>
+    <div class="row"><b>p<sub>n</sub>(x<sub>n</sub>) = p<sub>n0</sub> e<sup>V/V<sub>T</sub></sup></b> &nbsp;&nbsp;&nbsp; <b>n<sub>p</sub>(−x<sub>p</sub>) = n<sub>p0</sub> e<sup>V/V<sub>T</sub></sup></b></div>
+    <div class="row">Excess (injected) holes at x = x<sub>n</sub>: p<sub>n0</sub> e<sup>V/V<sub>T</sub></sup> − p<sub>n0</sub> = <b>p<sub>n0</sub>(e<sup>V/V<sub>T</sub></sup> − 1)</b></div>
+    <div class="row">Excess electrons at x = −x<sub>p</sub>: <b>n<sub>p0</sub>(e<sup>V/V<sub>T</sub></sup> − 1)</b></div></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Each 60 mV (about 2.3 V<sub>T</sub>) of forward voltage multiplies the number of kids sneaking over by 10. So a small voltage change makes a huge change in the flow. That is why the forward curve is so steep.</p></div>
+  <ol class="steps" start="5">
+    <li><b>The injected carriers recombine as they wander deeper</b>, so the excess decays exponentially with the diffusion length L:</li>
+  </ol>
+  {{fig:excess_carriers|Your pages 26 to 27: injected minority-carrier profiles. Decay due to recombination.}}
+  <div class="eq"><div class="row"><b>p<sub>n</sub>(x) = p<sub>n0</sub> + p<sub>n0</sub>(e<sup>V/V<sub>T</sub></sup> − 1) e<sup>−(x − x<sub>n</sub>)/L<sub>p</sub></sup></b></div>
+    <div class="row"><b>n<sub>p</sub>(x) = n<sub>p0</sub> + n<sub>p0</sub>(e<sup>V/V<sub>T</sub></sup> − 1) e<sup>−x′/L<sub>n</sub></sup></b> (x′ = distance measured away from the junction edge at −x<sub>p</sub>; your notes write it as (x − x<sub>p</sub>))</div>
+    <div class="row">L<sub>p</sub>, L<sub>n</sub> = diffusion lengths of holes and electrons</div></div>
+  <ol class="steps" start="6">
+    <li><b>Current from the gradient.</b> Differentiate: dp/dx = −(1/L<sub>p</sub>) × (excess) at the edge, so J<sub>p</sub> = −q D<sub>p</sub> dp/dx gives:</li>
+  </ol>
+  <div class="eq"><div class="row"><b>J<sub>p</sub>(x<sub>n</sub>) = q [[ D<sub>p</sub> | L<sub>p</sub> ]] p<sub>n0</sub> (e<sup>V/V<sub>T</sub></sup> − 1)</b> &nbsp;&nbsp;&nbsp; <b>J<sub>n</sub>(−x<sub>p</sub>) = q [[ D<sub>n</sub> | L<sub>n</sub> ]] n<sub>p0</sub> (e<sup>V/V<sub>T</sub></sup> − 1)</b></div></div>
+  <ol class="steps" start="7">
+    <li><b>Total current</b> = hole part + electron part, both evaluated at the depletion edges (total current is the same everywhere in steady state; away from the junction it is carried by <b>drift</b> in the quasi-neutral regions, J<sub>p</sub> = pqμ<sub>p</sub>𝓔, J<sub>n</sub> = nqμ<sub>n</sub>𝓔):</li>
+  </ol>
+  <div class="eq"><div class="row">I = A J<sub>p</sub> + A J<sub>n</sub> = A q ( [[ D<sub>p</sub> | L<sub>p</sub> ]] p<sub>n0</sub> + [[ D<sub>n</sub> | L<sub>n</sub> ]] n<sub>p0</sub> ) (e<sup>V/V<sub>T</sub></sup> − 1)</div>
+    <div class="row">Put n<sub>p0</sub> = n<sub>i</sub>²/N<sub>A</sub>, p<sub>n0</sub> = n<sub>i</sub>²/N<sub>D</sub>:</div>
+    <div class="row"><b>I = I<sub>s</sub> ( e<sup>V/V<sub>T</sub></sup> − 1 )</b> &nbsp;&nbsp; with &nbsp; <b>I<sub>s</sub> = A q n<sub>i</sub>² ( [[ D<sub>p</sub> | L<sub>p</sub> N<sub>D</sub> ]] + [[ D<sub>n</sub> | L<sub>n</sub> N<sub>A</sub> ]] )</b></div></div>
+  {{fig:diode_iv|Your page 28. The V=0 point, the flat reverse current −I_s, the exponential forward rise, and the breakdown knee.}}
+  <h4>Reading the I–V curve (your three cases)</h4>
+  <ul>
+    <li><b>V = 0:</b> I<sub>D</sub> = I<sub>s</sub>(1 − 1) = <b>0 A</b>.</li>
+    <li><b>V = −1, −2, −3 V (reverse):</b> once |V| ≫ V<sub>T</sub>, e<sup>V/V<sub>T</sub></sup> → 0 and <b>I<sub>D</sub> = −I<sub>s</sub></b>, independent of voltage. That is why I<sub>s</sub> is called the saturation current.</li>
+    <li><b>V increasing (forward):</b> I ≈ I<sub>s</sub> e<sup>V/V<sub>T</sub></sup>, exponential. The diode appears to "turn on" around 0.6–0.7 V in silicon because I<sub>s</sub> is so tiny (~10<sup>-15</sup> A) that noticeable current needs V near 0.6 V.</li>
+  </ul>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul><li>Depletion-region <b>diffusion</b> current depends on the majority carriers climbing a hill; <b>drift</b> current on the minority carriers rolling down. Don't swap them.</li>
+    <li>The saturation current formula has the <b>other</b> side's doping crossed: the hole term uses N<sub>D</sub> (n-side donors), the electron term uses N<sub>A</sub>.</li>
+    <li>In the formula, use <b>V<sub>T</sub> = 25.9 mV (or 26 mV)</b>, never 0.6 V.</li>
+    <li>I<sub>s</sub> doubles roughly every 5 °C in silicon (because n<sub>i</sub>² rises so fast). At a fixed current, the forward voltage falls about 2 mV per °C.</li></ul></div>
+
+  <h3>7.8 Breakdown region</h3>
+  <p>Push the reverse voltage far enough and the current suddenly shoots up at the breakdown voltage <b>V<sub>BR</sub></b>. It is not necessarily destructive; the junction is destroyed only if the power gets too large. Your notes list two mechanisms:</p>
+  <div class="two">
+    <div><h4>Zener mechanism</h4><p>A <b>strong electric field at the junction pulls electrons straight out of covalent bonds</b> (quantum tunnelling). Happens in <b>heavily doped</b> junctions with a very thin depletion region. <b>V<sub>BR</sub> &lt; ≈ 5 V</b>.</p></div>
+    <div><h4>Avalanche mechanism</h4><p>Carriers gain <b>high kinetic energy</b> from the field, collide with atoms, knock out new electron–hole pairs, which are themselves accelerated: a chain reaction. Happens in <b>lightly doped</b>, wide junctions. <b>V<sub>BR</sub> &gt; ≈ 8 V</b>.</p></div>
+  </div>
+  <p>Between about 5 and 8 V both mechanisms contribute. Zener diodes (voltage references) use the controlled breakdown.</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p><b>Zener:</b> the wall is so thin and the push so strong that kids are yanked straight through the wall. <b>Avalanche:</b> one kid running fast crashes into two people, who then run fast and crash into four, and so on, like a snowball rolling downhill.</p></div>
+
+  <h3>7.9 Your worked diode question (re-solved with checks)</h3>
+  <details class="q" open><summary>A p–n diode has N<sub>A</sub> = 10<sup>18</sup> cm<sup>-3</sup>, N<sub>D</sub> = 10<sup>16</sup> cm<sup>-3</sup>, A = 10<sup>-4</sup> cm², n<sub>i</sub> = 1.5×10<sup>10</sup> cm<sup>-3</sup>, L<sub>p</sub> = 5 μm, L<sub>n</sub> = 10 μm, D<sub>p</sub> = 10 cm²/s, D<sub>n</sub> = 18 cm²/s. It is forward biased and conducts I<sub>D</sub> = 0.1 mA. Calculate (i) I<sub>s</sub>, (ii) the forward-bias voltage, (iii) the hole-injection and electron-injection components of I.</summary><div class="ans">
+    <p><b>(i) Saturation current.</b> Convert lengths: L<sub>p</sub> = 5×10<sup>-4</sup> cm, L<sub>n</sub> = 10×10<sup>-4</sup> cm. n<sub>i</sub>² = 2.25×10<sup>20</sup>.</p>
+    <div class="eq"><div class="row">Hole term: D<sub>p</sub>/(L<sub>p</sub>N<sub>D</sub>) = 10 / (5×10<sup>-4</sup> × 10<sup>16</sup>) = 10/5×10<sup>12</sup> = 2×10<sup>-12</sup></div>
+    <div class="row">Electron term: D<sub>n</sub>/(L<sub>n</sub>N<sub>A</sub>) = 18 / (10<sup>-3</sup> × 10<sup>18</sup>) = 1.8×10<sup>-14</sup></div>
+    <div class="row">A q n<sub>i</sub>² = 10<sup>-4</sup> × 1.6×10<sup>-19</sup> × 2.25×10<sup>20</sup> = 3.6×10<sup>-3</sup></div>
+    <div class="row"><b>I<sub>s</sub> = 3.6×10<sup>-3</sup> × (2×10<sup>-12</sup> + 1.8×10<sup>-14</sup>) = 7.26×10<sup>-15</sup> A</b></div></div>
+    <p><b>(ii) Voltage.</b> I = I<sub>s</sub>(e<sup>V/V<sub>T</sub></sup> − 1) ⇒ 0.1×10<sup>-3</sup> = 7.26×10<sup>-15</sup>(e<sup>V/V<sub>T</sub></sup> − 1) ⇒ e<sup>V/V<sub>T</sub></sup> = 1.38×10<sup>10</sup> ⇒ V = V<sub>T</sub> ln(1.38×10<sup>10</sup>) = 0.026 × 23.35 = <b>0.607 V</b> (your notes: 0.605 V).</p>
+    <p><b>(iii) Split the current.</b> Divide the two components:</p>
+    <div class="eq"><div class="row">I<sub>p</sub>/I<sub>n</sub> = (2×10<sup>-12</sup>)/(1.8×10<sup>-14</sup>) = 111 = [[D<sub>p</sub> | D<sub>n</sub>]] · [[L<sub>n</sub> | L<sub>p</sub>]] · [[N<sub>A</sub> | N<sub>D</sub>]]</div>
+    <div class="row">I<sub>p</sub> + I<sub>n</sub> = 0.1 mA ⇒ I<sub>n</sub> = 0.1/112 = <b>0.0009 mA</b>, I<sub>p</sub> = <b>0.0991 mA</b></div></div>
+    <p><b>Meaning:</b> 99.1 % of the current is hole injection from the heavily doped p-side into the lightly doped n-side. Making one side much heavier makes the diode "one-carrier", which is exactly the trick used for the BJT emitter (Chapter 8). <i>(Your notes wrote I<sub>s</sub> = 7.26×10<sup>-15</sup> A but then typed 10<sup>-13</sup> in the next line; the 10<sup>-15</sup> value is the one consistent with V = 0.605 V.)</i></p></div></details>
+
+  <details class="q" open><summary>Your assignment: for Si and Ge p–n diodes, which needs the higher voltage to carry a fixed forward current of 20 mA? (Hint: n<sub>i</sub> ∝ e<sup>−E<sub>g</sub>/2k<sub>B</sub>T</sup>.)</summary><div class="ans">
+    <ol class="steps">
+    <li>E<sub>g</sub>(Si) = 1.1 eV &gt; E<sub>g</sub>(Ge) = 0.7 eV.</li>
+    <li>A bigger gap ⇒ much smaller n<sub>i</sub>: n<sub>i,Si</sub> &lt; n<sub>i,Ge</sub>.</li>
+    <li>I<sub>s</sub> ∝ n<sub>i</sub>² ⇒ I<sub>s,Si</sub> ≪ I<sub>s,Ge</sub>.</li>
+    <li>For the same I = I<sub>s</sub>e<sup>V/V<sub>T</sub></sup>: V = V<sub>T</sub> ln(I/I<sub>s</sub>), so the smaller I<sub>s</sub> needs the <b>larger V</b>.</li></ol>
+    <p><b>Answer: silicon needs the higher voltage.</b> Size of the effect: I<sub>s</sub> ratio ≈ e<sup>−(1.1−0.7)/k<sub>B</sub>T</sup> ≈ 2×10<sup>-7</sup> (ignoring the T<sup>3</sup> factor and mobility differences), so the voltage difference is V<sub>T</sub> ln(5×10<sup>6</sup>) ≈ 0.4 V. That matches the well-known turn-on voltages of ≈0.7 V for Si and ≈0.3 V for Ge.</p></div></details>
+
+  <details class="q"><summary>Extra: a Si diode has I<sub>s</sub> = 10<sup>-14</sup> A at 300 K. Find the current at V = 0.65 V, and the voltage change that doubles the current.</summary><div class="ans">
+    <p>I = 10<sup>-14</sup> (e<sup>0.65/0.0259</sup> − 1) = 10<sup>-14</sup> × e<sup>25.1</sup> = 10<sup>-14</sup> × 7.9×10<sup>10</sup> = <b>0.79 mA</b>. To double it: ΔV = V<sub>T</sub> ln 2 = 0.0259 × 0.693 = <b>17.9 mV</b>. (And ×10 needs 59.6 mV: the "60 mV per decade" rule.)</p></div></details>
+</section>

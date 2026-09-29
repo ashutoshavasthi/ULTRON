@@ -1,0 +1,147 @@
+<section class="chapter" id="ch2">
+  <h2><span class="num">CHAPTER 2</span>The E–k Diagram, Effective Mass, Holes</h2>
+  <p class="tagline">A map that tells you how an electron behaves inside a crystal, and why an electron in silicon acts as if it had a different mass.</p>
+  <span class="chip src">Your notes p.4 to p.7</span>
+
+  <h3>2.1 What are k and the E–k diagram?</h3>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>You can describe a song in two ways: as the wiggly sound in <b>time</b>, or as a list of which <b>notes</b> (frequencies) it contains. Both describe the same song. The switch between them is called a Fourier transform. Electrons are waves too. We can describe them by <b>where</b> they are (real space, in cm) or by <b>how fast the wave wiggles in space</b> (reciprocal space, in cm<sup>-1</sup>). That second number is <b>k</b>, the wave-vector. More wiggles per centimetre = bigger k = faster electron.</p></div>
+  <div class="tablewrap"><table>
+    <tr><th>Real domain</th><th>Fourier transform →</th><th>Reciprocal domain</th></tr>
+    <tr><td>time (s)</td><td>F.T.</td><td>frequency ω</td></tr>
+    <tr><td>real space (cm)</td><td>F.T.</td><td>reciprocal space (cm<sup>-1</sup>)</td></tr>
+    <tr><td>wavelength λ (cm)</td><td>F.T.</td><td>k = 2π/λ (cm<sup>-1</sup>), the wave-vector</td></tr>
+  </table></div>
+  <h4>Derivation from your notes: ħk is momentum</h4>
+  <div class="eq"><span class="cap">Momentum of the electron wave</span>
+    <div class="row">ħk = ħ · [[2π | λ]] = [[h | 2π]] · [[2π | λ]] = [[h | λ]] = p &nbsp;&nbsp;⇒&nbsp; <b>p = ħk</b></div>
+    <div class="row">(ħ = h/2π is the reduced Planck constant; h/λ is the de Broglie momentum.)</div></div>
+  <h4>Free-electron energy</h4>
+  <div class="eq"><span class="cap">Kinetic energy → parabola</span>
+    <div class="row">K.E. = ½ m v² = [[p² | 2m]] &nbsp;⇒&nbsp; <b>E = [[ħ²k² | 2m]]</b></div></div>
+  <p>So for a lone electron E versus k is a <b>parabola</b> (left plot below). For an electron in a crystal, the periodic atoms cut the parabola into pieces and open gaps exactly at k = ±π/a, ±2π/a, … (a = lattice spacing). Those gaps are the band gaps (right plot).</p>
+  {{fig:ek_free_crystal|Your page 5. Left: free electron. Right: a crystal lattice chops the parabola and opens forbidden gaps at ±π/a, ±2π/a.}}
+  <div class="callout beyond"><span class="lbl">Beyond your notes: why gaps appear at ±π/a</span>
+    <p>An electron wave whose wavelength is exactly twice the lattice spacing (λ = 2a, so k = π/a) gets reflected by each layer of atoms (Bragg reflection). Reflected and forward waves combine into two <b>standing waves</b>: one piles up charge on the atoms (lower energy) and one between the atoms (higher energy). The energy difference between them is the gap.</p></div>
+
+  <h3>2.2 Effective mass m*</h3>
+  <p>Near the bottom of a band the crystal E–k curve still looks like a parabola, but a <b>different</b> one. We keep the free-electron formula and just swap the mass:</p>
+  <div class="eq"><span class="cap">Effective-mass parabola</span><div class="row">E = [[ħ²k² | 2m*]] &nbsp;where m* = effective mass of the electron</div></div>
+  <h4>Getting m* from the curve (your derivation)</h4>
+  <div class="eq"><div class="row">E = [[ħ²k² | 2m*]] &nbsp;⇒&nbsp; [[dE | dk]] = [[ħ²k | m*]] &nbsp;⇒&nbsp; [[d²E | dk²]] = [[ħ² | m*]]</div>
+    <div class="row"><b>m* = [[ħ² | d²E/dk²]]</b> &nbsp;← inverse of the curvature of the E–k diagram</div></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Pushing a shopping cart through a quiet hall is easy. Pushing the same cart through a crowded market is hard because people keep bumping it. The cart hasn't gotten heavier; the crowd is just interfering. An electron in a crystal is being pushed and pulled by all the atoms, so it <i>responds to a force as if</i> it had a new mass, the <b>effective mass</b>. Steep, sharply curved E–k = light and nimble electron. Flat, lazy E–k = heavy, sluggish electron.</p></div>
+  <div class="eq"><span class="cap">Remember</span>
+    <div class="row">high curvature ⇒ low m* ⇒ high mobility ⇒ high current density</div>
+    <div class="row">low curvature (flat) ⇒ high m* ⇒ low mobility ⇒ low current density</div></div>
+  <details class="q" open><summary>Your notes' question: two semiconductors have the E–k curves below. Which has the higher current density?</summary><div class="ans">
+    <p>Semiconductor 1's curve is sharper (higher curvature) than semiconductor 2's. So:</p>
+    <ol><li>Curvature ↑ ⇒ m* = ħ²/(d²E/dk²) <b>↓</b>.</li>
+    <li>Since μ = qτ/m*, a smaller m* gives a <b>higher mobility</b>.</li>
+    <li>J = nqμE, so a higher μ gives a <b>higher current density</b> (same n, same E).</li></ol>
+    <p><b>Answer: semiconductor 1</b> (the higher-curvature one).</p>
+    <div class="callout trap"><span class="lbl">Careful with the numbers</span><p>Your page also shows m* = 0.2m<sub>0</sub> and m* = 0.06m<sub>0</sub> (struck through). If a question gives numbers, compare them directly: the <b>smaller m* always wins</b>. With those two values the 0.06m<sub>0</sub> material has the higher mobility, so it would have to be the one drawn with the higher curvature. Always match the curve to its mass before answering. (m<sub>0</sub> = 9.11×10<sup>-31</sup> kg is the free-electron mass.)</p></div>
+  </div></details>
+  <details class="q"><summary>Extra: an E–k curve is E = 2×10<sup>-38</sup> k² (E in J, k in m<sup>-1</sup>). Find m* in terms of m<sub>0</sub>.</summary><div class="ans">
+    <p>Compare with E = ħ²k²/2m*: ħ²/2m* = 2×10<sup>-38</sup>. With ħ = 1.055×10<sup>-34</sup> J·s, ħ² = 1.113×10<sup>-68</sup>. So m* = ħ²/(2 × 2×10<sup>-38</sup>) = 1.113×10<sup>-68</sup> / 4×10<sup>-38</sup> = 2.78×10<sup>-31</sup> kg ≈ <b>0.31 m<sub>0</sub></b>.</p></div></details>
+
+  <h3>2.3 Holes</h3>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p>A <b>hole</b> is the <b>absence of an electron</b>, modelled as a <b>positively charged particle</b>. It always moves in the <b>valence band</b>. m<sub>h</sub>* = effective mass of holes, m<sub>e</sub>* = effective mass of electrons.</p></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A parking lot is completely full except for one empty space. When a car moves into the empty space, a new empty space appears where it came from, so the empty space seems to travel <i>backwards</i>. Tracking the one empty space is much easier than tracking 100 cars. The moving empty space is the <b>hole</b>. It acts like a tiny positive charge that moves in the direction of the electric field, while electrons go the opposite way.</p></div>
+  <ul>
+    <li>When an electron jumps from the VB to the CB it leaves a hole behind: an <b>electron–hole pair (EHP)</b> is created.</li>
+    <li>Electrons in the CB and holes in the VB both carry current.</li>
+    <li>In a hole picture the valence-band E–k curve is turned upside down (a hill), and the hole's effective mass is given the positive sign.</li>
+    <li>In Si, m<sub>h</sub>* &gt; m<sub>e</sub>* (holes are heavier), so <b>holes are slower</b>: μ<sub>p</sub> &lt; μ<sub>n</sub>.</li>
+  </ul>
+
+  <h3>2.4 E<sub>c</sub>, E<sub>v</sub> and E<sub>g</sub> on the E–k diagram</h3>
+  <p><b>E<sub>c</sub></b> = lowest point of the conduction band, <b>E<sub>v</sub></b> = highest point of the valence band, and <b>E<sub>g</sub> = E<sub>c</sub> − E<sub>v</sub></b>. Your notes draw the CB as an upward parabola sitting on top of the VB's downward parabola.</p>
+
+  <h3>2.5 Direct and indirect band-gap semiconductors</h3>
+  {{fig:direct_indirect|Your pages 6 and 7. Direct: both extremes at the same k, so a photon alone can lift an electron. Indirect: the CB minimum is at a different k, so momentum must be supplied by a phonon.}}
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Direct band-gap</th><th>Indirect band-gap</th></tr>
+    <tr><td>Examples</td><td>GaAs, GaN</td><td>Si, Ge</td></tr>
+    <tr><td>Where are E<sub>c</sub> and E<sub>v</sub>?</td><td>at the same k (both at k = 0)</td><td>E<sub>v</sub> at k = 0, E<sub>c</sub> at k ≠ 0</td></tr>
+    <tr><td>To excite an electron VB → CB</td><td>only energy is needed</td><td>energy <b>and momentum</b> change; needs a <b>phonon</b></td></tr>
+    <tr><td>Light emission (LED / laser)</td><td>efficient</td><td>poor</td></tr>
+    <tr><td>Best for</td><td>LEDs, lasers, solar cells</td><td>digital chips (cheap, great oxide)</td></tr>
+  </table></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A <b>phonon</b> is a little shake of the crystal's atoms (heat vibration). A photon (light particle) carries plenty of energy but almost no momentum, like a ping-pong ball. Jumping straight up is easy. But in silicon the top floor's doorway is off to the <i>side</i>, so the electron needs a sideways shove as well. The atom vibration (phonon) provides that sideways shove, like a friend giving you a push at the same moment you jump. Needing two things to happen together makes silicon bad at making light.</p></div>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul><li>Photons carry energy but negligible momentum; phonons carry momentum but little energy. That's why indirect transitions need both.</li>
+    <li>Silicon is <b>indirect</b>. Many students memorise "Si = direct" by mistake because it is the most common material.</li></ul></div>
+</section>
+
+<section class="chapter" id="ch3">
+  <h2><span class="num">CHAPTER 3</span>Fermi–Dirac Statistics, Fermi Level, Density of States</h2>
+  <p class="tagline">How many electrons are actually sitting on the top floor? Two ingredients: how many seats exist, and how likely each seat is to be taken.</p>
+  <span class="chip src">Your notes p.7 to p.9, p.11 to p.12</span>
+
+  <h3>3.1 The Fermi–Dirac function f(E)</h3>
+  <div class="eq"><span class="cap">Probability that a state of energy E is occupied by an electron</span>
+    <div class="row"><b>f(E) = [[1 | 1 + exp( (E − E<sub>F</sub>) / k<sub>B</sub>T )]]</b></div>
+    <div class="row">1 − f(E) = probability the state is <b>empty</b> = probability of finding a <b>hole</b></div></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Imagine a huge cinema where the seats are the energy levels. The <b>Fermi level E<sub>F</sub></b> is an invisible "50-50 line": a seat exactly at that height is taken half the time. Seats far below the line are nearly always taken; seats far above are nearly always empty. The <b>temperature</b> decides how blurry the line is. At absolute zero the line is razor sharp; when it is warm, a few kids from the lower rows jump to seats above the line.</p>
+    <p>Important: the Fermi level does <b>not</b> have to be a real seat. Your notes call it an "imaginary construct". It can sit in the forbidden gap where no seat exists.</p></div>
+  {{fig:fermi|Your pages 7, 12: at T = 0 K a perfect step; as T rises the step smooths. Every curve passes through f = 0.5 at E = E_F.}}
+  <h4>The three cases your notes list at T = 0 K</h4>
+  <div class="tablewrap"><table>
+    <tr><th>Energy</th><th>f(E) at T = 0 K</th><th>Meaning</th></tr>
+    <tr><td>E &lt; E<sub>F</sub></td><td>1</td><td>every state below E<sub>F</sub> is <b>completely filled</b></td></tr>
+    <tr><td>E = E<sub>F</sub></td><td>½ (50%)</td><td>the borderline</td></tr>
+    <tr><td>E &gt; E<sub>F</sub></td><td>0</td><td>every state above E<sub>F</sub> is <b>completely empty</b></td></tr>
+  </table></div>
+  <p>Why? For T → 0, if E &lt; E<sub>F</sub> the exponent (E−E<sub>F</sub>)/k<sub>B</sub>T → −∞, so e<sup>−∞</sup> = 0 and f = 1/(1+0) = 1. If E &gt; E<sub>F</sub> the exponent → +∞, e<sup>+∞</sup> = ∞, so f = 0.</p>
+
+  <details class="q" open><summary>Your notes, Q1: At T = 300 K find the probability of occupation of a state at (a) E = E<sub>F</sub> + 0.1 eV, (b) E = E<sub>F</sub> − 0.1 eV.</summary><div class="ans">
+    <ol class="steps">
+    <li>Thermal energy k<sub>B</sub>T ≈ 0.026 eV at 300 K.</li>
+    <li>(a) Exponent = 0.1/0.026 = 3.846, e<sup>3.846</sup> = 46.81. So f = 1/(1 + 46.81) = 0.0209 = <b>2.09 %</b>.</li>
+    <li>(b) Exponent = −3.846, e<sup>−3.846</sup> = 0.0213. So f = 1/(1 + 0.0213) = 0.979 = <b>97.9 %</b>.</li></ol>
+    <p><b>Check:</b> the two answers add to 100 %. This always happens: f(E<sub>F</sub>+Δ) + f(E<sub>F</sub>−Δ) = 1. The chance a state Δ above E<sub>F</sub> is filled equals the chance a state Δ below is empty. (With k<sub>B</sub>T = 0.02585 eV you get 2.05 % and 97.95 %; both are accepted.)</p></div></details>
+  <details class="q" open><summary>Your notes, Q2: Plot f(E) versus E at T = 0 K, 200 K, 300 K.</summary><div class="ans">
+    <p>Draw the same axes for all three. At 0 K: a horizontal line at 1 dropping vertically to 0 at E<sub>F</sub>. At 200 K: a fairly steep S-curve through (E<sub>F</sub>, 0.5). At 300 K: a gentler S-curve, also through (E<sub>F</sub>, 0.5). The hotter the curve, the more its "shoulders" spread out, so the more states above E<sub>F</sub> are occupied and the more below are empty. See the figure above (the extra 600 K curve shows the trend continuing).</p></div></details>
+  <details class="q"><summary>Extra: at what energy above E<sub>F</sub> is f = 1 % at 300 K?</summary><div class="ans">
+    <p>0.01 = 1/(1+e<sup>x</sup>) ⇒ e<sup>x</sup> = 99 ⇒ x = ln 99 = 4.595. E − E<sub>F</sub> = 4.595 × 0.02585 = <b>0.119 eV</b>. In general, f ≈ e<sup>−(E−E<sub>F</sub>)/k<sub>B</sub>T</sup> once E − E<sub>F</sub> ≫ k<sub>B</sub>T (the "Boltzmann tail").</p></div></details>
+
+  <h3>3.2 Density of states g(E)</h3>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p><b>g(E)</b> = number of energy states available <b>per unit energy per unit volume</b>. <b>f(E)</b> = probability that a state is occupied.</p></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>g(E) is how many seats exist at each height. f(E) is the chance each seat is occupied. To count how many kids are actually in the top-floor seats, multiply "seats at each height" by "chance each is taken" and add up all heights. That is what the integral does.</p></div>
+  <div class="eq"><span class="cap">Electron concentration in the conduction band</span>
+    <div class="row"><b>n = ∫<sub>E<sub>c</sub></sub><sup>∞</sup> g(E) f(E) dE</b> &nbsp;&nbsp; (similarly p = ∫<sub>−∞</sub><sup>E<sub>v</sub></sup> g(E)[1 − f(E)] dE)</div></div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: the results of that integral</span>
+    <p>Near the band edges g(E) ∝ √(E − E<sub>c</sub>) (3-D crystal). Using the Boltzmann tail of f, the integral gives:</p>
+    <div class="eq"><div class="row">n = N<sub>c</sub> exp[ −(E<sub>c</sub> − E<sub>F</sub>)/k<sub>B</sub>T ] &nbsp;&nbsp; p = N<sub>v</sub> exp[ −(E<sub>F</sub> − E<sub>v</sub>)/k<sub>B</sub>T ]</div>
+    <div class="row">n = n<sub>i</sub> exp[ (E<sub>F</sub> − E<sub>i</sub>)/k<sub>B</sub>T ] &nbsp;&nbsp; p = n<sub>i</sub> exp[ (E<sub>i</sub> − E<sub>F</sub>)/k<sub>B</sub>T ]</div></div>
+    <p>N<sub>c</sub>, N<sub>v</sub> are the "effective densities of states" (about 2.8×10<sup>19</sup> and 1.04×10<sup>19</sup> cm<sup>-3</sup> for Si at 300 K); E<sub>i</sub> is the intrinsic (mid-gap) Fermi level. The message: <b>the closer E<sub>F</sub> is to E<sub>c</sub>, the more electrons; the closer to E<sub>v</sub>, the more holes.</b> Multiplying the two gives n·p = N<sub>c</sub>N<sub>v</sub>e<sup>−E<sub>g</sub>/kT</sup> = n<sub>i</sub>², the mass-action law of Chapter 5.</p></div>
+
+  <h3>3.3 Where does E<sub>F</sub> sit? Intrinsic, n-type, p-type</h3>
+  {{fig:ef_positions|Your page 8/9: E_F in the middle for intrinsic, near E_c for n-type, near E_v for p-type. E_d and E_a are the donor and acceptor levels.}}
+  <div class="tablewrap"><table>
+    <tr><th>Type</th><th>Carriers</th><th>E<sub>F</sub> position</th></tr>
+    <tr><td>Intrinsic (pure)</td><td>n = p</td><td>near the middle of the gap</td></tr>
+    <tr><td>n-type</td><td>n &gt; p</td><td>closer to E<sub>c</sub> (upper half)</td></tr>
+    <tr><td>p-type</td><td>p &gt; n</td><td>closer to E<sub>v</sub> (lower half)</td></tr>
+  </table></div>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p>As you <b>increase the doping</b>, E<sub>F</sub> shifts <b>towards the conduction band for n-type</b> and <b>towards the valence band for p-type</b>.</p></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>E<sub>F</sub> is like the water level in a tank next to two shelves. Add donors (extra electrons) and the level rises toward the top shelf (CB). Add acceptors (extra holes) and the level sinks toward the bottom shelf (VB). The water level tells you at a glance which carrier is the majority.</p></div>
+
+  <h3>3.4 Reading band diagrams (very common exam question)</h3>
+  <ol class="steps">
+    <li><b>Flat E<sub>F</sub> everywhere</b> ⇒ the system is at equilibrium ⇒ <b>no net current</b>.</li>
+    <li><b>Sloped E<sub>F</sub></b> ⇒ <b>current is flowing</b> through the device (not equilibrium).</li>
+    <li><b>Sloped (tilted) E<sub>c</sub> and E<sub>v</sub></b> ⇒ an <b>electric field exists</b>. The steeper the tilt, the stronger the field.</li>
+    <li>Electric field: E = (1/q) dE<sub>c</sub>/dx (derived in Chapter 7). Electrons roll <i>downhill</i> in energy on the diagram; holes float <i>uphill</i>.</li>
+  </ol>
+</section>
