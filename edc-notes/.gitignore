@@ -1,0 +1,6 @@
+build/katex/
+build/prev*.png
+build/prev.html
+build/shot.png
+build/__pycache__/
+build/notes.html

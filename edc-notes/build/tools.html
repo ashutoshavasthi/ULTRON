@@ -1,0 +1,120 @@
+<div class="tool" id="t-diode"><h3>1 · Diode equation and temperature</h3>
+<div class="grid">
+<div><label>I₀ at 25 °C (µA)</label><input id="d-i0" type="number" value="1" step="any"></div>
+<div><label>Forward voltage V<sub>D</sub> (V)</label><input id="d-v" type="number" value="0.2" step="any"></div>
+<div><label>η (1 Ge, 2 Si)</label><select id="d-eta"><option value="1">1 (Ge)</option><option value="2">2 (Si)</option></select></div>
+<div><label>Junction temperature (°C)</label><input id="d-t" type="number" value="27" step="any"></div></div>
+<div class="out" id="d-out"></div></div>
+
+<div class="tool" id="t-zener"><h3>2 · Zener regulator</h3>
+<div class="grid">
+<div><label>V<sub>in</sub> (V)</label><input id="z-vin" type="number" value="15" step="any"></div>
+<div><label>V<sub>Z</sub> (V)</label><input id="z-vz" type="number" value="9.1" step="any"></div>
+<div><label>R<sub>S</sub> (Ω)</label><input id="z-rs" type="number" value="330" step="any"></div>
+<div><label>R<sub>L</sub> (Ω, 0 = no load)</label><input id="z-rl" type="number" value="1000" step="any"></div>
+<div><label>Zener rating P<sub>ZM</sub> (mW)</label><input id="z-p" type="number" value="500" step="any"></div>
+<div><label>I<sub>ZK</sub> (mA)</label><input id="z-k" type="number" value="1" step="any"></div></div>
+<div class="out" id="z-out"></div></div>
+
+<div class="tool" id="t-rect"><h3>3 · Rectifier performance</h3>
+<div class="grid">
+<div><label>Type</label><select id="r-type"><option value="h">Half-wave</option><option value="c">Centre-tap full-wave</option><option value="b">Bridge full-wave</option></select></div>
+<div><label>Peak secondary voltage V<sub>Smax</sub> (V)</label><input id="r-vm" type="number" value="77.78" step="any"></div>
+<div><label>Diode R<sub>f</sub> (Ω)</label><input id="r-rf" type="number" value="20" step="any"></div>
+<div><label>Load R<sub>L</sub> (Ω)</label><input id="r-rl" type="number" value="1000" step="any"></div></div>
+<div class="out" id="r-out"></div></div>
+
+<div class="tool" id="t-filt"><h3>4 · Filter ripple factor (full-wave, ripple at 2f)</h3>
+<div class="grid">
+<div><label>Filter</label><select id="f-type"><option value="l">L (series inductor)</option><option value="c">C (shunt capacitor)</option><option value="lc">LC (L-section)</option><option value="pi">π (C–L–C)</option></select></div>
+<div><label>Frequency f (Hz)</label><input id="f-f" type="number" value="50" step="any"></div>
+<div><label>R<sub>L</sub> (Ω)</label><input id="f-rl" type="number" value="750" step="any"></div>
+<div><label>L (H)</label><input id="f-l" type="number" value="4" step="any"></div>
+<div><label>C or C₁ (µF)</label><input id="f-c1" type="number" value="100" step="any"></div>
+<div><label>C₂ (µF, π only)</label><input id="f-c2" type="number" value="100" step="any"></div></div>
+<div class="out" id="f-out"></div></div>
+
+<div class="tool" id="t-ujt"><h3>5 · UJT relaxation oscillator</h3>
+<div class="grid">
+<div><label>η</label><input id="u-eta" type="number" value="0.5" step="any"></div>
+<div><label>V<sub>BB</sub> (V)</label><input id="u-vbb" type="number" value="40" step="any"></div>
+<div><label>R<sub>E</sub> (kΩ)</label><input id="u-re" type="number" value="100" step="any"></div>
+<div><label>C<sub>E</sub> (nF)</label><input id="u-ce" type="number" value="1" step="any"></div></div>
+<div class="out" id="u-out"></div></div>
+
+<div class="tool" id="t-bjt"><h3>6 · BJT bias (DC) and small-signal (AC) solver</h3>
+<div class="grid">
+<div><label>Configuration</label><select id="b-cfg"><option value="fixed">Fixed bias</option><option value="emitter">Emitter bias</option><option value="divider">Voltage divider (exact)</option><option value="cfb">Collector feedback</option><option value="follower">Emitter follower</option></select></div>
+<div><label>V<sub>CC</sub> (or V<sub>EE</sub> for follower) (V)</label><input id="b-vcc" type="number" value="12" step="any"></div>
+<div><label>β</label><input id="b-beta" type="number" value="50" step="any"></div>
+<div><label>R<sub>B</sub> or R<sub>F</sub> (kΩ)</label><input id="b-rb" type="number" value="240" step="any"></div>
+<div><label>R<sub>1</sub> (kΩ, divider)</label><input id="b-r1" type="number" value="82" step="any"></div>
+<div><label>R<sub>2</sub> (kΩ, divider)</label><input id="b-r2" type="number" value="22" step="any"></div>
+<div><label>R<sub>C</sub> (kΩ)</label><input id="b-rc" type="number" value="2.2" step="any"></div>
+<div><label>R<sub>E</sub> (kΩ, 0 if none)</label><input id="b-re" type="number" value="0" step="any"></div>
+<div><label>Emitter bypassed for ac?</label><select id="b-by"><option value="1">Yes (C<sub>E</sub> present)</option><option value="0">No</option></select></div></div>
+<div class="out" id="b-out"></div></div>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var v=function(i){return parseFloat($(i).value)};
+  var f=function(x,n){if(!isFinite(x))return '—';var a=Math.abs(x);if(a!==0&&(a<1e-3||a>=1e6))return x.toExponential(3);return (+x.toPrecision(n||4)).toString()};
+  function on(ids,fn){ids.forEach(function(i){$(i).addEventListener('input',fn);$(i).addEventListener('change',fn)});fn()}
+  // 1 diode
+  on(['d-i0','d-v','d-eta','d-t'],function(){
+    var T=v('d-t')+273, VT=T/11600, eta=v('d-eta');
+    var I0=v('d-i0')*1e-6*Math.pow(2,(v('d-t')-25)/10);
+    var x=v('d-v')/(eta*VT), I=I0*(Math.exp(x)-1), rd=eta*VT/Math.max(Math.abs(I),1e-30);
+    $('d-out').textContent='V_T = '+f(VT*1000)+' mV\nI₀ at this temperature = '+f(I0*1e6)+' µA  (doubles every 10 °C)\nI_D = '+f(I*1e3)+' mA\nr_d = ηV_T/I_D = '+f(rd)+' Ω';});
+  // 2 zener
+  on(['z-vin','z-vz','z-rs','z-rl','z-p','z-k'],function(){
+    var IS=(v('z-vin')-v('z-vz'))/v('z-rs')*1e3, IL=v('z-rl')>0?v('z-vz')/v('z-rl')*1e3:0, IZ=IS-IL, PZ=v('z-vz')*IZ, IZM=v('z-p')/v('z-vz');
+    var msg=IZ<v('z-k')?'⚠ I_Z below I_ZK: regulation lost':(PZ>v('z-p')?'⚠ power rating exceeded':'✓ in the regulating region');
+    $('z-out').textContent='I_S = '+f(IS)+' mA\nI_L = '+f(IL)+' mA\nI_Z = I_S − I_L = '+f(IZ)+' mA\nZener power = '+f(PZ)+' mW  (I_ZM = '+f(IZM)+' mA)\n'+msg;});
+  // 3 rectifier
+  on(['r-type','r-vm','r-rf','r-rl'],function(){
+    var t=$('r-type').value,Vm=v('r-vm'),Rf=v('r-rf'),RL=v('r-rl'),Im,Idc,Irms,Pdc,Pac,eta,g,piv,Kf;
+    if(t==='h'){Im=Vm/(Rf+RL);Idc=Im/Math.PI;Irms=Im/2;Pdc=Idc*Idc*RL;Pac=Irms*Irms*(Rf+RL);Kf=Math.PI/2;piv=Vm}
+    else{var Rt=(t==='b')?2*Rf+RL:Rf+RL;Im=Vm/Rt;Idc=2*Im/Math.PI;Irms=Im/Math.SQRT2;Pdc=Idc*Idc*RL;Pac=Irms*Irms*(t==='b'?2*Rf+RL:Rf+RL);Kf=Math.PI/(2*Math.SQRT2);piv=(t==='c')?2*Vm:Vm}
+    eta=Pdc/Pac*100;g=Math.sqrt(Kf*Kf-1);
+    $('r-out').textContent='I_max = '+f(Im*1e3)+' mA\nI_dc = '+f(Idc*1e3)+' mA     V_dc = '+f(Idc*RL)+' V\nI_rms = '+f(Irms*1e3)+' mA   V_rms(load) = '+f(Irms*RL)+' V\nP_dc = '+f(Pdc)+' W    P_ac = '+f(Pac)+' W\nEfficiency = '+f(eta)+' %\nRipple factor (no filter) = '+f(g)+'\nPIV = '+f(piv)+' V\nRegulation (R_f/R_L) = '+f((t==='b'?2*Rf:Rf)/RL*100)+' %';});
+  // 4 filter
+  on(['f-type','f-f','f-rl','f-l','f-c1','f-c2'],function(){
+    var t=$('f-type').value,fr=v('f-f'),w=2*Math.PI*fr,RL=v('f-rl'),L=v('f-l'),C1=v('f-c1')*1e-6,C2=v('f-c2')*1e-6,g,note='';
+    if(t==='l'){g=(2/(3*Math.SQRT2))*RL/Math.sqrt(RL*RL+4*w*w*L*L);note='approx (2ωL≫R_L): '+f(RL/(3*Math.SQRT2*w*L))}
+    else if(t==='c'){g=1/(4*Math.sqrt(3)*fr*C1*RL)}
+    else if(t==='lc'){g=Math.SQRT2/3/(4*w*w*L*C1)}
+    else{var Xc1=1/(2*w*C1),Xc2=1/(2*w*C2),XL=2*w*L;g=Math.SQRT2*Xc1*Xc2/(RL*(XL+Xc2));note='approx (X_L≫X_C2): '+f(Math.SQRT2/(8*w*w*w*L*C1*C2*RL))}
+    $('f-out').textContent='Ripple factor γ = '+f(g)+'  ('+f(g*100)+' %)\n'+note+'\nω = '+f(w)+' rad/s (ripple frequency = 2f = '+f(2*fr)+' Hz)\nNo filter (FWR): γ = 0.482';});
+  // 5 ujt
+  on(['u-eta','u-vbb','u-re','u-ce'],function(){
+    var eta=v('u-eta'),Vbb=v('u-vbb'),RE=v('u-re')*1e3,CE=v('u-ce')*1e-9,T=RE*CE*Math.log(1/(1-eta));
+    $('u-out').textContent='V_P = ηV_BB = '+f(eta*Vbb)+' V   (with V_D = 0.7 V: '+f(eta*Vbb+0.7)+' V)\nτ = R_E·C_E = '+f(RE*CE*1e6)+' µs\nT = R_E C_E ln[1/(1−η)] = '+f(T*1e6)+' µs\nf = 1/T = '+f(1/T)+' Hz';});
+  // 6 bjt
+  on(['b-cfg','b-vcc','b-beta','b-rb','b-r1','b-r2','b-rc','b-re','b-by'],function(){
+    var c=$('b-cfg').value,VCC=v('b-vcc'),b=v('b-beta'),RB=v('b-rb')*1e3,R1=v('b-r1')*1e3,R2=v('b-r2')*1e3,RC=v('b-rc')*1e3,RE=v('b-re')*1e3,by=$('b-by').value==='1',VBE=0.7;
+    var IB,IC,IE,VCE,txt='',Rth,Eth;
+    if(c==='fixed'){RE=0;IB=(VCC-VBE)/RB}
+    else if(c==='emitter'){IB=(VCC-VBE)/(RB+(b+1)*RE)}
+    else if(c==='divider'){Rth=R1*R2/(R1+R2);Eth=R2*VCC/(R1+R2);IB=(Eth-VBE)/(Rth+(b+1)*RE)}
+    else if(c==='cfb'){IB=(VCC-VBE)/(RB+b*(RC+RE))}
+    else {IB=(VCC-VBE)/(RB+(b+1)*RE)}
+    IC=b*IB;IE=(b+1)*IB;
+    if(c==='follower'){VCE=VCC-IE*RE}else if(c==='cfb'){VCE=VCC-IC*(RC+RE)}else{VCE=VCC-IC*(RC+RE)}
+    var sat=(c==='follower')?VCC/RE:VCC/(RC+RE);
+    var region=VCE<0.2?'⚠ SATURATED (V_CE ≈ 0.2 V; I_C is limited to about I_C,sat)':(IB<=0?'⚠ CUT-OFF':'✓ active region');
+    txt='DC: I_B = '+f(IB*1e6)+' µA   I_C = '+f(IC*1e3)+' mA   I_E = '+f(IE*1e3)+' mA\n    V_CE = '+f(VCE)+' V   I_C,sat = '+f(sat*1e3)+' mA\n    '+region+'\n';
+    var re=0.026/IE, Zi,Zo,Av;
+    if(c==='fixed'||c==='emitter'||c==='divider'){
+      var Zb,Rin=(c==='divider')?Rth:RB;
+      if(c==='fixed'||by){Zb=b*re;Av=-RC/re}else{Zb=b*(re+RE);Av=-RC/(re+RE)}
+      Zi=1/(1/Rin+1/Zb);Zo=RC;
+      txt+='AC: r_e = 26 mV/I_E = '+f(re)+' Ω\n    Z_i = '+f(Zi)+' Ω   Z_o ≈ R_C = '+f(Zo)+' Ω\n    A_v = '+f(Av)+'   A_i ≈ β = '+f(b);
+    } else if(c==='follower'){
+      var Zb2=b*(re+RE);Zi=1/(1/RB+1/Zb2);Zo=1/(1/RE+1/re);Av=RE/(RE+re);
+      txt+='AC: r_e = '+f(re)+' Ω\n    Z_i = '+f(Zi)+' Ω   Z_o = R_E‖r_e = '+f(Zo)+' Ω\n    A_v = '+f(Av)+' (in phase)';
+    } else { txt+='AC for collector feedback needs R_F1/R_F2 (see Chapter 18).'; }
+    $('b-out').textContent=txt;});
+})();
+</script>
