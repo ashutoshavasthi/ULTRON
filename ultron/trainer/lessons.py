@@ -713,7 +713,8 @@ class Phase2Exam(Lesson):
     goal = ("No teaching. Questions that combine Phase 2's inventions in ways never "
             "practised: square roots, logarithms and negative powers (never taught), "
             "fractions raised to powers, clock numbers with huge backward spins, energy for "
-            "dropped balls, and 'what power 2 equals 2', which no fraction answers.")
+            "dropped balls, and 'what power 2 equals 2', which no fraction answers (Ultron "
+            "must pin it in a gap of its line).")
     kind = "exam"
 
 

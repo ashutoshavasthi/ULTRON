@@ -66,6 +66,7 @@ def look_for_ladders(brain):
     record = brain.inventions.setdefault("ladder", {
         "shape": "law-maker", "primitives": [], "lesson": brain.lesson, "rungs": [],
         "predicted": [], "stops_at": None, "story": ""})
+    record["evidence"] = len(steps)
     for upper, (lower, a, n, e) in sorted(steps.items()):
         if upper not in record["rungs"]:
             record["rungs"].append(upper)
@@ -117,7 +118,10 @@ def look_for_ladders(brain):
 
 
 def seed_predictions(brain, spec):
-    """Meeting a new kind of experience with two amounts: maybe it's a predicted law."""
+    """Meeting a new kind of experience with two amounts: keep the predicted laws in
+    mind as candidate explanations. They aren't assumed, and experiments aren't designed
+    around them; they are checked against the real experiences before any search, and
+    only mentioned if they fit."""
     if spec.kind != "program" or spec.out_type != INT or len(spec.inputs) != 2:
         return
     preds = [n for n in brain.inventions.get("ladder", {}).get("predicted", [])
@@ -128,10 +132,7 @@ def seed_predictions(brain, spec):
     ideas = []
     for name in preds:
         ideas += [("call", name, ("var", x), ("var", y)), ("call", name, ("var", y), ("var", x))]
-    brain.hypotheses[spec.name] = ideas[0]
-    brain.rivals[spec.name] = ideas[1:]
-    brain.note("design", f"{spec.name}: could this be my predicted law {preds[0]}? I'll "
-                         f"test that first")
+    brain.candidates[spec.name] = ideas
 
 
 def confirm_predictions(brain, expr):
@@ -143,3 +144,6 @@ def confirm_predictions(brain, expr):
             law.provenance["confirmed_in"] = brain.lesson
             brain.note("confirm", f"my predicted law '{expr[1]}' was right: the world does "
                                   f"exactly what REPEAT said it would")
+            record = brain.inventions.get("ladder")
+            if record is not None:
+                record["confirmed"] = record.get("confirmed", 0) + 1

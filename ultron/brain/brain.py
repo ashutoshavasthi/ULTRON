@@ -42,6 +42,7 @@ class Brain:
         self.found_at = {}                  # spec -> experiences when current idea was found
         self.compress = True                # look for patterns among its own laws
         self.quantities = {}                # lengths etc. Ultron holds an idea about
+        self.candidates = {}                # spec -> predictions kept in mind, not assumed
         self.lesson = None
 
     # ------------------------------------------------------------------ utils
@@ -246,6 +247,27 @@ class Brain:
             self.note("doubt", f"{name}: my confirmed law {show(trusted.expr)} just failed; "
                                f"I don't trust it any more until a better one is confirmed")
         eps = self.memory.of(name)
+        for cand in self.candidates.get(name, []):
+            if not all(safe_evaluate(cand, e["inputs"], self.library) == e["outcome"]
+                       for e in eps):
+                continue
+            old = self.hypotheses.get(name)
+            self.hypotheses[name] = cand
+            self.found_at[name] = len(eps)
+            if len(eps) < ESTABLISHED:
+                # one or two experiences can fit almost anything by coincidence: test it,
+                # don't trust it
+                self.note("revise", f"{name}: a prediction I had in mind, {show(cand)}, fits "
+                                    f"my first {len(eps)} experience(s); only a suspicion, so "
+                                    f"I'll test it before searching for anything else")
+            else:
+                self.candidates[name] = [c for c in self.candidates[name] if c != cand]
+                self.note("revise", f"{name}: a prediction I had in mind, {show(cand)}, fits "
+                                    f"all {len(eps)} experiences (was "
+                                    f"{show(old) if old else 'nothing'})")
+            return show(cand)
+        self.candidates[name] = [c for c in self.candidates.get(name, []) if all(
+            safe_evaluate(c, e["inputs"], self.library) == e["outcome"] for e in eps)]
         for rival in self.rivals.get(name, []):
             if all(safe_evaluate(rival, e["inputs"], self.library) == e["outcome"] for e in eps):
                 old = self.hypotheses.get(name)

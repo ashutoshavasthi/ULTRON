@@ -77,7 +77,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _word_: 'equals' joins things that are the same amount
 - Ultron _word_: '=' joins things that are the same amount
 - **Trainer**: I acted out 'plus', 'minus', 'times' with real piles and said the words.
-- Ultron _revise_: numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was repeated_groups(left, right); 1 experiences, 11273 programs searched)
+- Ultron _revise_: numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 11273 programs searched)
 - Ultron _revise_: numeral: surprised; my other idea merge(right, groups(left, 10)) fits everything (was succ(succ(groups(8, 9))))
 - Ultron _confirm_: numeral: merge(right, groups(left, 10)) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
@@ -149,28 +149,29 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: spend_coins
 - Ultron _meet_: new kind of experience: spend_notes
 - **Trainer**: Here is a purse. You can earn coins and spend coins. If you spend with an empty purse, the shop gives you an IOU note. Play.
-- Ultron _revise_: earn_coins: surprised; new best explanation is 6 (was repeated_groups(coins, notes); 1 experiences, 35 programs searched)
-- Ultron _revise_: earn_notes: surprised; my other idea repeated_groups(notes, coins) fits everything (was repeated_groups(coins, notes))
-- Ultron _revise_: spend_coins: surprised; new best explanation is 4 (was repeated_groups(coins, notes); 1 experiences, 35 programs searched)
-- Ultron _revise_: spend_notes: surprised; my other idea repeated_groups(notes, coins) fits everything (was repeated_groups(coins, notes))
-- Ultron _revise_: earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was 6; 2 experiences, 9871 programs searched)
-- Ultron _revise_: earn_notes: surprised; new best explanation is notes (was repeated_groups(notes, coins); 2 experiences, 19 programs searched)
-- Ultron _revise_: spend_coins: surprised; my other idea pred(coins) fits everything (was 4)
-- Ultron _revise_: earn_notes: surprised; my other idea pred(notes) fits everything (was notes)
-- Ultron _revise_: spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was repeated_groups(notes, coins); 3 experiences, 27565 programs searched)
-- Ultron _confirm_: earn_coins: take_away(succ(coins), notes) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _revise_: earn_coins: a prediction I had in mind, repeated_groups(coins, notes), fits my first 1 experience(s); only a suspicion, so I'll test it before searching for anything else
+- Ultron _revise_: earn_notes: surprised; new best explanation is coins (was nothing; 1 experiences, 15 programs searched)
+- Ultron _revise_: spend_coins: surprised; new best explanation is coins (was nothing; 1 experiences, 15 programs searched)
+- Ultron _revise_: spend_notes: a prediction I had in mind, repeated_groups(coins, notes), fits my first 1 experience(s); only a suspicion, so I'll test it before searching for anything else
+- Ultron _revise_: earn_coins: surprised; new best explanation is succ(coins) (was repeated_groups(coins, notes); 2 experiences, 1049 programs searched)
+- Ultron _revise_: earn_notes: surprised; my other idea notes fits everything (was coins)
+- Ultron _revise_: spend_coins: surprised; my other idea pred(coins) fits everything (was coins)
+- Ultron _revise_: spend_notes: a prediction I had in mind, repeated_groups(notes, coins), fits my first 2 experience(s); only a suspicion, so I'll test it before searching for anything else
+- Ultron _revise_: earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was succ(coins); 3 experiences, 38927 programs searched)
+- Ultron _revise_: spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was repeated_groups(notes, coins); 3 experiences, 38925 programs searched)
+- Ultron _revise_: earn_notes: surprised; new best explanation is pred(notes) (was notes; 4 experiences, 1232 programs searched)
 - Ultron _confirm_: spend_coins: pred(coins) predicted 8 new experiences in a row; added to my library of building blocks
-- Ultron _confirm_: earn_notes: pred(notes) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _confirm_: earn_coins: take_away(succ(coins), notes) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: spend_notes: take_away(succ(notes), coins) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _confirm_: earn_notes: pred(notes) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _reflect_: 'up one' and 'down one' undo each other on my line
 - **Trainer**: You say some purses are 'below zero'. Let's buy and sell with that idea.
 - Ultron _meet_: new kind of experience: pay
 - Ultron _meet_: new kind of experience: get_paid
-- Ultron _revise_: pay: surprised; new best explanation is down(purse) (was repeated_groups(price, purse); 1 experiences, 1383 programs searched)
-- Ultron _revise_: get_paid: surprised; my other idea repeated_groups(wage, purse) fits everything (was repeated_groups(purse, wage))
-- Ultron _revise_: pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 2 experiences, 75535 programs searched)
-- Ultron _revise_: get_paid: surprised; new best explanation is merge(purse, wage) (was repeated_groups(wage, purse); 2 experiences, 4561 programs searched)
+- Ultron _revise_: pay: surprised; new best explanation is repeat price times [down] starting from purse (was nothing; 1 experiences, 2940 programs searched)
+- Ultron _revise_: get_paid: surprised; new best explanation is succ(purse) (was nothing; 1 experiences, 86 programs searched)
+- Ultron _revise_: get_paid: surprised; my other idea merge(purse, wage) fits everything (was succ(purse))
 - Ultron _confirm_: pay: repeat price times [down] starting from purse predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: get_paid: merge(purse, wage) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
@@ -195,8 +196,10 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: recut
 - **Trainer**: Here are cakes, a knife that cuts into equal pieces, and a balance. Play.
 - Ultron _revise_: cake_balance: surprised; new best explanation is true (was nothing; 1 experiences, 51 programs searched)
-- Ultron _revise_: recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(cut, recut); 1 experiences, 1625 programs searched)
+- Ultron _revise_: recut: a prediction I had in mind, repeated_groups(cut, recut), fits my first 1 experience(s); only a suspicion, so I'll test it before searching for anything else
 - Ultron _revise_: cake_balance: surprised; new best explanation is lt(pieces, cut) (was true; 2 experiences, 2444 programs searched)
+- Ultron _revise_: recut: a prediction I had in mind, repeated_groups(recut, cut), fits my first 2 experience(s); only a suspicion, so I'll test it before searching for anything else
+- Ultron _revise_: recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(recut, cut); 3 experiences, 2300 programs searched)
 - Ultron _revise_: cake_balance: surprised; my other idea eq(pieces, wholes) fits everything (was lt(pieces, cut))
 - Ultron _confirm_: recut: groups(cut, recut) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: cake_balance: eq(pieces, wholes) predicted 8 new experiences in a row; added to my library of building blocks
@@ -230,8 +233,8 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Now spin it as many ticks as you like and watch where it stops.
 - Ultron _meet_: new kind of experience: spin
-- Ultron _revise_: spin: surprised; new best explanation is 1 (was repeated_groups(start, ticks); 1 experiences, 31 programs searched)
-- Ultron _revise_: spin: surprised; new best explanation is take_away(start, 4) (was 1; 2 experiences, 2467 programs searched)
+- Ultron _revise_: spin: surprised; new best explanation is start (was nothing; 1 experiences, 15 programs searched)
+- Ultron _revise_: spin: surprised; new best explanation is take_away(start, 4) (was start; 2 experiences, 2467 programs searched)
 - Ultron _revise_: spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 133689 programs searched)
 - Ultron _confirm_: spin: repeat ticks times [tick] starting from start predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
@@ -263,7 +266,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 
 - **Trainer**: Lesson 13: Growing
 - Ultron _meet_: new kind of experience: grow
-- Ultron _revise_: grow: surprised; my other idea repeated_groups(split, days) fits everything (was repeated_groups(days, split))
+- Ultron _revise_: grow: a prediction I had in mind, repeated_groups(split, days), fits my first 1 experience(s); only a suspicion, so I'll test it before searching for anything else
 - Ultron _confirm_: grow: repeated_groups(split, days) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: my predicted law 'repeated_groups' was right: the world does exactly what REPEAT said it would
 - Ultron _bored_: nothing here is teaching me anything new any more

@@ -85,14 +85,17 @@ Four more principles govern how laws are used and refined:
 
 | Mechanism | File | What it does | Inventions |
 |---|---|---|---|
-| Shape discovery | `invention.py` | Walks an action from the empty state with its own laws; the walk is a cycle, a line through zero, or a half-line | negative numbers (line), clock numbers (cycle) |
-| Hidden quantities | `invariants.py` (`search_sum_invariant`) | When no product stays constant, tries A + λ·B with a fitted λ, constant within each run | energy |
+| Shape discovery | `invention.py` | Walks the world's states with its own laws: a cycle, a line through zero, a half-line, or a *finer* line (roles of its law's inputs found by testing) | negative numbers (line), clock numbers (cycle), fractions (finer line) |
+| Numbers in the gaps | `gaps.py` | An inverse question no pile of pieces answers, yet always squeezed between two piles: a number in a gap, pinned as tightly as its counting allows (effort budget in counting steps) | irrational numbers (√2 = a tile's diagonal) |
+| Hidden quantities | `invariants.py` (`search_sum_invariant`) | When no product stays constant, tries sums of 2, then 3 terms with least-squares coefficients, constant within each run | energy (and spring energy) |
 | Compression | `compression.py` | Finds "this law is that law, repeated" (REPEAT) in its library; predicts the next law; stops where the pattern becomes ambiguous | powers (predicted 10 lessons early) |
 | Laws on amounts | `amounts.py` (`evaluate_amount`) | Runs any of its programs on fractions; a below-zero number of repeats means undoing | roots, logarithms, negative and fractional powers |
 
 Also in Phase 2:
 - Experiment design prefers *rich* situations (not "0 groups of 1").
 - Symmetric laws "count on from the bigger number".
+- Among equally short explanations, prefer the one borrowing fewer library laws.
+- Predictions are candidate explanations: tested first, trusted only after 3 fits.
 - The program language gained "if ... then ... else" and one-input laws.
 
 ## Curiosity (`curiosity.py`)
@@ -143,10 +146,11 @@ python -m pytest                  # tests
 ## File map
 
 ```
-ultron/brain/     dsl, synth, invariants, invention, amounts, compression, curiosity, memory, perception, units, language, reasoner, brain
+ultron/brain/     dsl, synth, invariants, invention, amounts, gaps, compression, curiosity, memory, perception, units, language, reasoner, brain
 ultron/env/       toyworld, physics, dataworld, data/*.csv (real measurements, sources in headers)
 ultron/trainer/   lessons: Phase 1 = 0-10 (7 noisy lab, 8 owing, 9 sharing cakes, 10 final exam);
-                  Phase 2 = 11 wheel, 12 hills and valleys, 13 growing, 14 Phase 2 final exam
+                  Phase 2 = 11 wheel, 12 hills and valleys, 13 growing, 14 hills and a spring,
+                  15 the diagonal of a tile, 16 Phase 2 final exam
 blind/            write your own blind test; `python -m ultron blind FILE` (mastery gate, naming after understanding)
 ultron/judge/     exams (held-out + memoriser baselines), report
 ultron/logic/     peano (rules from learned laws + proof checker)

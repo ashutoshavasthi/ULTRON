@@ -1,69 +1,60 @@
-# Judge's verdict: Phase 2 (inventing concepts, more generally)
+# Judge's verdict: Phase 2 (inventing concepts, generally)
 
-*Written by Claude, as Ultron's trainer and judge, after running lessons 0–14,
-every exam, and the experiments in `python -m ultron experiment`. Metrics are in
+*Written by Claude, as Ultron's trainer and judge, after running lessons 0–16,
+every exam, and `python -m ultron experiment`. Metrics are in
 [`report_card.md`](report_card.md).*
 
 ## Verdict
 
-**Phase 2 passes, but it isn't perfect.** Ultron now invents concepts with
-mechanisms that are *general*: each one produced at least one concept it was
-never built for. Every Phase 2 lesson and the Phase 2 final exam passed on the
-first attempt. Where it falls short of "one mechanism for everything" is listed
-below, as plainly as the successes.
+**Phase 2 is complete. Every imperfection I found that can be fixed within this
+phase has been fixed.** All 17 lessons pass their held-out exams on the first
+attempt. What remains open is either not mine to supply (a blind test) or the
+research frontier (letting Ultron invent new *kinds* of hypothesis). Both are
+named at the end, because "perfect" would be a false claim.
 
-## What Phase 2 demonstrated
+## What Ultron invents, and with how few mechanisms
 
-| Mechanism | What it invented | Evidence it's general |
+| Mechanism | Inventions | Proof it is general |
 |---|---|---|
-| **Shape discovery** (`invention.py`): walk an action from the empty state with its own laws and look at the shape it traces | **Clock numbers** (lesson 11): "the 6th tick brings me back to the start... numbers go round" | The *same code* found negative numbers as a line in Phase 1. Nothing in it mentions clocks or wheels. |
-| **Hidden quantities** (`invariants.py`): when no product stays constant, try A + λ·B with λ fitted | **Energy** (lesson 12): y + 0.0509684·v² per run (= height + v²/2g), found in 7 experiences, mass correctly left out | It noticed that its coefficient's units are those of its own accelerometer readings. It then answered never-trained questions about balls thrown *upwards*. |
-| **Compression** (`compression.py`): find the pattern "this law is that law, repeated" in its own library | **Powers**, predicted in *lesson 3*, ten lessons before meeting anything that grows | The growing world confirmed the prediction. Ultron searched 0 programs, against 110,210 without compression. It then declined to predict the next rung and explained why (powers aren't symmetric). |
-| **Laws on amounts** (`amounts.py`): run any of its programs on fractions; "undo" steps below zero | **Square roots, cube roots, logarithms, negative and fractional powers**, none of them taught | "what power 2 equals 81" = 9, "2 power what equals 1024" = 10, "3 power -2" = 1/9. It correctly refuses "what power 2 equals 2": no fraction answers it. |
+| **Shape discovery** (`invention.py`): walk the world's states with its own laws and look at the shape | **negative numbers** (a line through zero), **clock numbers** (a cycle), **fractions** (a finer line) | One module, three kinds of number, no concept-specific code. For fractions it even works out *by testing* which input of its law is the count, the kind of piece and the wholes. |
+| **Numbers in the gaps** (`gaps.py`) | **irrational numbers**: "what power 2 equals 2" is always squeezed between two piles, never on one | Invented by reasoning in lesson 13. Confirmed by the world in lesson 15: the tile's diagonal predicts every ruler reading, at 1,000 marks too, without ever being measured there. |
+| **Hidden quantities** (`invariants.py`): sums of any number of terms, coefficients fitted | **energy**: y + v²/2g, then y + v²/2g + (k/2mg)·c² with a spring | The spring coefficient matched the hidden true value exactly. It answers never-trained questions: balls thrown up, how far a spring squashes, how high a spring launches. |
+| **Compression** (`compression.py`): "this law is that law, repeated" | **powers**, predicted in lesson 3 and confirmed in lesson 13 | 0 programs searched against 130,758 without compression. It declines to predict the next rung, because powers aren't symmetric. |
+| **Laws run on amounts** (`amounts.py`) | **roots, logarithms, negative and fractional powers**, never taught | "what power 2 equals 81" = 9, "2 power what equals 1024" = 10, "3 power -2" = 1/9, √2 between 141/100 and 71/50 |
 
-**Imperfections from Phase 1, fixed in Phase 2:**
-- **Designing experiments now pays off.** It used to pick the first situation
-  that split its ideas, which was always the tiniest, like "0 groups of 1". Such
-  cases fit almost any rule. It now prefers the richest such situation.
-  Experiences needed to find every law:
+## Imperfections found in Phase 2, and what happened to them
 
-  | Teacher | Designing | Watching | Saving |
-  |---|---|---|---|
-  | Helpful | 27 | 34 | 21% |
-  | Random, wider range | 23 | 38 | 39% |
+| Imperfection | Fix |
+|---|---|
+| Fractions had their own mechanism | Fractions are now a shape (a *finer line*) found by the same shape discovery as negatives and clock numbers, with no hard-coded law names |
+| Energy could only have two parts | Hidden quantities have any number of parts; spring energy was found exactly |
+| Irrational numbers didn't exist for Ultron | Invented by reasoning (numbers in the gaps), then confirmed by measuring a tile's diagonal |
+| Its wheel law was odd (it reused the purse law) | Among equally short explanations, it prefers the one that borrows fewer laws from its library (borrowing costs more description). The law is now "if slot is 5 then 0 else slot + 1" |
+| REPEAT was trusted after one example, and assumed everywhere | Predictions are candidate explanations kept in mind and *tested first*. It calls a fit on 1–2 experiences "only a suspicion", and it counts its evidence honestly |
+| Designing experiments sometimes hurt | It prefers rich situations over degenerate ones like "0 groups of 1". It needs 29 vs 34 experiences (helpful teacher) and 31 vs 37 (random teacher) compared with watching, and only it can learn what a biased teacher never shows |
+| Slow answers | It counts on from the bigger number for laws it checked are symmetric, reuses coarse pins, and only tries piece sizes that fit evenly |
 
-  With a biased teacher it is still the only way to learn what nobody shows it.
-- **Speed.** Ultron checks which of its laws are symmetric and then "counts on
-  from the bigger number". Full training went from 50 seconds to 9 seconds,
-  with identical answers.
+## What remains, honestly
 
-## Imperfections, stated plainly
-
-1. **Fractions still use their own mechanism.** Shape discovery unified
-   negatives and clock numbers; fractions still come from `amounts.py`, which
-   was built for them. One mechanism for all three is not done.
-2. **The mechanisms are still categories I designed:** shapes of an action's
-   walk, two-term sums, the REPEAT pattern. They're far more general than
-   Phase 1's one-concept detectors, but Ultron can't invent a new *kind* of
-   hypothesis.
-3. **REPEAT was generalised from one example.** Ultron says so ("I have seen
-   this shape 1 time"), treats the result as a prediction, and lets the world
-   decide. It also tries its prediction on every new two-number experience.
-   That's harmless and quickly refuted, but naive.
-4. **Energy has exactly two terms.** A world where height, speed and a spring
-   all share energy would need three terms, which the search does not try.
-5. **Its wheel law is odd.** It wrote `earn_coins(slot, groups(6,
-   take_away(slot, 4)))` instead of "if slot is 5 then 0 else slot + 1". Both
-   are correct and equally short; Occam's razor cannot tell them apart.
-6. **Irrational numbers are a genuine next invention.** Ultron is right that
-   no fraction squared makes 2. Inventing numbers that fill those gaps is where
-   its current mechanisms stop.
-7. **I wrote every exam.** A blind test from someone else is still the
-   strongest evidence missing.
+1. **Counting arithmetic caps precision.** Ultron multiplies by counting, so it
+   pins √2 to hundredths quickly, but cube roots take a second or two. That is a
+   genuine limit of a mind that only counts. It is also the natural next
+   invention: place-value ("column") arithmetic, which would make its own
+   numerals do the work.
+2. **Repeating a fractional number of times.** "2 power what equals 3" is
+   refused. The answer is between 1 and 2, and Ultron has no idea what doing
+   something "1.58 times" means. That's a real concept, not a bug.
+3. **The kinds of hypothesis are still mine.** Shapes, sums of terms, REPEAT,
+   gaps: Ultron invents *concepts* with them, but it can't invent a new *kind of
+   hypothesis*. That is the open research frontier, not something one more
+   patch fixes.
+4. **The blind test.** I wrote every exam. Only questions written by someone
+   else can prove all of this.
 
 ## Grade
 
-Phase 2 is **passed**. The inventions are real and each one is checked on
-problems never seen: clock numbers, energy, predicted powers, and roots and
-logarithms never taught. "One mechanism for every concept" is still an
-honest *not yet*.
+**Phase 2: complete.** Ultron invented negative numbers, clock numbers,
+fractions, irrational numbers, energy with any number of parts, and powers
+before meeting them. It uses a handful of general mechanisms, and every
+invention is tested on problems it has never seen. The four items above are
+where Phase 3 begins.

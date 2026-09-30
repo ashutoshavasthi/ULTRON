@@ -100,19 +100,19 @@
   "not compressing": {
    "found_after": 3,
    "passed": false,
-   "programs_searched": 110210
+   "programs_searched": 130758
   }
  },
  "curated": {
   "active": {
-   "earn_coins": 2,
-   "earn_notes": 3,
-   "get_paid": 2,
+   "earn_coins": 3,
+   "earn_notes": 4,
+   "get_paid": 3,
    "groups": 3,
    "merge": 2,
    "numeral": 2,
    "pair_off": 2,
-   "pay": 2,
+   "pay": 1,
    "peekaboo": 1,
    "repeated_groups": null,
    "spend_coins": 2,
@@ -137,17 +137,17 @@
  },
  "uncurated": {
   "active": {
-   "earn_coins": 2,
-   "earn_notes": 3,
-   "get_paid": 1,
+   "earn_coins": 3,
+   "earn_notes": 4,
+   "get_paid": 2,
    "groups": 3,
    "merge": 2,
    "numeral": 2,
    "pair_off": 2,
-   "pay": 1,
+   "pay": 5,
    "peekaboo": 1,
    "repeated_groups": null,
-   "spend_coins": 1,
+   "spend_coins": 2,
    "spend_notes": 3,
    "take_away": 2
   },
@@ -159,7 +159,7 @@
    "merge": 2,
    "numeral": 2,
    "pair_off": 13,
-   "pay": 2,
+   "pay": 1,
    "peekaboo": 1,
    "repeated_groups": null,
    "spend_coins": 2,
