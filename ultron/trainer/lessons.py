@@ -10,7 +10,7 @@ from ..brain.memory import Spec
 from ..brain.perception import count, present, read_marks
 from ..env import dataworld
 from ..env.physics import PhysicsSandbox
-from ..env.toyworld import Bakery, ShopWorld, ToyWorld
+from ..env.toyworld import Bakery, ShopWorld, ToyWorld, Wheel
 
 NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
                 "nine", "ten"]
@@ -518,7 +518,62 @@ class FinalExam(Lesson):
     kind = "exam"
 
 
+# ============================================================== PHASE 2
+# ---------------------------------------------------------------- lesson 11
+class WheelLesson(Lesson):
+    number, title = 11, "The wheel"
+    goal = ("A wheel with 6 slots and a pointer that ticks round. Nobody mentions clocks. "
+            "The same shape discovery that found negative numbers should find that these "
+            "positions go round, and invent clock numbers: '100 after 3', '-2 after 3'.")
+    kind = "guided"
+    budget = 200
+    CYCLE = "cycle:tick"
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.world = Wheel(6, seed)
+        self.rng = self.world.rng
+
+    def specs(self):
+        return [Spec("tick", "program", {"slot": INT}, "slot_after", out_type=INT,
+                     action="tick", state_var="slot")]
+
+    def spin_specs(self):
+        return [Spec("spin", "program", {"start": INT, "ticks": INT}, "end", out_type=INT)]
+
+    def options(self, name):
+        if name == "tick":
+            return [{"slot": p} for p in range(6)]
+        return [{"start": p, "ticks": t} for p in range(6) for t in range(9)]
+
+    def scene(self, name, wide=False, request=None):
+        w, rng = self.world, self.rng
+        if name == "tick":
+            w.set(request["slot"] if request else rng.randrange(6))
+            before = count(w.marks_past_top())
+            w.tick()
+            return {"slot": before}, count(w.marks_past_top())
+        w.set(request["start"] if request else rng.randrange(6))
+        start = count(w.marks_past_top())
+        n = request["ticks"] if request else rng.randint(0, 8)
+        for _ in range(n):
+            w.tick()
+        return {"start": start, "ticks": n}, count(w.marks_past_top())
+
+    def after_demos(self):
+        """The Trainer spins the wheel and says e.g. '3 after 5 equals 2'."""
+        out = []
+        for _ in range(6):
+            start, n = self.rng.randrange(6), self.rng.randint(0, 9)
+            self.world.set(start)
+            for _ in range(n):
+                self.world.tick()
+            out.append((n, start, count(self.world.marks_past_top())))
+        return out
+
+
 def all_lessons(seed=0):
     return [Permanence(seed), Pairing(seed + 1), Combining(seed + 2), Groups(seed + 3),
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
-            Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10)]
+            Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10),
+            WheelLesson(seed + 11)]

@@ -14,8 +14,11 @@ save as JSON:
     ("not", e) ("and", a, b)      logic
     ("eq", a, b) ("lt", a, b)     "same as" and "fewer than"
     ("call", law, a, b)           use a law already in the library
+    ("call1", law, a)             use a one-input law (e.g. "tick" on a wheel)
+    ("ite", c, a, b)              if c then a else b
     ("iter", F, n, x)             start at x and do F, n times
-        F = ("succ",) | ("pred",) | ("down",) | ("call", law, t)   where ("call", law, t)
+        F = ("succ",) | ("pred",) | ("down",) | ("call1", law) | ("call", law, t)
+        where ("call", law, t)
         means "acc -> law(acc, t)"
 
 These primitives are the only thing designed by hand. Addition,
@@ -86,6 +89,8 @@ class Library:
         # "succ" -> ["down"], "merge" -> ["pay", "t_first"] (pay(t, acc) undoes merge(acc, t))
         self.inverses = {}
         self._memo = {}     # laws are pure functions: remember results already worked out
+        # steps that come back to where they started after k repeats (found by reflection)
+        self.cycles = {}
 
     def inverse_of(self, F):
         """The step that undoes F, if Ultron knows one."""
@@ -106,6 +111,19 @@ class Library:
 
     def binary_int_laws(self):
         return [self.laws[k] for k in sorted(self.laws) if self.laws[k].is_binary_int]
+
+    def unary_int_laws(self):
+        return [self.laws[k] for k in sorted(self.laws)
+                if self.laws[k].out_type == INT and len(self.laws[k].params) == 1]
+
+    def call1(self, name, a):
+        key = (name, a, len(self.inverses), len(self.cycles))
+        if key in self._memo:
+            return self._memo[key]
+        law = self.laws[name]
+        v = evaluate(law.expr, {law.params[0]: a}, self)
+        self._memo[key] = v
+        return v
 
     def call(self, name, a, b):
         key = (name, a, b, len(self.inverses))
@@ -130,6 +148,7 @@ class Library:
         new = Library()
         new.laws = copy.deepcopy(self.laws, memo)
         new.inverses = copy.deepcopy(self.inverses, memo)
+        new.cycles = copy.deepcopy(self.cycles, memo)
         return new
 
     def __contains__(self, name):
@@ -150,10 +169,15 @@ def apply_step(F, acc, t, library):
         return acc - 1
     if tag == "callr":
         return check(library.call(F[1], t, acc))
+    if tag == "call1":
+        return check(library.call1(F[1], acc))
     return check(library.call(F[1], acc, t))
 
 
 def iterate(F, n, x, t, library):
+    if F[0] == "call1" and F[1] in library.cycles:
+        # on a cycle, k repeats change nothing, and going back = going on round
+        n = n % library.cycles[F[1]]
     if n < 0:
         # doing something a below-zero number of times = undoing it that many times
         G = library.inverse_of(F)
@@ -192,6 +216,11 @@ def evaluate(expr, env, library):
     if tag == "call":
         return check(library.call(expr[1], evaluate(expr[2], env, library),
                                   evaluate(expr[3], env, library)))
+    if tag == "call1":
+        return check(library.call1(expr[1], evaluate(expr[2], env, library)))
+    if tag == "ite":
+        return (evaluate(expr[2], env, library) if evaluate(expr[1], env, library)
+                else evaluate(expr[3], env, library))
     if tag == "iter":
         F = expr[1]
         t = evaluate(F[2], env, library) if F[0] == "call" else None
@@ -217,6 +246,10 @@ def size(expr):
         return 1 + size(expr[1]) + size(expr[2])
     if tag == "call":
         return 1 + size(expr[2]) + size(expr[3])
+    if tag == "call1":
+        return 1 + size(expr[2])
+    if tag == "ite":
+        return 1 + size(expr[1]) + size(expr[2]) + size(expr[3])
     if tag == "iter":
         F = expr[1]
         f_cost = 1 + (size(F[2]) if F[0] == "call" else 0)
@@ -237,9 +270,14 @@ def show(expr):
         return f"{tag}({show(expr[1])}, {show(expr[2])})"
     if tag == "call":
         return f"{expr[1]}({show(expr[2])}, {show(expr[3])})"
+    if tag == "call1":
+        return f"{expr[1]}({show(expr[2])})"
+    if tag == "ite":
+        return f"if {show(expr[1])} then {show(expr[2])} else {show(expr[3])}"
     if tag == "iter":
         F = expr[1]
-        f = F[0] if F[0] != "call" else f"{F[1]}(·, {show(F[2])})"
+        f = (f"{F[1]}(·, {show(F[2])})" if F[0] == "call"
+             else F[1] if F[0] == "call1" else F[0])
         return f"repeat {show(expr[2])} times [{f}] starting from {show(expr[3])}"
     raise ValueError(tag)
 

@@ -129,3 +129,23 @@ class Bakery:
         """-1 if the left pan goes up, 0 if level, 1 if it goes down."""
         a, b = sum(left), sum(right)
         return (a > b) - (a < b)
+
+
+class Wheel:
+    """A wheel with evenly spaced slots and a pointer. 'tick' moves the pointer one
+    slot on. Ultron sees how many slots the pointer is past the top mark. Nothing
+    here mentions clocks or numbers that wrap around."""
+
+    def __init__(self, slots=6, seed=0):
+        self.slots = slots
+        self.rng = random.Random(seed)
+        self.pointer = 0
+
+    def set(self, slot):
+        self.pointer = slot
+
+    def tick(self):
+        self.pointer = (self.pointer + 1) % self.slots
+
+    def marks_past_top(self):
+        return list(range(self.pointer))

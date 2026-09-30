@@ -573,6 +573,50 @@ def exam_final(brain, seed=1008):
     return _result(10, [div, inv, chain, impossible, phys, back, phys_no, sky], 0.9)
 
 
+# ================================================================ PHASE 2
+def exam_wheel(brain, seed=1011):
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    inv = b.inventions.get("cycle:tick")
+    invented = Tally("invented numbers that go round (a cycle), without being told")
+    invented.item("wheel", 6, inv["size"] if inv else None)
+    spin = Tally("spins of 1,000-1,000,000 ticks (trained: up to 8)")
+    for _ in range(30):
+        inputs = {"start": rng.randrange(6), "ticks": rng.randint(1000, 10 ** 6)}
+        spin.item(inputs, (inputs["start"] + inputs["ticks"]) % 6, b.predict("spin", inputs),
+                  b.memory.of("spin"), "end", inputs)
+    ask = lambda q: reasoner.arithmetic(b, q)
+    words = Tally("'17 after 4' in words")
+    for _ in range(20):
+        t, s0 = rng.randint(7, 200), rng.randrange(6)
+        words.item(f"{t} after {s0}", str((s0 + t) % 6), ask(f"{t} after {s0}").text)
+    back = Tally("going backwards: '-2 after 3' (never experienced)")
+    for _ in range(10):
+        t, s0 = rng.randint(1, 30), rng.randrange(6)
+        back.item(f"-{t} after {s0}", str((s0 - t) % 6), ask(f"-{t} after {s0}").text)
+    inverse = Tally("'what after 4 equals 1' (the nearest answer)")
+    for _ in range(10):
+        s0, e = rng.randrange(6), rng.randrange(6)
+        d = (e - s0) % 6
+        best = min((d, d - 6), key=lambda x: (abs(x), -x))
+        inverse.item(f"what after {s0} equals {e}", str(best),
+                     ask(f"what after {s0} equals {e}").text)
+    refuse = Tally("impossible: a position that isn't on the wheel")
+    for _ in range(10):
+        v = rng.choice([rng.randint(6, 30), -rng.randint(1, 9)])
+        q = (f"{rng.randint(1, 9)} after {v}" if rng.random() < 0.5
+             else f"what after {v} equals {rng.randrange(6)}")
+        refuse.item(q, REFUSE, ask(q).value)
+    return _result(11, [invented, spin, words, back, inverse, refuse], 0.99,
+                   {"story": inv["story"] if inv else None,
+                    "tick_law": show_law(b, "tick")})
+
+
+def show_law(brain, name):
+    from ..brain.dsl import show as show_expr
+    law = brain.library.get(name)
+    return show_expr(law.expr) if law else None
+
+
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
-         8: exam_owing, 9: exam_sharing, 10: exam_final}
+         8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel}

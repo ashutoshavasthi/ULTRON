@@ -409,6 +409,225 @@
   "passed": true,
   "threshold": 0.9
  },
+ "11": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "wheel",
+      "truth": 6,
+      "ultron": 6
+     }
+    ],
+    "name": "invented numbers that go round (a cycle), without being told",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "start": 2,
+       "ticks": 266932
+      },
+      "truth": 0,
+      "ultron": 0
+     },
+     {
+      "question": {
+       "start": 0,
+       "ticks": 435318
+      },
+      "truth": 0,
+      "ultron": 0
+     },
+     {
+      "question": {
+       "start": 1,
+       "ticks": 692974
+      },
+      "truth": 5,
+      "ultron": 5
+     }
+    ],
+    "name": "spins of 1,000-1,000,000 ticks (trained: up to 8)",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      6,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "54 after 0",
+      "truth": "0",
+      "ultron": "0"
+     },
+     {
+      "question": "138 after 5",
+      "truth": "5",
+      "ultron": "5"
+     },
+     {
+      "question": "127 after 3",
+      "truth": "4",
+      "ultron": "4"
+     }
+    ],
+    "name": "'17 after 4' in words",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "-11 after 1",
+      "truth": "2",
+      "ultron": "2"
+     },
+     {
+      "question": "-11 after 3",
+      "truth": "4",
+      "ultron": "4"
+     },
+     {
+      "question": "-1 after 3",
+      "truth": "2",
+      "ultron": "2"
+     }
+    ],
+    "name": "going backwards: '-2 after 3' (never experienced)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "what after 4 equals 4",
+      "truth": "0",
+      "ultron": "0"
+     },
+     {
+      "question": "what after 3 equals 2",
+      "truth": "-1",
+      "ultron": "-1"
+     },
+     {
+      "question": "what after 4 equals 4",
+      "truth": "0",
+      "ultron": "0"
+     }
+    ],
+    "name": "'what after 4 equals 1' (the nearest answer)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "what after 11 equals 2",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "5 after 11",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "what after 16 equals 3",
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "impossible: a position that isn't on the wheel",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 11,
+  "passed": true,
+  "story": "Repeating 'tick' from the start, slot counts 1, 2, ... 5, and the 6th 'tick' brings me back to the start. So here numbers go round: after 5 comes 0 again. 6 'tick's change nothing, and going back one is the same as going on 5. These are a new kind of number that repeats every 6.",
+  "threshold": 0.99,
+  "tick_law": "earn_coins(slot, groups(6, take_away(slot, 4)))"
+ },
  "2": {
   "attempt": 1,
   "items": [

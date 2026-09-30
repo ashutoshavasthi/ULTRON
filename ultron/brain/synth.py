@@ -30,6 +30,8 @@ class _Done(Exception):
 def _vec_iter(F, nvec, xvec, tvec, library):
     out = []
     for i, (n, acc) in enumerate(zip(nvec, xvec)):
+        if F[0] == "call1" and F[1] in library.cycles:
+            n = n % library.cycles[F[1]]
         if n < 0 or n > dsl.MAX_ITER:
             return None
         t = tvec[i] if tvec is not None else None
@@ -39,6 +41,19 @@ def _vec_iter(F, nvec, xvec, tvec, library):
         except Overflow:
             return None
         out.append(acc)
+    return tuple(out)
+
+
+def _vec_call1(name, avec, library):
+    out = []
+    try:
+        for a in avec:
+            v = library.call1(name, a)
+            if v > dsl.MAX_VALUE:
+                return None
+            out.append(v)
+    except Overflow:
+        return None
     return tuple(out)
 
 
@@ -95,6 +110,7 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
         return bank[typ].get(s, [])
 
     libs = library.binary_int_laws()
+    ulibs = library.unary_int_laws()
     unary = [("succ", lambda x: x + 1), ("pred", lambda x: x - 1 if x > 0 else 0)]
     steps = [("succ",), ("pred",)]
     if "down" in extra:
@@ -123,6 +139,8 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
             for e, v in list(at(INT, s - 1)):
                 for name, f in unary:
                     consider((name, e), INT, tuple(f(x) for x in v), s)
+                for law in ulibs:
+                    consider(("call1", law.name, e), INT, _vec_call1(law.name, v, library), s)
             for e, v in list(at(BOOL, s - 1)):
                 consider(("not", e), BOOL, tuple(not x for x in v), s)
 
@@ -140,8 +158,18 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
                     for b, bv in list(at(BOOL, j)):
                         consider(("and", a, b), BOOL, tuple(x and y for x, y in zip(av, bv)), s)
 
+            # "if c then a else b" (simple conditions only: size 3 or less)
+            for i in range(1, min(3, s - 3) + 1):
+                for j in range(1, s - 1 - i):
+                    k = s - 1 - i - j
+                    for c, cv in list(at(BOOL, i)):
+                        for a, av in list(at(INT, j)):
+                            for b, bv in list(at(INT, k)):
+                                consider(("ite", c, a, b), INT,
+                                         tuple(x if q else y for q, x, y in zip(cv, av, bv)), s)
+
             # repetition: "start at x and do F, n times"
-            options = [(F, 1, None) for F in steps]
+            options = [(F, 1, None) for F in steps] + [(("call1", l.name), 1, None) for l in ulibs]
             for law in libs:
                 for ts in range(1, s - 3):
                     for t, tv in list(at(INT, ts)):

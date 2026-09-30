@@ -66,6 +66,8 @@ class Trainer:
                 self.teach_owing(lesson)
             elif lesson.number == 9:
                 self.teach_sharing(lesson)
+            elif lesson.number == 11:
+                self.teach_wheel(lesson)
             elif attempt == 1:
                 free_play(brain, lesson, lesson.budget)
             else:
@@ -155,6 +157,21 @@ class Trainer:
             amounts.bind_division(brain, word, shares)
         self.say("I shared cakes fairly between people and said 'divided' out loud.")
 
+    # ----------------------------------------------------------- lesson 11
+    def teach_wheel(self, lesson):
+        brain = self.brain
+        self.say("Here is a wheel with a pointer. You can make it tick. Play.")
+        free_play(brain, lesson, lesson.budget)
+        if lesson.CYCLE not in brain.inventions:
+            self.say("You haven't found anything new about the wheel. The lesson stops here.")
+            return
+        self.say("Now spin it as many ticks as you like and watch where it stops.")
+        for spec in lesson.spin_specs():
+            brain.meet(spec)
+        free_play(brain, lesson, lesson.budget, names=["spin"])
+        bind_operation(brain, "after", lesson.after_demos())
+        self.say("I spun the wheel and said '3 after 5 equals 2' and so on.")
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -169,6 +186,7 @@ class Trainer:
             "lab_stretch": "stiffness (measured with noise)"},
         8: {"line:earn/spend": "negative numbers (the integers)"},
         9: {"amounts:cake": "fractions (the rational numbers)"},
+        11: {"cycle:tick": "clock numbers (arithmetic modulo 6)"},
     }
 
     def name_concepts(self, number):
@@ -177,7 +195,7 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=10):
+    def run_all(self, upto=11):
         for n in range(upto + 1):
             self.run(n)
         return self.results

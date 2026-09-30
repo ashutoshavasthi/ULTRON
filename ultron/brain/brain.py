@@ -318,8 +318,8 @@ class Brain:
             if spec.kind == "conservation" and self.memory.of(name):
                 self._learn_conservation(spec, True, reflecting=True)
         from .amounts import look_for_amounts
-        from .invention import find_inverses, look_for_line
-        look_for_line(self)
+        from .invention import find_inverses, look_for_shapes
+        look_for_shapes(self)
         find_inverses(self)
         look_for_amounts(self)
 
@@ -372,6 +372,7 @@ class Brain:
             "search_steps": dict(sorted(self.search_steps.items())),
             "inventions": dict(sorted(self.inventions.items())),
             "inverses": dict(sorted(self.library.inverses.items())),
+            "cycles": dict(sorted(self.library.cycles.items())),
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
@@ -398,6 +399,7 @@ class Brain:
         b.search_steps = dict(d.get("search_steps", {}))
         b.inventions = dict(d.get("inventions", {}))
         b.library.inverses = dict(d.get("inverses", {}))
+        b.library.cycles = dict(d.get("cycles", {}))
         b.curiosity = Curiosity.from_json(d.get("curiosity", {}))
         b.memory = Memory.from_json(d["memory"])
         b.log = list(d.get("log", []))

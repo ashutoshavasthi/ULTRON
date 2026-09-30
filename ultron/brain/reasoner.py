@@ -50,6 +50,18 @@ def symmetric(brain, law_name):
     return checked if checked >= 5 else 0
 
 
+def _cycle_starts(expr, library):
+    """Variables a law uses as a starting position on a cycle it walks round."""
+    out = []
+    if isinstance(expr, tuple):
+        if expr[0] == "iter" and expr[1][0] == "call1" and expr[1][1] in library.cycles \
+                and expr[3][0] == "var":
+            out.append((expr[3][1], library.cycles[expr[1][1]]))
+        for e in expr[1:]:
+            out.extend(_cycle_starts(e, library))
+    return out
+
+
 def outside_experience(brain, law_name, a, b):
     """Magnitude is not a problem (rules generalise), but a *kind* of situation
     Ultron has never once met is: e.g. taking away more than there is.
@@ -59,6 +71,11 @@ def outside_experience(brain, law_name, a, b):
     if not eps or len(law.params) != 2:
         return None
     p, q = law.params
+    for var, k in _cycle_starts(law.expr, brain.library):
+        v = a if var == p else b
+        if not 0 <= v < k:
+            return (f"'{law_name}' starts from a position on my cycle of {k}, and there is "
+                    f"no position {v} on it")
     for name, v in ((p, a), (q, b)):
         if v < 0 and not any(e["inputs"][name] < 0 for e in eps):
             return (f"in all {len(eps)} of my '{law_name}' experiences, {name} was never "
@@ -191,6 +208,7 @@ def inverse(brain, raw):
     unknown_first = left[0] == UNKNOWN
     limit = 2 * abs(goal) + abs(known) + 10
     tried = 0
+    last_reason = None
     # with numbers below zero invented, the unknown may be on either side of zero
     candidates = [0] + [v for k in range(1, limit + 1)
                         for v in ((k, -k) if brain.inventions else (k,))]
@@ -199,6 +217,7 @@ def inverse(brain, raw):
         a, b = xy if op[2] == "xy" else (xy[1], xy[0])
         why_not = outside_experience(brain, op[1], a, b)
         if why_not and not ("below zero" in why_not and brain.library.inverses):
+            last_reason = why_not
             continue
         tried += 1
         try:
@@ -213,6 +232,8 @@ def inverse(brain, raw):
         spoken = speak_number(brain, x)
         return Answer(x, spoken if spoken is not None else str(x), steps)
     span = f"-{limit} to {limit}" if brain.inventions else f"0 to {limit}"
+    if tried == 0 and last_reason:
+        return Answer(None, f"I can't answer that: {last_reason}", steps)
     from . import amounts
     if amounts.invented(brain):
         x = amounts.solve(brain, op[1], op[2], (known, 1), (goal, 1), unknown_first)
