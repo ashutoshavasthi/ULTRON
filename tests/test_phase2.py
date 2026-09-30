@@ -65,3 +65,11 @@ def test_one_shape_discovery_for_three_kinds_of_number(trained):
     # it worked out which input is which by testing, and re-cuts with its own times law
     assert finer["roles"] == {"count": "pieces", "kind": "cut", "whole": "wholes"}
     assert finer["scale"] == "groups"
+
+
+def test_energy_with_three_parts(trained):
+    brain, results = trained
+    assert results[14]["passed"]
+    law = brain.qlaws["bounce"]
+    assert [p for p, _ in law.terms] == [{"y": 1}, {"v": 2}, {"c": 2}]
+    assert abs(law.terms[2][1] - 400 / (2 * 2 * 9.81)) < 1e-6    # k / 2mg, found not given

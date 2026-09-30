@@ -323,34 +323,41 @@ class Brain:
 
     def _adopt_sum_law(self, spec, old, new, eps):
         name = spec.name
-        if isinstance(old, SumLaw) and old.a == new.a and old.b == new.b:
-            old.properties, old.coef = new.properties, new.coef
+        if isinstance(old, SumLaw) and [p for p, _ in old.terms] == [p for p, _ in new.terms]:
+            old.properties, old.terms = new.properties, new.terms
             group = eps[-1][spec.group_by]
             self.note("measure", f"{name}: new {spec.group_by} {group}; its hidden amount is "
                                  f"{old.properties[group]:.6g}")
             return None
         new.provenance = {"lesson": self.lesson, "experiences": len(eps), "support": 0}
         self.qlaws[name] = new
-        dims_a = U.of_monomial(new.a, spec.units)
-        dims_b = U.of_monomial(new.b, spec.units)
-        coef_dims = tuple(x - y for x, y in zip(dims_a, dims_b)) if dims_a and dims_b else None
-        a, b = monomial_str(new.a), monomial_str(new.b)
-        story = (f"Along each {spec.group_by}, neither {a} nor {b} stays the same, but "
-                 f"{a} + {new.coef:.6g}·{b} does [coefficient in {U.name(coef_dims)}]. Each "
-                 f"{spec.group_by} has its own amount of this hidden quantity: whatever {a} is "
-                 f"lost turns up as {b}, and the total never changes.")
-        if coef_dims is not None:
-            inv_dims = tuple(-x for x in coef_dims)
-            like = next(((v, n) for n, sp in sorted(self.memory.specs.items())
+        first = monomial_str(new.terms[0][0])
+        forms = [monomial_str(p) for p, _ in new.terms]
+        story = (f"Along each {spec.group_by}, none of {', '.join(forms)} stays the same, but "
+                 f"{new.formula()} does. Each {spec.group_by} has its own amount of this hidden "
+                 f"quantity: whatever {first} is lost turns up as "
+                 f"{' and '.join(forms[1:])}, and the total never changes.")
+        for p, c in new.terms[1:]:
+            dims_t = U.of_monomial(p, spec.units)
+            dims_a = U.of_monomial(new.terms[0][0], spec.units)
+            if dims_t is None or dims_a is None:
+                continue
+            inv_dims = tuple(y - x for x, y in zip(dims_a, dims_t))
+            like = next(((v, n) for n, sp in sorted(self.memory.specs.items()) if n != name
                          for v, d in sorted(sp.units.items()) if tuple(d) == inv_dims), None)
             if like:
-                story += (f" (Its coefficient is one over {1 / new.coef:.4g} {U.name(inv_dims)}: "
-                          f"the same units as '{like[0]}' in my '{like[1]}' experiences.)")
+                story += (f" (The coefficient of {monomial_str(p)} is one over {1 / c:.4g} "
+                          f"{U.name(inv_dims)}: the same units as '{like[0]}' in my "
+                          f"'{like[1]}' experiences.)")
         self.note("revise", f"{name}: {story}")
         key = f"hidden:{name}"
+        if key in self.inventions and len(new.terms) > len(
+                self.inventions[key].get("terms", [None, None])):
+            self.inventions.pop(key)      # a richer hidden quantity replaces a simpler idea
         if key not in self.inventions:
             self.inventions[key] = {"shape": "hidden quantity", "law": name, "primitives": [],
-                                    "lesson": self.lesson, "story": story}
+                                    "lesson": self.lesson, "story": story,
+                                    "terms": [monomial_str(p) for p, _ in new.terms]}
             self.note("invent", story)
         return new.formula()
 

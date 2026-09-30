@@ -665,7 +665,7 @@
        "y": 4.90158416433331
       },
       "truth": 19.1224188769,
-      "ultron": 19.122418876887966
+      "ultron": 19.12241887689167
      },
      {
       "question": {
@@ -674,7 +674,7 @@
        "y": 0.7010046386260874
       },
       "truth": 21.1679539398,
-      "ultron": 21.16795393980006
+      "ultron": 21.16795393980416
      },
      {
       "question": {
@@ -683,7 +683,7 @@
        "y": 6.035197769077039
       },
       "truth": 18.5317404681,
-      "ultron": 18.53174046812927
+      "ultron": 18.53174046813286
      }
     ],
     "name": "runs 10-50 m high (trained: 1-5 m): speed, after one look at the release",
@@ -743,17 +743,17 @@
      {
       "question": 8.314894679703595,
       "truth": 3.5238263779084176,
-      "ultron": 3.52382637791013
+      "ultron": 3.5238263779087653
      },
      {
       "question": 32.656210906848884,
       "truth": 54.35413408728828,
-      "ultron": 54.35413408731469
+      "ultron": 54.35413408729364
      },
      {
       "question": 26.787073601485393,
       "truth": 36.57223813105992,
-      "ultron": 36.5722381310777
+      "ultron": 36.57223813106353
      }
     ],
     "name": "NEVER TRAINED: a ball thrown straight up at 5-40 m/s: how high?",
@@ -811,7 +811,7 @@
   ],
   "lesson": 12,
   "passed": true,
-  "story": "Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)",
+  "story": "Along each run, none of y, v^2 stays the same, but y + 0.0509684\u00b7v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)",
   "threshold": 0.99
  },
  "13": {
@@ -979,6 +979,200 @@
   "threshold": 0.99
  },
  "14": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "spring",
+      "truth": [
+       "c^2",
+       "v^2",
+       "y"
+      ],
+      "ultron": [
+       "c^2",
+       "v^2",
+       "y"
+      ]
+     }
+    ],
+    "name": "invented a hidden quantity with THREE parts: height, speed, squash",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "c": 0.0,
+       "run": "ExamS1",
+       "y": 3.9462462042153046
+      },
+      "truth": 13.4107384292,
+      "ultron": 13.410738429237709
+     },
+     {
+      "question": {
+       "c": 1.0597638466662245,
+       "run": "ExamS1",
+       "y": 0.0
+      },
+      "truth": 5.71431304743,
+      "ultron": 5.714313047437538
+     },
+     {
+      "question": {
+       "c": 0.0,
+       "run": "ExamS2",
+       "y": 17.67666409261773
+      },
+      "truth": 11.6533447429,
+      "ultron": 11.653344742939128
+     }
+    ],
+    "name": "runs 10-40 m high (trained: 1-5 m): speed on the hills and in the spring",
+    "scores": {
+     "lookup": [
+      0,
+      20
+     ],
+     "nearest": [
+      0,
+      20
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamS1",
+      "truth": 1.1341808844805763,
+      "ultron": 1.1341808844807317
+     },
+     {
+      "question": "ExamS2",
+      "truth": 1.553410108752701,
+      "ultron": 1.5534101087529137
+     },
+     {
+      "question": "ExamS3",
+      "truth": 1.470557233596318,
+      "ultron": 1.4705572335965194
+     }
+    ],
+    "name": "NEVER TRAINED: how far will the spring squash?",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": 0.9582732776936422,
+      "truth": 9.360730629375293,
+      "ultron": 9.36073062937273
+     },
+     {
+      "question": 0.6431856724724632,
+      "truth": 4.217001113902698,
+      "ultron": 4.217001113901543
+     },
+     {
+      "question": 0.4665878030728509,
+      "truth": 2.2192067072003003,
+      "ultron": 2.219206707199693
+     }
+    ],
+    "name": "NEVER TRAINED: a ball pushed off a squashed spring: how high does it go?",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamS1",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "ExamS2",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "ExamS3",
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "impossible: its speed with the spring squashed further than it can be",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 14,
+  "passed": true,
+  "story": "Along each run, none of y, v^2, c^2 stays the same, but y + 0.0509684\u00b7v^2 + 10.1937\u00b7c^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2 and c^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.) (The coefficient of c^2 is one over 0.0981 m: the same units as 'x' in my 'lab_stretch' experiences.)",
+  "threshold": 0.99
+ },
+ "15": {
   "attempt": 1,
   "items": [
    {
@@ -1161,17 +1355,17 @@
      {
       "question": 20.314642049500602,
       "truth": 19.9643000631,
-      "ultron": 19.964300063137905
+      "ultron": 19.96430006314177
      },
      {
       "question": 79.29819541557146,
       "truth": 39.4440184826,
-      "ultron": 39.444018482562804
+      "ultron": 39.44401848257044
      },
      {
       "question": 26.865167233420237,
       "truth": 22.9585404832,
-      "ultron": 22.958540483215586
+      "ultron": 22.95854048322003
      }
     ],
     "name": "energy: a ball dropped from 2-80 m, speed at the ground",
@@ -1227,7 +1421,7 @@
     "tolerance": null
    }
   ],
-  "lesson": 14,
+  "lesson": 15,
   "passed": true,
   "threshold": 0.99
  },
@@ -2525,7 +2719,7 @@
   ],
   "lesson": 9,
   "passed": true,
-  "story": "One piece of a cake cut into 2 balances no whole number of cakes: not 0, not 1. Yet 2 of them balance exactly 1 cake. So there are amounts *between* my numbers. I'll treat every pile of equal pieces (so many pieces of a cake cut into so many) as a number too. Two piles are the same number when, cut again into the same kind of piece, they have the same count. My whole numbers are piles of a cake 'cut into 1'.",
+  "story": "Walking by single pieces of a cake cut into 2, I pass a whole every 2 steps, and in between I'm at places no whole number reaches: one piece balances no whole number of cakes, yet 2 of them balance exactly 1. So my number line is FINER than I thought: there are numbers *between* my numbers. Every pile of equal pieces is one. And since scaling the count and the kind of piece together with my 'groups' law never changes what balances, two piles are the same number when, cut into the same kind of piece, they have the same count. My whole numbers are piles of pieces 'cut into 1'.",
   "threshold": 0.99
  }
 }

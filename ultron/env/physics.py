@@ -83,3 +83,20 @@ class Track:
         """None if the ball can never get that high on this run."""
         drop = self.release - height
         return None if drop < 0 else _r((2 * self.G * drop) ** 0.5)
+
+
+class SpringTrack(Track):
+    """The same frictionless track, now with a spring bumper at the bottom. A ball rolls
+    down, squashes the spring, stops, and is pushed back up. Instruments read its
+    height, its speed and how far the spring is squashed. Nobody mentions that
+    springs store anything."""
+
+    STIFFNESS = 400.0   # N/m, hidden from Ultron
+    MASS = 2.0          # kg, the same ball every time
+
+    def speed(self, height, squash):
+        left = 2 * self.G * (self.release - height) - self.STIFFNESS / self.MASS * squash ** 2
+        return None if left < 0 else _r(left ** 0.5)
+
+    def max_squash(self):
+        return (2 * self.MASS * self.G * self.release / self.STIFFNESS) ** 0.5

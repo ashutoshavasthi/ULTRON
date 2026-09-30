@@ -720,7 +720,43 @@ def exam_phase2(brain, seed=1014):
                        "'I can't'")
     for n in (2, 3, 5, 7, 8):
         irrational.item(n, REFUSE, reasoner.arithmetic(b, f"what power 2 equals {n}").value)
-    return _result(14, [roots, logs, neg, clock, chains, drop, irrational], 0.99)
+    return _result(15, [roots, logs, neg, clock, chains, drop, irrational], 0.99)
+
+
+def exam_springy(brain, seed=1015):
+    from ..env.physics import SpringTrack
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    world = SpringTrack(seed, prefix="ExamS")
+    inv = b.inventions.get("hidden:bounce")
+    invented = Tally("invented a hidden quantity with THREE parts: height, speed, squash")
+    invented.item("spring", ["c^2", "v^2", "y"], sorted(inv["terms"]) if inv else None)
+    speed = Tally("runs 10-40 m high (trained: 1-5 m): speed on the hills and in the spring",
+                  tol=0.01)
+    squash = Tally("NEVER TRAINED: how far will the spring squash?", tol=0.01)
+    launch = Tally("NEVER TRAINED: a ball pushed off a squashed spring: how high does it go?",
+                   tol=0.01)
+    refuse = Tally("impossible: its speed with the spring squashed further than it can be")
+    for _ in range(10):
+        h = rng.uniform(10, 40)
+        run = world.new_run(h, world.MASS)
+        b.experience("bounce", {"y": h, "c": 0.0, "run": run}, 0.0)
+        for y, c in ((rng.uniform(0, h), 0.0), (0.0, rng.uniform(0, world.max_squash()))):
+            inputs = {"y": y, "c": c, "run": run}
+            speed.item(inputs, world.speed(y, c), b.predict("bounce", inputs),
+                       b.memory.of("bounce"), "v", inputs)
+        ans = reasoner.physics(b, "c", {"y": 0.0, "v": 0.0}, {"run": run})
+        squash.item(run, world.max_squash(), ans.value)
+        refuse.item(run, REFUSE, b.predict("bounce", {"y": 0.0, "c": world.max_squash() * 1.3,
+                                                       "run": run}))
+    for _ in range(10):
+        c0 = rng.uniform(0.2, 1.5)
+        height = world.STIFFNESS * c0 ** 2 / (2 * world.MASS * world.G)
+        run = world.new_run(height, world.MASS)
+        b.experience("bounce", {"y": 0.0, "c": c0, "run": run}, 0.0)
+        ans = reasoner.physics(b, "y", {"v": 0.0, "c": 0.0}, {"run": run})
+        launch.item(c0, height, ans.value)
+    return _result(14, [invented, speed, squash, launch, refuse], 0.99,
+                   {"story": inv["story"] if inv else None})
 
 
 def compression_benefit(upto=13):
@@ -749,4 +785,4 @@ def show_law(brain, name):
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
-         13: exam_growing, 14: exam_phase2}
+         13: exam_growing, 14: exam_springy, 15: exam_phase2}

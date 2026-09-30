@@ -29,6 +29,30 @@
  },
  "curiosity": {
   "errors": {
+   "bounce": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0
+   ],
    "cake_balance": [
     1.0,
     1.0,
@@ -549,12 +573,6 @@
   "tick": "if eq(slot, 5) then 0 else succ(slot)"
  },
  "inventions": {
-  "amounts:cake": {
-   "example": 2,
-   "lesson": 9,
-   "primitives": [],
-   "story": "One piece of a cake cut into 2 balances no whole number of cakes: not 0, not 1. Yet 2 of them balance exactly 1 cake. So there are amounts *between* my numbers. I'll treat every pile of equal pieces (so many pieces of a cake cut into so many) as a number too. Two piles are the same number when, cut again into the same kind of piece, they have the same count. My whole numbers are piles of a cake 'cut into 1'."
-  },
   "cycle:tick": {
    "counted": "slot",
    "lesson": 11,
@@ -567,12 +585,42 @@
     "slot"
    ]
   },
+  "finer:cake_balance": {
+   "example": 2,
+   "law": "cake_balance",
+   "lesson": 9,
+   "primitives": [],
+   "roles": {
+    "count": "pieces",
+    "kind": "cut",
+    "whole": "wholes"
+   },
+   "scale": "groups",
+   "shape": "finer line",
+   "story": "Walking by single pieces of a cake cut into 2, I pass a whole every 2 steps, and in between I'm at places no whole number reaches: one piece balances no whole number of cakes, yet 2 of them balance exactly 1. So my number line is FINER than I thought: there are numbers *between* my numbers. Every pile of equal pieces is one. And since scaling the count and the kind of piece together with my 'groups' law never changes what balances, two piles are the same number when, cut into the same kind of piece, they have the same count. My whole numbers are piles of pieces 'cut into 1'."
+  },
+  "hidden:bounce": {
+   "law": "bounce",
+   "lesson": 14,
+   "primitives": [],
+   "shape": "hidden quantity",
+   "story": "Along each run, none of y, v^2, c^2 stays the same, but y + 0.0509684\u00b7v^2 + 10.1937\u00b7c^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2 and c^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.) (The coefficient of c^2 is one over 0.0981 m: the same units as 'x' in my 'lab_stretch' experiences.)",
+   "terms": [
+    "y",
+    "v^2",
+    "c^2"
+   ]
+  },
   "hidden:roll": {
    "law": "roll",
    "lesson": 12,
    "primitives": [],
    "shape": "hidden quantity",
-   "story": "Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
+   "story": "Along each run, none of y, v^2 stays the same, but y + 0.0509684\u00b7v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)",
+   "terms": [
+    "y",
+    "v^2"
+   ]
   },
   "ladder": {
    "lesson": 3,
@@ -4543,7 +4591,7 @@
   {
    "kind": "invent",
    "lesson": 9,
-   "text": "One piece of a cake cut into 2 balances no whole number of cakes: not 0, not 1. Yet 2 of them balance exactly 1 cake. So there are amounts *between* my numbers. I'll treat every pile of equal pieces (so many pieces of a cake cut into so many) as a number too. Two piles are the same number when, cut again into the same kind of piece, they have the same count. My whole numbers are piles of a cake 'cut into 1'."
+   "text": "Walking by single pieces of a cake cut into 2, I pass a whole every 2 steps, and in between I'm at places no whole number reaches: one piece balances no whole number of cakes, yet 2 of them balance exactly 1. So my number line is FINER than I thought: there are numbers *between* my numbers. Every pile of equal pieces is one. And since scaling the count and the kind of piece together with my 'groups' law never changes what balances, two piles are the same number when, cut into the same kind of piece, they have the same count. My whole numbers are piles of pieces 'cut into 1'."
   },
   {
    "kind": "word",
@@ -4578,7 +4626,7 @@
   {
    "kind": "trainer",
    "lesson": 9,
-   "text": "What you found in 'amounts:cake' is what people call fractions (the rational numbers)."
+   "text": "What you found in 'finer:cake_balance' is what people call fractions (the rational numbers)."
   },
   {
    "kind": "trainer",
@@ -5051,12 +5099,12 @@
   {
    "kind": "revise",
    "lesson": 12,
-   "text": "roll: Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
+   "text": "roll: Along each run, none of y, v^2 stays the same, but y + 0.0509684\u00b7v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
   },
   {
    "kind": "invent",
    "lesson": 12,
-   "text": "Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
+   "text": "Along each run, none of y, v^2 stays the same, but y + 0.0509684\u00b7v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
   },
   {
    "choice": "roll",
@@ -5371,21 +5419,377 @@
   {
    "kind": "trainer",
    "lesson": 14,
-   "text": "Lesson 14: Phase 2 final exam"
+   "text": "Lesson 14: Hills and a spring"
   },
   {
-   "kind": "trainer",
+   "kind": "meet",
    "lesson": 14,
-   "text": "No teaching today. Show me what you can do."
+   "text": "new kind of experience: bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 14,
+   "text": "bounce: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 14,
+   "text": "bounce: nothing stays constant yet (2 experiences)"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 14,
+   "text": "bounce: nothing stays constant yet (3 experiences)"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 14,
+   "text": "bounce: nothing stays constant yet (4 experiences)"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 14,
+   "text": "bounce: nothing stays constant yet (5 experiences)"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 14,
+   "text": "bounce: nothing stays constant yet (6 experiences)"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "revise",
+   "lesson": 14,
+   "text": "bounce: Along each run, none of y, v^2, c^2 stays the same, but y + 0.0509684\u00b7v^2 + 10.1937\u00b7c^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2 and c^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.) (The coefficient of c^2 is one over 0.0981 m: the same units as 'x' in my 'lab_stretch' experiences.)"
+  },
+  {
+   "kind": "invent",
+   "lesson": 14,
+   "text": "Along each run, none of y, v^2, c^2 stays the same, but y + 0.0509684\u00b7v^2 + 10.1937\u00b7c^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2 and c^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.) (The coefficient of c^2 is one over 0.0981 m: the same units as 'x' in my 'lab_stretch' experiences.)"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "establish",
+   "lesson": 14,
+   "text": "bounce: y + 0.0509684\u00b7v^2 + 10.1937\u00b7c^2 has now predicted 3 new experiences; no longer tentative"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "measure",
+   "lesson": 14,
+   "text": "bounce: new run S3; its hidden amount is 2.101"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "measure",
+   "lesson": 14,
+   "text": "bounce: new run S4; its hidden amount is 2.615"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "choice": "bounce",
+   "kind": "choice",
+   "lesson": 14,
+   "text": "chose to play with bounce"
+  },
+  {
+   "kind": "measure",
+   "lesson": 14,
+   "text": "bounce: new run S5; its hidden amount is 3.496"
+  },
+  {
+   "kind": "bored",
+   "lesson": 14,
+   "text": "nothing here is teaching me anything new any more"
   },
   {
    "kind": "trainer",
    "lesson": 14,
    "text": "Exam for lesson 14, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 14,
+   "text": "What you found in 'hidden:bounce' is what people call energy: gravitational + kinetic + elastic (spring)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 14,
+   "text": "What you found in 'bounce' is what people call conservation of energy with a spring."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 15,
+   "text": "Lesson 15: Phase 2 final exam"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 15,
+   "text": "No teaching today. Show me what you can do."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 15,
+   "text": "Exam for lesson 15, attempt 1: passed"
   }
  ],
  "memory": {
   "episodes": {
+   "bounce": [
+    {
+     "c": 0.0,
+     "run": "S1",
+     "v": 0.0,
+     "y": 1.427
+    },
+    {
+     "c": 0.0,
+     "run": "S1",
+     "v": 4.56469495147,
+     "y": 0.365
+    },
+    {
+     "c": 0.2464,
+     "run": "S1",
+     "v": 3.98185233277,
+     "y": 0.0
+    },
+    {
+     "c": 0.0,
+     "run": "S1",
+     "v": 2.97466300612,
+     "y": 0.976
+    },
+    {
+     "c": 0.0,
+     "run": "S1",
+     "v": 2.49390055936,
+     "y": 1.11
+    },
+    {
+     "c": 0.0,
+     "run": "S2",
+     "v": 0.0,
+     "y": 1.474
+    },
+    {
+     "c": 0.12,
+     "run": "S2",
+     "v": 5.10292857093,
+     "y": 0.0
+    },
+    {
+     "c": 0.1371,
+     "run": "S2",
+     "v": 5.01603409079,
+     "y": 0.0
+    },
+    {
+     "c": 0.1963,
+     "run": "S2",
+     "v": 4.60577268219,
+     "y": 0.0
+    },
+    {
+     "c": 0.0,
+     "run": "S2",
+     "v": 3.11009003085,
+     "y": 0.981
+    },
+    {
+     "c": 0.0,
+     "run": "S3",
+     "v": 0.0,
+     "y": 2.101
+    },
+    {
+     "c": 0.0559,
+     "run": "S3",
+     "v": 6.37155067468,
+     "y": 0.0
+    },
+    {
+     "c": 0.0,
+     "run": "S3",
+     "v": 6.14720424258,
+     "y": 0.175
+    },
+    {
+     "c": 0.0,
+     "run": "S3",
+     "v": 0.950010526257,
+     "y": 2.055
+    },
+    {
+     "c": 0.0,
+     "run": "S4",
+     "v": 0.0,
+     "y": 2.615
+    },
+    {
+     "c": 0.0478,
+     "run": "S4",
+     "v": 7.13087175596,
+     "y": 0.0
+    },
+    {
+     "c": 0.4488,
+     "run": "S4",
+     "v": 3.31994156575,
+     "y": 0.0
+    },
+    {
+     "c": 0.3228,
+     "run": "S4",
+     "v": 5.51963150944,
+     "y": 0.0
+    },
+    {
+     "c": 0.0,
+     "run": "S4",
+     "v": 2.63170287077,
+     "y": 2.262
+    },
+    {
+     "c": 0.2465,
+     "run": "S4",
+     "v": 6.25730373244,
+     "y": 0.0
+    },
+    {
+     "c": 0.1372,
+     "run": "S4",
+     "v": 6.89503676567,
+     "y": 0.0
+    },
+    {
+     "c": 0.0,
+     "run": "S5",
+     "v": 0.0,
+     "y": 3.496
+    }
+   ],
    "cake_balance": [
     {
      "inputs": {
@@ -8615,6 +9019,47 @@
    ]
   },
   "specs": {
+   "bounce": {
+    "action": null,
+    "group_by": "run",
+    "inputs": {
+     "c": [
+      0,
+      1,
+      0
+     ],
+     "y": [
+      0,
+      1,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "bounce",
+    "out_type": null,
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "v",
+    "tol": 1e-06,
+    "units": {
+     "c": [
+      0,
+      1,
+      0
+     ],
+     "v": [
+      0,
+      1,
+      -1
+     ],
+     "y": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
    "cake_balance": {
     "action": null,
     "group_by": null,
@@ -9181,12 +9626,14 @@
  },
  "name": "Ultron",
  "names": {
-  "amounts:cake": "fractions (the rational numbers)",
+  "bounce": "conservation of energy with a spring",
   "collide": "conservation of momentum",
   "cycle:tick": "clock numbers (arithmetic modulo 6)",
+  "finer:cake_balance": "fractions (the rational numbers)",
   "gas": "Boyle's law",
   "groups": "multiplication",
   "grow": "exponential growth",
+  "hidden:bounce": "energy: gravitational + kinetic + elastic (spring)",
   "hidden:roll": "energy (height + speed\u00b2/2g, per unit of weight)",
   "lab_push": "Newton's second law (measured with noise)",
   "lab_stretch": "stiffness (measured with noise)",
@@ -9203,6 +9650,44 @@
   "take_away": "subtraction"
  },
  "quantity_laws": {
+  "bounce": {
+   "etype": "bounce",
+   "form": "sum",
+   "group_by": "run",
+   "properties": {
+    "S1": 1.4269999999993834,
+    "S2": 1.474000000000194,
+    "S3": 2.1010000000006093,
+    "S4": 2.6149999999998985,
+    "S5": 3.496
+   },
+   "provenance": {
+    "experiences": 7,
+    "lesson": 14,
+    "support": 12
+   },
+   "spread": 9.02338659091138e-13,
+   "terms": [
+    [
+     {
+      "y": 1
+     },
+     1.0
+    ],
+    [
+     {
+      "v": 2
+     },
+     0.050968399592278626
+    ],
+    [
+     {
+      "c": 2
+     },
+     10.193679918447769
+    ]
+   ]
+  },
   "gas": {
    "constant": 1409.3076923076924,
    "etype": "gas",
@@ -9302,29 +9787,36 @@
    "spread": 4.120481733598893e-12
   },
   "roll": {
-   "a": {
-    "y": 1
-   },
-   "b": {
-    "v": 2
-   },
-   "coef": 0.050968399592258025,
    "etype": "roll",
    "form": "sum",
    "group_by": "run",
    "properties": {
-    "R1": 2.8979999999991803,
-    "R2": 4.2410000000008266,
-    "R3": 2.760000000000012,
-    "R4": 3.7480000000002214,
-    "R5": 1.8929999999996903
+    "R1": 2.8979999999991723,
+    "R2": 4.241000000000818,
+    "R3": 2.760000000000006,
+    "R4": 3.7480000000002165,
+    "R5": 1.8929999999996898
    },
    "provenance": {
     "experiences": 7,
     "lesson": 12,
     "support": 11
    },
-   "spread": 1.337324546018854e-12
+   "spread": 1.2472194889476027e-12,
+   "terms": [
+    [
+     {
+      "y": 1
+     },
+     1.0
+    ],
+    [
+     {
+      "v": 2
+     },
+     0.05096839959225779
+    ]
+   ]
   },
   "stretch": {
    "constant": null,
@@ -9352,8 +9844,9 @@
   }
  },
  "search_steps": {
+  "bounce": 2060,
   "cake_balance": 187467,
-  "collide": 100,
+  "collide": 110,
   "earn_coins": 9906,
   "earn_notes": 19,
   "gas": 28,

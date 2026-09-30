@@ -16,7 +16,8 @@ Conservation laws (collisions) use the same idea: a per-object quantity whose
 total before equals its total after.
 
 Hidden quantities: when no single product stays constant, Ultron also tries
-*sums*: A + λ·B, where A and B are simple products and it fits λ itself. If that
+*sums*: A + λ·B (+ μ·C ...), where the terms are simple products and it fits the
+coefficients itself. If that
 stays constant along each run (but differs between runs), it has found a hidden
 quantity that flows between A and B while its total never changes.
 """
@@ -87,66 +88,83 @@ class QuantityLaw:
 
 
 class SumLaw:
-    """A + coef·B == property(group): a hidden quantity conserved along each group
-    (e.g. each run of a ball), shared between two measurable forms."""
+    """term_1 + c_2·term_2 + ... == property(group): a hidden quantity conserved along
+    each group (e.g. each run of a ball), shared between several measurable forms."""
 
     kind = "grouped"
 
-    def __init__(self, etype, a, b, coef, group_by, properties, spread=0.0, provenance=None):
+    def __init__(self, etype, terms, group_by, properties, spread=0.0, provenance=None):
         self.etype = etype
-        self.a = dict(a)
-        self.b = dict(b)
-        self.coef = coef
+        self.terms = [(dict(p), float(c)) for p, c in terms]   # first coefficient is 1
         self.group_by = group_by
         self.properties = dict(properties)
         self.spread = spread
         self.provenance = provenance or {}
 
+    # the two-term view (kept for readers of simple laws)
+    @property
+    def a(self):
+        return self.terms[0][0]
+
+    @property
+    def b(self):
+        return self.terms[1][0]
+
+    @property
+    def coef(self):
+        return self.terms[1][1]
+
     @property
     def powers(self):
         """Every quantity the law involves (for chaining)."""
-        out = dict(self.a)
-        out.update(self.b)
+        out = {}
+        for p, _ in self.terms:
+            out.update(p)
         return out
 
     def variables(self):
-        return sorted(set(self.a) | set(self.b))
+        return sorted(self.powers)
 
     def value_for(self, group=None):
         return self.properties.get(group)
 
     def total(self, values):
-        return _mono(values, self.a) + self.coef * _mono(values, self.b)
+        return sum(c * _mono(values, p) for p, c in self.terms)
 
     def solve(self, target, known, group=None):
         e = self.value_for(group)
         if e is None:
             return None
-        for mono, other, scale in ((self.a, self.b, 1.0), (self.b, self.a, self.coef)):
-            if target in mono and target not in other:
-                try:
-                    rest = _mono(known, {k: v for k, v in mono.items() if k != target})
-                    other_part = _mono(known, other) * (self.coef if scale == 1.0 else 1.0)
-                except (KeyError, ZeroDivisionError):
-                    return None
-                x = (e - other_part) / (scale * rest)
-                p = mono[target]
-                if x < 0 and p % 2 == 0:
-                    return None     # e.g. a speed that would need a negative square
-                return math.copysign(abs(x) ** (1.0 / p), x)
-        return None
+        holders = [(p, c) for p, c in self.terms if target in p]
+        if len(holders) != 1:
+            return None
+        mono, scale = holders[0]
+        try:
+            others = sum(c * _mono(known, p) for p, c in self.terms if target not in p)
+            rest = _mono(known, {k: v for k, v in mono.items() if k != target})
+        except (KeyError, ZeroDivisionError):
+            return None
+        x = (e - others) / (scale * rest)
+        pw = mono[target]
+        if x < 0 and pw % 2 == 0:
+            return None     # e.g. a speed that would need a negative square
+        return math.copysign(abs(x) ** (1.0 / pw), x)
 
     def formula(self):
-        return f"{monomial_str(self.a)} + {self.coef:.6g}·{monomial_str(self.b)}"
+        parts = [monomial_str(self.terms[0][0])]
+        parts += [f"{c:.6g}·{monomial_str(p)}" for p, c in self.terms[1:]]
+        return " + ".join(parts)
 
     def to_json(self):
-        return {"form": "sum", "etype": self.etype, "a": self.a, "b": self.b,
-                "coef": self.coef, "group_by": self.group_by, "properties": self.properties,
-                "spread": self.spread, "provenance": self.provenance}
+        return {"form": "sum", "etype": self.etype,
+                "terms": [[p, c] for p, c in self.terms], "group_by": self.group_by,
+                "properties": self.properties, "spread": self.spread,
+                "provenance": self.provenance}
 
     @classmethod
     def from_json(cls, d):
-        return cls(d["etype"], d["a"], d["b"], d["coef"], d["group_by"], d["properties"],
+        terms = d.get("terms") or [[d["a"], 1.0], [d["b"], d["coef"]]]
+        return cls(d["etype"], [(p, c) for p, c in terms], d["group_by"], d["properties"],
                    d.get("spread", 0.0), d.get("provenance"))
 
 
@@ -171,51 +189,76 @@ def monomials(names, max_complexity=2):
     return out
 
 
-def search_sum_invariant(etype, episodes, names, tol, group_by, max_complexity=2):
-    """Find A + λ·B constant within each group (not across groups), smallest first."""
+def _fit(groups, monos):
+    """Least-squares coefficients c_2..c_k making term_1 + Σ c_i·term_i the same within
+    every group. Returns (coefficients, worst relative spread, properties) or None."""
+    rows, rhs = [], []
+    for g in groups.values():
+        if len(g) < 2:
+            continue
+        base = g[0]
+        for e in g[1:]:
+            rows.append([_mono(e, m) - _mono(base, m) for m in monos[1:]])
+            rhs.append(-(_mono(e, monos[0]) - _mono(base, monos[0])))
+    k = len(monos) - 1
+    if len(rows) < k + 1:
+        return None
+    # normal equations (k is 1 or 2, so this is tiny)
+    ata = [[sum(r[i] * r[j] for r in rows) for j in range(k)] for i in range(k)]
+    atb = [sum(r[i] * y for r, y in zip(rows, rhs)) for i in range(k)]
+    try:
+        if k == 1:
+            coefs = [atb[0] / ata[0][0]]
+        else:
+            det = ata[0][0] * ata[1][1] - ata[0][1] * ata[1][0]
+            if abs(det) < 1e-12 * (abs(ata[0][0] * ata[1][1]) + 1e-300):
+                return None
+            coefs = [(atb[0] * ata[1][1] - atb[1] * ata[0][1]) / det,
+                     (ata[0][0] * atb[1] - ata[1][0] * atb[0]) / det]
+    except ZeroDivisionError:
+        return None
+    if any(abs(c) < 1e-12 for c in coefs):
+        return None
+    terms = [(monos[0], 1.0)] + list(zip(monos[1:], coefs))
+    props, worst = {}, 0.0
+    for key, g in groups.items():
+        vals = [sum(c * _mono(e, m) for m, c in terms) for e in g]
+        props[key] = sum(vals) / len(vals)
+        if len(vals) >= 2:
+            worst = max(worst, (max(vals) - min(vals)) / (abs(props[key]) or 1.0))
+    return terms, worst, props
+
+
+def search_sum_invariant(etype, episodes, names, tol, group_by, max_complexity=2, max_terms=3):
+    """Find the simplest sum of terms that stays constant within each group (and differs
+    between groups): two terms first, then three. Coefficients are fitted, not given."""
     names = sorted(names)
     monos = monomials(names, max_complexity)
     groups = {}
     for ep in episodes:
         groups.setdefault(ep[group_by], []).append(ep)
-    multi = [g for g in groups.values() if len(g) >= 2]
     steps = 0
-    if len(multi) < 2:
+    if sum(1 for g in groups.values() if len(g) >= 2) < 2:
         return InvariantResult(None, steps)
     best = None
-    for i, a in enumerate(monos):
-        for b in monos[i + 1:]:
+    for n_terms in range(2, max_terms + 1):
+        for combo in itertools.combinations(monos, n_terms):
             steps += 1
-            if set(a) & set(b):
+            if any(set(x) & set(y) for x, y in itertools.combinations(combo, 2)):
+                continue    # a quantity may appear in only one term
+            fit = _fit(groups, list(combo))
+            if fit is None:
                 continue
-            lambdas = []
-            for g in multi:
-                av = [_mono(e, a) for e in g]
-                bv = [_mono(e, b) for e in g]
-                for k in range(1, len(g)):
-                    db = bv[k] - bv[0]
-                    if abs(db) > 1e-12:
-                        lambdas.append(-(av[k] - av[0]) / db)
-            if len(lambdas) < 2:
-                continue
-            lam = sum(lambdas) / len(lambdas)
-            if lam == 0 or _spread(lambdas) > tol * 10:
-                continue
-            props, worst = {}, 0.0
-            for key, g in groups.items():
-                vals = [_mono(e, a) + lam * _mono(e, b) for e in g]
-                props[key] = sum(vals) / len(vals)
-                if len(vals) >= 2:
-                    worst = max(worst, (max(vals) - min(vals)) / (abs(props[key]) or 1.0))
+            terms, worst, props = fit
             if worst > tol:
                 continue
-            distinct = len({round(v, 9) for v in props.values()}) > 1
-            if not distinct:
+            if len({round(v, 9) for v in props.values()}) < 2:
                 continue    # the same everywhere: a plain law, not a hidden quantity
-            score = sum(a.values()) + sum(b.values()) + 1 + len(groups)
+            score = sum(sum(p.values()) for p, _ in terms) + n_terms - 1 + len(groups)
             if best is None or score < best[0]:
-                best = (score, SumLaw(etype, a, b, lam, group_by,
-                                      dict(sorted(props.items())), worst))
+                best = (score, SumLaw(etype, terms, group_by, dict(sorted(props.items())), worst))
+        if best is not None:
+            break           # fewer terms always wins when they explain everything
     return InvariantResult(best[1] if best else None, steps)
 
 

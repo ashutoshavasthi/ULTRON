@@ -210,7 +210,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _word_: '÷' asks: what, times the second number, gives the first? (checked on all 6 sharings)
 - **Trainer**: I shared cakes fairly between people and said 'divided' out loud.
 - **Trainer**: Exam for lesson 9, attempt 1: passed
-- **Trainer**: What you found in 'amounts:cake' is what people call fractions (the rational numbers).
+- **Trainer**: What you found in 'finer:cake_balance' is what people call fractions (the rational numbers).
 
 ## Lesson 10
 
@@ -250,7 +250,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _stuck_: roll: nothing stays constant yet (4 experiences)
 - Ultron _stuck_: roll: nothing stays constant yet (5 experiences)
 - Ultron _stuck_: roll: nothing stays constant yet (6 experiences)
-- Ultron _revise_: roll: Along each run, neither y nor v^2 stays the same, but y + 0.0509684·v^2 does [coefficient in m^-1·s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s²: the same units as 'a' in my 'lab_push' experiences.)
+- Ultron _revise_: roll: Along each run, none of y, v^2 stays the same, but y + 0.0509684·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s²: the same units as 'a' in my 'lab_push' experiences.)
 - Ultron _measure_: roll: new run R3; its hidden amount is 2.76
 - Ultron _measure_: roll: new run R4; its hidden amount is 3.748
 - Ultron _measure_: roll: new run R5; its hidden amount is 1.893
@@ -277,6 +277,25 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 
 ## Lesson 14
 
-- **Trainer**: Lesson 14: Phase 2 final exam
-- **Trainer**: No teaching today. Show me what you can do.
+- **Trainer**: Lesson 14: Hills and a spring
+- Ultron _meet_: new kind of experience: bounce
+- Ultron _stuck_: bounce: nothing stays constant yet (1 experiences)
+- Ultron _stuck_: bounce: nothing stays constant yet (2 experiences)
+- Ultron _stuck_: bounce: nothing stays constant yet (3 experiences)
+- Ultron _stuck_: bounce: nothing stays constant yet (4 experiences)
+- Ultron _stuck_: bounce: nothing stays constant yet (5 experiences)
+- Ultron _stuck_: bounce: nothing stays constant yet (6 experiences)
+- Ultron _revise_: bounce: Along each run, none of y, v^2, c^2 stays the same, but y + 0.0509684·v^2 + 10.1937·c^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2 and c^2, and the total never changes. (The coefficient of v^2 is one over 19.62 m/s²: the same units as 'a' in my 'lab_push' experiences.) (The coefficient of c^2 is one over 0.0981 m: the same units as 'x' in my 'lab_stretch' experiences.)
+- Ultron _measure_: bounce: new run S3; its hidden amount is 2.101
+- Ultron _measure_: bounce: new run S4; its hidden amount is 2.615
+- Ultron _measure_: bounce: new run S5; its hidden amount is 3.496
+- Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 14, attempt 1: passed
+- **Trainer**: What you found in 'hidden:bounce' is what people call energy: gravitational + kinetic + elastic (spring).
+- **Trainer**: What you found in 'bounce' is what people call conservation of energy with a spring.
+
+## Lesson 15
+
+- **Trainer**: Lesson 15: Phase 2 final exam
+- **Trainer**: No teaching today. Show me what you can do.
+- **Trainer**: Exam for lesson 15, attempt 1: passed

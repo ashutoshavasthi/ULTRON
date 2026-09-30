@@ -194,6 +194,8 @@ class Trainer:
         12: {"hidden:roll": "energy (height + speed²/2g, per unit of weight)",
              "roll": "conservation of energy"},
         13: {"repeated_groups": "powers (exponentiation)", "grow": "exponential growth"},
+        14: {"hidden:bounce": "energy: gravitational + kinetic + elastic (spring)",
+             "bounce": "conservation of energy with a spring"},
     }
 
     def name_concepts(self, number):
@@ -202,7 +204,7 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=14):
+    def run_all(self, upto=15):
         for n in range(upto + 1):
             self.run(n)
         return self.results
