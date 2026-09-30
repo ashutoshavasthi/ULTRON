@@ -31,7 +31,7 @@ INT, BOOL = "int", "bool"
 import contextlib
 
 MAX_ITER = 2_000_000    # refuse to count further than this in one step
-MAX_VALUE = 10 ** 9     # refuse to hold numbers bigger than this
+MAX_VALUE = 10 ** 120   # refuse to hold numbers bigger than this
 _DEFAULT_LIMITS = (MAX_ITER, MAX_VALUE)
 
 
@@ -94,6 +94,14 @@ class Library:
         # laws Ultron has checked give the same result either way round: for those it
         # counts along the smaller number ("count on from the bigger one")
         self.symmetric = set()
+        # laws for which Ultron checked that a column method always agrees (fast path)
+        self.fast = {}
+        self._columns = None
+        self._fast_fns = None
+        self._counting = 0
+
+    def _columns_facts(self):
+        return self._columns.facts
 
     def inverse_of(self, F):
         """The step that undoes F, if Ultron knows one."""
@@ -144,6 +152,12 @@ class Library:
             if hit is Overflow:
                 raise Overflow()
             return hit
+        if self._fast_fns is not None and name in self.fast and not self._counting:
+            worth_it, fast_call = self._fast_fns
+            if worth_it(self, name, a, b):
+                v = fast_call(self, name, a, b)
+                self._memo[key] = v
+                return v
         law = self.laws[name]
         try:
             v = evaluate(law.expr, {law.params[0]: a, law.params[1]: b}, self)
@@ -162,6 +176,12 @@ class Library:
         new.inverses = copy.deepcopy(self.inverses, memo)
         new.cycles = copy.deepcopy(self.cycles, memo)
         new.symmetric = set(self.symmetric)
+        new.fast = dict(self.fast)
+        new._counting = 0
+        if self._columns is not None:
+            from .columns import Columns
+            new._columns = Columns(new, self._columns_facts())
+            new._fast_fns = self._fast_fns
         return new
 
     def __contains__(self, name):

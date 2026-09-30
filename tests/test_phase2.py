@@ -84,3 +84,15 @@ def test_invents_irrational_numbers_and_the_world_agrees(trained):
     kind, lo, hi = ans.value
     assert kind == "between" and lo[0] / lo[1] < 2 ** 0.5 < hi[0] / hi[1]
     assert brain.predict("ruler", {"marks": 1000}) == 1414   # predicted, never measured
+
+
+def test_invents_column_arithmetic(trained):
+    brain, _ = trained
+    col = next(e for e in brain.log if e["kind"] == "invent" and "column arithmetic" in e["text"])
+    assert col["lesson"] == 4
+    # each fast path was earned by agreeing with a law on 60 examples
+    assert brain.library.fast["groups"][0] == "times"
+    assert brain.library.fast["pay"] == ("take away", "yx")
+    ans = reasoner.arithmetic(brain, "123456789 times 987654321")
+    assert ans.text == "121932631112635269"
+    assert reasoner.arithmetic(brain, "2 power 100").text == str(2 ** 100)

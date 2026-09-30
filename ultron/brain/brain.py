@@ -436,10 +436,13 @@ class Brain:
         from .invention import find_inverses, look_for_shapes
         from .compression import look_for_ladders
         from .gaps import look_for_gaps
+        from .columns import look_for_columns, trust_fast_paths
         self._check_symmetry()
         look_for_shapes(self)
         find_inverses(self)
         look_for_ladders(self)
+        look_for_columns(self)
+        trust_fast_paths(self)
         look_for_gaps(self)
 
     def _check_symmetry(self):
@@ -510,6 +513,7 @@ class Brain:
             "inverses": dict(sorted(self.library.inverses.items())),
             "cycles": dict(sorted(self.library.cycles.items())),
             "symmetric": sorted(self.library.symmetric),
+            "fast": dict(sorted(self.library.fast.items())),
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
@@ -539,6 +543,9 @@ class Brain:
         b.library.inverses = dict(d.get("inverses", {}))
         b.library.cycles = dict(d.get("cycles", {}))
         b.library.symmetric = set(d.get("symmetric", []))
+        b.library.fast = {k: tuple(v) for k, v in d.get("fast", {}).items()}
+        from .columns import attach
+        attach(b)
         b.curiosity = Curiosity.from_json(d.get("curiosity", {}))
         b.memory = Memory.from_json(d["memory"])
         b.log = list(d.get("log", []))
