@@ -1,0 +1,4309 @@
+{
+ "conservation_laws": {
+  "collide": [
+   {
+    "etype": "collide",
+    "powers": {
+     "m": 1,
+     "v": 1
+    },
+    "provenance": {},
+    "scope": "all"
+   },
+   {
+    "etype": "collide",
+    "powers": {
+     "m": 1,
+     "v": 2
+    },
+    "provenance": {},
+    "scope": [
+     "steel"
+    ]
+   }
+  ]
+ },
+ "curiosity": {
+  "errors": {
+   "collide": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "gas": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "groups": [
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "lab_push": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "lab_stretch": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "lamps": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "merge": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "numeral": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "orbit": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "pair_off": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "peekaboo": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "push": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "stretch": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "take_away": [
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "hypotheses": {
+  "groups": "repeat size times [merge(\u00b7, groups)] starting from 0",
+  "merge": "repeat nA times [succ] starting from nB",
+  "numeral": "merge(right, groups(left, 10))",
+  "pair_off": "eq(nA, nB)",
+  "peekaboo": "went_in",
+  "take_away": "repeat n_taken times [pred] starting from nA"
+ },
+ "library": {
+  "groups": {
+   "expr": [
+    "iter",
+    [
+     "call",
+     "merge",
+     [
+      "var",
+      "groups"
+     ]
+    ],
+    [
+     "var",
+     "size"
+    ],
+    [
+     "const",
+     0
+    ]
+   ],
+   "name": "groups",
+   "out_type": "int",
+   "params": [
+    "groups",
+    "size"
+   ],
+   "provenance": {
+    "experiences": 11,
+    "lesson": 3,
+    "size": 5
+   }
+  },
+  "merge": {
+   "expr": [
+    "iter",
+    [
+     "succ"
+    ],
+    [
+     "var",
+     "nA"
+    ],
+    [
+     "var",
+     "nB"
+    ]
+   ],
+   "name": "merge",
+   "out_type": "int",
+   "params": [
+    "nA",
+    "nB"
+   ],
+   "provenance": {
+    "experiences": 10,
+    "lesson": 2,
+    "size": 4
+   }
+  },
+  "numeral": {
+   "expr": [
+    "call",
+    "merge",
+    [
+     "var",
+     "right"
+    ],
+    [
+     "call",
+     "groups",
+     [
+      "var",
+      "left"
+     ],
+     [
+      "const",
+      10
+     ]
+    ]
+   ],
+   "name": "numeral",
+   "out_type": "int",
+   "params": [
+    "left",
+    "right"
+   ],
+   "provenance": {
+    "experiences": 10,
+    "lesson": 4,
+    "size": 5
+   }
+  },
+  "pair_off": {
+   "expr": [
+    "eq",
+    [
+     "var",
+     "nA"
+    ],
+    [
+     "var",
+     "nB"
+    ]
+   ],
+   "name": "pair_off",
+   "out_type": "bool",
+   "params": [
+    "nA",
+    "nB"
+   ],
+   "provenance": {
+    "experiences": 10,
+    "lesson": 1,
+    "size": 3
+   }
+  },
+  "peekaboo": {
+   "expr": [
+    "var",
+    "went_in"
+   ],
+   "name": "peekaboo",
+   "out_type": "bool",
+   "params": [
+    "waited",
+    "went_in"
+   ],
+   "provenance": {
+    "experiences": 9,
+    "lesson": 0,
+    "size": 1
+   }
+  },
+  "take_away": {
+   "expr": [
+    "iter",
+    [
+     "pred"
+    ],
+    [
+     "var",
+     "n_taken"
+    ],
+    [
+     "var",
+     "nA"
+    ]
+   ],
+   "name": "take_away",
+   "out_type": "int",
+   "params": [
+    "nA",
+    "n_taken"
+   ],
+   "provenance": {
+    "experiences": 11,
+    "lesson": 2,
+    "size": 4
+   }
+  }
+ },
+ "log": [
+  {
+   "kind": "trainer",
+   "lesson": 0,
+   "text": "Lesson 0: Hidden things"
+  },
+  {
+   "kind": "meet",
+   "lesson": 0,
+   "text": "new kind of experience: peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "kind": "revise",
+   "lesson": 0,
+   "text": "peekaboo: surprised; new best explanation is went_in (was nothing; 1 experiences, 2 programs searched)"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 0,
+   "text": "peekaboo: went_in predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "choice": "peekaboo",
+   "kind": "choice",
+   "lesson": 0,
+   "text": "chose to play with peekaboo"
+  },
+  {
+   "kind": "bored",
+   "lesson": 0,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 0,
+   "text": "Exam for lesson 0, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 0,
+   "text": "What you found in 'peekaboo' is what people call object permanence."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 1,
+   "text": "Lesson 1: Same number"
+  },
+  {
+   "kind": "meet",
+   "lesson": 1,
+   "text": "new kind of experience: pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "kind": "revise",
+   "lesson": 1,
+   "text": "pair_off: surprised; new best explanation is false (was nothing; 1 experiences, 6 programs searched)"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "kind": "revise",
+   "lesson": 1,
+   "text": "pair_off: surprised; new best explanation is eq(nA, nB) (was false; 2 experiences, 27 programs searched)"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 1,
+   "text": "pair_off: eq(nA, nB) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "kind": "bored",
+   "lesson": 1,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 1,
+   "text": "Exam for lesson 1, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 1,
+   "text": "What you found in 'pair_off' is what people call same number (one-to-one correspondence)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 2,
+   "text": "Lesson 2: Putting together and taking away"
+  },
+  {
+   "kind": "meet",
+   "lesson": 2,
+   "text": "new kind of experience: merge"
+  },
+  {
+   "kind": "meet",
+   "lesson": 2,
+   "text": "new kind of experience: take_away"
+  },
+  {
+   "kind": "meet",
+   "lesson": 2,
+   "text": "new kind of experience: lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "kind": "revise",
+   "lesson": 2,
+   "text": "merge: surprised; new best explanation is nA (was nothing; 1 experiences, 1 programs searched)"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "kind": "revise",
+   "lesson": 2,
+   "text": "take_away: surprised; new best explanation is nA (was nothing; 1 experiences, 1 programs searched)"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "kind": "revise",
+   "lesson": 2,
+   "text": "lamps: surprised; new best explanation is succ(succ(lit_before)) (was nothing; 1 experiences, 10 programs searched)"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "kind": "revise",
+   "lesson": 2,
+   "text": "merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 150 programs searched)"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 2,
+   "text": "lamps: no simple law explains all 2 experiences (searched 587 programs)"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "kind": "revise",
+   "lesson": 2,
+   "text": "take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was nA; 3 experiences, 152 programs searched)"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 2,
+   "text": "lamps: no simple law explains all 4 experiences (searched 587 programs)"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 2,
+   "text": "lamps: no simple law explains all 8 experiences (searched 587 programs)"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 2,
+   "text": "merge: repeat nA times [succ] starting from nB predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 2,
+   "text": "take_away: repeat n_taken times [pred] starting from nA predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 2,
+   "text": "lamps: no simple law explains all 16 experiences (searched 1831 programs)"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "kind": "bored",
+   "lesson": 2,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 2,
+   "text": "Exam for lesson 2, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 2,
+   "text": "What you found in 'merge' is what people call addition."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 2,
+   "text": "What you found in 'take_away' is what people call subtraction."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 3,
+   "text": "Lesson 3: Groups of groups"
+  },
+  {
+   "kind": "meet",
+   "lesson": 3,
+   "text": "new kind of experience: groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "revise",
+   "lesson": 3,
+   "text": "groups: surprised; new best explanation is size (was nothing; 1 experiences, 2 programs searched)"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "revise",
+   "lesson": 3,
+   "text": "groups: surprised; new best explanation is succ(succ(succ(1))) (was size; 2 experiences, 95 programs searched)"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "revise",
+   "lesson": 3,
+   "text": "groups: surprised; new best explanation is repeat size times [merge(\u00b7, groups)] starting from 0 (was succ(succ(succ(1))); 3 experiences, 850 programs searched)"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 3,
+   "text": "groups: repeat size times [merge(\u00b7, groups)] starting from 0 predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "bored",
+   "lesson": 3,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 3,
+   "text": "Exam for lesson 3, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 3,
+   "text": "What you found in 'groups' is what people call multiplication."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 4,
+   "text": "Lesson 4: Names for things"
+  },
+  {
+   "kind": "meet",
+   "lesson": 4,
+   "text": "new kind of experience: numeral"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 4,
+   "text": "I pointed at piles and said their names: marks 0-9 and words zero-ten."
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'plus' behaves exactly like my law 'merge' (arguments xy) in all 6 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'+' behaves exactly like my law 'merge' (arguments xy) in all 6 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'minus' behaves exactly like my law 'take_away' (arguments xy) in all 6 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'-' behaves exactly like my law 'take_away' (arguments xy) in all 6 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'times' behaves exactly like my law 'groups' (arguments xy) in all 6 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'\u00d7' behaves exactly like my law 'groups' (arguments xy) in all 6 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'*' behaves exactly like my law 'groups' (arguments xy) in all 6 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'equals' joins things that are the same amount"
+  },
+  {
+   "kind": "word",
+   "lesson": 4,
+   "text": "'=' joins things that are the same amount"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 4,
+   "text": "I acted out 'plus', 'minus', 'times' with real piles and said the words."
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "kind": "revise",
+   "lesson": 4,
+   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 1115 programs searched)"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "kind": "revise",
+   "lesson": 4,
+   "text": "numeral: surprised; new best explanation is merge(right, groups(left, 10)) (was succ(succ(groups(8, 9))); 2 experiences, 2789 programs searched)"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 4,
+   "text": "numeral: merge(right, groups(left, 10)) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "choice": "numeral",
+   "kind": "choice",
+   "lesson": 4,
+   "text": "chose to play with numeral"
+  },
+  {
+   "kind": "bored",
+   "lesson": 4,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 4,
+   "text": "I wrote two-mark numerals next to piles of 10-99 things."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 4,
+   "text": "Exam for lesson 4, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 4,
+   "text": "What you found in 'numeral' is what people call place value."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 5,
+   "text": "Lesson 5: Pushing, stretching, colliding"
+  },
+  {
+   "kind": "meet",
+   "lesson": 5,
+   "text": "new kind of experience: push"
+  },
+  {
+   "kind": "meet",
+   "lesson": 5,
+   "text": "new kind of experience: stretch"
+  },
+  {
+   "kind": "meet",
+   "lesson": 5,
+   "text": "new kind of experience: collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 5,
+   "text": "push: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 5,
+   "text": "stretch: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "kind": "revise",
+   "lesson": 5,
+   "text": "collide: total m\u00b7v is the same before and after in every collision (1 experiences)"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "kind": "revise",
+   "lesson": 5,
+   "text": "push: F / (a\u00b7m) = 1 [dimensionless] in every experiment (22 candidates searched)"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 5,
+   "text": "stretch: nothing stays constant yet (2 experiences)"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 5,
+   "text": "stretch: nothing stays constant yet (3 experiences)"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 5,
+   "text": "stretch: nothing stays constant yet (4 experiences)"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 5,
+   "text": "stretch: nothing stays constant yet (5 experiences)"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 5,
+   "text": "stretch: nothing stays constant yet (6 experiences)"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "kind": "revise",
+   "lesson": 5,
+   "text": "stretch: F / x is constant for each spring but differs between them: a hidden property of each spring [N/m] (20 candidates searched)"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "collide",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with collide"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "choice": "push",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with push"
+  },
+  {
+   "choice": "stretch",
+   "kind": "choice",
+   "lesson": 5,
+   "text": "chose to play with stretch"
+  },
+  {
+   "kind": "bored",
+   "lesson": 5,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 5,
+   "text": "collide: total m\u00b7v is the same before and after in every collision; total m\u00b7v^2 is the same before and after only in steel collisions (16 experiences)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 5,
+   "text": "Exam for lesson 5, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 5,
+   "text": "What you found in 'push' is what people call Newton's second law."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 5,
+   "text": "What you found in 'stretch' is what people call stiffness (Hooke's law)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 5,
+   "text": "What you found in 'collide' is what people call conservation of momentum."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 6,
+   "text": "Lesson 6: Real measurements"
+  },
+  {
+   "kind": "meet",
+   "lesson": 6,
+   "text": "new kind of experience: orbit"
+  },
+  {
+   "kind": "meet",
+   "lesson": 6,
+   "text": "new kind of experience: gas"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 6,
+   "text": "orbit: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "kind": "revise",
+   "lesson": 6,
+   "text": "orbit: T^2 / r^3 = 2.97473e-19 [m^-3\u00b7s^2] in every experiment (20 candidates searched)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 6,
+   "text": "I showed real distances and orbital periods of six planets."
+  },
+  {
+   "kind": "stuck",
+   "lesson": 6,
+   "text": "gas: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "kind": "revise",
+   "lesson": 6,
+   "text": "gas: P\u00b7V = 1401.94 [the data's own units] in every experiment (2 candidates searched)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 6,
+   "text": "I showed Boyle's 1662 measurements for the larger air volumes."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 6,
+   "text": "Exam for lesson 6, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 6,
+   "text": "What you found in 'orbit' is what people call Kepler's third law."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 6,
+   "text": "What you found in 'gas' is what people call Boyle's law."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 7,
+   "text": "Lesson 7: A lab with cheap instruments"
+  },
+  {
+   "kind": "meet",
+   "lesson": 7,
+   "text": "new kind of experience: lab_push"
+  },
+  {
+   "kind": "meet",
+   "lesson": 7,
+   "text": "new kind of experience: lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 7,
+   "text": "lab_push: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 7,
+   "text": "lab_stretch: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "kind": "revise",
+   "lesson": 7,
+   "text": "lab_push: F / (a\u00b7m) = 0.991157 [dimensionless] in every experiment (7 candidates searched)"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 7,
+   "text": "lab_stretch: nothing stays constant yet (2 experiences)"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 7,
+   "text": "lab_stretch: nothing stays constant yet (3 experiences)"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "kind": "revise",
+   "lesson": 7,
+   "text": "lab_stretch: F / x is constant for each spring but differs between them: a hidden property of each spring [N/m] (6 candidates searched)"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "kind": "measure",
+   "lesson": 7,
+   "text": "lab_stretch: met new spring L4; measured its property F / x = 16.6613"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "kind": "measure",
+   "lesson": 7,
+   "text": "lab_stretch: met new spring L3; measured its property F / x = 68.8365"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "choice": "lab_push",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_push"
+  },
+  {
+   "choice": "lab_stretch",
+   "kind": "choice",
+   "lesson": 7,
+   "text": "chose to play with lab_stretch"
+  },
+  {
+   "kind": "bored",
+   "lesson": 7,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 7,
+   "text": "Exam for lesson 7, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 7,
+   "text": "What you found in 'lab_push' is what people call Newton's second law (measured with noise)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 7,
+   "text": "What you found in 'lab_stretch' is what people call stiffness (measured with noise)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 8,
+   "text": "Lesson 8: The tough final exam"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 8,
+   "text": "No teaching today. Show me what you can do."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 8,
+   "text": "Exam for lesson 8, attempt 1: passed"
+  }
+ ],
+ "memory": {
+  "episodes": {
+   "collide": [
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 1.996,
+      "m2": 1.207,
+      "v1": 1.627,
+      "v1_after": -0.0118520137371,
+      "v2": -2.722
+     },
+     "outcome": -0.0118520137371
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 1.867,
+      "m2": 2.118,
+      "v1": 4.665,
+      "v1_after": 3.25813776662,
+      "v2": 2.018
+     },
+     "outcome": 3.25813776662
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 1.507,
+      "m2": 1.007,
+      "v1": 4.486,
+      "v1_after": 1.44016547335,
+      "v2": -3.118
+     },
+     "outcome": 1.44016547335
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 4.846,
+      "m2": 3.157,
+      "v1": 3.711,
+      "v1_after": 0.937826190179,
+      "v2": -3.319
+     },
+     "outcome": 0.937826190179
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 2.66,
+      "m2": 4.743,
+      "v1": 2.055,
+      "v1_after": -1.07154869647,
+      "v2": -2.825
+     },
+     "outcome": -1.07154869647
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 4.274,
+      "m2": 2.923,
+      "v1": 2.263,
+      "v1_after": 0.634778935668,
+      "v2": -1.746
+     },
+     "outcome": 0.634778935668
+    },
+    {
+     "inputs": {
+      "kind": "steel",
+      "m1": 2.431,
+      "m2": 2.617,
+      "v1": 3.196,
+      "v1_after": -1.96023652932,
+      "v2": -1.777
+     },
+     "outcome": 3.01276347068
+    },
+    {
+     "inputs": {
+      "kind": "steel",
+      "m1": 3.495,
+      "m2": 4.818,
+      "v1": 1.476,
+      "v1_after": -4.32553735114,
+      "v2": -3.529
+     },
+     "outcome": 0.679462648863
+    },
+    {
+     "inputs": {
+      "kind": "steel",
+      "m1": 2.851,
+      "m2": 3.359,
+      "v1": 4.124,
+      "v1_after": -2.31922190016,
+      "v2": -1.832
+     },
+     "outcome": 3.63677809984
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 3.052,
+      "m2": 2.451,
+      "v1": 1.593,
+      "v1_after": -0.595217881156,
+      "v2": -3.32
+     },
+     "outcome": -0.595217881156
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 3.507,
+      "m2": 3.885,
+      "v1": 2.237,
+      "v1_after": 0.146289772727,
+      "v2": -1.741
+     },
+     "outcome": 0.146289772727
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 3.962,
+      "m2": 2.375,
+      "v1": 2.001,
+      "v1_after": 0.963225816632,
+      "v2": -0.768
+     },
+     "outcome": 0.963225816632
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 2.337,
+      "m2": 1.828,
+      "v1": 4.925,
+      "v1_after": 2.90213037215,
+      "v2": 0.316
+     },
+     "outcome": 2.90213037215
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 2.492,
+      "m2": 1.235,
+      "v1": 2.683,
+      "v1_after": 0.473122082104,
+      "v2": -3.986
+     },
+     "outcome": 0.473122082104
+    },
+    {
+     "inputs": {
+      "kind": "clay",
+      "m1": 2.271,
+      "m2": 2.096,
+      "v1": 2.88,
+      "v1_after": 2.29252484543,
+      "v2": 1.656
+     },
+     "outcome": 2.29252484543
+    },
+    {
+     "inputs": {
+      "kind": "steel",
+      "m1": 2.997,
+      "m2": 2.354,
+      "v1": 1.357,
+      "v1_after": -2.83277686414,
+      "v2": -3.405
+     },
+     "outcome": 1.92922313586
+    }
+   ],
+   "gas": [
+    {
+     "P": 29.125,
+     "V": 48.0
+    },
+    {
+     "P": 30.5625,
+     "V": 46.0
+    },
+    {
+     "P": 31.9375,
+     "V": 44.0
+    },
+    {
+     "P": 33.5,
+     "V": 42.0
+    },
+    {
+     "P": 35.3125,
+     "V": 40.0
+    },
+    {
+     "P": 36.9375,
+     "V": 38.0
+    },
+    {
+     "P": 39.3125,
+     "V": 36.0
+    },
+    {
+     "P": 41.625,
+     "V": 34.0
+    },
+    {
+     "P": 44.1875,
+     "V": 32.0
+    },
+    {
+     "P": 47.0625,
+     "V": 30.0
+    },
+    {
+     "P": 50.3125,
+     "V": 28.0
+    },
+    {
+     "P": 54.3125,
+     "V": 26.0
+    },
+    {
+     "P": 58.8125,
+     "V": 24.0
+    }
+   ],
+   "groups": [
+    {
+     "inputs": {
+      "groups": 1,
+      "size": 4
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "groups": 4,
+      "size": 1
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "groups": 2,
+      "size": 4
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "groups": 3,
+      "size": 4
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 3,
+      "size": 2
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "groups": 4,
+      "size": 1
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "groups": 1,
+      "size": 3
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "groups": 4,
+      "size": 4
+     },
+     "outcome": 16
+    },
+    {
+     "inputs": {
+      "groups": 3,
+      "size": 3
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "groups": 1,
+      "size": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "groups": 1,
+      "size": 4
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "groups": 3,
+      "size": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 4
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 2,
+      "size": 3
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "groups": 4,
+      "size": 3
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "groups": 3,
+      "size": 3
+     },
+     "outcome": 9
+    }
+   ],
+   "lab_push": [
+    {
+     "F": 2.08183362682,
+     "a": 0.847629050921,
+     "m": 2.48395619874
+    },
+    {
+     "F": 8.9100885932,
+     "a": 6.63152516222,
+     "m": 1.35232893402
+    },
+    {
+     "F": 16.6864067838,
+     "a": 6.15374223191,
+     "m": 2.67616552542
+    },
+    {
+     "F": 12.117532252,
+     "a": 3.44347546644,
+     "m": 3.52942593146
+    },
+    {
+     "F": 19.7139190216,
+     "a": 7.54558717907,
+     "m": 2.60703174497
+    },
+    {
+     "F": 8.97957545071,
+     "a": 5.89613075897,
+     "m": 1.53540415288
+    },
+    {
+     "F": 16.6404019418,
+     "a": 7.37110974154,
+     "m": 2.24851651804
+    },
+    {
+     "F": 4.60976140929,
+     "a": 1.37907053711,
+     "m": 3.25239792901
+    },
+    {
+     "F": 2.14901223947,
+     "a": 1.71809409069,
+     "m": 1.24025016764
+    },
+    {
+     "F": 15.6479189342,
+     "a": 5.04219435547,
+     "m": 3.1000476989
+    },
+    {
+     "F": 6.68878562165,
+     "a": 2.39988392983,
+     "m": 2.82113153969
+    },
+    {
+     "F": 12.012025238,
+     "a": 6.03459616184,
+     "m": 1.97600892669
+    },
+    {
+     "F": 9.46477663986,
+     "a": 4.00388438512,
+     "m": 2.36467732326
+    },
+    {
+     "F": 8.89719778056,
+     "a": 6.10575153437,
+     "m": 1.47908525523
+    },
+    {
+     "F": 1.73041367041,
+     "a": 0.586641980591,
+     "m": 2.97559429539
+    },
+    {
+     "F": 17.7910894431,
+     "a": 5.35509756727,
+     "m": 3.31220700694
+    },
+    {
+     "F": 10.4634446406,
+     "a": 4.3277737965,
+     "m": 2.37751653855
+    }
+   ],
+   "lab_stretch": [
+    {
+     "F": 6.74066645709,
+     "spring": "L5",
+     "x": 0.114593482298
+    },
+    {
+     "F": 1.27100480285,
+     "spring": "L2",
+     "x": 0.0547866736033
+    },
+    {
+     "F": 18.4132756876,
+     "spring": "L1",
+     "x": 0.471736839972
+    },
+    {
+     "F": 11.4812790009,
+     "spring": "L1",
+     "x": 0.292930263679
+    },
+    {
+     "F": 11.0075044452,
+     "spring": "L1",
+     "x": 0.282946365011
+    },
+    {
+     "F": 3.93885639503,
+     "spring": "L5",
+     "x": 0.0673718300114
+    },
+    {
+     "F": 1.42627253911,
+     "spring": "L2",
+     "x": 0.0606090689864
+    },
+    {
+     "F": 10.9394835777,
+     "spring": "L1",
+     "x": 0.275900432657
+    },
+    {
+     "F": 5.92784991635,
+     "spring": "L2",
+     "x": 0.254356543524
+    },
+    {
+     "F": 4.93572463588,
+     "spring": "L4",
+     "x": 0.296238267641
+    },
+    {
+     "F": 8.28964334236,
+     "spring": "L2",
+     "x": 0.354084163842
+    },
+    {
+     "F": 14.6258298856,
+     "spring": "L5",
+     "x": 0.254840386531
+    },
+    {
+     "F": 28.7669150209,
+     "spring": "L5",
+     "x": 0.488912563858
+    },
+    {
+     "F": 5.82383711619,
+     "spring": "L3",
+     "x": 0.084603947838
+    },
+    {
+     "F": 14.9222755362,
+     "spring": "L1",
+     "x": 0.383467293188
+    },
+    {
+     "F": 12.0548757991,
+     "spring": "L3",
+     "x": 0.177788584133
+    },
+    {
+     "F": 0.717348145102,
+     "spring": "L4",
+     "x": 0.0439142392557
+    }
+   ],
+   "lamps": [
+    {
+     "inputs": {
+      "lit_before": 2
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "lit_before": 9
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "lit_before": 8
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "lit_before": 5
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "lit_before": 8
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "lit_before": 5
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "lit_before": 8
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "lit_before": 9
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "lit_before": 7
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "lit_before": 8
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "lit_before": 5
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "lit_before": 7
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "lit_before": 7
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "lit_before": 8
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "lit_before": 4
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "lit_before": 9
+     },
+     "outcome": 1
+    }
+   ],
+   "merge": [
+    {
+     "inputs": {
+      "nA": 0,
+      "nB": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 4
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "nB": 5
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "nB": 2
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 3
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 4
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 3
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 3
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 3
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 5
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "nB": 4
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 5
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 5
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "nB": 4
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "nB": 4
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 5
+     },
+     "outcome": 7
+    }
+   ],
+   "numeral": [
+    {
+     "inputs": {
+      "left": 7,
+      "right": 4
+     },
+     "outcome": 74
+    },
+    {
+     "inputs": {
+      "left": 4,
+      "right": 1
+     },
+     "outcome": 41
+    },
+    {
+     "inputs": {
+      "left": 3,
+      "right": 2
+     },
+     "outcome": 32
+    },
+    {
+     "inputs": {
+      "left": 4,
+      "right": 1
+     },
+     "outcome": 41
+    },
+    {
+     "inputs": {
+      "left": 7,
+      "right": 0
+     },
+     "outcome": 70
+    },
+    {
+     "inputs": {
+      "left": 4,
+      "right": 5
+     },
+     "outcome": 45
+    },
+    {
+     "inputs": {
+      "left": 2,
+      "right": 1
+     },
+     "outcome": 21
+    },
+    {
+     "inputs": {
+      "left": 8,
+      "right": 0
+     },
+     "outcome": 80
+    },
+    {
+     "inputs": {
+      "left": 4,
+      "right": 8
+     },
+     "outcome": 48
+    },
+    {
+     "inputs": {
+      "left": 1,
+      "right": 0
+     },
+     "outcome": 10
+    },
+    {
+     "inputs": {
+      "left": 4,
+      "right": 7
+     },
+     "outcome": 47
+    },
+    {
+     "inputs": {
+      "left": 8,
+      "right": 3
+     },
+     "outcome": 83
+    },
+    {
+     "inputs": {
+      "left": 4,
+      "right": 9
+     },
+     "outcome": 49
+    },
+    {
+     "inputs": {
+      "left": 7,
+      "right": 5
+     },
+     "outcome": 75
+    },
+    {
+     "inputs": {
+      "left": 3,
+      "right": 4
+     },
+     "outcome": 34
+    },
+    {
+     "inputs": {
+      "left": 6,
+      "right": 2
+     },
+     "outcome": 62
+    },
+    {
+     "inputs": {
+      "left": 6,
+      "right": 4
+     },
+     "outcome": 64
+    }
+   ],
+   "orbit": [
+    {
+     "T": 7600521.6,
+     "r": 57909000000.0,
+     "system": "Sun"
+    },
+    {
+     "T": 19414166.4,
+     "r": 108209000000.0,
+     "system": "Sun"
+    },
+    {
+     "T": 31558118.4,
+     "r": 149598000000.0,
+     "system": "Sun"
+    },
+    {
+     "T": 59355072.0,
+     "r": 227956000000.0,
+     "system": "Sun"
+    },
+    {
+     "T": 374335689.6,
+     "r": 778479000000.0,
+     "system": "Sun"
+    },
+    {
+     "T": 929596608.0,
+     "r": 1432041000000.0,
+     "system": "Sun"
+    }
+   ],
+   "pair_off": [
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 0
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 2
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "nB": 3
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 1
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 0,
+      "nB": 3
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "nB": 0
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "nB": 5
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 0
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 2
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 0,
+      "nB": 0
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "nB": 3
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "nB": 5
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 3
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "nB": 4
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 3
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 3
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "nB": 0
+     },
+     "outcome": false
+    }
+   ],
+   "peekaboo": [
+    {
+     "inputs": {
+      "waited": 4,
+      "went_in": false
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "waited": 5,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 3,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 3,
+      "went_in": false
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "waited": 2,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 3,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 1,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 3,
+      "went_in": false
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "waited": 5,
+      "went_in": false
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "waited": 5,
+      "went_in": false
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "waited": 3,
+      "went_in": false
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "waited": 1,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 6,
+      "went_in": false
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "waited": 5,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 4,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 6,
+      "went_in": true
+     },
+     "outcome": true
+    }
+   ],
+   "push": [
+    {
+     "F": 1.551,
+     "a": 0.330774152271,
+     "m": 4.689
+    },
+    {
+     "F": 2.938,
+     "a": 1.16448672216,
+     "m": 2.523
+    },
+    {
+     "F": 2.367,
+     "a": 0.584733201581,
+     "m": 4.048
+    },
+    {
+     "F": 4.151,
+     "a": 0.8574674654,
+     "m": 4.841
+    },
+    {
+     "F": 17.981,
+     "a": 3.69523222359,
+     "m": 4.866
+    },
+    {
+     "F": 14.446,
+     "a": 4.26891252955,
+     "m": 3.384
+    },
+    {
+     "F": 19.527,
+     "a": 15.901465798,
+     "m": 1.228
+    },
+    {
+     "F": 1.172,
+     "a": 0.353651176826,
+     "m": 3.314
+    },
+    {
+     "F": 7.741,
+     "a": 3.25525651808,
+     "m": 2.378
+    },
+    {
+     "F": 18.97,
+     "a": 16.5387968614,
+     "m": 1.147
+    },
+    {
+     "F": 7.019,
+     "a": 3.11955555556,
+     "m": 2.25
+    },
+    {
+     "F": 12.412,
+     "a": 9.3746223565,
+     "m": 1.324
+    },
+    {
+     "F": 18.405,
+     "a": 15.0490596893,
+     "m": 1.223
+    },
+    {
+     "F": 15.972,
+     "a": 4.53492333901,
+     "m": 3.522
+    },
+    {
+     "F": 9.617,
+     "a": 1.96105220228,
+     "m": 4.904
+    },
+    {
+     "F": 19.779,
+     "a": 7.88636363636,
+     "m": 2.508
+    },
+    {
+     "F": 19.638,
+     "a": 9.53763963089,
+     "m": 2.059
+    }
+   ],
+   "stretch": [
+    {
+     "F": 36.9800049606,
+     "spring": "S4",
+     "x": 0.39
+    },
+    {
+     "F": 1.22817326454,
+     "spring": "S2",
+     "x": 0.016
+    },
+    {
+     "F": 23.9729428504,
+     "spring": "S5",
+     "x": 0.313
+    },
+    {
+     "F": 11.6676460131,
+     "spring": "S2",
+     "x": 0.152
+    },
+    {
+     "F": 1.71291583892,
+     "spring": "S3",
+     "x": 0.021
+    },
+    {
+     "F": 10.7019067115,
+     "spring": "S1",
+     "x": 0.162
+    },
+    {
+     "F": 31.3790474565,
+     "spring": "S1",
+     "x": 0.475
+    },
+    {
+     "F": 23.5838314568,
+     "spring": "S1",
+     "x": 0.357
+    },
+    {
+     "F": 10.1865859396,
+     "spring": "S5",
+     "x": 0.133
+    },
+    {
+     "F": 7.39884908449,
+     "spring": "S1",
+     "x": 0.112
+    },
+    {
+     "F": 30.7810924424,
+     "spring": "S2",
+     "x": 0.401
+    },
+    {
+     "F": 2.46533366404,
+     "spring": "S4",
+     "x": 0.026
+    },
+    {
+     "F": 26.6226444737,
+     "spring": "S1",
+     "x": 0.403
+    },
+    {
+     "F": 6.14368718623,
+     "spring": "S1",
+     "x": 0.093
+    },
+    {
+     "F": 32.9975428879,
+     "spring": "S4",
+     "x": 0.348
+    },
+    {
+     "F": 24.3331828036,
+     "spring": "S2",
+     "x": 0.317
+    },
+    {
+     "F": 26.0941552533,
+     "spring": "S1",
+     "x": 0.395
+    },
+    {
+     "F": 28.5485973153,
+     "spring": "S3",
+     "x": 0.35
+    },
+    {
+     "F": 25.2353602703,
+     "spring": "S1",
+     "x": 0.382
+    },
+    {
+     "F": 23.1651475359,
+     "spring": "S3",
+     "x": 0.284
+    },
+    {
+     "F": 34.1767493575,
+     "spring": "S3",
+     "x": 0.419
+    },
+    {
+     "F": 39.0707946115,
+     "spring": "S3",
+     "x": 0.479
+    }
+   ],
+   "take_away": [
+    {
+     "inputs": {
+      "nA": 0,
+      "n_taken": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "n_taken": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "n_taken": 2
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 0,
+      "n_taken": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "n_taken": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "nA": 0,
+      "n_taken": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "n_taken": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "n_taken": 2
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "n_taken": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "n_taken": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "n_taken": 3
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "n_taken": 3
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "n_taken": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "n_taken": 4
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "n_taken": 3
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "n_taken": 2
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 0,
+      "n_taken": 0
+     },
+     "outcome": 0
+    }
+   ]
+  },
+  "specs": {
+   "collide": {
+    "group_by": null,
+    "inputs": {},
+    "kind": "conservation",
+    "name": "collide",
+    "out_type": null,
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "v2_after",
+    "tol": 1e-09,
+    "units": {
+     "m": [
+      1,
+      0,
+      0
+     ],
+     "v": [
+      0,
+      1,
+      -1
+     ]
+    }
+   },
+   "gas": {
+    "group_by": null,
+    "inputs": {
+     "V": null
+    },
+    "kind": "quantity",
+    "name": "gas",
+    "out_type": null,
+    "precision": 0.0,
+    "surprise": 0.02,
+    "target": "P",
+    "tol": 0.02,
+    "units": {}
+   },
+   "groups": {
+    "group_by": null,
+    "inputs": {
+     "groups": "int",
+     "size": "int"
+    },
+    "kind": "program",
+    "name": "groups",
+    "out_type": "int",
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "total",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "lab_push": {
+    "group_by": null,
+    "inputs": {
+     "F": [
+      1,
+      1,
+      -2
+     ],
+     "m": [
+      1,
+      0,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "lab_push",
+    "out_type": null,
+    "precision": 0.01,
+    "surprise": 1e-06,
+    "target": "a",
+    "tol": 1e-09,
+    "units": {
+     "F": [
+      1,
+      1,
+      -2
+     ],
+     "a": [
+      0,
+      1,
+      -2
+     ],
+     "m": [
+      1,
+      0,
+      0
+     ]
+    }
+   },
+   "lab_stretch": {
+    "group_by": "spring",
+    "inputs": {
+     "x": [
+      0,
+      1,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "lab_stretch",
+    "out_type": null,
+    "precision": 0.01,
+    "surprise": 1e-06,
+    "target": "F",
+    "tol": 1e-09,
+    "units": {
+     "F": [
+      1,
+      1,
+      -2
+     ],
+     "x": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
+   "lamps": {
+    "group_by": null,
+    "inputs": {
+     "lit_before": "int"
+    },
+    "kind": "program",
+    "name": "lamps",
+    "out_type": "int",
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "lit_after",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "merge": {
+    "group_by": null,
+    "inputs": {
+     "nA": "int",
+     "nB": "int"
+    },
+    "kind": "program",
+    "name": "merge",
+    "out_type": "int",
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "total",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "numeral": {
+    "group_by": null,
+    "inputs": {
+     "left": "int",
+     "right": "int"
+    },
+    "kind": "program",
+    "name": "numeral",
+    "out_type": "int",
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "count",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "orbit": {
+    "group_by": "system",
+    "inputs": {
+     "r": [
+      0,
+      1,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "orbit",
+    "out_type": null,
+    "precision": 0.0,
+    "surprise": 0.02,
+    "target": "T",
+    "tol": 0.02,
+    "units": {
+     "T": [
+      0,
+      0,
+      1
+     ],
+     "r": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
+   "pair_off": {
+    "group_by": null,
+    "inputs": {
+     "nA": "int",
+     "nB": "int"
+    },
+    "kind": "program",
+    "name": "pair_off",
+    "out_type": "bool",
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "all_paired",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "peekaboo": {
+    "group_by": null,
+    "inputs": {
+     "waited": "int",
+     "went_in": "bool"
+    },
+    "kind": "program",
+    "name": "peekaboo",
+    "out_type": "bool",
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "there",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "push": {
+    "group_by": null,
+    "inputs": {
+     "F": [
+      1,
+      1,
+      -2
+     ],
+     "m": [
+      1,
+      0,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "push",
+    "out_type": null,
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "a",
+    "tol": 1e-09,
+    "units": {
+     "F": [
+      1,
+      1,
+      -2
+     ],
+     "a": [
+      0,
+      1,
+      -2
+     ],
+     "m": [
+      1,
+      0,
+      0
+     ]
+    }
+   },
+   "stretch": {
+    "group_by": "spring",
+    "inputs": {
+     "x": [
+      0,
+      1,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "stretch",
+    "out_type": null,
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "F",
+    "tol": 1e-09,
+    "units": {
+     "F": [
+      1,
+      1,
+      -2
+     ],
+     "x": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
+   "take_away": {
+    "group_by": null,
+    "inputs": {
+     "nA": "int",
+     "n_taken": "int"
+    },
+    "kind": "program",
+    "name": "take_away",
+    "out_type": "int",
+    "precision": 0.0,
+    "surprise": 1e-06,
+    "target": "left",
+    "tol": 1e-09,
+    "units": {}
+   }
+  }
+ },
+ "name": "Ultron",
+ "names": {
+  "collide": "conservation of momentum",
+  "gas": "Boyle's law",
+  "groups": "multiplication",
+  "lab_push": "Newton's second law (measured with noise)",
+  "lab_stretch": "stiffness (measured with noise)",
+  "merge": "addition",
+  "numeral": "place value",
+  "orbit": "Kepler's third law",
+  "pair_off": "same number (one-to-one correspondence)",
+  "peekaboo": "object permanence",
+  "push": "Newton's second law",
+  "stretch": "stiffness (Hooke's law)",
+  "take_away": "subtraction"
+ },
+ "quantity_laws": {
+  "gas": {
+   "constant": 1409.3076923076924,
+   "etype": "gas",
+   "group_by": null,
+   "kind": "global",
+   "powers": {
+    "P": 1,
+    "V": 1
+   },
+   "properties": {},
+   "provenance": {
+    "experiences": 2,
+    "lesson": 6
+   },
+   "spread": 0.005617226160224689
+  },
+  "lab_push": {
+   "constant": 1.0011411428312733,
+   "etype": "lab_push",
+   "group_by": null,
+   "kind": "global",
+   "powers": {
+    "F": 1,
+    "a": -1,
+    "m": -1
+   },
+   "properties": {},
+   "provenance": {
+    "experiences": 2,
+    "lesson": 7
+   },
+   "spread": 0.004812410530246798
+  },
+  "lab_stretch": {
+   "constant": null,
+   "etype": "lab_stretch",
+   "group_by": "spring",
+   "kind": "grouped",
+   "powers": {
+    "F": 1,
+    "x": -1
+   },
+   "properties": {
+    "L1": 39.138971948607434,
+    "L2": 23.36206800904301,
+    "L3": 68.32051240351484,
+    "L4": 16.498269862755706,
+    "L5": 58.37938820597851
+   },
+   "provenance": {
+    "experiences": 4,
+    "lesson": 7
+   },
+   "spread": 0.004132595717576238
+  },
+  "orbit": {
+   "constant": 2.9685067667562683e-19,
+   "etype": "orbit",
+   "group_by": null,
+   "kind": "global",
+   "powers": {
+    "T": 2,
+    "r": -3
+   },
+   "properties": {},
+   "provenance": {
+    "experiences": 2,
+    "lesson": 6
+   },
+   "spread": 2.8882680893856936e-06
+  },
+  "push": {
+   "constant": 0.9999999999999528,
+   "etype": "push",
+   "group_by": null,
+   "kind": "global",
+   "powers": {
+    "F": 1,
+    "a": -1,
+    "m": -1
+   },
+   "properties": {},
+   "provenance": {
+    "experiences": 2,
+    "lesson": 5
+   },
+   "spread": 4.120481733598893e-12
+  },
+  "stretch": {
+   "constant": null,
+   "etype": "stretch",
+   "group_by": "spring",
+   "kind": "grouped",
+   "powers": {
+    "F": 1,
+    "x": -1
+   },
+   "properties": {
+    "S1": 66.0611525400784,
+    "S2": 76.7608290335394,
+    "S3": 81.56742090093113,
+    "S4": 94.82052553998085,
+    "S5": 76.59087172641668
+   },
+   "provenance": {
+    "experiences": 7,
+    "lesson": 5
+   },
+   "spread": 2.571107591844849e-12
+  }
+ },
+ "search_steps": {
+  "collide": 30,
+  "gas": 28,
+  "groups": 947,
+  "lab_push": 165,
+  "lab_stretch": 116,
+  "lamps": 3602,
+  "merge": 151,
+  "numeral": 3904,
+  "orbit": 46,
+  "pair_off": 33,
+  "peekaboo": 2,
+  "push": 180,
+  "stretch": 176,
+  "take_away": 153
+ },
+ "vocabulary": {
+  "*": [
+   "op",
+   "groups",
+   "xy"
+  ],
+  "+": [
+   "op",
+   "merge",
+   "xy"
+  ],
+  "-": [
+   "op",
+   "take_away",
+   "xy"
+  ],
+  "0": [
+   "number",
+   0
+  ],
+  "1": [
+   "number",
+   1
+  ],
+  "2": [
+   "number",
+   2
+  ],
+  "3": [
+   "number",
+   3
+  ],
+  "4": [
+   "number",
+   4
+  ],
+  "5": [
+   "number",
+   5
+  ],
+  "6": [
+   "number",
+   6
+  ],
+  "7": [
+   "number",
+   7
+  ],
+  "8": [
+   "number",
+   8
+  ],
+  "9": [
+   "number",
+   9
+  ],
+  "=": [
+   "relation",
+   "same"
+  ],
+  "eight": [
+   "number",
+   8
+  ],
+  "equals": [
+   "relation",
+   "same"
+  ],
+  "five": [
+   "number",
+   5
+  ],
+  "four": [
+   "number",
+   4
+  ],
+  "minus": [
+   "op",
+   "take_away",
+   "xy"
+  ],
+  "nine": [
+   "number",
+   9
+  ],
+  "one": [
+   "number",
+   1
+  ],
+  "plus": [
+   "op",
+   "merge",
+   "xy"
+  ],
+  "seven": [
+   "number",
+   7
+  ],
+  "six": [
+   "number",
+   6
+  ],
+  "ten": [
+   "number",
+   10
+  ],
+  "three": [
+   "number",
+   3
+  ],
+  "times": [
+   "op",
+   "groups",
+   "xy"
+  ],
+  "two": [
+   "number",
+   2
+  ],
+  "zero": [
+   "number",
+   0
+  ],
+  "\u00d7": [
+   "op",
+   "groups",
+   "xy"
+  ]
+ }
+}

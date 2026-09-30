@@ -1,0 +1,1226 @@
+{
+ "0": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": {
+       "waited": 862,
+       "went_in": false
+      },
+      "truth": false,
+      "ultron": false
+     },
+     {
+      "question": {
+       "waited": 565,
+       "went_in": true
+      },
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": {
+       "waited": 4430,
+       "went_in": true
+      },
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "object still there after long hides (waited 50-5000)",
+    "scores": {
+     "lookup": [
+      0,
+      40
+     ],
+     "nearest": [
+      40,
+      40
+     ],
+     "ultron": [
+      40,
+      40
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 0,
+  "passed": true,
+  "threshold": 0.99
+ },
+ "1": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": {
+       "nA": 7,
+       "nB": 12
+      },
+      "truth": false,
+      "ultron": false
+     },
+     {
+      "question": {
+       "nA": 8,
+       "nB": 18
+      },
+      "truth": false,
+      "ultron": false
+     },
+     {
+      "question": {
+       "nA": 11,
+       "nB": 17
+      },
+      "truth": false,
+      "ultron": false
+     }
+    ],
+    "name": "pairing trays of 6-30 objects",
+    "scores": {
+     "lookup": [
+      0,
+      60
+     ],
+     "nearest": [
+      24,
+      60
+     ],
+     "ultron": [
+      60,
+      60
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 1,
+  "passed": true,
+  "threshold": 0.99
+ },
+ "2": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": {
+       "nA": 22,
+       "nB": 25
+      },
+      "truth": 47,
+      "ultron": 47
+     },
+     {
+      "question": {
+       "nA": 10,
+       "nB": 10
+      },
+      "truth": 20,
+      "ultron": 20
+     },
+     {
+      "question": {
+       "nA": 10,
+       "nB": 26
+      },
+      "truth": 36,
+      "ultron": 36
+     }
+    ],
+    "name": "putting together piles of 6-30",
+    "scores": {
+     "lookup": [
+      0,
+      60
+     ],
+     "nearest": [
+      0,
+      60
+     ],
+     "ultron": [
+      60,
+      60
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "nA": 32,
+       "n_taken": 14
+      },
+      "truth": 18,
+      "ultron": 18
+     },
+     {
+      "question": {
+       "nA": 23,
+       "n_taken": 15
+      },
+      "truth": 8,
+      "ultron": 8
+     },
+     {
+      "question": {
+       "nA": 43,
+       "n_taken": 39
+      },
+      "truth": 4,
+      "ultron": 4
+     }
+    ],
+    "name": "taking away from piles of 6-60",
+    "scores": {
+     "lookup": [
+      0,
+      60
+     ],
+     "nearest": [
+      2,
+      60
+     ],
+     "ultron": [
+      60,
+      60
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 2,
+  "noisy_tv": {
+   "lamp_choices": 16,
+   "lamps_law": false,
+   "last_lamp_choice": 48,
+   "total_choices": 50
+  },
+  "passed": true,
+  "threshold": 0.99
+ },
+ "3": {
+  "attempt": 1,
+  "blank_brain": {
+   "law": false,
+   "note": "same lesson, same budget, but no addition law in its library",
+   "score": [
+    0,
+    40
+   ]
+  },
+  "items": [
+   {
+    "examples": [
+     {
+      "question": {
+       "groups": 20,
+       "size": 22
+      },
+      "truth": 440,
+      "ultron": 440
+     },
+     {
+      "question": {
+       "groups": 16,
+       "size": 12
+      },
+      "truth": 192,
+      "ultron": 192
+     },
+     {
+      "question": {
+       "groups": 28,
+       "size": 19
+      },
+      "truth": 532,
+      "ultron": 532
+     }
+    ],
+    "name": "groups: 5-30 groups of 5-30",
+    "scores": {
+     "lookup": [
+      0,
+      40
+     ],
+     "nearest": [
+      0,
+      40
+     ],
+     "ultron": [
+      40,
+      40
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 3,
+  "passed": true,
+  "threshold": 0.99
+ },
+ "4": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "6999",
+      "truth": 6999,
+      "ultron": 6999
+     },
+     {
+      "question": "1842",
+      "truth": 1842,
+      "ultron": 1842
+     },
+     {
+      "question": "8942",
+      "truth": 8942,
+      "ultron": 8942
+     }
+    ],
+    "name": "reading numerals with 3-4 marks (100-9999)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "what is 40 times 3?",
+      "truth": "120",
+      "ultron": "120"
+     },
+     {
+      "question": "what is 409 \u00d7 30?",
+      "truth": "12270",
+      "ultron": "12270"
+     },
+     {
+      "question": "what is 743 + 826?",
+      "truth": "1569",
+      "ultron": "1569"
+     }
+    ],
+    "name": "answering written questions (numbers 10-999)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "zero times three",
+      "truth": "0",
+      "ultron": "0"
+     },
+     {
+      "question": "ten times eight",
+      "truth": "80",
+      "ultron": "80"
+     },
+     {
+      "question": "nine plus zero",
+      "truth": "9",
+      "ultron": "9"
+     }
+    ],
+    "name": "questions in words (zero-ten)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "groups(1, 4)",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "groups(4, 4)",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "merge(9, 2)",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "Peano proofs derived from its own laws, independently checked",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 4,
+  "passed": true,
+  "threshold": 0.99
+ },
+ "5": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": {
+       "F": 534.799,
+       "m": 92.175
+      },
+      "truth": 5.80199620287,
+      "ultron": 5.801996202875239
+     },
+     {
+      "question": {
+       "F": 583.711,
+       "m": 90.091
+      },
+      "truth": 6.47912666082,
+      "ultron": 6.4791266608210325
+     },
+     {
+      "question": {
+       "F": 615.841,
+       "m": 99.562
+      },
+      "truth": 6.18550250095,
+      "ultron": 6.185502500954471
+     }
+    ],
+    "name": "push: heavy balls (20-100 kg), big forces (100-1000 N)",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "spring": "S3",
+       "x": 0.866
+      },
+      "truth": 70.6373865002,
+      "ultron": 70.63738650020636
+     },
+     {
+      "question": {
+       "spring": "S2",
+       "x": 0.826
+      },
+      "truth": 63.4044447817,
+      "ultron": 63.40444478170354
+     },
+     {
+      "question": {
+       "spring": "S4",
+       "x": 1.011
+      },
+      "truth": 95.8635513208,
+      "ultron": 95.86355132092062
+     }
+    ],
+    "name": "stretch: known springs, long stretches (0.6-2 m)",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "spring": "S_new",
+       "x": 1.356
+      },
+      "truth": 126.120542593,
+      "ultron": 126.1205425930644
+     },
+     {
+      "question": {
+       "spring": "S_new",
+       "x": 0.781
+      },
+      "truth": 72.6402240156,
+      "ultron": 72.6402240156219
+     },
+     {
+      "question": {
+       "spring": "S_new",
+       "x": 1.872
+      },
+      "truth": 174.113315438,
+      "ultron": 174.1133154382128
+     }
+    ],
+    "name": "new spring: one measurement, then predict",
+    "scores": {
+     "lookup": [
+      0,
+      10
+     ],
+     "nearest": [
+      0,
+      10
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "m": 17.21,
+       "spring": "S_new",
+       "x": 0.458
+      },
+      "truth": 2.47520257772,
+      "ultron": 2.47520257771971
+     },
+     {
+      "question": {
+       "m": 27.067,
+       "spring": "S2",
+       "x": 0.458
+      },
+      "truth": 1.29886798305,
+      "ultron": 1.298867983055481
+     },
+     {
+      "question": {
+       "m": 32.707,
+       "spring": "S3",
+       "x": 0.161
+      },
+      "truth": 0.401515111904,
+      "ultron": 0.4015151119041957
+     }
+    ],
+    "name": "NEVER TRAINED: ball on a stretched spring, first acceleration",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "kind": "clay",
+       "m1": 28.384,
+       "m2": 32.142,
+       "v1": 4.445,
+       "v1_after": 3.51142375178,
+       "v2": 2.687
+      },
+      "truth": 3.51142375178,
+      "ultron": 3.511423751772649
+     },
+     {
+      "question": {
+       "kind": "steel",
+       "m1": 19.924,
+       "m2": 39.269,
+       "v1": 3.489,
+       "v1_after": -5.87033390773,
+       "v2": -3.565
+      },
+      "truth": 1.18366609227,
+      "ultron": 1.1836660922766695
+     },
+     {
+      "question": {
+       "kind": "clay",
+       "m1": 40.993,
+       "m2": 48.403,
+       "v1": 2.682,
+       "v1_after": 0.107429940937,
+       "v2": -2.073
+      },
+      "truth": 0.107429940937,
+      "ultron": 0.10742994093691664
+     }
+    ],
+    "name": "collisions of heavy balls (10-50 kg)",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": 0.01
+   }
+  ],
+  "launch_trace": "a = 2.4752 m/s\u00b2\n  - stretch: F / x = 93.0092 for spring S_new  =>  F = 42.5982 N\n  - push: F / (a\u00b7m) = 1  =>  a = 2.4752 m/s\u00b2",
+  "lesson": 5,
+  "passed": true,
+  "threshold": 0.99
+ },
+ "6": {
+  "attempt": 1,
+  "blank_one_shot": {
+   "examples": [
+    {
+     "question": "Europa",
+     "truth": 306806.4,
+     "ultron": null
+    },
+    {
+     "question": "Ganymede",
+     "truth": 618192.0,
+     "ultron": null
+    },
+    {
+     "question": "Callisto",
+     "truth": 1441929.6,
+     "ultron": null
+    }
+   ],
+   "name": "blank brain after seeing only Io",
+   "scores": {
+    "lookup": [
+     0,
+     0
+    ],
+    "nearest": [
+     0,
+     0
+    ],
+    "ultron": [
+     0,
+     3
+    ]
+   },
+   "tolerance": 0.02
+  },
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "Uranus",
+      "truth": 2651218560.0,
+      "ultron": 2644967447.8760333
+     },
+     {
+      "question": "Neptune",
+      "truth": 5200329600.0,
+      "ultron": 5226956336.435747
+     }
+    ],
+    "name": "Kepler: predict orbital period of Uranus and Neptune",
+    "scores": {
+     "lookup": [
+      0,
+      2
+     ],
+     "nearest": [
+      0,
+      2
+     ],
+     "ultron": [
+      2,
+      2
+     ]
+    },
+    "tolerance": 0.02
+   },
+   {
+    "examples": [
+     {
+      "question": "Europa",
+      "truth": 306806.4,
+      "ultron": 306734.4607686411
+     },
+     {
+      "question": "Ganymede",
+      "truth": 618192.0,
+      "ultron": 617875.3406682367
+     },
+     {
+      "question": "Callisto",
+      "truth": 1441929.6,
+      "ultron": 1441296.713014732
+     }
+    ],
+    "name": "Jupiter's moons after seeing only Io (one-shot transfer)",
+    "scores": {
+     "lookup": [
+      0,
+      3
+     ],
+     "nearest": [
+      0,
+      3
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": 0.02
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "V": 23.0
+      },
+      "truth": 61.3125,
+      "ultron": 61.274247491638796
+     },
+     {
+      "question": {
+       "V": 22.0
+      },
+      "truth": 64.0625,
+      "ultron": 64.05944055944056
+     },
+     {
+      "question": {
+       "V": 21.0
+      },
+      "truth": 67.0625,
+      "ultron": 67.10989010989012
+     }
+    ],
+    "name": "Boyle: predict pressure at small volumes (V < 24, unseen)",
+    "scores": {
+     "lookup": [
+      0,
+      12
+     ],
+     "nearest": [
+      0,
+      12
+     ],
+     "ultron": [
+      12,
+      12
+     ]
+    },
+    "tolerance": 0.02
+   }
+  ],
+  "lesson": 6,
+  "passed": true,
+  "sun_vs_jupiter": 1048.6374927496204,
+  "threshold": 0.99
+ },
+ "7": {
+  "attempt": 1,
+  "effort": {
+   "blank_laws": [
+    "lab_push",
+    "lab_stretch"
+   ],
+   "blank_steps": {
+    "lab_push": 180,
+    "lab_stretch": 168
+   },
+   "ultron_steps": {
+    "lab_push": 165,
+    "lab_stretch": 116
+   }
+  },
+  "items": [
+   {
+    "examples": [
+     {
+      "question": {
+       "F": 812.572269328,
+       "m": 89.2367857883
+      },
+      "truth": 9.27306183399,
+      "ultron": 9.09542021341537
+     },
+     {
+      "question": {
+       "F": 892.121754271,
+       "m": 67.1508180632
+      },
+      "truth": 13.3068003613,
+      "ultron": 13.270201347223903
+     },
+     {
+      "question": {
+       "F": 832.808057918,
+       "m": 79.0126649921
+      },
+      "truth": 10.4480801074,
+      "ultron": 10.52817024091464
+     }
+    ],
+    "name": "noisy lab: TRUE acceleration of heavy balls (20-100 kg)",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": 0.03
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "spring": "L1",
+       "x": 1.73138119484
+      },
+      "truth": 68.2264776418,
+      "ultron": 67.76448001718917
+     },
+     {
+      "question": {
+       "spring": "L3",
+       "x": 0.669033571617
+      },
+      "truth": 46.0640808599,
+      "ultron": 45.70871642802708
+     },
+     {
+      "question": {
+       "spring": "L2",
+       "x": 1.04459931197
+      },
+      "truth": 24.6875583415,
+      "ultron": 24.40400016844268
+     }
+    ],
+    "name": "noisy lab: TRUE spring force at long stretches",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": 0.03
+   }
+  ],
+  "lesson": 7,
+  "passed": true,
+  "threshold": 0.99
+ },
+ "8": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "what times 9 equals 162",
+      "truth": 18,
+      "ultron": 18
+     },
+     {
+      "question": "what times 3 equals 36",
+      "truth": 12,
+      "ultron": 12
+     },
+     {
+      "question": "what times 3 equals 72",
+      "truth": 24,
+      "ultron": 24
+     }
+    ],
+    "name": "division - never taught ('what times 7 equals 84')",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "what plus 14 equals 70",
+      "truth": 56,
+      "ultron": 56
+     },
+     {
+      "question": "74 minus what equals 28",
+      "truth": 46,
+      "ultron": 46
+     },
+     {
+      "question": "what plus 21 equals 40",
+      "truth": 19,
+      "ultron": 19
+     }
+    ],
+    "name": "inverse questions ('12 minus what equals 5', 'what plus 9 equals 30')",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "130 plus 32 plus 23 plus 34",
+      "truth": 219,
+      "ultron": 219
+     },
+     {
+      "question": "135 plus 21 plus 6 minus 36",
+      "truth": 126,
+      "ultron": 126
+     },
+     {
+      "question": "421 plus 14 minus 22 minus 28",
+      "truth": 385,
+      "ultron": 385
+     }
+    ],
+    "name": "chains of three operations ('100 minus 37 plus 12 minus 5')",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      15,
+      15
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "1 minus 12",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "what times 10 equals 47",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "what plus 13 equals 4",
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "impossible questions: the only right answer is 'I can't'",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      15,
+      15
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": [
+       "m",
+       240.63961312135154
+      ],
+      "truth": 17.616908344926962,
+      "ultron": 17.616908344955785
+     },
+     {
+      "question": [
+       "x",
+       "S4"
+      ],
+      "truth": 1.0064132996201314,
+      "ultron": 1.0064132996190023
+     },
+     {
+      "question": [
+       "m",
+       119.44318833087127
+      ],
+      "truth": 14.314251839674338,
+      "ultron": 14.314251839678631
+     }
+    ],
+    "name": "physics solved for a different unknown (mass, stretch, force)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      15,
+      15
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": [
+       "S5",
+       0.8818167593479852
+      ],
+      "truth": 6.383178714558374,
+      "ultron": 6.3831787145385395
+     },
+     {
+      "question": [
+       "S1",
+       0.3281794537292322
+      ],
+      "truth": 23.300477068044245,
+      "ultron": 23.30047706804717
+     },
+     {
+      "question": [
+       "S1",
+       0.3055376983176259
+      ],
+      "truth": 43.88752813307976,
+      "ultron": 43.887528133068116
+     }
+    ],
+    "name": "backwards chain: mass from spring, stretch and acceleration",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": 0,
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": 1,
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": 2,
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "impossible physics: unknown spring, or a quantity no law relates",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "Ceres",
+      "truth": 145152000.0,
+      "ultron": 145139381.62792954
+     },
+     {
+      "question": "Halley",
+      "truth": 2376864000.0,
+      "ultron": 2374233028.0256042
+     },
+     {
+      "question": "Titan",
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "unseen real bodies: Ceres, Halley's Comet; Earth's distance from its year; Titan (unknown system: must refuse)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      4,
+      4
+     ]
+    },
+    "tolerance": 0.02
+   }
+  ],
+  "lesson": 8,
+  "passed": true,
+  "threshold": 0.9
+ }
+}

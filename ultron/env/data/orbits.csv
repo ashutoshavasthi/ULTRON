@@ -1,0 +1,17 @@
+# Real orbital data. Semi-major axis and sidereal orbital period.
+# Planets: NASA Goddard Planetary Fact Sheet (nssdc.gsfc.nasa.gov/planetary/factsheet).
+# Galilean moons: NASA Jovian Satellite Fact Sheet.
+# r is in thousands of km for moons and millions of km for planets (see r_unit_km); T in days.
+body,system,r,r_unit_km,T_days
+Mercury,Sun,57.909,1000000,87.969
+Venus,Sun,108.209,1000000,224.701
+Earth,Sun,149.598,1000000,365.256
+Mars,Sun,227.956,1000000,686.980
+Jupiter,Sun,778.479,1000000,4332.589
+Saturn,Sun,1432.041,1000000,10759.22
+Uranus,Sun,2867.043,1000000,30685.4
+Neptune,Sun,4514.953,1000000,60189.0
+Io,Jupiter,421.8,1000,1.769
+Europa,Jupiter,671.1,1000,3.551
+Ganymede,Jupiter,1070.4,1000,7.155
+Callisto,Jupiter,1882.7,1000,16.689
