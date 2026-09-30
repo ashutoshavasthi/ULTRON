@@ -79,6 +79,46 @@
     0.0,
     0.0
    ],
+   "coil_look": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "coil_stretch": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "collide": [
     1.0,
     0.0,
@@ -759,6 +799,13 @@
     "coins",
     "notes"
    ]
+  },
+  "why:coil_stretch": {
+   "law": "coil_stretch~why",
+   "lesson": 17,
+   "primitives": [],
+   "shape": "law about a law",
+   "story": "Each spring's F / x (a property I invented, in N/m) isn't arbitrary: it\u00b7coils is the same, 600, for all 6 springs whose coils I have counted. That's a law about my law. Now I can know a new spring's property just by counting its coils, and predict what it will do before I ever try it."
   }
  },
  "inverses": {
@@ -5549,6 +5596,11 @@
    "text": "Two things are always true of my 'repeated_groups' law (checked on 80 examples): repeating p times and then that q times is repeating p\u00b7q times, and repeating p times and then q more is repeating p+q times. So if 'repeating half a time' means anything, doing it twice must be repeating once. The only meaning that keeps both laws true: repeating p/q times gives the amount whose q-fold repeat equals the p-fold repeat. It may be a pile of pieces, or a number in a gap."
   },
   {
+   "kind": "reflect",
+   "lesson": 13,
+   "text": "the same law lets me repeat faster: to repeat 2k times, repeat k times and then do that twice (squaring)"
+  },
+  {
    "kind": "invent",
    "lesson": 13,
    "text": "I asked myself grow(2, ?) = 2. No whole number works, and no pile of pieces either (I tried cakes cut into up to 60). But the answer is squeezed: 7/5 gives too little, 8/5 too much, and however finely I cut, it is always caught between two piles, never on one. So my finer line has GAPS: places no pile of pieces reaches. I'll treat each such place as a number too: I can't write it as pieces, but I can pin it between two piles as tightly as I can count."
@@ -6001,6 +6053,312 @@
    "kind": "trainer",
    "lesson": 16,
    "text": "Exam for lesson 16, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 17,
+   "text": "Lesson 17: Coiled springs"
+  },
+  {
+   "kind": "meet",
+   "lesson": 17,
+   "text": "new kind of experience: coil_stretch"
+  },
+  {
+   "kind": "meet",
+   "lesson": 17,
+   "text": "new kind of experience: coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 17,
+   "text": "coil_stretch: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 17,
+   "text": "coil_stretch: nothing stays constant yet (2 experiences)"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 17,
+   "text": "coil_stretch: nothing stays constant yet (3 experiences)"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 17,
+   "text": "coil_stretch: nothing stays constant yet (4 experiences)"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "revise",
+   "lesson": 17,
+   "text": "coil_stretch: F / x is constant for each spring but differs between them: a hidden property of each spring [N/m] (12 candidates searched; tentative until it predicts 3 new experiences)"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "establish",
+   "lesson": 17,
+   "text": "coil_stretch: F / x has now predicted 3 new experiences; no longer tentative"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "measure",
+   "lesson": 17,
+   "text": "coil_stretch: met new spring C5; measured its property F / x = 100"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "measure",
+   "lesson": 17,
+   "text": "coil_stretch: met new spring C1; measured its property F / x = 60"
+  },
+  {
+   "choice": "coil_look",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_look"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "choice": "coil_stretch",
+   "kind": "choice",
+   "lesson": 17,
+   "text": "chose to play with coil_stretch"
+  },
+  {
+   "kind": "bored",
+   "lesson": 17,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "invent",
+   "lesson": 17,
+   "text": "Each spring's F / x (a property I invented, in N/m) isn't arbitrary: it\u00b7coils is the same, 600, for all 6 springs whose coils I have counted. That's a law about my law. Now I can know a new spring's property just by counting its coils, and predict what it will do before I ever try it."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 17,
+   "text": "Exam for lesson 17, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 17,
+   "text": "What you found in 'why:coil_stretch' is what people call a law about a law: stiffness is inversely proportional to the number of coils."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 18,
+   "text": "Lesson 18: Phase 3 exam: the hardest questions"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 18,
+   "text": "No teaching today. Show me what you can do."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 18,
+   "text": "Exam for lesson 18, attempt 1: passed"
   }
  ],
  "memory": {
@@ -6331,6 +6689,206 @@
       "wholes": 0
      },
      "outcome": false
+    }
+   ],
+   "coil_look": [
+    {
+     "inputs": {
+      "spring": "C1"
+     },
+     "outcome": 10
+    },
+    {
+     "inputs": {
+      "spring": "C6"
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "spring": "C5"
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "spring": "C7"
+     },
+     "outcome": 10
+    },
+    {
+     "inputs": {
+      "spring": "C4"
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "spring": "C1"
+     },
+     "outcome": 10
+    },
+    {
+     "inputs": {
+      "spring": "C2"
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "spring": "C5"
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "spring": "C6"
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "spring": "C1"
+     },
+     "outcome": 10
+    },
+    {
+     "inputs": {
+      "spring": "C3"
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "spring": "C7"
+     },
+     "outcome": 10
+    },
+    {
+     "inputs": {
+      "spring": "C5"
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "spring": "C4"
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "spring": "C3"
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "spring": "C5"
+     },
+     "outcome": 6
+    }
+   ],
+   "coil_stretch": [
+    {
+     "F": 21.9,
+     "spring": "C6",
+     "x": 0.146
+    },
+    {
+     "F": 14.85,
+     "spring": "C2",
+     "x": 0.198
+    },
+    {
+     "F": 11.4857142857,
+     "spring": "C4",
+     "x": 0.134
+    },
+    {
+     "F": 9.96,
+     "spring": "C7",
+     "x": 0.166
+    },
+    {
+     "F": 70.95,
+     "spring": "C6",
+     "x": 0.473
+    },
+    {
+     "F": 37.425,
+     "spring": "C2",
+     "x": 0.499
+    },
+    {
+     "F": 30.6,
+     "spring": "C2",
+     "x": 0.408
+    },
+    {
+     "F": 33.225,
+     "spring": "C2",
+     "x": 0.443
+    },
+    {
+     "F": 40.3,
+     "spring": "C5",
+     "x": 0.403
+    },
+    {
+     "F": 12.9,
+     "spring": "C2",
+     "x": 0.172
+    },
+    {
+     "F": 48.45,
+     "spring": "C6",
+     "x": 0.323
+    },
+    {
+     "F": 4.28571428571,
+     "spring": "C4",
+     "x": 0.05
+    },
+    {
+     "F": 27.7714285714,
+     "spring": "C4",
+     "x": 0.324
+    },
+    {
+     "F": 25.8,
+     "spring": "C2",
+     "x": 0.344
+    },
+    {
+     "F": 15.48,
+     "spring": "C7",
+     "x": 0.258
+    },
+    {
+     "F": 13.32,
+     "spring": "C1",
+     "x": 0.222
+    },
+    {
+     "F": 26.94,
+     "spring": "C1",
+     "x": 0.449
+    },
+    {
+     "F": 27.6,
+     "spring": "C6",
+     "x": 0.184
+    },
+    {
+     "F": 16.6285714286,
+     "spring": "C4",
+     "x": 0.194
+    },
+    {
+     "F": 0.78,
+     "spring": "C7",
+     "x": 0.013
     }
    ],
    "collide": [
@@ -9622,6 +10180,53 @@
     "tol": 1e-09,
     "units": {}
    },
+   "coil_look": {
+    "action": null,
+    "group_by": "spring",
+    "inputs": {
+     "spring": null
+    },
+    "kind": "feature",
+    "name": "coil_look",
+    "out_type": null,
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "coils",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "coil_stretch": {
+    "action": null,
+    "group_by": "spring",
+    "inputs": {
+     "x": [
+      0,
+      1,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "coil_stretch",
+    "out_type": null,
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "F",
+    "tol": 1e-09,
+    "units": {
+     "F": [
+      1,
+      1,
+      -2
+     ],
+     "x": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
    "collide": {
     "action": null,
     "group_by": null,
@@ -10225,7 +10830,8 @@
   "repeated_groups": "powers (exponentiation)",
   "roll": "conservation of energy",
   "stretch": "stiffness (Hooke's law)",
-  "take_away": "subtraction"
+  "take_away": "subtraction",
+  "why:coil_stretch": "a law about a law: stiffness is inversely proportional to the number of coils"
  },
  "quantities": {
   "diagonal": {
@@ -10281,6 +10887,49 @@
      10.193679918447769
     ]
    ]
+  },
+  "coil_stretch": {
+   "constant": null,
+   "etype": "coil_stretch",
+   "form": "product",
+   "group_by": "spring",
+   "kind": "grouped",
+   "powers": {
+    "F": 1,
+    "x": -1
+   },
+   "properties": {
+    "C1": 60.0,
+    "C2": 75.0,
+    "C4": 85.71428571425241,
+    "C5": 99.99999999999999,
+    "C6": 150.0,
+    "C7": 60.0
+   },
+   "provenance": {
+    "experiences": 5,
+    "lesson": 17,
+    "support": 13
+   },
+   "spread": 0.0
+  },
+  "coil_stretch~why": {
+   "constant": 599.9999999999611,
+   "etype": "coil_stretch~why",
+   "form": "product",
+   "group_by": null,
+   "kind": "global",
+   "powers": {
+    "coil_stretch.property": 1,
+    "coils": 1
+   },
+   "properties": {},
+   "provenance": {
+    "lesson": 17,
+    "objects": 6,
+    "support": 6
+   },
+   "spread": 3.884300288822133e-13
   },
   "gas": {
    "constant": 1409.3076923076924,
@@ -10440,7 +11089,8 @@
  "search_steps": {
   "bounce": 2060,
   "cake_balance": 187467,
-  "collide": 120,
+  "coil_stretch": 162,
+  "collide": 130,
   "earn_coins": 39976,
   "earn_notes": 1247,
   "gas": 28,

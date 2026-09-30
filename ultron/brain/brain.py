@@ -104,6 +104,10 @@ class Brain:
                 return name
         return None
 
+    def trusts_quantity(self, name):
+        law = self.qlaws.get(name)
+        return law is not None and law.provenance.get("support", 0) >= ESTABLISHED
+
     def trusts(self, name):
         law = self.library.get(name)
         return law is not None and not law.provenance.get("doubted")
@@ -155,9 +159,18 @@ class Brain:
         if spec.kind == "quantity":
             law = self.qlaws.get(spec_name)
             group = inputs.get(spec.group_by) if spec.group_by else None
-            if law is None or not self.law_applies(spec_name, group):
+            if law is None:
                 return None
+            if not self.law_applies(spec_name, group):
+                from .metalaws import predicted_property
+                prop = predicted_property(self, spec_name, group)
+                if prop is None or law.kind != "grouped":
+                    return None
+                law = QuantityLaw(law.etype, law.powers, "global", constant=prop)
+                return law.solve(spec.target, inputs)
             return law.solve(spec.target, inputs, group)
+        if spec.kind == "feature":
+            return None
         if spec.kind == "conservation":
             return self._predict_collision(spec_name, inputs)
         if spec.kind == "measure":
@@ -217,6 +230,9 @@ class Brain:
         elif spec.kind == "quantity":
             self.memory.store(spec_name, {**inputs, spec.target: outcome})
             revised = self._learn_quantity(spec, surprised)
+        elif spec.kind == "feature":
+            self.memory.store(spec_name, {"inputs": inputs, "outcome": outcome})
+            revised = None
         elif spec.kind == "measure":
             self.memory.store(spec_name, {"inputs": inputs, "outcome": outcome})
             revised = None
@@ -444,6 +460,8 @@ class Brain:
         look_for_columns(self)
         trust_fast_paths(self)
         look_for_exponent_laws(self)
+        from .metalaws import look_for_property_laws
+        look_for_property_laws(self)
         look_for_gaps(self)
 
     def _check_symmetry(self):
@@ -545,6 +563,7 @@ class Brain:
         b.library.cycles = dict(d.get("cycles", {}))
         b.library.symmetric = set(d.get("symmetric", []))
         b.library.fast = {k: tuple(v) for k, v in d.get("fast", {}).items()}
+        b.library.squaring = "fractional repeats" in d.get("inventions", {})
         from .columns import attach
         attach(b)
         b.curiosity = Curiosity.from_json(d.get("curiosity", {}))

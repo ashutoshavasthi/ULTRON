@@ -3,6 +3,7 @@ laws Ultron found, and keeping every step so it can say *why*."""
 
 from . import units as U
 from .dsl import Overflow, show
+from .invariants import QuantityLaw
 from .language import prefixes, read_number, speak_number
 
 FILLER = {"what", "is", "?", "whats", "what's", "equals", "=", "how", "much"}
@@ -329,11 +330,52 @@ def physics(brain, target, knowns, objects=None):
         # when two laws relate the same quantities, trust the most precise evidence
         for name in sorted(brain.qlaws, key=lambda n: (brain.qlaws[n].spread, n)):
             law = brain.qlaws[name]
+            spec = brain.memory.specs.get(name)
+            if spec is None:
+                if not name.endswith("~why"):
+                    continue
+                # a law about a law chains like any other law, one level up
+                unknown = [v for v in law.powers if v not in known]
+                if len(unknown) != 1:
+                    continue
+                value = law.solve(unknown[0], known)
+                if value is None:
+                    continue
+                known[unknown[0]] = value
+                steps.append(f"a law about my law: {law.formula()} = {law.constant:.6g}  =>  "
+                             f"{unknown[0]} = {value:.6g}")
+                progress = True
+                continue
+            group = objects.get(spec.group_by) if spec.group_by else None
+            if law.kind == "grouped" and group not in law.properties:
+                # an object never measured the usual way: its property is one more quantity
+                from .metalaws import property_var
+                if f"{name}~why" not in brain.qlaws:
+                    continue
+                pv = property_var(name)
+                unknown = [v for v in law.powers if v not in known]
+                if pv in known and len(unknown) == 1:
+                    rule = QuantityLaw(law.etype, law.powers, "global", constant=known[pv])
+                    value = rule.solve(unknown[0], known)
+                    if value is None:
+                        continue
+                    known[unknown[0]] = value
+                    steps.append(f"{brain.names.get(name, name)}: {law.formula()} = "
+                                 f"{known[pv]:.6g}  =>  {unknown[0]} = {value:.6g} "
+                                 f"{U.name(units.get(unknown[0]))}")
+                    progress = True
+                elif pv not in known and not unknown:
+                    value = 1.0
+                    for var, pw in law.powers.items():
+                        value *= known[var] ** pw
+                    known[pv] = value
+                    steps.append(f"{brain.names.get(name, name)}: this {spec.group_by}'s "
+                                 f"property {law.formula()} = {value:.6g}")
+                    progress = True
+                continue
             unknown = [v for v in law.powers if v not in known]
             if len(unknown) != 1:
                 continue
-            spec = brain.memory.specs[name]
-            group = objects.get(spec.group_by) if spec.group_by else None
             if law.kind == "grouped" and group not in law.properties:
                 continue
             if not brain.law_applies(name, group):

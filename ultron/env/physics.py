@@ -100,3 +100,31 @@ class SpringTrack(Track):
 
     def max_squash(self):
         return (2 * self.MASS * self.G * self.release / self.STIFFNESS) ** 0.5
+
+
+class CoilShop:
+    """Springs wound from the same wire, each with its own number of coils. Stretching a
+    spring shows how hard it pulls; looking at it shows how many coils it has. Nothing
+    says the two are connected (the world makes stiffness = 600 N/m / coils)."""
+
+    WIRE = 600.0
+
+    def __init__(self, seed=0, prefix="C"):
+        self.rng = random.Random(seed)
+        self.prefix = prefix
+        self._coils = {}
+
+    def new_spring(self, coils=None):
+        name = f"{self.prefix}{len(self._coils) + 1}"
+        self._coils[name] = coils if coils is not None else self.rng.randint(2, 12)
+        return name
+
+    @property
+    def springs(self):
+        return sorted(self._coils)
+
+    def stretch(self, spring, extension):
+        return _r(self.WIRE / self._coils[spring] * extension)
+
+    def count_coils(self, spring):
+        return list(range(self._coils[spring]))

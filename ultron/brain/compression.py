@@ -217,6 +217,9 @@ def look_for_exponent_laws(brain):
                "lesson": brain.lesson, "story": story}
         brain.inventions[FRACTIONAL] = inv
         brain.note("invent", story)
+        brain.library.squaring = True
+        brain.note("reflect", "the same law lets me repeat faster: to repeat 2k times, repeat "
+                              "k times and then do that twice (squaring)")
         return inv
     return None
 

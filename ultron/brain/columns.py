@@ -112,11 +112,33 @@ class Columns:
         self.library = library
         self.facts = facts
         (plus, po), (times, to) = facts["plus"], facts["times"]
-        self.plus = lambda x, y: _slow(library, plus, *((x, y) if po == "xy" else (y, x)))
-        self.times = lambda x, y: _slow(library, times, *((x, y) if to == "xy" else (y, x)))
+        self._plus = lambda x, y: _slow(library, plus, *((x, y) if po == "xy" else (y, x)))
+        self._times = lambda x, y: _slow(library, times, *((x, y) if to == "xy" else (y, x)))
+        # the small facts, once worked out by counting, are known by heart (a times table)
+        self._by_heart = {"+": {}, "x": {}, "split": {}, "diff": {}}
+
+    def plus(self, x, y):
+        table = self._by_heart["+"]
+        v = table.get((x, y))
+        if v is None:
+            v = table[(x, y)] = self._plus(x, y)
+        return v
+
+    def times(self, x, y):
+        table = self._by_heart["x"]
+        v = table.get((x, y))
+        if v is None:
+            v = table[(x, y)] = self._times(x, y)
+        return v
 
     def _diff(self, big, small):
         """big - small for small digits: count up from the smaller one."""
+        table = self._by_heart["diff"]
+        if (big, small) not in table:
+            table[(big, small)] = self._count_up(big, small)
+        return table[(big, small)]
+
+    def _count_up(self, big, small):
         r = 0
         while self.plus(small, r) != big:
             r += 1
@@ -137,6 +159,12 @@ class Columns:
 
     def _split(self, s):
         """A small total (under 100) as (tens, units), using its times law."""
+        table = self._by_heart["split"]
+        if s not in table:
+            table[s] = self._split_slow(s)
+        return table[s]
+
+    def _split_slow(self, s):
         tens = 0
         while self.times(tens + 1, 10) <= s:
             tens += 1
@@ -209,6 +237,21 @@ class Columns:
     def power(self, a, n):
         if n < 0:
             return None
+        if getattr(self.library, "squaring", False):
+            # its law of repeating (repeat p, then that q times = repeat p·q) lets it square
+            # instead of multiplying one step at a time: a^(2k) = (a^k)^2
+            result, sq, k = 1, a, n
+            while k:
+                if k % 2:
+                    result = self.mul_signed(result, sq)
+                    if len(str(abs(result))) > MAX_DIGITS:
+                        return None
+                k //= 2
+                if k:
+                    sq = self.mul_signed(sq, sq)
+                    if len(str(abs(sq))) > MAX_DIGITS:
+                        return None
+            return result
         acc = 1
         for _ in range(n):
             acc = self.mul_signed(acc, a)
@@ -288,7 +331,10 @@ def fast_call(brain_library, name, a, b):
     if label == "times":
         dsl.STEPS[0] += da * db
     elif label == "repeated times":
-        dsl.STEPS[0] += max(0, y) ** 2 * da * da // 2 + 1
+        if getattr(brain_library, "squaring", False):
+            dsl.STEPS[0] += max(1, y).bit_length() * (da * max(1, y)) ** 2 // 4 + 1
+        else:
+            dsl.STEPS[0] += max(0, y) ** 2 * da * da // 2 + 1
     else:
         dsl.STEPS[0] += max(da, db)
     if label == "repeated times" and y > 0 and len(str(abs(x))) * y > MAX_DIGITS * 2:

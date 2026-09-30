@@ -231,6 +231,8 @@ class Trainer:
         13: {"repeated_groups": "powers (exponentiation)", "grow": "exponential growth"},
         14: {"hidden:bounce": "energy: gravitational + kinetic + elastic (spring)",
              "bounce": "conservation of energy with a spring"},
+        17: {"why:coil_stretch": "a law about a law: stiffness is inversely proportional "
+                                 "to the number of coils"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }
@@ -241,7 +243,7 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=16):
+    def run_all(self, upto=18):
         for n in range(upto + 1):
             self.run(n)
         return self.results

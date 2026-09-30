@@ -184,7 +184,7 @@ def main(argv=None):
     p.add_argument("--brain", default=BRAIN)
     sub = p.add_subparsers(dest="cmd", required=True)
     t = sub.add_parser("train")
-    t.add_argument("--upto", type=int, default=16)
+    t.add_argument("--upto", type=int, default=18)
     t.add_argument("--seed", type=int, default=0)
     sub.add_parser("exam")
     a = sub.add_parser("ask")

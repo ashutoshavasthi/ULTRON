@@ -30,7 +30,12 @@ def laws_section(brain):
               "|---|---|---|---|---|---|"]
     from ..brain.invariants import SumLaw
     for name, law in sorted(brain.qlaws.items()):
-        spec = brain.memory.specs[name]
+        spec = brain.memory.specs.get(name)
+        if spec is None:        # a law about a law
+            lines.append(f"| `{name}` | `{law.formula()}` = {law.constant:.6g} | a law about "
+                         f"a law | — | {law.provenance.get('objects', 0)} objects | "
+                         f"{brain.names.get('why:' + name.split('~')[0], '')} |")
+            continue
         if isinstance(law, SumLaw):
             dims = U.of_monomial(law.a, spec.units)
             trust = f"{brain.status(name)} ({law.provenance.get('support', 0)} confirmations)"
@@ -163,7 +168,8 @@ def special_section(results, brain):
     for n, what in ((11, "Inventing clock numbers"), (12, "Inventing energy"),
                     (13, "Predicting powers from a pattern in its own laws"),
                     (14, "Inventing energy with three parts (a spring)"),
-                    (15, "Inventing numbers in the gaps (irrational numbers)")):
+                    (15, "Inventing numbers in the gaps (irrational numbers)"),
+                    (17, "A law about its own law (coiled springs)")):
         r = results.get(str(n)) or results.get(n)
         if r and r.get("story"):
             lines.append(f"- **{what}** (lesson {n}, Phase 2): _{r['story']}_")

@@ -7,6 +7,7 @@ class Spec:
 
     kind:
       "measure"       a ruler reading of a length Ultron holds an idea about
+      "feature"       an observation of one object (e.g. counting a spring's coils)
       "program"       discrete inputs -> discrete outcome; law = small program
       "quantity"      measured numbers; law = invariant combination
       "conservation"  objects before/after an event; law = conserved total

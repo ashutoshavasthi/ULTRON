@@ -99,6 +99,7 @@ class Library:
         self._columns = None
         self._fast_fns = None
         self._counting = 0
+        self.squaring = False       # licensed by the laws of repeating, once checked
 
     def _columns_facts(self):
         return self._columns.facts
@@ -178,6 +179,7 @@ class Library:
         new.symmetric = set(self.symmetric)
         new.fast = dict(self.fast)
         new._counting = 0
+        new.squaring = self.squaring
         if self._columns is not None:
             from .columns import Columns
             new._columns = Columns(new, self._columns_facts())

@@ -1721,6 +1721,347 @@
   "passed": true,
   "threshold": 0.99
  },
+ "17": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "why",
+      "truth": {
+       "coil_stretch.property": 1,
+       "coils": 1
+      },
+      "ultron": {
+       "coil_stretch.property": 1,
+       "coils": 1
+      }
+     }
+    ],
+    "name": "found a law about its own stiffness law (stiffness \u00d7 coils)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "spring": "New1",
+       "x": 1.821
+      },
+      "truth": 64.2705882353,
+      "ultron": 64.27058823528995
+     },
+     {
+      "question": {
+       "spring": "New2",
+       "x": 0.422
+      },
+      "truth": 16.88,
+      "ultron": 16.879999999998905
+     },
+     {
+      "question": {
+       "spring": "New3",
+       "x": 0.739
+      },
+      "truth": 88.68,
+      "ultron": 88.67999999999427
+     }
+    ],
+    "name": "springs NEVER stretched: pull predicted from counting coils alone",
+    "scores": {
+     "lookup": [
+      0,
+      15
+     ],
+     "nearest": [
+      0,
+      15
+     ],
+     "ultron": [
+      15,
+      15
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": [
+       32.22352941176471,
+       1.826
+      ],
+      "truth": 34.0,
+      "ultron": 33.9999999999978
+     },
+     {
+      "question": [
+       23.666666666666668,
+       0.355
+      ],
+      "truth": 9.0,
+      "ultron": 8.999999999999416
+     },
+     {
+      "question": [
+       25.54285714285714,
+       0.596
+      ],
+      "truth": 14.0,
+      "ultron": 13.999999999999094
+     }
+    ],
+    "name": "NEVER TRAINED: how many coils for a spring that pulls F at stretch x?",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.01
+   }
+  ],
+  "lesson": 17,
+  "passed": true,
+  "story": "Each spring's F / x (a property I invented, in N/m) isn't arbitrary: it\u00b7coils is the same, 600, for all 6 springs whose coils I have counted. That's a law about my law. Now I can know a new spring's property just by counting its coils, and predict what it will do before I ever try it.",
+  "threshold": 0.99
+ },
+ "18": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "13079922465897750369 minus 243424603791",
+      "truth": "13079922222473146578",
+      "ultron": "13079922222473146578"
+     },
+     {
+      "question": "96296847265221818859 minus 205323897673",
+      "truth": "96296847059897921186",
+      "ultron": "96296847059897921186"
+     },
+     {
+      "question": "69078252018731594116 times 877103088189",
+      "truth": "60588748172327504673846501495924",
+      "ultron": "60588748172327504673846501495924"
+     }
+    ],
+    "name": "huge numbers, exact (column arithmetic): 12-20 digits",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "5 power 30",
+      "truth": "931322574615478515625",
+      "ultron": "931322574615478515625"
+     },
+     {
+      "question": "9 power 32",
+      "truth": "3433683820292512484657849089281",
+      "ultron": "3433683820292512484657849089281"
+     },
+     {
+      "question": "2 power 56",
+      "truth": "72057594037927936",
+      "ultron": "72057594037927936"
+     }
+    ],
+    "name": "big powers, exact ('3 power 40')",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      6,
+      6
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "2 power what equals 17",
+      "truth": 4.08746284125034,
+      "ultron": [
+       "between",
+       [
+        102,
+        25
+       ],
+       [
+        409,
+        100
+       ]
+      ]
+     },
+     {
+      "question": "3 power what equals 4",
+      "truth": 1.2618595071429148,
+      "ultron": [
+       "between",
+       [
+        63,
+        50
+       ],
+       [
+        127,
+        100
+       ]
+      ]
+     },
+     {
+      "question": "9 power what equals 8",
+      "truth": 0.946394630357186,
+      "ultron": [
+       "between",
+       [
+        47,
+        50
+       ],
+       [
+        19,
+        20
+       ]
+      ]
+     }
+    ],
+    "name": "logarithms with no fraction answer, pinned in a gap (to within 1/50)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      6,
+      6
+     ]
+    },
+    "tolerance": 0.02
+   },
+   {
+    "examples": [
+     {
+      "question": "8^2/3",
+      "truth": 4,
+      "ultron": 4
+     },
+     {
+      "question": "27^1/3",
+      "truth": 3,
+      "ultron": 3
+     },
+     {
+      "question": "16^3/4",
+      "truth": 8,
+      "ultron": 8
+     }
+    ],
+    "name": "fractional powers ('8 power 2/3', '2 power 1/2')",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      6,
+      6
+     ]
+    },
+    "tolerance": 0.02
+   },
+   {
+    "examples": [
+     {
+      "question": "what times 0 equals 5",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "3 power what equals -1",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "what times 0 equals -2",
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "still impossible: 'what times 0 equals 5', '3 power what equals -1'",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 18,
+  "passed": true,
+  "threshold": 0.99
+ },
  "2": {
   "attempt": 1,
   "items": [

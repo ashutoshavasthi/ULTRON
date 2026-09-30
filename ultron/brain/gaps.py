@@ -193,7 +193,7 @@ def describe(brain, gap):
             break
         best, used = c, d
         cost = max(1, dsl.STEPS[0] - before)
-        growth = max(10, cost // last_cost) if last_cost else 1000
+        growth = max(10, cost // last_cost) if last_cost else 10
         last_cost = cost
         if i + 1 == len(PRECISIONS) or cost * growth > EFFORT:
             break           # the next pin would cost more counting than it's worth

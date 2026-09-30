@@ -279,6 +279,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _reflect_: Repeating 'repeated_groups' could mean two different things: repeated_groups(2, 3) is not repeated_groups(3, 2), so I can't tell which input to feed back in. The REPEAT pattern stops telling me what comes next here, so I won't guess.
 - Ultron _reflect_: the column way of 'repeated times' gives the same answer as my law 'grow' on 60 examples; I'll use it for big numbers
 - Ultron _reflect_: the column way of 'repeated times' gives the same answer as my law 'repeated_groups' on 60 examples; I'll use it for big numbers
+- Ultron _reflect_: the same law lets me repeat faster: to repeat 2k times, repeat k times and then do that twice (squaring)
 - Ultron _word_: 'power' behaves exactly like my law 'grow' (arguments yx) in all 6 demonstrations
 - **Trainer**: I grew cells and said '3 power 2 equals 9' and so on.
 - **Trainer**: Exam for lesson 13, attempt 1: passed
@@ -326,3 +327,25 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Lesson 16: Phase 2 final exam
 - **Trainer**: No teaching today. Show me what you can do.
 - **Trainer**: Exam for lesson 16, attempt 1: passed
+
+## Lesson 17
+
+- **Trainer**: Lesson 17: Coiled springs
+- Ultron _meet_: new kind of experience: coil_stretch
+- Ultron _meet_: new kind of experience: coil_look
+- Ultron _stuck_: coil_stretch: nothing stays constant yet (1 experiences)
+- Ultron _stuck_: coil_stretch: nothing stays constant yet (2 experiences)
+- Ultron _stuck_: coil_stretch: nothing stays constant yet (3 experiences)
+- Ultron _stuck_: coil_stretch: nothing stays constant yet (4 experiences)
+- Ultron _revise_: coil_stretch: F / x is constant for each spring but differs between them: a hidden property of each spring [N/m] (12 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _measure_: coil_stretch: met new spring C5; measured its property F / x = 100
+- Ultron _measure_: coil_stretch: met new spring C1; measured its property F / x = 60
+- Ultron _bored_: nothing here is teaching me anything new any more
+- **Trainer**: Exam for lesson 17, attempt 1: passed
+- **Trainer**: What you found in 'why:coil_stretch' is what people call a law about a law: stiffness is inversely proportional to the number of coils.
+
+## Lesson 18
+
+- **Trainer**: Lesson 18: Phase 3 exam: the hardest questions
+- **Trainer**: No teaching today. Show me what you can do.
+- **Trainer**: Exam for lesson 18, attempt 1: passed

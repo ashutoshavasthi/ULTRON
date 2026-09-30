@@ -9,7 +9,7 @@ from ..brain.dsl import BOOL, INT
 from ..brain.memory import Spec
 from ..brain.perception import count, present, read_marks
 from ..env import dataworld
-from ..env.physics import PhysicsSandbox, SpringTrack, Track
+from ..env.physics import CoilShop, PhysicsSandbox, SpringTrack, Track
 from ..env.toyworld import Bakery, Dish, ShopWorld, Tiles, ToyWorld, Wheel
 
 NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
@@ -718,9 +718,48 @@ class Phase2Exam(Lesson):
     kind = "exam"
 
 
+# ============================================================== PHASE 3
+# ---------------------------------------------------------------- lesson 17
+class CoiledSprings(Lesson):
+    number, title = 17, "Coiled springs"
+    goal = ("Springs wound from the same wire with different numbers of coils. Stretching "
+            "one shows how hard it pulls; looking at it shows its coils. Can Ultron find a "
+            "law about its own stiffness law (stiffness × coils is constant) and predict how "
+            "hard a brand-new spring pulls without ever stretching it?")
+    budget = 200
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.world = CoilShop(seed)
+        self.rng = self.world.rng
+        for _ in range(7):
+            self.world.new_spring()
+
+    def specs(self):
+        return [Spec("coil_stretch", "quantity", {"x": LENGTH}, "F", group_by="spring",
+                     units={"F": FORCE, "x": LENGTH}),
+                Spec("coil_look", "feature", {"spring": None}, "coils", group_by="spring")]
+
+    def scene(self, name, wide=False, request=None):
+        spring = self.rng.choice(self.world.springs)
+        if name == "coil_look":
+            return {"spring": spring}, count(self.world.count_coils(spring))
+        x = round(self.rng.uniform(0.01, 0.5), 3)
+        return {"x": x, "spring": spring}, self.world.stretch(spring, x)
+
+
+# ---------------------------------------------------------------- lesson 18
+class Phase3Exam(Lesson):
+    number, title = 18, "Phase 3 exam: the hardest questions"
+    goal = ("No teaching. Huge numbers (column arithmetic), logarithms and fractional powers "
+            "(fractional repeats), and springs never stretched (laws about laws).")
+    kind = "exam"
+
+
 def all_lessons(seed=0):
     return [Permanence(seed), Pairing(seed + 1), Combining(seed + 2), Groups(seed + 3),
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
             Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10),
             WheelLesson(seed + 11), Ramps(seed + 12), Growing(seed + 13),
-            SpringyHills(seed + 14), Diagonal(seed + 15), Phase2Exam(seed + 16)]
+            SpringyHills(seed + 14), Diagonal(seed + 15), Phase2Exam(seed + 16),
+            CoiledSprings(seed + 17), Phase3Exam(seed + 18)]

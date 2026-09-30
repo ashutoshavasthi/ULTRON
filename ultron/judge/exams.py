@@ -797,6 +797,72 @@ def exam_diagonal(brain, seed=1016):
                    {"story": inv["story"] if inv else None})
 
 
+# ================================================================ PHASE 3
+def exam_coils(brain, seed=1017):
+    from ..env.physics import CoilShop
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    world = CoilShop(seed, prefix="New")
+    meta = b.qlaws.get("coil_stretch~why")
+    found = Tally("found a law about its own stiffness law (stiffness × coils)")
+    found.item("why", {"coil_stretch.property": 1, "coils": 1}, meta.powers if meta else None)
+    never = Tally("springs NEVER stretched: pull predicted from counting coils alone", tol=0.01)
+    chain = Tally("NEVER TRAINED: how many coils for a spring that pulls F at stretch x?",
+                  tol=0.01)
+    for _ in range(15):
+        spring = world.new_spring(rng.randint(2, 30))
+        coils = len(world.count_coils(spring))
+        b.experience("coil_look", {"spring": spring}, coils)
+        x = round(rng.uniform(0.05, 2.0), 3)
+        inputs = {"x": x, "spring": spring}
+        never.item(inputs, world.stretch(spring, x), b.predict("coil_stretch", inputs),
+                   b.memory.of("coil_stretch"), "F", inputs)
+    for _ in range(10):
+        coils = rng.randint(2, 40)
+        x = round(rng.uniform(0.05, 2.0), 3)
+        F = world.WIRE / coils * x
+        ans = reasoner.physics(b, "coils", {"F": F, "x": x}, {"spring": "Unseen"})
+        chain.item((F, x), float(coils), ans.value)
+    inv = b.inventions.get("why:coil_stretch")
+    return _result(17, [found, never, chain], 0.99, {"story": inv["story"] if inv else None})
+
+
+def exam_phase3(brain, seed=1018):
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    ask = lambda q: reasoner.arithmetic(b, q)
+    big = Tally("huge numbers, exact (column arithmetic): 12-20 digits")
+    for _ in range(10):
+        x, y = rng.randint(10 ** 11, 10 ** 20), rng.randint(10 ** 5, 10 ** 12)
+        word, f = [("times", lambda p, q: p * q), ("plus", lambda p, q: p + q),
+                   ("minus", lambda p, q: p - q)][rng.randrange(3)]
+        big.item(f"{x} {word} {y}", str(f(x, y)), ask(f"{x} {word} {y}").text)
+    powers = Tally("big powers, exact ('3 power 40')")
+    for _ in range(6):
+        a, n = rng.randint(2, 9), rng.randint(20, 60)
+        powers.item(f"{a} power {n}", str(a ** n), ask(f"{a} power {n}").text)
+    logs = Tally("logarithms with no fraction answer, pinned in a gap (to within 1/50)",
+                 tol=0.02)
+    import math
+    for _ in range(6):
+        a, n = rng.randint(2, 9), rng.randint(2, 20)
+        while round(math.log(n, a)) == math.log(n, a) or a ** round(math.log(n, a)) == n:
+            n += 1
+        logs.item(f"{a} power what equals {n}", math.log(n, a),
+                  ask(f"{a} power what equals {n}").value)
+    frac = Tally("fractional powers ('8 power 2/3', '2 power 1/2')", tol=0.02)
+    for base, p, q in ((8, 2, 3), (27, 1, 3), (16, 3, 4), (2, 1, 2), (10, 1, 2), (5, 2, 3)):
+        truth = base ** (p / q)
+        v = ask(f"{base} power {p}/{q}").value
+        if isinstance(v, tuple) and v and v[0] != "between":
+            v = v[0] / v[1]
+            frac.item(f"{base}^{p}/{q}", round(truth), round(v) if abs(v - round(v)) < 1e-9 else v)
+        else:
+            frac.item(f"{base}^{p}/{q}", truth, v)
+    impossible = Tally("still impossible: 'what times 0 equals 5', '3 power what equals -1'")
+    for q in ("what times 0 equals 5", "3 power what equals -1", "what times 0 equals -2"):
+        impossible.item(q, REFUSE, ask(q).value)
+    return _result(18, [big, powers, logs, frac, impossible], 0.99)
+
+
 def compression_benefit(upto=13):
     """Growing lesson with and without compression: how much searching did it take?"""
     from ..trainer.trainer import Trainer
@@ -823,4 +889,5 @@ def show_law(brain, name):
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
-         13: exam_growing, 14: exam_springy, 15: exam_diagonal, 16: exam_phase2}
+         13: exam_growing, 14: exam_springy, 15: exam_diagonal, 16: exam_phase2,
+         17: exam_coils, 18: exam_phase3}
