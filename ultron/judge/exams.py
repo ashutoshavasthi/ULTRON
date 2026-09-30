@@ -475,7 +475,7 @@ def exam_sharing(brain, seed=1010):
         q = (f"what times 0 equals {rng.randint(1, 30)}" if rng.random() < 0.5
              else f"{rng.randint(1, 9)}/0 plus 1")
         refuse.item(q, REFUSE, reasoner.arithmetic(b, q).value)
-    inv_rec = b.inventions.get(amounts.KEY)
+    inv_rec = amounts.record(b)
     return _result(9, [invented, bal, inv, div, ops, refuse], 0.99,
                    {"story": inv_rec["story"] if inv_rec else None})
 

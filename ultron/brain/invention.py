@@ -13,11 +13,19 @@ repeating the action using only its own laws, and looks at the shape it traces:
   * it never comes back and nothing runs the other way: the ordinary counting
     numbers, which it already has, so nothing new.
 
+  * walking by a smaller unit, it passes each whole unit every n steps, and in
+    between is at places no whole number reaches: a FINER line. The places
+    between are new numbers (fractions).
+
 In every case it also checks that every state it has ever seen lies on the shape,
 and that the steps coincide with something it already counts, so the shape's
-positions really are numbers. The same code finds negative numbers in a purse
-and clock numbers on a wheel; nothing in it is specific to either.
+positions really are numbers. The same code finds negative numbers in a purse,
+clock numbers on a wheel and fractions in a bakery; nothing in it is specific to
+any of them. For the finer line it even works out, by testing, which input of its
+law is the count, which the kind of piece, and which the wholes.
 """
+
+import itertools
 
 from .dsl import safe_evaluate
 
@@ -81,6 +89,9 @@ def _counts_up(walk, vars_):
 
 def look_for_shapes(brain):
     """Record and return the first new shape found, or None."""
+    finer = _finer_line(brain)
+    if finer:
+        return finer
     fams = _families(brain)
     for a in sorted(fams):
         vars_ = sorted(fams[a])
@@ -161,6 +172,63 @@ def _line(brain, a, fams, vars_, base, walk, seen):
         return key, {"shape": "line", "up": up, "down": down, "vars": vars_,
                      "counted": counted, "primitives": ["down"], "lesson": brain.lesson,
                      "story": story}
+    return None
+
+
+def _holds(brain, law, env):
+    try:
+        return safe_evaluate(law.expr, env, brain.library)
+    except Exception:
+        return None
+
+
+def _finer_line(brain):
+    """Is there a law comparing piles of pieces with whole things, where walking by
+    pieces is a finer walk than walking by wholes?"""
+    if any(inv.get("shape") == "finer line" for inv in brain.inventions.values()):
+        return None
+    lib = brain.library
+    for law in sorted(lib.laws.values(), key=lambda l: l.name):
+        if law.out_type != "bool" or len(law.params) != 3 or not brain.trusts(law.name):
+            continue
+        for count, kind, whole in itertools.permutations(law.params):
+            env = lambda c, k, w: {count: c, kind: k, whole: w}
+            # 1. pieces of kind 1 ARE whole things: the walk it already knows
+            if not all(_holds(brain, law, env(w, 1, w)) and
+                       not _holds(brain, law, env(w, 1, w + 1)) for w in range(6)):
+                continue
+            # 2. a finer walk: n pieces make one whole, one piece makes no whole
+            for n in range(2, 7):
+                if not _holds(brain, law, env(n, n, 1)):
+                    continue
+                if any(_holds(brain, law, env(1, n, w)) for w in range(0, 4)):
+                    continue
+                # 3. can it re-cut in imagination? find a law that scales count and kind
+                #    together without changing what balances
+                scale = next((t.name for t in lib.binary_int_laws() if all(
+                    _holds(brain, law, env(c, k, w)) ==
+                    _holds(brain, law, env(lib.call(t.name, c, m), lib.call(t.name, k, m), w))
+                    for c in range(0, 7) for k in range(1, 4) for w in range(0, 3)
+                    for m in range(1, 4))), None)
+                if scale is None:
+                    continue
+                story = (f"Walking by single pieces of a cake cut into {n}, I pass a whole every "
+                         f"{n} steps, and in between I'm at places no whole number reaches: one "
+                         f"piece balances no whole number of cakes, yet {n} of them balance "
+                         f"exactly 1. So my number line is FINER than I thought: there are "
+                         f"numbers *between* my numbers. Every pile of equal pieces is one. "
+                         f"And since scaling the count and the kind of piece together with my "
+                         f"'{scale}' law never changes what balances, two piles are the same "
+                         f"number when, cut into the same kind of piece, they have the same "
+                         f"count. My whole numbers are piles of pieces 'cut into 1'.")
+                key = f"finer:{law.name}"
+                inv = {"shape": "finer line", "law": law.name,
+                       "roles": {"count": count, "kind": kind, "whole": whole},
+                       "scale": scale, "primitives": [], "lesson": brain.lesson,
+                       "example": n, "story": story}
+                brain.inventions[key] = inv
+                brain.note("invent", story)
+                return inv
     return None
 
 

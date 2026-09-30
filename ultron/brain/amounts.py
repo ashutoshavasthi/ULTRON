@@ -1,12 +1,10 @@
 """Inventing amounts *between* numbers (fractions), and reasoning with them.
 
-Ultron has two confirmed laws from the bakery:
-  cake_balance: k pieces of a cake cut into n balance w whole cakes exactly when
-                k = w groups of n
-  recut:        cutting each piece of an n-cut into m gives pieces of an
-                (n·m)-cut (it counts n·m of them per cake)
+From the bakery Ultron has a law saying when k pieces of a cake cut into n
+balance w whole cakes. Shape discovery (invention.py) finds that walking by pieces
+is a *finer* walk than walking by wholes, which is the invention.
 
-Reflecting, it imagines with those laws. One piece of a 3-cut balances no whole
+Reflecting, it imagines with that law. One piece of a 3-cut balances no whole
 number of cakes (not 0, not 1), yet 3 of them balance 1 cake exactly. So there are
 amounts between its numbers. It decides to treat any pile of equal pieces
 (count k, of a cake cut into n) as a number. Two piles are the same number when,
@@ -14,52 +12,31 @@ re-cut into the same kind of piece, they have the same count. Whole numbers are
 just piles of pieces of a cake "cut into 1".
 
 Everything below is worked out with Ultron's own laws: counts are combined with
-its plus/minus/times laws (including its below-zero 'undo' rule), and kinds with
-its recut law. No fraction arithmetic is built in.
+its plus/minus/times laws (including its below-zero 'undo' rule), and kinds are
+re-cut in imagination with the law it checked scales count and kind together. No
+fraction arithmetic is built in.
 """
 
 from .dsl import Overflow, evaluate
 from .language import read_number, speak_number
 
-KEY = "amounts:cake"
-
-
 # ------------------------------------------------------------------ invention
-def _balances(brain, pieces, cut, wholes):
-    law = brain.library.get("cake_balance")
-    try:
-        return evaluate(law.expr, {"pieces": pieces, "cut": cut, "wholes": wholes},
-                        brain.library)
-    except Overflow:
-        return None
+# The invention itself is a shape ("a finer line"), found by invention.py's shape
+# discovery. This module is how Ultron reasons with the numbers it invented.
 
-
-def look_for_amounts(brain):
-    if KEY in brain.inventions:
-        return None
-    if not brain.trusts("cake_balance") or not brain.trusts("recut"):
-        return None
-    # whole cakes are piles of "pieces of a cake cut into 1"
-    if not all(_balances(brain, w, 1, w) for w in range(6)):
-        return None
-    for n in range(2, 7):
-        no_whole = not any(_balances(brain, 1, n, w) for w in range(0, 4))
-        if no_whole and _balances(brain, n, n, 1):
-            story = (f"One piece of a cake cut into {n} balances no whole number of cakes: "
-                     f"not 0, not 1. Yet {n} of them balance exactly 1 cake. So there are "
-                     f"amounts *between* my numbers. I'll treat every pile of equal pieces "
-                     f"(so many pieces of a cake cut into so many) as a number too. Two piles "
-                     f"are the same number when, cut again into the same kind of piece, they "
-                     f"have the same count. My whole numbers are piles of a cake 'cut into 1'.")
-            inv = {"primitives": [], "lesson": brain.lesson, "story": story, "example": n}
-            brain.inventions[KEY] = inv
-            brain.note("invent", story)
-            return inv
-    return None
+def record(brain):
+    return next((inv for inv in brain.inventions.values()
+                 if inv.get("shape") == "finer line"), None)
 
 
 def invented(brain):
-    return KEY in brain.inventions
+    return record(brain) is not None
+
+
+def look_for_amounts(brain):
+    """Kept for callers: the finer line is found by shape discovery now."""
+    from .invention import look_for_shapes
+    return None if invented(brain) else look_for_shapes(brain)
 
 
 # ------------------------------------------------------------ using its laws
@@ -73,12 +50,19 @@ def _call(brain, law, a, b):
     return brain.library.call(law, a, b)
 
 
+def _scale(brain):
+    rec = record(brain)
+    return rec["scale"] if rec else "groups"
+
+
 def _times(brain, a, b):
-    return _call(brain, "groups", a, b)
+    return _call(brain, _scale(brain), a, b)
 
 
 def _recut(brain, n, m):
-    return _call(brain, "recut", n, m)
+    """Cutting each piece of an n-cut into m: done in imagination with the law that
+    Ultron checked scales count and kind together."""
+    return _call(brain, _scale(brain), n, m)
 
 
 def common(brain, x, y):

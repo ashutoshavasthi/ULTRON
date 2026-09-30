@@ -385,13 +385,11 @@ class Brain:
             spec = self.memory.specs[name]
             if spec.kind == "conservation" and self.memory.of(name):
                 self._learn_conservation(spec, True, reflecting=True)
-        from .amounts import look_for_amounts
         from .invention import find_inverses, look_for_shapes
         from .compression import look_for_ladders
         self._check_symmetry()
         look_for_shapes(self)
         find_inverses(self)
-        look_for_amounts(self)
         look_for_ladders(self)
 
     def _check_symmetry(self):

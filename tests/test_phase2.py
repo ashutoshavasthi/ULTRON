@@ -55,3 +55,13 @@ def test_knows_where_the_pattern_stops(trained):
     brain, _ = trained
     assert brain.inventions["ladder"]["stops_at"] == "repeated_groups"
     assert brain.inventions["ladder"]["predicted"] == ["repeated_groups"]
+
+
+def test_one_shape_discovery_for_three_kinds_of_number(trained):
+    brain, _ = trained
+    shapes = {inv["shape"] for inv in brain.inventions.values()}
+    assert {"line", "cycle", "finer line"} <= shapes
+    finer = brain.inventions["finer:cake_balance"]
+    # it worked out which input is which by testing, and re-cuts with its own times law
+    assert finer["roles"] == {"count": "pieces", "kind": "cut", "whole": "wholes"}
+    assert finer["scale"] == "groups"

@@ -189,7 +189,7 @@ class Trainer:
         7: {"lab_push": "Newton's second law (measured with noise)",
             "lab_stretch": "stiffness (measured with noise)"},
         8: {"line:earn/spend": "negative numbers (the integers)"},
-        9: {"amounts:cake": "fractions (the rational numbers)"},
+        9: {"finer:cake_balance": "fractions (the rational numbers)"},
         11: {"cycle:tick": "clock numbers (arithmetic modulo 6)"},
         12: {"hidden:roll": "energy (height + speed²/2g, per unit of weight)",
              "roll": "conservation of energy"},
