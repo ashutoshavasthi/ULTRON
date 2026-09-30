@@ -35,8 +35,8 @@ Every law below was found by Ultron's own search from its own experiences. The n
 | `earn_coins(coins, notes)` | `take_away(succ(coins), notes)` | 4 | 3 experiences |  |
 | `earn_notes(coins, notes)` | `pred(notes)` | 2 | 3 experiences |  |
 | `spend_notes(coins, notes)` | `take_away(succ(notes), coins)` | 4 | 3 experiences |  |
+| `get_paid(purse, wage)` | `merge(purse, wage)` | 3 | 2 experiences |  |
 | `pay(price, purse)` | `repeat price times [down] starting from purse` | 4 | 3 experiences |  |
-| `get_paid(purse, wage)` | `merge(wage, purse)` | 3 | 5 experiences |  |
 
 ### Laws about measurements
 
@@ -79,11 +79,12 @@ Every law below was found by Ultron's own search from its own experiences. The n
 | 7 | noisy lab: TRUE acceleration of heavy balls (20-100 kg) | **30/30 (100%)** | 0/30 (0%) | 0/30 (0%) |
 | 7 | noisy lab: TRUE spring force at long stretches | **30/30 (100%)** | 0/30 (0%) | 0/30 (0%) |
 | 8 | invented numbers below zero, without being told | **1/1 (100%)** | n/a | n/a |
-| 8 | paying from purses of -40..40 with prices 10-60 (trained: -5..5, up to 8) | **30/30 (100%)** | 0/30 (0%) | 0/30 (0%) |
+| 8 | paying from purses of -40..40 with prices 10-60 (trained: -5..5, up to 8) | **30/30 (100%)** | 0/30 (0%) | 1/30 (3%) |
 | 8 | getting paid into purses of -40..40, wages 10-60 | **30/30 (100%)** | 0/30 (0%) | 1/30 (3%) |
 | 8 | questions with negative numbers, in marks and words | **20/20 (100%)** | n/a | n/a |
 | 8 | adding a below-zero amount, reached by symmetry it checked ('5 plus -3') | **10/10 (100%)** | n/a | n/a |
-| 8 | never experienced: a below-zero number of groups | **10/10 (100%)** | n/a | n/a |
+| 8 | never experienced, reached by 'below-zero times = undo': '5 minus -3', '-4 plus -2', '-2 times -3' | **20/20 (100%)** | n/a | n/a |
+| 8 | still impossible: no whole number works | **10/10 (100%)** | n/a | n/a |
 | 9 | division - never taught ('what times 7 equals 84') | **20/20 (100%)** | n/a | n/a |
 | 9 | inverse questions ('12 minus what equals 5', 'what plus 9 equals 30') | **20/20 (100%)** | n/a | n/a |
 | 9 | chains of three operations ('100 minus 37 plus 12 minus 5') | **15/15 (100%)** | n/a | n/a |
@@ -97,7 +98,9 @@ Every law below was found by Ultron's own search from its own experiences. The n
 
 - **Noisy TV** (lesson 2): the lamp panel is pure randomness. Ultron gave it 16 of its 51 play choices (the minimum look every new thing gets), found no law, and stopped choosing it. Law for lamps: none (correct).
 - **Does knowledge compound?** A blank brain given the same groups lesson (no addition law to build on) scored 0/40 (0%) and found no law. Ultron scored 40/40 (100%).
-- **Designing experiments vs watching** (lessons 0-8, from `python -m ultron experiment`): experiences until the law it kept was first found, summed over all laws: 35 when Ultron designs experiments, 34 when it only watches random scenes. Per law where they differ (active, passive): {'earn_coins': (3, 4), 'earn_notes': (3, 6), 'get_paid': (5, 2), 'groups': (6, 3), 'pay': (3, 2), 'spend_notes': (3, 5)}. In worlds this small, every law is found within a few experiences either way, so there is little to gain.
+- **Does designing its own experiments help?** (from `python -m ultron experiment`)
+  - With a helpful teacher, experiences until every law was found: 32 designing vs 34 watching. With random scenes over a wider range: 25 vs 26. **No gain**: when the teacher shows everything, Occam's razor finds each law within a few experiences either way.
+  - With a **biased teacher**, who never shows equal trays and never lets the purse go into debt: designing, Ultron passed lesson 1 (60/60) and invented negative numbers by spending from an empty purse itself. Only watching, it failed lesson 1 (36/60: it concluded trays never pair off) and never invented negative numbers. **Designing experiments is how it learns what nobody shows it.**
 - **Composition, never trained**: a ball on a stretched spring. Ultron chained two laws it learned separately:
 
 ```

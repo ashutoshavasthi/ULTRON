@@ -24,40 +24,49 @@ open").
 | **It transfers** | It predicted Jupiter's moons from one sighting of Io, and unseen Ceres and Halley's Comet from real data. |
 | **It composes and reasons backwards** | It answers a never-trained spring-launch problem by chaining two laws, and runs laws backwards. Division, never taught, comes from running multiplication in reverse. |
 | **It copes with noise** | With ±1% instruments it uses error propagation and predicts the *true* values. |
-| **It knows what it doesn't know** | It refuses situations new *in kind*: a planet system it never saw, an unmeasured spring, a negative wage, a word never taught. It gives the reason each time. Tough final exam: 109/109. |
+| **It knows what it doesn't know** | It refuses situations new *in kind* that none of its principles reach: a planet system it never saw, an unmeasured spring, a division with no whole answer, a word never taught. It gives the reason each time. Tough final exam: 109/109. |
+| **It learns what nobody shows it** | Under a biased teacher it still found "same number" and invented negative numbers, because it designed its own experiments. When only watching, it failed both. |
 | **It isn't overconfident** | Laws are *tentative* until confirmed 3 times. Its early "momentum after one collision" claim is now marked tentative until the evidence arrives. |
 | **It is checkable** | Every answer comes with its reasons. Peano proofs are derived from its own laws and checked independently. Training is deterministic, byte for byte. |
 
-## What did not work, honestly
+## Imperfections found, and what happened to them
 
-- **Designing experiments made no measurable difference.** Ultron now sets up
-  the situation where its rival explanations disagree, or else a kind of
-  situation it has never tried. Summed over all laws, it needed 35 experiences
-  to find its final laws; watching random scenes needed 34. It helped on the
-  harder purse laws (12 vs 19) and hurt on simple ones. In worlds this small,
-  every law appears within a few experiences anyway. I tried two other
-  strategies (more rivals; novelty first); neither helped. The mechanism
-  stays, and its value is unproven.
-- **Fixed after my last review:**
-  - **Lesson 0's exam was weak.** A nearest-example memoriser also scored 100%.
-    Lesson 0 now hides *several* things and tests counts it never saw. The
-    memoriser drops to 0/40; Ultron stays at 40/40.
-  - **Ultron refused "5 plus -3".** It now checks, over every experience
-    where it can, that swapping the inputs of "plus" never changes the
-    result (18 checks). It then answers 2, and says that is how it got there.
-- **Refusals that remain.** "5 minus -3", "-4 plus -2" and anything with a
-  below-zero number of groups are refused. Minus isn't symmetric, and nothing
-  in its experience covers these. A person would answer them. Doing so needs
-  concepts Ultron doesn't have yet (for example, that taking away a debt is
-  being paid).
-- **Training slowed from ~5 s to ~1 min.** The purse lesson's searches reach
-  70,000 candidate programs.
+- **Designing experiments: fixed by understanding what it is for.** With a
+  teacher who shows everything, it gives no speed gain: 32 vs 34 experiences to
+  find every law, and 25 vs 26 with random scenes over a wider range. Occam's
+  razor finds each law within a few experiences either way. Its real value
+  shows with a **biased teacher**, who never shows equal trays and never lets
+  the purse go into debt:
+  - Designing its own experiments, Ultron passed both lessons. It invented
+    negative numbers by spending from an empty purse itself.
+  - Only watching, it failed lesson 1: it concluded that "trays never pair
+    off".
+  - Only watching, it never invented negative numbers.
+
+  Designing experiments is how it learns what nobody shows it.
+- **Lesson 0's exam was weak: fixed.** It now hides several things and tests
+  counts never seen. A nearest-example memoriser drops from 100% to 0%.
+- **Fair questions below zero were refused: fixed.** One reasoning principle
+  was added: doing something a below-zero number of times means undoing it
+  that many times. Mathematicians used this "keep the rules working" principle
+  to extend arithmetic. Ultron found *which* steps undo which by imagining
+  with its own laws ("pay always undoes merge"). From that, it answers:
+  - "5 minus -3" = 8
+  - "-4 plus -2" = -6
+  - **"-2 times -3" = 6**
+
+  "Minus times minus is plus" appears nowhere in the code; Ultron derives it.
+  Only genuinely impossible questions are still refused, for example "what
+  times 3 equals -7", or a word never taught.
+- **Still true:** training takes about 1 minute, because the purse lesson's
+  searches reach 70,000 candidate programs.
 
 ## What I built, not Ultron
 
 - The innate primitives (counting, `succ`, `pred`, `eq`, "repeat n times").
 - The power-product form for measurements.
-- The *ability* to notice a line of states.
+- The *ability* to notice a line of states, and the principle that a
+  below-zero number of repetitions means undoing.
 - The curiosity and confirmation rules.
 - The reading and solving procedures.
 

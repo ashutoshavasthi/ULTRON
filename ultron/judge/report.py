@@ -88,17 +88,26 @@ def special_section(results, brain):
             avp = json.load(f)
     except OSError:
         pass
-    if avp:
-        a = sum(v for v in avp["active"].values() if v)
-        p = sum(v for v in avp["passive"].values() if v)
-        diff = {k: (avp["active"][k], avp["passive"].get(k)) for k in avp["active"]
-                if avp["active"][k] != avp["passive"].get(k)}
-        lines.append(f"- **Designing experiments vs watching** (lessons 0-8, from "
-                     f"`python -m ultron experiment`): experiences until the law it kept was "
-                     f"first found, summed over all laws: {a} when Ultron designs experiments, "
-                     f"{p} when it only watches random scenes. Per law where they differ "
-                     f"(active, passive): {diff or 'none'}. In worlds this small, every law is "
-                     f"found within a few experiences either way, so there is little to gain.")
+    if avp and "biased" in avp:
+        total = lambda d: sum(v for v in d.values() if v)
+        cur, unc, bia = avp["curated"], avp["uncurated"], avp["biased"]
+        lines += [
+            "- **Does designing its own experiments help?** (from `python -m ultron experiment`)",
+            f"  - With a helpful teacher, experiences until every law was found: "
+            f"{total(cur['active'])} designing vs {total(cur['passive'])} watching. With "
+            f"random scenes over a wider range: {total(unc['active'])} vs "
+            f"{total(unc['passive'])}. **No gain**: when the teacher shows everything, "
+            f"Occam's razor finds each law within a few experiences either way.",
+            f"  - With a **biased teacher**, who never shows equal trays and never lets the "
+            f"purse go into debt: designing, Ultron passed lesson 1 "
+            f"({bia['active']['1']['scores'][0][0]}/{bia['active']['1']['scores'][0][1]}) and "
+            f"{'invented' if bia['active']['invented_below_zero'] else 'did NOT invent'} "
+            f"negative numbers by spending from an empty purse itself. Only watching, it failed "
+            f"lesson 1 ({bia['passive']['1']['scores'][0][0]}/"
+            f"{bia['passive']['1']['scores'][0][1]}: it concluded trays never pair off) and "
+            f"{'invented' if bia['passive']['invented_below_zero'] else 'never invented'} "
+            f"negative numbers. **Designing experiments is how it learns what nobody shows it.**",
+        ]
     r5 = results.get("5") or results.get(5)
     if r5 and r5.get("launch_trace"):
         lines += ["- **Composition, never trained**: a ball on a stretched spring. Ultron chained "

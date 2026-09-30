@@ -163,17 +163,19 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _confirm_: earn_notes: pred(notes) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: spend_notes: take_away(succ(notes), coins) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
+- Ultron _reflect_: 'up one' and 'down one' undo each other on my line
 - **Trainer**: You say some purses are 'below zero'. Let's buy and sell with that idea.
 - Ultron _meet_: new kind of experience: pay
 - Ultron _meet_: new kind of experience: get_paid
-- Ultron _revise_: pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 1639 programs searched)
+- Ultron _revise_: pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 293 programs searched)
 - Ultron _revise_: get_paid: surprised; new best explanation is 3 (was nothing; 1 experiences, 28 programs searched)
 - Ultron _revise_: get_paid: surprised; new best explanation is merge(purse, wage) (was 3; 2 experiences, 4272 programs searched)
-- Ultron _revise_: pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 75774 programs searched)
-- Ultron _revise_: get_paid: surprised; new best explanation is merge(wage, purse) (was merge(purse, wage); 5 experiences, 5276 programs searched)
+- Ultron _revise_: pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 84934 programs searched)
+- Ultron _confirm_: get_paid: merge(purse, wage) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: pay: repeat price times [down] starting from purse predicted 8 new experiences in a row; added to my library of building blocks
-- Ultron _confirm_: get_paid: merge(wage, purse) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
+- Ultron _reflect_: imagining with my laws: 'pay' always undoes 'get_paid'
+- Ultron _reflect_: imagining with my laws: 'pay' always undoes 'merge'
 - Ultron _word_: '-' in front of a number means that far below zero
 - Ultron _word_: 'negative' in front of a number means that far below zero
 - **Trainer**: People write your below-zero places as -1, -2, -3 and say 'negative one, negative two'.

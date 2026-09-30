@@ -26,6 +26,17 @@ class Lesson:
     goal = ""
     kind = "play"           # "play": curiosity-driven; "guided": trainer-led
     budget = 200
+    # A curated trainer picks helpful scenes (e.g. many equal trays). An uncurated
+    # one shows uniformly random scenes over a wider range: that is where designing
+    # your own experiments should matter.
+    curated = True
+    # A biased trainer never shows one kind of situation (e.g. equal trays, or a purse
+    # in debt). Ultron can still set that situation up itself, if it thinks to.
+    biased = False
+
+    @property
+    def top(self):
+        return 5 if self.curated else 20
 
     def __init__(self, seed=0):
         self.seed = seed
@@ -56,12 +67,12 @@ class Permanence(Lesson):
                      out_type=INT)]
 
     def options(self, name):
-        return [{"hidden": h, "waited": t} for h in range(6) for t in range(1, 7)]
+        return [{"hidden": h, "waited": t} for h in range(self.top + 1) for t in range(1, 7)]
 
     def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
         w.clear()
-        n = request["hidden"] if request else rng.randint(0, 9 if wide else 5)
+        n = request["hidden"] if request else rng.randint(0, 9 if wide else self.top)
         objs = w.put("table", n)
         w.hide("cup", objs)
         waited = request["waited"] if request else rng.randint(1, 40 if wide else 6)
@@ -83,13 +94,15 @@ class Pairing(Lesson):
                      out_type=BOOL)]
 
     def options(self, name):
-        return [{"nA": a, "nB": b} for a in range(6) for b in range(6)]
+        return [{"nA": a, "nB": b} for a in range(self.top + 1) for b in range(self.top + 1)]
 
     def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
-        top = 9 if wide else 5
+        top = 9 if wide else self.top
         a = rng.randint(0, top)
-        b = a if rng.random() < 0.4 else rng.randint(0, top)
+        b = a if self.curated and rng.random() < 0.4 else rng.randint(0, top)
+        while self.biased and b == a:
+            b = rng.randint(0, top)
         if request:
             a, b = request["nA"], request["nB"]
         w.put("A", a)
@@ -116,15 +129,16 @@ class Combining(Lesson):
                 Spec("lamps", "program", {"lit_before": INT}, "lit_after", out_type=INT)]
 
     def options(self, name):
+        n = self.top + 1
         if name == "merge":
-            return [{"nA": a, "nB": b} for a in range(6) for b in range(6)]
+            return [{"nA": a, "nB": b} for a in range(n) for b in range(n)]
         if name == "take_away":
-            return [{"nA": a, "n_taken": t} for a in range(6) for t in range(a + 1)]
+            return [{"nA": a, "n_taken": t} for a in range(n) for t in range(a + 1)]
         return []
 
     def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
-        top = 9 if wide else 5
+        top = 9 if wide else self.top
         if name == "merge":
             w.put("A", request["nA"] if request else rng.randint(0, top))
             w.put("B", request["nB"] if request else rng.randint(0, top))
@@ -154,12 +168,13 @@ class Groups(Lesson):
         return [Spec("groups", "program", {"groups": INT, "size": INT}, "total", out_type=INT)]
 
     def options(self, name):
-        return [{"groups": g, "size": z} for g in range(5) for z in range(5)]
+        top = 4 if self.curated else 10
+        return [{"groups": g, "size": z} for g in range(top + 1) for z in range(top + 1)]
 
     def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
         w.clear()
-        top = 6 if wide else 4
+        top = 6 if wide else (4 if self.curated else 10)
         g, s = rng.randint(0, top), rng.randint(0, top)
         if request:
             g, s = request["groups"], request["size"]
@@ -374,16 +389,18 @@ class Owing(Lesson):
     def specs(self):
         return self.purse_specs()
 
-    def _random_purse(self, top=5):
+    def _random_purse(self, top=None):
         rng = self.world.rng
-        n = rng.randint(0, top)
+        n = rng.randint(0, self.top if top is None else top)
+        if self.biased:
+            return (max(n, 1), 0)       # never an empty purse, never a debt
         return (n, 0) if rng.random() < 0.5 else (0, n)
 
     def options(self, name):
         if name in ("pay", "get_paid"):
             return []
-        return [{"coins": c, "notes": 0} for c in range(6)] + \
-               [{"coins": 0, "notes": n} for n in range(1, 6)]
+        return [{"coins": c, "notes": 0} for c in range(self.top + 1)] + \
+               [{"coins": 0, "notes": n} for n in range(1, self.top + 1)]
 
     def perceive(self):
         from ..brain.invention import position

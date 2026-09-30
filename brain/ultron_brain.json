@@ -107,7 +107,6 @@
     1.0,
     0.0,
     0.0,
-    1.0,
     0.0,
     0.0,
     0.0,
@@ -410,7 +409,7 @@
  "hypotheses": {
   "earn_coins": "take_away(succ(coins), notes)",
   "earn_notes": "pred(notes)",
-  "get_paid": "merge(wage, purse)",
+  "get_paid": "merge(purse, wage)",
   "groups": "repeat size times [merge(\u00b7, groups)] starting from 0",
   "merge": "repeat nA times [succ] starting from nB",
   "numeral": "merge(right, groups(left, 10))",
@@ -436,6 +435,22 @@
     "notes"
    ]
   }
+ },
+ "inverses": {
+  "down": [
+   "succ"
+  ],
+  "get_paid": [
+   "pay",
+   "t_first"
+  ],
+  "merge": [
+   "pay",
+   "t_first"
+  ],
+  "succ": [
+   "down"
+  ]
  },
  "library": {
   "earn_coins": {
@@ -494,11 +509,11 @@
     "merge",
     [
      "var",
-     "wage"
+     "purse"
     ],
     [
      "var",
-     "purse"
+     "wage"
     ]
    ],
    "name": "get_paid",
@@ -508,8 +523,8 @@
     "wage"
    ],
    "provenance": {
-    "experiences": 13,
-    "found_after": 5,
+    "experiences": 10,
+    "found_after": 2,
     "lesson": 8,
     "size": 3
    }
@@ -3353,6 +3368,11 @@
    "text": "My coins/notes states all lie on ONE line: 'earn' and 'spend' undo each other, and from the empty state 'earn' counts coins up 1, 2, 3... But 'spend' from the empty state doesn't stop: it keeps going, into states with notes. Those are places *below* zero. I'll treat them as numbers too, and use a new step 'down' that has no floor."
   },
   {
+   "kind": "reflect",
+   "lesson": 8,
+   "text": "'up one' and 'down one' undo each other on my line"
+  },
+  {
    "kind": "trainer",
    "lesson": 8,
    "text": "You say some purses are 'below zero'. Let's buy and sell with that idea."
@@ -3376,7 +3396,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 1639 programs searched)"
+   "text": "pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 293 programs searched)"
   },
   {
    "choice": "get_paid",
@@ -3415,42 +3435,13 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 75774 programs searched)"
+   "text": "pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 84934 programs searched)"
   },
   {
    "choice": "get_paid",
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with get_paid"
-  },
-  {
-   "choice": "pay",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with pay"
-  },
-  {
-   "choice": "get_paid",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with get_paid"
-  },
-  {
-   "choice": "pay",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with pay"
-  },
-  {
-   "choice": "get_paid",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with get_paid"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "get_paid: surprised; new best explanation is merge(wage, purse) (was merge(purse, wage); 5 experiences, 5276 programs searched)"
   },
   {
    "choice": "pay",
@@ -3511,6 +3502,35 @@
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 8,
+   "text": "get_paid: merge(purse, wage) predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "pay",
@@ -3554,11 +3574,6 @@
    "text": "chose to play with get_paid"
   },
   {
-   "kind": "confirm",
-   "lesson": 8,
-   "text": "get_paid: merge(wage, purse) predicted 8 new experiences in a row; added to my library of building blocks"
-  },
-  {
    "choice": "pay",
    "kind": "choice",
    "lesson": 8,
@@ -3587,12 +3602,6 @@
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with pay"
-  },
-  {
-   "choice": "get_paid",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with get_paid"
   },
   {
    "choice": "get_paid",
@@ -3616,6 +3625,16 @@
    "kind": "bored",
    "lesson": 8,
    "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 8,
+   "text": "imagining with my laws: 'pay' always undoes 'get_paid'"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 8,
+   "text": "imagining with my laws: 'pay' always undoes 'merge'"
   },
   {
    "kind": "word",
@@ -4295,59 +4314,52 @@
     },
     {
      "inputs": {
-      "purse": 5,
-      "wage": 7
+      "purse": -4,
+      "wage": 1
      },
-     "outcome": 12
+     "outcome": -3
+    },
+    {
+     "inputs": {
+      "purse": -5,
+      "wage": 6
+     },
+     "outcome": 1
     },
     {
      "inputs": {
       "purse": 2,
-      "wage": 7
+      "wage": 8
      },
-     "outcome": 9
+     "outcome": 10
     },
     {
      "inputs": {
-      "purse": 0,
-      "wage": 4
+      "purse": 1,
+      "wage": 3
      },
      "outcome": 4
     },
     {
      "inputs": {
-      "purse": 2,
-      "wage": 6
+      "purse": -1,
+      "wage": 8
      },
-     "outcome": 8
+     "outcome": 7
     },
     {
      "inputs": {
-      "purse": -4,
-      "wage": 3
-     },
-     "outcome": -1
-    },
-    {
-     "inputs": {
-      "purse": 1,
-      "wage": 1
+      "purse": 0,
+      "wage": 2
      },
      "outcome": 2
     },
     {
      "inputs": {
-      "purse": -4,
-      "wage": 0
+      "purse": 3,
+      "wage": 4
      },
-     "outcome": -4
-    },
-    {
-     "inputs": {
-      "purse": 5,
-      "wage": 1
-     },
-     "outcome": 6
+     "outcome": 7
     }
    ],
    "groups": [
@@ -5344,52 +5356,45 @@
     },
     {
      "inputs": {
-      "price": 1,
-      "purse": -4
+      "price": 7,
+      "purse": 5
      },
-     "outcome": -5
+     "outcome": -2
     },
     {
      "inputs": {
       "price": 6,
-      "purse": -5
-     },
-     "outcome": -11
-    },
-    {
-     "inputs": {
-      "price": 8,
       "purse": 2
      },
-     "outcome": -6
+     "outcome": -4
     },
     {
      "inputs": {
       "price": 3,
+      "purse": -4
+     },
+     "outcome": -7
+    },
+    {
+     "inputs": {
+      "price": 1,
       "purse": 1
      },
-     "outcome": -2
+     "outcome": 0
     },
     {
      "inputs": {
-      "price": 8,
-      "purse": -1
+      "price": 0,
+      "purse": -4
      },
-     "outcome": -9
+     "outcome": -4
     },
     {
      "inputs": {
-      "price": 2,
-      "purse": 0
+      "price": 1,
+      "purse": 5
      },
-     "outcome": -2
-    },
-    {
-     "inputs": {
-      "price": 4,
-      "purse": 3
-     },
-     "outcome": -1
+     "outcome": 4
     }
    ],
    "peekaboo": [
@@ -6683,7 +6688,7 @@
   "earn_coins": 40011,
   "earn_notes": 1266,
   "gas": 28,
-  "get_paid": 9576,
+  "get_paid": 4300,
   "groups": 5484,
   "lab_push": 165,
   "lab_stretch": 116,
@@ -6692,7 +6697,7 @@
   "numeral": 22789,
   "orbit": 46,
   "pair_off": 67,
-  "pay": 77413,
+  "pay": 85227,
   "peekaboo": 8,
   "push": 180,
   "spend_coins": 1066,

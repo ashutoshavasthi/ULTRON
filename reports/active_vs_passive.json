@@ -1,30 +1,154 @@
 {
- "active": {
-  "earn_coins": 3,
-  "earn_notes": 3,
-  "get_paid": 5,
-  "groups": 6,
-  "merge": 2,
-  "numeral": 2,
-  "pair_off": 2,
-  "pay": 3,
-  "peekaboo": 1,
-  "spend_coins": 2,
-  "spend_notes": 3,
-  "take_away": 3
+ "biased": {
+  "active": {
+   "1": {
+    "passed": true,
+    "scores": [
+     [
+      60,
+      60
+     ]
+    ]
+   },
+   "8": {
+    "passed": true,
+    "scores": [
+     [
+      1,
+      1
+     ],
+     [
+      30,
+      30
+     ],
+     [
+      30,
+      30
+     ],
+     [
+      20,
+      20
+     ],
+     [
+      10,
+      10
+     ],
+     [
+      20,
+      20
+     ],
+     [
+      10,
+      10
+     ]
+    ]
+   },
+   "invented_below_zero": true
+  },
+  "passive": {
+   "1": {
+    "passed": false,
+    "scores": [
+     [
+      36,
+      60
+     ]
+    ]
+   },
+   "8": {
+    "passed": false,
+    "scores": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      30
+     ],
+     [
+      0,
+      30
+     ],
+     [
+      0,
+      20
+     ],
+     [
+      0,
+      10
+     ],
+     [
+      0,
+      20
+     ],
+     [
+      10,
+      10
+     ]
+    ]
+   },
+   "invented_below_zero": false
+  }
  },
- "passive": {
-  "earn_coins": 4,
-  "earn_notes": 6,
-  "get_paid": 2,
-  "groups": 3,
-  "merge": 2,
-  "numeral": 2,
-  "pair_off": 2,
-  "pay": 2,
-  "peekaboo": 1,
-  "spend_coins": 2,
-  "spend_notes": 5,
-  "take_away": 3
+ "curated": {
+  "active": {
+   "earn_coins": 3,
+   "earn_notes": 3,
+   "get_paid": 2,
+   "groups": 6,
+   "merge": 2,
+   "numeral": 2,
+   "pair_off": 2,
+   "pay": 3,
+   "peekaboo": 1,
+   "spend_coins": 2,
+   "spend_notes": 3,
+   "take_away": 3
+  },
+  "passive": {
+   "earn_coins": 4,
+   "earn_notes": 6,
+   "get_paid": 2,
+   "groups": 3,
+   "merge": 2,
+   "numeral": 2,
+   "pair_off": 2,
+   "pay": 2,
+   "peekaboo": 1,
+   "spend_coins": 2,
+   "spend_notes": 5,
+   "take_away": 3
+  }
+ },
+ "uncurated": {
+  "active": {
+   "earn_coins": 3,
+   "earn_notes": 3,
+   "get_paid": 1,
+   "groups": 2,
+   "merge": 2,
+   "numeral": 1,
+   "pair_off": 2,
+   "pay": 2,
+   "peekaboo": 1,
+   "spend_coins": 2,
+   "spend_notes": 3,
+   "take_away": 3
+  },
+  "passive": {
+   "earn_coins": 4,
+   "earn_notes": 3,
+   "get_paid": 1,
+   "groups": 2,
+   "merge": 2,
+   "numeral": 2,
+   "pair_off": 1,
+   "pay": 2,
+   "peekaboo": 1,
+   "spend_coins": 2,
+   "spend_notes": 4,
+   "take_away": 2
+  }
  }
 }

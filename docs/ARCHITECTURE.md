@@ -59,7 +59,12 @@ Four more principles govern how laws are used and refined:
 - **Designing experiments** (`Brain.propose`). The search also returns
   *rival* programs that explain the same experiences. When they disagree
   about some situation Ultron could set up, it sets that one up, so the world
-  decides between them.
+  decides between them. When they all agree, it tries a *kind* of situation it
+  has never met. This is how it learns what a biased teacher never shows it.
+- **Undoing** (`find_inverses`, `dsl.iterate`). Once numbers below zero
+  exist, Ultron imagines with its laws to find which steps undo which ("pay
+  undoes merge"). Repeating a step a below-zero number of times then means
+  undoing it that many times. This gives, for example, (-2) × (-3) = 6.
 - **Inventing concepts** (`invention.py`, line discovery). When two actions
   undo each other and every state lies on one line through the empty state,
   Ultron treats the states past empty as a new kind of number: below zero. It

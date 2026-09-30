@@ -979,7 +979,7 @@
       30
      ],
      "nearest": [
-      0,
+      1,
       30
      ],
      "ultron": [
@@ -1107,21 +1107,56 @@
     "examples": [
      {
       "question": "-4 times 9",
-      "truth": "I can't",
-      "ultron": null
+      "truth": "-36",
+      "ultron": "-36"
      },
      {
       "question": "-5 times 1",
+      "truth": "-5",
+      "ultron": "-5"
+     },
+     {
+      "question": "-7 plus -7",
+      "truth": "-14",
+      "ultron": "-14"
+     }
+    ],
+    "name": "never experienced, reached by 'below-zero times = undo': '5 minus -3', '-4 plus -2', '-2 times -3'",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "what times 5 equals -43",
       "truth": "I can't",
       "ultron": null
      },
      {
-      "question": "-7 times 3",
+      "question": "what times 4 equals -30",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "what times 9 equals -66",
       "truth": "I can't",
       "ultron": null
      }
     ],
-    "name": "never experienced: a below-zero number of groups",
+    "name": "still impossible: no whole number works",
     "scores": {
      "lookup": [
       0,
@@ -1260,12 +1295,12 @@
       "ultron": null
      },
      {
-      "question": "2 times -7",
+      "question": "what times 0 equals 14",
       "truth": "I can't",
       "ultron": null
      },
      {
-      "question": "2 times -5",
+      "question": "what times 0 equals 52",
       "truth": "I can't",
       "ultron": null
      }
@@ -1292,26 +1327,26 @@
      {
       "question": [
        "m",
-       279.9647970126743
+       269.46177609079564
       ],
-      "truth": 22.05843096394524,
-      "ultron": 22.058430963904993
+      "truth": 40.69999811923749,
+      "ultron": 40.699998119224546
      },
      {
       "question": [
-       "x",
-       "S3"
+       "F",
+       20.71440289950539
       ],
-      "truth": 1.5039972817348417,
-      "ultron": 1.5039972817333445
+      "truth": 808.5863823990743,
+      "ultron": 808.5863823980466
      },
      {
       "question": [
        "m",
-       411.8456625455054
+       40.15017208933542
       ],
-      "truth": 34.94090988046113,
-      "ultron": 34.94090988049781
+      "truth": 5.793145221597759,
+      "ultron": 5.793145221598357
      }
     ],
     "name": "physics solved for a different unknown (mass, stretch, force)",
@@ -1336,26 +1371,26 @@
      {
       "question": [
        "S5",
+       1.025668495919834
+      ],
+      "truth": 8.017554486562835,
+      "ultron": 8.017554486541812
+     },
+     {
+      "question": [
+       "S3",
+       1.1295925470413504
+      ],
+      "truth": 39.87475087394411,
+      "ultron": 39.87475087402433
+     },
+     {
+      "question": [
+       "S5",
        0.8818167593479852
       ],
       "truth": 6.383178714558374,
       "ultron": 6.3831787145385395
-     },
-     {
-      "question": [
-       "S1",
-       0.3281794537292322
-      ],
-      "truth": 23.300477068044245,
-      "ultron": 23.30047706804717
-     },
-     {
-      "question": [
-       "S1",
-       0.3055376983176259
-      ],
-      "truth": 43.88752813307976,
-      "ultron": 43.887528133068116
      }
     ],
     "name": "backwards chain: mass from spring, stretch and acceleration",

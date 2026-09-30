@@ -156,9 +156,10 @@ def exam_groups(brain, seed=1003, blank=True):
     return _result(3, [t], 0.99, extra)
 
 
-def active_vs_passive(upto=8):
+def active_vs_passive(upto=8, curated=True):
     """Experiences Ultron needed before it first held the law it finally kept, when it
-    designs its own experiments versus when it only watches random scenes."""
+    designs its own experiments versus when it only watches the scenes it is shown.
+    curated=False: the teacher shows uniformly random scenes over a wider range."""
     from ..trainer.trainer import Trainer
     out = {}
     for mode in ("active", "passive"):
@@ -167,6 +168,7 @@ def active_vs_passive(upto=8):
         trainer = Trainer(brain)
         for n in range(upto + 1):
             lesson = trainer.lessons[n]
+            lesson.curated = curated
             brain.lesson = n
             for spec in lesson.specs():
                 brain.meet(spec)
@@ -181,6 +183,29 @@ def active_vs_passive(upto=8):
                 free_play(brain, lesson, lesson.budget)
         out[mode] = {name: law.provenance.get("found_after")
                      for name, law in sorted(brain.library.laws.items())}
+    return out
+
+
+def biased_teacher():
+    """A trainer who never shows equal trays (lesson 1) and never lets the purse be
+    empty or in debt (lesson 8). Can Ultron still learn, by setting those situations
+    up itself? Compared with the same brain when it only watches."""
+    from ..trainer.trainer import Trainer
+    out = {}
+    for mode in ("active", "passive"):
+        brain = Brain(mode)
+        brain.active = mode == "active"
+        trainer = Trainer(brain)
+        for n in (1, 8):
+            trainer.lessons[n].biased = True
+        row = {}
+        for n in range(9):
+            r = trainer.run(n)
+            if n in (1, 8):
+                row[str(n)] = {"passed": r["passed"],
+                               "scores": [i["scores"]["ultron"] for i in r["items"]]}
+        row["invented_below_zero"] = "line:earn/spend" in brain.inventions
+        out[mode] = row
     return out
 
 
@@ -382,12 +407,26 @@ def exam_owing(brain, seed=1009):
         x, y = rng.randint(1, 9), rng.randint(1, 9)
         q = f"{x} plus -{y}"
         swap.item(q, str(x - y), reasoner.arithmetic(b, q).text)
-    refuse = Tally("never experienced: a below-zero number of groups")
-    for _ in range(10):
+    undo = Tally("never experienced, reached by 'below-zero times = undo': "
+                 "'5 minus -3', '-4 plus -2', '-2 times -3'")
+    for _ in range(20):
         x, y = rng.randint(1, 9), rng.randint(1, 9)
-        q = f"-{x} times {y}" if rng.random() < 0.5 else f"{x} times -{y}"
+        form = rng.randrange(4)
+        if form == 0:
+            q, t = f"{x} minus -{y}", x + y
+        elif form == 1:
+            q, t = f"-{x} plus -{y}", -x - y
+        elif form == 2:
+            q, t = f"-{x} times {y}", -x * y
+        else:
+            q, t = f"-{x} times -{y}", x * y
+        undo.item(q, str(t), reasoner.arithmetic(b, q).text)
+    refuse = Tally("still impossible: no whole number works")
+    for _ in range(10):
+        y = rng.randint(2, 9)
+        q = f"what times {y} equals -{y * rng.randint(1, 9) + rng.randint(1, y - 1)}"
         refuse.item(q, REFUSE, reasoner.arithmetic(b, q).value)
-    return _result(8, [invented, pay, paid, words, swap, refuse], 0.99,
+    return _result(8, [invented, pay, paid, words, swap, undo, refuse], 0.99,
                    {"story": inv["story"] if inv else None})
 
 
@@ -438,7 +477,7 @@ def exam_final(brain, seed=1008):
         elif form == 1:
             q = f"what is {rng.randint(10, 99)} divided {rng.randint(2, 9)}"
         else:
-            q = f"{rng.randint(1, 9)} times -{rng.randint(1, 9)}"
+            q = f"what times 0 equals {rng.randint(1, 99)}"
         impossible.item(q, REFUSE, ask(q))
 
     mech = Mechanics(seed=5).world

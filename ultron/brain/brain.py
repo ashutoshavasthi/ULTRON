@@ -118,7 +118,9 @@ class Brain:
 
     # ------------------------------------------------------------- predicting
     def predict(self, spec_name, inputs):
-        spec = self.memory.specs[spec_name]
+        spec = self.memory.specs.get(spec_name)
+        if spec is None:
+            return None     # never met this kind of experience
         if spec.kind == "program":
             expr = self.hypotheses.get(spec_name)
             return None if expr is None else safe_evaluate(expr, inputs, self.library)
@@ -295,8 +297,9 @@ class Brain:
             spec = self.memory.specs[name]
             if spec.kind == "conservation" and self.memory.of(name):
                 self._learn_conservation(spec, True, reflecting=True)
-        from .invention import look_for_line
+        from .invention import find_inverses, look_for_line
         look_for_line(self)
+        find_inverses(self)
 
     def _learn_conservation(self, spec, surprised, reflecting=False):
         if not surprised and spec.name in self.claws:
@@ -346,6 +349,7 @@ class Brain:
             "names": dict(sorted(self.names.items())),
             "search_steps": dict(sorted(self.search_steps.items())),
             "inventions": dict(sorted(self.inventions.items())),
+            "inverses": dict(sorted(self.library.inverses.items())),
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
@@ -371,6 +375,7 @@ class Brain:
         b.names = dict(d.get("names", {}))
         b.search_steps = dict(d.get("search_steps", {}))
         b.inventions = dict(d.get("inventions", {}))
+        b.library.inverses = dict(d.get("inverses", {}))
         b.curiosity = Curiosity.from_json(d.get("curiosity", {}))
         b.memory = Memory.from_json(d["memory"])
         b.log = list(d.get("log", []))

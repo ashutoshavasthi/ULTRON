@@ -15,8 +15,8 @@ def test_division_without_being_taught(trained):
 def test_refuses_what_it_has_never_experienced(trained):
     brain, _ = trained
     assert reasoner.arithmetic(brain, "what times 4 equals 21").value is None
-    assert reasoner.arithmetic(brain, "-2 times 3").value is None    # never made -2 groups
-    assert reasoner.arithmetic(brain, "2 times -3").value is None
+    assert reasoner.arithmetic(brain, "what times 0 equals 5").value is None
+    assert reasoner.arithmetic(brain, "what times 3 equals -7").value is None
     assert brain.predict("orbit", {"r": 1.2e9, "system": "Saturn"}) is None
     assert reasoner.physics(brain, "a", {"x": 0.3, "m": 2.0}, {"spring": "S99"}).value is None
 
@@ -72,5 +72,28 @@ def test_symmetry_reaches_new_situations(trained):
     brain, _ = trained
     ans = reasoner.arithmetic(brain, "5 plus -3")
     assert ans.text == "2" and any("swapping" in s for s in ans.steps)
-    # minus is not symmetric, so it cannot use that route
-    assert reasoner.arithmetic(brain, "5 minus -3").value is None
+
+
+
+def test_below_zero_times_means_undo(trained):
+    brain, _ = trained
+    assert brain.library.inverses["merge"] == ["pay", "t_first"]
+    assert reasoner.arithmetic(brain, "5 minus -3").text == "8"
+    assert reasoner.arithmetic(brain, "-4 plus -2").text == "-6"
+    assert reasoner.arithmetic(brain, "-2 times -3").text == "6"
+    assert reasoner.arithmetic(brain, "what times -4 equals 8").text == "-2"
+
+
+def test_designing_experiments_beats_a_biased_teacher():
+    from ultron.brain.brain import Brain
+    from ultron.trainer.trainer import Trainer
+    results = {}
+    for active in (True, False):
+        brain = Brain()
+        brain.active = active
+        trainer = Trainer(brain)
+        trainer.lessons[1].biased = True    # never shows equal trays
+        for n in range(2):
+            r = trainer.run(n)
+        results[active] = r["passed"]
+    assert results[True] and not results[False]

@@ -121,6 +121,12 @@ def arithmetic(brain, question):
                          f"experiences where I could check, swapping the two amounts gave the "
                          f"same result, and swapped, this is a situation I know")
             a, b, strange = b, a, None
+        if strange and "below zero" in strange and brain.library.inverses:
+            steps.append(f"{strange.split(';')[0]}; but my law works by repeating steps, and "
+                         f"repeating a step a below-zero number of times naturally means "
+                         f"undoing it that many times. I know what undoes each step, so I'll "
+                         f"use that")
+            strange = None
         if strange:
             return Answer(None, f"I can't answer that: {strange}", steps)
         try:
@@ -168,7 +174,8 @@ def inverse(brain, raw):
     for x in candidates:
         xy = (x, known) if unknown_first else (known, x)
         a, b = xy if op[2] == "xy" else (xy[1], xy[0])
-        if outside_experience(brain, op[1], a, b):
+        why_not = outside_experience(brain, op[1], a, b)
+        if why_not and not ("below zero" in why_not and brain.library.inverses):
             continue
         tried += 1
         try:

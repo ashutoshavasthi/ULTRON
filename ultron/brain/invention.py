@@ -146,3 +146,46 @@ def position(brain, key, state):
         toward_down = _step(brain, fams[inv["down"]], toward_down) if toward_down else None
         toward_up = _step(brain, fams[inv["up"]], toward_up) if toward_up else None
     return None
+
+
+def find_inverses(brain):
+    """Once numbers below zero exist, work out which steps undo which, by imagining
+    with its own laws. up/down come from the line itself; for each law used as a
+    step, look for another law that always brings the result back."""
+    from .dsl import Overflow
+    line = next((inv for inv in brain.inventions.values() if "down" in inv["primitives"]), None)
+    if line is None:
+        return
+    lib = brain.library
+    if "succ" not in lib.inverses:
+        lib.inverses["succ"] = ["down"]
+        lib.inverses["down"] = ["succ"]
+        brain.note("reflect", "'up one' and 'down one' undo each other on my line")
+    for law in lib.binary_int_laws():
+        if law.name in lib.inverses:
+            continue
+        for other in lib.binary_int_laws():
+            if other.name == law.name:
+                continue
+            for order in ("acc_first", "t_first"):
+                ok = True
+                try:
+                    for x in range(-5, 6):
+                        for t in range(0, 5):
+                            y = lib.call(law.name, x, t)
+                            back = lib.call(other.name, y, t) if order == "acc_first" \
+                                else lib.call(other.name, t, y)
+                            if back != x:
+                                ok = False
+                                break
+                        if not ok:
+                            break
+                except Overflow:
+                    ok = False
+                if ok:
+                    lib.inverses[law.name] = [other.name, order]
+                    brain.note("reflect", f"imagining with my laws: '{other.name}' always undoes "
+                                          f"'{law.name}'")
+                    break
+            if law.name in lib.inverses:
+                break

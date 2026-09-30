@@ -81,6 +81,19 @@ class Library:
 
     def __init__(self):
         self.laws = {}
+        # which step undoes which, as Ultron worked out by imagining with its laws:
+        # "succ" -> ["down"], "merge" -> ["pay", "t_first"] (pay(t, acc) undoes merge(acc, t))
+        self.inverses = {}
+
+    def inverse_of(self, F):
+        """The step that undoes F, if Ultron knows one."""
+        if F[0] in ("succ", "down"):
+            inv = self.inverses.get(F[0])
+            return (inv[0],) if inv else None
+        if F[0] == "call" and F[1] in self.inverses:
+            law, order = self.inverses[F[1]]
+            return ("call" if order == "acc_first" else "callr", law, F[2])
+        return None
 
     def add(self, law):
         self.laws[law.name] = law
@@ -111,11 +124,19 @@ def apply_step(F, acc, t, library):
         return acc - 1 if acc > 0 else 0
     if tag == "down":
         return acc - 1
+    if tag == "callr":
+        return check(library.call(F[1], t, acc))
     return check(library.call(F[1], acc, t))
 
 
 def iterate(F, n, x, t, library):
-    if n < 0 or n > MAX_ITER:
+    if n < 0:
+        # doing something a below-zero number of times = undoing it that many times
+        G = library.inverse_of(F)
+        if G is None:
+            raise Overflow()
+        F, n = G, -n
+    if n > MAX_ITER:
         raise Overflow()
     acc = x
     for _ in range(n):
