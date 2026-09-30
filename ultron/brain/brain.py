@@ -38,6 +38,11 @@ class Brain:
         self.search_steps = {}              # spec -> steps spent searching (effort)
         self.rivals = {}                    # spec -> other programs explaining the same data
         self.inventions = {}                # concepts Ultron made up itself
+        self.kinds = {}                     # kinds of explanation it invented (kinds.py)
+        self.slaws = {}                     # spec -> SequenceLaw (a law of an invented kind)
+        self.kind_steps = {}                # spec -> {"innate", "reuse", "invent"} effort
+        self.inventing = True               # may it invent new kinds? (off: ablation)
+        self.eyes = None                    # learned in Phase 3 (senses/eyes.py)
         self.active = True                  # design experiments when ideas disagree
         self.found_at = {}                  # spec -> experiences when current idea was found
         self.compress = True                # look for patterns among its own laws
@@ -94,9 +99,17 @@ class Brain:
         return (zeros, order, flags)
 
     def unsure(self, options):
-        """Kinds of experience where I hold an idea I haven't confirmed yet."""
+        """Kinds of experience where I hold an idea I haven't confirmed yet, or where I
+        haven't yet watched enough to test any idea at all (a few readings of one cup
+        can't be boring: they can't say anything yet)."""
+        from .kinds import MIN_GROUPS, sequences
         for name in options:
             spec = self.memory.specs.get(name)
+            if spec is not None and spec.kind == "sequence" and name not in self.slaws:
+                seqs = sequences(self.memory.of(name), spec.target, spec.order_by,
+                                 spec.group_by)
+                if sum(1 for xs, ys in seqs.values() if len(ys) >= 4) < MIN_GROUPS:
+                    return name
             if spec is None or spec.kind != "program" or self.hypotheses.get(name) is None:
                 continue
             law = self.library.get(name)
@@ -171,11 +184,98 @@ class Brain:
             return law.solve(spec.target, inputs, group)
         if spec.kind == "feature":
             return None
+        if spec.kind == "sequence":
+            return self._predict_sequence(spec, inputs)
         if spec.kind == "conservation":
             return self._predict_collision(spec_name, inputs)
         if spec.kind == "measure":
             return self._predict_reading(spec, inputs)
         raise ValueError(spec.kind)
+
+    def history(self, spec, group):
+        """This object's readings so far, ordered: (xs, ys)."""
+        from .kinds import sequences
+        eps = [e for e in self.memory.of(spec.name)
+               if not spec.group_by or e.get(spec.group_by) == group]
+        return sequences(eps, spec.target, spec.order_by, spec.group_by).get(
+            group if spec.group_by else "_", ([], []))
+
+    def _predict_sequence(self, spec, inputs):
+        law = self.slaws.get(spec.name)
+        if law is None:
+            return None
+        group = inputs.get(spec.group_by) if spec.group_by else None
+        return law.predict(self.history(spec, group), inputs[spec.order_by], group)
+
+    def _learn_sequence(self, spec, surprised):
+        """Readings along a sequence: first the kinds it was born with, then the kinds it
+        invented, then (if still stuck) a new kind from the grammar."""
+        from . import kinds
+        name = spec.name
+        law = self.slaws.get(name)
+        eps = self.memory.of(name)
+        if law is not None and not surprised:
+            law.provenance["support"] = law.provenance.get("support", 0) + 1
+            return None
+        if law is not None and law.scope == "per group":
+            group = eps[-1].get(spec.group_by)
+            hist = self.history(spec, group)
+            if group not in law.properties:
+                c = law.value_for(group, hist)
+                zs = kinds.transform(law.template, *hist)
+                if c is not None and zs and len(zs) >= 2 and kinds._same(
+                        zs, max(spec.tol, 1e-9) + 4 * spec.precision):
+                    law.properties[group] = c
+                    self.note("measure", f"{name}: met new {spec.group_by} {group}; its "
+                                         f"{law.formula()} = {c:.6g}")
+                    return None
+                if not zs or len(zs) < 2:
+                    return None     # too few readings of this one to say anything yet
+        seqs = kinds.sequences(eps, spec.target, spec.order_by, spec.group_by)
+        if sum(1 for xs, ys in seqs.values() if len(ys) >= 4) < kinds.MIN_GROUPS:
+            return None             # not enough to go on yet
+        effort = self.kind_steps.setdefault(name, {"innate": 0, "reuse": 0, "invent": 0})
+        if law is None and not effort["innate"]:
+            # the kinds it was born with: a product, or a sum, of the readings
+            names = list(spec.inputs) + [spec.target]
+            rows = [{k: e[k] for k in names + ([spec.group_by] if spec.group_by else [])}
+                    for e in eps]
+            r1 = search_invariant(name, rows, names, max(spec.tol, 1e-9) + 4 * spec.precision,
+                                  group_by=spec.group_by)
+            effort["innate"] += r1.steps
+            if r1.law is None and spec.group_by:
+                r2 = search_sum_invariant(name, rows, names, spec.tol + 4 * spec.precision,
+                                          spec.group_by)
+                effort["innate"] += r2.steps
+            if r1.law is not None:
+                self.note("stuck", f"{name}: {r1.law.formula()} stays the same, but only for "
+                                   f"these readings; I keep looking")
+            else:
+                self.note("stuck", f"{name}: no product or sum of the readings stays the same; "
+                                   f"none of the kinds of explanation I was born with fits")
+        new, steps, kind = kinds.explain(self, spec, eps)
+        effort["reuse"] += steps["reuse"]
+        effort["invent"] += steps["invent"]
+        self.search_steps[name] = self.search_steps.get(name, 0) + steps["reuse"] + steps["invent"]
+        if new is None:
+            if effort.get("stuck_at") != len(seqs):
+                effort["stuck_at"] = len(seqs)
+                self.note("stuck", f"{name}: nothing I can express stays the same "
+                                   f"({len(seqs)} {spec.group_by or 'sequence'}s, "
+                                   f"{len(eps)} readings)")
+            if law is not None:
+                self.note("doubt", f"{name}: {law.formula()} just failed; back to being unsure")
+                del self.slaws[name]
+            return None
+        if law is None or law.template != new.template or law.scope != new.scope:
+            self.slaws[name] = new
+            self.note("revise", f"{name}: {new.formula()} stays the same "
+                                f"{'for everything' if new.scope == 'global' else 'for each ' + str(spec.group_by)}"
+                                f" ({kind['name']}: {kind['words']})")
+        else:
+            law.properties.update(new.properties)
+            law.constant = new.constant
+        return new
 
     def _predict_reading(self, spec, inputs):
         """A ruler with `marks` per unit passes c marks when the length lies between
@@ -233,6 +333,9 @@ class Brain:
         elif spec.kind == "feature":
             self.memory.store(spec_name, {"inputs": inputs, "outcome": outcome})
             revised = None
+        elif spec.kind == "sequence":
+            self.memory.store(spec_name, {**inputs, spec.target: outcome})
+            revised = self._learn_sequence(spec, surprised)
         elif spec.kind == "measure":
             self.memory.store(spec_name, {"inputs": inputs, "outcome": outcome})
             revised = None
@@ -351,7 +454,7 @@ class Brain:
         if result.law is None and spec.group_by:
             # no single product stays constant: is something *shared* between two forms?
             result = search_sum_invariant(name, eps, names, spec.tol + 4 * spec.precision,
-                                          spec.group_by)
+                                          spec.group_by, errors=spec.errors)
             self.search_steps[name] += result.steps
         if result.law is None:
             self.note("stuck", f"{name}: nothing stays constant yet ({len(eps)} experiences)")
@@ -424,7 +527,12 @@ class Brain:
             groups = {}
             for e in eps:
                 groups.setdefault(e[law.group_by], []).append(law.total(e))
-            law.properties = {k: sum(v) / len(v) for k, v in sorted(groups.items())}
+            spec = self.memory.specs.get(law.etype)
+            if spec is not None and spec.errors:
+                import statistics      # noisy readings: the middle one, not the average
+                law.properties = {k: statistics.median(v) for k, v in sorted(groups.items())}
+            else:
+                law.properties = {k: sum(v) / len(v) for k, v in sorted(groups.items())}
             return
         if law.kind == "global":
             vals = [self._monomial(e, law.powers) for e in eps]
@@ -528,6 +636,10 @@ class Brain:
             "names": dict(sorted(self.names.items())),
             "search_steps": dict(sorted(self.search_steps.items())),
             "inventions": dict(sorted(self.inventions.items())),
+            "kinds": dict(sorted(self.kinds.items())),
+            "sequence_laws": {k: v.to_json() for k, v in sorted(self.slaws.items())},
+            "kind_steps": dict(sorted(self.kind_steps.items())),
+            "eyes": self.eyes.to_json() if self.eyes is not None else None,
             "quantities": dict(sorted(self.quantities.items())),
             "inverses": dict(sorted(self.library.inverses.items())),
             "cycles": dict(sorted(self.library.cycles.items())),
@@ -559,6 +671,13 @@ class Brain:
         b.search_steps = dict(d.get("search_steps", {}))
         b.inventions = dict(d.get("inventions", {}))
         b.quantities = dict(d.get("quantities", {}))
+        from .kinds import SequenceLaw
+        b.kinds = dict(d.get("kinds", {}))
+        b.slaws = {k: SequenceLaw.from_json(v) for k, v in d.get("sequence_laws", {}).items()}
+        b.kind_steps = dict(d.get("kind_steps", {}))
+        if d.get("eyes"):
+            from ..senses.eyes import Eyes
+            b.eyes = Eyes.from_json(d["eyes"])
         b.library.inverses = dict(d.get("inverses", {}))
         b.library.cycles = dict(d.get("cycles", {}))
         b.library.symmetric = set(d.get("symmetric", []))

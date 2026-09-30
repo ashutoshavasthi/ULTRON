@@ -756,10 +756,117 @@ class Phase3Exam(Lesson):
     kind = "exam"
 
 
+# ------------------------------------------------------- Phase 3: new kinds
+class _Sequences(Lesson):
+    """Readings of one object after another, in order; Ultron picks which world to
+    watch by curiosity."""
+    READS = {}
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        import random
+        self.rng = random.Random(seed)
+        self.state = {}
+
+    def worlds(self):
+        return {}
+
+    def xs(self, name):
+        n = self.READS.get(name, 10)
+        return list(range(n))
+
+    def scene(self, name, wide=False, request=None):
+        world, new, spec = self.worlds()[name]
+        st = self.state.get(name)
+        if st is None or not st["xs"]:
+            st = self.state[name] = {"obj": new(), "xs": self.xs(name)}
+        x = st["xs"].pop(0)
+        return {spec.order_by: x, spec.group_by: st["obj"]}, world.read(st["obj"], x)
+
+
+class CoolingLesson(_Sequences):
+    number, title = 22, "Cooling cups"
+    goal = ("Hot cups cool on a table; a thermometer is read once a minute. Newton's law of "
+            "cooling fits none of Ultron's innate kinds of explanation (no product and no "
+            "sum of readings stays the same). Can it invent a new KIND of explanation, "
+            "'the steps shrink by the same fraction each time', and use it to predict new "
+            "cups and the room's temperature it never measured?")
+    budget = 80
+    READS = {"cool": 10}
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        from ..env.sequences import CoolingCups
+        self.cups = CoolingCups(seed)
+
+    def specs(self):
+        return [Spec("cool", "sequence", {"t": None}, "T", group_by="cup", order_by="t",
+                     tol=0.01, surprise=0.005)]
+
+    def worlds(self):
+        return {"cool": (self.cups, self.cups.new_cup, self.specs()[0])}
+
+
+class SettlingLesson(_Sequences):
+    number, title = 23, "Bouncing, charging, hanging, burning, wandering"
+    goal = ("Five new worlds. Balls bounce lower each time; batteries fill toward full; "
+            "springs are measured by their whole length; candles burn down, read at odd "
+            "times; and a marker blown about by random gusts. Does Ultron reuse the kind of "
+            "explanation it invented (cheaply) where it fits, invent a second kind where it "
+            "doesn't ('equal steps in what I change give equal steps in what I read'), carry "
+            "that to candles, and refuse to explain the random marker at all?")
+    budget = 400
+    READS = {"bounces": 7, "charge": 10, "hang": 6, "burn": 8, "wander": 10}
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        from ..env.sequences import Batteries, BouncingBalls, Candles, HangingSprings, Wanderers
+        self.balls, self.batteries = BouncingBalls(seed), Batteries(seed + 1)
+        self.springs, self.candles = HangingSprings(seed + 2), Candles(seed + 3)
+        self.walkers = Wanderers(seed + 4)
+
+    def specs(self):
+        seq = lambda name, x, y, g, tol=0.01: Spec(name, "sequence", {x: None}, y, group_by=g,
+                                                  order_by=x, tol=tol, surprise=tol / 2)
+        return [seq("bounces", "k", "h", "ball"), seq("charge", "t", "q", "battery"),
+                seq("hang", "F", "L", "spring"), seq("burn", "t", "H", "candle"),
+                seq("wander", "t", "x", "walker")]
+
+    def worlds(self):
+        s = {spec.name: spec for spec in self.specs()}
+        return {"bounces": (self.balls, self.balls.new_ball, s["bounces"]),
+                "charge": (self.batteries, self.batteries.new_battery, s["charge"]),
+                "hang": (self.springs, self.springs.new_spring, s["hang"]),
+                "burn": (self.candles, self.candles.new_candle, s["burn"]),
+                "wander": (self.walkers, self.walkers.new_walker, s["wander"])}
+
+    def xs(self, name):
+        rng = self.rng
+        if name == "hang":
+            return sorted(round(rng.uniform(1, 30), 2) for _ in range(self.READS[name]))
+        if name == "burn":
+            t, out = 0, []
+            for _ in range(self.READS[name]):
+                out.append(t)
+                t += rng.randint(1, 5)      # whenever someone looks
+            return out
+        return super().xs(name)
+
+
 def all_lessons(seed=0):
     return [Permanence(seed), Pairing(seed + 1), Combining(seed + 2), Groups(seed + 3),
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
             Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10),
             WheelLesson(seed + 11), Ramps(seed + 12), Growing(seed + 13),
             SpringyHills(seed + 14), Diagonal(seed + 15), Phase2Exam(seed + 16),
-            CoiledSprings(seed + 17), Phase3Exam(seed + 18)]
+            CoiledSprings(seed + 17), Phase3Exam(seed + 18)] + _phase3(seed)
+
+
+def _phase3(seed):
+    """Phase 3 needs numpy for its senses; without it, lessons 0-18 still run."""
+    try:
+        from .senses_lessons import later_lessons, senses_lessons
+    except ImportError:
+        return []
+    return (senses_lessons(seed) + [CoolingLesson(seed + 22), SettlingLesson(seed + 23)]
+            + later_lessons(seed))

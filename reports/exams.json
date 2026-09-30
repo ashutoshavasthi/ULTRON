@@ -2062,6 +2062,131 @@
   "passed": true,
   "threshold": 0.99
  },
+ "19": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "eyes",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "learned its eyes from touch (a neural network, 3 conv layers)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": 10,
+      "truth": 10,
+      "ultron": 10
+     },
+     {
+      "question": 6,
+      "truth": 6,
+      "ultron": 6
+     },
+     {
+      "question": 2,
+      "truth": 2,
+      "ultron": 2
+     }
+    ],
+    "name": "counts NEW trays of 0-30 things from noisy pixels (looking again when unsure)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      60,
+      60
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": 40,
+      "truth": 40,
+      "ultron": 40
+     },
+     {
+      "question": 47,
+      "truth": 47,
+      "ultron": 47
+     },
+     {
+      "question": 44,
+      "truth": 44,
+      "ultron": 44
+     }
+    ],
+    "name": "NEVER PRACTISED: trays of 31-50 things in a bigger picture",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [],
+    "name": "finds where each thing is, to within half a pixel",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      228,
+      229
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 19,
+  "mean_glances": 2.033333333333333,
+  "passed": true,
+  "story": "I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 83.4 to 3.2). A spot must be at least 0.15 strong to be a thing: that threshold matched my hands best. From now on I see without touching.",
+  "threshold": 0.95,
+  "untrained_network_right": "5/60"
+ },
  "2": {
   "attempt": 1,
   "items": [
@@ -2163,6 +2288,1189 @@
   },
   "passed": true,
   "threshold": 0.99
+ },
+ "20": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "see_merge",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "see_take",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "recognised that what it sees obeys the addition and subtraction it knows",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      2,
+      2
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "nA": 22,
+       "nB": 17
+      },
+      "truth": 39,
+      "ultron": 39
+     },
+     {
+      "question": {
+       "nA": 12,
+       "nB": 6
+      },
+      "truth": 18,
+      "ultron": 18
+     },
+     {
+      "question": {
+       "nA": 19,
+       "nB": 6
+      },
+      "truth": 25,
+      "ultron": 25
+     }
+    ],
+    "name": "PICTURES of trays of 5-25 things: how many together? (played with up to 12)",
+    "scores": {
+     "lookup": [
+      0,
+      25
+     ],
+     "nearest": [
+      0,
+      25
+     ],
+     "ultron": [
+      25,
+      25
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "nA": 23,
+       "n_taken": 6
+      },
+      "truth": 17,
+      "ultron": 17
+     },
+     {
+      "question": {
+       "nA": 22,
+       "n_taken": 16
+      },
+      "truth": 6,
+      "ultron": 6
+     },
+     {
+      "question": {
+       "nA": 16,
+       "n_taken": 7
+      },
+      "truth": 9,
+      "ultron": 9
+     }
+    ],
+    "name": "PICTURES: a tray of 10-25, some taken away: how many left?",
+    "scores": {
+     "lookup": [
+      1,
+      25
+     ],
+     "nearest": [
+      2,
+      25
+     ],
+     "ultron": [
+      25,
+      25
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "laws": {
+   "see_merge": "get_paid(nA, nB)",
+   "see_take": "take_away(nA, n_taken)"
+  },
+  "lesson": 20,
+  "passed": true,
+  "threshold": 0.95
+ },
+ "21": {
+  "attempt": 1,
+  "blank_brain_laws": [
+   "see_push",
+   "see_roll",
+   "see_stretch"
+  ],
+  "energy_law": "y + 0.0518642\u00b7v^2",
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "F=ma",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "stiffness",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "energy",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "rediscovered F = m\u00b7a, stiffness and energy from video alone",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "F=ma",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "stiffness",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "energy",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "a BLANK brain with only these eyes rediscovers all three too",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "F": 17.0,
+       "m": 9.0
+      },
+      "truth": 1.8888888888888888,
+      "ultron": 1.889318466400402
+     },
+     {
+      "question": {
+       "F": 6.0,
+       "m": 4.0
+      },
+      "truth": 1.5,
+      "ultron": 1.5003411350826723
+     },
+     {
+      "question": {
+       "F": 9.0,
+       "m": 9.0
+      },
+      "truth": 1.0,
+      "ultron": 1.0002274233884483
+     }
+    ],
+    "name": "new pushes: acceleration predicted BEFORE watching, vs the true one",
+    "scores": {
+     "lookup": [
+      1,
+      12
+     ],
+     "nearest": [
+      1,
+      12
+     ],
+     "ultron": [
+      12,
+      12
+     ]
+    },
+    "tolerance": 0.03
+   },
+   {
+    "examples": [
+     {
+      "question": [
+       "Hang1",
+       4
+      ],
+      "truth": 3.011554406442542,
+      "ultron": 3.007099781853659
+     },
+     {
+      "question": [
+       "Hang1",
+       5
+      ],
+      "truth": 3.7644430080531777,
+      "ultron": 3.7588747273170733
+     },
+     {
+      "question": [
+       "Hang2",
+       4
+      ],
+      "truth": 3.5059977126153066,
+      "ultron": 3.4916726084941816
+     }
+    ],
+    "name": "NEVER HUNG: 4-5 blocks on its springs; how far will each stretch?",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.04
+   },
+   {
+    "examples": [
+     {
+      "question": [
+       "ExamHill1",
+       2.18
+      ],
+      "truth": 2.9987833537491686,
+      "ultron": 2.9288666980572797
+     },
+     {
+      "question": [
+       "ExamHill1",
+       1.75
+      ],
+      "truth": 4.173893631657897,
+      "ultron": 4.106340522435956
+     },
+     {
+      "question": [
+       "ExamHill1",
+       1.2
+      ],
+      "truth": 5.311687439678743,
+      "ultron": 5.24103497586756
+     }
+    ],
+    "name": "new balls in the valley: after watching a moment, the speed at every later height",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      24,
+      24
+     ]
+    },
+    "tolerance": 0.05
+   }
+  ],
+  "lesson": 21,
+  "passed": true,
+  "push_law": "F / (a\u00b7m)",
+  "threshold": 0.9
+ },
+ "22": {
+  "attempt": 1,
+  "effort": {
+   "innate": 46,
+   "invent": 240,
+   "reuse": 0
+  },
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "cool",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "invented a new KIND of explanation (none of its innate kinds fit)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "cool",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "the same brain without inventing kinds can't explain cooling at all",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "cup": "ExamCup1",
+       "t": 4
+      },
+      "truth": 51.959,
+      "ultron": 51.95823506995164
+     },
+     {
+      "question": {
+       "cup": "ExamCup1",
+       "t": 7
+      },
+      "truth": 35.972,
+      "ultron": 35.96882759800607
+     },
+     {
+      "question": {
+       "cup": "ExamCup1",
+       "t": 14
+      },
+      "truth": 20.07,
+      "ultron": 20.063095028855873
+     }
+    ],
+    "name": "new cups, after 3 looks: the temperature 3-20 minutes on",
+    "scores": {
+     "lookup": [
+      0,
+      40
+     ],
+     "nearest": [
+      0,
+      40
+     ],
+     "ultron": [
+      40,
+      40
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamCup1",
+      "truth": 13.853914512468739,
+      "ultron": 13.843925600739404
+     },
+     {
+      "question": "ExamCup2",
+      "truth": 23.416533868578334,
+      "ultron": 23.421924969248963
+     },
+     {
+      "question": "ExamCup3",
+      "truth": 22.0836707940489,
+      "ultron": 22.09480787537879
+     }
+    ],
+    "name": "NEVER MEASURED: the room's temperature (where a cup settles)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.02
+   }
+  ],
+  "lesson": 22,
+  "passed": true,
+  "story": "None of the kinds of explanation I was born with fits 'cool': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u03c1(\u0394(T)) stays the same for each cup (3 cups). That is a new KIND of explanation, not just a new law: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time.",
+  "threshold": 0.95
+ },
+ "23": {
+  "attempt": 1,
+  "effort": {
+   "bounces": {
+    "innate": 46,
+    "invent": 0,
+    "reuse": 36
+   },
+   "burn": {
+    "innate": 46,
+    "invent": 0,
+    "reuse": 40
+   },
+   "charge": {
+    "innate": 46,
+    "invent": 0,
+    "reuse": 48
+   },
+   "hang": {
+    "innate": 46,
+    "invent": 32,
+    "reuse": 0
+   },
+   "wander": {
+    "innate": 46,
+    "invent": 167440,
+    "reuse": 66976,
+    "stuck_at": 11
+   }
+  },
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "bounces",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "charge",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "burn",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "REUSED its invented 'settling' kind for bounces and batteries, and its 'equal steps' kind for candles (no new kind invented)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "hang",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "invented a second kind where the first didn't fit (spring lengths)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "bounces",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "charge",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "burn",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "on the same readings, trying its invented kinds first never takes more search than the whole grammar, and takes less for bounces and batteries",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "wander",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "the randomly blown marker, even after watching 8 more walks of 20 steps: explained by nothing, and no kind invented for it",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "ball": "ExamBall1",
+       "k": 3
+      },
+      "truth": 0.5546,
+      "ultron": 0.5545477333885325
+     },
+     {
+      "question": {
+       "ball": "ExamBall1",
+       "k": 5
+      },
+      "truth": 0.2051,
+      "ultron": 0.2050540112675929
+     },
+     {
+      "question": {
+       "ball": "ExamBall1",
+       "k": 8
+      },
+      "truth": 0.0461,
+      "ultron": 0.046064285711958516
+     }
+    ],
+    "name": "new balls, after 3 bounces: heights of bounces 3-8",
+    "scores": {
+     "lookup": [
+      0,
+      24
+     ],
+     "nearest": [
+      0,
+      24
+     ],
+     "ultron": [
+      23,
+      24
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamBattery1",
+      "truth": 84.19935986598614,
+      "ultron": 84.20481108108109
+     },
+     {
+      "question": "ExamBattery2",
+      "truth": 119.6972608477195,
+      "ultron": 119.71052238001076
+     },
+     {
+      "question": "ExamBattery3",
+      "truth": 50.15778202942055,
+      "ultron": 50.25664935064937
+     }
+    ],
+    "name": "NEVER MEASURED: a new battery's full charge, after 3 readings",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      8,
+      8
+     ]
+    },
+    "tolerance": 0.02
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "F": 5.0,
+       "spring": "ExamCoil1"
+      },
+      "truth": 0.2911,
+      "ultron": 0.291095
+     },
+     {
+      "question": {
+       "F": 20.0,
+       "spring": "ExamCoil1"
+      },
+      "truth": 0.42468,
+      "ultron": 0.42466999999999994
+     },
+     {
+      "question": {
+       "F": 40.0,
+       "spring": "ExamCoil1"
+      },
+      "truth": 0.60278,
+      "ultron": 0.6027699999999998
+     }
+    ],
+    "name": "new springs, after 2 weights: length with other weights",
+    "scores": {
+     "lookup": [
+      0,
+      24
+     ],
+     "nearest": [
+      0,
+      24
+     ],
+     "ultron": [
+      24,
+      24
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamCoil1",
+      "truth": 0.24656868513994065,
+      "ultron": 0.24657
+     },
+     {
+      "question": "ExamCoil2",
+      "truth": 0.3987025464902265,
+      "ultron": 0.39869750000000004
+     },
+     {
+      "question": "ExamCoil3",
+      "truth": 0.10067620869751667,
+      "ultron": 0.1006725
+     }
+    ],
+    "name": "NEVER MEASURED: a spring's unstretched length",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      8,
+      8
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamCandle1",
+      "truth": 47.39674846376657,
+      "ultron": 47.40552016985137
+     },
+     {
+      "question": "ExamCandle2",
+      "truth": 66.05126784580793,
+      "ultron": 66.05251544571938
+     },
+     {
+      "question": "ExamCandle3",
+      "truth": 19.596140897973537,
+      "ultron": 19.595933263816473
+     }
+    ],
+    "name": "NEVER TRAINED: when will a new candle burn out? (after 2 looks)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      8,
+      8
+     ]
+    },
+    "tolerance": 0.02
+   }
+  ],
+  "lesson": 23,
+  "passed": true,
+  "reuse": {
+   "bounces": 84,
+   "burn": 72,
+   "charge": 96
+  },
+  "scratch": {
+   "bounces": 168,
+   "burn": 72,
+   "charge": 404
+  },
+  "threshold": 0.95
+ },
+ "24": {
+  "attempt": 1,
+  "carpet_first_try": "0/12",
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "slide",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "found how far a kicked puck slides (distance / speed\u00b2 fixed on a floor)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [],
+    "name": "goals on WOOD (the floor it played on): stopped within 10 cm, first try",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      12,
+      12
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [],
+    "name": "goals on CARPET (never touched): a cautious first kick, then within 10 cm on the second try",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      12,
+      12
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 24,
+  "passed": true,
+  "random_kicks_hit": "4%",
+  "threshold": 0.9,
+  "traces": [
+   [
+    "my law: d / u^2 = 0.1707",
+    "try 1: u = 4.15, so d should be 2.94; it was 2.93"
+   ],
+   [
+    "I've never done this on carpet: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1707), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
+    "try 1: u = 2.82, so d should be 1.35; it was 0.905",
+    "so here d / u^2 = 0.114; now for the mark itself",
+    "try 2: u = 4.88, so d should be 2.71; it was 2.69"
+   ]
+  ]
+ },
+ "25": {
+  "attempt": 1,
+  "drain_effort": {
+   "innate": 46,
+   "invent": 0,
+   "reuse": 40
+  },
+  "drain_scratch": 940,
+  "ice_trace": [
+   [
+    "I've never done this on ice: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1707), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
+    "try 1: u = 1.78, so d should be 0.542; it was 1.35",
+    "so here d / u^2 = 0.4258; now for the mark itself",
+    "try 2: u = 1.6, so d should be 1.08; it was 1.09"
+   ]
+  ],
+  "items": [
+   {
+    "examples": [
+     {
+      "question": 37,
+      "truth": 37,
+      "ultron": 37
+     },
+     {
+      "question": 41,
+      "truth": 41,
+      "ultron": 41
+     },
+     {
+      "question": 32,
+      "truth": 32,
+      "ultron": 32
+     }
+    ],
+    "name": "counts trays of 0-50 things from pixels",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": [
+       8,
+       1
+      ],
+      "truth": 8.0,
+      "ultron": 8.001819387107586
+     },
+     {
+      "question": [
+       3,
+       4
+      ],
+      "truth": 0.75,
+      "ultron": 0.7501705675413362
+     },
+     {
+      "question": [
+       13,
+       4
+      ],
+      "truth": 3.25,
+      "ultron": 3.2507391260124567
+     }
+    ],
+    "name": "predicts a push's acceleration BEFORE watching, counting the load by eye",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.03
+   },
+   {
+    "examples": [
+     {
+      "question": "drain",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "a NEW world (draining tanks): explained on first meeting by a kind of explanation it invented lessons earlier, no new search needed",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "t": 3,
+       "tank": "Tank6"
+      },
+      "truth": 1.2294,
+      "ultron": 1.2293863904268618
+     },
+     {
+      "question": {
+       "t": 8,
+       "tank": "Tank6"
+      },
+      "truth": 0.4224,
+      "ultron": 0.42241309301223123
+     },
+     {
+      "question": {
+       "t": 15,
+       "tank": "Tank6"
+      },
+      "truth": 0.1724,
+      "ultron": 0.17233816679682665
+     }
+    ],
+    "name": "new tanks after 3 readings: level 3-15 minutes on",
+    "scores": {
+     "lookup": [
+      0,
+      18
+     ],
+     "nearest": [
+      0,
+      18
+     ],
+     "ultron": [
+      18,
+      18
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "Tank12",
+      "truth": 0.05889914183776997,
+      "ultron": 0.05921076852288343
+     },
+     {
+      "question": "Tank13",
+      "truth": 0.05050367415201888,
+      "ultron": 0.048072793863604746
+     },
+     {
+      "question": "Tank14",
+      "truth": 0.13053143752440666,
+      "ultron": 0.13103414637913724
+     }
+    ],
+    "name": "NEVER MEASURED: how high the hole is (where the water stops), after 6 readings, to within 5 mm",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      6,
+      6
+     ]
+    },
+    "tolerance": "\u00b10.005"
+   },
+   {
+    "examples": [
+     {
+      "question": "drain",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "the same brain with its invented kinds removed can't explain the tanks",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [],
+    "name": "goals on ICE (never touched): a cautious first kick, then within 10 cm on the second try",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 25,
+  "passed": true,
+  "threshold": 0.9
  },
  "3": {
   "attempt": 1,

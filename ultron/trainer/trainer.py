@@ -51,6 +51,7 @@ class Trainer:
         lesson = self.lessons[number]
         brain = self.brain
         brain.lesson = number
+        lesson.brain = brain            # lessons with senses need to know whose eyes look
         self.say(f"Lesson {number}: {lesson.title}")
         for spec in lesson.specs():
             brain.meet(spec)
@@ -70,6 +71,8 @@ class Trainer:
                 self.teach_wheel(lesson)
             elif lesson.number == 15:
                 self.teach_diagonal(lesson)
+            elif lesson.number == 19:
+                self.teach_handling(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -211,6 +214,27 @@ class Trainer:
             inputs, reading = lesson.ruler(marks)
             brain.experience("ruler", inputs, reading)
 
+    # ----------------------------------------------------------- lesson 19
+    def teach_handling(self, lesson):
+        from ..senses.eyes import Eyes
+        brain = self.brain
+        self.say("Pick these things up and put them down. Your hands will tell you where "
+                 "they are; watch at the same time.")
+        pics, touches = zip(*lesson.handling())
+        eyes = Eyes(seed=lesson.seed)
+        losses = eyes.learn(list(pics), list(touches), seed=lesson.seed)
+        brain.eyes = eyes
+        brain.inventions["eyes"] = {
+            "shape": "learned perception", "primitives": [], "lesson": brain.lesson,
+            "story": (f"I handled things {len(pics)} times while watching. My hands said where "
+                      f"each thing was; I trained a small network of 3 layers of 3x3 filters "
+                      f"to light up where my hands felt something (error per picture fell from "
+                      f"{losses[0]:.1f} to {losses[-1]:.1f}). A spot must be at least "
+                      f"{eyes.threshold:.2f} strong to be a thing: that threshold matched my "
+                      f"hands best. From now on I see without touching.")}
+        brain.note("invent", brain.inventions["eyes"]["story"])
+        self.say("Now put your hands behind your back. Only look.")
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -233,6 +257,18 @@ class Trainer:
              "bounce": "conservation of energy with a spring"},
         17: {"why:coil_stretch": "a law about a law: stiffness is inversely proportional "
                                  "to the number of coils"},
+        19: {"eyes": "vision (a learned convolutional neural network)"},
+        20: {"see_merge": "addition, seen", "see_take": "subtraction, seen"},
+        21: {"see_push": "Newton's second law, seen on video",
+             "see_stretch": "stiffness (Hooke's law), seen on video",
+             "see_roll": "conservation of energy, seen on video"},
+        22: {"kind:cool": "exponential decay toward equilibrium (Newton's law of cooling)",
+             "cool": "Newton's law of cooling"},
+        23: {"kind:hang": "a linear relationship (a constant rate of change)",
+             "bounces": "coefficient of restitution (geometric decay)",
+             "charge": "exponential approach to a limit", "hang": "Hooke's law with an "
+             "unstretched length", "burn": "constant rate"},
+        24: {"slide": "sliding friction (stopping distance ∝ speed²)"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }
@@ -243,7 +279,10 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=18):
-        for n in range(upto + 1):
-            self.run(n)
+    def run_all(self, upto=None):
+        if upto is None:
+            upto = max(self.lessons)
+        for n in sorted(self.lessons):
+            if n <= upto:
+                self.run(n)
         return self.results

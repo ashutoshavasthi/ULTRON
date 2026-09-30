@@ -11,11 +11,13 @@ class Spec:
       "program"       discrete inputs -> discrete outcome; law = small program
       "quantity"      measured numbers; law = invariant combination
       "conservation"  objects before/after an event; law = conserved total
+      "sequence"      readings of one object as something changes step by step; law =
+                      any kind of explanation it has (innate, invented, or new)
     """
 
     def __init__(self, name, kind, inputs=None, target=None, out_type=None, group_by=None,
                  units=None, tol=1e-9, surprise=1e-6, precision=0.0, action=None,
-                 state_var=None):
+                 state_var=None, order_by=None, errors=None):
         self.name = name
         self.kind = kind
         self.inputs = dict(inputs or {})    # var -> type (program) or var -> dims (quantity)
@@ -28,6 +30,9 @@ class Spec:
         self.precision = precision          # instruments' stated relative precision (±)
         self.action = action                # for state changes: which action ("earn")
         self.state_var = state_var          # ... and which part of the state it predicts
+        self.order_by = order_by            # sequences: what orders the readings (t, F)
+        self.errors = errors                # {quantity: key of its own measured ± in each
+                                            # experience}, when Ultron measures its noise
 
     def to_json(self):
         return {k: (list(v) if isinstance(v, tuple) else v) for k, v in self.__dict__.items()}

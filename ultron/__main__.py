@@ -31,7 +31,10 @@ BRAIN = os.path.join("brain", "ultron_brain.json")
 def cmd_train(args):
     brain = Brain()
     trainer = Trainer(brain, seed=args.seed)
-    for n in range(args.upto + 1):
+    upto = max(trainer.lessons) if args.upto is None else args.upto
+    for n in sorted(trainer.lessons):
+        if n > upto:
+            continue
         r = trainer.run(n)
         status = "passed" if r["passed"] else "FAILED"
         print(f"lesson {n}: {status} (attempt {r['attempt']})")
@@ -50,6 +53,26 @@ def cmd_exam(args):
             print(f"lesson {n} | {item['name']}: ultron {s['ultron'][0]}/{s['ultron'][1]}  "
                   f"lookup {s['lookup'][0]}/{s['lookup'][1]}  "
                   f"nearest {s['nearest'][0]}/{s['nearest'][1]}")
+
+
+def cmd_look(args):
+    """Show Ultron a picture (a .npy array of brightness 0-1, or a plain PGM file)."""
+    import numpy as np
+    brain = Brain.load(args.brain)
+    if brain.eyes is None:
+        print("I have no eyes yet (train through lesson 19)")
+        return
+    if args.file.endswith(".npy"):
+        img = np.load(args.file)
+    else:
+        with open(args.file, "rb") as f:
+            parts = f.read().split(maxsplit=4)
+        w, h, top = int(parts[1]), int(parts[2]), float(parts[3])
+        img = np.frombuffer(parts[4], dtype=np.uint8)[: w * h].reshape(h, w) / top
+    seen = brain.eyes.see(np.asarray(img, dtype=float))
+    print(f"I see {len(seen)} thing{'s' if len(seen) != 1 else ''}")
+    for x, y, strength in seen:
+        print(f"  at x={x:.1f}, y={y:.1f} (strength {strength:.2f})")
 
 
 def cmd_ask(args):
@@ -191,7 +214,7 @@ def main(argv=None):
     p.add_argument("--brain", default=BRAIN)
     sub = p.add_subparsers(dest="cmd", required=True)
     t = sub.add_parser("train")
-    t.add_argument("--upto", type=int, default=18)
+    t.add_argument("--upto", type=int, default=None)
     t.add_argument("--seed", type=int, default=0)
     sub.add_parser("exam")
     a = sub.add_parser("ask")
@@ -202,9 +225,12 @@ def main(argv=None):
     bl = sub.add_parser("blind")
     bl.add_argument("file")
     sub.add_parser("experiment")
+    lk = sub.add_parser("look")
+    lk.add_argument("file")
     args = p.parse_args(argv)
     {"train": cmd_train, "exam": cmd_exam, "ask": cmd_ask, "why": cmd_why,
-     "show": cmd_show, "blind": cmd_blind, "experiment": cmd_experiment}[args.cmd](args)
+     "show": cmd_show, "blind": cmd_blind, "experiment": cmd_experiment,
+     "look": cmd_look}[args.cmd](args)
 
 
 if __name__ == "__main__":

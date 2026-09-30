@@ -58,6 +58,25 @@ def laws_section(brain):
             lines.append(f"| `{name}` | total `{law.formula()}` before = after | — | "
                          f"{scope} | {law.provenance.get('support', 0)} events | "
                          f"{brain.names.get(name, '') if law.scope == 'all' else ''} |")
+    if getattr(brain, "slaws", None):
+        lines += ["", "### Laws of kinds Ultron invented (Phase 3)", "",
+                  "| Experience | What stays the same | Where | Kind | Called |",
+                  "|---|---|---|---|---|"]
+        for name, law in sorted(brain.slaws.items()):
+            kind = next((k["name"] for k in brain.kinds.values()
+                         if k["template"] == law.template), "")
+            where = ("for everything" if law.scope == "global"
+                     else f"one per {law.group_by} ({len(law.properties)} {law.group_by}s)")
+            lines.append(f"| `{name}` | `{law.formula()}` | {where} | {kind} | "
+                         f"{brain.names.get(name, '')} |")
+    if getattr(brain, "kinds", None):
+        lines += ["", "### Kinds of explanation", "",
+                  "Born with: " + "; ".join(f"*{k}*" for k in __import__(
+                      "ultron.brain.kinds", fromlist=["INNATE"]).INNATE) + ".", "",
+                  "Invented:", ""]
+        for k in sorted(brain.kinds.values(), key=lambda k: k["order"]):
+            lines.append(f"- **{k['name']}** (lesson {k['lesson']}, found in `{k['found_in']}`, "
+                         f"used for {', '.join(f'`{u}`' for u in k['uses'])}): {k['words']}")
     if brain.inventions:
         lines += ["", "### Concepts Ultron invented itself", ""]
         for key, inv in sorted(brain.inventions.items()):
@@ -173,6 +192,28 @@ def special_section(results, brain):
         r = results.get(str(n)) or results.get(n)
         if r and r.get("story"):
             lines.append(f"- **{what}** (lesson {n}, Phase 2): _{r['story']}_")
+    r19 = results.get("19") or results.get(19)
+    if r19:
+        lines.append(f"- **Eyes** (lesson 19): a convolutional network trained from touch. On new "
+                     f"trays it looked {r19.get('mean_glances', 0):.2f} times on average (looking "
+                     f"again when two glances disagreed). The same network before learning "
+                     f"counted {r19.get('untrained_network_right')} trays right.")
+    r21 = results.get("21") or results.get(21)
+    if r21:
+        lines.append(f"- **Laws from video** (lesson 21): `{r21.get('push_law')}` and "
+                     f"`{r21.get('energy_law')}`; a blank brain with only the eyes found "
+                     f"{', '.join(r21.get('blank_brain_laws', []))}.")
+    r23 = results.get("23") or results.get(23)
+    if r23 and r23.get("scratch"):
+        rows = ", ".join(f"{n}: {r23['reuse'][n]} steps trying its own kinds first vs "
+                         f"{r23['scratch'][n]} searching the whole grammar"
+                         for n in r23["scratch"])
+        lines.append(f"- **Reusing invented kinds** (lesson 23): {rows}.")
+    r24 = results.get("24") or results.get(24)
+    if r24:
+        lines.append(f"- **Acting** (lesson 24): random kicks hit a mark "
+                     f"{r24.get('random_kicks_hit')} of the time. On the never-touched carpet: "
+                     f"_{' / '.join(r24.get('traces', [[]])[-1])}_")
     r10 = results.get("10") or results.get(10)
     if r10:
         lines.append("- **Tough final exam** (lesson 10): no teaching; kinds of question never "
@@ -204,7 +245,7 @@ def report_card(brain, results):
 
 def transcript(brain):
     keep = {"trainer", "revise", "confirm", "stuck", "bored", "word", "measure", "reflect",
-            "conflict", "meet"}
+            "conflict", "meet", "invent", "reuse"}
     lines = ["# Training transcript", "",
              "Everything Ultron and the Trainer said, in order (individual play choices "
              "omitted; see `brain/ultron_brain.json`).", ""]

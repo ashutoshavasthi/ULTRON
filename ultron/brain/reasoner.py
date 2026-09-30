@@ -410,8 +410,48 @@ def _in_a_gap(brain, op, left, known, goal, unknown_first, steps):
     return Answer(("between", lo, hi), text, steps)
 
 
+def sequence(brain, target, knowns):
+    """'find T given t=10 T@0=80 T@1=70 T@2=62.5': readings of one thing (value@when),
+    then a question about another moment, or 'find rest ...' for where it settles."""
+    readings = {}
+    for k, v in knowns.items():
+        if "@" in k:
+            var, at = k.split("@", 1)
+            readings.setdefault(var, {})[float(at)] = v
+    if len(readings) != 1:
+        return Answer(None, "give readings of one quantity, like T@0=80 T@1=70", [])
+    (var, by_x), = readings.items()
+    xs = sorted(by_x)
+    ys = [by_x[x] for x in xs]
+    rest = target in ("rest", "settle", "limit")
+    for name, law in sorted(getattr(brain, "slaws", {}).items()):
+        if law.target != var:
+            continue
+        if not rest and (target != var or law.order_by not in knowns):
+            continue
+        label = brain.names.get(name, name)
+        kind = next((k for k in brain.kinds.values() if k["template"] == law.template), None)
+        steps = [f"'{name}' ({label}): {law.formula()} stays the same"
+                 + (f" ({kind['words']})" if kind else "")]
+        if rest:
+            value = law.resting_value((xs, ys))
+            if value is None:
+                return Answer(None, f"by {name}, this doesn't settle anywhere", steps)
+            steps.append(f"from these readings it settles at {value:.6g}")
+            return Answer(value, f"it settles at {var} = {value:.6g}", steps)
+        at = knowns[law.order_by]
+        value = law.predict((xs, ys), at)
+        if value is None:
+            return Answer(None, f"I need more readings (or evenly spaced ones) to say", steps)
+        steps.append(f"from the readings, {var} at {law.order_by} = {at:g} is {value:.6g}")
+        return Answer(value, f"{var} = {value:.6g}", steps)
+    return Answer(None, f"I know nothing that changes like {var} does", [])
+
+
 def physics(brain, target, knowns, objects=None):
     """Chain quantity laws: repeatedly use any law with exactly one unknown."""
+    if any("@" in k for k in knowns):
+        return sequence(brain, target, knowns)
     objects = dict(objects or {})
     known = dict(knowns)
     steps = []

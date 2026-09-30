@@ -23,6 +23,7 @@ quantity that flows between A and B while its total never changes.
 """
 
 import itertools
+import statistics
 import math
 
 MAX_POWER = 4
@@ -239,9 +240,38 @@ def _fit(groups, monos):
     return terms, worst, props
 
 
-def search_sum_invariant(etype, episodes, names, tol, group_by, max_complexity=2, max_terms=3):
+def _noise_check(groups, terms, errors):
+    """With readings whose uncertainties Ultron measured itself: are the leftovers no
+    bigger than that noise? Returns (ok, robust relative spread, properties)."""
+    zs, props, worst = [], {}, 0.0
+    for key, g in groups.items():
+        vals = [sum(c * _mono(e, m) for m, c in terms) for e in g]
+        centre = statistics.median(vals)
+        props[key] = centre
+        for e, v in zip(g, vals):
+            var = 0.0
+            for m, c in terms:
+                for x, p in m.items():
+                    if x in errors and e.get(errors[x]) is not None and e[x] != 0:
+                        var += (c * p * _mono(e, m) / e[x] * e[errors[x]]) ** 2
+            sigma = var ** 0.5 or 1e-12
+            if len(g) >= 2:
+                zs.append(abs(v - centre) / sigma)
+        if len(vals) >= 2:
+            mad = statistics.median([abs(v - centre) for v in vals])
+            worst = max(worst, 1.4826 * mad / (abs(centre) or 1.0))
+    if not zs:
+        return False, worst, props
+    outliers = sum(1 for z in zs if z > 4) / len(zs)
+    return statistics.median(zs) <= 1.5 and outliers <= 0.1, worst, props
+
+
+def search_sum_invariant(etype, episodes, names, tol, group_by, max_complexity=2, max_terms=3,
+                         errors=None):
     """Find the simplest sum of terms that stays constant within each group (and differs
-    between groups): two terms first, then three. Coefficients are fitted, not given."""
+    between groups): two terms first, then three. Coefficients are fitted, not given.
+    errors: {quantity: key of its measured uncertainty in each episode}; then a sum is
+    accepted when what's left over is the size of that noise, not a fixed tolerance."""
     names = sorted(names)
     monos = monomials(names, max_complexity)
     groups = {}
@@ -260,7 +290,11 @@ def search_sum_invariant(etype, episodes, names, tol, group_by, max_complexity=2
             if fit is None:
                 continue
             terms, worst, props = fit
-            if worst > tol:
+            if errors:
+                ok, worst, props = _noise_check(groups, terms, errors)
+                if not ok:
+                    continue
+            elif worst > tol:
                 continue
             if len({round(v, 9) for v in props.values()}) < 2:
                 continue    # the same everywhere: a plain law, not a hidden quantity

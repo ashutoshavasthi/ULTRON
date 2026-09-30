@@ -13,6 +13,8 @@ import random
 
 from ..brain import reasoner
 from ..brain.brain import Brain
+from ..brain.dsl import show
+from ..brain.invariants import SumLaw
 from ..brain.language import read_number
 from ..logic import peano
 from ..env import dataworld
@@ -55,9 +57,10 @@ def nearest(episodes, target, inputs):
 
 
 class Tally:
-    def __init__(self, name, tol=None):
+    def __init__(self, name, tol=None, abs_tol=None):
         self.name = name
         self.tol = tol
+        self.abs_tol = abs_tol      # when a relative tolerance would be unfair (tiny values)
         self.scores = {"ultron": [0, 0], "lookup": [0, 0], "nearest": [0, 0]}
         self.examples = []
 
@@ -70,6 +73,8 @@ class Tally:
                     and hi[0] / hi[1] - lo[0] / lo[1] <= (self.tol or 1.0))
         if got is None:
             return False
+        if self.abs_tol is not None:
+            return abs(got - truth) <= self.abs_tol
         if self.tol is None:
             return got == truth
         return abs(got - truth) <= self.tol * abs(truth)
@@ -93,7 +98,7 @@ class Tally:
 
     def to_json(self):
         return {"name": self.name, "scores": self.scores, "examples": self.examples,
-                "tolerance": self.tol}
+                "tolerance": self.tol if self.abs_tol is None else f"±{self.abs_tol}"}
 
 
 def _result(lesson, tallies, threshold, extra=None):
@@ -886,8 +891,386 @@ def show_law(brain, name):
     return show_expr(law.expr) if law else None
 
 
+# ---------------------------------------------------------------- Phase 3: senses
+def exam_eyes(brain, seed=1019):
+    import numpy as np
+    from ..senses.eyes import Eyes
+    from ..senses.world import Trays
+    b = copy.deepcopy(brain)
+    trays = Trays(seed)
+    rng = np.random.default_rng(seed)
+    learned = Tally("learned its eyes from touch (a neural network, 3 conv layers)")
+    learned.item("eyes", True, b.eyes is not None and b.eyes.trained_on > 0)
+    count = Tally("counts NEW trays of 0-30 things from noisy pixels (looking again when unsure)")
+    big = Tally("NEVER PRACTISED: trays of 31-50 things in a bigger picture")
+    glances = []
+    blank = Eyes(seed=seed)         # the same network before any learning
+    blank_right = 0
+    for _ in range(60):
+        n = int(rng.integers(0, 31))
+        look = trays.tray(n)
+        c, g = b.eyes.count(look)
+        glances.append(g)
+        count.item(n, n, c)
+        blank_right += blank.count(look)[0] == n
+    for _ in range(20):
+        n = int(rng.integers(31, 51))
+        big.item(n, n, b.eyes.count(trays.tray(n))[0])
+    where = Tally("finds where each thing is, to within half a pixel")
+    for _ in range(30):
+        img, touch = trays.handle(int(rng.integers(1, 15)))
+        seen = b.eyes.see(img)
+        for x, y in touch:
+            d = min(((sx - x) ** 2 + (sy - y) ** 2) ** 0.5 for sx, sy, _ in seen) if seen else 9
+            where.add("ultron", d <= 0.5, True)
+    inv = b.inventions.get("eyes")
+    return _result(19, [learned, count, big, where], 0.95,
+                   {"story": inv["story"] if inv else None,
+                    "mean_glances": sum(glances) / len(glances),
+                    "untrained_network_right": f"{blank_right}/60"})
+
+
+def exam_seeing_numbers(brain, seed=1020):
+    import numpy as np
+    from ..senses.world import Trays
+    b = copy.deepcopy(brain)
+    trays = Trays(seed)
+    rng = np.random.default_rng(seed)
+    same = Tally("recognised that what it sees obeys the addition and subtraction it knows")
+    same.item("see_merge", True, b.library.get("see_merge") is not None)
+    same.item("see_take", True, b.library.get("see_take") is not None)
+    add = Tally("PICTURES of trays of 5-25 things: how many together? (played with up to 12)")
+    take = Tally("PICTURES: a tray of 10-25, some taken away: how many left?")
+    for _ in range(25):
+        a, c = int(rng.integers(5, 26)), int(rng.integers(5, 26))
+        inputs = {"nA": b.eyes.count(trays.tray(a))[0], "nB": b.eyes.count(trays.tray(c))[0]}
+        add.item(inputs, a + c, b.predict("see_merge", inputs), b.memory.of("see_merge"),
+                 "total", inputs)
+        a = int(rng.integers(10, 26))
+        t = int(rng.integers(0, a + 1))
+        inputs = {"nA": b.eyes.count(trays.tray(a))[0], "n_taken": b.eyes.count(trays.tray(t))[0]}
+        take.item(inputs, a - t, b.predict("see_take", inputs), b.memory.of("see_take"),
+                  "left", inputs)
+    laws = {n: show(b.library.get(n).expr) for n in ("see_merge", "see_take")
+            if b.library.get(n)}
+    return _result(20, [same, add, take], 0.95, {"laws": laws})
+
+
+def exam_watching(brain, seed=1021):
+    from ..senses.world import G, HillTrack, PushTable
+    from ..trainer.senses_lessons import WatchingMotion
+    from ..trainer.trainer import free_play
+    b = copy.deepcopy(brain)
+    lesson = WatchingMotion(seed)
+    lesson.brain = b
+    found = Tally("rediscovered F = m·a, stiffness and energy from video alone")
+    push = b.qlaws.get("see_push")
+    found.item("F=ma", True, bool(push) and push.powers == {"F": 1, "a": -1, "m": -1}
+               and abs(push.constant - 1) < 0.02)
+    st = b.qlaws.get("see_stretch")
+    found.item("stiffness", True, bool(st) and st.kind == "grouped"
+               and st.powers == {"W": 1, "x": -1})
+    roll = b.qlaws.get("see_roll")
+    found.item("energy", True, isinstance(roll, SumLaw) and roll.a == {"y": 1}
+               and roll.b == {"v": 2} and abs(roll.coef * 2 * G - 1) < 0.03)
+    # the same, starting from a blank brain that has only these eyes
+    fresh = Brain("blank")
+    fresh.eyes = b.eyes
+    fresh_lesson = WatchingMotion(seed + 1)
+    fresh_lesson.brain = fresh
+    for spec in fresh_lesson.specs():
+        fresh.meet(spec)
+    free_play(fresh, fresh_lesson, fresh_lesson.budget)
+    fp, fs, fr = (fresh.qlaws.get(n) for n in ("see_push", "see_stretch", "see_roll"))
+    blank = Tally("a BLANK brain with only these eyes rediscovers all three too")
+    blank.item("F=ma", True, bool(fp) and fp.powers == {"F": 1, "a": -1, "m": -1})
+    blank.item("stiffness", True, bool(fs) and fs.powers == {"W": 1, "x": -1})
+    blank.item("energy", True, isinstance(fr, SumLaw) and fr.b == {"v": 2})
+    pushes = Tally("new pushes: acceleration predicted BEFORE watching, vs the true one",
+                   tol=0.03)
+    table = PushTable(seed)
+    rng = random.Random(seed)
+    for _ in range(12):
+        F, blocks = rng.randint(1, 20), rng.randint(1, 9)
+        m, _ = b.eyes.count(table.load(blocks))
+        inputs = {"F": float(F), "m": float(m)}
+        pushes.item(inputs, PushTable.truth(F, blocks), b.predict("see_push", inputs),
+                    b.memory.of("see_push"), "a", inputs)
+    hang = Tally("NEVER HUNG: 4-5 blocks on its springs; how far will each stretch?", tol=0.04)
+    stand = WatchingMotion(seed=21).stand     # the springs it played with (Judge's truth)
+    for spring in sorted(st.properties) if st else []:
+        for blocks in (4, 5):
+            hang.item((spring, blocks), stand.extension(spring, blocks),
+                      st.solve("x", {"W": float(blocks)}, spring))
+    hills = Tally("new balls in the valley: after watching a moment, the speed at every "
+                  "later height", tol=0.05)
+    from ..senses import measure
+    track = HillTrack(seed, prefix="ExamHill")
+    for release in (0.15, 0.45, 0.8, 1.05):
+        run, pics, truth, fps = track.film(release)
+        # heights are read up from the lowest ruler mark, which is the valley floor
+        first = measure.path_samples(b.eyes, pics[:14], fps)[:1]
+        for y, v, sy, sv in first:
+            b.experience("see_roll", {"y": y, "run": run, "±y": sy, "±v": sv}, v)
+        law = b.qlaws.get("see_roll")
+        for x, y, v in truth[20::8]:
+            got = law.solve("v", {"y": y}, run) if isinstance(law, SumLaw) else None
+            if v > 0.5:
+                hills.item((run, round(y, 2)), v, got)
+    return _result(21, [found, blank, pushes, hang, hills], 0.9,
+                   {"push_law": push.formula() if push else None,
+                    "energy_law": roll.formula() if roll else None,
+                    "blank_brain_laws": sorted(fresh.qlaws)})
+
+
+# ---------------------------------------------------------------- Phase 3: new kinds
+def _watch(b, spec_name, world, obj, xs):
+    """Ultron watches the first readings of a new object (this is allowed to teach the
+    exam copy about that one object, as looking at a new cup would)."""
+    spec = b.memory.specs[spec_name]
+    for x in xs:
+        b.experience(spec_name, {spec.order_by: x, spec.group_by: obj}, world.read(obj, x))
+
+
+def _ablated_fails(brain, spec_name):
+    """The same brain, with every invented kind and law removed and inventing switched
+    off, relearns from the same readings: can it explain them?"""
+    b = copy.deepcopy(brain)
+    b.kinds, b.slaws, b.inventing = {}, {}, False
+    b.kind_steps.pop(spec_name, None)
+    b._learn_sequence(b.memory.specs[spec_name], True)
+    return spec_name not in b.slaws
+
+
+def _scratch_steps(brain, spec_name, reuse=False):
+    """What explaining this world costs on the same readings: searching the whole
+    grammar from scratch, or (reuse=True) trying its invented kinds first."""
+    from ..brain import kinds
+    spec = brain.memory.specs[spec_name]
+    seqs = kinds.sequences(brain.memory.of(spec_name), spec.target, spec.order_by,
+                           spec.group_by)
+    templates = ([k["template"] for k in kinds.learned(brain)] if reuse
+                 else kinds.grammar())
+    _, steps = kinds.search(seqs, max(spec.tol, 1e-9) + 4 * spec.precision, templates,
+                            budget=10 ** 9)
+    return steps
+
+
+def exam_cooling(brain, seed=1022):
+    from ..env.sequences import CoolingCups
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    world = CoolingCups(seed, prefix="ExamCup")
+    invented = Tally("invented a new KIND of explanation (none of its innate kinds fit)")
+    invented.item("cool", True, "kind:cool" in b.inventions)
+    ablation = Tally("the same brain without inventing kinds can't explain cooling at all")
+    ablation.item("cool", True, _ablated_fails(b, "cool"))
+    future = Tally("new cups, after 3 looks: the temperature 3-20 minutes on", tol=0.01)
+    room = Tally("NEVER MEASURED: the room's temperature (where a cup settles)", tol=0.02)
+    for _ in range(10):
+        cup = world.new_cup()
+        _watch(b, "cool", world, cup, [0, 1, 2])
+        for t in sorted(rng.sample(range(3, 21), 4)):
+            inputs = {"t": t, "cup": cup}
+            future.item(inputs, world.read(cup, t), b.predict("cool", inputs),
+                        b.memory.of("cool"), "T", inputs)
+        law = b.slaws.get("cool")
+        rest = law.resting_value(b.history(b.memory.specs["cool"], cup), cup) if law else None
+        room.item(cup, world.room(cup), rest)
+    inv = b.inventions.get("kind:cool")
+    return _result(22, [invented, ablation, future, room], 0.95,
+                   {"story": inv["story"] if inv else None,
+                    "effort": dict(b.kind_steps.get("cool", {}))})
+
+
+def exam_settling(brain, seed=1023):
+    from ..env.sequences import Batteries, BouncingBalls, Candles, HangingSprings
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    reused = Tally("REUSED its invented 'settling' kind for bounces and batteries, and its "
+                   "'equal steps' kind for candles (no new kind invented)")
+    for name in ("bounces", "charge", "burn"):
+        reused.item(name, True, name in b.slaws and f"kind:{name}" not in b.inventions)
+    second = Tally("invented a second kind where the first didn't fit (spring lengths)")
+    second.item("hang", True, "kind:hang" in b.inventions)
+    cheaper = Tally("on the same readings, trying its invented kinds first never takes more "
+                    "search than the whole grammar, and takes less for bounces and batteries")
+    for name in ("bounces", "charge", "burn"):
+        mine, scratch = _scratch_steps(b, name, reuse=True), _scratch_steps(b, name)
+        cheaper.item(name, True, mine < scratch if name != "burn" else mine <= scratch)
+    noise = Tally("the randomly blown marker, even after watching 8 more walks of 20 "
+                  "steps: explained by nothing, and no kind invented for it")
+    from ..env.sequences import Wanderers
+    walkers = Wanderers(seed, prefix="ExamWalker")
+    for _ in range(8):
+        _watch(b, "wander", walkers, walkers.new_walker(), list(range(20)))
+    noise.item("wander", True, "wander" not in b.slaws and "kind:wander" not in b.inventions)
+    bounce = Tally("new balls, after 3 bounces: heights of bounces 3-8", tol=0.01)
+    balls = BouncingBalls(seed, prefix="ExamBall")
+    for _ in range(8):
+        ball = balls.new_ball()
+        _watch(b, "bounces", balls, ball, [0, 1, 2])
+        for k in (3, 5, 8):
+            inputs = {"k": k, "ball": ball}
+            bounce.item(inputs, balls.read(ball, k), b.predict("bounces", inputs),
+                        b.memory.of("bounces"), "h", inputs)
+    full = Tally("NEVER MEASURED: a new battery's full charge, after 3 readings", tol=0.02)
+    bats = Batteries(seed, prefix="ExamBattery")
+    for _ in range(8):
+        bat = bats.new_battery()
+        _watch(b, "charge", bats, bat, [0, 1, 2])
+        law = b.slaws.get("charge")
+        got = law.resting_value(b.history(b.memory.specs["charge"], bat), bat) if law else None
+        full.item(bat, bats.hidden[bat]["full"], got)
+    hang = Tally("new springs, after 2 weights: length with other weights", tol=0.01)
+    rest = Tally("NEVER MEASURED: a spring's unstretched length", tol=0.01)
+    springs = HangingSprings(seed, prefix="ExamCoil")
+    for _ in range(8):
+        sp = springs.new_spring()
+        _watch(b, "hang", springs, sp, [2.0, 10.0])
+        for F in (5.0, 20.0, 40.0):
+            inputs = {"F": F, "spring": sp}
+            hang.item(inputs, springs.read(sp, F), b.predict("hang", inputs),
+                      b.memory.of("hang"), "L", inputs)
+        rest.item(sp, springs.hidden[sp]["rest"], b.predict("hang", {"F": 0.0, "spring": sp}))
+    burn = Tally("NEVER TRAINED: when will a new candle burn out? (after 2 looks)", tol=0.02)
+    candles = Candles(seed, prefix="ExamCandle")
+    for _ in range(8):
+        c = candles.new_candle()
+        _watch(b, "burn", candles, c, [0, rng.randint(2, 6)])
+        law = b.slaws.get("burn")
+        got = None
+        if law is not None:
+            xs, ys = b.history(b.memory.specs["burn"], c)
+            slope = law.value_for(c, (xs, ys))
+            got = xs[-1] - ys[-1] / slope if slope else None
+        h = candles.hidden[c]
+        burn.item(c, h["tall"] / h["rate"], got)
+    return _result(23, [reused, second, cheaper, noise, bounce, full, hang, rest, burn], 0.95,
+                   {"effort": {n: dict(b.kind_steps.get(n, {})) for n in
+                               ("bounces", "charge", "hang", "burn", "wander")},
+                    "scratch": {n: _scratch_steps(b, n) for n in ("bounces", "charge", "burn")
+                                if n in b.slaws},
+                    "reuse": {n: _scratch_steps(b, n, reuse=True)
+                              for n in ("bounces", "charge", "burn") if n in b.slaws}})
+
+
+# ---------------------------------------------------------------- Phase 3: acting
+def _goals(b, floor, n, rng, lesson, floors, tries=2):
+    """Painted marks to stop on. Returns (first-try hits, hits within `tries`, traces)."""
+    from ..brain.body import reach
+    from ..senses import measure
+    first, hit, traces = 0, 0, []
+    for _ in range(n):
+        want_true = rng.uniform(0.8, 3.5)
+        # Ultron sees the goal: where is the mark, measured from the start?
+        start, _ = measure.position(b.eyes, floors.before(), measure.BOTTOM)
+        mark, _ = measure.position(b.eyes, floors.goal(want_true), measure.BOTTOM)
+        want = mark - start
+        out = reach(b, "slide", "u", "d", want,
+                    lambda u: lesson.watch_kick(floor, u, floors), place=floor, tries=tries)
+        # the Judge checks where the puck REALLY stopped against where the mark REALLY is
+        first += out["hit"] and out["tries"] == 1
+        hit += out["hit"]
+        if len(traces) < 2:
+            traces.append(out["trace"])
+    return first, hit, traces
+
+
+def exam_acting(brain, seed=1024):
+    from ..senses.world import Floors
+    from ..trainer.senses_lessons import UsingWhatItKnows
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    lesson = UsingWhatItKnows(seed)
+    lesson.brain = b
+    floors = Floors(seed)
+    law = Tally("found how far a kicked puck slides (distance / speed² fixed on a floor)")
+    slide = b.qlaws.get("slide")
+    law.item("slide", True, bool(slide) and slide.powers == {"d": 1, "u": -2})
+    wood = Tally("goals on WOOD (the floor it played on): stopped within 10 cm, first try")
+    carpet = Tally("goals on CARPET (never touched): a cautious first kick, then within 10 "
+                   "cm on the second try")
+    f1, h1, t1 = _goals(b, "wood", 12, rng, lesson, floors)
+    f2, h2, t2 = _goals(b, "carpet", 12, rng, lesson, floors)
+    for i in range(12):
+        wood.add("ultron", i < f1, True)
+        carpet.add("ultron", i < h2, True)
+    # a body without understanding: kicks at random within what it tried in play
+    lucky = 0
+    for _ in range(200):
+        want, u = rng.uniform(0.8, 3.5), rng.uniform(1.0, 3.8)
+        lucky += abs(floors.distance("wood", u) - want) <= 0.1
+    return _result(24, [law, wood, carpet], 0.9,
+                   {"carpet_first_try": f"{f2}/12", "random_kicks_hit": f"{lucky / 200:.0%}",
+                    "traces": t1[:1] + t2[:1]})
+
+
+def exam_phase3_senses(brain, seed=1025):
+    import numpy as np
+    from ..brain import kinds
+    from ..env.sequences import DrainingTanks
+    from ..senses.world import Floors, PushTable, Trays
+    from ..trainer.senses_lessons import UsingWhatItKnows
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    trays = Trays(seed)
+    nrng = np.random.default_rng(seed)
+    sees = Tally("counts trays of 0-50 things from pixels")
+    for _ in range(20):
+        n = int(nrng.integers(0, 51))
+        sees.item(n, n, b.eyes.count(trays.tray(n))[0])
+    motion = Tally("predicts a push's acceleration BEFORE watching, counting the load by eye",
+                   tol=0.03)
+    table = PushTable(seed)
+    for _ in range(10):
+        F, blocks = rng.randint(2, 30), rng.randint(1, 12)
+        m, _ = b.eyes.count(table.load(blocks))
+        motion.item((F, blocks), F / blocks, b.predict("see_push", {"F": float(F),
+                                                                    "m": float(m)}))
+    # a world never met: draining tanks
+    tanks = DrainingTanks(seed)
+    from ..brain.memory import Spec
+    spec = Spec("drain", "sequence", {"t": None}, "h", group_by="tank", order_by="t",
+                tol=0.01, surprise=0.005)
+    b.meet(spec)
+    for _ in range(5):
+        _watch(b, "drain", tanks, tanks.new_tank(), list(range(8)))
+    new_world = Tally("a NEW world (draining tanks): explained on first meeting by a kind of "
+                      "explanation it invented lessons earlier, no new search needed")
+    eff = b.kind_steps.get("drain", {})
+    new_world.item("drain", True, "drain" in b.slaws and not eff.get("invent")
+                   and "kind:drain" not in b.inventions)
+    drain = Tally("new tanks after 3 readings: level 3-15 minutes on", tol=0.01)
+    for _ in range(6):
+        tank = tanks.new_tank()
+        _watch(b, "drain", tanks, tank, [0, 1, 2])
+        for t in (3, 8, 15):
+            inputs = {"t": t, "tank": tank}
+            drain.item(inputs, tanks.read(tank, t), b.predict("drain", inputs),
+                       b.memory.of("drain"), "h", inputs)
+    hole = Tally("NEVER MEASURED: how high the hole is (where the water stops), after 6 "
+                 "readings, to within 5 mm", abs_tol=0.005)
+    for _ in range(6):
+        tank = tanks.new_tank()
+        _watch(b, "drain", tanks, tank, list(range(6)))
+        law = b.slaws.get("drain")
+        rest = law.resting_value(b.history(spec, tank), tank) if law else None
+        hole.item(tank, tanks.hidden[tank]["hole"], rest)
+    ablation = Tally("the same brain with its invented kinds removed can't explain the tanks")
+    ablation.item("drain", True, _ablated_fails(b, "drain"))
+    lesson = UsingWhatItKnows(seed)
+    lesson.brain = b
+    ice = Tally("goals on ICE (never touched): a cautious first kick, then within 10 cm on "
+                "the second try")
+    _, h, traces = _goals(b, "ice", 10, rng, lesson, Floors(seed))
+    for i in range(10):
+        ice.add("ultron", i < h, True)
+    return _result(25, [sees, motion, new_world, drain, hole, ablation, ice], 0.9,
+                   {"drain_effort": dict(eff), "drain_scratch": _scratch_steps(b, "drain"),
+                    "ice_trace": traces[:1]})
+
+
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
          13: exam_growing, 14: exam_springy, 15: exam_diagonal, 16: exam_phase2,
-         17: exam_coils, 18: exam_phase3}
+         17: exam_coils, 18: exam_phase3, 19: exam_eyes, 20: exam_seeing_numbers,
+         21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
+         25: exam_phase3_senses}
