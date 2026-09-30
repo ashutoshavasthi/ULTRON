@@ -38,6 +38,19 @@ words for them only afterwards.
   examiners who never saw its code, tests or exams: 55/60 and 54/60 on first sight,
   every failure fair and since fixed.
 
+**Phase 3** (see the [verdict](reports/phase3_senses_verdict.md)):
+- It **sees**. A small neural network, trained from touch, turns noisy camera pixels into
+  things. It counts trays of up to 50 things and measures positions to a fraction of a
+  pixel.
+- It rediscovers **F = m·a, stiffness and energy from video alone**. It measures its own
+  noise and accepts a law only when what's left over is that noise.
+- It **invents new kinds of explanation** when none it has fits: "it settles by the same
+  fraction each step" and "equal steps give equal steps". It reuses them in worlds it
+  has never met, and refuses to explain pure randomness.
+- It **acts**. To stop a puck on a mark it runs its law backwards; on a floor it never
+  touched, it tries cautiously, reads the floor from what it sees, and hits on the
+  second try.
+
 It then passes a tough final exam with no teaching. The exam includes:
 - division, which it was never taught (it reasons backwards through its
   multiplication law);
@@ -49,14 +62,15 @@ Every law is a small program or formula it wrote and can explain. Every answer
 comes with its reasons.
 
 ```bash
-python -m ultron train                          # ~25 s; no dependencies beyond Python 3.10+
+python -m ultron train                          # ~60 s; Python 3.10+ and numpy (for the eyes)
 python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
+python -m ultron ask "find rest given T@0=80 T@1=70 T@2=62"   # where a cooling cup settles
 python -m ultron why "3 + 2"
 python -m ultron blind blind/independent_2.txt       # an independent examiner's test; write your own
 ```
 
 - [How it works](docs/ARCHITECTURE.md)
-- [Report card](reports/report_card.md), the [Phase 1 verdict](reports/judge_verdict.md) the [Phase 2 verdict](reports/phase2_verdict.md) and the [verdict on closing its gaps](reports/phase3_verdict.md)
+- [Report card](reports/report_card.md), the [Phase 1 verdict](reports/judge_verdict.md) the [Phase 2 verdict](reports/phase2_verdict.md) and the [verdict on closing its gaps](reports/phase3_verdict.md) and the [Phase 3 verdict](reports/phase3_senses_verdict.md)
 - [Roadmap to a self-improving expert](docs/ROADMAP.md)
 - Original requirements: [PRD v1](ULTRON_PRD_V1.md), [PRD v2](ULTRON_PRD_V2.md)

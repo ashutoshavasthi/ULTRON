@@ -196,6 +196,10 @@ def search(seqs, tol, templates, budget=10_000):
 
 
 # ------------------------------------------------------------------ laws
+def _power(c, n):
+    return c ** n if c > 0 else (-1) ** int(round(n)) * abs(c) ** n
+
+
 class SequenceLaw:
     kind = "sequence"
     form = "sequence"
@@ -229,21 +233,54 @@ class SequenceLaw:
         return None
 
     def predict(self, history, x_new, group=None):
-        """history: (xs, ys) of this object's readings so far, ordered."""
+        """history: (xs, ys) of this object's readings so far, ordered. The moment asked
+        about may be later, earlier, or between readings: repeating a step a fraction of a
+        time, or a below-zero number of times, means what it meant for powers."""
         xs, ys = history
         if x_new in xs:
             return ys[xs.index(x_new)]
-        c = self.value_for(group, history)
-        k = len(self.template["y_ops"])
-        if c is None or len(ys) < k + (1 if self.template.get("x_op") else 0) or not xs:
+        if not xs:
             return None
         if self.template.get("x_op"):
+            c = self.value_for(group, history)
             # Δy/Δx = c: from the last reading, one straight step
-            return ys[-1] + c * (x_new - xs[-1])
-        if len(xs) < 2 and k > 0:
+            return None if c is None else ys[-1] + c * (x_new - xs[-1])
+        if len(xs) < 2 or not _even(xs):
             return None
-        step = xs[-1] - xs[-2] if len(xs) >= 2 else 1
+        step = xs[1] - xs[0]
         n = (x_new - xs[-1]) / step
+        ops = self.template["y_ops"]
+        c = self.value_for(group, history)
+        if ops == ["Δ", "ρ"]:
+            rest = self.common_rest() if len(ys) < 3 else None
+            if c is None and rest is not None:
+                # every one I've met settles at the same place: two readings are enough
+                if ys[-2] == rest:
+                    return None
+                c = (ys[-1] - rest) / (ys[-2] - rest)
+            if c is None:
+                return None
+            if abs(c - 1) < 1e-12:
+                return ys[-1] + (ys[-1] - ys[-2]) * n
+            if rest is None:
+                rest = ys[-1] + (ys[-1] - ys[-2]) * c / (1 - c)
+            if c <= 0 and abs(n - round(n)) > 1e-9:
+                return None
+            return rest + (ys[-1] - rest) * _power(c, n)
+        if c is None:
+            return None
+        if ops == ["Δ"]:
+            return ys[-1] + c * n
+        if ops == ["ρ"]:
+            return None if c <= 0 and abs(n - round(n)) > 1e-9 else ys[-1] * _power(c, n)
+        if ops == ["Δ", "Δ"] and len(ys) >= 2:
+            d = ys[-1] - ys[-2]
+            return ys[-1] + d * n + c * n * (n + 1) / 2
+        if n < 0 or abs(n - round(n)) > 1e-9 or n > 10_000:
+            return None
+        k = len(ops)
+        if len(ys) < k + 1:
+            return None
         if n < 0 or abs(n - round(n)) > 1e-9 or n > 10_000:
             return None
         levels = [list(ys)]
@@ -259,6 +296,10 @@ class SequenceLaw:
                 prev = levels[i - 1][-1]
                 levels[i - 1].append(prev + levels[i][-1] if op == "Δ" else prev * levels[i][-1])
         return levels[0][-1]
+
+    def common_rest(self):
+        """If every object I've met settles at the same value, that value."""
+        return self.provenance.get("common_rest")
 
     def resting_value(self, history, group=None):
         """For a settling law (ρ of the steps below 1 in size): where it ends up."""
@@ -312,6 +353,7 @@ def explain(brain, spec, episodes):
                       found.scope, found.constant, found.properties, found.spread,
                       {"lesson": brain.lesson, "support": 0,
                        "groups": sum(1 for xs, ys in seqs.values() if len(ys) >= 3)})
+    note_common_rest(law, seqs, tol)
     if kind is None:
         kind = _record(brain, spec, found, len(seqs))
     elif spec.name not in kind["uses"]:
@@ -322,6 +364,24 @@ def explain(brain, spec, episodes):
                             f"the same {'for everything' if found.scope == 'global' else 'for each ' + str(spec.group_by)}); "
                             f"{steps['reuse']} steps of checking")
     return law, steps, kind
+
+
+def note_common_rest(law, seqs, tol):
+    """A law about the law: do all the objects settle at the same value?"""
+    if law.template != {"y_ops": ["Δ", "ρ"], "x_op": None}:
+        return
+    rests, scale = [], 0.0
+    for g, (xs, ys) in seqs.items():
+        r = law.resting_value((xs, ys), g) if len(ys) >= 3 else None
+        if r is not None:
+            rests.append(r)
+            scale = max(scale, max(abs(y) for y in ys))
+    if len(rests) >= MIN_GROUPS:
+        m = statistics.median(rests)
+        if max(abs(r - m) for r in rests) <= 2 * tol * scale:
+            law.provenance["common_rest"] = round(m, 9) if abs(m) > tol * scale else 0.0
+        else:
+            law.provenance.pop("common_rest", None)
 
 
 def _record(brain, spec, found, n_groups):

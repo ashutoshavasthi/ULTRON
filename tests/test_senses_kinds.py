@@ -95,3 +95,21 @@ def test_kind_templates_are_data():
     assert [round(z, 9) for z in kinds.transform(t, [0, 1, 2, 3], [80, 70, 62, 55.6])] == [0.8, 0.8]
     law = kinds.SequenceLaw("x", "T", "t", "cup", t, "per group")
     assert abs(law.predict(([0, 1, 2], [80, 70, 62]), 3) - 55.6) < 1e-9
+
+
+def test_blind_3_failures_stay_fixed(trained):
+    """Questions from the third independent examiner that Ultron once got wrong."""
+    brain, _ = trained
+    ask = lambda q: reasoner.physics(brain, *reasoner.parse_physics(q)[:2]).value
+    assert abs(ask("find T given t=0 T@3=45.312 T@4=39.414 T@5=34.813") - 75) < 0.75
+    assert abs(ask("find T given t=5 T@0=88 T@2=66.378 T@4=51.84") - 46.4688) < 0.5
+    assert abs(ask("find h given k=4 h@0=3.2 h@1=2.72") - 1.67042) < 0.02   # all balls settle at 0
+    assert ask("find T given t=5 T@0=80 T@1=70") is None                      # cups don't
+
+
+def test_independent_3_passes(trained):
+    import pathlib
+    from ultron.__main__ import score_blind
+    path = pathlib.Path(__file__).parent.parent / "blind" / "independent_3.txt"
+    right, total, _ = score_blind(trained[0], path.read_text())
+    assert right == total

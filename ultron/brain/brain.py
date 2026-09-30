@@ -275,6 +275,9 @@ class Brain:
         else:
             law.properties.update(new.properties)
             law.constant = new.constant
+            law.provenance.pop("common_rest", None)
+            if "common_rest" in new.provenance:
+                law.provenance["common_rest"] = new.provenance["common_rest"]
         return new
 
     def _predict_reading(self, spec, inputs):

@@ -2702,7 +2702,7 @@
        "t": 4
       },
       "truth": 51.959,
-      "ultron": 51.95823506995164
+      "ultron": 51.95823506995165
      },
      {
       "question": {
@@ -2718,7 +2718,7 @@
        "t": 14
       },
       "truth": 20.07,
-      "ultron": 20.063095028855873
+      "ultron": 20.063095028855876
      }
     ],
     "name": "new cups, after 3 looks: the temperature 3-20 minutes on",
@@ -2946,7 +2946,7 @@
        "k": 5
       },
       "truth": 0.2051,
-      "ultron": 0.2050540112675929
+      "ultron": 0.20505401126759287
      },
      {
       "question": {
@@ -2954,7 +2954,7 @@
        "k": 8
       },
       "truth": 0.0461,
-      "ultron": 0.046064285711958516
+      "ultron": 0.04606428571195852
      }
     ],
     "name": "new balls, after 3 bounces: heights of bounces 3-8",
@@ -3352,7 +3352,7 @@
        "tank": "Tank6"
       },
       "truth": 1.2294,
-      "ultron": 1.2293863904268618
+      "ultron": 1.2293863904268616
      },
      {
       "question": {
@@ -3360,7 +3360,7 @@
        "tank": "Tank6"
       },
       "truth": 0.4224,
-      "ultron": 0.42241309301223123
+      "ultron": 0.42241309301223107
      },
      {
       "question": {
@@ -3368,7 +3368,7 @@
        "tank": "Tank6"
       },
       "truth": 0.1724,
-      "ultron": 0.17233816679682665
+      "ultron": 0.17233816679682643
      }
     ],
     "name": "new tanks after 3 readings: level 3-15 minutes on",
