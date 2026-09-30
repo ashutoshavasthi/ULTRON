@@ -59,9 +59,17 @@ def _pattern(expr):
 
 
 def rules_from_law(law):
-    """Turn an iteration law into two rewrite rules, or None if it isn't one."""
+    """Turn a law into rewrite rules, or None if it can't be written in Peano
+    arithmetic (e.g. a law using the invented 'down' step, which goes below zero,
+    where Peano's numbers don't exist)."""
     e = law.expr
-    if e[0] != "iter" or e[2][0] != "var" or len(law.params) != 2:
+    if len(law.params) != 2:
+        return None
+    if e[0] == "call" and e[2][0] == "var" and e[3][0] == "var":
+        # a law defined as another law: get_paid(purse, wage) -> merge(wage, purse)
+        head = (law.name,) + tuple(("?", p) for p in law.params)
+        return [(f"{law.name}-def", head, (e[1], ("?", e[2][1]), ("?", e[3][1])))]
+    if e[0] != "iter" or e[2][0] != "var" or e[1][0] not in ("succ", "pred", "call"):
         return None
     counter = e[2][1]
     try:

@@ -12,7 +12,8 @@ class Spec:
     """
 
     def __init__(self, name, kind, inputs=None, target=None, out_type=None, group_by=None,
-                 units=None, tol=1e-9, surprise=1e-6, precision=0.0):
+                 units=None, tol=1e-9, surprise=1e-6, precision=0.0, action=None,
+                 state_var=None):
         self.name = name
         self.kind = kind
         self.inputs = dict(inputs or {})    # var -> type (program) or var -> dims (quantity)
@@ -23,6 +24,8 @@ class Spec:
         self.tol = tol                      # how constant an invariant must be
         self.surprise = surprise            # prediction error that counts as a surprise
         self.precision = precision          # instruments' stated relative precision (±)
+        self.action = action                # for state changes: which action ("earn")
+        self.state_var = state_var          # ... and which part of the state it predicts
 
     def to_json(self):
         return {k: (list(v) if isinstance(v, tuple) else v) for k, v in self.__dict__.items()}

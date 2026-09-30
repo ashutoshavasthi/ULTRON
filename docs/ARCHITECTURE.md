@@ -49,6 +49,24 @@ Four more principles govern how laws are used and refined:
 - **Reasoning backwards.** An inverse question ("what times 4 equals 20") is
   answered by trying candidates with the law itself.
 
+## Trust, experiments and invention
+
+- **Trust.** A measured law stays *tentative* until it has predicted 3 new
+  experiences, then becomes *established*. If an established law fails,
+  Ultron notes its doubt and searches again. Discrete laws are confirmed
+  after 8 correct predictions in a row. Conservation laws are tentative until
+  they have held for 3 events.
+- **Designing experiments** (`Brain.propose`). The search also returns
+  *rival* programs that explain the same experiences. When they disagree
+  about some situation Ultron could set up, it sets that one up, so the world
+  decides between them.
+- **Inventing concepts** (`invention.py`, line discovery). When two actions
+  undo each other and every state lies on one line through the empty state,
+  Ultron treats the states past empty as a new kind of number: below zero. It
+  also gets a new primitive, `down`, a step with no floor. This is how it
+  invents negative numbers from a purse of coins and IOU notes (lesson 8).
+  The words '-3' and 'negative three' are taught only afterwards.
+
 ## Curiosity (`curiosity.py`)
 
 For each kind of experiment, Ultron tracks how fast its prediction error is
@@ -78,6 +96,7 @@ are derived from Ultron's own programs and checked independently
 | counting by tally, `succ`, `pred`, `eq`, `lt`, `not`, `and`, "repeat n times" | object permanence, same-number, addition, subtraction, multiplication, place value |
 | power-product form for measurements; instruments and their units | F = m·a, spring stiffness (invented property), momentum and energy conservation, Kepler's 3rd law, Boyle's law |
 | curiosity rule, confirmation rule, reading marks left-to-right | which word means which law; every constant and every property value |
+| line discovery (the *ability* to notice a line of states) | negative numbers, the `down` step, paying and being paid below zero |
 
 ## Running it
 
@@ -88,15 +107,17 @@ python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
 python -m ultron why "3 + 2"      # checked proof
 python -m ultron exam             # re-run held-out exams on the saved brain
+python -m ultron blind blind/example_not_blind.txt   # score it on someone else's questions
 python -m pytest                  # tests
 ```
 
 ## File map
 
 ```
-ultron/brain/     dsl, synth, invariants, curiosity, memory, perception, units, language, reasoner, brain
+ultron/brain/     dsl, synth, invariants, invention, curiosity, memory, perception, units, language, reasoner, brain
 ultron/env/       toyworld, physics, dataworld, data/*.csv (real measurements, sources in headers)
-ultron/trainer/   lessons (curriculum 0-8: 7 = noisy lab, 8 = tough final exam), trainer (mastery gate, naming after understanding)
+ultron/trainer/   lessons (curriculum 0-9: 7 = noisy lab, 8 = owing, 9 = tough final exam), trainer
+blind/            write your own blind test; `python -m ultron blind FILE` (mastery gate, naming after understanding)
 ultron/judge/     exams (held-out + memoriser baselines), report
 ultron/logic/     peano (rules from learned laws + proof checker)
 brain/            Ultron's saved brain

@@ -24,3 +24,18 @@ def test_checker_rejects_a_forged_step():
     steps[-1] = dict(steps[-1], after=peano.numeral(5))
     ok, _ = peano.check(lhs, 5, steps, rules)
     assert not ok
+
+
+def test_laws_below_zero_are_not_turned_into_peano_rules():
+    down = Law("pay", ["price", "purse"], ("iter", ("down",), ("var", "price"), ("var", "purse")), INT)
+    assert peano.rules_from_law(down) is None
+
+
+def test_definition_rules():
+    lib = Library()
+    lib.add(ADD)
+    lib.add(Law("get_paid", ["purse", "wage"], ("call", "merge", ("var", "wage"), ("var", "purse")), INT))
+    rules = peano.all_rules(lib)
+    lhs = ("get_paid", peano.numeral(3), peano.numeral(2))
+    steps = peano.prove(lhs, rules)
+    assert peano.check(lhs, 5, steps, rules)[0]

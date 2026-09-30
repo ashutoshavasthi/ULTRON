@@ -42,6 +42,7 @@ def test_answers_questions_with_reasons(trained):
     ans = reasoner.arithmetic(brain, "what is 347 plus 1289?")
     assert ans.text == "1636" and len(ans.steps) >= 3
     assert reasoner.arithmetic(brain, "3 divided 4").value is None
+    assert reasoner.arithmetic(brain, "5 minus 8").text == "-3"
 
 
 def test_chains_laws_it_learned_separately(trained):

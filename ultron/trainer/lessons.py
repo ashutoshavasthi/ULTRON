@@ -10,7 +10,7 @@ from ..brain.memory import Spec
 from ..brain.perception import count, present, read_marks
 from ..env import dataworld
 from ..env.physics import PhysicsSandbox
-from ..env.toyworld import ToyWorld
+from ..env.toyworld import ShopWorld, ToyWorld
 
 NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
                 "nine", "ten"]
@@ -33,8 +33,12 @@ class Lesson:
     def specs(self):
         return []
 
-    def scene(self, name, wide=False):
+    def scene(self, name, wide=False, request=None):
         raise NotImplementedError
+
+    def options(self, name):
+        """Situations Ultron could set up itself in this lesson (empty: it can't)."""
+        return []
 
 
 # ---------------------------------------------------------------- lesson 0
@@ -50,12 +54,16 @@ class Permanence(Lesson):
         return [Spec("peekaboo", "program", {"went_in": BOOL, "waited": INT}, "there",
                      out_type=BOOL)]
 
-    def scene(self, name, wide=False):
+    def options(self, name):
+        return [{"went_in": g, "waited": t} for g in (True, False) for t in range(1, 7)]
+
+    def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
         w.clear()
-        objs = w.put("table", 1) if rng.random() < 0.6 else []
+        went = request["went_in"] if request else rng.random() < 0.6
+        objs = w.put("table", 1) if went else []
         w.hide("cup", objs)
-        waited = rng.randint(1, 40 if wide else 6)
+        waited = request["waited"] if request else rng.randint(1, 40 if wide else 6)
         w.wait(waited)
         return {"went_in": present(objs), "waited": waited}, present(w.reveal("cup"))
 
@@ -73,11 +81,16 @@ class Pairing(Lesson):
         return [Spec("pair_off", "program", {"nA": INT, "nB": INT}, "all_paired",
                      out_type=BOOL)]
 
-    def scene(self, name, wide=False):
+    def options(self, name):
+        return [{"nA": a, "nB": b} for a in range(6) for b in range(6)]
+
+    def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
         top = 9 if wide else 5
         a = rng.randint(0, top)
         b = a if rng.random() < 0.4 else rng.randint(0, top)
+        if request:
+            a, b = request["nA"], request["nB"]
         w.put("A", a)
         w.put("B", b)
         left_a, left_b = w.pair_off("A", "B")
@@ -101,19 +114,26 @@ class Combining(Lesson):
                      out_type=INT),
                 Spec("lamps", "program", {"lit_before": INT}, "lit_after", out_type=INT)]
 
-    def scene(self, name, wide=False):
+    def options(self, name):
+        if name == "merge":
+            return [{"nA": a, "nB": b} for a in range(6) for b in range(6)]
+        if name == "take_away":
+            return [{"nA": a, "n_taken": t} for a in range(6) for t in range(a + 1)]
+        return []
+
+    def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
         top = 9 if wide else 5
         if name == "merge":
-            w.put("A", rng.randint(0, top))
-            w.put("B", rng.randint(0, top))
+            w.put("A", request["nA"] if request else rng.randint(0, top))
+            w.put("B", request["nB"] if request else rng.randint(0, top))
             inputs = {"nA": count(w.trays["A"]), "nB": count(w.trays["B"])}
             return inputs, count(w.merge(["A", "B"], "C"))
         if name == "take_away":
-            a = rng.randint(0, top)
+            a = request["nA"] if request else rng.randint(0, top)
             w.put("A", a)
             inputs = {"nA": count(w.trays["A"])}
-            w.take("A", rng.randint(0, a), "hand")
+            w.take("A", request["n_taken"] if request else rng.randint(0, a), "hand")
             inputs["n_taken"] = count(w.trays["hand"])
             return inputs, count(w.trays["A"])
         before = w.flicker()
@@ -132,11 +152,16 @@ class Groups(Lesson):
     def specs(self):
         return [Spec("groups", "program", {"groups": INT, "size": INT}, "total", out_type=INT)]
 
-    def scene(self, name, wide=False):
+    def options(self, name):
+        return [{"groups": g, "size": z} for g in range(5) for z in range(5)]
+
+    def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
         w.clear()
         top = 6 if wide else 4
         g, s = rng.randint(0, top), rng.randint(0, top)
+        if request:
+            g, s = request["groups"], request["size"]
         trays = [f"G{i}" for i in range(g)]
         for t in trays:
             w.put(t, s)
@@ -200,7 +225,7 @@ class Names(Lesson):
                 demos[word].append((g, s, total))
         return demos, equals
 
-    def scene(self, name, wide=False):
+    def scene(self, name, wide=False, request=None):
         """Two-mark numeral next to a pile: the Trainer writes it, Ultron reads marks."""
         rng = self.world.rng
         n = rng.randint(10, 99)
@@ -232,7 +257,7 @@ class Mechanics(Lesson):
                  units={"m": MASS, "v": SPEED}),
         ]
 
-    def scene(self, name, wide=False):
+    def scene(self, name, wide=False, request=None):
         rng = self.rng
         r = lambda lo, hi: round(rng.uniform(lo, hi), 3)
         if name == "push":
@@ -310,7 +335,7 @@ class NoisyLab(Lesson):
                  units={"F": FORCE, "x": LENGTH}, precision=p),
         ]
 
-    def scene(self, name, wide=False):
+    def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.rng
         if name == "lab_push":
             m, F = rng.uniform(1, 5), rng.uniform(1, 20)
@@ -320,8 +345,95 @@ class NoisyLab(Lesson):
 
 
 # ---------------------------------------------------------------- lesson 8
+class Owing(Lesson):
+    number, title = 8, "Owing"
+    goal = ("A purse of coins and IOU notes. Nobody mentions numbers below zero. Can "
+            "Ultron notice that its purse states form one line that continues past "
+            "empty, *invent* numbers below zero, and then do arithmetic with them?")
+    kind = "guided"
+    budget = 200
+    LINE = "line:earn/spend"
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.world = ShopWorld(seed)
+        self.brain = None       # set by the Trainer: Ultron perceives purses its own way
+
+    def purse_specs(self):
+        return [Spec(f"{act}_{var}", "program", {"coins": INT, "notes": INT}, f"{var}_after",
+                     out_type=INT, action=act, state_var=var)
+                for act in ("earn", "spend") for var in ("coins", "notes")]
+
+    def deal_specs(self):
+        return [Spec("pay", "program", {"purse": INT, "price": INT}, "purse_after",
+                     out_type=INT),
+                Spec("get_paid", "program", {"purse": INT, "wage": INT}, "purse_after",
+                     out_type=INT)]
+
+    def specs(self):
+        return self.purse_specs()
+
+    def _random_purse(self, top=5):
+        rng = self.world.rng
+        n = rng.randint(0, top)
+        return (n, 0) if rng.random() < 0.5 else (0, n)
+
+    def options(self, name):
+        if name in ("pay", "get_paid"):
+            return []
+        return [{"coins": c, "notes": 0} for c in range(6)] + \
+               [{"coins": 0, "notes": n} for n in range(1, 6)]
+
+    def perceive(self):
+        from ..brain.invention import position
+        return position(self.brain, self.LINE,
+                        {"coins": len(self.world.coins), "notes": len(self.world.notes)})
+
+    def scene(self, name, wide=False, request=None):
+        w, rng = self.world, self.world.rng
+        if name in ("pay", "get_paid"):
+            w.set_purse(*self._random_purse())
+            purse = self.perceive()
+            amount = rng.randint(0, 8)
+            for _ in range(amount):
+                (w.spend if name == "pay" else w.earn)()
+            key = "price" if name == "pay" else "wage"
+            return {"purse": purse, key: amount}, self.perceive()
+        c, n = (request["coins"], request["notes"]) if request else self._random_purse()
+        w.set_purse(c, n)
+        act, var = name.split("_")
+        (w.earn if act == "earn" else w.spend)()
+        return {"coins": c, "notes": n}, len(w.coins if var == "coins" else w.notes)
+
+    def below_zero_names(self):
+        """(written mark, spoken words, purse) the Trainer points at, AFTER the invention."""
+        return [(f"-{n}", f"negative {NUMBER_WORDS[n]}", (0, n)) for n in range(1, 6)]
+
+    def demos(self):
+        """The Trainer acts out purchases and pay days and says them aloud."""
+        rng = self.world.rng
+        out = {"minus": [], "-": [], "plus": [], "+": []}
+        for _ in range(8):
+            c, n = self._random_purse()
+            self.world.set_purse(c, n)
+            before = self.perceive()
+            k = rng.randint(0, 8)
+            for _ in range(k):
+                self.world.spend()
+            out["minus"].append((before, k, self.perceive()))
+            self.world.set_purse(*self._random_purse())
+            before = self.perceive()
+            k = rng.randint(0, 8)
+            for _ in range(k):
+                self.world.earn()
+            out["plus"].append((before, k, self.perceive()))
+        out["-"], out["+"] = out["minus"], out["plus"]
+        return out
+
+
+# ---------------------------------------------------------------- lesson 9
 class FinalExam(Lesson):
-    number, title = 8, "The tough final exam"
+    number, title = 9, "The tough final exam"
     goal = ("No teaching at all. Kinds of question never practised: division (never "
             "taught), inverse and chained questions, backwards physics chains, unseen "
             "real bodies, and impossible questions where the only right answer is "
@@ -332,4 +444,4 @@ class FinalExam(Lesson):
 def all_lessons(seed=0):
     return [Permanence(seed), Pairing(seed + 1), Combining(seed + 2), Groups(seed + 3),
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
-            FinalExam(seed + 8)]
+            Owing(seed + 8), FinalExam(seed + 9)]

@@ -36,6 +36,13 @@ def bind_operation(brain, token, demos):
                     break
             if ok:
                 brain.bind(token, ("op", law.name, order))
+                # a demonstration the Trainer acted out is an experience too
+                if law.name in brain.memory.episodes:
+                    for x, y, r in demos:
+                        a, b = (x, y) if order == "xy" else (y, x)
+                        ep = {"inputs": {law.params[0]: a, law.params[1]: b}, "outcome": r}
+                        if ep not in brain.memory.of(law.name):
+                            brain.memory.store(law.name, ep)
                 brain.note("word", f"'{token}' behaves exactly like my law '{law.name}' "
                                    f"(arguments {order}) in all {len(demos)} demonstrations")
                 return brain.vocab[token]
@@ -54,6 +61,33 @@ def bind_relation(brain, token, demos):
     return None
 
 
+def bind_prefix(brain, examples):
+    """examples: [(what the Trainer said, position Ultron perceives)], e.g. ('-3', -3)
+    or ('negative three', -3). Ultron finds the part that is the same in every example,
+    checks the rest reads as the distance below zero, and learns that prefix."""
+    found = set()
+    for said, pos in examples:
+        if pos is None or pos >= 0:
+            return None
+        for i in range(1, len(said)):
+            prefix, rest = said[:i].strip(), said[i:].strip()
+            value, _ = read_number(brain, rest)
+            if value == -pos and prefix:
+                found.add(prefix)
+                break
+        else:
+            return None
+    for prefix in sorted(found):
+        brain.bind("prefix:" + prefix, ("prefix", "below zero"))
+        brain.note("word", f"'{prefix}' in front of a number means that far below zero")
+    return found
+
+
+def prefixes(brain):
+    return [k[len("prefix:"):] for k, m in sorted(brain.vocab.items())
+            if k.startswith("prefix:") and m[0] == "prefix"]
+
+
 def is_numeral(brain, token):
     return bool(token) and all(brain.vocab.get(ch, ("",))[0] == "number" and len(ch) == 1
                                for ch in token)
@@ -65,6 +99,12 @@ def read_number(brain, token):
     if meaning and meaning[0] == "number":
         things = "thing" if meaning[1] == 1 else "things"
         return meaning[1], f"'{token}' is a word I was shown with {meaning[1]} {things}"
+    for p in prefixes(brain):
+        rest = token[len(p):].strip()
+        if token.startswith(p) and rest and (not p.isalpha() or token[len(p)] == " "):
+            value, _ = read_number(brain, rest)
+            if value is not None and value > 0:
+                return -value, f"'{token}' is {value} below zero on my purse line"
     if not is_numeral(brain, token):
         return None, f"I don't know the word '{token}'"
     law = brain.library.get(NUMERAL_LAW)
@@ -79,6 +119,10 @@ def read_number(brain, token):
 
 def speak_number(brain, n):
     """Write a quantity as marks by inverting the place-value law."""
+    if n < 0:
+        marks = [p for p in prefixes(brain) if not p.isalpha()]
+        rest = speak_number(brain, -n)
+        return None if not marks or rest is None else marks[0] + rest
     marks = {m[1]: tok for tok, m in brain.vocab.items()
              if m[0] == "number" and len(tok) == 1}
     if n in marks:

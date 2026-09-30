@@ -8,11 +8,14 @@ save as JSON:
     ("const", value)              a constant (0, 1, or a number it has a name for)
     ("succ", e)                   one more than e
     ("pred", e)                   one less than e (never below 0)
+    ("down", e)                   one step lower, with no floor (an *invented*
+                                  primitive: only available once the brain has
+                                  discovered a line that goes below zero)
     ("not", e) ("and", a, b)      logic
     ("eq", a, b) ("lt", a, b)     "same as" and "fewer than"
     ("call", law, a, b)           use a law already in the library
     ("iter", F, n, x)             start at x and do F, n times
-        F = ("succ",) | ("pred",) | ("call", law, t)   where ("call", law, t)
+        F = ("succ",) | ("pred",) | ("down",) | ("call", law, t)   where ("call", law, t)
         means "acc -> law(acc, t)"
 
 These primitives are the only thing designed by hand. Addition,
@@ -106,11 +109,13 @@ def apply_step(F, acc, t, library):
         return check(acc + 1)
     if tag == "pred":
         return acc - 1 if acc > 0 else 0
+    if tag == "down":
+        return acc - 1
     return check(library.call(F[1], acc, t))
 
 
 def iterate(F, n, x, t, library):
-    if n > MAX_ITER:
+    if n < 0 or n > MAX_ITER:
         raise Overflow()
     acc = x
     for _ in range(n):
@@ -129,6 +134,8 @@ def evaluate(expr, env, library):
     if tag == "pred":
         v = evaluate(expr[1], env, library)
         return v - 1 if v > 0 else 0
+    if tag == "down":
+        return evaluate(expr[1], env, library) - 1
     if tag == "not":
         return not evaluate(expr[1], env, library)
     if tag == "and":
@@ -159,7 +166,7 @@ def size(expr):
     tag = expr[0]
     if tag in ("var", "const"):
         return 1
-    if tag in ("succ", "pred", "not"):
+    if tag in ("succ", "pred", "down", "not"):
         return 1 + size(expr[1])
     if tag in ("and", "eq", "lt"):
         return 1 + size(expr[1]) + size(expr[2])
@@ -179,7 +186,7 @@ def show(expr):
         return expr[1]
     if tag == "const":
         return str(expr[1]).lower() if isinstance(expr[1], bool) else str(expr[1])
-    if tag in ("succ", "pred", "not"):
+    if tag in ("succ", "pred", "down", "not"):
         return f"{tag}({show(expr[1])})"
     if tag in ("and", "eq", "lt"):
         return f"{tag}({show(expr[1])}, {show(expr[2])})"

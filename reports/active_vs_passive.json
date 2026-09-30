@@ -1,0 +1,30 @@
+{
+ "active": {
+  "earn_coins": 3,
+  "earn_notes": 3,
+  "get_paid": 5,
+  "groups": 6,
+  "merge": 2,
+  "numeral": 2,
+  "pair_off": 2,
+  "pay": 3,
+  "peekaboo": 1,
+  "spend_coins": 2,
+  "spend_notes": 3,
+  "take_away": 3
+ },
+ "passive": {
+  "earn_coins": 4,
+  "earn_notes": 6,
+  "get_paid": 2,
+  "groups": 3,
+  "merge": 2,
+  "numeral": 2,
+  "pair_off": 2,
+  "pay": 2,
+  "peekaboo": 1,
+  "spend_coins": 2,
+  "spend_notes": 5,
+  "take_away": 3
+ }
+}

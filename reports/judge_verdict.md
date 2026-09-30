@@ -1,137 +1,72 @@
-# Judge's verdict: Baby Ultron v0
+# Judge's verdict: Phase 1 (Baby Ultron), final
 
-*Written by Claude, acting as Ultron's trainer and judge, after running every
-lesson and exam in this repository and questioning Ultron directly. Metrics are
-in [`report_card.md`](report_card.md); the full conversation is in
-[`transcript.md`](transcript.md).*
+*Written by Claude, acting as Ultron's trainer and judge, after running all ten
+lessons and every exam in this repository and questioning Ultron directly.
+The metrics are in [`report_card.md`](report_card.md); the full conversation is
+in [`transcript.md`](transcript.md).*
 
 ## Verdict
 
-**Phase 1 is passed as a proof of mechanism. It is not yet intelligence.**
+**Phase 1 is complete.** Ultron is the kind of learner this project set out to
+build. It is grounded, it learns rules rather than answers, its knowledge
+compounds, and it **invented a concept nobody gave it**. It is still an infant,
+and I built its innate abilities. The one test that could prove me wrong has
+not been run yet: a blind test written by someone else (see "What is still
+open").
 
-Ultron learns the way the design intends, and the results cannot be explained
-by memorisation. It is still a small learner in a small world that I designed
-to be learnable. Both statements are true, and the second one matters as much as
-the first.
+## What Ultron demonstrated
 
-## What Ultron genuinely demonstrated
+| Claim | Evidence |
+|---|---|
+| **Rules, not answers** | 100% on held-out sizes far outside training in every numeric exam. A lookup memoriser trained on the same experiences scored 0%. |
+| **Knowledge compounds** | Multiplication was found only because addition was in its library. A blank brain scored 0/40. Place value was built from both. |
+| **It invents concepts** | **Negative numbers** (lesson 8). It lived with a purse of coins and IOU notes, never hearing of numbers below zero. On reflection it noticed its purse states form one line that continues past empty. It decided those were places *below zero*, invented a step with no floor, and learned to pay and be paid there. It was told the words "-3" and "negative three" only afterwards. It also invented spring stiffness, and a per-star property that matches the Sun/Jupiter mass ratio. |
+| **It transfers** | It predicted Jupiter's moons from one sighting of Io, and unseen Ceres and Halley's Comet from real data. |
+| **It composes and reasons backwards** | It answers a never-trained spring-launch problem by chaining two laws, and runs laws backwards. Division, never taught, comes from running multiplication in reverse. |
+| **It copes with noise** | With ±1% instruments it uses error propagation and predicts the *true* values. |
+| **It knows what it doesn't know** | It refuses situations new *in kind*: a planet system it never saw, an unmeasured spring, a negative wage, a word never taught. It gives the reason each time. Tough final exam: 109/109. |
+| **It isn't overconfident** | Laws are *tentative* until confirmed 3 times. Its early "momentum after one collision" claim is now marked tentative until the evidence arrives. |
+| **It is checkable** | Every answer comes with its reasons. Peano proofs are derived from its own laws and checked independently. Training is deterministic, byte for byte. |
 
-1. **Rules, not answers.** On every numeric exam with sizes outside its
-   training range, Ultron scored 100%. A lookup memoriser trained on exactly the
-   same experiences scored 0%, and a nearest-example memoriser scored 0–40%.
-   The one exception is lesson 0 (see weaknesses).
-2. **Knowledge compounds.** Multiplication was found *only* because addition was
-   already in its library. A blank brain given the identical lesson found
-   nothing (0/40). Place value was then found using both addition and
-   multiplication.
-3. **It invents concepts.** Nobody mentioned stiffness. Ultron noticed that
-   `F / x` is constant for each spring but different between springs, and
-   concluded that every spring carries a hidden property. It did the same with
-   the planets: the Kepler constant became a property of the central body, and
-   Ultron's ratio for Jupiter vs the Sun (≈1049) is the real mass ratio (≈1047).
-4. **It transfers.** It predicted three of Jupiter's moons from a single
-   observation of Io, using the form of a law it had learned from planets. A
-   blank brain could predict nothing from one moon.
-5. **It composes.** It had never seen a ball launched by a spring. It answered
-   by chaining the spring law and Newton's law through the shared quantity F.
-   The trace is in the report card.
-6. **It knows what it doesn't know.** It says "I don't know what 'divided'
-   means" and "I don't know the word 'twelve'" instead of guessing.
-7. **Its curiosity isn't fooled by noise.** It gave the random lamp panel the
-   minimum look (16 tries) and never came back.
-8. **Its reasoning is checkable.** Its Peano rules are derived from its own
-   programs, and an independent checker verifies every proof step.
+## What did not work, honestly
 
-## The tougher test (lessons 7 and 8)
+- **Designing experiments made no measurable difference.** Ultron now sets up
+  the situation where its rival explanations disagree, or else a kind of
+  situation it has never tried. Summed over all laws, it needed 35 experiences
+  to find its final laws; watching random scenes needed 34. It helped on the
+  harder purse laws (12 vs 19) and hurt on simple ones. In worlds this small,
+  every law appears within a few experiences anyway. I tried two other
+  strategies (more rivals; novelty first); neither helped. The mechanism
+  stays, and its value is unproven.
+- **The lesson 0 exam is weak.** A nearest-example memoriser also scores 100%.
+- **Some refusals are a judgement call.** Ultron refuses "5 plus -3" because it
+  was never paid a negative wage. That is consistent with its principle, but a
+  person would simply answer 2.
+- **Training slowed from ~5 s to ~1 min.** The purse lesson's searches reach
+  70,000 candidate programs.
 
-Lessons 0–6 were too easy for the verdict to mean much, so I added two harder
-lessons.
+## What I built, not Ultron
 
-- **Lesson 7, the noisy lab.** Every reading is off by up to ±1%.
-- **Lesson 8, the final exam.** There is no teaching at all, and every question
-  is of a kind never practised:
-  - division, which was never taught;
-  - inverse questions and three-step chains;
-  - physics solved for a different unknown, and chained backwards;
-  - unseen real bodies (Ceres and Halley's Comet);
-  - impossible questions, where the only correct answer is "I can't".
+- The innate primitives (counting, `succ`, `pred`, `eq`, "repeat n times").
+- The power-product form for measurements.
+- The *ability* to notice a line of states.
+- The curiosity and confirmation rules.
+- The reading and solving procedures.
 
-**What happened the first time, before any changes:**
-- In the noisy lab Ultron found **no laws at all**. It demanded exact
-  constancy, and noisy data is never exact.
-- It answered "5 minus 8 = 0".
-- It confidently gave Titan (orbiting Saturn) a period using the Sun's
-  constant, and got it wrong.
-- In the noisy lab, its estimate of F/(m·a) stayed at 0.991. It was computed
-  from the first few noisy readings and never updated.
+What Ultron discovers with these is its own. Nothing in the code states a law,
+a formula or an answer. But the space it searches is small and was designed by
+me. Phase 2's job is to let it grow that space itself.
 
-**What I changed in the brain.** Each change is a general principle, not an
-answer:
-1. **Error propagation.** Instruments state their precision, and Ultron
-   works out how much error a formula can accumulate (sum of |powers| ×
-   precision). Small misses within that are no longer surprises.
-2. **Outside experience.** Rules generalise across *magnitude*, but a
-   situation that is new *in kind* is not predicted. Examples: taking away more
-   than there is, which never happened in any experience; a planetary system it
-   has never observed; a spring it has never measured. Ultron now says so and
-   gives the reason.
-3. **Reasoning backwards.** For "what times 4 equals 20", Ultron tries 0, 1,
-   2, ... with its own law. Division was never taught, so this is how it
-   divides. It also refuses when no number works.
-4. **Refining estimates.** Constants are re-averaged over all evidence, not
-   frozen at discovery.
-5. **Trusting precise evidence.** When two laws relate the same quantities
-   (from the clean sandbox and from the noisy lab), the reasoner uses the more
-   precise one.
+## What is still open
 
-**Result after the changes:** lesson 7 60/60, lesson 8 109/109. All previous
-exams still pass.
+1. **The blind test.** Write questions in `blind/` (format in
+   `blind/README.md`) and run `python -m ultron blind yourfile.txt`. I wrote,
+   ran and then improved against every other test, so only a test written by
+   someone else proves the claims above. If it fails fairly, Phase 1 isn't
+   done, and I'll say so.
+2. **Invention beyond one mechanism.** Line discovery produced negative
+   numbers. Phase 2 needs a general way to invent, by compressing recurring
+   pieces of its own programs into new primitives.
 
-**Honest caveat:** I designed this test, saw the failures, then improved the
-brain. The changes are principled and the exam items are random draws, so this
-is not memorising answers. But it is no longer a *blind* test. The real proof
-is a test written by someone else. **Ask Ultron your own questions** with
-`python -m ultron ask`.
-
-## Weaknesses, stated plainly
-
-1. **I designed the building blocks.** Ultron combines primitives such as
-   `succ`, `pred`, `eq`, repetition and the power-product form. It did not
-   invent them. Its search space is small, and the answers are guaranteed to be
-   in it. This is the biggest limitation and the main Phase 2 target.
-2. **The exams share the lessons' structure.** Held-out values are far outside
-   the training range, but they are the same kind of problem. The lesson 0
-   exam is weak: the nearest-example memoriser also scored 100%.
-3. **The physics is clean and the real data is tiny.** The sandbox has no
-   noise. The real-data lesson has 12 orbits and 25 Boyle rows. Finding these
-   laws this way was already done by the BACON program in the 1970s, so this is
-   a sound foundation, not new science.
-4. **Overconfidence.** It declared momentum conserved after one collision.
-   Reflection later refined this correctly, but there is no uncertainty or
-   confidence tracking on laws yet.
-5. **Its world stops at zero.** It now correctly *refuses* "5 minus 8"
-   instead of saying 0. But it still has no negative numbers or fractions, and
-   it divides only by trial, not with a division concept of its own.
-6. **Its language is tiny.** It knows 30 grounded tokens and one sentence
-   pattern ("x op y"). This is grounded, but it is nowhere near English.
-7. **Some strategies are built in.** Reading numerals left to right, and solving
-   a collision for one unknown, are hand-written procedures. The laws they use
-   are learned; the procedures are not.
-8. **Curiosity chooses what, not how.** Ultron picks which experiment to run,
-   but not its parameters. It doesn't yet design experiments to settle
-   questions.
-
-## What I would teach next (Phase 2)
-
-- **Library learning:** let Ultron compress recurring pieces of its programs
-  into new primitives it names itself (DreamCoder-style). The first target is
-  to invent "negative" or "division" when the world demands it (debts, sharing).
-- **Confidence per law:** how many independent confirmations a law has, and
-  demotion when a law fails.
-- **Active experiments:** choose parameters that best split the surviving
-  hypotheses.
-- **A noisy sandbox**, so uncertainty handling is forced early.
-- **Blind exams** written by someone other than its trainer.
-
-*Grade: A for the mechanism, and honestly an early infant for intelligence.
-It is the right kind of learner. It is still very early in its life.*
+*Grade: Phase 1 passed. It is the right kind of mind, a very young one, with
+one genuine invention of its own.*

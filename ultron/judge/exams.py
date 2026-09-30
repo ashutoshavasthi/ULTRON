@@ -16,7 +16,7 @@ from ..brain.brain import Brain
 from ..brain.language import read_number
 from ..logic import peano
 from ..env import dataworld
-from ..trainer.lessons import Combining, Mechanics, NoisyLab, NUMBER_WORDS, RealData
+from ..trainer.lessons import Combining, Mechanics, NoisyLab, NUMBER_WORDS, Owing, RealData
 
 REFUSE = "I can't"      # the right answer to an impossible question
 
@@ -155,6 +155,34 @@ def exam_groups(brain, seed=1003, blank=True):
     if blank:
         extra["blank_brain"] = blank_brain_groups(items)
     return _result(3, [t], 0.99, extra)
+
+
+def active_vs_passive(upto=8):
+    """Experiences Ultron needed before it first held the law it finally kept, when it
+    designs its own experiments versus when it only watches random scenes."""
+    from ..trainer.trainer import Trainer
+    out = {}
+    for mode in ("active", "passive"):
+        brain = Brain(mode)
+        brain.active = mode == "active"
+        trainer = Trainer(brain)
+        for n in range(upto + 1):
+            lesson = trainer.lessons[n]
+            brain.lesson = n
+            for spec in lesson.specs():
+                brain.meet(spec)
+            if n == 4:
+                trainer.teach_names(lesson)
+            elif n == 6:
+                trainer.teach_real_data(lesson)
+            elif n == 8:
+                trainer.teach_owing(lesson)
+            else:
+                from ..trainer.trainer import free_play
+                free_play(brain, lesson, lesson.budget)
+        out[mode] = {name: law.provenance.get("found_after")
+                     for name, law in sorted(brain.library.laws.items())}
+    return out
 
 
 def blank_brain_groups(items, seed=3):
@@ -323,6 +351,43 @@ def noisy_effort(brain, seed=7):
 
 
 # ---------------------------------------------------------------- lesson 8
+def exam_owing(brain, seed=1009):
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    invented = Tally("invented numbers below zero, without being told")
+    inv = b.inventions.get(Owing.LINE)
+    invented.item("purse line", True, bool(inv and "down" in inv["primitives"]))
+    pay = Tally("paying from purses of -40..40 with prices 10-60 (trained: -5..5, up to 8)")
+    paid = Tally("getting paid into purses of -40..40, wages 10-60")
+    for _ in range(30):
+        inputs = {"purse": rng.randint(-40, 40), "price": rng.randint(10, 60)}
+        pay.item(inputs, inputs["purse"] - inputs["price"], b.predict("pay", inputs),
+                 b.memory.of("pay"), "purse_after", inputs)
+        inputs = {"purse": rng.randint(-40, 40), "wage": rng.randint(10, 60)}
+        paid.item(inputs, inputs["purse"] + inputs["wage"], b.predict("get_paid", inputs),
+                  b.memory.of("get_paid"), "purse_after", inputs)
+    words = Tally("questions with negative numbers, in marks and words")
+    for _ in range(20):
+        form = rng.randrange(4)
+        x, y = rng.randint(0, 9), rng.randint(0, 9)
+        if form == 0:
+            q, t = f"{x} minus {x + y + 1}", -(y + 1)
+        elif form == 1:
+            q, t = f"-{x + 1} plus {y}", -(x + 1) + y
+        elif form == 2:
+            q, t = f"negative {NUMBER_WORDS[x + 1]} minus {y}", -(x + 1) - y
+        else:
+            q, t = f"what plus {x + y + 1} equals {x}", -(y + 1)
+        words.item(q, str(t), reasoner.arithmetic(b, q).text)
+    refuse = Tally("never experienced: a negative wage, a negative number of groups")
+    for _ in range(10):
+        x, y = rng.randint(1, 9), rng.randint(1, 9)
+        q = f"{x} plus -{y}" if rng.random() < 0.5 else f"-{x} times {y}"
+        refuse.item(q, REFUSE, reasoner.arithmetic(b, q).value)
+    return _result(8, [invented, pay, paid, words, refuse], 0.99,
+                   {"story": inv["story"] if inv else None})
+
+
+# ---------------------------------------------------------------- lesson 9
 def exam_final(brain, seed=1008):
     b, rng = copy.deepcopy(brain), random.Random(seed)
     ask = lambda q: reasoner.arithmetic(b, q).value
@@ -364,14 +429,12 @@ def exam_final(brain, seed=1008):
     for _ in range(15):
         form = rng.randrange(3)
         if form == 0:
-            x = rng.randint(0, 20)
-            q = f"{x} minus {x + rng.randint(1, 20)}"
-        elif form == 1:
             y = rng.randint(2, 12)
             q = f"what times {y} equals {y * rng.randint(1, 20) + rng.randint(1, y - 1)}"
+        elif form == 1:
+            q = f"what is {rng.randint(10, 99)} divided {rng.randint(2, 9)}"
         else:
-            y = rng.randint(10, 40)
-            q = f"what plus {y} equals {rng.randint(0, y - 1)}"
+            q = f"{rng.randint(1, 9)} times -{rng.randint(1, 9)}"
         impossible.item(q, REFUSE, ask(q))
 
     mech = Mechanics(seed=5).world
@@ -415,9 +478,9 @@ def exam_final(brain, seed=1008):
     ans = reasoner.physics(b, "r", {"T": earth["T"]}, {"system": "Sun"})
     sky.item("Earth's distance from its year", earth["r"], ans.value)
 
-    return _result(8, [div, inv, chain, impossible, phys, back, phys_no, sky], 0.9)
+    return _result(9, [div, inv, chain, impossible, phys, back, phys_no, sky], 0.9)
 
 
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
-         8: exam_final}
+         8: exam_owing, 9: exam_final}

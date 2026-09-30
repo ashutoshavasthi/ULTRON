@@ -5,16 +5,16 @@ The Trainer may look at the world's ground truth to grade answers. It never
 passes a law, formula or answer into the brain.
 """
 
-from ..brain.language import bind_number, bind_operation, bind_relation
+from ..brain.language import bind_number, bind_operation, bind_prefix, bind_relation
 from ..judge.exams import EXAMS
 from .lessons import RealData, all_lessons
 
 MAX_ATTEMPTS = 3
 
 
-def free_play(brain, lesson, budget, wide=False):
+def free_play(brain, lesson, budget, wide=False, names=None):
     """Ultron chooses what to play with, by learning progress."""
-    options = [s.name for s in lesson.specs()]
+    options = names or [s.name for s in lesson.specs()]
     for _ in range(budget):
         choice = brain.curiosity.choose(options)
         if choice is None:
@@ -22,7 +22,8 @@ def free_play(brain, lesson, budget, wide=False):
             break
         brain.log.append({"lesson": brain.lesson, "kind": "choice", "choice": choice,
                           "text": f"chose to play with {choice}"})
-        inputs, outcome = lesson.scene(choice, wide)
+        request = brain.propose(choice, lesson.options(choice))
+        inputs, outcome = lesson.scene(choice, wide, request)
         brain.experience(choice, inputs, outcome)
     brain.reflect()
 
@@ -60,6 +61,8 @@ class Trainer:
                 self.teach_names(lesson)
             elif lesson.number == 6:
                 self.teach_real_data(lesson)
+            elif lesson.number == 8:
+                self.teach_owing(lesson)
             elif attempt == 1:
                 free_play(brain, lesson, lesson.budget)
             else:
@@ -105,6 +108,34 @@ class Trainer:
             brain.experience("gas", {"V": row["V"]}, row["P"])
         self.say("I showed Boyle's 1662 measurements for the larger air volumes.")
 
+    # ----------------------------------------------------------- lesson 8
+    def teach_owing(self, lesson):
+        brain = self.brain
+        lesson.brain = brain
+        self.say("Here is a purse. You can earn coins and spend coins. If you spend with "
+                 "an empty purse, the shop gives you an IOU note. Play.")
+        free_play(brain, lesson, lesson.budget)
+        if lesson.LINE not in brain.inventions:
+            self.say("You haven't found anything new about the purse. The lesson stops here.")
+            return
+        self.say("You say some purses are 'below zero'. Let's buy and sell with that idea.")
+        for spec in lesson.deal_specs():
+            brain.meet(spec)
+        free_play(brain, lesson, lesson.budget, names=[s.name for s in lesson.deal_specs()])
+        marks, words = [], []
+        for mark, spoken, purse in lesson.below_zero_names():
+            lesson.world.set_purse(*purse)
+            pos = lesson.perceive()
+            marks.append((mark, pos))
+            words.append((spoken, pos))
+        bind_prefix(brain, marks)
+        bind_prefix(brain, words)
+        self.say("People write your below-zero places as -1, -2, -3 and say 'negative one, "
+                 "negative two'.")
+        for word, ds in lesson.demos().items():
+            bind_operation(brain, word, ds)
+        self.say("I bought and sold things with you and said 'minus' and 'plus' out loud.")
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -117,6 +148,7 @@ class Trainer:
         6: {"orbit": "Kepler's third law", "gas": "Boyle's law"},
         7: {"lab_push": "Newton's second law (measured with noise)",
             "lab_stretch": "stiffness (measured with noise)"},
+        8: {"line:earn/spend": "negative numbers (the integers)"},
     }
 
     def name_concepts(self, number):
@@ -125,7 +157,7 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=8):
+    def run_all(self, upto=9):
         for n in range(upto + 1):
             self.run(n)
         return self.results

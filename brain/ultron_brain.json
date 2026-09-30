@@ -7,7 +7,9 @@
      "m": 1,
      "v": 1
     },
-    "provenance": {},
+    "provenance": {
+     "support": 16
+    },
     "scope": "all"
    },
    {
@@ -16,7 +18,9 @@
      "m": 1,
      "v": 2
     },
-    "provenance": {},
+    "provenance": {
+     "support": 4
+    },
     "scope": [
      "steel"
     ]
@@ -26,6 +30,46 @@
  "curiosity": {
   "errors": {
    "collide": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "earn_coins": [
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "earn_notes": [
+    1.0,
+    1.0,
     1.0,
     0.0,
     0.0,
@@ -58,8 +102,31 @@
     0.0,
     0.0
    ],
+   "get_paid": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "groups": [
     1.0,
+    1.0,
+    0.0,
+    0.0,
     1.0,
     1.0,
     0.0,
@@ -199,6 +266,25 @@
     0.0,
     0.0
    ],
+   "pay": [
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "peekaboo": [
     1.0,
     0.0,
@@ -218,6 +304,45 @@
     0.0
    ],
    "push": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "spend_coins": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "spend_notes": [
+    1.0,
     1.0,
     1.0,
     0.0,
@@ -262,8 +387,9 @@
    ],
    "take_away": [
     1.0,
-    0.0,
     1.0,
+    1.0,
+    0.0,
     0.0,
     0.0,
     0.0,
@@ -282,14 +408,112 @@
   }
  },
  "hypotheses": {
+  "earn_coins": "take_away(succ(coins), notes)",
+  "earn_notes": "pred(notes)",
+  "get_paid": "merge(wage, purse)",
   "groups": "repeat size times [merge(\u00b7, groups)] starting from 0",
   "merge": "repeat nA times [succ] starting from nB",
   "numeral": "merge(right, groups(left, 10))",
   "pair_off": "eq(nA, nB)",
+  "pay": "repeat price times [down] starting from purse",
   "peekaboo": "went_in",
+  "spend_coins": "pred(coins)",
+  "spend_notes": "take_away(succ(notes), coins)",
   "take_away": "repeat n_taken times [pred] starting from nA"
  },
+ "inventions": {
+  "line:earn/spend": {
+   "counted": "coins",
+   "down": "spend",
+   "lesson": 8,
+   "primitives": [
+    "down"
+   ],
+   "story": "My coins/notes states all lie on ONE line: 'earn' and 'spend' undo each other, and from the empty state 'earn' counts coins up 1, 2, 3... But 'spend' from the empty state doesn't stop: it keeps going, into states with notes. Those are places *below* zero. I'll treat them as numbers too, and use a new step 'down' that has no floor.",
+   "up": "earn",
+   "vars": [
+    "coins",
+    "notes"
+   ]
+  }
+ },
  "library": {
+  "earn_coins": {
+   "expr": [
+    "call",
+    "take_away",
+    [
+     "succ",
+     [
+      "var",
+      "coins"
+     ]
+    ],
+    [
+     "var",
+     "notes"
+    ]
+   ],
+   "name": "earn_coins",
+   "out_type": "int",
+   "params": [
+    "coins",
+    "notes"
+   ],
+   "provenance": {
+    "experiences": 11,
+    "found_after": 3,
+    "lesson": 8,
+    "size": 4
+   }
+  },
+  "earn_notes": {
+   "expr": [
+    "pred",
+    [
+     "var",
+     "notes"
+    ]
+   ],
+   "name": "earn_notes",
+   "out_type": "int",
+   "params": [
+    "coins",
+    "notes"
+   ],
+   "provenance": {
+    "experiences": 11,
+    "found_after": 3,
+    "lesson": 8,
+    "size": 2
+   }
+  },
+  "get_paid": {
+   "expr": [
+    "call",
+    "merge",
+    [
+     "var",
+     "wage"
+    ],
+    [
+     "var",
+     "purse"
+    ]
+   ],
+   "name": "get_paid",
+   "out_type": "int",
+   "params": [
+    "purse",
+    "wage"
+   ],
+   "provenance": {
+    "experiences": 13,
+    "found_after": 5,
+    "lesson": 8,
+    "size": 3
+   }
+  },
   "groups": {
    "expr": [
     "iter",
@@ -317,7 +541,8 @@
     "size"
    ],
    "provenance": {
-    "experiences": 11,
+    "experiences": 14,
+    "found_after": 6,
     "lesson": 3,
     "size": 5
    }
@@ -345,6 +570,7 @@
    ],
    "provenance": {
     "experiences": 10,
+    "found_after": 2,
     "lesson": 2,
     "size": 4
    }
@@ -378,6 +604,7 @@
    ],
    "provenance": {
     "experiences": 10,
+    "found_after": 2,
     "lesson": 4,
     "size": 5
    }
@@ -402,8 +629,37 @@
    ],
    "provenance": {
     "experiences": 10,
+    "found_after": 2,
     "lesson": 1,
     "size": 3
+   }
+  },
+  "pay": {
+   "expr": [
+    "iter",
+    [
+     "down"
+    ],
+    [
+     "var",
+     "price"
+    ],
+    [
+     "var",
+     "purse"
+    ]
+   ],
+   "name": "pay",
+   "out_type": "int",
+   "params": [
+    "price",
+    "purse"
+   ],
+   "provenance": {
+    "experiences": 11,
+    "found_after": 3,
+    "lesson": 8,
+    "size": 4
    }
   },
   "peekaboo": {
@@ -419,8 +675,59 @@
    ],
    "provenance": {
     "experiences": 9,
+    "found_after": 1,
     "lesson": 0,
     "size": 1
+   }
+  },
+  "spend_coins": {
+   "expr": [
+    "pred",
+    [
+     "var",
+     "coins"
+    ]
+   ],
+   "name": "spend_coins",
+   "out_type": "int",
+   "params": [
+    "coins",
+    "notes"
+   ],
+   "provenance": {
+    "experiences": 10,
+    "found_after": 2,
+    "lesson": 8,
+    "size": 2
+   }
+  },
+  "spend_notes": {
+   "expr": [
+    "call",
+    "take_away",
+    [
+     "succ",
+     [
+      "var",
+      "notes"
+     ]
+    ],
+    [
+     "var",
+     "coins"
+    ]
+   ],
+   "name": "spend_notes",
+   "out_type": "int",
+   "params": [
+    "coins",
+    "notes"
+   ],
+   "provenance": {
+    "experiences": 11,
+    "found_after": 3,
+    "lesson": 8,
+    "size": 4
    }
   },
   "take_away": {
@@ -446,6 +753,7 @@
    ],
    "provenance": {
     "experiences": 11,
+    "found_after": 3,
     "lesson": 2,
     "size": 4
    }
@@ -469,15 +777,25 @@
    "text": "chose to play with peekaboo"
   },
   {
+   "kind": "design",
+   "lesson": 0,
+   "text": "peekaboo: my ideas agree, but I've never tried a situation like {'went_in': True, 'waited': 1}; I'll set that up"
+  },
+  {
    "kind": "revise",
    "lesson": 0,
-   "text": "peekaboo: surprised; new best explanation is went_in (was nothing; 1 experiences, 2 programs searched)"
+   "text": "peekaboo: surprised; new best explanation is went_in (was nothing; 1 experiences, 12 programs searched)"
   },
   {
    "choice": "peekaboo",
    "kind": "choice",
    "lesson": 0,
    "text": "chose to play with peekaboo"
+  },
+  {
+   "kind": "design",
+   "lesson": 0,
+   "text": "peekaboo: my 3 explanations disagree about {'went_in': False, 'waited': 1}; I'll set that up to find out"
   },
   {
    "choice": "peekaboo",
@@ -600,20 +918,14 @@
    "text": "chose to play with pair_off"
   },
   {
-   "kind": "revise",
+   "kind": "design",
    "lesson": 1,
-   "text": "pair_off: surprised; new best explanation is false (was nothing; 1 experiences, 6 programs searched)"
-  },
-  {
-   "choice": "pair_off",
-   "kind": "choice",
-   "lesson": 1,
-   "text": "chose to play with pair_off"
+   "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 0, 'nB': 0}; I'll set that up"
   },
   {
    "kind": "revise",
    "lesson": 1,
-   "text": "pair_off: surprised; new best explanation is eq(nA, nB) (was false; 2 experiences, 27 programs searched)"
+   "text": "pair_off: surprised; new best explanation is true (was nothing; 1 experiences, 12 programs searched)"
   },
   {
    "choice": "pair_off",
@@ -622,10 +934,14 @@
    "text": "chose to play with pair_off"
   },
   {
-   "choice": "pair_off",
-   "kind": "choice",
+   "kind": "design",
    "lesson": 1,
-   "text": "chose to play with pair_off"
+   "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 0, 'nB': 1}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 1,
+   "text": "pair_off: surprised; new best explanation is eq(nA, nB) (was true; 2 experiences, 46 programs searched)"
   },
   {
    "choice": "pair_off",
@@ -634,10 +950,42 @@
    "text": "chose to play with pair_off"
   },
   {
+   "kind": "design",
+   "lesson": 1,
+   "text": "pair_off: my 4 explanations disagree about {'nA': 1, 'nB': 0}; I'll set that up to find out"
+  },
+  {
    "choice": "pair_off",
    "kind": "choice",
    "lesson": 1,
    "text": "chose to play with pair_off"
+  },
+  {
+   "kind": "design",
+   "lesson": 1,
+   "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 1}; I'll set that up"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "kind": "design",
+   "lesson": 1,
+   "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 2}; I'll set that up"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "kind": "design",
+   "lesson": 1,
+   "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 2, 'nB': 1}; I'll set that up"
   },
   {
    "choice": "pair_off",
@@ -752,9 +1100,14 @@
    "text": "chose to play with merge"
   },
   {
+   "kind": "design",
+   "lesson": 2,
+   "text": "merge: my ideas agree, but I've never tried a situation like {'nA': 0, 'nB': 0}; I'll set that up"
+  },
+  {
    "kind": "revise",
    "lesson": 2,
-   "text": "merge: surprised; new best explanation is nA (was nothing; 1 experiences, 1 programs searched)"
+   "text": "merge: surprised; new best explanation is nA (was nothing; 1 experiences, 6 programs searched)"
   },
   {
    "choice": "take_away",
@@ -763,9 +1116,14 @@
    "text": "chose to play with take_away"
   },
   {
+   "kind": "design",
+   "lesson": 2,
+   "text": "take_away: my ideas agree, but I've never tried a situation like {'nA': 0, 'n_taken': 0}; I'll set that up"
+  },
+  {
    "kind": "revise",
    "lesson": 2,
-   "text": "take_away: surprised; new best explanation is nA (was nothing; 1 experiences, 1 programs searched)"
+   "text": "take_away: surprised; new best explanation is nA (was nothing; 1 experiences, 6 programs searched)"
   },
   {
    "choice": "lamps",
@@ -776,7 +1134,7 @@
   {
    "kind": "revise",
    "lesson": 2,
-   "text": "lamps: surprised; new best explanation is succ(succ(lit_before)) (was nothing; 1 experiences, 10 programs searched)"
+   "text": "lamps: surprised; new best explanation is 1 (was nothing; 1 experiences, 7 programs searched)"
   },
   {
    "choice": "merge",
@@ -785,9 +1143,177 @@
    "text": "chose to play with merge"
   },
   {
+   "kind": "design",
+   "lesson": 2,
+   "text": "merge: my 4 explanations disagree about {'nA': 2, 'nB': 3}; I'll set that up to find out"
+  },
+  {
    "kind": "revise",
    "lesson": 2,
-   "text": "merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 150 programs searched)"
+   "text": "merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 336 programs searched)"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "kind": "design",
+   "lesson": 2,
+   "text": "take_away: my 4 explanations disagree about {'nA': 3, 'n_taken': 1}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 2,
+   "text": "take_away: surprised; new best explanation is pred(nA) (was nA; 2 experiences, 52 programs searched)"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 2,
+   "text": "lamps: no simple law explains all 2 experiences (searched 425 programs)"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "kind": "design",
+   "lesson": 2,
+   "text": "merge: my 3 explanations disagree about {'nA': 0, 'nB': 2}; I'll set that up to find out"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "kind": "design",
+   "lesson": 2,
+   "text": "take_away: my ideas agree, but I've never tried a situation like {'nA': 1, 'n_taken': 0}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 2,
+   "text": "take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was pred(nA); 3 experiences, 342 programs searched)"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "kind": "design",
+   "lesson": 2,
+   "text": "merge: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 0}; I'll set that up"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "kind": "design",
+   "lesson": 2,
+   "text": "take_away: my ideas agree, but I've never tried a situation like {'nA': 1, 'n_taken': 1}; I'll set that up"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 2,
+   "text": "lamps: no simple law explains all 4 experiences (searched 893 programs)"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "kind": "design",
+   "lesson": 2,
+   "text": "merge: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 1}; I'll set that up"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "kind": "design",
+   "lesson": 2,
+   "text": "merge: my ideas agree, but I've never tried a situation like {'nA': 2, 'nB': 1}; I'll set that up"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
+  },
+  {
+   "choice": "lamps",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with lamps"
+  },
+  {
+   "choice": "merge",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with merge"
   },
   {
    "choice": "take_away",
@@ -804,130 +1330,7 @@
   {
    "kind": "stuck",
    "lesson": 2,
-   "text": "lamps: no simple law explains all 2 experiences (searched 587 programs)"
-  },
-  {
-   "choice": "merge",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with merge"
-  },
-  {
-   "choice": "take_away",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with take_away"
-  },
-  {
-   "kind": "revise",
-   "lesson": 2,
-   "text": "take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was nA; 3 experiences, 152 programs searched)"
-  },
-  {
-   "choice": "lamps",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with lamps"
-  },
-  {
-   "choice": "merge",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with merge"
-  },
-  {
-   "choice": "take_away",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with take_away"
-  },
-  {
-   "choice": "lamps",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with lamps"
-  },
-  {
-   "kind": "stuck",
-   "lesson": 2,
-   "text": "lamps: no simple law explains all 4 experiences (searched 587 programs)"
-  },
-  {
-   "choice": "merge",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with merge"
-  },
-  {
-   "choice": "take_away",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with take_away"
-  },
-  {
-   "choice": "lamps",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with lamps"
-  },
-  {
-   "choice": "merge",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with merge"
-  },
-  {
-   "choice": "take_away",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with take_away"
-  },
-  {
-   "choice": "lamps",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with lamps"
-  },
-  {
-   "choice": "merge",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with merge"
-  },
-  {
-   "choice": "take_away",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with take_away"
-  },
-  {
-   "choice": "lamps",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with lamps"
-  },
-  {
-   "choice": "merge",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with merge"
-  },
-  {
-   "choice": "take_away",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with take_away"
-  },
-  {
-   "choice": "lamps",
-   "kind": "choice",
-   "lesson": 2,
-   "text": "chose to play with lamps"
-  },
-  {
-   "kind": "stuck",
-   "lesson": 2,
-   "text": "lamps: no simple law explains all 8 experiences (searched 587 programs)"
+   "text": "lamps: no simple law explains all 8 experiences (searched 913 programs)"
   },
   {
    "choice": "merge",
@@ -1086,7 +1489,13 @@
   {
    "kind": "stuck",
    "lesson": 2,
-   "text": "lamps: no simple law explains all 16 experiences (searched 1831 programs)"
+   "text": "lamps: no simple law explains all 16 experiences (searched 2913 programs)"
+  },
+  {
+   "choice": "take_away",
+   "kind": "choice",
+   "lesson": 2,
+   "text": "chose to play with take_away"
   },
   {
    "choice": "merge",
@@ -1137,9 +1546,14 @@
    "text": "chose to play with groups"
   },
   {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 0, 'size': 0}; I'll set that up"
+  },
+  {
    "kind": "revise",
    "lesson": 3,
-   "text": "groups: surprised; new best explanation is size (was nothing; 1 experiences, 2 programs searched)"
+   "text": "groups: surprised; new best explanation is groups (was nothing; 1 experiences, 10 programs searched)"
   },
   {
    "choice": "groups",
@@ -1148,9 +1562,14 @@
    "text": "chose to play with groups"
   },
   {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my 4 explanations disagree about {'groups': 2, 'size': 0}; I'll set that up to find out"
+  },
+  {
    "kind": "revise",
    "lesson": 3,
-   "text": "groups: surprised; new best explanation is succ(succ(succ(1))) (was size; 2 experiences, 95 programs searched)"
+   "text": "groups: surprised; new best explanation is 0 (was groups; 2 experiences, 12 programs searched)"
   },
   {
    "choice": "groups",
@@ -1159,15 +1578,63 @@
    "text": "chose to play with groups"
   },
   {
-   "kind": "revise",
+   "kind": "design",
    "lesson": 3,
-   "text": "groups: surprised; new best explanation is repeat size times [merge(\u00b7, groups)] starting from 0 (was succ(succ(succ(1))); 3 experiences, 850 programs searched)"
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 0, 'size': 0}; I'll set that up"
   },
   {
    "choice": "groups",
    "kind": "choice",
    "lesson": 3,
    "text": "chose to play with groups"
+  },
+  {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 0, 'size': 0}; I'll set that up"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 1, 'size': 1}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 3,
+   "text": "groups: surprised; new best explanation is take_away(groups, take_away(groups, size)) (was 0; 5 experiences, 988 programs searched)"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my 4 explanations disagree about {'groups': 1, 'size': 2}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 3,
+   "text": "groups: surprised; new best explanation is repeat size times [merge(\u00b7, groups)] starting from 0 (was take_away(groups, take_away(groups, size)); 6 experiences, 3438 programs searched)"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 2, 'size': 1}; I'll set that up"
   },
   {
    "choice": "groups",
@@ -1347,7 +1814,7 @@
   {
    "kind": "revise",
    "lesson": 4,
-   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 1115 programs searched)"
+   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 3030 programs searched)"
   },
   {
    "choice": "numeral",
@@ -1358,7 +1825,7 @@
   {
    "kind": "revise",
    "lesson": 4,
-   "text": "numeral: surprised; new best explanation is merge(right, groups(left, 10)) (was succ(succ(groups(8, 9))); 2 experiences, 2789 programs searched)"
+   "text": "numeral: surprised; new best explanation is merge(right, groups(left, 10)) (was succ(succ(groups(8, 9))); 2 experiences, 16912 programs searched)"
   },
   {
    "choice": "numeral",
@@ -1526,7 +1993,7 @@
   {
    "kind": "revise",
    "lesson": 5,
-   "text": "collide: total m\u00b7v is the same before and after in every collision (1 experiences)"
+   "text": "collide: total m\u00b7v is the same before and after in every collision [tentative: 1 event(s)] (1 experiences)"
   },
   {
    "choice": "push",
@@ -1537,7 +2004,7 @@
   {
    "kind": "revise",
    "lesson": 5,
-   "text": "push: F / (a\u00b7m) = 1 [dimensionless] in every experiment (22 candidates searched)"
+   "text": "push: F / (a\u00b7m) = 1 [dimensionless] in every experiment (22 candidates searched; tentative until it predicts 3 new experiences)"
   },
   {
    "choice": "stretch",
@@ -1609,6 +2076,11 @@
    "text": "chose to play with push"
   },
   {
+   "kind": "establish",
+   "lesson": 5,
+   "text": "push: F / (a\u00b7m) has now predicted 3 new experiences; no longer tentative"
+  },
+  {
    "choice": "stretch",
    "kind": "choice",
    "lesson": 5,
@@ -1663,7 +2135,7 @@
   {
    "kind": "revise",
    "lesson": 5,
-   "text": "stretch: F / x is constant for each spring but differs between them: a hidden property of each spring [N/m] (20 candidates searched)"
+   "text": "stretch: F / x is constant for each spring but differs between them: a hidden property of each spring [N/m] (20 candidates searched; tentative until it predicts 3 new experiences)"
   },
   {
    "choice": "collide",
@@ -1718,6 +2190,11 @@
    "kind": "choice",
    "lesson": 5,
    "text": "chose to play with stretch"
+  },
+  {
+   "kind": "establish",
+   "lesson": 5,
+   "text": "stretch: F / x has now predicted 3 new experiences; no longer tentative"
   },
   {
    "choice": "collide",
@@ -1928,7 +2405,12 @@
   {
    "kind": "revise",
    "lesson": 6,
-   "text": "orbit: T^2 / r^3 = 2.97473e-19 [m^-3\u00b7s^2] in every experiment (20 candidates searched)"
+   "text": "orbit: T^2 / r^3 = 2.97473e-19 [m^-3\u00b7s^2] in every experiment (20 candidates searched; tentative until it predicts 3 new experiences)"
+  },
+  {
+   "kind": "establish",
+   "lesson": 6,
+   "text": "orbit: T^2 / r^3 has now predicted 3 new experiences; no longer tentative"
   },
   {
    "kind": "trainer",
@@ -1943,7 +2425,12 @@
   {
    "kind": "revise",
    "lesson": 6,
-   "text": "gas: P\u00b7V = 1401.94 [the data's own units] in every experiment (2 candidates searched)"
+   "text": "gas: P\u00b7V = 1401.94 [the data's own units] in every experiment (2 candidates searched; tentative until it predicts 3 new experiences)"
+  },
+  {
+   "kind": "establish",
+   "lesson": 6,
+   "text": "gas: P\u00b7V has now predicted 3 new experiences; no longer tentative"
   },
   {
    "kind": "trainer",
@@ -2011,7 +2498,7 @@
   {
    "kind": "revise",
    "lesson": 7,
-   "text": "lab_push: F / (a\u00b7m) = 0.991157 [dimensionless] in every experiment (7 candidates searched)"
+   "text": "lab_push: F / (a\u00b7m) = 0.991157 [dimensionless] in every experiment (7 candidates searched; tentative until it predicts 3 new experiences)"
   },
   {
    "choice": "lab_stretch",
@@ -2056,13 +2543,18 @@
   {
    "kind": "revise",
    "lesson": 7,
-   "text": "lab_stretch: F / x is constant for each spring but differs between them: a hidden property of each spring [N/m] (6 candidates searched)"
+   "text": "lab_stretch: F / x is constant for each spring but differs between them: a hidden property of each spring [N/m] (6 candidates searched; tentative until it predicts 3 new experiences)"
   },
   {
    "choice": "lab_push",
    "kind": "choice",
    "lesson": 7,
    "text": "chose to play with lab_push"
+  },
+  {
+   "kind": "establish",
+   "lesson": 7,
+   "text": "lab_push: F / (a\u00b7m) has now predicted 3 new experiences; no longer tentative"
   },
   {
    "choice": "lab_stretch",
@@ -2093,6 +2585,11 @@
    "kind": "choice",
    "lesson": 7,
    "text": "chose to play with lab_stretch"
+  },
+  {
+   "kind": "establish",
+   "lesson": 7,
+   "text": "lab_stretch: F / x has now predicted 3 new experiences; no longer tentative"
   },
   {
    "choice": "lab_push",
@@ -2247,17 +2744,933 @@
   {
    "kind": "trainer",
    "lesson": 8,
-   "text": "Lesson 8: The tough final exam"
+   "text": "Lesson 8: Owing"
+  },
+  {
+   "kind": "meet",
+   "lesson": 8,
+   "text": "new kind of experience: earn_coins"
+  },
+  {
+   "kind": "meet",
+   "lesson": 8,
+   "text": "new kind of experience: earn_notes"
+  },
+  {
+   "kind": "meet",
+   "lesson": 8,
+   "text": "new kind of experience: spend_coins"
+  },
+  {
+   "kind": "meet",
+   "lesson": 8,
+   "text": "new kind of experience: spend_notes"
   },
   {
    "kind": "trainer",
    "lesson": 8,
-   "text": "No teaching today. Show me what you can do."
+   "text": "Here is a purse. You can earn coins and spend coins. If you spend with an empty purse, the shop gives you an IOU note. Play."
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "earn_coins: surprised; new best explanation is 1 (was nothing; 1 experiences, 35 programs searched)"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_notes: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "earn_notes: surprised; new best explanation is coins (was nothing; 1 experiences, 15 programs searched)"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "spend_coins: surprised; new best explanation is coins (was nothing; 1 experiences, 15 programs searched)"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_notes: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "spend_notes: surprised; new best explanation is 1 (was nothing; 1 experiences, 35 programs searched)"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_coins: my 3 explanations disagree about {'coins': 1, 'notes': 0}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "earn_coins: surprised; new best explanation is succ(coins) (was 1; 2 experiences, 905 programs searched)"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_notes: my 4 explanations disagree about {'coins': 2, 'notes': 0}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "earn_notes: surprised; new best explanation is notes (was coins; 2 experiences, 19 programs searched)"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_coins: my 4 explanations disagree about {'coins': 2, 'notes': 0}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "spend_coins: surprised; new best explanation is pred(coins) (was coins; 2 experiences, 907 programs searched)"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_notes: my 3 explanations disagree about {'coins': 1, 'notes': 0}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "spend_notes: surprised; new best explanation is take_away(1, coins) (was 1; 2 experiences, 1638 programs searched)"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 1}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was succ(coins); 3 experiences, 33523 programs searched)"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_notes: my 4 explanations disagree about {'coins': 0, 'notes': 2}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "earn_notes: surprised; new best explanation is pred(notes) (was notes; 3 experiences, 1063 programs searched)"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 1}; I'll set that up"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_notes: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 1}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was take_away(1, coins); 3 experiences, 33521 programs searched)"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 8,
+   "text": "spend_coins: pred(coins) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 8,
+   "text": "earn_coins: take_away(succ(coins), notes) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 8,
+   "text": "earn_notes: pred(notes) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 8,
+   "text": "spend_notes: take_away(succ(notes), coins) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "kind": "bored",
+   "lesson": 8,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "invent",
+   "lesson": 8,
+   "text": "My coins/notes states all lie on ONE line: 'earn' and 'spend' undo each other, and from the empty state 'earn' counts coins up 1, 2, 3... But 'spend' from the empty state doesn't stop: it keeps going, into states with notes. Those are places *below* zero. I'll treat them as numbers too, and use a new step 'down' that has no floor."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 8,
+   "text": "You say some purses are 'below zero'. Let's buy and sell with that idea."
+  },
+  {
+   "kind": "meet",
+   "lesson": 8,
+   "text": "new kind of experience: pay"
+  },
+  {
+   "kind": "meet",
+   "lesson": 8,
+   "text": "new kind of experience: get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 1495 programs searched)"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "get_paid: surprised; new best explanation is 3 (was nothing; 1 experiences, 28 programs searched)"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "get_paid: surprised; new best explanation is merge(purse, wage) (was 3; 2 experiences, 3947 programs searched)"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 68705 programs searched)"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "get_paid: surprised; new best explanation is merge(wage, purse) (was merge(purse, wage); 5 experiences, 4899 programs searched)"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 8,
+   "text": "pay: repeat price times [down] starting from purse predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 8,
+   "text": "get_paid: merge(wage, purse) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "kind": "bored",
+   "lesson": 8,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "word",
+   "lesson": 8,
+   "text": "'-' in front of a number means that far below zero"
+  },
+  {
+   "kind": "word",
+   "lesson": 8,
+   "text": "'negative' in front of a number means that far below zero"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 8,
+   "text": "People write your below-zero places as -1, -2, -3 and say 'negative one, negative two'."
+  },
+  {
+   "kind": "word",
+   "lesson": 8,
+   "text": "'minus' behaves exactly like my law 'pay' (arguments yx) in all 8 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 8,
+   "text": "'-' behaves exactly like my law 'pay' (arguments yx) in all 8 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 8,
+   "text": "'plus' behaves exactly like my law 'get_paid' (arguments xy) in all 8 demonstrations"
+  },
+  {
+   "kind": "word",
+   "lesson": 8,
+   "text": "'+' behaves exactly like my law 'get_paid' (arguments xy) in all 8 demonstrations"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 8,
+   "text": "I bought and sold things with you and said 'minus' and 'plus' out loud."
   },
   {
    "kind": "trainer",
    "lesson": 8,
    "text": "Exam for lesson 8, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 8,
+   "text": "What you found in 'line:earn/spend' is what people call negative numbers (the integers)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 9,
+   "text": "Lesson 9: The tough final exam"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 9,
+   "text": "No teaching today. Show me what you can do."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 9,
+   "text": "Exam for lesson 9, attempt 1: passed"
   }
  ],
  "memory": {
@@ -2440,6 +3853,262 @@
      "outcome": 1.92922313586
     }
    ],
+   "earn_coins": [
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 1,
+      "notes": 0
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 1,
+      "notes": 0
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "coins": 4,
+      "notes": 0
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 3
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 4,
+      "notes": 0
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "coins": 4,
+      "notes": 0
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "coins": 1,
+      "notes": 0
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "coins": 4,
+      "notes": 0
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "coins": 2,
+      "notes": 0
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 5
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 4
+     },
+     "outcome": 0
+    }
+   ],
+   "earn_notes": [
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 2,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 2
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 5,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 5,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 5,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 4
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 4
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "coins": 5,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 2
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 5
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 0
+    }
+   ],
    "gas": [
     {
      "P": 29.125,
@@ -2494,34 +4163,204 @@
      "V": 24.0
     }
    ],
-   "groups": [
+   "get_paid": [
     {
      "inputs": {
-      "groups": 1,
-      "size": 4
+      "purse": 1,
+      "wage": 2
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "purse": 5,
+      "wage": 5
+     },
+     "outcome": 10
+    },
+    {
+     "inputs": {
+      "purse": 1,
+      "wage": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "purse": 3,
+      "wage": 1
      },
      "outcome": 4
     },
     {
      "inputs": {
-      "groups": 4,
-      "size": 1
+      "purse": -3,
+      "wage": 6
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "purse": 5,
+      "wage": 7
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "purse": 4,
+      "wage": 5
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "purse": 0,
+      "wage": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "purse": 5,
+      "wage": 6
+     },
+     "outcome": 11
+    },
+    {
+     "inputs": {
+      "purse": -5,
+      "wage": 8
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "purse": -5,
+      "wage": 3
+     },
+     "outcome": -2
+    },
+    {
+     "inputs": {
+      "purse": 0,
+      "wage": 6
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "purse": 4,
+      "wage": 5
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "purse": -2,
+      "wage": 5
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "purse": 1,
+      "wage": 6
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "purse": 1,
+      "wage": 6
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "purse": -5,
+      "wage": 5
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "purse": 5,
+      "wage": 7
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "purse": 2,
+      "wage": 7
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "purse": 0,
+      "wage": 4
      },
      "outcome": 4
     },
     {
      "inputs": {
-      "groups": 2,
-      "size": 4
+      "purse": 2,
+      "wage": 6
      },
      "outcome": 8
     },
     {
      "inputs": {
-      "groups": 3,
+      "purse": -4,
+      "wage": 3
+     },
+     "outcome": -1
+    },
+    {
+     "inputs": {
+      "purse": 1,
+      "wage": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "purse": -4,
+      "wage": 0
+     },
+     "outcome": -4
+    },
+    {
+     "inputs": {
+      "purse": 5,
+      "wage": 1
+     },
+     "outcome": 6
+    }
+   ],
+   "groups": [
+    {
+     "inputs": {
+      "groups": 0,
       "size": 4
      },
-     "outcome": 12
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 2,
+      "size": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 4
+     },
+     "outcome": 0
     },
     {
      "inputs": {
@@ -2532,24 +4371,24 @@
     },
     {
      "inputs": {
-      "groups": 3,
-      "size": 2
-     },
-     "outcome": 6
-    },
-    {
-     "inputs": {
-      "groups": 4,
+      "groups": 1,
       "size": 1
      },
-     "outcome": 4
+     "outcome": 1
     },
     {
      "inputs": {
       "groups": 1,
-      "size": 3
+      "size": 2
      },
-     "outcome": 3
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "groups": 2,
+      "size": 1
+     },
+     "outcome": 2
     },
     {
      "inputs": {
@@ -2620,6 +4459,62 @@
       "size": 3
      },
      "outcome": 9
+    },
+    {
+     "inputs": {
+      "groups": 4,
+      "size": 3
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "groups": 1,
+      "size": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 3,
+      "size": 1
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "groups": 4,
+      "size": 2
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "groups": 2,
+      "size": 2
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 5
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 5,
+      "size": 3
+     },
+     "outcome": 15
     }
    ],
    "lab_push": [
@@ -2799,9 +4694,27 @@
    "lamps": [
     {
      "inputs": {
+      "lit_before": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "lit_before": 1
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
       "lit_before": 2
      },
      "outcome": 4
+    },
+    {
+     "inputs": {
+      "lit_before": 4
+     },
+     "outcome": 9
     },
     {
      "inputs": {
@@ -2813,31 +4726,37 @@
      "inputs": {
       "lit_before": 8
      },
-     "outcome": 7
+     "outcome": 5
     },
     {
      "inputs": {
-      "lit_before": 5
+      "lit_before": 0
      },
-     "outcome": 7
+     "outcome": 0
     },
     {
      "inputs": {
-      "lit_before": 8
+      "lit_before": 6
      },
-     "outcome": 2
+     "outcome": 8
     },
     {
      "inputs": {
-      "lit_before": 5
+      "lit_before": 3
      },
-     "outcome": 2
+     "outcome": 0
     },
     {
      "inputs": {
       "lit_before": 8
      },
      "outcome": 8
+    },
+    {
+     "inputs": {
+      "lit_before": 2
+     },
+     "outcome": 7
     },
     {
      "inputs": {
@@ -2868,30 +4787,6 @@
       "lit_before": 7
      },
      "outcome": 3
-    },
-    {
-     "inputs": {
-      "lit_before": 7
-     },
-     "outcome": 4
-    },
-    {
-     "inputs": {
-      "lit_before": 8
-     },
-     "outcome": 8
-    },
-    {
-     "inputs": {
-      "lit_before": 4
-     },
-     "outcome": 3
-    },
-    {
-     "inputs": {
-      "lit_before": 9
-     },
-     "outcome": 1
     }
    ],
    "merge": [
@@ -2905,6 +4800,69 @@
     {
      "inputs": {
       "nA": 2,
+      "nB": 3
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 0,
+      "nB": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 1
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "nB": 3
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "nA": 2,
+      "nB": 3
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 4
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 2
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "nA": 2,
       "nB": 4
      },
      "outcome": 6
@@ -2918,41 +4876,6 @@
     },
     {
      "inputs": {
-      "nA": 4,
-      "nB": 2
-     },
-     "outcome": 6
-    },
-    {
-     "inputs": {
-      "nA": 2,
-      "nB": 3
-     },
-     "outcome": 5
-    },
-    {
-     "inputs": {
-      "nA": 1,
-      "nB": 1
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
-      "nA": 1,
-      "nB": 4
-     },
-     "outcome": 5
-    },
-    {
-     "inputs": {
-      "nA": 1,
-      "nB": 3
-     },
-     "outcome": 4
-    },
-    {
-     "inputs": {
       "nA": 2,
       "nB": 3
      },
@@ -2981,24 +4904,10 @@
     },
     {
      "inputs": {
-      "nA": 2,
-      "nB": 5
-     },
-     "outcome": 7
-    },
-    {
-     "inputs": {
-      "nA": 2,
-      "nB": 5
-     },
-     "outcome": 7
-    },
-    {
-     "inputs": {
-      "nA": 5,
+      "nA": 1,
       "nB": 4
      },
-     "outcome": 9
+     "outcome": 5
     },
     {
      "inputs": {
@@ -3009,10 +4918,24 @@
     },
     {
      "inputs": {
-      "nA": 2,
-      "nB": 5
+      "nA": 0,
+      "nB": 3
      },
-     "outcome": 7
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "nB": 4
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "nB": 1
+     },
+     "outcome": 6
     }
    ],
    "numeral": [
@@ -3171,24 +5094,24 @@
    "pair_off": [
     {
      "inputs": {
-      "nA": 1,
+      "nA": 0,
       "nB": 0
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 0,
+      "nB": 1
      },
      "outcome": false
     },
     {
      "inputs": {
-      "nA": 2,
-      "nB": 2
+      "nA": 1,
+      "nB": 0
      },
-     "outcome": true
-    },
-    {
-     "inputs": {
-      "nA": 3,
-      "nB": 3
-     },
-     "outcome": true
+     "outcome": false
     },
     {
      "inputs": {
@@ -3199,15 +5122,15 @@
     },
     {
      "inputs": {
-      "nA": 0,
-      "nB": 3
+      "nA": 1,
+      "nB": 2
      },
      "outcome": false
     },
     {
      "inputs": {
-      "nA": 3,
-      "nB": 0
+      "nA": 2,
+      "nB": 1
      },
      "outcome": false
     },
@@ -3289,7 +5212,191 @@
      "outcome": false
     }
    ],
+   "pay": [
+    {
+     "inputs": {
+      "price": 1,
+      "purse": -1
+     },
+     "outcome": -2
+    },
+    {
+     "inputs": {
+      "price": 1,
+      "purse": 2
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "price": 7,
+      "purse": 2
+     },
+     "outcome": -5
+    },
+    {
+     "inputs": {
+      "price": 5,
+      "purse": 4
+     },
+     "outcome": -1
+    },
+    {
+     "inputs": {
+      "price": 7,
+      "purse": -1
+     },
+     "outcome": -8
+    },
+    {
+     "inputs": {
+      "price": 7,
+      "purse": 0
+     },
+     "outcome": -7
+    },
+    {
+     "inputs": {
+      "price": 7,
+      "purse": -4
+     },
+     "outcome": -11
+    },
+    {
+     "inputs": {
+      "price": 3,
+      "purse": 3
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "price": 0,
+      "purse": -1
+     },
+     "outcome": -1
+    },
+    {
+     "inputs": {
+      "price": 8,
+      "purse": 4
+     },
+     "outcome": -4
+    },
+    {
+     "inputs": {
+      "price": 6,
+      "purse": 1
+     },
+     "outcome": -5
+    },
+    {
+     "inputs": {
+      "price": 4,
+      "purse": 0
+     },
+     "outcome": -4
+    },
+    {
+     "inputs": {
+      "price": 1,
+      "purse": -1
+     },
+     "outcome": -2
+    },
+    {
+     "inputs": {
+      "price": 8,
+      "purse": -5
+     },
+     "outcome": -13
+    },
+    {
+     "inputs": {
+      "price": 1,
+      "purse": -2
+     },
+     "outcome": -3
+    },
+    {
+     "inputs": {
+      "price": 4,
+      "purse": -4
+     },
+     "outcome": -8
+    },
+    {
+     "inputs": {
+      "price": 5,
+      "purse": -5
+     },
+     "outcome": -10
+    },
+    {
+     "inputs": {
+      "price": 1,
+      "purse": -4
+     },
+     "outcome": -5
+    },
+    {
+     "inputs": {
+      "price": 6,
+      "purse": -5
+     },
+     "outcome": -11
+    },
+    {
+     "inputs": {
+      "price": 8,
+      "purse": 2
+     },
+     "outcome": -6
+    },
+    {
+     "inputs": {
+      "price": 3,
+      "purse": 1
+     },
+     "outcome": -2
+    },
+    {
+     "inputs": {
+      "price": 8,
+      "purse": -1
+     },
+     "outcome": -9
+    },
+    {
+     "inputs": {
+      "price": 2,
+      "purse": 0
+     },
+     "outcome": -2
+    },
+    {
+     "inputs": {
+      "price": 4,
+      "purse": 3
+     },
+     "outcome": -1
+    }
+   ],
    "peekaboo": [
+    {
+     "inputs": {
+      "waited": 1,
+      "went_in": true
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "waited": 1,
+      "went_in": false
+     },
+     "outcome": false
+    },
     {
      "inputs": {
       "waited": 4,
@@ -3387,20 +5494,6 @@
       "went_in": true
      },
      "outcome": true
-    },
-    {
-     "inputs": {
-      "waited": 4,
-      "went_in": true
-     },
-     "outcome": true
-    },
-    {
-     "inputs": {
-      "waited": 6,
-      "went_in": true
-     },
-     "outcome": true
     }
    ],
    "push": [
@@ -3488,6 +5581,255 @@
      "F": 19.638,
      "a": 9.53763963089,
      "m": 2.059
+    }
+   ],
+   "spend_coins": [
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 2,
+      "notes": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 5,
+      "notes": 0
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "coins": 5,
+      "notes": 0
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 5
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 3
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 2
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 2
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 4
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 2,
+      "notes": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 1,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 1,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 5,
+      "notes": 0
+     },
+     "outcome": 4
+    }
+   ],
+   "spend_notes": [
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 1,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "coins": 1,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 3
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 3
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 4
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "coins": 2,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 4,
+      "notes": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "coins": 4,
+      "notes": 0
+     },
+     "outcome": 0
     }
    ],
    "stretch": [
@@ -3612,6 +5954,27 @@
     },
     {
      "inputs": {
+      "nA": 3,
+      "n_taken": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "n_taken": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "n_taken": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
       "nA": 1,
       "n_taken": 0
      },
@@ -3620,28 +5983,7 @@
     {
      "inputs": {
       "nA": 3,
-      "n_taken": 2
-     },
-     "outcome": 1
-    },
-    {
-     "inputs": {
-      "nA": 0,
-      "n_taken": 0
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "nA": 3,
-      "n_taken": 1
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
-      "nA": 0,
-      "n_taken": 0
+      "n_taken": 3
      },
      "outcome": 0
     },
@@ -3654,10 +5996,38 @@
     },
     {
      "inputs": {
-      "nA": 3,
-      "n_taken": 2
+      "nA": 2,
+      "n_taken": 1
      },
      "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "n_taken": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "n_taken": 0
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "n_taken": 4
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "n_taken": 2
+     },
+     "outcome": 2
     },
     {
      "inputs": {
@@ -3689,27 +6059,6 @@
     },
     {
      "inputs": {
-      "nA": 1,
-      "n_taken": 1
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "nA": 4,
-      "n_taken": 4
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "nA": 4,
-      "n_taken": 3
-     },
-     "outcome": 1
-    },
-    {
-     "inputs": {
       "nA": 2,
       "n_taken": 2
      },
@@ -3717,21 +6066,44 @@
     },
     {
      "inputs": {
-      "nA": 0,
-      "n_taken": 0
+      "nA": 2,
+      "n_taken": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 8,
+      "n_taken": 8
      },
      "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "n_taken": 1
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "nA": 9,
+      "n_taken": 5
+     },
+     "outcome": 4
     }
    ]
   },
   "specs": {
    "collide": {
+    "action": null,
     "group_by": null,
     "inputs": {},
     "kind": "conservation",
     "name": "collide",
     "out_type": null,
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "v2_after",
     "tol": 1e-09,
@@ -3748,7 +6120,42 @@
      ]
     }
    },
+   "earn_coins": {
+    "action": "earn",
+    "group_by": null,
+    "inputs": {
+     "coins": "int",
+     "notes": "int"
+    },
+    "kind": "program",
+    "name": "earn_coins",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": "coins",
+    "surprise": 1e-06,
+    "target": "coins_after",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "earn_notes": {
+    "action": "earn",
+    "group_by": null,
+    "inputs": {
+     "coins": "int",
+     "notes": "int"
+    },
+    "kind": "program",
+    "name": "earn_notes",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": "notes",
+    "surprise": 1e-06,
+    "target": "notes_after",
+    "tol": 1e-09,
+    "units": {}
+   },
    "gas": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "V": null
@@ -3757,12 +6164,31 @@
     "name": "gas",
     "out_type": null,
     "precision": 0.0,
+    "state_var": null,
     "surprise": 0.02,
     "target": "P",
     "tol": 0.02,
     "units": {}
    },
+   "get_paid": {
+    "action": null,
+    "group_by": null,
+    "inputs": {
+     "purse": "int",
+     "wage": "int"
+    },
+    "kind": "program",
+    "name": "get_paid",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "purse_after",
+    "tol": 1e-09,
+    "units": {}
+   },
    "groups": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "groups": "int",
@@ -3772,12 +6198,14 @@
     "name": "groups",
     "out_type": "int",
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "total",
     "tol": 1e-09,
     "units": {}
    },
    "lab_push": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "F": [
@@ -3795,6 +6223,7 @@
     "name": "lab_push",
     "out_type": null,
     "precision": 0.01,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "a",
     "tol": 1e-09,
@@ -3817,6 +6246,7 @@
     }
    },
    "lab_stretch": {
+    "action": null,
     "group_by": "spring",
     "inputs": {
      "x": [
@@ -3829,6 +6259,7 @@
     "name": "lab_stretch",
     "out_type": null,
     "precision": 0.01,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "F",
     "tol": 1e-09,
@@ -3846,6 +6277,7 @@
     }
    },
    "lamps": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "lit_before": "int"
@@ -3854,12 +6286,14 @@
     "name": "lamps",
     "out_type": "int",
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "lit_after",
     "tol": 1e-09,
     "units": {}
    },
    "merge": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "nA": "int",
@@ -3869,12 +6303,14 @@
     "name": "merge",
     "out_type": "int",
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "total",
     "tol": 1e-09,
     "units": {}
    },
    "numeral": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "left": "int",
@@ -3884,12 +6320,14 @@
     "name": "numeral",
     "out_type": "int",
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "count",
     "tol": 1e-09,
     "units": {}
    },
    "orbit": {
+    "action": null,
     "group_by": "system",
     "inputs": {
      "r": [
@@ -3902,6 +6340,7 @@
     "name": "orbit",
     "out_type": null,
     "precision": 0.0,
+    "state_var": null,
     "surprise": 0.02,
     "target": "T",
     "tol": 0.02,
@@ -3919,6 +6358,7 @@
     }
    },
    "pair_off": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "nA": "int",
@@ -3928,12 +6368,31 @@
     "name": "pair_off",
     "out_type": "bool",
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "all_paired",
     "tol": 1e-09,
     "units": {}
    },
+   "pay": {
+    "action": null,
+    "group_by": null,
+    "inputs": {
+     "price": "int",
+     "purse": "int"
+    },
+    "kind": "program",
+    "name": "pay",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "purse_after",
+    "tol": 1e-09,
+    "units": {}
+   },
    "peekaboo": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "waited": "int",
@@ -3943,12 +6402,14 @@
     "name": "peekaboo",
     "out_type": "bool",
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "there",
     "tol": 1e-09,
     "units": {}
    },
    "push": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "F": [
@@ -3966,6 +6427,7 @@
     "name": "push",
     "out_type": null,
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "a",
     "tol": 1e-09,
@@ -3987,7 +6449,42 @@
      ]
     }
    },
+   "spend_coins": {
+    "action": "spend",
+    "group_by": null,
+    "inputs": {
+     "coins": "int",
+     "notes": "int"
+    },
+    "kind": "program",
+    "name": "spend_coins",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": "coins",
+    "surprise": 1e-06,
+    "target": "coins_after",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "spend_notes": {
+    "action": "spend",
+    "group_by": null,
+    "inputs": {
+     "coins": "int",
+     "notes": "int"
+    },
+    "kind": "program",
+    "name": "spend_notes",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": "notes",
+    "surprise": 1e-06,
+    "target": "notes_after",
+    "tol": 1e-09,
+    "units": {}
+   },
    "stretch": {
+    "action": null,
     "group_by": "spring",
     "inputs": {
      "x": [
@@ -4000,6 +6497,7 @@
     "name": "stretch",
     "out_type": null,
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "F",
     "tol": 1e-09,
@@ -4017,6 +6515,7 @@
     }
    },
    "take_away": {
+    "action": null,
     "group_by": null,
     "inputs": {
      "nA": "int",
@@ -4026,6 +6525,7 @@
     "name": "take_away",
     "out_type": "int",
     "precision": 0.0,
+    "state_var": null,
     "surprise": 1e-06,
     "target": "left",
     "tol": 1e-09,
@@ -4040,6 +6540,7 @@
   "groups": "multiplication",
   "lab_push": "Newton's second law (measured with noise)",
   "lab_stretch": "stiffness (measured with noise)",
+  "line:earn/spend": "negative numbers (the integers)",
   "merge": "addition",
   "numeral": "place value",
   "orbit": "Kepler's third law",
@@ -4062,7 +6563,8 @@
    "properties": {},
    "provenance": {
     "experiences": 2,
-    "lesson": 6
+    "lesson": 6,
+    "support": 11
    },
    "spread": 0.005617226160224689
   },
@@ -4079,7 +6581,8 @@
    "properties": {},
    "provenance": {
     "experiences": 2,
-    "lesson": 7
+    "lesson": 7,
+    "support": 15
    },
    "spread": 0.004812410530246798
   },
@@ -4101,7 +6604,8 @@
    },
    "provenance": {
     "experiences": 4,
-    "lesson": 7
+    "lesson": 7,
+    "support": 11
    },
    "spread": 0.004132595717576238
   },
@@ -4117,7 +6621,8 @@
    "properties": {},
    "provenance": {
     "experiences": 2,
-    "lesson": 6
+    "lesson": 6,
+    "support": 4
    },
    "spread": 2.8882680893856936e-06
   },
@@ -4134,7 +6639,8 @@
    "properties": {},
    "provenance": {
     "experiences": 2,
-    "lesson": 5
+    "lesson": 5,
+    "support": 15
    },
    "spread": 4.120481733598893e-12
   },
@@ -4156,26 +6662,33 @@
    },
    "provenance": {
     "experiences": 7,
-    "lesson": 5
+    "lesson": 5,
+    "support": 15
    },
    "spread": 2.571107591844849e-12
   }
  },
  "search_steps": {
-  "collide": 30,
+  "collide": 50,
+  "earn_coins": 34463,
+  "earn_notes": 1097,
   "gas": 28,
-  "groups": 947,
+  "get_paid": 8874,
+  "groups": 4448,
   "lab_push": 165,
   "lab_stretch": 116,
-  "lamps": 3602,
-  "merge": 151,
-  "numeral": 3904,
+  "lamps": 5151,
+  "merge": 342,
+  "numeral": 19942,
   "orbit": 46,
-  "pair_off": 33,
-  "peekaboo": 2,
+  "pair_off": 58,
+  "pay": 70200,
+  "peekaboo": 12,
   "push": 180,
+  "spend_coins": 922,
+  "spend_notes": 35194,
   "stretch": 176,
-  "take_away": 153
+  "take_away": 400
  },
  "vocabulary": {
   "*": [
@@ -4185,13 +6698,13 @@
   ],
   "+": [
    "op",
-   "merge",
+   "get_paid",
    "xy"
   ],
   "-": [
    "op",
-   "take_away",
-   "xy"
+   "pay",
+   "yx"
   ],
   "0": [
    "number",
@@ -4255,8 +6768,8 @@
   ],
   "minus": [
    "op",
-   "take_away",
-   "xy"
+   "pay",
+   "yx"
   ],
   "nine": [
    "number",
@@ -4268,8 +6781,16 @@
   ],
   "plus": [
    "op",
-   "merge",
+   "get_paid",
    "xy"
+  ],
+  "prefix:-": [
+   "prefix",
+   "below zero"
+  ],
+  "prefix:negative": [
+   "prefix",
+   "below zero"
   ],
   "seven": [
    "number",

@@ -3,7 +3,7 @@ laws Ultron found, and keeping every step so it can say *why*."""
 
 from . import units as U
 from .dsl import Overflow, show
-from .language import read_number, speak_number
+from .language import prefixes, read_number, speak_number
 
 FILLER = {"what", "is", "?", "whats", "what's", "equals", "=", "how", "much"}
 EQUALS = {"equals", "="}
@@ -15,6 +15,20 @@ def _cmp(a, b):
     return (a > b) - (a < b)
 
 
+def _join_prefix_words(brain, tokens):
+    """'negative three' is one number, not two words."""
+    words = {p for p in prefixes(brain) if p.isalpha()}
+    out, i = [], 0
+    while i < len(tokens):
+        if tokens[i] in words and i + 1 < len(tokens):
+            out.append(tokens[i] + " " + tokens[i + 1])
+            i += 2
+        else:
+            out.append(tokens[i])
+            i += 1
+    return out
+
+
 def outside_experience(brain, law_name, a, b):
     """Magnitude is not a problem (rules generalise), but a *kind* of situation
     Ultron has never once met is: e.g. taking away more than there is.
@@ -24,6 +38,10 @@ def outside_experience(brain, law_name, a, b):
     if not eps or len(law.params) != 2:
         return None
     p, q = law.params
+    for name, v in ((p, a), (q, b)):
+        if v < 0 and not any(e["inputs"][name] < 0 for e in eps):
+            return (f"in all {len(eps)} of my '{law_name}' experiences, {name} was never "
+                    f"below zero; I have never seen this happen, so I can't say")
     seen = {_cmp(e["inputs"][p], e["inputs"][q]) for e in eps}
     if _cmp(a, b) in seen:
         return None
@@ -50,7 +68,7 @@ def _law_note(brain, law_name):
 
 
 def arithmetic(brain, question):
-    raw = question.lower().replace("?", " ").split()
+    raw = _join_prefix_words(brain, question.lower().replace("?", " ").split())
     if any(t in EQUALS for t in raw) and UNKNOWN in raw[1:] or (
             any(t in EQUALS for t in raw) and raw and raw[0] == UNKNOWN
             and len(raw) > 1 and brain.vocab.get(raw[1], ("",))[0] == "op"):
@@ -115,9 +133,12 @@ def inverse(brain, raw):
     if known is None:
         return Answer(None, why, steps)
     unknown_first = left[0] == UNKNOWN
-    limit = 2 * goal + known + 10
+    limit = 2 * abs(goal) + abs(known) + 10
     tried = 0
-    for x in range(limit + 1):
+    # with numbers below zero invented, the unknown may be on either side of zero
+    candidates = [0] + [v for k in range(1, limit + 1)
+                        for v in ((k, -k) if brain.inventions else (k,))]
+    for x in candidates:
         xy = (x, known) if unknown_first else (known, x)
         a, b = xy if op[2] == "xy" else (xy[1], xy[0])
         if outside_experience(brain, op[1], a, b):
@@ -129,11 +150,13 @@ def inverse(brain, raw):
         except Overflow:
             break
         steps.append(f"'{left[1]}' is {_law_note(brain, op[1])}")
-        steps.append(f"I tried numbers 0, 1, 2, ... in its place and {x} was the first that "
+        order = "0, 1, -1, 2, -2" if brain.inventions else "0, 1, 2"
+        steps.append(f"I tried numbers {order}, ... in its place and {x} was the first that "
                      f"gives {goal} ({tried} tried)")
         spoken = speak_number(brain, x)
         return Answer(x, spoken if spoken is not None else str(x), steps)
-    return Answer(None, f"no number I know works: I tried every number from 0 to {limit} "
+    span = f"-{limit} to {limit}" if brain.inventions else f"0 to {limit}"
+    return Answer(None, f"no number I know works: I tried every number from {span} "
                         f"and none of them gives {goal}", steps)
 
 

@@ -17,13 +17,17 @@ def laws_section(brain):
              "Every law below was found by Ultron's own search from its own experiences. "
              "The name in brackets was given by the Trainer *after* the exam was passed.", ""]
     lines += ["### Laws about things (small programs)", "",
-              "| Experience | Law Ultron wrote | Size | Called |", "|---|---|---|---|"]
+              "| Experience | Law Ultron wrote | Size | Found after | Called |",
+              "|---|---|---|---|---|"]
     for name in sorted(brain.library.laws, key=lambda n: brain.library.laws[n].provenance.get("lesson", 0)):
         law = brain.library.laws[name]
         lines.append(f"| `{name}({', '.join(law.params)})` | `{show(law.expr)}` | "
-                     f"{law.provenance.get('size', '')} | {brain.names.get(name, '')} |")
+                     f"{law.provenance.get('size', '')} | "
+                     f"{law.provenance.get('found_after', '')} experiences | "
+                     f"{brain.names.get(name, '')} |")
     lines += ["", "### Laws about measurements", "",
-              "| Experience | Law | Constant | Units | Called |", "|---|---|---|---|---|"]
+              "| Experience | Law | Constant | Units | Trust | Called |",
+              "|---|---|---|---|---|---|"]
     for name, law in sorted(brain.qlaws.items()):
         spec = brain.memory.specs[name]
         dims = U.of_monomial(law.powers, spec.units) if spec.units else None
@@ -32,13 +36,20 @@ def laws_section(brain):
         else:
             props = ", ".join(f"{k}: {v:.4g}" for k, v in law.properties.items())
             const = f"one per {law.group_by} ({props})"
+        trust = f"{brain.status(name)} ({law.provenance.get('support', 0)} confirmations)"
         lines.append(f"| `{name}` | `{law.formula()}` = constant | {const} | {U.name(dims)} | "
-                     f"{brain.names.get(name, '')} |")
+                     f"{trust} | {brain.names.get(name, '')} |")
     for name, laws in sorted(brain.claws.items()):
         for law in laws:
             scope = "every collision" if law.scope == "all" else f"{'/'.join(law.scope)} collisions only"
             lines.append(f"| `{name}` | total `{law.formula()}` before = after | — | "
-                         f"{scope} | {brain.names.get(name, '') if law.scope == 'all' else ''} |")
+                         f"{scope} | {law.provenance.get('support', 0)} events | "
+                         f"{brain.names.get(name, '') if law.scope == 'all' else ''} |")
+    if brain.inventions:
+        lines += ["", "### Concepts Ultron invented itself", ""]
+        for key, inv in sorted(brain.inventions.items()):
+            lines += [f"- **{brain.names.get(key, key)}** (lesson {inv['lesson']}, new primitive "
+                      f"`{'`, `'.join(inv['primitives'])}`). In Ultron's words: _{inv['story']}_"]
     return lines
 
 
@@ -71,6 +82,23 @@ def special_section(results, brain):
                      f"(no addition law to build on) scored {_pct(bb['score'])} and "
                      f"{'found' if bb['law'] else 'found no'} law. Ultron scored "
                      f"{_pct(r3['items'][0]['scores']['ultron'])}.")
+    avp = None
+    try:
+        with open("reports/active_vs_passive.json") as f:
+            avp = json.load(f)
+    except OSError:
+        pass
+    if avp:
+        a = sum(v for v in avp["active"].values() if v)
+        p = sum(v for v in avp["passive"].values() if v)
+        diff = {k: (avp["active"][k], avp["passive"].get(k)) for k in avp["active"]
+                if avp["active"][k] != avp["passive"].get(k)}
+        lines.append(f"- **Designing experiments vs watching** (lessons 0-8, from "
+                     f"`python -m ultron experiment`): experiences until the law it kept was "
+                     f"first found, summed over all laws: {a} when Ultron designs experiments, "
+                     f"{p} when it only watches random scenes. Per law where they differ "
+                     f"(active, passive): {diff or 'none'}. In worlds this small, every law is "
+                     f"found within a few experiences either way, so there is little to gain.")
     r5 = results.get("5") or results.get(5)
     if r5 and r5.get("launch_trace"):
         lines += ["- **Composition, never trained**: a ball on a stretched spring. Ultron chained "
@@ -96,8 +124,13 @@ def special_section(results, brain):
                      f"again and predicted the *true* values. Its lesson-5 laws steered the search: "
                      f"{u} candidates vs {bl} for a blank brain (both succeeded; the saving is modest).")
     r8 = results.get("8") or results.get(8)
-    if r8:
-        lines.append("- **Tough final exam** (lesson 8): no teaching; kinds of question never "
+    if r8 and r8.get("story"):
+        lines.append("- **Inventing negative numbers** (lesson 8): nobody mentioned them. Ultron "
+                     "played with a purse of coins and IOU notes, then noticed: _" + r8["story"] +
+                     "_ Only after that was it told the words '-3' and 'negative three'.")
+    r9 = results.get("9") or results.get(9)
+    if r9:
+        lines.append("- **Tough final exam** (lesson 9): no teaching; kinds of question never "
                      "practised. Division was never taught: Ultron answers 'what times 7 equals 84' "
                      "by running its multiplication law backwards. For impossible questions the only "
                      "correct answer is a refusal, and a guess counts as wrong.")

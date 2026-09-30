@@ -184,7 +184,7 @@
       60
      ],
      "nearest": [
-      2,
+      1,
       60
      ],
      "ultron": [
@@ -200,7 +200,7 @@
    "lamp_choices": 16,
    "lamps_law": false,
    "last_lamp_choice": 48,
-   "total_choices": 50
+   "total_choices": 51
   },
   "passed": true,
   "threshold": 0.99
@@ -923,6 +923,198 @@
    {
     "examples": [
      {
+      "question": "purse line",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "invented numbers below zero, without being told",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "price": 10,
+       "purse": -17
+      },
+      "truth": -27,
+      "ultron": -27
+     },
+     {
+      "question": {
+       "price": 40,
+       "purse": 26
+      },
+      "truth": -14,
+      "ultron": -14
+     },
+     {
+      "question": {
+       "price": 23,
+       "purse": -10
+      },
+      "truth": -33,
+      "ultron": -33
+     }
+    ],
+    "name": "paying from purses of -40..40 with prices 10-60 (trained: -5..5, up to 8)",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "purse": 22,
+       "wage": 14
+      },
+      "truth": 36,
+      "ultron": 36
+     },
+     {
+      "question": {
+       "purse": -19,
+       "wage": 42
+      },
+      "truth": 23,
+      "ultron": 23
+     },
+     {
+      "question": {
+       "purse": -5,
+       "wage": 15
+      },
+      "truth": 10,
+      "ultron": 10
+     }
+    ],
+    "name": "getting paid into purses of -40..40, wages 10-60",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      1,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "negative one minus 5",
+      "truth": "-6",
+      "ultron": "-6"
+     },
+     {
+      "question": "8 minus 16",
+      "truth": "-8",
+      "ultron": "-8"
+     },
+     {
+      "question": "-10 plus 8",
+      "truth": "-2",
+      "ultron": "-2"
+     }
+    ],
+    "name": "questions with negative numbers, in marks and words",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      20,
+      20
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "5 plus -5",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "-5 times 3",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "-7 times 1",
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "never experienced: a negative wage, a negative number of groups",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 8,
+  "passed": true,
+  "story": "My coins/notes states all lie on ONE line: 'earn' and 'spend' undo each other, and from the empty state 'earn' counts coins up 1, 2, 3... But 'spend' from the empty state doesn't stop: it keeps going, into states with notes. Those are places *below* zero. I'll treat them as numbers too, and use a new step 'down' that has no floor.",
+  "threshold": 0.99
+ },
+ "9": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
       "question": "what times 9 equals 162",
       "truth": 18,
       "ultron": 18
@@ -1028,17 +1220,17 @@
    {
     "examples": [
      {
-      "question": "1 minus 12",
+      "question": "what times 2 equals 23",
       "truth": "I can't",
       "ultron": null
      },
      {
-      "question": "what times 10 equals 47",
+      "question": "2 times -7",
       "truth": "I can't",
       "ultron": null
      },
      {
-      "question": "what plus 13 equals 4",
+      "question": "2 times -5",
       "truth": "I can't",
       "ultron": null
      }
@@ -1065,26 +1257,26 @@
      {
       "question": [
        "m",
-       240.63961312135154
+       279.9647970126743
       ],
-      "truth": 17.616908344926962,
-      "ultron": 17.616908344955785
+      "truth": 22.05843096394524,
+      "ultron": 22.058430963904993
      },
      {
       "question": [
        "x",
-       "S4"
+       "S3"
       ],
-      "truth": 1.0064132996201314,
-      "ultron": 1.0064132996190023
+      "truth": 1.5039972817348417,
+      "ultron": 1.5039972817333445
      },
      {
       "question": [
        "m",
-       119.44318833087127
+       411.8456625455054
       ],
-      "truth": 14.314251839674338,
-      "ultron": 14.314251839678631
+      "truth": 34.94090988046113,
+      "ultron": 34.94090988049781
      }
     ],
     "name": "physics solved for a different unknown (mass, stretch, force)",
@@ -1219,7 +1411,7 @@
     "tolerance": 0.02
    }
   ],
-  "lesson": 8,
+  "lesson": 9,
   "passed": true,
   "threshold": 0.9
  }

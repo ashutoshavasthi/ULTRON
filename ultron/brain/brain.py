@@ -15,6 +15,8 @@ from .memory import Memory, Spec
 from .synth import synthesize
 
 CONFIRM_STREAK = 8   # correct predictions in a row before a law is trusted
+ESTABLISHED = 3      # confirmations before a measured law stops being tentative
+N_RIVALS = 3         # alternative explanations kept to design experiments against
 
 
 class Brain:
@@ -32,6 +34,10 @@ class Brain:
         self.curiosity = Curiosity()
         self.log = []
         self.search_steps = {}              # spec -> steps spent searching (effort)
+        self.rivals = {}                    # spec -> other programs explaining the same data
+        self.inventions = {}                # concepts Ultron made up itself
+        self.active = True                  # design experiments when ideas disagree
+        self.found_at = {}                  # spec -> experiences when current idea was found
         self.lesson = None
 
     # ------------------------------------------------------------------ utils
@@ -48,6 +54,64 @@ class Brain:
         """0 and 1 are innate; numbers that have been given names become usable too."""
         named = {m[1] for m in self.vocab.values() if m[0] == "number"}
         return tuple(sorted({0, 1} | {n for n in named if n <= 10}))
+
+    def primitives(self):
+        """Invented primitives now available to the hypothesis engine."""
+        return tuple(sorted({p for inv in self.inventions.values() for p in inv["primitives"]}))
+
+    def status(self, spec_name):
+        """How much Ultron trusts its law for this kind of experience."""
+        spec = self.memory.specs.get(spec_name)
+        if spec is None:
+            return "unknown"
+        if spec.kind == "program":
+            return "established" if spec_name in self.library else "tentative"
+        if spec.kind == "quantity":
+            law = self.qlaws.get(spec_name)
+            return ("established" if law and law.provenance.get("support", 0) >= ESTABLISHED
+                    else "tentative")
+        laws = self.claws.get(spec_name, [])
+        return ("established" if laws and min(l.provenance.get("support", 0) for l in laws)
+                >= ESTABLISHED else "tentative")
+
+    @staticmethod
+    def kind_of(inputs):
+        """The qualitative shape of a situation: which amounts are zero, and how
+        each pair of amounts compares. '3 and 5' and '4 and 9' are the same kind."""
+        names = sorted(k for k, v in inputs.items()
+                       if isinstance(v, int) and not isinstance(v, bool))
+        zeros = tuple(inputs[n] == 0 for n in names)
+        order = tuple((inputs[a] > inputs[b]) - (inputs[a] < inputs[b])
+                      for i, a in enumerate(names) for b in names[i + 1:])
+        flags = tuple(sorted((k, v) for k, v in inputs.items() if isinstance(v, bool)))
+        return (zeros, order, flags)
+
+    def propose(self, spec_name, options):
+        """Design an experiment. First, the situation where my current explanation
+        and its rivals disagree most, so the world decides between them. If they all
+        agree everywhere I could look, a kind of situation I have never tried: my
+        ideas might all be wrong in the same way there."""
+        if not self.active or not options:
+            return None
+        expr = self.hypotheses.get(spec_name)
+        ideas = ([expr] if expr is not None else []) + self.rivals.get(spec_name, [])
+        best, best_split = None, 1
+        if len(ideas) > 1:
+            for inputs in options:
+                outs = {repr(safe_evaluate(e, inputs, self.library)) for e in ideas}
+                if len(outs) > best_split:
+                    best, best_split = inputs, len(outs)
+        if best is not None:
+            self.note("design", f"{spec_name}: my {len(ideas)} explanations disagree about "
+                                f"{best}; I'll set that up to find out")
+            return best
+        seen = {self.kind_of(e["inputs"]) for e in self.memory.of(spec_name)}
+        for inputs in options:
+            if self.kind_of(inputs) not in seen:
+                self.note("design", f"{spec_name}: my ideas agree, but I've never tried a "
+                                    f"situation like {inputs}; I'll set that up")
+                return inputs
+        return None
 
     def known_forms(self):
         return [law.powers for law in self.qlaws.values()]
@@ -121,6 +185,9 @@ class Brain:
         name = spec.name
         if not surprised:
             self.streak[name] = self.streak.get(name, 0) + 1
+            last = self.memory.of(name)[-1]
+            self.rivals[name] = [r for r in self.rivals.get(name, [])
+                                 if safe_evaluate(r, last["inputs"], self.library) == last["outcome"]]
             expr = self.hypotheses.get(name)
             if expr is not None and self.streak[name] == CONFIRM_STREAK:
                 self._confirm_program(spec, expr)
@@ -131,7 +198,8 @@ class Brain:
         if last_fail is not None and len(eps) < 2 * last_fail:
             return None     # "I couldn't explain this before; wait for more evidence"
         result = synthesize([e["inputs"] for e in eps], [e["outcome"] for e in eps],
-                            spec.inputs, spec.out_type, self.library, self.constants())
+                            spec.inputs, spec.out_type, self.library, self.constants(),
+                            rivals=N_RIVALS, extra=self.primitives())
         self.search_steps[name] = self.search_steps.get(name, 0) + result.steps
         old = self.hypotheses.get(name)
         if result.expr is None:
@@ -142,6 +210,8 @@ class Brain:
             return None
         self.failed_search.pop(name, None)
         self.hypotheses[name] = result.expr
+        self.rivals[name] = result.rivals
+        self.found_at[name] = len(eps)
         self.note("revise", f"{name}: surprised; new best explanation is "
                             f"{show(result.expr)} (was {show(old) if old else 'nothing'}; "
                             f"{len(eps)} experiences, {result.steps} programs searched)")
@@ -150,7 +220,7 @@ class Brain:
     def _confirm_program(self, spec, expr):
         law = Law(spec.name, sorted(spec.inputs), expr, spec.out_type, {
             "lesson": self.lesson, "experiences": len(self.memory.of(spec.name)),
-            "size": size(expr)})
+            "found_after": self.found_at.get(spec.name), "size": size(expr)})
         self.library.add(law)
         self.note("confirm", f"{spec.name}: {show(expr)} predicted {CONFIRM_STREAK} new "
                              f"experiences in a row; added to my library of building blocks")
@@ -162,7 +232,17 @@ class Brain:
         if not surprised:
             if law is not None:
                 self._refine(law, eps)
+                law.provenance["support"] = law.provenance.get("support", 0) + 1
+                if law.provenance["support"] == ESTABLISHED:
+                    self.note("establish", f"{name}: {law.formula()} has now predicted "
+                                           f"{ESTABLISHED} new experiences; no longer tentative")
             return None
+        new_object = (law is not None and law.kind == "grouped"
+                      and eps[-1].get(spec.group_by) not in law.properties)
+        if (law is not None and not new_object
+                and law.provenance.get("support", 0) >= ESTABLISHED):
+            self.note("doubt", f"{name}: my established law {law.formula()} just failed; "
+                               f"back to being unsure")
         names = list(spec.inputs) + [spec.target]
         result = search_invariant(name, eps, names, spec.tol, group_by=spec.group_by,
                                   prior_powers=self.known_forms(), precision=spec.precision)
@@ -179,14 +259,15 @@ class Brain:
             self.note("measure", f"{name}: met new {spec.group_by} {group}; measured its "
                                  f"property {law.formula()} = {law.properties[group]:.6g}")
             return None
-        new.provenance = {"lesson": self.lesson, "experiences": len(eps)}
+        new.provenance = {"lesson": self.lesson, "experiences": len(eps), "support": 0}
         self.qlaws[name] = new
         dims = U.of_monomial(new.powers, spec.units)
         what = (f"{new.formula()} = {new.constant:.6g} [{U.name(dims)}] in every experiment"
                 if new.kind == "global" else
                 f"{new.formula()} is constant for each {spec.group_by} but differs between "
                 f"them: a hidden property of each {spec.group_by} [{U.name(dims)}]")
-        self.note("revise", f"{name}: {what} ({result.steps} candidates searched)")
+        self.note("revise", f"{name}: {what} ({result.steps} candidates searched; tentative "
+                            f"until it predicts {ESTABLISHED} new experiences)")
         return new.formula()
 
     def _refine(self, law, eps):
@@ -214,9 +295,15 @@ class Brain:
             spec = self.memory.specs[name]
             if spec.kind == "conservation" and self.memory.of(name):
                 self._learn_conservation(spec, True, reflecting=True)
+        from .invention import look_for_line
+        look_for_line(self)
 
     def _learn_conservation(self, spec, surprised, reflecting=False):
         if not surprised and spec.name in self.claws:
+            kind = self.memory.of(spec.name)[-1]["inputs"]["kind"]
+            for law in self.claws[spec.name]:
+                if law.scope == "all" or kind in law.scope:
+                    law.provenance["support"] = law.provenance.get("support", 0) + 1
             return None
         eps = self.memory.of(spec.name)
         events = [{"before": [(e["inputs"]["m1"], e["inputs"]["v1"]),
@@ -225,6 +312,9 @@ class Brain:
                              (e["inputs"]["m2"], e["outcome"])],
                    "kind": e["inputs"]["kind"]} for e in eps]
         laws, steps = search_conservation(spec.name, events, tol=spec.tol)
+        for law in laws:
+            law.provenance["support"] = sum(
+                1 for ev in events if law.scope == "all" or ev["kind"] in law.scope)
         self.search_steps[spec.name] = self.search_steps.get(spec.name, 0) + steps
         old = [l.formula() for l in self.claws.get(spec.name, [])]
         self.claws[spec.name] = laws
@@ -233,6 +323,8 @@ class Brain:
             desc = "; ".join(f"total {l.formula()} is the same before and after "
                              + ("in every collision" if l.scope == "all"
                                 else f"only in {'/'.join(l.scope)} collisions")
+                             + ("" if l.provenance.get("support", 0) >= ESTABLISHED
+                                else f" [tentative: {l.provenance.get('support', 0)} event(s)]")
                              for l in laws) or "nothing"
             self.note("reflect" if reflecting else "revise",
                       f"{spec.name}: {desc} ({len(eps)} experiences)")
@@ -253,6 +345,7 @@ class Brain:
             "vocabulary": {k: list(v) for k, v in sorted(self.vocab.items())},
             "names": dict(sorted(self.names.items())),
             "search_steps": dict(sorted(self.search_steps.items())),
+            "inventions": dict(sorted(self.inventions.items())),
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
@@ -277,6 +370,7 @@ class Brain:
         b.vocab = {k: tuple(v) for k, v in d["vocabulary"].items()}
         b.names = dict(d.get("names", {}))
         b.search_steps = dict(d.get("search_steps", {}))
+        b.inventions = dict(d.get("inventions", {}))
         b.curiosity = Curiosity.from_json(d.get("curiosity", {}))
         b.memory = Memory.from_json(d["memory"])
         b.log = list(d.get("log", []))

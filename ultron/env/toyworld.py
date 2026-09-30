@@ -61,3 +61,39 @@ class ToyWorld:
     def flicker(self):
         """A panel of lamps that lights up at random: pure noise."""
         return self.rng.randint(0, 9)
+
+
+class ShopWorld:
+    """A purse holding coins and IOU notes (promises to pay a coin later).
+
+    Earning a coin first tears up an IOU if there is one; otherwise the coin goes
+    in the purse. Spending a coin takes one from the purse; if the purse is
+    empty, the shop hands over an IOU note instead. Nothing here mentions
+    numbers below zero: there are only coins and notes.
+    """
+
+    def __init__(self, seed=0):
+        self.rng = random.Random(seed)
+        self.coins = []
+        self.notes = []
+        self._next = 0
+
+    def _new(self):
+        self._next += 1
+        return self._next
+
+    def set_purse(self, coins, notes):
+        self.coins = [self._new() for _ in range(coins)]
+        self.notes = [self._new() for _ in range(notes)]
+
+    def earn(self):
+        if self.notes:
+            self.notes.pop()
+        else:
+            self.coins.append(self._new())
+
+    def spend(self):
+        if self.coins:
+            self.coins.pop()
+        else:
+            self.notes.append(self._new())
