@@ -133,10 +133,11 @@ def cmd_blind(args):
 
 def cmd_experiment(args):
     """Does designing its own experiments help? Three conditions (a few minutes)."""
-    from .judge.exams import active_vs_passive, biased_teacher
+    from .judge.exams import active_vs_passive, biased_teacher, compression_benefit
     r = {"curated": active_vs_passive(curated=True),
          "uncurated": active_vs_passive(curated=False),
-         "biased": biased_teacher()}
+         "biased": biased_teacher(),
+         "compression": compression_benefit()}
     os.makedirs("reports", exist_ok=True)
     with open(os.path.join("reports", "active_vs_passive.json"), "w") as f:
         json.dump(r, f, indent=1, sort_keys=True)
@@ -145,6 +146,9 @@ def cmd_experiment(args):
         a = sum(v for v in r[cond]["active"].values() if v)
         p = sum(v for v in r[cond]["passive"].values() if v)
         print(f"{cond:10} experiences to find all laws: active {a}, passive {p}")
+    for mode, c in r["compression"].items():
+        print(f"growing    {mode:16} programs searched {c['programs_searched']}, "
+              f"found after {c['found_after']} experiences, passed={c['passed']}")
     for mode in ("active", "passive"):
         b = r["biased"][mode]
         print(f"biased     {mode:8} lesson 1 passed={b['1']['passed']}  lesson 8 "
@@ -173,7 +177,7 @@ def main(argv=None):
     p.add_argument("--brain", default=BRAIN)
     sub = p.add_subparsers(dest="cmd", required=True)
     t = sub.add_parser("train")
-    t.add_argument("--upto", type=int, default=12)
+    t.add_argument("--upto", type=int, default=14)
     t.add_argument("--seed", type=int, default=0)
     sub.add_parser("exam")
     a = sub.add_parser("ask")

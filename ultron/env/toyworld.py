@@ -149,3 +149,18 @@ class Wheel:
 
     def marks_past_top(self):
         return list(range(self.pointer))
+
+
+class Dish:
+    """A dish of cells. Each day, every cell splits into the same number of cells.
+    Ultron counts cells; nothing here mentions powers."""
+
+    def __init__(self, seed=0):
+        self.rng = random.Random(seed)
+        self.cells = [0]
+
+    def start(self):
+        self.cells = [0]
+
+    def day(self, split):
+        self.cells = [c for c in self.cells for _ in range(split)]

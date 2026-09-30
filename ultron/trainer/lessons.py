@@ -10,7 +10,7 @@ from ..brain.memory import Spec
 from ..brain.perception import count, present, read_marks
 from ..env import dataworld
 from ..env.physics import PhysicsSandbox, Track
-from ..env.toyworld import Bakery, ShopWorld, ToyWorld, Wheel
+from ..env.toyworld import Bakery, Dish, ShopWorld, ToyWorld, Wheel
 
 NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
                 "nine", "ten"]
@@ -603,8 +603,57 @@ class Ramps(Lesson):
         return {"y": y, "m": w.mass, "run": self.current}, w.speed_at(y)
 
 
+# ---------------------------------------------------------------- lesson 13
+class Growing(Lesson):
+    number, title = 13, "Growing"
+    goal = ("One cell in a dish; each day every cell splits into the same number. Ultron "
+            "predicted a law like this ten lessons earlier, from a pattern in its own laws "
+            "(REPEAT). Does the world agree? And does it see where the pattern stops?")
+    budget = 150
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.world = Dish(seed)
+        self.rng = self.world.rng
+
+    def specs(self):
+        return [Spec("grow", "program", {"split": INT, "days": INT}, "cells", out_type=INT)]
+
+    def options(self, name):
+        return [{"split": k, "days": d} for k in range(1, 5) for d in range(0, 5)]
+
+    def scene(self, name, wide=False, request=None):
+        k = request["split"] if request else self.rng.randint(1, 4)
+        d = request["days"] if request else self.rng.randint(0, 4)
+        self.world.start()
+        for _ in range(d):
+            self.world.day(k)
+        return {"split": k, "days": d}, count(self.world.cells)
+
+    def power_demos(self):
+        out = []
+        for _ in range(6):
+            k, d = self.rng.randint(1, 4), self.rng.randint(0, 4)
+            self.world.start()
+            for _ in range(d):
+                self.world.day(k)
+            out.append((k, d, count(self.world.cells)))
+        return out
+
+
+# ---------------------------------------------------------------- lesson 14
+class Phase2Exam(Lesson):
+    number, title = 14, "Phase 2 final exam"
+    goal = ("No teaching. Questions that combine Phase 2's inventions in ways never "
+            "practised: square roots, logarithms and negative powers (never taught), "
+            "fractions raised to powers, clock numbers with huge backward spins, energy for "
+            "dropped balls, and 'what power 2 equals 2', which no fraction answers.")
+    kind = "exam"
+
+
 def all_lessons(seed=0):
     return [Permanence(seed), Pairing(seed + 1), Combining(seed + 2), Groups(seed + 3),
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
             Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10),
-            WheelLesson(seed + 11), Ramps(seed + 12)]
+            WheelLesson(seed + 11), Ramps(seed + 12), Growing(seed + 13),
+            Phase2Exam(seed + 14)]

@@ -17,6 +17,13 @@ decided those were places below zero. It cut cakes and weighed the pieces,
 found amounts *between* its numbers, and invented fractions. It was told the
 words for them only afterwards.
 
+**Phase 2** made its inventing general. The same shape-finding code that found
+negative numbers invents **clock numbers**. It invents **energy** from a ball
+rolling on hills. From a pattern in its own laws it **predicts powers** ten
+lessons before meeting them, and correctly declines to guess what comes after.
+It works out square roots, logarithms and negative powers that it was never
+taught.
+
 It then passes a tough final exam with no teaching. The exam includes:
 - division, which it was never taught (it reasons backwards through its
   multiplication law);
@@ -28,7 +35,7 @@ Every law is a small program or formula it wrote and can explain. Every answer
 comes with its reasons.
 
 ```bash
-python -m ultron train                          # seconds; no dependencies beyond Python 3.10+
+python -m ultron train                          # ~10 s; no dependencies beyond Python 3.10+
 python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
 python -m ultron why "3 + 2"
@@ -36,6 +43,6 @@ python -m ultron blind blind/example_not_blind.txt   # then write your own blind
 ```
 
 - [How it works](docs/ARCHITECTURE.md)
-- [Report card](reports/report_card.md) and the [judge's verdict](reports/judge_verdict.md)
+- [Report card](reports/report_card.md), the [Phase 1 verdict](reports/judge_verdict.md) and the [Phase 2 verdict](reports/phase2_verdict.md)
 - [Roadmap to a self-improving expert](docs/ROADMAP.md)
 - Original requirements: [PRD v1](ULTRON_PRD_V1.md), [PRD v2](ULTRON_PRD_V2.md)

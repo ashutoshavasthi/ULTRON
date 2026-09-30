@@ -104,8 +104,11 @@ def special_section(results, brain):
             f"  - With a helpful teacher, experiences until every law was found: "
             f"{total(cur['active'])} designing vs {total(cur['passive'])} watching. With "
             f"random scenes over a wider range: {total(unc['active'])} vs "
-            f"{total(unc['passive'])}. **No gain**: when the teacher shows everything, "
-            f"Occam's razor finds each law within a few experiences either way.",
+            f"{total(unc['passive'])}. "
+            + ("**Designing its own experiments finds laws faster.**"
+               if total(cur['active']) < total(cur['passive'])
+               and total(unc['active']) < total(unc['passive'])
+               else "**No clear gain** in these conditions."),
             f"  - With a **biased teacher**, who never shows equal trays and never lets the "
             f"purse go into debt: designing, Ultron passed lesson 1 "
             f"({bia['active']['1']['scores'][0][0]}/{bia['active']['1']['scores'][0][1]}) and "
@@ -116,6 +119,12 @@ def special_section(results, brain):
             f"{'invented' if bia['passive']['invented_below_zero'] else 'never invented'} "
             f"negative numbers. **Designing experiments is how it learns what nobody shows it.**",
         ]
+    if avp and "compression" in avp:
+        c, n = avp["compression"]["compressing"], avp["compression"]["not compressing"]
+        lines.append(f"- **Does compression help?** In the growing world, with its REPEAT "
+                     f"prediction Ultron searched {c['programs_searched']:,} programs and had the "
+                     f"law after {c['found_after']} experience(s); without compression it searched "
+                     f"{n['programs_searched']:,} programs and needed {n['found_after']}.")
     r5 = results.get("5") or results.get(5)
     if r5 and r5.get("launch_trace"):
         lines += ["- **Composition, never trained**: a ball on a stretched spring. Ultron chained "
@@ -151,7 +160,8 @@ def special_section(results, brain):
                      "and weighed piles of pieces, then noticed: _" + r9["story"] + "_ Afterwards "
                      "it answers 'what times 3 equals -7' with -7/3, and '1/2 plus 1/3' by "
                      "re-cutting both piles into sixths.")
-    for n, what in ((11, "Inventing clock numbers"), (12, "Inventing energy")):
+    for n, what in ((11, "Inventing clock numbers"), (12, "Inventing energy"),
+                    (13, "Predicting powers from a pattern in its own laws")):
         r = results.get(str(n)) or results.get(n)
         if r and r.get("story"):
             lines.append(f"- **{what}** (lesson {n}, Phase 2): _{r['story']}_")

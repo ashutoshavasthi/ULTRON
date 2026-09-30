@@ -113,6 +113,76 @@ def scale_compatible(brain, law):
         return False
 
 
+MAX_REPEATS = 2000
+
+
+def _plus_one(brain, acc, sign):
+    law = "merge" if sign > 0 else "pay"
+    if law not in brain.library:
+        return None
+    return apply_law(brain, law, acc, (1, 1)) if sign > 0 else apply_law(brain, law, (1, 1), acc)
+
+
+def evaluate_amount(brain, expr, env):
+    """Run one of Ultron's own programs with amounts instead of whole numbers.
+    Repeating is only possible a whole number of times; repeating a step a
+    below-zero number of times means undoing it (finding what the step turns into
+    the current amount)."""
+    tag = expr[0]
+    if tag == "var":
+        return env[expr[1]]
+    if tag == "const" and isinstance(expr[1], int) and not isinstance(expr[1], bool):
+        return (expr[1], 1)
+    if tag == "call":
+        a = evaluate_amount(brain, expr[2], env)
+        b = evaluate_amount(brain, expr[3], env)
+        return None if a is None or b is None else apply_law(brain, expr[1], a, b)
+    if tag == "succ":
+        v = evaluate_amount(brain, expr[1], env)
+        return None if v is None else _plus_one(brain, v, 1)
+    if tag == "down":
+        v = evaluate_amount(brain, expr[1], env)
+        return None if v is None else _plus_one(brain, v, -1)
+    if tag == "iter":
+        n = evaluate_amount(brain, expr[2], env)
+        acc = evaluate_amount(brain, expr[3], env)
+        if n is None or acc is None:
+            return None
+        n = simplest(brain, n)
+        if n[1] != 1 or abs(n[0]) > MAX_REPEATS:
+            return None             # I can only repeat something a whole number of times
+        F = expr[1]
+        t = evaluate_amount(brain, F[2], env) if F[0] == "call" else None
+        for _ in range(abs(n[0])):
+            if F[0] == "call" and n[0] > 0:
+                acc = apply_law(brain, F[1], acc, t)
+            elif F[0] == "call":
+                acc = solve(brain, F[1], "xy", t, acc, unknown_first=True)   # undo one step
+            elif F[0] in ("succ", "down"):
+                up = (F[0] == "succ") == (n[0] > 0)
+                acc = _plus_one(brain, acc, 1 if up else -1)
+            else:
+                return None
+            if acc is None:
+                return None
+        return acc
+    return None
+
+
+def apply_law(brain, law, a, b):
+    """law(a, b) on amounts, worked out with Ultron's own laws."""
+    if law == "groups":
+        (k1, n1), (k2, n2) = a, b
+        return (_times(brain, k1, k2), _recut(brain, n1, n2))
+    if scale_compatible(brain, law):
+        c1, c2, kind = common(brain, a, b)
+        return (_call(brain, law, c1, c2), kind)
+    rule = brain.library.get(law)
+    if rule is None or len(rule.params) != 2:
+        return None
+    return evaluate_amount(brain, rule.expr, {rule.params[0]: a, rule.params[1]: b})
+
+
 def combine(brain, law, x, y, order):
     """Apply one of Ultron's laws to two amounts. Returns (amount, explanation)."""
     a, b = (x, y) if order == "xy" else (y, x)
@@ -129,7 +199,11 @@ def combine(brain, law, x, y, order):
         how = (f"I cut both piles into pieces of a cake cut into {kind} (my recut law): "
                f"{c1} and {c2} such pieces, then use my law '{law}' on the counts")
         return res, how
-    return None, f"my law '{law}' doesn't work piece by piece, so I can't use it on amounts"
+    res = apply_law(brain, law, a, b)
+    if res is None:
+        return None, f"I can't run my law '{law}' on these amounts"
+    return res, (f"I ran my law '{law}' step by step on amounts, using what I know about "
+                 f"adding, taking away and multiplying pieces")
 
 
 # --------------------------------------------------------------- reading/writing
@@ -205,7 +279,7 @@ def bind_division(brain, token, demos):
     return None
 
 
-def solve(brain, law, order, known, goal, unknown_first, max_cut=60):
+def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
     """Find the simplest amount x with law(x, known) == goal (or law(known, x)).
 
     For each kind of piece (cut into 1, 2, 3, ...) it compares the result with the
@@ -221,6 +295,9 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=60):
         c1, c2, _ = common(brain, res, goal)
         return c1 - c2
 
+    if max_cut is None:
+        # enough kinds of piece to hold any answer built from these two amounts
+        max_cut = max(60, goal[1] * max(1, abs(known[0])) * known[1])
     for d in range(1, max_cut + 1):
         try:
             g0, g1 = gap((0, d)), gap((1, d))

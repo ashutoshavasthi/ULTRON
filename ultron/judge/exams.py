@@ -645,6 +645,101 @@ def exam_ramps(brain, seed=1012):
                    {"story": inv["story"] if inv else None})
 
 
+def exam_growing(brain, seed=1013):
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    ladder = b.inventions.get("ladder", {})
+    predicted_at = next((e["lesson"] for e in b.log if e["kind"] == "invent"
+                         and "repeated_groups" in e["text"]), None)
+    foresight = Tally("predicted this law from a pattern in its own laws, lessons before "
+                      "meeting it")
+    foresight.item("REPEAT", True, predicted_at is not None and predicted_at < 13)
+    right = Tally("the world confirmed the prediction")
+    law = b.library.get("repeated_groups")
+    right.item("repeated_groups", True, bool(law) and not law.provenance.get("predicted"))
+    grow = Tally("5-10 days of splitting into 2-6 (trained: up to 4 days, 4-way splits)")
+    for _ in range(30):
+        inputs = {"split": rng.randint(2, 6), "days": rng.randint(5, 10)}
+        grow.item(inputs, inputs["split"] ** inputs["days"], b.predict("grow", inputs),
+                  b.memory.of("grow"), "cells", inputs)
+    words = Tally("'3 power 4' in words")
+    for _ in range(15):
+        x, y = rng.randint(2, 9), rng.randint(0, 6)
+        words.item(f"{x} power {y}", str(x ** y), reasoner.arithmetic(b, f"{x} power {y}").text)
+    stop = Tally("sees that REPEAT can't say what comes after powers, and doesn't guess")
+    stop.item("next rung", True, ladder.get("stops_at") == "repeated_groups"
+              and len(ladder.get("predicted", [])) == 1)
+    return _result(13, [foresight, right, grow, words, stop], 0.99,
+                   {"story": ladder.get("story"), "search_steps": b.search_steps.get("grow")})
+
+
+def exam_phase2(brain, seed=1014):
+    from ..env.physics import Track
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    ask = lambda q: reasoner.arithmetic(b, q).text
+    roots = Tally("square and cube roots, never taught ('what power 2 equals 81')")
+    for _ in range(12):
+        x, p = rng.randint(-12, 12), rng.choice([2, 3])
+        if p == 2:
+            x = abs(x)
+        q = f"what power {p} equals {x ** p}"
+        want = abs(x) if p == 2 else x
+        roots.item(q, str(want), ask(q))
+    logs = Tally("logarithms, never taught ('2 power what equals 1024')")
+    for _ in range(12):
+        base, e = rng.randint(2, 6), rng.randint(0, 8)
+        q = f"{base} power what equals {base ** e}"
+        logs.item(q, str(e), ask(q))
+    neg = Tally("negative powers and powers of fractions ('3 power -2', '2/3 power 3')")
+    for _ in range(12):
+        if rng.random() < 0.5:
+            base, e = rng.randint(2, 5), -rng.randint(1, 3)
+            q, t = f"{base} power {e}", Fraction(base) ** e
+        else:
+            fr = Fraction(rng.randint(1, 4), rng.randint(2, 5))
+            e = rng.randint(1, 3)
+            q, t = f"{fr.numerator}/{fr.denominator} power {e}", fr ** e
+        neg.item(q, _frac(t), ask(q))
+    clock = Tally("clock numbers with huge backward spins ('-1000 after 2')")
+    for _ in range(10):
+        t, s0 = rng.randint(100, 100000), rng.randrange(6)
+        clock.item(f"-{t} after {s0}", str((s0 - t) % 6), ask(f"-{t} after {s0}"))
+    chains = Tally("chains of fractions ('1/2 plus 1/3 plus 1/6')")
+    for _ in range(10):
+        parts = [Fraction(rng.randint(1, 5), rng.randint(2, 6)) for _ in range(3)]
+        q = " plus ".join(f"{p.numerator}/{p.denominator}" for p in parts)
+        chains.item(q, _frac(sum(parts)), ask(q))
+    drop = Tally("energy: a ball dropped from 2-80 m, speed at the ground", tol=0.01)
+    world = Track(seed, prefix="Drop")
+    for _ in range(10):
+        h = rng.uniform(2, 80)
+        run = world.new_run(h, 1.0)
+        b.experience("roll", {"y": h, "m": 1.0, "run": run}, 0.0)
+        ans = reasoner.physics(b, "v", {"y": 0.0}, {"run": run})
+        drop.item(h, world.speed_at(0.0), ans.value)
+    irrational = Tally("'what power 2 equals 2': no fraction works, so the right answer is "
+                       "'I can't'")
+    for n in (2, 3, 5, 7, 8):
+        irrational.item(n, REFUSE, reasoner.arithmetic(b, f"what power 2 equals {n}").value)
+    return _result(14, [roots, logs, neg, clock, chains, drop, irrational], 0.99)
+
+
+def compression_benefit(upto=13):
+    """Growing lesson with and without compression: how much searching did it take?"""
+    from ..trainer.trainer import Trainer
+    out = {}
+    for mode in ("compressing", "not compressing"):
+        brain = Brain(mode)
+        brain.compress = mode == "compressing"
+        trainer = Trainer(brain)
+        for n in range(upto + 1):
+            trainer.run(n)
+        law = brain.library.get("grow")
+        out[mode] = {"programs_searched": brain.search_steps.get("grow", 0),
+                     "found_after": law.provenance.get("found_after") if law else None,
+                     "passed": trainer.results[13]["passed"]}
+    return out
+
+
 def show_law(brain, name):
     from ..brain.dsl import show as show_expr
     law = brain.library.get(name)
@@ -653,4 +748,5 @@ def show_law(brain, name):
 
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
-         8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps}
+         8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
+         13: exam_growing, 14: exam_phase2}

@@ -158,6 +158,15 @@ def arithmetic(brain, question):
         try:
             result = brain.library.call(op[1], a, b)
         except Overflow:
+            from . import amounts
+            if amounts.invented(brain):
+                res, how = amounts.combine(brain, op[1], (a, 1), (b, 1), "xy")
+                if res is not None:
+                    steps.append(f"'{tokens[i]}' doesn't stay among whole numbers here; {how}")
+                    rest = " ".join(tokens[i + 2:])
+                    if rest:
+                        return arithmetic(brain, f"{amounts.show(brain, res)} {rest}")
+                    return Answer(res, amounts.show(brain, res), steps)
             return Answer(None, "that is more than I am willing to count", steps)
         steps.append(f"'{tokens[i]}' is {_law_note(brain, op[1])}; with {a} and {b} it gives "
                      f"{result}")
@@ -224,7 +233,7 @@ def inverse(brain, raw):
             if brain.library.call(op[1], a, b) != goal:
                 continue
         except Overflow:
-            break
+            continue        # can't work this one out; try the next
         steps.append(f"'{left[1]}' is {_law_note(brain, op[1])}")
         order = "0, 1, -1, 2, -2" if brain.inventions else "0, 1, 2"
         steps.append(f"I tried numbers {order}, ... in its place and {x} was the first that "
@@ -242,8 +251,9 @@ def inverse(brain, raw):
             steps.append(f"no whole number from {span} works, so I looked at amounts: pieces "
                          f"of cakes cut into 2, 3, ... and found {amounts.show(brain, x)}")
             return Answer(x, amounts.show(brain, x), steps)
-        return Answer(None, f"no number or amount I know works: for cakes cut into up to 60 "
-                            f"pieces, no count of pieces gives {goal}", steps)
+        return Answer(None, f"no number or amount I know works: I looked through amounts cut "
+                            f"into up to {max(60, abs(known))} pieces, and none gives {goal}",
+                      steps)
     return Answer(None, f"no number I know works: I tried every number from {span} "
                         f"and none of them gives {goal}", steps)
 

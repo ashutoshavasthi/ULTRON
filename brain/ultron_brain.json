@@ -43,6 +43,8 @@
     0.0,
     0.0,
     0.0,
+    0.0,
+    0.0,
     1.0,
     0.0,
     0.0,
@@ -72,7 +74,6 @@
     0.0
    ],
    "earn_coins": [
-    1.0,
     1.0,
     1.0,
     0.0,
@@ -148,9 +149,24 @@
    "groups": [
     1.0,
     1.0,
-    0.0,
-    0.0,
     1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "grow": [
     1.0,
     0.0,
     0.0,
@@ -291,8 +307,8 @@
    ],
    "pay": [
     1.0,
-    0.0,
     1.0,
+    0.0,
     0.0,
     0.0,
     0.0,
@@ -346,7 +362,6 @@
     0.0
    ],
    "recut": [
-    1.0,
     1.0,
     0.0,
     0.0,
@@ -408,9 +423,8 @@
    ],
    "spend_notes": [
     1.0,
-    1.0,
-    1.0,
     0.0,
+    1.0,
     0.0,
     0.0,
     0.0,
@@ -430,11 +444,11 @@
     1.0,
     1.0,
     0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
     1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
     0.0,
     0.0,
     0.0,
@@ -493,17 +507,15 @@
    "tick": [
     1.0,
     1.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
     1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
     0.0,
     0.0,
     0.0,
@@ -524,6 +536,7 @@
   "earn_notes": "pred(notes)",
   "get_paid": "merge(purse, wage)",
   "groups": "repeat size times [merge(\u00b7, groups)] starting from 0",
+  "grow": "repeated_groups(split, days)",
   "merge": "repeat nA times [succ] starting from nB",
   "numeral": "merge(right, groups(left, 10))",
   "pair_off": "eq(nA, nB)",
@@ -561,6 +574,20 @@
    "primitives": [],
    "shape": "hidden quantity",
    "story": "Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
+  },
+  "ladder": {
+   "lesson": 3,
+   "predicted": [
+    "repeated_groups"
+   ],
+   "primitives": [],
+   "rungs": [
+    "groups",
+    "repeated_groups"
+   ],
+   "shape": "law-maker",
+   "stops_at": "repeated_groups",
+   "story": "'groups' is 'merge' repeated (I have seen this shape 1 time). If REPEAT is a general way of making laws, then applied to 'groups' it predicts a law I have never met: repeated_groups(amount, times) = repeat times times [groups(\u00b7, amount)] starting from 1. That is only a guess from a pattern, so I'll keep it as a prediction until the world agrees. Repeating 'repeated_groups' could mean two different things: repeated_groups(2, 3) is not repeated_groups(3, 2), so I can't tell which input to feed back in. The REPEAT pattern stops telling me what comes next here, so I won't guess."
   },
   "line:earn/spend": {
    "counted": "coins",
@@ -623,8 +650,8 @@
     "wholes"
    ],
    "provenance": {
-    "experiences": 22,
-    "found_after": 14,
+    "experiences": 24,
+    "found_after": 16,
     "lesson": 9,
     "size": 5
    }
@@ -652,8 +679,8 @@
     "notes"
    ],
    "provenance": {
-    "experiences": 11,
-    "found_after": 3,
+    "experiences": 10,
+    "found_after": 2,
     "lesson": 8,
     "size": 4
    }
@@ -732,10 +759,36 @@
     "size"
    ],
    "provenance": {
-    "experiences": 14,
-    "found_after": 6,
+    "experiences": 11,
+    "found_after": 3,
     "lesson": 3,
     "size": 5
+   }
+  },
+  "grow": {
+   "expr": [
+    "call",
+    "repeated_groups",
+    [
+     "var",
+     "split"
+    ],
+    [
+     "var",
+     "days"
+    ]
+   ],
+   "name": "grow",
+   "out_type": "int",
+   "params": [
+    "days",
+    "split"
+   ],
+   "provenance": {
+    "experiences": 9,
+    "found_after": 1,
+    "lesson": 13,
+    "size": 3
    }
   },
   "merge": {
@@ -847,8 +900,8 @@
     "purse"
    ],
    "provenance": {
-    "experiences": 11,
-    "found_after": 3,
+    "experiences": 10,
+    "found_after": 2,
     "lesson": 8,
     "size": 4
    }
@@ -891,10 +944,43 @@
     "recut"
    ],
    "provenance": {
-    "experiences": 10,
-    "found_after": 2,
+    "experiences": 9,
+    "found_after": 1,
     "lesson": 9,
     "size": 3
+   }
+  },
+  "repeated_groups": {
+   "expr": [
+    "iter",
+    [
+     "call",
+     "groups",
+     [
+      "var",
+      "amount"
+     ]
+    ],
+    [
+     "var",
+     "times"
+    ],
+    [
+     "const",
+     1
+    ]
+   ],
+   "name": "repeated_groups",
+   "out_type": "int",
+   "params": [
+    "amount",
+    "times"
+   ],
+   "provenance": {
+    "confirmed_in": 13,
+    "lesson": 3,
+    "predicted": false,
+    "size": 5
    }
   },
   "spend_coins": {
@@ -970,8 +1056,8 @@
     "ticks"
    ],
    "provenance": {
-    "experiences": 16,
-    "found_after": 8,
+    "experiences": 12,
+    "found_after": 4,
     "lesson": 11,
     "size": 4
    }
@@ -1039,8 +1125,8 @@
     "slot"
    ],
    "provenance": {
-    "experiences": 21,
-    "found_after": 13,
+    "experiences": 12,
+    "found_after": 4,
     "lesson": 11,
     "size": 7
    }
@@ -1082,7 +1168,7 @@
   {
    "kind": "design",
    "lesson": 0,
-   "text": "peekaboo: my 4 explanations disagree about {'hidden': 2, 'waited': 4}; I'll set that up to find out"
+   "text": "peekaboo: my 4 explanations disagree about {'hidden': 4, 'waited': 6}; I'll set that up to find out"
   },
   {
    "choice": "peekaboo",
@@ -1249,7 +1335,7 @@
   {
    "kind": "design",
    "lesson": 1,
-   "text": "pair_off: my 4 explanations disagree about {'nA': 1, 'nB': 0}; I'll set that up to find out"
+   "text": "pair_off: my 4 explanations disagree about {'nA': 5, 'nB': 5}; I'll set that up to find out"
   },
   {
    "choice": "pair_off",
@@ -1260,7 +1346,18 @@
   {
    "kind": "design",
    "lesson": 1,
-   "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 1}; I'll set that up"
+   "text": "pair_off: my 3 explanations disagree about {'nA': 5, 'nB': 4}; I'll set that up to find out"
+  },
+  {
+   "choice": "pair_off",
+   "kind": "choice",
+   "lesson": 1,
+   "text": "chose to play with pair_off"
+  },
+  {
+   "kind": "design",
+   "lesson": 1,
+   "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 0}; I'll set that up"
   },
   {
    "choice": "pair_off",
@@ -1272,17 +1369,6 @@
    "kind": "design",
    "lesson": 1,
    "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 2}; I'll set that up"
-  },
-  {
-   "choice": "pair_off",
-   "kind": "choice",
-   "lesson": 1,
-   "text": "chose to play with pair_off"
-  },
-  {
-   "kind": "design",
-   "lesson": 1,
-   "text": "pair_off: my ideas agree, but I've never tried a situation like {'nA': 2, 'nB': 1}; I'll set that up"
   },
   {
    "choice": "pair_off",
@@ -1442,12 +1528,12 @@
   {
    "kind": "design",
    "lesson": 2,
-   "text": "merge: my 4 explanations disagree about {'nA': 2, 'nB': 3}; I'll set that up to find out"
+   "text": "merge: my 4 explanations disagree about {'nA': 4, 'nB': 5}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 2,
-   "text": "merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 496 programs searched)"
+   "text": "merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 526 programs searched)"
   },
   {
    "choice": "take_away",
@@ -1458,12 +1544,12 @@
   {
    "kind": "design",
    "lesson": 2,
-   "text": "take_away: my 4 explanations disagree about {'nA': 3, 'n_taken': 1}; I'll set that up to find out"
+   "text": "take_away: my 4 explanations disagree about {'nA': 5, 'n_taken': 3}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 2,
-   "text": "take_away: surprised; new best explanation is pred(nA) (was nA; 2 experiences, 68 programs searched)"
+   "text": "take_away: surprised; new best explanation is pred(n_taken) (was nA; 2 experiences, 70 programs searched)"
   },
   {
    "choice": "lamps",
@@ -1485,7 +1571,7 @@
   {
    "kind": "design",
    "lesson": 2,
-   "text": "merge: my 3 explanations disagree about {'nA': 0, 'nB': 2}; I'll set that up to find out"
+   "text": "merge: my 3 explanations disagree about {'nA': 5, 'nB': 5}; I'll set that up to find out"
   },
   {
    "choice": "take_away",
@@ -1501,7 +1587,7 @@
   {
    "kind": "revise",
    "lesson": 2,
-   "text": "take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was pred(nA); 3 experiences, 502 programs searched)"
+   "text": "take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was pred(n_taken); 3 experiences, 629 programs searched)"
   },
   {
    "choice": "lamps",
@@ -1518,7 +1604,7 @@
   {
    "kind": "design",
    "lesson": 2,
-   "text": "merge: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 0}; I'll set that up"
+   "text": "merge: my ideas agree, but I've never tried a situation like {'nA': 0, 'nB': 1}; I'll set that up"
   },
   {
    "choice": "take_away",
@@ -1551,7 +1637,7 @@
   {
    "kind": "design",
    "lesson": 2,
-   "text": "merge: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 1}; I'll set that up"
+   "text": "merge: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 0}; I'll set that up"
   },
   {
    "choice": "take_away",
@@ -1812,6 +1898,11 @@
    "text": "nothing here is teaching me anything new any more"
   },
   {
+   "kind": "reflect",
+   "lesson": 2,
+   "text": "'merge' gives the same answer either way round, so I can count along the smaller number"
+  },
+  {
    "kind": "trainer",
    "lesson": 2,
    "text": "Exam for lesson 2, attempt 1: passed"
@@ -1861,12 +1952,39 @@
   {
    "kind": "design",
    "lesson": 3,
-   "text": "groups: my 4 explanations disagree about {'groups': 2, 'size': 0}; I'll set that up to find out"
+   "text": "groups: my 4 explanations disagree about {'groups': 4, 'size': 4}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 3,
-   "text": "groups: surprised; new best explanation is 0 (was groups; 2 experiences, 12 programs searched)"
+   "text": "groups: surprised; new best explanation is repeat groups times [merge(\u00b7, groups)] starting from 0 (was groups; 2 experiences, 1195 programs searched)"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my 4 explanations disagree about {'groups': 3, 'size': 4}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 3,
+   "text": "groups: surprised; my other idea repeat size times [merge(\u00b7, groups)] starting from 0 fits everything (was repeat groups times [merge(\u00b7, groups)] starting from 0)"
+  },
+  {
+   "choice": "groups",
+   "kind": "choice",
+   "lesson": 3,
+   "text": "chose to play with groups"
+  },
+  {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my 3 explanations disagree about {'groups': 3, 'size': 4}; I'll set that up to find out"
   },
   {
    "choice": "groups",
@@ -1899,12 +2017,7 @@
   {
    "kind": "design",
    "lesson": 3,
-   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 1, 'size': 1}; I'll set that up"
-  },
-  {
-   "kind": "revise",
-   "lesson": 3,
-   "text": "groups: surprised; new best explanation is take_away(groups, take_away(groups, size)) (was 0; 5 experiences, 1173 programs searched)"
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 0, 'size': 0}; I'll set that up"
   },
   {
    "choice": "groups",
@@ -1915,12 +2028,7 @@
   {
    "kind": "design",
    "lesson": 3,
-   "text": "groups: my 4 explanations disagree about {'groups': 1, 'size': 2}; I'll set that up to find out"
-  },
-  {
-   "kind": "revise",
-   "lesson": 3,
-   "text": "groups: surprised; new best explanation is repeat size times [merge(\u00b7, groups)] starting from 0 (was take_away(groups, take_away(groups, size)); 6 experiences, 3377 programs searched)"
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 0, 'size': 0}; I'll set that up"
   },
   {
    "choice": "groups",
@@ -1931,7 +2039,7 @@
   {
    "kind": "design",
    "lesson": 3,
-   "text": "groups: my 4 explanations disagree about {'groups': 2, 'size': 1}; I'll set that up to find out"
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 0, 'size': 0}; I'll set that up"
   },
   {
    "choice": "groups",
@@ -1940,10 +2048,9 @@
    "text": "chose to play with groups"
   },
   {
-   "choice": "groups",
-   "kind": "choice",
+   "kind": "design",
    "lesson": 3,
-   "text": "chose to play with groups"
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 0, 'size': 0}; I'll set that up"
   },
   {
    "choice": "groups",
@@ -1952,28 +2059,9 @@
    "text": "chose to play with groups"
   },
   {
-   "choice": "groups",
-   "kind": "choice",
+   "kind": "design",
    "lesson": 3,
-   "text": "chose to play with groups"
-  },
-  {
-   "choice": "groups",
-   "kind": "choice",
-   "lesson": 3,
-   "text": "chose to play with groups"
-  },
-  {
-   "choice": "groups",
-   "kind": "choice",
-   "lesson": 3,
-   "text": "chose to play with groups"
-  },
-  {
-   "choice": "groups",
-   "kind": "choice",
-   "lesson": 3,
-   "text": "chose to play with groups"
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 1, 'size': 0}; I'll set that up"
   },
   {
    "kind": "confirm",
@@ -1985,6 +2073,11 @@
    "kind": "choice",
    "lesson": 3,
    "text": "chose to play with groups"
+  },
+  {
+   "kind": "design",
+   "lesson": 3,
+   "text": "groups: my ideas agree, but I've never tried a situation like {'groups': 2, 'size': 1}; I'll set that up"
   },
   {
    "choice": "groups",
@@ -2028,6 +2121,21 @@
    "text": "nothing here is teaching me anything new any more"
   },
   {
+   "kind": "reflect",
+   "lesson": 3,
+   "text": "'groups' gives the same answer either way round, so I can count along the smaller number"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 3,
+   "text": "'groups' is 'merge' repeated: groups(groups, size) = repeat size times [merge(\u00b7, groups)] starting from 0, which is 'merge''s nothing (merge(0, x) = x)"
+  },
+  {
+   "kind": "invent",
+   "lesson": 3,
+   "text": "'groups' is 'merge' repeated (I have seen this shape 1 time). If REPEAT is a general way of making laws, then applied to 'groups' it predicts a law I have never met: repeated_groups(amount, times) = repeat times times [groups(\u00b7, amount)] starting from 1. That is only a guess from a pattern, so I'll keep it as a prediction until the world agrees."
+  },
+  {
    "kind": "trainer",
    "lesson": 3,
    "text": "Exam for lesson 3, attempt 1: passed"
@@ -2046,6 +2154,11 @@
    "kind": "meet",
    "lesson": 4,
    "text": "new kind of experience: numeral"
+  },
+  {
+   "kind": "design",
+   "lesson": 4,
+   "text": "numeral: could this be my predicted law repeated_groups? I'll test that first"
   },
   {
    "kind": "trainer",
@@ -2111,7 +2224,7 @@
   {
    "kind": "revise",
    "lesson": 4,
-   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 3551 programs searched)"
+   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was repeated_groups(left, right); 1 experiences, 3551 programs searched)"
   },
   {
    "choice": "numeral",
@@ -2122,7 +2235,7 @@
   {
    "kind": "revise",
    "lesson": 4,
-   "text": "numeral: surprised; new best explanation is merge(right, groups(left, 10)) (was succ(succ(groups(8, 9))); 2 experiences, 19238 programs searched)"
+   "text": "numeral: surprised; my other idea merge(right, groups(left, 10)) fits everything (was succ(succ(groups(8, 9))))"
   },
   {
    "choice": "numeral",
@@ -3049,9 +3162,19 @@
    "text": "new kind of experience: earn_coins"
   },
   {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_coins: could this be my predicted law repeated_groups? I'll test that first"
+  },
+  {
    "kind": "meet",
    "lesson": 8,
    "text": "new kind of experience: earn_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_notes: could this be my predicted law repeated_groups? I'll test that first"
   },
   {
    "kind": "meet",
@@ -3059,9 +3182,19 @@
    "text": "new kind of experience: spend_coins"
   },
   {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_coins: could this be my predicted law repeated_groups? I'll test that first"
+  },
+  {
    "kind": "meet",
    "lesson": 8,
    "text": "new kind of experience: spend_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_notes: could this be my predicted law repeated_groups? I'll test that first"
   },
   {
    "kind": "trainer",
@@ -3077,12 +3210,76 @@
   {
    "kind": "design",
    "lesson": 8,
-   "text": "earn_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
+   "text": "earn_coins: my 2 explanations disagree about {'coins': 5, 'notes': 0}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "earn_coins: surprised; new best explanation is 1 (was nothing; 1 experiences, 35 programs searched)"
+   "text": "earn_coins: surprised; new best explanation is 6 (was repeated_groups(coins, notes); 1 experiences, 35 programs searched)"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_notes: my 2 explanations disagree about {'coins': 5, 'notes': 0}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "earn_notes: surprised; my other idea repeated_groups(notes, coins) fits everything (was repeated_groups(coins, notes))"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_coins: my 2 explanations disagree about {'coins': 5, 'notes': 0}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "spend_coins: surprised; new best explanation is 4 (was repeated_groups(coins, notes); 1 experiences, 35 programs searched)"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_notes: my 2 explanations disagree about {'coins': 5, 'notes': 0}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "spend_notes: surprised; my other idea repeated_groups(notes, coins) fits everything (was repeated_groups(coins, notes))"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_coins: my 3 explanations disagree about {'coins': 0, 'notes': 5}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was 6; 2 experiences, 9871 programs searched)"
   },
   {
    "choice": "earn_notes",
@@ -3098,7 +3295,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "earn_notes: surprised; new best explanation is coins (was nothing; 1 experiences, 15 programs searched)"
+   "text": "earn_notes: surprised; new best explanation is notes (was repeated_groups(notes, coins); 2 experiences, 19 programs searched)"
   },
   {
    "choice": "spend_coins",
@@ -3109,12 +3306,12 @@
   {
    "kind": "design",
    "lesson": 8,
-   "text": "spend_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
+   "text": "spend_coins: my 3 explanations disagree about {'coins': 0, 'notes': 5}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "spend_coins: surprised; new best explanation is coins (was nothing; 1 experiences, 15 programs searched)"
+   "text": "spend_coins: surprised; my other idea pred(coins) fits everything (was 4)"
   },
   {
    "choice": "spend_notes",
@@ -3128,11 +3325,6 @@
    "text": "spend_notes: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
   },
   {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "spend_notes: surprised; new best explanation is 1 (was nothing; 1 experiences, 35 programs searched)"
-  },
-  {
    "choice": "earn_coins",
    "kind": "choice",
    "lesson": 8,
@@ -3141,12 +3333,7 @@
   {
    "kind": "design",
    "lesson": 8,
-   "text": "earn_coins: my 3 explanations disagree about {'coins': 1, 'notes': 0}; I'll set that up to find out"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "earn_coins: surprised; new best explanation is succ(coins) (was 1; 2 experiences, 1049 programs searched)"
+   "text": "earn_coins: my 4 explanations disagree about {'coins': 3, 'notes': 0}; I'll set that up to find out"
   },
   {
    "choice": "earn_notes",
@@ -3157,12 +3344,12 @@
   {
    "kind": "design",
    "lesson": 8,
-   "text": "earn_notes: my 4 explanations disagree about {'coins': 2, 'notes': 0}; I'll set that up to find out"
+   "text": "earn_notes: my 4 explanations disagree about {'coins': 0, 'notes': 5}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "earn_notes: surprised; new best explanation is notes (was coins; 2 experiences, 19 programs searched)"
+   "text": "earn_notes: surprised; my other idea pred(notes) fits everything (was notes)"
   },
   {
    "choice": "spend_coins",
@@ -3173,71 +3360,7 @@
   {
    "kind": "design",
    "lesson": 8,
-   "text": "spend_coins: my 4 explanations disagree about {'coins': 2, 'notes': 0}; I'll set that up to find out"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "spend_coins: surprised; new best explanation is pred(coins) (was coins; 2 experiences, 1051 programs searched)"
-  },
-  {
-   "choice": "spend_notes",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with spend_notes"
-  },
-  {
-   "kind": "design",
-   "lesson": 8,
-   "text": "spend_notes: my 3 explanations disagree about {'coins': 1, 'notes': 0}; I'll set that up to find out"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "spend_notes: surprised; new best explanation is take_away(1, coins) (was 1; 2 experiences, 1830 programs searched)"
-  },
-  {
-   "choice": "earn_coins",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with earn_coins"
-  },
-  {
-   "kind": "design",
-   "lesson": 8,
-   "text": "earn_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 1}; I'll set that up"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was succ(coins); 3 experiences, 38927 programs searched)"
-  },
-  {
-   "choice": "earn_notes",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with earn_notes"
-  },
-  {
-   "kind": "design",
-   "lesson": 8,
-   "text": "earn_notes: my 4 explanations disagree about {'coins': 0, 'notes': 2}; I'll set that up to find out"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "earn_notes: surprised; new best explanation is pred(notes) (was notes; 3 experiences, 1232 programs searched)"
-  },
-  {
-   "choice": "spend_coins",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with spend_coins"
-  },
-  {
-   "kind": "design",
-   "lesson": 8,
-   "text": "spend_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 1}; I'll set that up"
+   "text": "spend_coins: my 2 explanations disagree about {'coins': 0, 'notes': 5}; I'll set that up to find out"
   },
   {
    "choice": "spend_notes",
@@ -3253,7 +3376,51 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was take_away(1, coins); 3 experiences, 38925 programs searched)"
+   "text": "spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was repeated_groups(notes, coins); 3 experiences, 27565 programs searched)"
+  },
+  {
+   "choice": "earn_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
+  },
+  {
+   "choice": "earn_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with earn_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "earn_notes: my 3 explanations disagree about {'coins': 0, 'notes': 5}; I'll set that up to find out"
+  },
+  {
+   "choice": "spend_coins",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_coins"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_coins: my ideas agree, but I've never tried a situation like {'coins': 0, 'notes': 0}; I'll set that up"
+  },
+  {
+   "choice": "spend_notes",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with spend_notes"
+  },
+  {
+   "kind": "design",
+   "lesson": 8,
+   "text": "spend_notes: my 4 explanations disagree about {'coins': 1, 'notes': 0}; I'll set that up to find out"
   },
   {
    "choice": "earn_coins",
@@ -3382,28 +3549,9 @@
    "text": "chose to play with earn_coins"
   },
   {
-   "choice": "earn_notes",
-   "kind": "choice",
+   "kind": "confirm",
    "lesson": 8,
-   "text": "chose to play with earn_notes"
-  },
-  {
-   "choice": "spend_coins",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with spend_coins"
-  },
-  {
-   "choice": "spend_notes",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with spend_notes"
-  },
-  {
-   "choice": "earn_coins",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with earn_coins"
+   "text": "earn_coins: take_away(succ(coins), notes) predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "earn_notes",
@@ -3433,11 +3581,6 @@
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with earn_coins"
-  },
-  {
-   "kind": "confirm",
-   "lesson": 8,
-   "text": "earn_coins: take_away(succ(coins), notes) predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "earn_notes",
@@ -3588,22 +3731,16 @@
    "text": "chose to play with spend_notes"
   },
   {
-   "choice": "earn_coins",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with earn_coins"
-  },
-  {
    "choice": "earn_notes",
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with earn_notes"
   },
   {
-   "choice": "spend_notes",
+   "choice": "earn_coins",
    "kind": "choice",
    "lesson": 8,
-   "text": "chose to play with spend_notes"
+   "text": "chose to play with earn_coins"
   },
   {
    "choice": "spend_coins",
@@ -3612,22 +3749,16 @@
    "text": "chose to play with spend_coins"
   },
   {
-   "choice": "earn_coins",
+   "choice": "spend_notes",
    "kind": "choice",
    "lesson": 8,
-   "text": "chose to play with earn_coins"
+   "text": "chose to play with spend_notes"
   },
   {
    "choice": "earn_notes",
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with earn_notes"
-  },
-  {
-   "choice": "spend_notes",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with spend_notes"
   },
   {
    "kind": "bored",
@@ -3655,48 +3786,19 @@
    "text": "new kind of experience: pay"
   },
   {
+   "kind": "design",
+   "lesson": 8,
+   "text": "pay: could this be my predicted law repeated_groups? I'll test that first"
+  },
+  {
    "kind": "meet",
    "lesson": 8,
    "text": "new kind of experience: get_paid"
   },
   {
-   "choice": "pay",
-   "kind": "choice",
+   "kind": "design",
    "lesson": 8,
-   "text": "chose to play with pay"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 293 programs searched)"
-  },
-  {
-   "choice": "get_paid",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with get_paid"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "get_paid: surprised; new best explanation is 3 (was nothing; 1 experiences, 28 programs searched)"
-  },
-  {
-   "choice": "pay",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with pay"
-  },
-  {
-   "choice": "get_paid",
-   "kind": "choice",
-   "lesson": 8,
-   "text": "chose to play with get_paid"
-  },
-  {
-   "kind": "revise",
-   "lesson": 8,
-   "text": "get_paid: surprised; new best explanation is merge(purse, wage) (was 3; 2 experiences, 4272 programs searched)"
+   "text": "get_paid: could this be my predicted law repeated_groups? I'll test that first"
   },
   {
    "choice": "pay",
@@ -3707,13 +3809,40 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 84934 programs searched)"
+   "text": "pay: surprised; new best explanation is down(purse) (was repeated_groups(price, purse); 1 experiences, 1383 programs searched)"
   },
   {
    "choice": "get_paid",
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with get_paid"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "get_paid: surprised; my other idea repeated_groups(wage, purse) fits everything (was repeated_groups(purse, wage))"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 2 experiences, 75535 programs searched)"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "kind": "revise",
+   "lesson": 8,
+   "text": "get_paid: surprised; new best explanation is merge(purse, wage) (was repeated_groups(wage, purse); 2 experiences, 4561 programs searched)"
   },
   {
    "choice": "pay",
@@ -3792,6 +3921,23 @@
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with pay"
+  },
+  {
+   "choice": "get_paid",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with get_paid"
+  },
+  {
+   "choice": "pay",
+   "kind": "choice",
+   "lesson": 8,
+   "text": "chose to play with pay"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 8,
+   "text": "pay: repeat price times [down] starting from purse predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "get_paid",
@@ -3809,11 +3955,6 @@
    "kind": "choice",
    "lesson": 8,
    "text": "chose to play with pay"
-  },
-  {
-   "kind": "confirm",
-   "lesson": 8,
-   "text": "pay: repeat price times [down] starting from purse predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "get_paid",
@@ -3897,6 +4038,11 @@
    "kind": "bored",
    "lesson": 8,
    "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 8,
+   "text": "'get_paid' gives the same answer either way round, so I can count along the smaller number"
   },
   {
    "kind": "reflect",
@@ -3974,6 +4120,11 @@
    "text": "new kind of experience: recut"
   },
   {
+   "kind": "design",
+   "lesson": 9,
+   "text": "recut: could this be my predicted law repeated_groups? I'll test that first"
+  },
+  {
    "kind": "trainer",
    "lesson": 9,
    "text": "Here are cakes, a knife that cuts into equal pieces, and a balance. Play."
@@ -4003,12 +4154,12 @@
   {
    "kind": "design",
    "lesson": 9,
-   "text": "recut: my ideas agree, but I've never tried a situation like {'cut': 1, 'recut': 1}; I'll set that up"
+   "text": "recut: my 2 explanations disagree about {'cut': 5, 'recut': 6}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 9,
-   "text": "recut: surprised; new best explanation is cut (was nothing; 1 experiences, 17 programs searched)"
+   "text": "recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(cut, recut); 1 experiences, 801 programs searched)"
   },
   {
    "choice": "cake_balance",
@@ -4035,12 +4186,7 @@
   {
    "kind": "design",
    "lesson": 9,
-   "text": "recut: my 4 explanations disagree about {'cut': 2, 'recut': 3}; I'll set that up to find out"
-  },
-  {
-   "kind": "revise",
-   "lesson": 9,
-   "text": "recut: surprised; new best explanation is groups(cut, recut) (was cut; 2 experiences, 5499 programs searched)"
+   "text": "recut: my 4 explanations disagree about {'cut': 6, 'recut': 6}; I'll set that up to find out"
   },
   {
    "choice": "cake_balance",
@@ -4051,7 +4197,7 @@
   {
    "kind": "design",
    "lesson": 9,
-   "text": "cake_balance: my 4 explanations disagree about {'pieces': 2, 'cut': 1, 'wholes': 0}; I'll set that up to find out"
+   "text": "cake_balance: my 4 explanations disagree about {'pieces': 12, 'cut': 6, 'wholes': 4}; I'll set that up to find out"
   },
   {
    "choice": "recut",
@@ -4073,12 +4219,46 @@
   {
    "kind": "design",
    "lesson": 9,
-   "text": "cake_balance: my 3 explanations disagree about {'pieces': 0, 'cut': 1, 'wholes': 1}; I'll set that up to find out"
+   "text": "cake_balance: my 3 explanations disagree about {'pieces': 5, 'cut': 6, 'wholes': 4}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 9,
-   "text": "cake_balance: surprised; new best explanation is eq(pieces, wholes) (was lt(pieces, cut); 4 experiences, 6209 programs searched)"
+   "text": "cake_balance: surprised; my other idea eq(pieces, wholes) fits everything (was lt(pieces, cut))"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 2, 'cut': 1, 'wholes': 0}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 0, 'cut': 1, 'wholes': 1}; I'll set that up"
   },
   {
    "choice": "recut",
@@ -4138,6 +4318,11 @@
    "text": "chose to play with recut"
   },
   {
+   "kind": "confirm",
+   "lesson": 9,
+   "text": "recut: groups(cut, recut) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
    "choice": "cake_balance",
    "kind": "choice",
    "lesson": 9,
@@ -4183,15 +4368,15 @@
    "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 3, 'cut': 1, 'wholes': 2}; I'll set that up"
   },
   {
+   "kind": "confirm",
+   "lesson": 9,
+   "text": "cake_balance: eq(pieces, wholes) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
    "choice": "recut",
    "kind": "choice",
    "lesson": 9,
    "text": "chose to play with recut"
-  },
-  {
-   "kind": "confirm",
-   "lesson": 9,
-   "text": "recut: groups(cut, recut) predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "cake_balance",
@@ -4220,11 +4405,6 @@
    "kind": "design",
    "lesson": 9,
    "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 2, 'wholes': 0}; I'll set that up"
-  },
-  {
-   "kind": "confirm",
-   "lesson": 9,
-   "text": "cake_balance: eq(pieces, wholes) predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "recut",
@@ -4268,7 +4448,7 @@
   {
    "kind": "revise",
    "lesson": 9,
-   "text": "cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 14 experiences, 80862 programs searched)"
+   "text": "cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 86693 programs searched)"
   },
   {
    "choice": "recut",
@@ -4285,13 +4465,7 @@
   {
    "kind": "design",
    "lesson": 9,
-   "text": "cake_balance: my 4 explanations disagree about {'pieces': 2, 'cut': 2, 'wholes': 1}; I'll set that up to find out"
-  },
-  {
-   "choice": "recut",
-   "kind": "choice",
-   "lesson": 9,
-   "text": "chose to play with recut"
+   "text": "cake_balance: my 4 explanations disagree about {'pieces': 12, 'cut': 6, 'wholes': 2}; I'll set that up to find out"
   },
   {
    "choice": "cake_balance",
@@ -4302,13 +4476,7 @@
   {
    "kind": "design",
    "lesson": 9,
-   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 3, 'cut': 2, 'wholes': 1}; I'll set that up"
-  },
-  {
-   "choice": "recut",
-   "kind": "choice",
-   "lesson": 9,
-   "text": "chose to play with recut"
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 2, 'cut': 2, 'wholes': 1}; I'll set that up"
   },
   {
    "choice": "cake_balance",
@@ -4322,12 +4490,6 @@
    "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 2, 'wholes': 2}; I'll set that up"
   },
   {
-   "choice": "recut",
-   "kind": "choice",
-   "lesson": 9,
-   "text": "chose to play with recut"
-  },
-  {
    "choice": "cake_balance",
    "kind": "choice",
    "lesson": 9,
@@ -4337,17 +4499,6 @@
    "kind": "design",
    "lesson": 9,
    "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 2, 'wholes': 3}; I'll set that up"
-  },
-  {
-   "choice": "cake_balance",
-   "kind": "choice",
-   "lesson": 9,
-   "text": "chose to play with cake_balance"
-  },
-  {
-   "kind": "design",
-   "lesson": 9,
-   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 2, 'cut': 3, 'wholes': 1}; I'll set that up"
   },
   {
    "choice": "cake_balance",
@@ -4373,6 +4524,12 @@
    "text": "chose to play with cake_balance"
   },
   {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
    "kind": "confirm",
    "lesson": 9,
    "text": "cake_balance: eq(pieces, groups(cut, wholes)) predicted 8 new experiences in a row; added to my library of building blocks"
@@ -4381,6 +4538,11 @@
    "kind": "bored",
    "lesson": 9,
    "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 9,
+   "text": "'recut' gives the same answer either way round, so I can count along the smaller number"
   },
   {
    "kind": "invent",
@@ -4477,93 +4639,39 @@
   {
    "kind": "design",
    "lesson": 11,
-   "text": "tick: my 4 explanations disagree about {'slot': 1}; I'll set that up to find out"
+   "text": "tick: my 4 explanations disagree about {'slot': 5}; I'll set that up to find out"
   },
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "tick: surprised; new best explanation is succ(slot) (was 1; 2 experiences, 95 programs searched)"
+   "text": "tick: surprised; new best explanation is spend_notes(slot, 0) (was 1; 2 experiences, 2126 programs searched)"
   },
   {
    "choice": "tick",
    "kind": "choice",
    "lesson": 11,
    "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "kind": "confirm",
-   "lesson": 11,
-   "text": "tick: succ(slot) predicted 8 new experiences in a row; added to my library of building blocks"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
-  },
-  {
-   "kind": "doubt",
-   "lesson": 11,
-   "text": "tick: my confirmed law succ(slot) just failed; I don't trust it any more until a better one is confirmed"
   },
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "tick: surprised; new best explanation is earn_coins(slot, groups(6, take_away(slot, 4))) (was succ(slot); 13 experiences, 304113 programs searched)"
+   "text": "tick: surprised; new best explanation is earn_coins(slot, groups(slot, take_away(slot, 3))) (was spend_notes(slot, 0); 3 experiences, 268477 programs searched)"
+  },
+  {
+   "choice": "tick",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with tick"
+  },
+  {
+   "kind": "design",
+   "lesson": 11,
+   "text": "tick: my 4 explanations disagree about {'slot': 4}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 11,
+   "text": "tick: surprised; new best explanation is earn_coins(slot, groups(6, take_away(slot, 4))) (was earn_coins(slot, groups(slot, take_away(slot, 3))); 4 experiences, 283100 programs searched)"
   },
   {
    "choice": "tick",
@@ -4619,6 +4727,48 @@
    "text": "tick: earn_coins(slot, groups(6, take_away(slot, 4))) predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
+   "choice": "tick",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with tick"
+  },
+  {
+   "choice": "tick",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with tick"
+  },
+  {
+   "choice": "tick",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with tick"
+  },
+  {
+   "choice": "tick",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with tick"
+  },
+  {
+   "choice": "tick",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with tick"
+  },
+  {
+   "choice": "tick",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with tick"
+  },
+  {
+   "choice": "tick",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with tick"
+  },
+  {
    "kind": "bored",
    "lesson": 11,
    "text": "nothing here is teaching me anything new any more"
@@ -4639,6 +4789,27 @@
    "text": "new kind of experience: spin"
   },
   {
+   "kind": "design",
+   "lesson": 11,
+   "text": "spin: could this be my predicted law repeated_groups? I'll test that first"
+  },
+  {
+   "choice": "spin",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with spin"
+  },
+  {
+   "kind": "design",
+   "lesson": 11,
+   "text": "spin: my 2 explanations disagree about {'start': 5, 'ticks': 8}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 11,
+   "text": "spin: surprised; new best explanation is 1 (was repeated_groups(start, ticks); 1 experiences, 31 programs searched)"
+  },
+  {
    "choice": "spin",
    "kind": "choice",
    "lesson": 11,
@@ -4652,7 +4823,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "spin: surprised; new best explanation is start (was nothing; 1 experiences, 15 programs searched)"
+   "text": "spin: surprised; new best explanation is take_away(start, 4) (was 1; 2 experiences, 426 programs searched)"
   },
   {
    "choice": "spin",
@@ -4663,12 +4834,7 @@
   {
    "kind": "design",
    "lesson": 11,
-   "text": "spin: my 4 explanations disagree about {'start': 2, 'ticks': 3}; I'll set that up to find out"
-  },
-  {
-   "kind": "revise",
-   "lesson": 11,
-   "text": "spin: surprised; new best explanation is get_paid(start, ticks) (was start; 2 experiences, 282 programs searched)"
+   "text": "spin: my 4 explanations disagree about {'start': 4, 'ticks': 8}; I'll set that up to find out"
   },
   {
    "choice": "spin",
@@ -4680,6 +4846,11 @@
    "kind": "design",
    "lesson": 11,
    "text": "spin: my ideas agree, but I've never tried a situation like {'start': 0, 'ticks': 1}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 11,
+   "text": "spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 135855 programs searched)"
   },
   {
    "choice": "spin",
@@ -4727,46 +4898,6 @@
    "text": "chose to play with spin"
   },
   {
-   "kind": "revise",
-   "lesson": 11,
-   "text": "spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was get_paid(start, ticks); 8 experiences, 63799 programs searched)"
-  },
-  {
-   "choice": "spin",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with spin"
-  },
-  {
-   "kind": "design",
-   "lesson": 11,
-   "text": "spin: my 4 explanations disagree about {'start': 0, 'ticks': 7}; I'll set that up to find out"
-  },
-  {
-   "choice": "spin",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with spin"
-  },
-  {
-   "choice": "spin",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with spin"
-  },
-  {
-   "choice": "spin",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with spin"
-  },
-  {
-   "choice": "spin",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with spin"
-  },
-  {
    "choice": "spin",
    "kind": "choice",
    "lesson": 11,
@@ -4788,6 +4919,30 @@
    "kind": "confirm",
    "lesson": 11,
    "text": "spin: repeat ticks times [tick] starting from start predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "spin",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with spin"
+  },
+  {
+   "choice": "spin",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with spin"
+  },
+  {
+   "choice": "spin",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with spin"
+  },
+  {
+   "choice": "spin",
+   "kind": "choice",
+   "lesson": 11,
+   "text": "chose to play with spin"
   },
   {
    "choice": "spin",
@@ -5041,6 +5196,207 @@
    "kind": "trainer",
    "lesson": 12,
    "text": "What you found in 'roll' is what people call conservation of energy."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 13,
+   "text": "Lesson 13: Growing"
+  },
+  {
+   "kind": "meet",
+   "lesson": 13,
+   "text": "new kind of experience: grow"
+  },
+  {
+   "kind": "design",
+   "lesson": 13,
+   "text": "grow: could this be my predicted law repeated_groups? I'll test that first"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "kind": "design",
+   "lesson": 13,
+   "text": "grow: my 2 explanations disagree about {'split': 3, 'days': 4}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 13,
+   "text": "grow: surprised; my other idea repeated_groups(split, days) fits everything (was repeated_groups(days, split))"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "kind": "design",
+   "lesson": 13,
+   "text": "grow: my ideas agree, but I've never tried a situation like {'split': 1, 'days': 0}; I'll set that up"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "kind": "design",
+   "lesson": 13,
+   "text": "grow: my ideas agree, but I've never tried a situation like {'split': 1, 'days': 1}; I'll set that up"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "kind": "design",
+   "lesson": 13,
+   "text": "grow: my ideas agree, but I've never tried a situation like {'split': 2, 'days': 1}; I'll set that up"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 13,
+   "text": "grow: repeated_groups(split, days) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 13,
+   "text": "my predicted law 'repeated_groups' was right: the world does exactly what REPEAT said it would"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "choice": "grow",
+   "kind": "choice",
+   "lesson": 13,
+   "text": "chose to play with grow"
+  },
+  {
+   "kind": "bored",
+   "lesson": 13,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 13,
+   "text": "'repeated_groups' is 'groups' repeated: repeated_groups(amount, times) = repeat times times [groups(\u00b7, amount)] starting from 1, which is 'groups''s nothing (groups(1, x) = x)"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 13,
+   "text": "Repeating 'repeated_groups' could mean two different things: repeated_groups(2, 3) is not repeated_groups(3, 2), so I can't tell which input to feed back in. The REPEAT pattern stops telling me what comes next here, so I won't guess."
+  },
+  {
+   "kind": "word",
+   "lesson": 13,
+   "text": "'power' behaves exactly like my law 'grow' (arguments yx) in all 6 demonstrations"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 13,
+   "text": "I grew cells and said '3 power 2 equals 9' and so on."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 13,
+   "text": "Exam for lesson 13, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 13,
+   "text": "What you found in 'repeated_groups' is what people call powers (exponentiation)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 13,
+   "text": "What you found in 'grow' is what people call exponential growth."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 14,
+   "text": "Lesson 14: Phase 2 final exam"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 14,
+   "text": "No teaching today. Show me what you can do."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 14,
+   "text": "Exam for lesson 14, attempt 1: passed"
   }
  ],
  "memory": {
@@ -5064,6 +5420,22 @@
     },
     {
      "inputs": {
+      "cut": 6,
+      "pieces": 12,
+      "wholes": 4
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 6,
+      "pieces": 5,
+      "wholes": 4
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
       "cut": 1,
       "pieces": 2,
       "wholes": 0
@@ -5160,19 +5532,19 @@
     },
     {
      "inputs": {
-      "cut": 2,
-      "pieces": 2,
-      "wholes": 1
+      "cut": 6,
+      "pieces": 12,
+      "wholes": 2
      },
      "outcome": true
     },
     {
      "inputs": {
       "cut": 2,
-      "pieces": 3,
+      "pieces": 2,
       "wholes": 1
      },
-     "outcome": false
+     "outcome": true
     },
     {
      "inputs": {
@@ -5193,14 +5565,6 @@
     {
      "inputs": {
       "cut": 3,
-      "pieces": 2,
-      "wholes": 1
-     },
-     "outcome": false
-    },
-    {
-     "inputs": {
-      "cut": 3,
       "pieces": 1,
       "wholes": 2
      },
@@ -5208,17 +5572,25 @@
     },
     {
      "inputs": {
-      "cut": 1,
-      "pieces": 0,
-      "wholes": 0
+      "cut": 2,
+      "pieces": 2,
+      "wholes": 1
      },
      "outcome": true
     },
     {
      "inputs": {
-      "cut": 5,
-      "pieces": 6,
-      "wholes": 0
+      "cut": 2,
+      "pieces": 9,
+      "wholes": 4
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 1,
+      "wholes": 3
      },
      "outcome": false
     }
@@ -5404,24 +5776,31 @@
    "earn_coins": [
     {
      "inputs": {
+      "coins": 5,
+      "notes": 0
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 5
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 3,
+      "notes": 0
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
       "coins": 0,
       "notes": 0
      },
      "outcome": 1
-    },
-    {
-     "inputs": {
-      "coins": 1,
-      "notes": 0
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
-      "coins": 0,
-      "notes": 1
-     },
-     "outcome": 0
     },
     {
      "inputs": {
@@ -5509,22 +5888,8 @@
     },
     {
      "inputs": {
-      "coins": 3,
-      "notes": 0
-     },
-     "outcome": 4
-    },
-    {
-     "inputs": {
-      "coins": 3,
-      "notes": 0
-     },
-     "outcome": 4
-    },
-    {
-     "inputs": {
       "coins": 0,
-      "notes": 4
+      "notes": 1
      },
      "outcome": 0
     }
@@ -5532,14 +5897,7 @@
    "earn_notes": [
     {
      "inputs": {
-      "coins": 0,
-      "notes": 0
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "coins": 2,
+      "coins": 5,
       "notes": 0
      },
      "outcome": 0
@@ -5547,9 +5905,23 @@
     {
      "inputs": {
       "coins": 0,
-      "notes": 2
+      "notes": 0
      },
-     "outcome": 1
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 5
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 5
+     },
+     "outcome": 4
     },
     {
      "inputs": {
@@ -5637,22 +6009,15 @@
     },
     {
      "inputs": {
-      "coins": 0,
-      "notes": 1
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "coins": 0,
+      "coins": 3,
       "notes": 0
      },
      "outcome": 0
     },
     {
      "inputs": {
-      "coins": 0,
-      "notes": 1
+      "coins": 3,
+      "notes": 0
      },
      "outcome": 0
     }
@@ -5714,45 +6079,31 @@
    "get_paid": [
     {
      "inputs": {
-      "purse": 1,
-      "wage": 2
-     },
-     "outcome": 3
-    },
-    {
-     "inputs": {
-      "purse": 5,
-      "wage": 5
-     },
-     "outcome": 10
-    },
-    {
-     "inputs": {
-      "purse": 1,
-      "wage": 0
+      "purse": 0,
+      "wage": 1
      },
      "outcome": 1
     },
     {
      "inputs": {
-      "purse": 3,
+      "purse": 4,
+      "wage": 2
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "purse": 1,
       "wage": 1
      },
-     "outcome": 4
+     "outcome": 2
     },
     {
      "inputs": {
-      "purse": -3,
-      "wage": 6
-     },
-     "outcome": 3
-    },
-    {
-     "inputs": {
-      "purse": 5,
+      "purse": 2,
       "wage": 7
      },
-     "outcome": 12
+     "outcome": 9
     },
     {
      "inputs": {
@@ -5763,17 +6114,66 @@
     },
     {
      "inputs": {
-      "purse": 0,
-      "wage": 1
+      "purse": -1,
+      "wage": 7
      },
-     "outcome": 1
+     "outcome": 6
     },
     {
      "inputs": {
-      "purse": 5,
+      "purse": 0,
+      "wage": 7
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "purse": -4,
+      "wage": 7
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "purse": 3,
+      "wage": 3
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "purse": -1,
+      "wage": 0
+     },
+     "outcome": -1
+    },
+    {
+     "inputs": {
+      "purse": 4,
+      "wage": 8
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "purse": 1,
       "wage": 6
      },
-     "outcome": 11
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "purse": 0,
+      "wage": 4
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "purse": -1,
+      "wage": 1
+     },
+     "outcome": 0
     },
     {
      "inputs": {
@@ -5784,45 +6184,17 @@
     },
     {
      "inputs": {
-      "purse": -5,
-      "wage": 3
-     },
-     "outcome": -2
-    },
-    {
-     "inputs": {
-      "purse": 0,
-      "wage": 6
-     },
-     "outcome": 6
-    },
-    {
-     "inputs": {
-      "purse": 4,
-      "wage": 5
-     },
-     "outcome": 9
-    },
-    {
-     "inputs": {
       "purse": -2,
-      "wage": 5
+      "wage": 1
      },
-     "outcome": 3
+     "outcome": -1
     },
     {
      "inputs": {
-      "purse": 1,
-      "wage": 6
+      "purse": -4,
+      "wage": 4
      },
-     "outcome": 7
-    },
-    {
-     "inputs": {
-      "purse": 1,
-      "wage": 6
-     },
-     "outcome": 7
+     "outcome": 0
     },
     {
      "inputs": {
@@ -5833,52 +6205,31 @@
     },
     {
      "inputs": {
-      "purse": -4,
-      "wage": 1
+      "purse": 5,
+      "wage": 7
      },
-     "outcome": -3
-    },
-    {
-     "inputs": {
-      "purse": -5,
-      "wage": 6
-     },
-     "outcome": 1
+     "outcome": 12
     },
     {
      "inputs": {
       "purse": 2,
-      "wage": 8
+      "wage": 6
      },
-     "outcome": 10
+     "outcome": 8
     },
     {
      "inputs": {
-      "purse": 1,
+      "purse": -4,
       "wage": 3
      },
-     "outcome": 4
+     "outcome": -1
     },
     {
      "inputs": {
-      "purse": -1,
-      "wage": 8
+      "purse": -4,
+      "wage": 0
      },
-     "outcome": 7
-    },
-    {
-     "inputs": {
-      "purse": 0,
-      "wage": 2
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
-      "purse": 3,
-      "wage": 4
-     },
-     "outcome": 7
+     "outcome": -4
     }
    ],
    "groups": [
@@ -5891,48 +6242,6 @@
     },
     {
      "inputs": {
-      "groups": 2,
-      "size": 0
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "groups": 0,
-      "size": 4
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "groups": 0,
-      "size": 0
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "groups": 1,
-      "size": 1
-     },
-     "outcome": 1
-    },
-    {
-     "inputs": {
-      "groups": 1,
-      "size": 2
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
-      "groups": 2,
-      "size": 1
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
       "groups": 4,
       "size": 4
      },
@@ -5941,41 +6250,76 @@
     {
      "inputs": {
       "groups": 3,
-      "size": 3
-     },
-     "outcome": 9
-    },
-    {
-     "inputs": {
-      "groups": 1,
-      "size": 1
-     },
-     "outcome": 1
-    },
-    {
-     "inputs": {
-      "groups": 1,
       "size": 4
      },
-     "outcome": 4
+     "outcome": 12
     },
     {
      "inputs": {
       "groups": 3,
+      "size": 4
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 3
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 4
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 3
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 0,
+      "size": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "groups": 0,
       "size": 0
      },
      "outcome": 0
     },
     {
      "inputs": {
-      "groups": 0,
-      "size": 4
+      "groups": 1,
+      "size": 0
      },
      "outcome": 0
     },
     {
      "inputs": {
-      "groups": 0,
+      "groups": 2,
+      "size": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "groups": 2,
       "size": 0
      },
      "outcome": 0
@@ -6014,13 +6358,6 @@
       "size": 2
      },
      "outcome": 2
-    },
-    {
-     "inputs": {
-      "groups": 0,
-      "size": 1
-     },
-     "outcome": 0
     },
     {
      "inputs": {
@@ -6056,6 +6393,134 @@
       "size": 3
      },
      "outcome": 15
+    }
+   ],
+   "grow": [
+    {
+     "inputs": {
+      "days": 4,
+      "split": 3
+     },
+     "outcome": 81
+    },
+    {
+     "inputs": {
+      "days": 0,
+      "split": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "days": 1,
+      "split": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "days": 1,
+      "split": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "days": 2,
+      "split": 3
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "days": 1,
+      "split": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "days": 1,
+      "split": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "days": 1,
+      "split": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "days": 4,
+      "split": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "days": 2,
+      "split": 2
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "days": 3,
+      "split": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "days": 4,
+      "split": 2
+     },
+     "outcome": 16
+    },
+    {
+     "inputs": {
+      "days": 2,
+      "split": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "days": 0,
+      "split": 2
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "days": 3,
+      "split": 3
+     },
+     "outcome": 27
+    },
+    {
+     "inputs": {
+      "days": 1,
+      "split": 4
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "days": 3,
+      "split": 2
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "days": 2,
+      "split": 4
+     },
+     "outcome": 16
     }
    ],
    "lab_push": [
@@ -6340,17 +6805,24 @@
     },
     {
      "inputs": {
-      "nA": 2,
-      "nB": 3
+      "nA": 4,
+      "nB": 5
      },
-     "outcome": 5
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "nB": 5
+     },
+     "outcome": 10
     },
     {
      "inputs": {
       "nA": 0,
-      "nB": 2
+      "nB": 1
      },
-     "outcome": 2
+     "outcome": 1
     },
     {
      "inputs": {
@@ -6358,13 +6830,6 @@
       "nB": 0
      },
      "outcome": 1
-    },
-    {
-     "inputs": {
-      "nA": 1,
-      "nB": 1
-     },
-     "outcome": 2
     },
     {
      "inputs": {
@@ -6456,6 +6921,13 @@
       "nB": 4
      },
      "outcome": 7
+    },
+    {
+     "inputs": {
+      "nA": 1,
+      "nB": 1
+     },
+     "outcome": 2
     },
     {
      "inputs": {
@@ -6649,6 +7121,20 @@
     },
     {
      "inputs": {
+      "nA": 5,
+      "nB": 5
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "nB": 4
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
       "nA": 1,
       "nB": 0
      },
@@ -6657,21 +7143,7 @@
     {
      "inputs": {
       "nA": 1,
-      "nB": 1
-     },
-     "outcome": true
-    },
-    {
-     "inputs": {
-      "nA": 1,
       "nB": 2
-     },
-     "outcome": false
-    },
-    {
-     "inputs": {
-      "nA": 2,
-      "nB": 1
      },
      "outcome": false
     },
@@ -6757,23 +7229,58 @@
     {
      "inputs": {
       "price": 1,
-      "purse": -1
+      "purse": 0
      },
-     "outcome": -2
+     "outcome": -1
     },
     {
      "inputs": {
-      "price": 1,
-      "purse": 2
+      "price": 2,
+      "purse": -4
+     },
+     "outcome": -6
+    },
+    {
+     "inputs": {
+      "price": 0,
+      "purse": 4
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "price": 5,
+      "purse": 5
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "price": 0,
+      "purse": 1
      },
      "outcome": 1
     },
     {
      "inputs": {
-      "price": 7,
-      "purse": 2
+      "price": 1,
+      "purse": 3
      },
-     "outcome": -5
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "price": 6,
+      "purse": -3
+     },
+     "outcome": -9
+    },
+    {
+     "inputs": {
+      "price": 7,
+      "purse": 5
+     },
+     "outcome": -2
     },
     {
      "inputs": {
@@ -6784,66 +7291,17 @@
     },
     {
      "inputs": {
-      "price": 7,
-      "purse": -1
-     },
-     "outcome": -8
-    },
-    {
-     "inputs": {
-      "price": 7,
+      "price": 1,
       "purse": 0
-     },
-     "outcome": -7
-    },
-    {
-     "inputs": {
-      "price": 7,
-      "purse": -4
-     },
-     "outcome": -11
-    },
-    {
-     "inputs": {
-      "price": 3,
-      "purse": 3
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "price": 0,
-      "purse": -1
      },
      "outcome": -1
     },
     {
      "inputs": {
-      "price": 8,
-      "purse": 4
-     },
-     "outcome": -4
-    },
-    {
-     "inputs": {
       "price": 6,
-      "purse": 1
+      "purse": 5
      },
-     "outcome": -5
-    },
-    {
-     "inputs": {
-      "price": 4,
-      "purse": 0
-     },
-     "outcome": -4
-    },
-    {
-     "inputs": {
-      "price": 1,
-      "purse": -1
-     },
-     "outcome": -2
+     "outcome": -1
     },
     {
      "inputs": {
@@ -6854,17 +7312,38 @@
     },
     {
      "inputs": {
-      "price": 1,
-      "purse": -2
+      "price": 3,
+      "purse": -5
      },
-     "outcome": -3
+     "outcome": -8
     },
     {
      "inputs": {
-      "price": 4,
-      "purse": -4
+      "price": 6,
+      "purse": 0
      },
-     "outcome": -8
+     "outcome": -6
+    },
+    {
+     "inputs": {
+      "price": 5,
+      "purse": 4
+     },
+     "outcome": -1
+    },
+    {
+     "inputs": {
+      "price": 5,
+      "purse": -2
+     },
+     "outcome": -7
+    },
+    {
+     "inputs": {
+      "price": 6,
+      "purse": 1
+     },
+     "outcome": -5
     },
     {
      "inputs": {
@@ -6875,45 +7354,45 @@
     },
     {
      "inputs": {
-      "price": 7,
-      "purse": 5
+      "price": 1,
+      "purse": -4
+     },
+     "outcome": -5
+    },
+    {
+     "inputs": {
+      "price": 6,
+      "purse": -5
+     },
+     "outcome": -11
+    },
+    {
+     "inputs": {
+      "price": 8,
+      "purse": 2
+     },
+     "outcome": -6
+    },
+    {
+     "inputs": {
+      "price": 3,
+      "purse": 1
      },
      "outcome": -2
     },
     {
      "inputs": {
-      "price": 6,
-      "purse": 2
+      "price": 8,
+      "purse": -1
      },
-     "outcome": -4
+     "outcome": -9
     },
     {
      "inputs": {
-      "price": 3,
-      "purse": -4
+      "price": 2,
+      "purse": 0
      },
-     "outcome": -7
-    },
-    {
-     "inputs": {
-      "price": 1,
-      "purse": 1
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "price": 0,
-      "purse": -4
-     },
-     "outcome": -4
-    },
-    {
-     "inputs": {
-      "price": 1,
-      "purse": 5
-     },
-     "outcome": 4
+     "outcome": -2
     }
    ],
    "peekaboo": [
@@ -6926,10 +7405,10 @@
     },
     {
      "inputs": {
-      "hidden": 2,
-      "waited": 4
+      "hidden": 4,
+      "waited": 6
      },
-     "outcome": 2
+     "outcome": 4
     },
     {
      "inputs": {
@@ -7120,17 +7599,17 @@
    "recut": [
     {
      "inputs": {
-      "cut": 1,
-      "recut": 1
+      "cut": 5,
+      "recut": 6
      },
-     "outcome": 1
+     "outcome": 30
     },
     {
      "inputs": {
-      "cut": 2,
-      "recut": 3
+      "cut": 6,
+      "recut": 6
      },
-     "outcome": 6
+     "outcome": 36
     },
     {
      "inputs": {
@@ -7229,13 +7708,6 @@
       "recut": 2
      },
      "outcome": 8
-    },
-    {
-     "inputs": {
-      "cut": 2,
-      "recut": 2
-     },
-     "outcome": 4
     }
    ],
    "roll": [
@@ -7369,22 +7841,29 @@
    "spend_coins": [
     {
      "inputs": {
-      "coins": 0,
+      "coins": 5,
       "notes": 0
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "coins": 0,
+      "notes": 5
      },
      "outcome": 0
     },
     {
      "inputs": {
-      "coins": 2,
-      "notes": 0
+      "coins": 0,
+      "notes": 5
      },
-     "outcome": 1
+     "outcome": 0
     },
     {
      "inputs": {
       "coins": 0,
-      "notes": 1
+      "notes": 0
      },
      "outcome": 0
     },
@@ -7478,16 +7957,16 @@
       "notes": 0
      },
      "outcome": 0
-    },
+    }
+   ],
+   "spend_notes": [
     {
      "inputs": {
       "coins": 5,
       "notes": 0
      },
-     "outcome": 4
-    }
-   ],
-   "spend_notes": [
+     "outcome": 0
+    },
     {
      "inputs": {
       "coins": 0,
@@ -7497,17 +7976,17 @@
     },
     {
      "inputs": {
-      "coins": 1,
-      "notes": 0
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
       "coins": 0,
       "notes": 1
      },
      "outcome": 2
+    },
+    {
+     "inputs": {
+      "coins": 1,
+      "notes": 0
+     },
+     "outcome": 0
     },
     {
      "inputs": {
@@ -7599,23 +8078,16 @@
       "notes": 0
      },
      "outcome": 0
-    },
-    {
-     "inputs": {
-      "coins": 0,
-      "notes": 0
-     },
-     "outcome": 1
-    },
-    {
-     "inputs": {
-      "coins": 4,
-      "notes": 0
-     },
-     "outcome": 0
     }
    ],
    "spin": [
+    {
+     "inputs": {
+      "start": 5,
+      "ticks": 8
+     },
+     "outcome": 1
+    },
     {
      "inputs": {
       "start": 0,
@@ -7625,10 +8097,10 @@
     },
     {
      "inputs": {
-      "start": 2,
-      "ticks": 3
+      "start": 4,
+      "ticks": 8
      },
-     "outcome": 5
+     "outcome": 0
     },
     {
      "inputs": {
@@ -7660,10 +8132,17 @@
     },
     {
      "inputs": {
-      "start": 5,
+      "start": 1,
+      "ticks": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "start": 4,
       "ticks": 0
      },
-     "outcome": 5
+     "outcome": 4
     },
     {
      "inputs": {
@@ -7671,13 +8150,6 @@
       "ticks": 6
      },
      "outcome": 4
-    },
-    {
-     "inputs": {
-      "start": 0,
-      "ticks": 7
-     },
-     "outcome": 1
     },
     {
      "inputs": {
@@ -7776,13 +8248,6 @@
       "ticks": 8
      },
      "outcome": 5
-    },
-    {
-     "inputs": {
-      "start": 0,
-      "ticks": 4
-     },
-     "outcome": 4
     }
    ],
    "stretch": [
@@ -7907,8 +8372,8 @@
     },
     {
      "inputs": {
-      "nA": 3,
-      "n_taken": 1
+      "nA": 5,
+      "n_taken": 3
      },
      "outcome": 2
     },
@@ -8040,6 +8505,13 @@
     },
     {
      "inputs": {
+      "nA": 3,
+      "n_taken": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
       "nA": 9,
       "n_taken": 5
      },
@@ -8055,15 +8527,21 @@
     },
     {
      "inputs": {
-      "slot": 1
+      "slot": 5
      },
-     "outcome": 2
+     "outcome": 0
     },
     {
      "inputs": {
       "slot": 3
      },
      "outcome": 4
+    },
+    {
+     "inputs": {
+      "slot": 4
+     },
+     "outcome": 5
     },
     {
      "inputs": {
@@ -8154,24 +8632,6 @@
       "slot": 2
      },
      "outcome": 3
-    },
-    {
-     "inputs": {
-      "slot": 1
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
-      "slot": 0
-     },
-     "outcome": 1
-    },
-    {
-     "inputs": {
-      "slot": 4
-     },
-     "outcome": 5
     }
    ]
   },
@@ -8300,6 +8760,23 @@
     "state_var": null,
     "surprise": 1e-06,
     "target": "total",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "grow": {
+    "action": null,
+    "group_by": null,
+    "inputs": {
+     "days": "int",
+     "split": "int"
+    },
+    "kind": "program",
+    "name": "grow",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "cells",
     "tol": 1e-09,
     "units": {}
    },
@@ -8730,6 +9207,7 @@
   "cycle:tick": "clock numbers (arithmetic modulo 6)",
   "gas": "Boyle's law",
   "groups": "multiplication",
+  "grow": "exponential growth",
   "hidden:roll": "energy (height + speed\u00b2/2g, per unit of weight)",
   "lab_push": "Newton's second law (measured with noise)",
   "lab_stretch": "stiffness (measured with noise)",
@@ -8740,6 +9218,7 @@
   "pair_off": "same number (one-to-one correspondence)",
   "peekaboo": "object permanence",
   "push": "Newton's second law",
+  "repeated_groups": "powers (exponentiation)",
   "roll": "conservation of energy",
   "stretch": "stiffness (Hooke's law)",
   "take_away": "subtraction"
@@ -8894,32 +9373,38 @@
   }
  },
  "search_steps": {
-  "cake_balance": 89566,
-  "collide": 90,
-  "earn_coins": 40011,
-  "earn_notes": 1266,
+  "cake_balance": 89188,
+  "collide": 100,
+  "earn_coins": 9906,
+  "earn_notes": 19,
   "gas": 28,
-  "get_paid": 4300,
-  "groups": 4572,
+  "get_paid": 4561,
+  "groups": 1205,
   "lab_push": 165,
   "lab_stretch": 116,
   "lamps": 7882,
-  "merge": 502,
-  "numeral": 22789,
+  "merge": 532,
+  "numeral": 3551,
   "orbit": 46,
   "pair_off": 67,
-  "pay": 85227,
+  "pay": 76918,
   "peekaboo": 8,
   "push": 180,
-  "recut": 5516,
+  "recut": 801,
   "roll": 1724,
-  "spend_coins": 1066,
-  "spend_notes": 40790,
-  "spin": 64096,
+  "spend_coins": 35,
+  "spend_notes": 27565,
+  "spin": 136312,
   "stretch": 176,
-  "take_away": 576,
-  "tick": 304229
+  "take_away": 705,
+  "tick": 553724
  },
+ "symmetric": [
+  "get_paid",
+  "groups",
+  "merge",
+  "recut"
+ ],
  "vocabulary": {
   "*": [
    "op",
@@ -9027,6 +9512,11 @@
    "op",
    "get_paid",
    "xy"
+  ],
+  "power": [
+   "op",
+   "grow",
+   "yx"
   ],
   "prefix:-": [
    "prefix",

@@ -40,3 +40,18 @@ def test_energy_answers_new_kinds_of_question(trained):
     names = [i["name"] for i in results[12]["items"]]
     assert any("thrown straight up" in n for n in names)
     assert all(i["scores"]["ultron"][0] == i["scores"]["ultron"][1] for i in results[12]["items"])
+
+
+def test_predicts_powers_before_meeting_them(trained):
+    brain, results = trained
+    assert results[13]["passed"]
+    invent = next(e for e in brain.log if e["kind"] == "invent" and "repeated_groups" in e["text"])
+    assert invent["lesson"] == 3                       # ten lessons before the growing world
+    assert not brain.library.get("repeated_groups").provenance.get("predicted")
+    assert reasoner.arithmetic(brain, "3 power 4").text == "81"
+
+
+def test_knows_where_the_pattern_stops(trained):
+    brain, _ = trained
+    assert brain.inventions["ladder"]["stops_at"] == "repeated_groups"
+    assert brain.inventions["ladder"]["predicted"] == ["repeated_groups"]

@@ -68,6 +68,10 @@ class Trainer:
                 self.teach_sharing(lesson)
             elif lesson.number == 11:
                 self.teach_wheel(lesson)
+            elif lesson.number == 13 and attempt == 1:
+                free_play(brain, lesson, lesson.budget)
+                bind_operation(brain, "power", lesson.power_demos())
+                self.say("I grew cells and said '3 power 2 equals 9' and so on.")
             elif attempt == 1:
                 free_play(brain, lesson, lesson.budget)
             else:
@@ -189,6 +193,7 @@ class Trainer:
         11: {"cycle:tick": "clock numbers (arithmetic modulo 6)"},
         12: {"hidden:roll": "energy (height + speed²/2g, per unit of weight)",
              "roll": "conservation of energy"},
+        13: {"repeated_groups": "powers (exponentiation)", "grow": "exponential growth"},
     }
 
     def name_concepts(self, number):
@@ -197,7 +202,7 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=12):
+    def run_all(self, upto=14):
         for n in range(upto + 1):
             self.run(n)
         return self.results

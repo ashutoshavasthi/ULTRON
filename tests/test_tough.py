@@ -68,7 +68,7 @@ def test_blind_harness(trained, tmp_path, capsys):
     brain.save(bpath)
     main(["--brain", str(bpath), "blind", "blind/example_not_blind.txt"])
     out = capsys.readouterr().out
-    assert "Score: 10/10" in out
+    assert "Score: 14/14" in out
 
 
 def test_symmetry_reaches_new_situations(trained):

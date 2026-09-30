@@ -91,6 +91,9 @@ class Library:
         self._memo = {}     # laws are pure functions: remember results already worked out
         # steps that come back to where they started after k repeats (found by reflection)
         self.cycles = {}
+        # laws Ultron has checked give the same result either way round: for those it
+        # counts along the smaller number ("count on from the bigger one")
+        self.symmetric = set()
 
     def inverse_of(self, F):
         """The step that undoes F, if Ultron knows one."""
@@ -110,7 +113,9 @@ class Library:
         return self.laws.get(name)
 
     def binary_int_laws(self):
-        return [self.laws[k] for k in sorted(self.laws) if self.laws[k].is_binary_int]
+        """Building blocks: confirmed laws only (a prediction is not a building block)."""
+        return [self.laws[k] for k in sorted(self.laws)
+                if self.laws[k].is_binary_int and not self.laws[k].provenance.get("predicted")]
 
     def unary_int_laws(self):
         return [self.laws[k] for k in sorted(self.laws)
@@ -126,6 +131,13 @@ class Library:
         return v
 
     def call(self, name, a, b):
+        if name in self.symmetric:
+            law = self.laws[name]
+            e = law.expr
+            if e[0] == "iter" and e[2] == ("var", law.params[0]) and abs(a) > abs(b):
+                a, b = b, a
+            elif e[0] == "iter" and e[2] == ("var", law.params[1]) and abs(b) > abs(a):
+                a, b = b, a
         key = (name, a, b, len(self.inverses))
         if key in self._memo:
             hit = self._memo[key]
@@ -149,6 +161,7 @@ class Library:
         new.laws = copy.deepcopy(self.laws, memo)
         new.inverses = copy.deepcopy(self.inverses, memo)
         new.cycles = copy.deepcopy(self.cycles, memo)
+        new.symmetric = set(self.symmetric)
         return new
 
     def __contains__(self, name):

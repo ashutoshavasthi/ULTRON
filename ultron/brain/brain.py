@@ -40,6 +40,7 @@ class Brain:
         self.inventions = {}                # concepts Ultron made up itself
         self.active = True                  # design experiments when ideas disagree
         self.found_at = {}                  # spec -> experiences when current idea was found
+        self.compress = True                # look for patterns among its own laws
         self.lesson = None
 
     # ------------------------------------------------------------------ utils
@@ -51,6 +52,8 @@ class Brain:
         if spec.name not in self.memory.specs:
             self.memory.know(spec)
             self.note("meet", f"new kind of experience: {spec.name}")
+            from .compression import seed_predictions
+            seed_predictions(self, spec)
 
     def constants(self):
         """0 and 1 are innate; numbers that have been given names become usable too."""
@@ -112,12 +115,18 @@ class Brain:
             return None
         expr = self.hypotheses.get(spec_name)
         ideas = ([expr] if expr is not None else []) + self.rivals.get(spec_name, [])
-        best, best_split = None, 1
+        best, best_key = None, (1, 0)
         if len(ideas) > 1:
             for inputs in options:
                 outs = {repr(safe_evaluate(e, inputs, self.library)) for e in ideas}
-                if len(outs) > best_split:
-                    best, best_split = inputs, len(outs)
+                # split my ideas as much as possible; among equally good splits prefer
+                # rich situations (bigger numbers): tiny ones like "0 groups of 1" fit
+                # almost any rule, so they teach the least
+                richness = sum(abs(v) for v in inputs.values()
+                               if isinstance(v, int) and not isinstance(v, bool))
+                key = (len(outs), richness)
+                if len(outs) > 1 and key > best_key:
+                    best, best_key = inputs, key
         if best is not None:
             self.note("design", f"{spec_name}: my {len(ideas)} explanations disagree about "
                                 f"{best}; I'll set that up to find out")
@@ -218,6 +227,15 @@ class Brain:
             self.note("doubt", f"{name}: my confirmed law {show(trusted.expr)} just failed; "
                                f"I don't trust it any more until a better one is confirmed")
         eps = self.memory.of(name)
+        for rival in self.rivals.get(name, []):
+            if all(safe_evaluate(rival, e["inputs"], self.library) == e["outcome"] for e in eps):
+                old = self.hypotheses.get(name)
+                self.hypotheses[name] = rival
+                self.rivals[name] = [r for r in self.rivals[name] if r != rival]
+                self.found_at[name] = len(eps)
+                self.note("revise", f"{name}: surprised; my other idea {show(rival)} fits "
+                                    f"everything (was {show(old) if old else 'nothing'})")
+                return show(rival)
         last_fail = self.failed_search.get(name)
         if last_fail is not None and len(eps) < 2 * last_fail:
             return None     # "I couldn't explain this before; wait for more evidence"
@@ -248,6 +266,8 @@ class Brain:
         self.library.add(law)
         self.note("confirm", f"{spec.name}: {show(expr)} predicted {CONFIRM_STREAK} new "
                              f"experiences in a row; added to my library of building blocks")
+        from .compression import confirm_predictions
+        confirm_predictions(self, expr)
 
     def _learn_quantity(self, spec, surprised):
         name = spec.name
@@ -367,9 +387,28 @@ class Brain:
                 self._learn_conservation(spec, True, reflecting=True)
         from .amounts import look_for_amounts
         from .invention import find_inverses, look_for_shapes
+        from .compression import look_for_ladders
+        self._check_symmetry()
         look_for_shapes(self)
         find_inverses(self)
         look_for_amounts(self)
+        look_for_ladders(self)
+
+    def _check_symmetry(self):
+        """Which of my laws give the same result either way round? (checked, not assumed)"""
+        from .dsl import Overflow
+        for law in self.library.binary_int_laws():
+            if law.name in self.library.symmetric or not self.trusts(law.name):
+                continue
+            try:
+                same = all(self.library.call(law.name, x, y) == self.library.call(law.name, y, x)
+                           for x in range(0, 7) for y in range(0, 7))
+            except Overflow:
+                same = False
+            if same:
+                self.library.symmetric.add(law.name)
+                self.note("reflect", f"'{law.name}' gives the same answer either way round, so "
+                                     f"I can count along the smaller number")
 
     def _learn_conservation(self, spec, surprised, reflecting=False):
         if not surprised and spec.name in self.claws:
@@ -421,6 +460,7 @@ class Brain:
             "inventions": dict(sorted(self.inventions.items())),
             "inverses": dict(sorted(self.library.inverses.items())),
             "cycles": dict(sorted(self.library.cycles.items())),
+            "symmetric": sorted(self.library.symmetric),
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
@@ -448,6 +488,7 @@ class Brain:
         b.inventions = dict(d.get("inventions", {}))
         b.library.inverses = dict(d.get("inverses", {}))
         b.library.cycles = dict(d.get("cycles", {}))
+        b.library.symmetric = set(d.get("symmetric", []))
         b.curiosity = Curiosity.from_json(d.get("curiosity", {}))
         b.memory = Memory.from_json(d["memory"])
         b.log = list(d.get("log", []))

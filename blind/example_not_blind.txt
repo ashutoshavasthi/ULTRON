@@ -9,3 +9,7 @@ find a given F=30 m=6 | 5
 find m given F=30 a=6 | 5
 find T given r=227956000000 system=Sun | 59355072
 find T given r=1221870000 system=Saturn | refuse
+100 after 3 | 1
+what power 2 equals 81 | 9
+2 power what equals 1024 | 10
+what power 2 equals 2 | refuse

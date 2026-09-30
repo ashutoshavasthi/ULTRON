@@ -81,6 +81,20 @@ Four more principles govern how laws are used and refined:
   invents negative numbers from a purse of coins and IOU notes (lesson 8).
   The words '-3' and 'negative three' are taught only afterwards.
 
+## Phase 2: general invention
+
+| Mechanism | File | What it does | Inventions |
+|---|---|---|---|
+| Shape discovery | `invention.py` | Walks an action from the empty state with its own laws; the walk is a cycle, a line through zero, or a half-line | negative numbers (line), clock numbers (cycle) |
+| Hidden quantities | `invariants.py` (`search_sum_invariant`) | When no product stays constant, tries A + λ·B with a fitted λ, constant within each run | energy |
+| Compression | `compression.py` | Finds "this law is that law, repeated" (REPEAT) in its library; predicts the next law; stops where the pattern becomes ambiguous | powers (predicted 10 lessons early) |
+| Laws on amounts | `amounts.py` (`evaluate_amount`) | Runs any of its programs on fractions; a below-zero number of repeats means undoing | roots, logarithms, negative and fractional powers |
+
+Also in Phase 2:
+- Experiment design prefers *rich* situations (not "0 groups of 1").
+- Symmetric laws "count on from the bigger number".
+- The program language gained "if ... then ... else" and one-input laws.
+
 ## Curiosity (`curiosity.py`)
 
 For each kind of experiment, Ultron tracks how fast its prediction error is
@@ -129,9 +143,10 @@ python -m pytest                  # tests
 ## File map
 
 ```
-ultron/brain/     dsl, synth, invariants, invention, amounts, curiosity, memory, perception, units, language, reasoner, brain
+ultron/brain/     dsl, synth, invariants, invention, amounts, compression, curiosity, memory, perception, units, language, reasoner, brain
 ultron/env/       toyworld, physics, dataworld, data/*.csv (real measurements, sources in headers)
-ultron/trainer/   lessons (curriculum 0-10: 7 = noisy lab, 8 = owing, 9 = sharing cakes, 10 = tough final exam), trainer
+ultron/trainer/   lessons: Phase 1 = 0-10 (7 noisy lab, 8 owing, 9 sharing cakes, 10 final exam);
+                  Phase 2 = 11 wheel, 12 hills and valleys, 13 growing, 14 Phase 2 final exam
 blind/            write your own blind test; `python -m ultron blind FILE` (mastery gate, naming after understanding)
 ultron/judge/     exams (held-out + memoriser baselines), report
 ultron/logic/     peano (rules from learned laws + proof checker)
