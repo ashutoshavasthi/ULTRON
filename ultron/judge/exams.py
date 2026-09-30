@@ -99,12 +99,11 @@ def _result(lesson, tallies, threshold, extra=None):
 # ---------------------------------------------------------------- lessons 0-3
 def exam_permanence(brain, seed=1000):
     b, rng = copy.deepcopy(brain), random.Random(seed)
-    t = Tally("object still there after long hides (waited 50-5000)")
+    t = Tally("all 6-30 hidden things still there after long hides (waited 50-5000)")
     mem = b.memory.of("peekaboo")
     for _ in range(40):
-        inputs = {"went_in": rng.random() < 0.5, "waited": rng.randint(50, 5000)}
-        truth = inputs["went_in"]
-        t.item(inputs, truth, b.predict("peekaboo", inputs), mem, "there", inputs)
+        inputs = {"hidden": rng.randint(6, 30), "waited": rng.randint(50, 5000)}
+        t.item(inputs, inputs["hidden"], b.predict("peekaboo", inputs), mem, "found", inputs)
     return _result(0, [t], 0.99)
 
 
@@ -378,12 +377,17 @@ def exam_owing(brain, seed=1009):
         else:
             q, t = f"what plus {x + y + 1} equals {x}", -(y + 1)
         words.item(q, str(t), reasoner.arithmetic(b, q).text)
-    refuse = Tally("never experienced: a negative wage, a negative number of groups")
+    swap = Tally("adding a below-zero amount, reached by symmetry it checked ('5 plus -3')")
     for _ in range(10):
         x, y = rng.randint(1, 9), rng.randint(1, 9)
-        q = f"{x} plus -{y}" if rng.random() < 0.5 else f"-{x} times {y}"
+        q = f"{x} plus -{y}"
+        swap.item(q, str(x - y), reasoner.arithmetic(b, q).text)
+    refuse = Tally("never experienced: a below-zero number of groups")
+    for _ in range(10):
+        x, y = rng.randint(1, 9), rng.randint(1, 9)
+        q = f"-{x} times {y}" if rng.random() < 0.5 else f"{x} times -{y}"
         refuse.item(q, REFUSE, reasoner.arithmetic(b, q).value)
-    return _result(8, [invented, pay, paid, words, refuse], 0.99,
+    return _result(8, [invented, pay, paid, words, swap, refuse], 0.99,
                    {"story": inv["story"] if inv else None})
 
 

@@ -7,8 +7,8 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 
 - **Trainer**: Lesson 0: Hidden things
 - Ultron _meet_: new kind of experience: peekaboo
-- Ultron _revise_: peekaboo: surprised; new best explanation is went_in (was nothing; 1 experiences, 12 programs searched)
-- Ultron _confirm_: peekaboo: went_in predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _revise_: peekaboo: surprised; new best explanation is hidden (was nothing; 1 experiences, 8 programs searched)
+- Ultron _confirm_: peekaboo: hidden predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 0, attempt 1: passed
 - **Trainer**: What you found in 'peekaboo' is what people call object permanence.
@@ -18,7 +18,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Lesson 1: Same number
 - Ultron _meet_: new kind of experience: pair_off
 - Ultron _revise_: pair_off: surprised; new best explanation is true (was nothing; 1 experiences, 12 programs searched)
-- Ultron _revise_: pair_off: surprised; new best explanation is eq(nA, nB) (was true; 2 experiences, 46 programs searched)
+- Ultron _revise_: pair_off: surprised; new best explanation is eq(nA, nB) (was true; 2 experiences, 55 programs searched)
 - Ultron _confirm_: pair_off: eq(nA, nB) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 1, attempt 1: passed
@@ -33,15 +33,15 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _revise_: merge: surprised; new best explanation is nA (was nothing; 1 experiences, 6 programs searched)
 - Ultron _revise_: take_away: surprised; new best explanation is nA (was nothing; 1 experiences, 6 programs searched)
 - Ultron _revise_: lamps: surprised; new best explanation is 1 (was nothing; 1 experiences, 7 programs searched)
-- Ultron _revise_: merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 336 programs searched)
-- Ultron _revise_: take_away: surprised; new best explanation is pred(nA) (was nA; 2 experiences, 52 programs searched)
-- Ultron _stuck_: lamps: no simple law explains all 2 experiences (searched 425 programs)
-- Ultron _revise_: take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was pred(nA); 3 experiences, 342 programs searched)
-- Ultron _stuck_: lamps: no simple law explains all 4 experiences (searched 893 programs)
-- Ultron _stuck_: lamps: no simple law explains all 8 experiences (searched 913 programs)
+- Ultron _revise_: merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 496 programs searched)
+- Ultron _revise_: take_away: surprised; new best explanation is pred(nA) (was nA; 2 experiences, 68 programs searched)
+- Ultron _stuck_: lamps: no simple law explains all 2 experiences (searched 709 programs)
+- Ultron _revise_: take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was pred(nA); 3 experiences, 502 programs searched)
+- Ultron _stuck_: lamps: no simple law explains all 4 experiences (searched 1440 programs)
+- Ultron _stuck_: lamps: no simple law explains all 8 experiences (searched 1466 programs)
 - Ultron _confirm_: merge: repeat nA times [succ] starting from nB predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: take_away: repeat n_taken times [pred] starting from nA predicted 8 new experiences in a row; added to my library of building blocks
-- Ultron _stuck_: lamps: no simple law explains all 16 experiences (searched 2913 programs)
+- Ultron _stuck_: lamps: no simple law explains all 16 experiences (searched 3672 programs)
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 2, attempt 1: passed
 - **Trainer**: What you found in 'merge' is what people call addition.
@@ -53,8 +53,8 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: groups
 - Ultron _revise_: groups: surprised; new best explanation is groups (was nothing; 1 experiences, 10 programs searched)
 - Ultron _revise_: groups: surprised; new best explanation is 0 (was groups; 2 experiences, 12 programs searched)
-- Ultron _revise_: groups: surprised; new best explanation is take_away(groups, take_away(groups, size)) (was 0; 5 experiences, 988 programs searched)
-- Ultron _revise_: groups: surprised; new best explanation is repeat size times [merge(·, groups)] starting from 0 (was take_away(groups, take_away(groups, size)); 6 experiences, 3438 programs searched)
+- Ultron _revise_: groups: surprised; new best explanation is take_away(groups, take_away(groups, size)) (was 0; 5 experiences, 1173 programs searched)
+- Ultron _revise_: groups: surprised; new best explanation is repeat size times [merge(·, groups)] starting from 0 (was take_away(groups, take_away(groups, size)); 6 experiences, 4289 programs searched)
 - Ultron _confirm_: groups: repeat size times [merge(·, groups)] starting from 0 predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 3, attempt 1: passed
@@ -75,8 +75,8 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _word_: 'equals' joins things that are the same amount
 - Ultron _word_: '=' joins things that are the same amount
 - **Trainer**: I acted out 'plus', 'minus', 'times' with real piles and said the words.
-- Ultron _revise_: numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 3030 programs searched)
-- Ultron _revise_: numeral: surprised; new best explanation is merge(right, groups(left, 10)) (was succ(succ(groups(8, 9))); 2 experiences, 16912 programs searched)
+- Ultron _revise_: numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 3551 programs searched)
+- Ultron _revise_: numeral: surprised; new best explanation is merge(right, groups(left, 10)) (was succ(succ(groups(8, 9))); 2 experiences, 19238 programs searched)
 - Ultron _confirm_: numeral: merge(right, groups(left, 10)) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: I wrote two-mark numerals next to piles of 10-99 things.
@@ -151,13 +151,13 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _revise_: earn_notes: surprised; new best explanation is coins (was nothing; 1 experiences, 15 programs searched)
 - Ultron _revise_: spend_coins: surprised; new best explanation is coins (was nothing; 1 experiences, 15 programs searched)
 - Ultron _revise_: spend_notes: surprised; new best explanation is 1 (was nothing; 1 experiences, 35 programs searched)
-- Ultron _revise_: earn_coins: surprised; new best explanation is succ(coins) (was 1; 2 experiences, 905 programs searched)
+- Ultron _revise_: earn_coins: surprised; new best explanation is succ(coins) (was 1; 2 experiences, 1049 programs searched)
 - Ultron _revise_: earn_notes: surprised; new best explanation is notes (was coins; 2 experiences, 19 programs searched)
-- Ultron _revise_: spend_coins: surprised; new best explanation is pred(coins) (was coins; 2 experiences, 907 programs searched)
-- Ultron _revise_: spend_notes: surprised; new best explanation is take_away(1, coins) (was 1; 2 experiences, 1638 programs searched)
-- Ultron _revise_: earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was succ(coins); 3 experiences, 33523 programs searched)
-- Ultron _revise_: earn_notes: surprised; new best explanation is pred(notes) (was notes; 3 experiences, 1063 programs searched)
-- Ultron _revise_: spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was take_away(1, coins); 3 experiences, 33521 programs searched)
+- Ultron _revise_: spend_coins: surprised; new best explanation is pred(coins) (was coins; 2 experiences, 1051 programs searched)
+- Ultron _revise_: spend_notes: surprised; new best explanation is take_away(1, coins) (was 1; 2 experiences, 1830 programs searched)
+- Ultron _revise_: earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was succ(coins); 3 experiences, 38927 programs searched)
+- Ultron _revise_: earn_notes: surprised; new best explanation is pred(notes) (was notes; 3 experiences, 1232 programs searched)
+- Ultron _revise_: spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was take_away(1, coins); 3 experiences, 38925 programs searched)
 - Ultron _confirm_: spend_coins: pred(coins) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: earn_coins: take_away(succ(coins), notes) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: earn_notes: pred(notes) predicted 8 new experiences in a row; added to my library of building blocks
@@ -166,11 +166,11 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: You say some purses are 'below zero'. Let's buy and sell with that idea.
 - Ultron _meet_: new kind of experience: pay
 - Ultron _meet_: new kind of experience: get_paid
-- Ultron _revise_: pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 1495 programs searched)
+- Ultron _revise_: pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 1639 programs searched)
 - Ultron _revise_: get_paid: surprised; new best explanation is 3 (was nothing; 1 experiences, 28 programs searched)
-- Ultron _revise_: get_paid: surprised; new best explanation is merge(purse, wage) (was 3; 2 experiences, 3947 programs searched)
-- Ultron _revise_: pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 68705 programs searched)
-- Ultron _revise_: get_paid: surprised; new best explanation is merge(wage, purse) (was merge(purse, wage); 5 experiences, 4899 programs searched)
+- Ultron _revise_: get_paid: surprised; new best explanation is merge(purse, wage) (was 3; 2 experiences, 4272 programs searched)
+- Ultron _revise_: pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 75774 programs searched)
+- Ultron _revise_: get_paid: surprised; new best explanation is merge(wage, purse) (was merge(purse, wage); 5 experiences, 5276 programs searched)
 - Ultron _confirm_: pay: repeat price times [down] starting from purse predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: get_paid: merge(wage, purse) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more

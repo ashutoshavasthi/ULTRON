@@ -44,28 +44,29 @@ class Lesson:
 # ---------------------------------------------------------------- lesson 0
 class Permanence(Lesson):
     number, title = 0, "Hidden things"
-    goal = "Discover that an object hidden under a cup is still there later."
+    goal = ("Discover that things hidden under a cup are all still there later: as many "
+            "come out as went in, however long it waits.")
 
     def __init__(self, seed=0):
         super().__init__(seed)
         self.world = ToyWorld(seed)
 
     def specs(self):
-        return [Spec("peekaboo", "program", {"went_in": BOOL, "waited": INT}, "there",
-                     out_type=BOOL)]
+        return [Spec("peekaboo", "program", {"hidden": INT, "waited": INT}, "found",
+                     out_type=INT)]
 
     def options(self, name):
-        return [{"went_in": g, "waited": t} for g in (True, False) for t in range(1, 7)]
+        return [{"hidden": h, "waited": t} for h in range(6) for t in range(1, 7)]
 
     def scene(self, name, wide=False, request=None):
         w, rng = self.world, self.world.rng
         w.clear()
-        went = request["went_in"] if request else rng.random() < 0.6
-        objs = w.put("table", 1) if went else []
+        n = request["hidden"] if request else rng.randint(0, 9 if wide else 5)
+        objs = w.put("table", n)
         w.hide("cup", objs)
         waited = request["waited"] if request else rng.randint(1, 40 if wide else 6)
         w.wait(waited)
-        return {"went_in": present(objs), "waited": waited}, present(w.reveal("cup"))
+        return {"hidden": count(objs), "waited": waited}, count(w.reveal("cup"))
 
 
 # ---------------------------------------------------------------- lesson 1

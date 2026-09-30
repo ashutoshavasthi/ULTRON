@@ -15,8 +15,8 @@ def test_division_without_being_taught(trained):
 def test_refuses_what_it_has_never_experienced(trained):
     brain, _ = trained
     assert reasoner.arithmetic(brain, "what times 4 equals 21").value is None
-    assert reasoner.arithmetic(brain, "5 plus -3").value is None     # never paid a negative wage
     assert reasoner.arithmetic(brain, "-2 times 3").value is None    # never made -2 groups
+    assert reasoner.arithmetic(brain, "2 times -3").value is None
     assert brain.predict("orbit", {"r": 1.2e9, "system": "Saturn"}) is None
     assert reasoner.physics(brain, "a", {"x": 0.3, "m": 2.0}, {"spring": "S99"}).value is None
 
@@ -66,3 +66,11 @@ def test_blind_harness(trained, tmp_path, capsys):
     main(["--brain", str(bpath), "blind", "blind/example_not_blind.txt"])
     out = capsys.readouterr().out
     assert "Score: 10/10" in out
+
+
+def test_symmetry_reaches_new_situations(trained):
+    brain, _ = trained
+    ans = reasoner.arithmetic(brain, "5 plus -3")
+    assert ans.text == "2" and any("swapping" in s for s in ans.steps)
+    # minus is not symmetric, so it cannot use that route
+    assert reasoner.arithmetic(brain, "5 minus -3").value is None

@@ -416,7 +416,7 @@
   "numeral": "merge(right, groups(left, 10))",
   "pair_off": "eq(nA, nB)",
   "pay": "repeat price times [down] starting from purse",
-  "peekaboo": "went_in",
+  "peekaboo": "hidden",
   "spend_coins": "pred(coins)",
   "spend_notes": "take_away(succ(notes), coins)",
   "take_away": "repeat n_taken times [pred] starting from nA"
@@ -665,13 +665,13 @@
   "peekaboo": {
    "expr": [
     "var",
-    "went_in"
+    "hidden"
    ],
    "name": "peekaboo",
-   "out_type": "bool",
+   "out_type": "int",
    "params": [
-    "waited",
-    "went_in"
+    "hidden",
+    "waited"
    ],
    "provenance": {
     "experiences": 9,
@@ -779,12 +779,12 @@
   {
    "kind": "design",
    "lesson": 0,
-   "text": "peekaboo: my ideas agree, but I've never tried a situation like {'went_in': True, 'waited': 1}; I'll set that up"
+   "text": "peekaboo: my ideas agree, but I've never tried a situation like {'hidden': 0, 'waited': 1}; I'll set that up"
   },
   {
    "kind": "revise",
    "lesson": 0,
-   "text": "peekaboo: surprised; new best explanation is went_in (was nothing; 1 experiences, 12 programs searched)"
+   "text": "peekaboo: surprised; new best explanation is hidden (was nothing; 1 experiences, 8 programs searched)"
   },
   {
    "choice": "peekaboo",
@@ -795,7 +795,7 @@
   {
    "kind": "design",
    "lesson": 0,
-   "text": "peekaboo: my 3 explanations disagree about {'went_in': False, 'waited': 1}; I'll set that up to find out"
+   "text": "peekaboo: my 4 explanations disagree about {'hidden': 2, 'waited': 4}; I'll set that up to find out"
   },
   {
    "choice": "peekaboo",
@@ -804,10 +804,20 @@
    "text": "chose to play with peekaboo"
   },
   {
+   "kind": "design",
+   "lesson": 0,
+   "text": "peekaboo: my ideas agree, but I've never tried a situation like {'hidden': 1, 'waited': 1}; I'll set that up"
+  },
+  {
    "choice": "peekaboo",
    "kind": "choice",
    "lesson": 0,
    "text": "chose to play with peekaboo"
+  },
+  {
+   "kind": "design",
+   "lesson": 0,
+   "text": "peekaboo: my ideas agree, but I've never tried a situation like {'hidden': 2, 'waited': 1}; I'll set that up"
   },
   {
    "choice": "peekaboo",
@@ -842,7 +852,7 @@
   {
    "kind": "confirm",
    "lesson": 0,
-   "text": "peekaboo: went_in predicted 8 new experiences in a row; added to my library of building blocks"
+   "text": "peekaboo: hidden predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "peekaboo",
@@ -941,7 +951,7 @@
   {
    "kind": "revise",
    "lesson": 1,
-   "text": "pair_off: surprised; new best explanation is eq(nA, nB) (was true; 2 experiences, 46 programs searched)"
+   "text": "pair_off: surprised; new best explanation is eq(nA, nB) (was true; 2 experiences, 55 programs searched)"
   },
   {
    "choice": "pair_off",
@@ -1150,7 +1160,7 @@
   {
    "kind": "revise",
    "lesson": 2,
-   "text": "merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 336 programs searched)"
+   "text": "merge: surprised; new best explanation is repeat nA times [succ] starting from nB (was nA; 2 experiences, 496 programs searched)"
   },
   {
    "choice": "take_away",
@@ -1166,7 +1176,7 @@
   {
    "kind": "revise",
    "lesson": 2,
-   "text": "take_away: surprised; new best explanation is pred(nA) (was nA; 2 experiences, 52 programs searched)"
+   "text": "take_away: surprised; new best explanation is pred(nA) (was nA; 2 experiences, 68 programs searched)"
   },
   {
    "choice": "lamps",
@@ -1177,7 +1187,7 @@
   {
    "kind": "stuck",
    "lesson": 2,
-   "text": "lamps: no simple law explains all 2 experiences (searched 425 programs)"
+   "text": "lamps: no simple law explains all 2 experiences (searched 709 programs)"
   },
   {
    "choice": "merge",
@@ -1204,7 +1214,7 @@
   {
    "kind": "revise",
    "lesson": 2,
-   "text": "take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was pred(nA); 3 experiences, 342 programs searched)"
+   "text": "take_away: surprised; new best explanation is repeat n_taken times [pred] starting from nA (was pred(nA); 3 experiences, 502 programs searched)"
   },
   {
    "choice": "lamps",
@@ -1243,7 +1253,7 @@
   {
    "kind": "stuck",
    "lesson": 2,
-   "text": "lamps: no simple law explains all 4 experiences (searched 893 programs)"
+   "text": "lamps: no simple law explains all 4 experiences (searched 1440 programs)"
   },
   {
    "choice": "merge",
@@ -1330,7 +1340,7 @@
   {
    "kind": "stuck",
    "lesson": 2,
-   "text": "lamps: no simple law explains all 8 experiences (searched 913 programs)"
+   "text": "lamps: no simple law explains all 8 experiences (searched 1466 programs)"
   },
   {
    "choice": "merge",
@@ -1489,7 +1499,7 @@
   {
    "kind": "stuck",
    "lesson": 2,
-   "text": "lamps: no simple law explains all 16 experiences (searched 2913 programs)"
+   "text": "lamps: no simple law explains all 16 experiences (searched 3672 programs)"
   },
   {
    "choice": "take_away",
@@ -1607,7 +1617,7 @@
   {
    "kind": "revise",
    "lesson": 3,
-   "text": "groups: surprised; new best explanation is take_away(groups, take_away(groups, size)) (was 0; 5 experiences, 988 programs searched)"
+   "text": "groups: surprised; new best explanation is take_away(groups, take_away(groups, size)) (was 0; 5 experiences, 1173 programs searched)"
   },
   {
    "choice": "groups",
@@ -1623,7 +1633,7 @@
   {
    "kind": "revise",
    "lesson": 3,
-   "text": "groups: surprised; new best explanation is repeat size times [merge(\u00b7, groups)] starting from 0 (was take_away(groups, take_away(groups, size)); 6 experiences, 3438 programs searched)"
+   "text": "groups: surprised; new best explanation is repeat size times [merge(\u00b7, groups)] starting from 0 (was take_away(groups, take_away(groups, size)); 6 experiences, 4289 programs searched)"
   },
   {
    "choice": "groups",
@@ -1814,7 +1824,7 @@
   {
    "kind": "revise",
    "lesson": 4,
-   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 3030 programs searched)"
+   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was nothing; 1 experiences, 3551 programs searched)"
   },
   {
    "choice": "numeral",
@@ -1825,7 +1835,7 @@
   {
    "kind": "revise",
    "lesson": 4,
-   "text": "numeral: surprised; new best explanation is merge(right, groups(left, 10)) (was succ(succ(groups(8, 9))); 2 experiences, 16912 programs searched)"
+   "text": "numeral: surprised; new best explanation is merge(right, groups(left, 10)) (was succ(succ(groups(8, 9))); 2 experiences, 19238 programs searched)"
   },
   {
    "choice": "numeral",
@@ -2849,7 +2859,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "earn_coins: surprised; new best explanation is succ(coins) (was 1; 2 experiences, 905 programs searched)"
+   "text": "earn_coins: surprised; new best explanation is succ(coins) (was 1; 2 experiences, 1049 programs searched)"
   },
   {
    "choice": "earn_notes",
@@ -2881,7 +2891,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "spend_coins: surprised; new best explanation is pred(coins) (was coins; 2 experiences, 907 programs searched)"
+   "text": "spend_coins: surprised; new best explanation is pred(coins) (was coins; 2 experiences, 1051 programs searched)"
   },
   {
    "choice": "spend_notes",
@@ -2897,7 +2907,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "spend_notes: surprised; new best explanation is take_away(1, coins) (was 1; 2 experiences, 1638 programs searched)"
+   "text": "spend_notes: surprised; new best explanation is take_away(1, coins) (was 1; 2 experiences, 1830 programs searched)"
   },
   {
    "choice": "earn_coins",
@@ -2913,7 +2923,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was succ(coins); 3 experiences, 33523 programs searched)"
+   "text": "earn_coins: surprised; new best explanation is take_away(succ(coins), notes) (was succ(coins); 3 experiences, 38927 programs searched)"
   },
   {
    "choice": "earn_notes",
@@ -2929,7 +2939,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "earn_notes: surprised; new best explanation is pred(notes) (was notes; 3 experiences, 1063 programs searched)"
+   "text": "earn_notes: surprised; new best explanation is pred(notes) (was notes; 3 experiences, 1232 programs searched)"
   },
   {
    "choice": "spend_coins",
@@ -2956,7 +2966,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was take_away(1, coins); 3 experiences, 33521 programs searched)"
+   "text": "spend_notes: surprised; new best explanation is take_away(succ(notes), coins) (was take_away(1, coins); 3 experiences, 38925 programs searched)"
   },
   {
    "choice": "earn_coins",
@@ -3366,7 +3376,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 1495 programs searched)"
+   "text": "pay: surprised; new best explanation is down(purse) (was nothing; 1 experiences, 1639 programs searched)"
   },
   {
    "choice": "get_paid",
@@ -3394,7 +3404,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "get_paid: surprised; new best explanation is merge(purse, wage) (was 3; 2 experiences, 3947 programs searched)"
+   "text": "get_paid: surprised; new best explanation is merge(purse, wage) (was 3; 2 experiences, 4272 programs searched)"
   },
   {
    "choice": "pay",
@@ -3405,7 +3415,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 68705 programs searched)"
+   "text": "pay: surprised; new best explanation is repeat price times [down] starting from purse (was down(purse); 3 experiences, 75774 programs searched)"
   },
   {
    "choice": "get_paid",
@@ -3440,7 +3450,7 @@
   {
    "kind": "revise",
    "lesson": 8,
-   "text": "get_paid: surprised; new best explanation is merge(wage, purse) (was merge(purse, wage); 5 experiences, 4899 programs searched)"
+   "text": "get_paid: surprised; new best explanation is merge(wage, purse) (was merge(purse, wage); 5 experiences, 5276 programs searched)"
   },
   {
    "choice": "pay",
@@ -5385,115 +5395,115 @@
    "peekaboo": [
     {
      "inputs": {
-      "waited": 1,
-      "went_in": true
+      "hidden": 0,
+      "waited": 1
      },
-     "outcome": true
+     "outcome": 0
     },
     {
      "inputs": {
-      "waited": 1,
-      "went_in": false
+      "hidden": 2,
+      "waited": 4
      },
-     "outcome": false
+     "outcome": 2
     },
     {
      "inputs": {
-      "waited": 4,
-      "went_in": false
+      "hidden": 1,
+      "waited": 1
      },
-     "outcome": false
+     "outcome": 1
     },
     {
      "inputs": {
-      "waited": 5,
-      "went_in": true
+      "hidden": 2,
+      "waited": 1
      },
-     "outcome": true
+     "outcome": 2
     },
     {
      "inputs": {
-      "waited": 3,
-      "went_in": true
+      "hidden": 3,
+      "waited": 4
      },
-     "outcome": true
+     "outcome": 3
     },
     {
      "inputs": {
-      "waited": 3,
-      "went_in": false
+      "hidden": 0,
+      "waited": 3
      },
-     "outcome": false
+     "outcome": 0
     },
     {
      "inputs": {
-      "waited": 2,
-      "went_in": true
+      "hidden": 4,
+      "waited": 4
      },
-     "outcome": true
+     "outcome": 4
     },
     {
      "inputs": {
-      "waited": 3,
-      "went_in": true
+      "hidden": 3,
+      "waited": 3
      },
-     "outcome": true
+     "outcome": 3
     },
     {
      "inputs": {
-      "waited": 1,
-      "went_in": true
+      "hidden": 3,
+      "waited": 3
      },
-     "outcome": true
+     "outcome": 3
     },
     {
      "inputs": {
-      "waited": 3,
-      "went_in": false
+      "hidden": 4,
+      "waited": 2
      },
-     "outcome": false
+     "outcome": 4
     },
     {
      "inputs": {
-      "waited": 5,
-      "went_in": false
+      "hidden": 4,
+      "waited": 2
      },
-     "outcome": false
+     "outcome": 4
     },
     {
      "inputs": {
-      "waited": 5,
-      "went_in": false
+      "hidden": 2,
+      "waited": 2
      },
-     "outcome": false
+     "outcome": 2
     },
     {
      "inputs": {
-      "waited": 3,
-      "went_in": false
+      "hidden": 0,
+      "waited": 5
      },
-     "outcome": false
+     "outcome": 0
     },
     {
      "inputs": {
-      "waited": 1,
-      "went_in": true
+      "hidden": 2,
+      "waited": 5
      },
-     "outcome": true
+     "outcome": 2
     },
     {
      "inputs": {
-      "waited": 6,
-      "went_in": false
+      "hidden": 5,
+      "waited": 5
      },
-     "outcome": false
+     "outcome": 5
     },
     {
      "inputs": {
-      "waited": 5,
-      "went_in": true
+      "hidden": 1,
+      "waited": 3
      },
-     "outcome": true
+     "outcome": 1
     }
    ],
    "push": [
@@ -6395,16 +6405,16 @@
     "action": null,
     "group_by": null,
     "inputs": {
-     "waited": "int",
-     "went_in": "bool"
+     "hidden": "int",
+     "waited": "int"
     },
     "kind": "program",
     "name": "peekaboo",
-    "out_type": "bool",
+    "out_type": "int",
     "precision": 0.0,
     "state_var": null,
     "surprise": 1e-06,
-    "target": "there",
+    "target": "found",
     "tol": 1e-09,
     "units": {}
    },
@@ -6670,25 +6680,25 @@
  },
  "search_steps": {
   "collide": 50,
-  "earn_coins": 34463,
-  "earn_notes": 1097,
+  "earn_coins": 40011,
+  "earn_notes": 1266,
   "gas": 28,
-  "get_paid": 8874,
-  "groups": 4448,
+  "get_paid": 9576,
+  "groups": 5484,
   "lab_push": 165,
   "lab_stretch": 116,
-  "lamps": 5151,
-  "merge": 342,
-  "numeral": 19942,
+  "lamps": 7294,
+  "merge": 502,
+  "numeral": 22789,
   "orbit": 46,
-  "pair_off": 58,
-  "pay": 70200,
-  "peekaboo": 12,
+  "pair_off": 67,
+  "pay": 77413,
+  "peekaboo": 8,
   "push": 180,
-  "spend_coins": 922,
-  "spend_notes": 35194,
+  "spend_coins": 1066,
+  "spend_notes": 40790,
   "stretch": 176,
-  "take_away": 400
+  "take_away": 576
  },
  "vocabulary": {
   "*": [

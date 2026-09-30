@@ -6,37 +6,37 @@
     "examples": [
      {
       "question": {
-       "waited": 862,
-       "went_in": false
+       "hidden": 30,
+       "waited": 3564
       },
-      "truth": false,
-      "ultron": false
+      "truth": 30,
+      "ultron": 30
      },
      {
       "question": {
-       "waited": 565,
-       "went_in": true
+       "hidden": 27,
+       "waited": 862
       },
-      "truth": true,
-      "ultron": true
+      "truth": 27,
+      "ultron": 27
      },
      {
       "question": {
-       "waited": 4430,
-       "went_in": true
+       "hidden": 18,
+       "waited": 2941
       },
-      "truth": true,
-      "ultron": true
+      "truth": 18,
+      "ultron": 18
      }
     ],
-    "name": "object still there after long hides (waited 50-5000)",
+    "name": "all 6-30 hidden things still there after long hides (waited 50-5000)",
     "scores": {
      "lookup": [
       0,
       40
      ],
      "nearest": [
-      40,
+      0,
       40
      ],
      "ultron": [
@@ -1072,21 +1072,56 @@
     "examples": [
      {
       "question": "5 plus -5",
+      "truth": "0",
+      "ultron": "0"
+     },
+     {
+      "question": "6 plus -5",
+      "truth": "1",
+      "ultron": "1"
+     },
+     {
+      "question": "3 plus -9",
+      "truth": "-6",
+      "ultron": "-6"
+     }
+    ],
+    "name": "adding a below-zero amount, reached by symmetry it checked ('5 plus -3')",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "-4 times 9",
       "truth": "I can't",
       "ultron": null
      },
      {
-      "question": "-5 times 3",
+      "question": "-5 times 1",
       "truth": "I can't",
       "ultron": null
      },
      {
-      "question": "-7 times 1",
+      "question": "-7 times 3",
       "truth": "I can't",
       "ultron": null
      }
     ],
-    "name": "never experienced: a negative wage, a negative number of groups",
+    "name": "never experienced: a below-zero number of groups",
     "scores": {
      "lookup": [
       0,

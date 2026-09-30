@@ -38,10 +38,18 @@ open").
   every law appears within a few experiences anyway. I tried two other
   strategies (more rivals; novelty first); neither helped. The mechanism
   stays, and its value is unproven.
-- **The lesson 0 exam is weak.** A nearest-example memoriser also scores 100%.
-- **Some refusals are a judgement call.** Ultron refuses "5 plus -3" because it
-  was never paid a negative wage. That is consistent with its principle, but a
-  person would simply answer 2.
+- **Fixed after my last review:**
+  - **Lesson 0's exam was weak.** A nearest-example memoriser also scored 100%.
+    Lesson 0 now hides *several* things and tests counts it never saw. The
+    memoriser drops to 0/40; Ultron stays at 40/40.
+  - **Ultron refused "5 plus -3".** It now checks, over every experience
+    where it can, that swapping the inputs of "plus" never changes the
+    result (18 checks). It then answers 2, and says that is how it got there.
+- **Refusals that remain.** "5 minus -3", "-4 plus -2" and anything with a
+  below-zero number of groups are refused. Minus isn't symmetric, and nothing
+  in its experience covers these. A person would answer them. Doing so needs
+  concepts Ultron doesn't have yet (for example, that taking away a debt is
+  being paid).
 - **Training slowed from ~5 s to ~1 min.** The purse lesson's searches reach
   70,000 candidate programs.
 

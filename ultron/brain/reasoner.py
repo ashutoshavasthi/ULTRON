@@ -29,6 +29,27 @@ def _join_prefix_words(brain, tokens):
     return out
 
 
+def symmetric(brain, law_name):
+    """How many experiences show that swapping the two inputs never changes this
+    law's result? Checked on every experience where the swapped version can be
+    worked out; 0 if any of them disagrees (or too few could be checked)."""
+    law = brain.library.get(law_name)
+    eps = brain.memory.of(law_name)
+    if law is None or len(law.params) != 2:
+        return 0
+    p, q = law.params
+    checked = 0
+    for e in eps:
+        try:
+            swapped = brain.library.call(law_name, e["inputs"][q], e["inputs"][p])
+        except Overflow:
+            continue    # the swapped situation is itself outside what the law covers
+        if swapped != e["outcome"]:
+            return 0
+        checked += 1
+    return checked if checked >= 5 else 0
+
+
 def outside_experience(brain, law_name, a, b):
     """Magnitude is not a problem (rules generalise), but a *kind* of situation
     Ultron has never once met is: e.g. taking away more than there is.
@@ -94,6 +115,12 @@ def arithmetic(brain, question):
         steps.append(why)
         a, b = (value, right) if op[2] == "xy" else (right, value)
         strange = outside_experience(brain, op[1], a, b)
+        checked = symmetric(brain, op[1]) if strange else 0
+        if checked and not outside_experience(brain, op[1], b, a):
+            steps.append(f"{strange.split(';')[0]}; but in all {checked} of my '{op[1]}' "
+                         f"experiences where I could check, swapping the two amounts gave the "
+                         f"same result, and swapped, this is a situation I know")
+            a, b, strange = b, a, None
         if strange:
             return Answer(None, f"I can't answer that: {strange}", steps)
         try:
