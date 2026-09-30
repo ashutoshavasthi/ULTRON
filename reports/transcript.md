@@ -81,6 +81,8 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _revise_: numeral: surprised; my other idea merge(right, groups(left, 10)) fits everything (was succ(succ(groups(8, 9))))
 - Ultron _confirm_: numeral: merge(right, groups(left, 10)) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
+- Ultron _reflect_: the column way of 'times' gives the same answer as my law 'groups' on 60 examples; I'll use it for big numbers
+- Ultron _reflect_: the column way of 'add' gives the same answer as my law 'merge' on 60 examples; I'll use it for big numbers
 - **Trainer**: I wrote two-mark numerals next to piles of 10-99 things.
 - **Trainer**: Exam for lesson 4, attempt 1: passed
 - **Trainer**: What you found in 'numeral' is what people call place value.
@@ -178,6 +180,8 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _reflect_: 'get_paid' gives the same answer either way round, so I can count along the smaller number
 - Ultron _reflect_: imagining with my laws: 'pay' always undoes 'get_paid'
 - Ultron _reflect_: imagining with my laws: 'pay' always undoes 'merge'
+- Ultron _reflect_: the column way of 'add' gives the same answer as my law 'get_paid' on 60 examples; I'll use it for big numbers
+- Ultron _reflect_: the column way of 'take away' gives the same answer as my law 'pay' on 60 examples; I'll use it for big numbers
 - Ultron _word_: '-' in front of a number means that far below zero
 - Ultron _word_: 'negative' in front of a number means that far below zero
 - **Trainer**: People write your below-zero places as -1, -2, -3 and say 'negative one, negative two'.
@@ -207,6 +211,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _confirm_: cake_balance: eq(pieces, groups(cut, wholes)) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _reflect_: 'recut' gives the same answer either way round, so I can count along the smaller number
+- Ultron _reflect_: the column way of 'times' gives the same answer as my law 'recut' on 60 examples; I'll use it for big numbers
 - Ultron _word_: 'a/b' means a pieces of a cake cut into b
 - **Trainer**: People write 'so many pieces of a cake cut into so many' like 2/3.
 - Ultron _word_: 'divided' asks: what, times the second number, gives the first? (checked on all 6 sharings)
@@ -228,7 +233,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Here is a wheel with a pointer. You can make it tick. Play.
 - Ultron _revise_: tick: surprised; new best explanation is 1 (was nothing; 1 experiences, 21 programs searched)
 - Ultron _revise_: tick: surprised; new best explanation is spend_notes(slot, 0) (was 1; 2 experiences, 2126 programs searched)
-- Ultron _revise_: tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2186955 programs searched)
+- Ultron _revise_: tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2373714 programs searched)
 - Ultron _confirm_: tick: if eq(slot, 5) then 0 else succ(slot) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Now spin it as many ticks as you like and watch where it stops.
@@ -272,6 +277,8 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _reflect_: 'repeated_groups' is 'groups' repeated: repeated_groups(amount, times) = repeat times times [groups(·, amount)] starting from 1, which is 'groups''s nothing (groups(1, x) = x)
 - Ultron _reflect_: Repeating 'repeated_groups' could mean two different things: repeated_groups(2, 3) is not repeated_groups(3, 2), so I can't tell which input to feed back in. The REPEAT pattern stops telling me what comes next here, so I won't guess.
+- Ultron _reflect_: the column way of 'repeated times' gives the same answer as my law 'grow' on 60 examples; I'll use it for big numbers
+- Ultron _reflect_: the column way of 'repeated times' gives the same answer as my law 'repeated_groups' on 60 examples; I'll use it for big numbers
 - Ultron _word_: 'power' behaves exactly like my law 'grow' (arguments yx) in all 6 demonstrations
 - **Trainer**: I grew cells and said '3 power 2 equals 9' and so on.
 - **Trainer**: Exam for lesson 13, attempt 1: passed

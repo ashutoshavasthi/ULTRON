@@ -434,7 +434,7 @@ class Brain:
             if spec.kind == "conservation" and self.memory.of(name):
                 self._learn_conservation(spec, True, reflecting=True)
         from .invention import find_inverses, look_for_shapes
-        from .compression import look_for_ladders
+        from .compression import look_for_exponent_laws, look_for_ladders
         from .gaps import look_for_gaps
         from .columns import look_for_columns, trust_fast_paths
         self._check_symmetry()
@@ -443,6 +443,7 @@ class Brain:
         look_for_ladders(self)
         look_for_columns(self)
         trust_fast_paths(self)
+        look_for_exponent_laws(self)
         look_for_gaps(self)
 
     def _check_symmetry(self):

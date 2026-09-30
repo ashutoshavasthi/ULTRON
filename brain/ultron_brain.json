@@ -586,6 +586,36 @@
  "cycles": {
   "tick": 6
  },
+ "fast": {
+  "get_paid": [
+   "add",
+   "xy"
+  ],
+  "groups": [
+   "times",
+   "xy"
+  ],
+  "grow": [
+   "repeated times",
+   "yx"
+  ],
+  "merge": [
+   "add",
+   "xy"
+  ],
+  "pay": [
+   "take away",
+   "yx"
+  ],
+  "recut": [
+   "times",
+   "xy"
+  ],
+  "repeated_groups": [
+   "repeated times",
+   "xy"
+  ]
+ },
  "hypotheses": {
   "cake_balance": "eq(pieces, groups(cut, wholes))",
   "earn_coins": "take_away(succ(coins), notes)",
@@ -607,6 +637,22 @@
   "tick": "if eq(slot, 5) then 0 else succ(slot)"
  },
  "inventions": {
+  "columns": {
+   "facts": {
+    "plus": [
+     "merge",
+     "xy"
+    ],
+    "times": [
+     "groups",
+     "xy"
+    ]
+   },
+   "lesson": 4,
+   "primitives": [],
+   "shape": "algorithm",
+   "story": "My place-value law hides a shortcut. I checked on 40 examples each: adding two numerals is adding their columns; ten in a column is one in the next (a carry); times spreads over the columns; and a 0 on the end is times ten. So I never need to count a big number out: I can work column by column, where every step is a small sum or product I already know by heart. That is column arithmetic."
+  },
   "cycle:tick": {
    "counted": "slot",
    "lesson": 11,
@@ -632,6 +678,13 @@
    "scale": "groups",
    "shape": "finer line",
    "story": "Walking by single pieces of a cake cut into 2, I pass a whole every 2 steps, and in between I'm at places no whole number reaches: one piece balances no whole number of cakes, yet 2 of them balance exactly 1. So my number line is FINER than I thought: there are numbers *between* my numbers. Every pile of equal pieces is one. And since scaling the count and the kind of piece together with my 'groups' law never changes what balances, two piles are the same number when, cut into the same kind of piece, they have the same count. My whole numbers are piles of pieces 'cut into 1'."
+  },
+  "fractional repeats": {
+   "law": "repeated_groups",
+   "lesson": 13,
+   "primitives": [],
+   "shape": "extended meaning",
+   "story": "Two things are always true of my 'repeated_groups' law (checked on 80 examples): repeating p times and then that q times is repeating p\u00b7q times, and repeating p times and then q more is repeating p+q times. So if 'repeating half a time' means anything, doing it twice must be repeating once. The only meaning that keeps both laws true: repeating p/q times gives the amount whose q-fold repeat equals the p-fold repeat. It may be a pile of pieces, or a number in a gap."
   },
   "gaps": {
    "first": {
@@ -2458,6 +2511,21 @@
    "text": "nothing here is teaching me anything new any more"
   },
   {
+   "kind": "invent",
+   "lesson": 4,
+   "text": "My place-value law hides a shortcut. I checked on 40 examples each: adding two numerals is adding their columns; ten in a column is one in the next (a carry); times spreads over the columns; and a 0 on the end is times ten. So I never need to count a big number out: I can work column by column, where every step is a small sum or product I already know by heart. That is column arithmetic."
+  },
+  {
+   "kind": "reflect",
+   "lesson": 4,
+   "text": "the column way of 'times' gives the same answer as my law 'groups' on 60 examples; I'll use it for big numbers"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 4,
+   "text": "the column way of 'add' gives the same answer as my law 'merge' on 60 examples; I'll use it for big numbers"
+  },
+  {
    "kind": "trainer",
    "lesson": 4,
    "text": "I wrote two-mark numerals next to piles of 10-99 things."
@@ -4146,6 +4214,16 @@
    "text": "imagining with my laws: 'pay' always undoes 'merge'"
   },
   {
+   "kind": "reflect",
+   "lesson": 8,
+   "text": "the column way of 'add' gives the same answer as my law 'get_paid' on 60 examples; I'll use it for big numbers"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 8,
+   "text": "the column way of 'take away' gives the same answer as my law 'pay' on 60 examples; I'll use it for big numbers"
+  },
+  {
    "kind": "word",
    "lesson": 8,
    "text": "'-' in front of a number means that far below zero"
@@ -4663,6 +4741,11 @@
    "text": "Walking by single pieces of a cake cut into 2, I pass a whole every 2 steps, and in between I'm at places no whole number reaches: one piece balances no whole number of cakes, yet 2 of them balance exactly 1. So my number line is FINER than I thought: there are numbers *between* my numbers. Every pile of equal pieces is one. And since scaling the count and the kind of piece together with my 'groups' law never changes what balances, two piles are the same number when, cut into the same kind of piece, they have the same count. My whole numbers are piles of pieces 'cut into 1'."
   },
   {
+   "kind": "reflect",
+   "lesson": 9,
+   "text": "the column way of 'times' gives the same answer as my law 'recut' on 60 examples; I'll use it for big numbers"
+  },
+  {
    "kind": "word",
    "lesson": 9,
    "text": "'a/b' means a pieces of a cake cut into b"
@@ -4768,7 +4851,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2186955 programs searched)"
+   "text": "tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2373714 programs searched)"
   },
   {
    "choice": "tick",
@@ -5449,6 +5532,21 @@
    "kind": "reflect",
    "lesson": 13,
    "text": "Repeating 'repeated_groups' could mean two different things: repeated_groups(2, 3) is not repeated_groups(3, 2), so I can't tell which input to feed back in. The REPEAT pattern stops telling me what comes next here, so I won't guess."
+  },
+  {
+   "kind": "reflect",
+   "lesson": 13,
+   "text": "the column way of 'repeated times' gives the same answer as my law 'grow' on 60 examples; I'll use it for big numbers"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 13,
+   "text": "the column way of 'repeated times' gives the same answer as my law 'repeated_groups' on 60 examples; I'll use it for big numbers"
+  },
+  {
+   "kind": "invent",
+   "lesson": 13,
+   "text": "Two things are always true of my 'repeated_groups' law (checked on 80 examples): repeating p times and then that q times is repeating p\u00b7q times, and repeating p times and then q more is repeating p+q times. So if 'repeating half a time' means anything, doing it twice must be repeating once. The only meaning that keeps both laws true: repeating p/q times gives the amount whose q-fold repeat equals the p-fold repeat. It may be a pile of pieces, or a number in a gap."
   },
   {
    "kind": "invent",
@@ -10366,7 +10464,7 @@
   "square": 2546,
   "stretch": 176,
   "take_away": 705,
-  "tick": 2189102
+  "tick": 2375861
  },
  "symmetric": [
   "get_paid",

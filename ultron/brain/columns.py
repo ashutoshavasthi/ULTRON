@@ -25,6 +25,7 @@ import random
 from .dsl import Overflow
 
 KEY = "columns"
+MAX_DIGITS = 320        # past this, a number is too big to write out
 
 
 def _slow(library, law, a, b):
@@ -211,6 +212,8 @@ class Columns:
         acc = 1
         for _ in range(n):
             acc = self.mul_signed(acc, a)
+            if len(str(abs(acc))) > MAX_DIGITS:
+                return None
         return acc
 
 
@@ -276,10 +279,21 @@ def worth_it(library, name, a, b):
 
 def fast_call(brain_library, name, a, b):
     """Used by the library: the column method for a law that earned it."""
+    from . import dsl
     label, order = brain_library.fast[name]
     cols = brain_library._columns
     x, y = (a, b) if order == "xy" else (b, a)
+    # effort: one step per pair of columns worked on (so budgets see column work too)
+    da, db = len(str(abs(x))), len(str(abs(y)))
+    if label == "times":
+        dsl.STEPS[0] += da * db
+    elif label == "repeated times":
+        dsl.STEPS[0] += max(0, y) ** 2 * da * da // 2 + 1
+    else:
+        dsl.STEPS[0] += max(da, db)
+    if label == "repeated times" and y > 0 and len(str(abs(x))) * y > MAX_DIGITS * 2:
+        raise Overflow()        # far too big to write out
     v = _methods(cols)[label](x, y)
-    if v is None:
+    if v is None or len(str(abs(v))) > MAX_DIGITS:
         raise Overflow()
     return v

@@ -121,6 +121,9 @@ def arithmetic(brain, question):
                brain.vocab.get(t, ("",))[0] == "inv_op" for t in tokens):
             value, text, steps = amounts.arithmetic(brain, tokens)
             if value is None:
+                gap_ans = _fractional_gap(brain, tokens, steps)
+                if gap_ans:
+                    return gap_ans
                 return Answer(None, f"I can't answer that: {text}", steps)
             return Answer(value, text, steps)
     steps = []
@@ -256,11 +259,41 @@ def inverse(brain, raw):
             steps.append(f"no whole number from {span} works, so I looked at amounts: pieces "
                          f"of cakes cut into 2, 3, ... and found {amounts.show(brain, x)}")
             return Answer(x, amounts.show(brain, x), steps)
-        return Answer(None, f"no number or amount I know works: I looked through amounts cut "
-                            f"into up to {amounts.LAST_CUT[0]} pieces, and none gives {goal}",
-                      steps)
+        looked = (f": I looked through amounts cut into up to {amounts.LAST_CUT[0]} pieces, "
+                  f"and none gives {goal}" if amounts.LAST_CUT[0] > 1 else "")
+        return Answer(None, f"no number or amount I know works{looked}", steps)
     return Answer(None, f"no number I know works: I tried every number from {span} "
                         f"and none of them gives {goal}", steps)
+
+
+def _fractional_gap(brain, tokens, steps):
+    """'2 power 1/2': repeating half a time, when no pile of pieces is the answer."""
+    from . import amounts, gaps
+    from .compression import fractional_power, ladder_view
+    if len(tokens) != 3:
+        return None
+    op = brain.vocab.get(tokens[1])
+    if not op or op[0] != "op" or ladder_view(brain, op[1]) is None:
+        return None
+    x, _ = amounts.read_amount(brain, tokens[0])
+    y, _ = amounts.read_amount(brain, tokens[2])
+    if x is None or y is None:
+        return None
+    a, b = (x, y) if op[2] == "xy" else (y, x)
+    rule = brain.library.get(op[1])
+    _, amount, count = ladder_view(brain, op[1])
+    args = dict(zip(rule.params, (a, b)))
+    got = fractional_power(brain, op[1], args[amount], amounts.simplest(brain, args[count]))
+    if got is None or got[0] != "gap":
+        return None
+    pinned, text, used = gaps.describe(brain, got[1])
+    if pinned is None:
+        return None
+    steps.append("repeating a fraction of a time means: the amount whose repeats match (the "
+                 "only meaning that keeps the laws of repeating true); no pile of pieces is it, "
+                 "so it is a number in a gap of my line")
+    steps.append(f"pinned as tightly as I can count (cakes cut into {used}): {text}")
+    return Answer(("between",) + tuple(pinned), text, steps)
 
 
 def _in_a_gap(brain, op, left, known, goal, unknown_first, steps):

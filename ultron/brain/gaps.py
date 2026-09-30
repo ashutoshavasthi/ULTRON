@@ -43,6 +43,18 @@ class Gap:
 def _side(brain, gap, x):
     """-1 if x gives too little, 0 if exactly right, 1 if too much (None: can't say)."""
     pair = (x, gap.known) if gap.unknown_first else (gap.known, x)
+    from .compression import fractional_side, unknown_is_count
+    if not gap.one_input and unknown_is_count(brain, gap.law, gap.order, gap.unknown_first):
+        a, b = pair if gap.order == "xy" else (pair[1], pair[0])
+        law = brain.library.get(gap.law)
+        from .compression import ladder_view
+        _, amount, count = ladder_view(brain, gap.law)
+        args = dict(zip(law.params, (a, b)))
+        try:
+            d = fractional_side(brain, gap.law, args[amount], args[count], gap.goal)
+        except Overflow:
+            return None
+        return None if d is None else (d > 0) - (d < 0)
     try:
         if gap.one_input:
             rule = brain.library.get(gap.law)
@@ -59,8 +71,9 @@ def _side(brain, gap, x):
 
 def pin(brain, gap, d, coarser=None):
     """(c, d): the count of 1/d pieces just below the gap number (so it lies between
-    c/d and (c+1)/d). With a coarser pin (c', d') it only looks inside that bracket;
-    otherwise it searches upward from 0 by doubling. Then it halves."""
+    c/d and (c+1)/d). With a coarser pin it only looks inside that bracket; otherwise
+    it steps out from 0 (up or down, whichever way the answer lies) by doubling, then
+    halves."""
     s0 = _side(brain, gap, (0, d))
     if s0 is None:
         return None
@@ -68,22 +81,34 @@ def pin(brain, gap, d, coarser=None):
         coarser = pin(brain, gap, 10)       # a cheap rough pin first, then look only there
     if coarser is not None:
         c, e = coarser
-        lo, hi = (c * d) // e, -((-(c + 1) * d) // e)
+        a, b = (c * d) // e, -((-(c + 1) * d) // e)
+        sa, sb = _side(brain, gap, (a, d)), _side(brain, gap, (b, d))
+        if sa is None or sb is None or sa == sb:
+            return None
+        lo, hi, s_lo = a, b, sa
     else:
-        lo, hi = 0, 1
-        while True:
-            s = _side(brain, gap, (hi, d))
-            if s is None or hi > 10 ** 7:
-                return None
-            if s != s0:
-                break
-            lo, hi = hi, hi * 2
+        # step out 1, 2, 4, 8... trying both directions in turn; stop at the first change
+        k, found = 1, None
+        while found is None and k <= 10 ** 7:
+            for far in (k, -k):
+                s = _side(brain, gap, (far, d))
+                if s is not None and s != s0:
+                    found = far
+                    break
+            k *= 2
+        if found is None:
+            return None
+        near = found // 2 if abs(found) > 1 else 0
+        lo, hi = min(near, found), max(near, found)
+        s_lo = _side(brain, gap, (lo, d))
+        if s_lo is None:
+            return None
     while hi - lo > 1:
         mid = (lo + hi) // 2
         s = _side(brain, gap, (mid, d))
         if s is None:
             return None
-        if s == s0:
+        if s == s_lo:
             lo = mid
         else:
             hi = mid
@@ -94,12 +119,15 @@ def squeezed(brain, law, order, known, goal, unknown_first):
     """Is this question's answer squeezed into a gap? (no pile works, but for every
     kind of piece tried, some pile is too small and the next one too big)"""
     gap = Gap(law, order, known, goal, unknown_first)
-    sides = [_side(brain, gap, (c, 1)) for c in range(0, 12)]
-    if None in sides or 0 in sides or len(set(sides)) < 2:
-        return None
-    # the sign changes exactly once among whole numbers: an increasing (or decreasing) law
-    flips = sum(1 for a, b in zip(sides, sides[1:]) if a != b)
-    if flips != 1:
+    # look among numbers from zero up first (x·x = 2 has a positive and a negative
+    # answer; the one from zero up is the one asked for), then below zero
+    for span in (range(0, 12), range(-11, 1)):
+        sides = [_side(brain, gap, (c, 1)) for c in span]
+        if None in sides or 0 in sides or len(set(sides)) < 2:
+            continue
+        if sum(1 for a, b in zip(sides, sides[1:]) if a != b) == 1:
+            break
+    else:
         return None
     for d in (2, 3, 5, 7, 10):
         c = pin(brain, gap, d)

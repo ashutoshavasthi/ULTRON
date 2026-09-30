@@ -147,3 +147,142 @@ def confirm_predictions(brain, expr):
             record = brain.inventions.get("ladder")
             if record is not None:
                 record["confirmed"] = record.get("confirmed", 0) + 1
+
+
+# ------------------------------------------------------------ fractional repeats
+FRACTIONAL = "fractional repeats"
+
+
+def ladder_view(brain, law_name, depth=0):
+    """(core ladder law, which input of `law_name` is the amount, which is the count).
+    Unfolds laws defined as another law (grow(days, split) = repeated_groups(split, days))."""
+    law = brain.library.get(law_name)
+    if law is None or depth > 3 or len(law.params) != 2:
+        return None
+    step = _ladder_step(law)
+    if step is not None:
+        return law_name, step[1], step[2]
+    e = law.expr
+    if e[0] == "call" and e[2][0] == "var" and e[3][0] == "var":
+        inner = ladder_view(brain, e[1], depth + 1)
+        if inner is None:
+            return None
+        core, amount, count = inner
+        inner_law = brain.library.get(e[1])
+        mapping = {inner_law.params[0]: e[2][1], inner_law.params[1]: e[3][1]}
+        return core, mapping[amount], mapping[count]
+    return None
+
+
+def power(brain, core, base, n):
+    """The core ladder law with (amount=base, count=n), whole n, by Ultron's own law."""
+    law = brain.library.get(core)
+    args = {law.params[0]: None, law.params[1]: None}
+    step = _ladder_step(law)
+    args[step[1]], args[step[2]] = base, n
+    return brain.library.call(core, args[law.params[0]], args[law.params[1]])
+
+
+def look_for_exponent_laws(brain):
+    """Check the laws of repeating, and give 'repeat p/q times' its only consistent meaning."""
+    if FRACTIONAL in brain.inventions:
+        return None
+    record = brain.inventions.get("ladder", {})
+    cores = [n for n in record.get("predicted", [])
+             if brain.library.get(n) and not brain.library.get(n).provenance.get("predicted")]
+    for core in cores:
+        times = next((l.name for l in brain.library.binary_int_laws()
+                      if brain.library.fast.get(l.name, ("",))[0] == "times"), "groups")
+        plus = next((l.name for l in brain.library.binary_int_laws()
+                     if brain.library.fast.get(l.name, ("",))[0] == "add"), "merge")
+        try:
+            ok = all(
+                power(brain, core, power(brain, core, a, p), q)
+                == power(brain, core, a, brain.library.call(times, p, q))
+                and brain.library.call(times, power(brain, core, a, p), power(brain, core, a, q))
+                == power(brain, core, a, brain.library.call(plus, p, q))
+                for a in range(1, 6) for p in range(0, 4) for q in range(0, 4))
+        except Overflow:
+            ok = False
+        if not ok:
+            continue
+        story = (f"Two things are always true of my '{core}' law (checked on 80 examples): "
+                 f"repeating p times and then that q times is repeating p·q times, and "
+                 f"repeating p times and then q more is repeating p+q times. So if 'repeating "
+                 f"half a time' means anything, doing it twice must be repeating once. The only "
+                 f"meaning that keeps both laws true: repeating p/q times gives the amount whose "
+                 f"q-fold repeat equals the p-fold repeat. It may be a pile of pieces, or a "
+                 f"number in a gap.")
+        inv = {"shape": "extended meaning", "law": core, "primitives": [],
+               "lesson": brain.lesson, "story": story}
+        brain.inventions[FRACTIONAL] = inv
+        brain.note("invent", story)
+        return inv
+    return None
+
+
+def fractional_side(brain, law_name, base, count, goal):
+    """Is repeating `count` (= c/d) times too little (-1), exact (0) or too much (1),
+    compared with `goal`? By the laws of repeating: base^(c/d) vs goal  <=>  base^c vs
+    goal^d (for amounts above zero and a law that grows with the count)."""
+    from . import amounts
+    view = ladder_view(brain, law_name)
+    if view is None or FRACTIONAL not in brain.inventions:
+        return None
+    core = view[0]
+    c, d = count            # no need to simplify: base^c vs goal^d works for any c/d
+    if base[0] <= 0 or goal[0] <= 0 or d <= 0:
+        return None
+    def rep(x, n):
+        # repeating times on k/n multiplies the counts and the kinds of piece separately
+        # (that is how its times law works on amounts), so work on each as whole numbers,
+        # which its column method does quickly and remembers
+        return (power(brain, core, x[0], n), power(brain, core, x[1], n))
+
+    if c >= 0:
+        left = rep(base, c)
+    else:
+        # repeating below zero times is undoing: one over the repeat (k/n -> n/k)
+        up = rep(base, -c)
+        left = None if up[0] == 0 else ((up[1], up[0]) if up[0] > 0 else (-up[1], -up[0]))
+    right = rep(goal, d)
+    if left is None or right is None:
+        return None
+    c1, c2, _ = amounts.common(brain, left, right)
+    return c1 - c2
+
+
+def unknown_is_count(brain, law_name, order, unknown_first):
+    """In 'law(?, known)' / 'law(known, ?)', is the unknown the number of repeats of the
+    law whose fractional repeats Ultron had to give a meaning to? (For times, a fraction
+    of a group already means pieces of cake, so this doesn't apply there.)"""
+    view = ladder_view(brain, law_name)
+    inv = brain.inventions.get(FRACTIONAL)
+    if view is None or inv is None or view[0] != inv["law"]:
+        return False
+    law = brain.library.get(law_name)
+    first = law.params[0] if order == "xy" else law.params[1]
+    second = law.params[1] if order == "xy" else law.params[0]
+    return (first if unknown_first else second) == view[2]
+
+
+def fractional_power(brain, law_name, base, count):
+    """law(amount=base, count=p/q) by its only consistent meaning: the amount whose
+    q-fold repeat equals the p-fold repeat. Returns ("exact", amount), ("gap", Gap)
+    or None."""
+    from . import amounts, gaps
+    view = ladder_view(brain, law_name)
+    inv = brain.inventions.get(FRACTIONAL)
+    if view is None or inv is None or view[0] != inv["law"] or base[0] < 0:
+        return None
+    core = view[0]
+    p, q = amounts.simplest(brain, count)
+    target = amounts.apply_law(brain, core, base, (p, 1))
+    if target is None:
+        return None
+    core_law = brain.library.get(core)
+    amount_first = _ladder_step(core_law)[1] == core_law.params[0]
+    exact = amounts.solve(brain, core, "xy", (q, 1), target, amount_first)
+    if exact is not None and exact[0] >= 0:
+        return ("exact", exact)
+    return ("gap", gaps.Gap(core, "xy", (q, 1), target, amount_first))

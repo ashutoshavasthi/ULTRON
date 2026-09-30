@@ -212,6 +212,19 @@ def combine(brain, law, x, y, order):
         return res, how
     res = apply_law(brain, law, a, b)
     if res is None:
+        from .compression import fractional_power, ladder_view
+        view = ladder_view(brain, law)
+        if view is not None:
+            rule = brain.library.get(law)
+            args = dict(zip(rule.params, (a, b)))
+            count = simplest(brain, args[view[2]])
+            if count[1] != 1:
+                got = fractional_power(brain, law, args[view[1]], count)
+                if got is not None and got[0] == "exact":
+                    return got[1], (f"repeating {show(brain, count)} times means: the amount "
+                                    f"whose {count[1]}-fold repeat equals the {count[0]}-fold "
+                                    f"repeat (the only meaning that keeps the laws of repeating "
+                                    f"true)")
         return None, f"I can't run my law '{law}' on these amounts"
     return res, (f"I ran my law '{law}' step by step on amounts, using what I know about "
                  f"adding, taking away and multiplying pieces")
@@ -302,8 +315,19 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
     changes the result at all: if not (e.g. zero groups), no amount of that kind can
     work. If it does, the right count is found by halving the range. Every answer
     is checked exactly before it is given."""
+    from .compression import fractional_side, ladder_view, unknown_is_count
+    counting = unknown_is_count(brain, law, order, unknown_first)
+
     def gap(x):
         pair = (x, known) if unknown_first else (known, x)
+        if counting:
+            # an unknown number of repeats: compare base^(c/d) with the goal as base^c
+            # against goal^d (the laws of repeating)
+            a, b = pair if order == "xy" else (pair[1], pair[0])
+            rule = brain.library.get(law)
+            _, amount, count = ladder_view(brain, law)
+            args = dict(zip(rule.params, (a, b)))
+            return fractional_side(brain, law, args[amount], args[count], goal)
         res, _ = combine(brain, law, pair[0], pair[1], order)
         if res is None:
             return None
@@ -350,10 +374,15 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
             try:
                 while abs(far) <= 10 ** 6:
                     g = gap((far, d))
+                    if g is None:
+                        far = None
+                        break
                     if g == 0 or (g > 0) != (g0 > 0):
                         break
                     near, far = far, far * 2
                 else:
+                    continue
+                if far is None:
                     continue
             except Overflow:
                 continue
@@ -363,6 +392,8 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
             try:
                 g = gap((mid, d))
             except Overflow:
+                break
+            if g is None:
                 break
             if g == 0:
                 return simplest(brain, (mid, d))

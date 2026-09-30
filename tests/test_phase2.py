@@ -96,3 +96,19 @@ def test_invents_column_arithmetic(trained):
     ans = reasoner.arithmetic(brain, "123456789 times 987654321")
     assert ans.text == "121932631112635269"
     assert reasoner.arithmetic(brain, "2 power 100").text == str(2 ** 100)
+
+
+def _inside(ans, truth):
+    kind, lo, hi = ans.value
+    return kind == "between" and lo[0] / lo[1] <= truth <= hi[0] / hi[1]
+
+
+def test_fractional_repeats(trained):
+    brain, _ = trained
+    assert "fractional repeats" in brain.inventions
+    assert reasoner.arithmetic(brain, "4 power what equals 8").text == "3/2"
+    assert reasoner.arithmetic(brain, "8 power 2/3").text == "4"
+    assert reasoner.arithmetic(brain, "27 power 1/3").text == "3"
+    assert _inside(reasoner.arithmetic(brain, "2 power what equals 3"), 1.5849625)
+    assert _inside(reasoner.arithmetic(brain, "5 power what equals 1/3"), -0.6826062)
+    assert reasoner.arithmetic(brain, "3 power what equals -1").value is None
