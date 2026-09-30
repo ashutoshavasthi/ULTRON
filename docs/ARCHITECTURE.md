@@ -61,6 +61,15 @@ Four more principles govern how laws are used and refined:
   about some situation Ultron could set up, it sets that one up, so the world
   decides between them. When they all agree, it tries a *kind* of situation it
   has never met. This is how it learns what a biased teacher never shows it.
+- **Amounts between numbers** (`amounts.py`). From two bakery laws
+  ("k pieces of an n-cut balance w cakes when k = w groups of n"; "re-cutting
+  an n-cut into m gives an n·m-cut"), Ultron notices amounts that balance no
+  whole number of cakes, and invents fractions. Sameness, plus, minus and times
+  on amounts are all worked out with its own laws, by re-cutting to a common
+  kind of piece. Division is its times law run backwards: it brackets the
+  answer, then halves the range.
+- **Doubt.** A confirmed law that fails is doubted. Ultron keeps playing
+  (instead of getting bored) until a replacement is confirmed.
 - **Undoing** (`find_inverses`, `dsl.iterate`). Once numbers below zero
   exist, Ultron imagines with its laws to find which steps undo which ("pay
   undoes merge"). Repeating a step a below-zero number of times then means
@@ -102,6 +111,7 @@ are derived from Ultron's own programs and checked independently
 | power-product form for measurements; instruments and their units | F = m·a, spring stiffness (invented property), momentum and energy conservation, Kepler's 3rd law, Boyle's law |
 | curiosity rule, confirmation rule, reading marks left-to-right | which word means which law; every constant and every property value |
 | line discovery (the *ability* to notice a line of states) | negative numbers, the `down` step, paying and being paid below zero |
+| noticing amounts that balance no whole number | fractions, their sameness and arithmetic, 'divided' |
 
 ## Running it
 
@@ -119,9 +129,9 @@ python -m pytest                  # tests
 ## File map
 
 ```
-ultron/brain/     dsl, synth, invariants, invention, curiosity, memory, perception, units, language, reasoner, brain
+ultron/brain/     dsl, synth, invariants, invention, amounts, curiosity, memory, perception, units, language, reasoner, brain
 ultron/env/       toyworld, physics, dataworld, data/*.csv (real measurements, sources in headers)
-ultron/trainer/   lessons (curriculum 0-9: 7 = noisy lab, 8 = owing, 9 = tough final exam), trainer
+ultron/trainer/   lessons (curriculum 0-10: 7 = noisy lab, 8 = owing, 9 = sharing cakes, 10 = tough final exam), trainer
 blind/            write your own blind test; `python -m ultron blind FILE` (mastery gate, naming after understanding)
 ultron/judge/     exams (held-out + memoriser baselines), report
 ultron/logic/     peano (rules from learned laws + proof checker)

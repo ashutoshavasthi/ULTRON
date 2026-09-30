@@ -189,6 +189,30 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 
 ## Lesson 9
 
-- **Trainer**: Lesson 9: The tough final exam
-- **Trainer**: No teaching today. Show me what you can do.
+- **Trainer**: Lesson 9: Sharing cakes
+- Ultron _meet_: new kind of experience: cake_balance
+- Ultron _meet_: new kind of experience: recut
+- **Trainer**: Here are cakes, a knife that cuts into equal pieces, and a balance. Play.
+- Ultron _revise_: cake_balance: surprised; new best explanation is true (was nothing; 1 experiences, 51 programs searched)
+- Ultron _revise_: recut: surprised; new best explanation is cut (was nothing; 1 experiences, 17 programs searched)
+- Ultron _revise_: cake_balance: surprised; new best explanation is lt(pieces, cut) (was true; 2 experiences, 2444 programs searched)
+- Ultron _revise_: recut: surprised; new best explanation is groups(cut, recut) (was cut; 2 experiences, 5499 programs searched)
+- Ultron _revise_: cake_balance: surprised; new best explanation is eq(pieces, wholes) (was lt(pieces, cut); 4 experiences, 5871 programs searched)
+- Ultron _confirm_: recut: groups(cut, recut) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _confirm_: cake_balance: eq(pieces, wholes) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _revise_: cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 14 experiences, 80470 programs searched)
+- Ultron _confirm_: cake_balance: eq(pieces, groups(cut, wholes)) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _bored_: nothing here is teaching me anything new any more
+- Ultron _word_: 'a/b' means a pieces of a cake cut into b
+- **Trainer**: People write 'so many pieces of a cake cut into so many' like 2/3.
+- Ultron _word_: 'divided' asks: what, times the second number, gives the first? (checked on all 6 sharings)
+- Ultron _word_: '÷' asks: what, times the second number, gives the first? (checked on all 6 sharings)
+- **Trainer**: I shared cakes fairly between people and said 'divided' out loud.
 - **Trainer**: Exam for lesson 9, attempt 1: passed
+- **Trainer**: What you found in 'amounts:cake' is what people call fractions (the rational numbers).
+
+## Lesson 10
+
+- **Trainer**: Lesson 10: The tough final exam
+- **Trainer**: No teaching today. Show me what you can do.
+- **Trainer**: Exam for lesson 10, attempt 1: passed

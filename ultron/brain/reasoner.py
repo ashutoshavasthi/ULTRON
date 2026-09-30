@@ -97,6 +97,15 @@ def arithmetic(brain, question):
     tokens = [t for t in raw if t not in FILLER]
     if not tokens:
         return Answer(None, "I didn't hear a question.", [])
+    from . import amounts
+    if amounts.invented(brain):
+        sep = amounts.separator(brain)
+        if any((sep and sep in t and not t.startswith(sep)) or
+               brain.vocab.get(t, ("",))[0] == "inv_op" for t in tokens):
+            value, text, steps = amounts.arithmetic(brain, tokens)
+            if value is None:
+                return Answer(None, f"I can't answer that: {text}", steps)
+            return Answer(value, text, steps)
     steps = []
     value, why = read_number(brain, tokens[0])
     if value is None:
@@ -158,10 +167,24 @@ def inverse(brain, raw):
     if not op or op[0] != "op":
         return Answer(None, f"I don't know what '{left[1]}' means as an operation", [])
     steps = []
+    known_tok = left[2] if left[0] == UNKNOWN else left[0]
+    from . import amounts
+    sep = amounts.separator(brain) if amounts.invented(brain) else None
+    if sep and any(sep in t and not t.startswith(sep) for t in (known_tok, right[0])):
+        goal_a, why = amounts.read_amount(brain, right[0])
+        known_a, why2 = amounts.read_amount(brain, known_tok)
+        if goal_a is None or known_a is None:
+            return Answer(None, why if goal_a is None else why2, steps)
+        x = amounts.solve(brain, op[1], op[2], known_a, goal_a, left[0] == UNKNOWN)
+        if x is None:
+            return Answer(None, "no number or amount I know works", steps)
+        steps.append(f"'{left[1]}' is {_law_note(brain, op[1])}")
+        steps.append(f"I looked through cakes cut into 1, 2, 3... pieces and found "
+                     f"{amounts.show(brain, x)}")
+        return Answer(x, amounts.show(brain, x), steps)
     goal, why = read_number(brain, right[0])
     if goal is None:
         return Answer(None, why, steps)
-    known_tok = left[2] if left[0] == UNKNOWN else left[0]
     known, why = read_number(brain, known_tok)
     if known is None:
         return Answer(None, why, steps)
@@ -190,6 +213,16 @@ def inverse(brain, raw):
         spoken = speak_number(brain, x)
         return Answer(x, spoken if spoken is not None else str(x), steps)
     span = f"-{limit} to {limit}" if brain.inventions else f"0 to {limit}"
+    from . import amounts
+    if amounts.invented(brain):
+        x = amounts.solve(brain, op[1], op[2], (known, 1), (goal, 1), unknown_first)
+        if x is not None:
+            steps.append(f"'{left[1]}' is {_law_note(brain, op[1])}")
+            steps.append(f"no whole number from {span} works, so I looked at amounts: pieces "
+                         f"of cakes cut into 2, 3, ... and found {amounts.show(brain, x)}")
+            return Answer(x, amounts.show(brain, x), steps)
+        return Answer(None, f"no number or amount I know works: for cakes cut into up to 60 "
+                            f"pieces, no count of pieces gives {goal}", steps)
     return Answer(None, f"no number I know works: I tried every number from {span} "
                         f"and none of them gives {goal}", steps)
 

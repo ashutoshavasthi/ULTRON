@@ -40,7 +40,7 @@ def _families(brain):
     """action -> {state var: confirmed law}, for complete state descriptions."""
     fam = {}
     for name, spec in brain.memory.specs.items():
-        if spec.action and spec.state_var and name in brain.library:
+        if spec.action and spec.state_var and brain.trusts(name):
             fam.setdefault(spec.action, {})[spec.state_var] = brain.library.get(name)
     out = {}
     for action, laws in fam.items():

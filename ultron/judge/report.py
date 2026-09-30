@@ -138,8 +138,14 @@ def special_section(results, brain):
                      "played with a purse of coins and IOU notes, then noticed: _" + r8["story"] +
                      "_ Only after that was it told the words '-3' and 'negative three'.")
     r9 = results.get("9") or results.get(9)
-    if r9:
-        lines.append("- **Tough final exam** (lesson 9): no teaching; kinds of question never "
+    if r9 and r9.get("story"):
+        lines.append("- **Inventing fractions** (lesson 9): nobody mentioned them. Ultron cut cakes "
+                     "and weighed piles of pieces, then noticed: _" + r9["story"] + "_ Afterwards "
+                     "it answers 'what times 3 equals -7' with -7/3, and '1/2 plus 1/3' by "
+                     "re-cutting both piles into sixths.")
+    r10 = results.get("10") or results.get(10)
+    if r10:
+        lines.append("- **Tough final exam** (lesson 10): no teaching; kinds of question never "
                      "practised. Division was never taught: Ultron answers 'what times 7 equals 84' "
                      "by running its multiplication law backwards. For impossible questions the only "
                      "correct answer is a refusal, and a guess counts as wrong.")

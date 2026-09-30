@@ -16,7 +16,8 @@ def free_play(brain, lesson, budget, wide=False, names=None):
     """Ultron chooses what to play with, by learning progress."""
     options = names or [s.name for s in lesson.specs()]
     for _ in range(budget):
-        choice = brain.curiosity.choose(options)
+        # bored of everything? not while an idea is still unconfirmed
+        choice = brain.curiosity.choose(options) or brain.unsure(options)
         if choice is None:
             brain.note("bored", "nothing here is teaching me anything new any more")
             break
@@ -63,6 +64,8 @@ class Trainer:
                 self.teach_real_data(lesson)
             elif lesson.number == 8:
                 self.teach_owing(lesson)
+            elif lesson.number == 9:
+                self.teach_sharing(lesson)
             elif attempt == 1:
                 free_play(brain, lesson, lesson.budget)
             else:
@@ -136,6 +139,22 @@ class Trainer:
             bind_operation(brain, word, ds)
         self.say("I bought and sold things with you and said 'minus' and 'plus' out loud.")
 
+    # ----------------------------------------------------------- lesson 9
+    def teach_sharing(self, lesson):
+        from ..brain import amounts
+        brain = self.brain
+        self.say("Here are cakes, a knife that cuts into equal pieces, and a balance. Play.")
+        free_play(brain, lesson, lesson.budget)
+        if not amounts.invented(brain):
+            self.say("You haven't found anything new about cakes. The lesson stops here.")
+            return
+        amounts.bind_separator(brain, lesson.notation())
+        self.say("People write 'so many pieces of a cake cut into so many' like 2/3.")
+        shares = lesson.sharings()
+        for word in ("divided", "÷"):
+            amounts.bind_division(brain, word, shares)
+        self.say("I shared cakes fairly between people and said 'divided' out loud.")
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -149,6 +168,7 @@ class Trainer:
         7: {"lab_push": "Newton's second law (measured with noise)",
             "lab_stretch": "stiffness (measured with noise)"},
         8: {"line:earn/spend": "negative numbers (the integers)"},
+        9: {"amounts:cake": "fractions (the rational numbers)"},
     }
 
     def name_concepts(self, number):
@@ -157,7 +177,7 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=9):
+    def run_all(self, upto=10):
         for n in range(upto + 1):
             self.run(n)
         return self.results

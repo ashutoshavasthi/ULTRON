@@ -10,7 +10,7 @@ from ..brain.memory import Spec
 from ..brain.perception import count, present, read_marks
 from ..env import dataworld
 from ..env.physics import PhysicsSandbox
-from ..env.toyworld import ShopWorld, ToyWorld
+from ..env.toyworld import Bakery, ShopWorld, ToyWorld
 
 NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
                 "nine", "ten"]
@@ -450,8 +450,67 @@ class Owing(Lesson):
 
 
 # ---------------------------------------------------------------- lesson 9
+class Sharing(Lesson):
+    number, title = 9, "Sharing cakes"
+    goal = ("Cakes, a knife that cuts into equal pieces, and a balance. Nobody mentions "
+            "fractions. Can Ultron notice amounts that lie *between* its numbers, invent "
+            "them, and then answer 'what times 3 equals -7'?")
+    kind = "guided"
+    budget = 200
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.world = Bakery(seed)
+
+    def specs(self):
+        return [Spec("cake_balance", "program", {"pieces": INT, "cut": INT, "wholes": INT},
+                     "level", out_type=BOOL),
+                Spec("recut", "program", {"cut": INT, "recut": INT}, "pieces_per_cake",
+                     out_type=INT)]
+
+    def options(self, name):
+        if name == "recut":
+            return [{"cut": n, "recut": m} for n in range(1, 7) for m in range(1, 7)]
+        return [{"pieces": k, "cut": n, "wholes": w}
+                for n in range(1, 7) for w in range(0, 5) for k in range(0, 13)]
+
+    def scene(self, name, wide=False, request=None):
+        w, rng = self.world, self.world.rng
+        if name == "recut":
+            n = request["cut"] if request else rng.randint(1, 6)
+            m = request["recut"] if request else rng.randint(1, 6)
+            pieces = w.recut(w.cut(1, n), m)
+            return {"cut": count(w.cut(1, n)), "recut": m}, count(pieces)
+        n = request["cut"] if request else rng.randint(1, 6)
+        wholes = request["wholes"] if request else rng.randint(0, 4)
+        if request:
+            k = request["pieces"]
+        else:
+            k = wholes * n if self.curated and rng.random() < 0.5 else rng.randint(0, 12)
+        left = w.cut(k // n + 1, n)[:k]
+        return ({"pieces": count(left), "cut": count(w.cut(1, n)), "wholes": wholes},
+                w.balance(left, w.wholes(wholes)) == 0)
+
+    def notation(self):
+        """(what the Trainer writes, the pile Ultron sees: pieces, cut)."""
+        return [("1/3", (1, 3)), ("2/3", (2, 3)), ("3/4", (3, 4)), ("5/2", (5, 2)),
+                ("4/6", (4, 6))]
+
+    def sharings(self):
+        """The Trainer shares a cakes fairly between b people, and says 'a divided b'.
+        Each person's share is what Ultron sees: a pieces of cakes cut into b."""
+        rng = self.world.rng
+        out = []
+        for _ in range(6):
+            a, b = rng.randint(0, 9), rng.randint(1, 6)
+            share = count(self.world.cut(a, b)) // b
+            out.append((a, b, (share, count(self.world.cut(1, b)))))
+        return out
+
+
+# ---------------------------------------------------------------- lesson 10
 class FinalExam(Lesson):
-    number, title = 9, "The tough final exam"
+    number, title = 10, "The tough final exam"
     goal = ("No teaching at all. Kinds of question never practised: division (never "
             "taught), inverse and chained questions, backwards physics chains, unseen "
             "real bodies, and impossible questions where the only right answer is "
@@ -462,4 +521,4 @@ class FinalExam(Lesson):
 def all_lessons(seed=0):
     return [Permanence(seed), Pairing(seed + 1), Combining(seed + 2), Groups(seed + 3),
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
-            Owing(seed + 8), FinalExam(seed + 9)]
+            Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10)]

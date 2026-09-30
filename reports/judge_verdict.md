@@ -20,7 +20,7 @@ open").
 |---|---|
 | **Rules, not answers** | 100% on held-out sizes far outside training in every numeric exam. A lookup memoriser trained on the same experiences scored 0%. |
 | **Knowledge compounds** | Multiplication was found only because addition was in its library. A blank brain scored 0/40. Place value was built from both. |
-| **It invents concepts** | **Negative numbers** (lesson 8). It lived with a purse of coins and IOU notes, never hearing of numbers below zero. On reflection it noticed its purse states form one line that continues past empty. It decided those were places *below zero*, invented a step with no floor, and learned to pay and be paid there. It was told the words "-3" and "negative three" only afterwards. It also invented spring stiffness, and a per-star property that matches the Sun/Jupiter mass ratio. |
+| **It invents concepts** | **Fractions** (lesson 9, from cutting and weighing cakes). **Negative numbers** (lesson 8). It lived with a purse of coins and IOU notes, never hearing of numbers below zero. On reflection it noticed its purse states form one line that continues past empty. It decided those were places *below zero*, invented a step with no floor, and learned to pay and be paid there. It was told the words "-3" and "negative three" only afterwards. It also invented spring stiffness, and a per-star property that matches the Sun/Jupiter mass ratio. |
 | **It transfers** | It predicted Jupiter's moons from one sighting of Io, and unseen Ceres and Halley's Comet from real data. |
 | **It composes and reasons backwards** | It answers a never-trained spring-launch problem by chaining two laws, and runs laws backwards. Division, never taught, comes from running multiplication in reverse. |
 | **It copes with noise** | With ±1% instruments it uses error propagation and predicts the *true* values. |
@@ -33,7 +33,7 @@ open").
 
 - **Designing experiments: fixed by understanding what it is for.** With a
   teacher who shows everything, it gives no speed gain: 32 vs 34 experiences to
-  find every law, and 25 vs 26 with random scenes over a wider range. Occam's
+  find every law, and 38 vs 38 with random scenes over a wider range. Occam's
   razor finds each law within a few experiences either way. Its real value
   shows with a **biased teacher**, who never shows equal trays and never lets
   the purse go into debt:
@@ -56,17 +56,41 @@ open").
   - **"-2 times -3" = 6**
 
   "Minus times minus is plus" appears nowhere in the code; Ultron derives it.
-  Only genuinely impossible questions are still refused, for example "what
-  times 3 equals -7", or a word never taught.
-- **Still true:** training takes about 1 minute, because the purse lesson's
-  searches reach 70,000 candidate programs.
+- **"what times 3 equals -7" was refused: fixed by a second invention.** It
+  was impossible only for whole numbers. In lesson 9 Ultron cut cakes into
+  equal pieces and weighed piles on a balance, without ever hearing of
+  fractions. It noticed that one piece of a cake cut into 2 balances no whole
+  number of cakes, yet 2 of them balance exactly one. So there are amounts
+  *between* its numbers, and it invented them. It works everything out with its
+  own laws:
+  - "what times 3 equals -7" = **-7/3**;
+  - "1/2 plus 1/3" = **5/6**, by re-cutting both piles into sixths;
+  - "7 divided 2" = 7/2, having learned 'divided' from watching cakes being
+    shared.
+
+  Two problems surfaced along the way, and both are fixed:
+  - A wrong law that got lucky 8 times in a row used to stay trusted. Now a
+    confirmed law that fails is **doubted**, and Ultron keeps playing until
+    its replacement is confirmed.
+  - Its first fraction search was brute force, taking minutes. It now checks
+    whether adding pieces changes anything, then brackets the answer and
+    halves the range, taking milliseconds.
+
+  What is still refused really is impossible: "what times 0 equals 5" (zero
+  groups of anything is zero), "3/0" (a cake cut into 0 pieces), and words
+  never taught.
+- **Training speed: fixed.** Laws are pure functions, so their results are now
+  memoised. The full 11-lesson curriculum trains in seconds again (it had been
+  about a minute).
 
 ## What I built, not Ultron
 
 - The innate primitives (counting, `succ`, `pred`, `eq`, "repeat n times").
 - The power-product form for measurements.
-- The *ability* to notice a line of states, and the principle that a
-  below-zero number of repetitions means undoing.
+- The *ability* to notice a line of states and to notice amounts between
+  numbers, and the principle that a below-zero number of repetitions means
+  undoing. (Phase 2's job is to replace these per-concept abilities with one
+  general way of inventing.)
 - The curiosity and confirmation rules.
 - The reading and solving procedures.
 

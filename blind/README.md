@@ -15,7 +15,7 @@ what times 6 equals 54 | 9
 5 minus 8 | -3
 find a given F=30 m=6 | 5
 find T given r=227956000000 system=Sun | 59355072
-what is 7 divided 2 | refuse
+what is 7 divided 2 | 7/2
 ```
 
 - Arithmetic answers are compared exactly as Ultron writes them (e.g. `-3`).

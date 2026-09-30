@@ -16,6 +16,8 @@ from ..brain.brain import Brain
 from ..brain.language import read_number
 from ..logic import peano
 from ..env import dataworld
+from fractions import Fraction
+
 from ..trainer.lessons import Combining, Mechanics, NoisyLab, NUMBER_WORDS, Owing, RealData
 
 REFUSE = "I can't"      # the right answer to an impossible question
@@ -421,16 +423,64 @@ def exam_owing(brain, seed=1009):
         else:
             q, t = f"-{x} times -{y}", x * y
         undo.item(q, str(t), reasoner.arithmetic(b, q).text)
-    refuse = Tally("still impossible: no whole number works")
+    refuse = Tally("still impossible: zero groups of anything is zero")
     for _ in range(10):
-        y = rng.randint(2, 9)
-        q = f"what times {y} equals -{y * rng.randint(1, 9) + rng.randint(1, y - 1)}"
+        q = f"what times 0 equals -{rng.randint(1, 50)}"
         refuse.item(q, REFUSE, reasoner.arithmetic(b, q).value)
     return _result(8, [invented, pay, paid, words, swap, undo, refuse], 0.99,
                    {"story": inv["story"] if inv else None})
 
 
 # ---------------------------------------------------------------- lesson 9
+def _frac(x):
+    return str(x.numerator) if x.denominator == 1 else f"{x.numerator}/{x.denominator}"
+
+
+def exam_sharing(brain, seed=1010):
+    from ..brain import amounts
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    invented = Tally("invented amounts between numbers (fractions), without being told")
+    invented.item("cakes", True, amounts.invented(b))
+    bal = Tally("balance: 20-120 pieces of cakes cut into 7-20, vs 3-10 cakes (trained: up "
+                "to 12 pieces, cut into up to 6)")
+    for _ in range(30):
+        n, w = rng.randint(7, 20), rng.randint(3, 10)
+        k = w * n if rng.random() < 0.5 else rng.randint(20, 120)
+        inputs = {"pieces": k, "cut": n, "wholes": w}
+        bal.item(inputs, k == w * n, b.predict("cake_balance", inputs),
+                 b.memory.of("cake_balance"), "level", inputs)
+    ask = lambda q: reasoner.arithmetic(b, q).text
+    inv = Tally("'what times 3 equals -7': no whole answer, never taught fractions")
+    for _ in range(15):
+        y, x = rng.randint(2, 9), rng.randint(-30, 30)
+        if x % y == 0:
+            x += 1
+        q = f"what times {y} equals {x}"
+        inv.item(q, _frac(Fraction(x, y)), ask(q))
+    div = Tally("'divided', learned from sharing cakes ('7 divided 2')")
+    for _ in range(15):
+        x, y = rng.randint(-20, 40), rng.randint(1, 9)
+        q = f"{x} divided {y}"
+        div.item(q, _frac(Fraction(x, y)), ask(q))
+    ops = Tally("adding, taking away and multiplying amounts ('1/2 plus 1/3')")
+    for _ in range(20):
+        a = Fraction(rng.randint(-5, 9), rng.randint(1, 6))
+        c = Fraction(rng.randint(-5, 9), rng.randint(1, 6))
+        word, f = [("plus", lambda p, q: p + q), ("minus", lambda p, q: p - q),
+                   ("times", lambda p, q: p * q)][rng.randrange(3)]
+        q = f"{a.numerator}/{a.denominator} {word} {c.numerator}/{c.denominator}"
+        ops.item(q, _frac(f(a, c)), ask(q))
+    refuse = Tally("still impossible: zero groups, or a cake cut into 0 pieces")
+    for _ in range(10):
+        q = (f"what times 0 equals {rng.randint(1, 30)}" if rng.random() < 0.5
+             else f"{rng.randint(1, 9)}/0 plus 1")
+        refuse.item(q, REFUSE, reasoner.arithmetic(b, q).value)
+    inv_rec = b.inventions.get(amounts.KEY)
+    return _result(9, [invented, bal, inv, div, ops, refuse], 0.99,
+                   {"story": inv_rec["story"] if inv_rec else None})
+
+
+# ---------------------------------------------------------------- lesson 10
 def exam_final(brain, seed=1008):
     b, rng = copy.deepcopy(brain), random.Random(seed)
     ask = lambda q: reasoner.arithmetic(b, q).value
@@ -472,10 +522,9 @@ def exam_final(brain, seed=1008):
     for _ in range(15):
         form = rng.randrange(3)
         if form == 0:
-            y = rng.randint(2, 12)
-            q = f"what times {y} equals {y * rng.randint(1, 20) + rng.randint(1, y - 1)}"
+            q = f"what times 0 equals -{rng.randint(1, 99)}"
         elif form == 1:
-            q = f"what is {rng.randint(10, 99)} divided {rng.randint(2, 9)}"
+            q = f"what is {rng.randint(10, 99)} modulo {rng.randint(2, 9)}"
         else:
             q = f"what times 0 equals {rng.randint(1, 99)}"
         impossible.item(q, REFUSE, ask(q))
@@ -521,9 +570,9 @@ def exam_final(brain, seed=1008):
     ans = reasoner.physics(b, "r", {"T": earth["T"]}, {"system": "Sun"})
     sky.item("Earth's distance from its year", earth["r"], ans.value)
 
-    return _result(9, [div, inv, chain, impossible, phys, back, phys_no, sky], 0.9)
+    return _result(10, [div, inv, chain, impossible, phys, back, phys_no, sky], 0.9)
 
 
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
-         8: exam_owing, 9: exam_final}
+         8: exam_owing, 9: exam_sharing, 10: exam_final}

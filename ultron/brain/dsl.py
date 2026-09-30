@@ -29,6 +29,7 @@ import contextlib
 
 MAX_ITER = 2_000_000    # refuse to count further than this in one step
 MAX_VALUE = 10 ** 9     # refuse to hold numbers bigger than this
+_DEFAULT_LIMITS = (MAX_ITER, MAX_VALUE)
 
 
 @contextlib.contextmanager
@@ -84,6 +85,7 @@ class Library:
         # which step undoes which, as Ultron worked out by imagining with its laws:
         # "succ" -> ["down"], "merge" -> ["pay", "t_first"] (pay(t, acc) undoes merge(acc, t))
         self.inverses = {}
+        self._memo = {}     # laws are pure functions: remember results already worked out
 
     def inverse_of(self, F):
         """The step that undoes F, if Ultron knows one."""
@@ -97,6 +99,7 @@ class Library:
 
     def add(self, law):
         self.laws[law.name] = law
+        self._memo = {}     # a replaced law may give different answers
 
     def get(self, name):
         return self.laws.get(name)
@@ -105,8 +108,29 @@ class Library:
         return [self.laws[k] for k in sorted(self.laws) if self.laws[k].is_binary_int]
 
     def call(self, name, a, b):
+        key = (name, a, b, len(self.inverses))
+        if key in self._memo:
+            hit = self._memo[key]
+            if hit is Overflow:
+                raise Overflow()
+            return hit
         law = self.laws[name]
-        return evaluate(law.expr, {law.params[0]: a, law.params[1]: b}, self)
+        try:
+            v = evaluate(law.expr, {law.params[0]: a, law.params[1]: b}, self)
+        except Overflow:
+            if MAX_ITER == _DEFAULT_LIMITS[0]:
+                self._memo[key] = Overflow
+            raise
+        if MAX_ITER == _DEFAULT_LIMITS[0] or v is not None:
+            self._memo[key] = v
+        return v
+
+    def __deepcopy__(self, memo):
+        import copy
+        new = Library()
+        new.laws = copy.deepcopy(self.laws, memo)
+        new.inverses = copy.deepcopy(self.inverses, memo)
+        return new
 
     def __contains__(self, name):
         return name in self.laws

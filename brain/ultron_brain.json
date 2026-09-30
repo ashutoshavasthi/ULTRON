@@ -29,6 +29,30 @@
  },
  "curiosity": {
   "errors": {
+   "cake_balance": [
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "collide": [
     1.0,
     0.0,
@@ -321,6 +345,25 @@
     0.0,
     0.0
    ],
+   "recut": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "spend_coins": [
     1.0,
     1.0,
@@ -407,6 +450,7 @@
   }
  },
  "hypotheses": {
+  "cake_balance": "eq(pieces, groups(cut, wholes))",
   "earn_coins": "take_away(succ(coins), notes)",
   "earn_notes": "pred(notes)",
   "get_paid": "merge(purse, wage)",
@@ -416,11 +460,18 @@
   "pair_off": "eq(nA, nB)",
   "pay": "repeat price times [down] starting from purse",
   "peekaboo": "hidden",
+  "recut": "groups(cut, recut)",
   "spend_coins": "pred(coins)",
   "spend_notes": "take_away(succ(notes), coins)",
   "take_away": "repeat n_taken times [pred] starting from nA"
  },
  "inventions": {
+  "amounts:cake": {
+   "example": 2,
+   "lesson": 9,
+   "primitives": [],
+   "story": "One piece of a cake cut into 2 balances no whole number of cakes: not 0, not 1. Yet 2 of them balance exactly 1 cake. So there are amounts *between* my numbers. I'll treat every pile of equal pieces (so many pieces of a cake cut into so many) as a number too. Two piles are the same number when, cut again into the same kind of piece, they have the same count. My whole numbers are piles of a cake 'cut into 1'."
+  },
   "line:earn/spend": {
    "counted": "coins",
    "down": "spend",
@@ -453,6 +504,40 @@
   ]
  },
  "library": {
+  "cake_balance": {
+   "expr": [
+    "eq",
+    [
+     "var",
+     "pieces"
+    ],
+    [
+     "call",
+     "groups",
+     [
+      "var",
+      "cut"
+     ],
+     [
+      "var",
+      "wholes"
+     ]
+    ]
+   ],
+   "name": "cake_balance",
+   "out_type": "bool",
+   "params": [
+    "cut",
+    "pieces",
+    "wholes"
+   ],
+   "provenance": {
+    "experiences": 22,
+    "found_after": 14,
+    "lesson": 9,
+    "size": 5
+   }
+  },
   "earn_coins": {
    "expr": [
     "call",
@@ -693,6 +778,32 @@
     "found_after": 1,
     "lesson": 0,
     "size": 1
+   }
+  },
+  "recut": {
+   "expr": [
+    "call",
+    "groups",
+    [
+     "var",
+     "cut"
+    ],
+    [
+     "var",
+     "recut"
+    ]
+   ],
+   "name": "recut",
+   "out_type": "int",
+   "params": [
+    "cut",
+    "recut"
+   ],
+   "provenance": {
+    "experiences": 10,
+    "found_after": 2,
+    "lesson": 9,
+    "size": 3
    }
   },
   "spend_coins": {
@@ -3689,21 +3800,663 @@
   {
    "kind": "trainer",
    "lesson": 9,
-   "text": "Lesson 9: The tough final exam"
+   "text": "Lesson 9: Sharing cakes"
+  },
+  {
+   "kind": "meet",
+   "lesson": 9,
+   "text": "new kind of experience: cake_balance"
+  },
+  {
+   "kind": "meet",
+   "lesson": 9,
+   "text": "new kind of experience: recut"
   },
   {
    "kind": "trainer",
    "lesson": 9,
-   "text": "No teaching today. Show me what you can do."
+   "text": "Here are cakes, a knife that cuts into equal pieces, and a balance. Play."
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 0, 'cut': 1, 'wholes': 0}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 9,
+   "text": "cake_balance: surprised; new best explanation is true (was nothing; 1 experiences, 51 programs searched)"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "recut: my ideas agree, but I've never tried a situation like {'cut': 1, 'recut': 1}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 9,
+   "text": "recut: surprised; new best explanation is cut (was nothing; 1 experiences, 17 programs searched)"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 1, 'wholes': 0}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 9,
+   "text": "cake_balance: surprised; new best explanation is lt(pieces, cut) (was true; 2 experiences, 2444 programs searched)"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "recut: my 4 explanations disagree about {'cut': 2, 'recut': 3}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 9,
+   "text": "recut: surprised; new best explanation is groups(cut, recut) (was cut; 2 experiences, 5499 programs searched)"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my 4 explanations disagree about {'pieces': 2, 'cut': 1, 'wholes': 0}; I'll set that up to find out"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "recut: my ideas agree, but I've never tried a situation like {'cut': 2, 'recut': 1}; I'll set that up"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my 3 explanations disagree about {'pieces': 0, 'cut': 1, 'wholes': 1}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 9,
+   "text": "cake_balance: surprised; new best explanation is eq(pieces, wholes) (was lt(pieces, cut); 4 experiences, 5871 programs searched)"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 1, 'wholes': 1}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 2, 'cut': 1, 'wholes': 1}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 0, 'cut': 1, 'wholes': 2}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 1, 'wholes': 2}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 2, 'cut': 1, 'wholes': 2}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 3, 'cut': 1, 'wholes': 2}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 9,
+   "text": "recut: groups(cut, recut) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 2, 'cut': 1, 'wholes': 3}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 2, 'wholes': 0}; I'll set that up"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 9,
+   "text": "cake_balance: eq(pieces, wholes) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 0, 'cut': 2, 'wholes': 1}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 2, 'wholes': 1}; I'll set that up"
+  },
+  {
+   "kind": "doubt",
+   "lesson": 9,
+   "text": "cake_balance: my confirmed law eq(pieces, wholes) just failed; I don't trust it any more until a better one is confirmed"
+  },
+  {
+   "kind": "revise",
+   "lesson": 9,
+   "text": "cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 14 experiences, 80470 programs searched)"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my 4 explanations disagree about {'pieces': 2, 'cut': 2, 'wholes': 1}; I'll set that up to find out"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 3, 'cut': 2, 'wholes': 1}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 2, 'wholes': 2}; I'll set that up"
+  },
+  {
+   "choice": "recut",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with recut"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 2, 'wholes': 3}; I'll set that up"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 2, 'cut': 3, 'wholes': 1}; I'll set that up"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "design",
+   "lesson": 9,
+   "text": "cake_balance: my ideas agree, but I've never tried a situation like {'pieces': 1, 'cut': 3, 'wholes': 2}; I'll set that up"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "choice": "cake_balance",
+   "kind": "choice",
+   "lesson": 9,
+   "text": "chose to play with cake_balance"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 9,
+   "text": "cake_balance: eq(pieces, groups(cut, wholes)) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "kind": "bored",
+   "lesson": 9,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "invent",
+   "lesson": 9,
+   "text": "One piece of a cake cut into 2 balances no whole number of cakes: not 0, not 1. Yet 2 of them balance exactly 1 cake. So there are amounts *between* my numbers. I'll treat every pile of equal pieces (so many pieces of a cake cut into so many) as a number too. Two piles are the same number when, cut again into the same kind of piece, they have the same count. My whole numbers are piles of a cake 'cut into 1'."
+  },
+  {
+   "kind": "word",
+   "lesson": 9,
+   "text": "'a/b' means a pieces of a cake cut into b"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 9,
+   "text": "People write 'so many pieces of a cake cut into so many' like 2/3."
+  },
+  {
+   "kind": "word",
+   "lesson": 9,
+   "text": "'divided' asks: what, times the second number, gives the first? (checked on all 6 sharings)"
+  },
+  {
+   "kind": "word",
+   "lesson": 9,
+   "text": "'\u00f7' asks: what, times the second number, gives the first? (checked on all 6 sharings)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 9,
+   "text": "I shared cakes fairly between people and said 'divided' out loud."
   },
   {
    "kind": "trainer",
    "lesson": 9,
    "text": "Exam for lesson 9, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 9,
+   "text": "What you found in 'amounts:cake' is what people call fractions (the rational numbers)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 10,
+   "text": "Lesson 10: The tough final exam"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 10,
+   "text": "No teaching today. Show me what you can do."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 10,
+   "text": "Exam for lesson 10, attempt 1: passed"
   }
  ],
  "memory": {
   "episodes": {
+   "cake_balance": [
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 0,
+      "wholes": 0
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 1,
+      "wholes": 0
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 2,
+      "wholes": 0
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 0,
+      "wholes": 1
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 1,
+      "wholes": 1
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 2,
+      "wholes": 1
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 0,
+      "wholes": 2
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 1,
+      "wholes": 2
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 2,
+      "wholes": 2
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 3,
+      "wholes": 2
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 2,
+      "wholes": 3
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "pieces": 1,
+      "wholes": 0
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "pieces": 0,
+      "wholes": 1
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "pieces": 1,
+      "wholes": 1
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "pieces": 2,
+      "wholes": 1
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "pieces": 3,
+      "wholes": 1
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "pieces": 1,
+      "wholes": 2
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "pieces": 1,
+      "wholes": 3
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 3,
+      "pieces": 2,
+      "wholes": 1
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 3,
+      "pieces": 1,
+      "wholes": 2
+     },
+     "outcome": false
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "pieces": 0,
+      "wholes": 0
+     },
+     "outcome": true
+    },
+    {
+     "inputs": {
+      "cut": 5,
+      "pieces": 6,
+      "wholes": 0
+     },
+     "outcome": false
+    }
+   ],
    "collide": [
     {
      "inputs": {
@@ -5598,6 +6351,127 @@
      "m": 2.059
     }
    ],
+   "recut": [
+    {
+     "inputs": {
+      "cut": 1,
+      "recut": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "recut": 3
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "recut": 1
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "cut": 4,
+      "recut": 5
+     },
+     "outcome": 20
+    },
+    {
+     "inputs": {
+      "cut": 3,
+      "recut": 3
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "recut": 2
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "cut": 6,
+      "recut": 1
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "cut": 3,
+      "recut": 5
+     },
+     "outcome": 15
+    },
+    {
+     "inputs": {
+      "cut": 4,
+      "recut": 5
+     },
+     "outcome": 20
+    },
+    {
+     "inputs": {
+      "cut": 1,
+      "recut": 3
+     },
+     "outcome": 3
+    },
+    {
+     "inputs": {
+      "cut": 5,
+      "recut": 5
+     },
+     "outcome": 25
+    },
+    {
+     "inputs": {
+      "cut": 6,
+      "recut": 1
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "cut": 6,
+      "recut": 4
+     },
+     "outcome": 24
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "recut": 6
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "cut": 4,
+      "recut": 6
+     },
+     "outcome": 24
+    },
+    {
+     "inputs": {
+      "cut": 4,
+      "recut": 2
+     },
+     "outcome": 8
+    },
+    {
+     "inputs": {
+      "cut": 2,
+      "recut": 2
+     },
+     "outcome": 4
+    }
+   ],
    "spend_coins": [
     {
      "inputs": {
@@ -6110,6 +6984,24 @@
    ]
   },
   "specs": {
+   "cake_balance": {
+    "action": null,
+    "group_by": null,
+    "inputs": {
+     "cut": "int",
+     "pieces": "int",
+     "wholes": "int"
+    },
+    "kind": "program",
+    "name": "cake_balance",
+    "out_type": "bool",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "level",
+    "tol": 1e-09,
+    "units": {}
+   },
    "collide": {
     "action": null,
     "group_by": null,
@@ -6464,6 +7356,23 @@
      ]
     }
    },
+   "recut": {
+    "action": null,
+    "group_by": null,
+    "inputs": {
+     "cut": "int",
+     "recut": "int"
+    },
+    "kind": "program",
+    "name": "recut",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "pieces_per_cake",
+    "tol": 1e-09,
+    "units": {}
+   },
    "spend_coins": {
     "action": "spend",
     "group_by": null,
@@ -6550,6 +7459,7 @@
  },
  "name": "Ultron",
  "names": {
+  "amounts:cake": "fractions (the rational numbers)",
   "collide": "conservation of momentum",
   "gas": "Boyle's law",
   "groups": "multiplication",
@@ -6684,7 +7594,8 @@
   }
  },
  "search_steps": {
-  "collide": 50,
+  "cake_balance": 88836,
+  "collide": 60,
   "earn_coins": 40011,
   "earn_notes": 1266,
   "gas": 28,
@@ -6700,6 +7611,7 @@
   "pay": 85227,
   "peekaboo": 8,
   "push": 180,
+  "recut": 5516,
   "spend_coins": 1066,
   "spend_notes": 40790,
   "stretch": 176,
@@ -6765,6 +7677,12 @@
    "relation",
    "same"
   ],
+  "divided": [
+   "inv_op",
+   "groups",
+   "xy",
+   "times"
+  ],
   "eight": [
    "number",
    8
@@ -6780,6 +7698,9 @@
   "four": [
    "number",
    4
+  ],
+  "infix:/": [
+   "amount_sep"
   ],
   "minus": [
    "op",
@@ -6840,6 +7761,12 @@
    "op",
    "groups",
    "xy"
+  ],
+  "\u00f7": [
+   "inv_op",
+   "groups",
+   "xy",
+   "times"
   ]
  }
 }

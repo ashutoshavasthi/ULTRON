@@ -11,10 +11,11 @@ Baby Ultron (Phase 1) starts from a few innate abilities (counting, "same",
 - Newton's second law, spring stiffness (a property it invented), and momentum and energy conservation;
 - Kepler's third law and Boyle's law, from real measurements.
 
-It **invented negative numbers itself**. It lived with a purse of coins and IOU
+It **invented negative numbers and fractions itself**. It lived with a purse of coins and IOU
 notes, noticed that its purse states form one line continuing past empty, and
-decided those were places below zero. It was told the words for them only
-afterwards.
+decided those were places below zero. It cut cakes and weighed the pieces,
+found amounts *between* its numbers, and invented fractions. It was told the
+words for them only afterwards.
 
 It then passes a tough final exam with no teaching. The exam includes:
 - division, which it was never taught (it reasons backwards through its
@@ -27,7 +28,7 @@ Every law is a small program or formula it wrote and can explain. Every answer
 comes with its reasons.
 
 ```bash
-python -m ultron train                          # ~1 min, no dependencies beyond Python 3.10+
+python -m ultron train                          # seconds; no dependencies beyond Python 3.10+
 python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
 python -m ultron why "3 + 2"

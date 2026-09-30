@@ -86,6 +86,21 @@ class Brain:
         flags = tuple(sorted((k, v) for k, v in inputs.items() if isinstance(v, bool)))
         return (zeros, order, flags)
 
+    def unsure(self, options):
+        """Kinds of experience where I hold an idea I haven't confirmed yet."""
+        for name in options:
+            spec = self.memory.specs.get(name)
+            if spec is None or spec.kind != "program" or self.hypotheses.get(name) is None:
+                continue
+            law = self.library.get(name)
+            if law is None or law.provenance.get("doubted"):
+                return name
+        return None
+
+    def trusts(self, name):
+        law = self.library.get(name)
+        return law is not None and not law.provenance.get("doubted")
+
     def propose(self, spec_name, options):
         """Design an experiment. First, the situation where my current explanation
         and its rivals disagree most, so the world decides between them. If they all
@@ -195,6 +210,11 @@ class Brain:
                 self._confirm_program(spec, expr)
             return None
         self.streak[name] = 0
+        trusted = self.library.get(name)
+        if trusted is not None and not trusted.provenance.get("doubted"):
+            trusted.provenance["doubted"] = True
+            self.note("doubt", f"{name}: my confirmed law {show(trusted.expr)} just failed; "
+                               f"I don't trust it any more until a better one is confirmed")
         eps = self.memory.of(name)
         last_fail = self.failed_search.get(name)
         if last_fail is not None and len(eps) < 2 * last_fail:
@@ -297,9 +317,11 @@ class Brain:
             spec = self.memory.specs[name]
             if spec.kind == "conservation" and self.memory.of(name):
                 self._learn_conservation(spec, True, reflecting=True)
+        from .amounts import look_for_amounts
         from .invention import find_inverses, look_for_line
         look_for_line(self)
         find_inverses(self)
+        look_for_amounts(self)
 
     def _learn_conservation(self, spec, surprised, reflecting=False):
         if not surprised and spec.name in self.claws:

@@ -2,9 +2,9 @@
 what is 23 plus 19 | 42
 what times 6 equals 54 | 9
 5 minus 8 | -3
-negative two plus seven | 5
 12 times 11 | 132
-what is 7 divided 2 | refuse
+what is 7 divided 2 | 7/2
+what times 0 equals 5 | refuse
 find a given F=30 m=6 | 5
 find m given F=30 a=6 | 5
 find T given r=227956000000 system=Sun | 59355072

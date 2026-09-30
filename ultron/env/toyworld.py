@@ -97,3 +97,35 @@ class ShopWorld:
             self.coins.pop()
         else:
             self.notes.append(self._new())
+
+
+class Bakery:
+    """Identical cakes, a knife that cuts anything into equal pieces, and a balance.
+
+    The world knows how heavy each piece really is (an exact share of a cake).
+    Ultron only sees how many pieces there are, how many pieces a cake was cut
+    into, and which pan of the balance goes down. Nothing here mentions fractions.
+    """
+
+    def __init__(self, seed=0):
+        from fractions import Fraction
+        self._F = Fraction
+        self.rng = random.Random(seed)
+
+    def cut(self, cakes, into):
+        """Cut `cakes` whole cakes into `into` equal pieces each."""
+        return [self._F(1, into)] * (cakes * into)
+
+    def recut(self, pieces, into):
+        return [p / into for p in pieces for _ in range(into)]
+
+    @staticmethod
+    def wholes(n):
+        from fractions import Fraction
+        return [Fraction(1)] * n
+
+    @staticmethod
+    def balance(left, right):
+        """-1 if the left pan goes up, 0 if level, 1 if it goes down."""
+        a, b = sum(left), sum(right)
+        return (a > b) - (a < b)
