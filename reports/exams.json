@@ -471,7 +471,7 @@
       30
      ],
      "nearest": [
-      6,
+      3,
       30
      ],
      "ultron": [
@@ -626,7 +626,7 @@
   "passed": true,
   "story": "Repeating 'tick' from the start, slot counts 1, 2, ... 5, and the 6th 'tick' brings me back to the start. So here numbers go round: after 5 comes 0 again. 6 'tick's change nothing, and going back one is the same as going on 5. These are a new kind of number that repeats every 6.",
   "threshold": 0.99,
-  "tick_law": "earn_coins(slot, groups(6, take_away(slot, 4)))"
+  "tick_law": "if eq(slot, 5) then 0 else succ(slot)"
  },
  "12": {
   "attempt": 1,

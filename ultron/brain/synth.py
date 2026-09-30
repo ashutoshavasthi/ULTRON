@@ -27,6 +27,19 @@ class _Done(Exception):
     pass
 
 
+MAX_SAME_SIZE = 40
+
+
+def borrowed(expr):
+    """How many laws from the library an explanation borrows."""
+    if not isinstance(expr, tuple):
+        return 0
+    own = 1 if expr[0] in ("call", "call1") else 0
+    if expr[0] == "iter" and expr[1][0] in ("call", "call1"):
+        own += 1
+    return own + sum(borrowed(e) for e in expr[1:] if isinstance(e, tuple))
+
+
 def _vec_iter(F, nvec, xvec, tvec, library):
     out = []
     for i, (n, acc) in enumerate(zip(nvec, xvec)):
@@ -95,10 +108,17 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
         if vec is None:
             return
         if typ == out_type and vec == target:
-            state["matches"].append(expr)
+            state["matches"].append((s, expr))
             if state["first_size"] is None:
                 state["first_size"] = s
-            if len(state["matches"]) > n_rivals:
+            # finish the size where the first explanation appeared (to compare all the
+            # equally short ones), then only collect enough rivals
+            state["least_borrowed"] = min(state.get("least_borrowed", 99), borrowed(expr)) \
+                if s == state["first_size"] else state.get("least_borrowed", 99)
+            if len(state["matches"]) > n_rivals and (
+                    s > state["first_size"] or state["least_borrowed"] == 0):
+                raise _Done()   # nothing equally short can borrow fewer laws than none
+            if len(state["matches"]) >= MAX_SAME_SIZE:
                 raise _Done()
         if vec in seen[typ]:
             return
@@ -119,7 +139,14 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
 
     def result(exhausted):
         m = state["matches"]
-        return SearchResult(m[0] if m else None, state["steps"], exhausted and not m, m[1:])
+        if not m:
+            return SearchResult(None, state["steps"], exhausted)
+        shortest = [e for sz, e in m if sz == state["first_size"]]
+        # equally short: borrowing a law from the library costs more description (it is
+        # one choice among many laws) than a basic step, so prefer fewer borrowed laws
+        best = min(shortest, key=lambda e: (borrowed(e), shortest.index(e)))
+        rest = [e for _, e in m if e is not best]
+        return SearchResult(best, state["steps"], False, rest)
 
     try:
         # size 1: what it perceives, and the constants it knows
@@ -133,7 +160,8 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
                 consider(("const", c), BOOL, tuple(c for _ in inputs), 1)
 
         for s in range(2, max_size + 1):
-            if state["first_size"] is not None and s > state["first_size"] + 1:
+            if state["first_size"] is not None and (
+                    s > state["first_size"] + 1 or len(state["matches"]) > n_rivals):
                 return result(False)
             # one-argument building blocks
             for e, v in list(at(INT, s - 1)):

@@ -508,7 +508,6 @@
     1.0,
     1.0,
     1.0,
-    1.0,
     0.0,
     0.0,
     0.0,
@@ -547,7 +546,7 @@
   "spend_notes": "take_away(succ(notes), coins)",
   "spin": "repeat ticks times [tick] starting from start",
   "take_away": "repeat n_taken times [pred] starting from nA",
-  "tick": "earn_coins(slot, groups(6, take_away(slot, 4)))"
+  "tick": "if eq(slot, 5) then 0 else succ(slot)"
  },
  "inventions": {
   "amounts:cake": {
@@ -1092,30 +1091,27 @@
   },
   "tick": {
    "expr": [
-    "call",
-    "earn_coins",
+    "ite",
     [
-     "var",
-     "slot"
-    ],
-    [
-     "call",
-     "groups",
+     "eq",
      [
-      "const",
-      6
+      "var",
+      "slot"
      ],
      [
-      "call",
-      "take_away",
-      [
-       "var",
-       "slot"
-      ],
-      [
-       "const",
-       4
-      ]
+      "const",
+      5
+     ]
+    ],
+    [
+     "const",
+     0
+    ],
+    [
+     "succ",
+     [
+      "var",
+      "slot"
      ]
     ]
    ],
@@ -1125,8 +1121,8 @@
     "slot"
    ],
    "provenance": {
-    "experiences": 12,
-    "found_after": 4,
+    "experiences": 11,
+    "found_after": 3,
     "lesson": 11,
     "size": 7
    }
@@ -2224,7 +2220,7 @@
   {
    "kind": "revise",
    "lesson": 4,
-   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was repeated_groups(left, right); 1 experiences, 3551 programs searched)"
+   "text": "numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was repeated_groups(left, right); 1 experiences, 11273 programs searched)"
   },
   {
    "choice": "numeral",
@@ -4159,7 +4155,7 @@
   {
    "kind": "revise",
    "lesson": 9,
-   "text": "recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(cut, recut); 1 experiences, 801 programs searched)"
+   "text": "recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(cut, recut); 1 experiences, 1625 programs searched)"
   },
   {
    "choice": "cake_balance",
@@ -4186,7 +4182,7 @@
   {
    "kind": "design",
    "lesson": 9,
-   "text": "recut: my 4 explanations disagree about {'cut': 6, 'recut': 6}; I'll set that up to find out"
+   "text": "recut: my 6 explanations disagree about {'cut': 6, 'recut': 6}; I'll set that up to find out"
   },
   {
    "choice": "cake_balance",
@@ -4448,7 +4444,7 @@
   {
    "kind": "revise",
    "lesson": 9,
-   "text": "cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 86693 programs searched)"
+   "text": "cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 184972 programs searched)"
   },
   {
    "choice": "recut",
@@ -4655,7 +4651,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "tick: surprised; new best explanation is earn_coins(slot, groups(slot, take_away(slot, 3))) (was spend_notes(slot, 0); 3 experiences, 268477 programs searched)"
+   "text": "tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2186955 programs searched)"
   },
   {
    "choice": "tick",
@@ -4666,18 +4662,7 @@
   {
    "kind": "design",
    "lesson": 11,
-   "text": "tick: my 4 explanations disagree about {'slot': 4}; I'll set that up to find out"
-  },
-  {
-   "kind": "revise",
-   "lesson": 11,
-   "text": "tick: surprised; new best explanation is earn_coins(slot, groups(6, take_away(slot, 4))) (was earn_coins(slot, groups(slot, take_away(slot, 3))); 4 experiences, 283100 programs searched)"
-  },
-  {
-   "choice": "tick",
-   "kind": "choice",
-   "lesson": 11,
-   "text": "chose to play with tick"
+   "text": "tick: my 29 explanations disagree about {'slot': 4}; I'll set that up to find out"
   },
   {
    "choice": "tick",
@@ -4724,7 +4709,7 @@
   {
    "kind": "confirm",
    "lesson": 11,
-   "text": "tick: earn_coins(slot, groups(6, take_away(slot, 4))) predicted 8 new experiences in a row; added to my library of building blocks"
+   "text": "tick: if eq(slot, 5) then 0 else succ(slot) predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "tick",
@@ -4823,7 +4808,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "spin: surprised; new best explanation is take_away(start, 4) (was 1; 2 experiences, 426 programs searched)"
+   "text": "spin: surprised; new best explanation is take_away(start, 4) (was 1; 2 experiences, 2467 programs searched)"
   },
   {
    "choice": "spin",
@@ -4834,7 +4819,7 @@
   {
    "kind": "design",
    "lesson": 11,
-   "text": "spin: my 4 explanations disagree about {'start': 4, 'ticks': 8}; I'll set that up to find out"
+   "text": "spin: my 6 explanations disagree about {'start': 4, 'ticks': 8}; I'll set that up to find out"
   },
   {
    "choice": "spin",
@@ -4850,7 +4835,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 135855 programs searched)"
+   "text": "spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 133689 programs searched)"
   },
   {
    "choice": "spin",
@@ -8132,17 +8117,24 @@
     },
     {
      "inputs": {
-      "start": 1,
-      "ticks": 1
+      "start": 2,
+      "ticks": 2
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "start": 0,
+      "ticks": 8
      },
      "outcome": 2
     },
     {
      "inputs": {
-      "start": 4,
+      "start": 5,
       "ticks": 0
      },
-     "outcome": 4
+     "outcome": 5
     },
     {
      "inputs": {
@@ -8203,23 +8195,23 @@
     {
      "inputs": {
       "start": 3,
-      "ticks": 3
+      "ticks": 9
      },
      "outcome": 0
     },
     {
      "inputs": {
-      "start": 4,
-      "ticks": 3
+      "start": 1,
+      "ticks": 8
      },
-     "outcome": 1
+     "outcome": 3
     },
     {
      "inputs": {
-      "start": 5,
+      "start": 1,
       "ticks": 4
      },
-     "outcome": 3
+     "outcome": 5
     },
     {
      "inputs": {
@@ -8241,13 +8233,6 @@
       "ticks": 4
      },
      "outcome": 1
-    },
-    {
-     "inputs": {
-      "start": 3,
-      "ticks": 8
-     },
-     "outcome": 5
     }
    ],
    "stretch": [
@@ -8626,12 +8611,6 @@
       "slot": 3
      },
      "outcome": 4
-    },
-    {
-     "inputs": {
-      "slot": 2
-     },
-     "outcome": 3
     }
    ]
   },
@@ -9373,7 +9352,7 @@
   }
  },
  "search_steps": {
-  "cake_balance": 89188,
+  "cake_balance": 187467,
   "collide": 100,
   "earn_coins": 9906,
   "earn_notes": 19,
@@ -9384,20 +9363,20 @@
   "lab_stretch": 116,
   "lamps": 7882,
   "merge": 532,
-  "numeral": 3551,
+  "numeral": 11273,
   "orbit": 46,
   "pair_off": 67,
   "pay": 76918,
   "peekaboo": 8,
   "push": 180,
-  "recut": 801,
+  "recut": 1625,
   "roll": 1724,
   "spend_coins": 35,
   "spend_notes": 27565,
-  "spin": 136312,
+  "spin": 136187,
   "stretch": 176,
   "take_away": 705,
-  "tick": 553724
+  "tick": 2189102
  },
  "symmetric": [
   "get_paid",

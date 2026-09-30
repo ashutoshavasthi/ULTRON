@@ -45,7 +45,7 @@ Every law below was found by Ultron's own search from its own experiences. The n
 | `get_paid(purse, wage)` | `merge(purse, wage)` | 3 | 2 experiences |  |
 | `recut(cut, recut)` | `groups(cut, recut)` | 3 | 1 experiences |  |
 | `cake_balance(cut, pieces, wholes)` | `eq(pieces, groups(cut, wholes))` | 5 | 16 experiences |  |
-| `tick(slot)` | `earn_coins(slot, groups(6, take_away(slot, 4)))` | 7 | 4 experiences |  |
+| `tick(slot)` | `if eq(slot, 5) then 0 else succ(slot)` | 7 | 3 experiences |  |
 | `spin(start, ticks)` | `repeat ticks times [tick] starting from start` | 4 | 4 experiences |  |
 | `grow(days, split)` | `repeated_groups(split, days)` | 3 | 1 experiences | exponential growth |
 
@@ -116,7 +116,7 @@ Every law below was found by Ultron's own search from its own experiences. The n
 | 10 | impossible physics: unknown spring, or a quantity no law relates | **10/10 (100%)** | n/a | n/a |
 | 10 | unseen real bodies: Ceres, Halley's Comet; Earth's distance from its year; Titan (unknown system: must refuse) | **4/4 (100%)** | n/a | n/a |
 | 11 | invented numbers that go round (a cycle), without being told | **1/1 (100%)** | n/a | n/a |
-| 11 | spins of 1,000-1,000,000 ticks (trained: up to 8) | **30/30 (100%)** | 0/30 (0%) | 6/30 (20%) |
+| 11 | spins of 1,000-1,000,000 ticks (trained: up to 8) | **30/30 (100%)** | 0/30 (0%) | 3/30 (10%) |
 | 11 | '17 after 4' in words | **20/20 (100%)** | n/a | n/a |
 | 11 | going backwards: '-2 after 3' (never experienced) | **10/10 (100%)** | n/a | n/a |
 | 11 | 'what after 4 equals 1' (the nearest answer) | **10/10 (100%)** | n/a | n/a |

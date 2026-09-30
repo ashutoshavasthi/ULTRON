@@ -77,7 +77,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _word_: 'equals' joins things that are the same amount
 - Ultron _word_: '=' joins things that are the same amount
 - **Trainer**: I acted out 'plus', 'minus', 'times' with real piles and said the words.
-- Ultron _revise_: numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was repeated_groups(left, right); 1 experiences, 3551 programs searched)
+- Ultron _revise_: numeral: surprised; new best explanation is succ(succ(groups(8, 9))) (was repeated_groups(left, right); 1 experiences, 11273 programs searched)
 - Ultron _revise_: numeral: surprised; my other idea merge(right, groups(left, 10)) fits everything (was succ(succ(groups(8, 9))))
 - Ultron _confirm_: numeral: merge(right, groups(left, 10)) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
@@ -195,12 +195,12 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: recut
 - **Trainer**: Here are cakes, a knife that cuts into equal pieces, and a balance. Play.
 - Ultron _revise_: cake_balance: surprised; new best explanation is true (was nothing; 1 experiences, 51 programs searched)
-- Ultron _revise_: recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(cut, recut); 1 experiences, 801 programs searched)
+- Ultron _revise_: recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(cut, recut); 1 experiences, 1625 programs searched)
 - Ultron _revise_: cake_balance: surprised; new best explanation is lt(pieces, cut) (was true; 2 experiences, 2444 programs searched)
 - Ultron _revise_: cake_balance: surprised; my other idea eq(pieces, wholes) fits everything (was lt(pieces, cut))
 - Ultron _confirm_: recut: groups(cut, recut) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: cake_balance: eq(pieces, wholes) predicted 8 new experiences in a row; added to my library of building blocks
-- Ultron _revise_: cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 86693 programs searched)
+- Ultron _revise_: cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 184972 programs searched)
 - Ultron _confirm_: cake_balance: eq(pieces, groups(cut, wholes)) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _reflect_: 'recut' gives the same answer either way round, so I can count along the smaller number
@@ -225,15 +225,14 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Here is a wheel with a pointer. You can make it tick. Play.
 - Ultron _revise_: tick: surprised; new best explanation is 1 (was nothing; 1 experiences, 21 programs searched)
 - Ultron _revise_: tick: surprised; new best explanation is spend_notes(slot, 0) (was 1; 2 experiences, 2126 programs searched)
-- Ultron _revise_: tick: surprised; new best explanation is earn_coins(slot, groups(slot, take_away(slot, 3))) (was spend_notes(slot, 0); 3 experiences, 268477 programs searched)
-- Ultron _revise_: tick: surprised; new best explanation is earn_coins(slot, groups(6, take_away(slot, 4))) (was earn_coins(slot, groups(slot, take_away(slot, 3))); 4 experiences, 283100 programs searched)
-- Ultron _confirm_: tick: earn_coins(slot, groups(6, take_away(slot, 4))) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _revise_: tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2186955 programs searched)
+- Ultron _confirm_: tick: if eq(slot, 5) then 0 else succ(slot) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Now spin it as many ticks as you like and watch where it stops.
 - Ultron _meet_: new kind of experience: spin
 - Ultron _revise_: spin: surprised; new best explanation is 1 (was repeated_groups(start, ticks); 1 experiences, 31 programs searched)
-- Ultron _revise_: spin: surprised; new best explanation is take_away(start, 4) (was 1; 2 experiences, 426 programs searched)
-- Ultron _revise_: spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 135855 programs searched)
+- Ultron _revise_: spin: surprised; new best explanation is take_away(start, 4) (was 1; 2 experiences, 2467 programs searched)
+- Ultron _revise_: spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 133689 programs searched)
 - Ultron _confirm_: spin: repeat ticks times [tick] starting from start predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _word_: 'after' behaves exactly like my law 'spin' (arguments yx) in all 6 demonstrations
