@@ -296,6 +296,23 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 
 ## Lesson 15
 
-- **Trainer**: Lesson 15: Phase 2 final exam
-- **Trainer**: No teaching today. Show me what you can do.
+- **Trainer**: Lesson 15: The diagonal of a tile
+- Ultron _meet_: new kind of experience: square
+- **Trainer**: Here are square tiles. Build squares and count the tiles in them.
+- Ultron _revise_: square: surprised; new best explanation is side (was nothing; 1 experiences, 18 programs searched)
+- Ultron _revise_: square: surprised; new best explanation is groups(side, side) (was side; 2 experiences, 2528 programs searched)
+- Ultron _confirm_: square: groups(side, side) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _bored_: nothing here is teaching me anything new any more
+- Ultron _reflect_: the square built on a tile's diagonal is covered by 4 half-tiles: 2 tiles
+- Ultron _reflect_: a square is a square: my 'square' law holds for the square on the diagonal too, so the diagonal is the side whose square holds 2 tiles: a number in a gap of my line, between 141/100 and 71/50
+- **Trainer**: Now measure the diagonal with rulers. Say what each will read first.
+- Ultron _meet_: new kind of experience: ruler
 - **Trainer**: Exam for lesson 15, attempt 1: passed
+- **Trainer**: What you found in 'gaps' is what people call irrational numbers (the real numbers).
+- **Trainer**: What you found in 'diagonal' is what people call the square root of 2 (√2), a tile's diagonal.
+
+## Lesson 16
+
+- **Trainer**: Lesson 16: Phase 2 final exam
+- **Trainer**: No teaching today. Show me what you can do.
+- **Trainer**: Exam for lesson 16, attempt 1: passed

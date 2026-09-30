@@ -68,6 +68,8 @@ class Trainer:
                 self.teach_sharing(lesson)
             elif lesson.number == 11:
                 self.teach_wheel(lesson)
+            elif lesson.number == 15:
+                self.teach_diagonal(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -176,6 +178,39 @@ class Trainer:
         bind_operation(brain, "after", lesson.after_demos())
         self.say("I spun the wheel and said '3 after 5 equals 2' and so on.")
 
+    # ----------------------------------------------------------- lesson 15
+    def teach_diagonal(self, lesson):
+        from ..brain import amounts, gaps
+        from ..brain.perception import count
+        brain = self.brain
+        self.say("Here are square tiles. Build squares and count the tiles in them.")
+        free_play(brain, lesson, lesson.budget)
+        if not brain.trusts("square"):
+            self.say("You haven't found how many tiles a square takes. The lesson stops here.")
+            return
+        halves = count(lesson.world.square_on_a_diagonal())
+        area = amounts.simplest(brain, (halves, count(["half", "half"])))
+        brain.note("reflect", f"the square built on a tile's diagonal is covered by {halves} "
+                              f"half-tiles: {amounts.show(brain, area)} tiles")
+        if not gaps.invented(brain):
+            self.say("You don't have numbers for this yet. The lesson stops here.")
+            return
+        # a square is a square: the diagonal is the side whose square holds `area` tiles
+        gap = gaps.Gap("square", "xy", (0, 1), area, True, one_input=True)
+        if gaps.pin(brain, gap, 10) is None:
+            self.say("You can't pin that length down. The lesson stops here.")
+            return
+        brain.quantities["diagonal"] = gap.to_json()
+        brain.note("reflect", f"a square is a square: my 'square' law holds for the square on "
+                              f"the diagonal too, so the diagonal is the side whose square holds "
+                              f"{amounts.show(brain, area)} tiles: a number in a gap of my line, "
+                              f"{gaps.describe(brain, gap)[1]}")
+        self.say("Now measure the diagonal with rulers. Say what each will read first.")
+        brain.meet(lesson.ruler_spec())
+        for marks in (1, 2, 3, 5, 7, 10, 12, 20, 30):
+            inputs, reading = lesson.ruler(marks)
+            brain.experience("ruler", inputs, reading)
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -196,6 +231,8 @@ class Trainer:
         13: {"repeated_groups": "powers (exponentiation)", "grow": "exponential growth"},
         14: {"hidden:bounce": "energy: gravitational + kinetic + elastic (spring)",
              "bounce": "conservation of energy with a spring"},
+        15: {"gaps": "irrational numbers (the real numbers)",
+             "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }
 
     def name_concepts(self, number):
@@ -204,7 +241,7 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=15):
+    def run_all(self, upto=16):
         for n in range(upto + 1):
             self.run(n)
         return self.results

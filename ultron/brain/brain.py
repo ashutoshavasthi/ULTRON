@@ -41,6 +41,7 @@ class Brain:
         self.active = True                  # design experiments when ideas disagree
         self.found_at = {}                  # spec -> experiences when current idea was found
         self.compress = True                # look for patterns among its own laws
+        self.quantities = {}                # lengths etc. Ultron holds an idea about
         self.lesson = None
 
     # ------------------------------------------------------------------ utils
@@ -158,7 +159,19 @@ class Brain:
             return law.solve(spec.target, inputs, group)
         if spec.kind == "conservation":
             return self._predict_collision(spec_name, inputs)
+        if spec.kind == "measure":
+            return self._predict_reading(spec, inputs)
         raise ValueError(spec.kind)
+
+    def _predict_reading(self, spec, inputs):
+        """A ruler with `marks` per unit passes c marks when the length lies between
+        c/marks and (c+1)/marks: pin the length at exactly that kind of piece."""
+        from . import gaps
+        idea = self.quantities.get(spec.target)
+        if idea is None:
+            return None
+        c = gaps.pin(self, gaps.Gap.from_json(idea), inputs["marks"])
+        return None if c is None else c[0]
 
     def _predict_collision(self, spec_name, inp):
         for law in self.claws.get(spec_name, []):
@@ -203,6 +216,12 @@ class Brain:
         elif spec.kind == "quantity":
             self.memory.store(spec_name, {**inputs, spec.target: outcome})
             revised = self._learn_quantity(spec, surprised)
+        elif spec.kind == "measure":
+            self.memory.store(spec_name, {"inputs": inputs, "outcome": outcome})
+            revised = None
+            if surprised:
+                self.note("doubt", f"{spec_name}: my idea of {spec.target} predicted "
+                                   f"{predicted}, but the ruler read {outcome}")
         else:
             self.memory.store(spec_name, {"inputs": inputs, "outcome": outcome})
             revised = self._learn_conservation(spec, surprised)
@@ -394,10 +413,12 @@ class Brain:
                 self._learn_conservation(spec, True, reflecting=True)
         from .invention import find_inverses, look_for_shapes
         from .compression import look_for_ladders
+        from .gaps import look_for_gaps
         self._check_symmetry()
         look_for_shapes(self)
         find_inverses(self)
         look_for_ladders(self)
+        look_for_gaps(self)
 
     def _check_symmetry(self):
         """Which of my laws give the same result either way round? (checked, not assumed)"""
@@ -463,6 +484,7 @@ class Brain:
             "names": dict(sorted(self.names.items())),
             "search_steps": dict(sorted(self.search_steps.items())),
             "inventions": dict(sorted(self.inventions.items())),
+            "quantities": dict(sorted(self.quantities.items())),
             "inverses": dict(sorted(self.library.inverses.items())),
             "cycles": dict(sorted(self.library.cycles.items())),
             "symmetric": sorted(self.library.symmetric),
@@ -491,6 +513,7 @@ class Brain:
         b.names = dict(d.get("names", {}))
         b.search_steps = dict(d.get("search_steps", {}))
         b.inventions = dict(d.get("inventions", {}))
+        b.quantities = dict(d.get("quantities", {}))
         b.library.inverses = dict(d.get("inverses", {}))
         b.library.cycles = dict(d.get("cycles", {}))
         b.library.symmetric = set(d.get("symmetric", []))

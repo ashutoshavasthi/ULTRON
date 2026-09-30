@@ -162,7 +162,8 @@ def special_section(results, brain):
                      "re-cutting both piles into sixths.")
     for n, what in ((11, "Inventing clock numbers"), (12, "Inventing energy"),
                     (13, "Predicting powers from a pattern in its own laws"),
-                    (14, "Inventing energy with three parts (a spring)")):
+                    (14, "Inventing energy with three parts (a spring)"),
+                    (15, "Inventing numbers in the gaps (irrational numbers)")):
         r = results.get(str(n)) or results.get(n)
         if r and r.get("story"):
             lines.append(f"- **{what}** (lesson {n}, Phase 2): _{r['story']}_")

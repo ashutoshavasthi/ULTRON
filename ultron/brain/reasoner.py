@@ -203,7 +203,8 @@ def inverse(brain, raw):
             return Answer(None, why if goal_a is None else why2, steps)
         x = amounts.solve(brain, op[1], op[2], known_a, goal_a, left[0] == UNKNOWN)
         if x is None:
-            return Answer(None, "no number or amount I know works", steps)
+            ans = _in_a_gap(brain, op, left, known_a, goal_a, left[0] == UNKNOWN, steps)
+            return ans or Answer(None, "no number or amount I know works", steps)
         steps.append(f"'{left[1]}' is {_law_note(brain, op[1])}")
         steps.append(f"I looked through cakes cut into 1, 2, 3... pieces and found "
                      f"{amounts.show(brain, x)}")
@@ -246,16 +247,39 @@ def inverse(brain, raw):
     from . import amounts
     if amounts.invented(brain):
         x = amounts.solve(brain, op[1], op[2], (known, 1), (goal, 1), unknown_first)
+        if x is None:
+            ans = _in_a_gap(brain, op, left, (known, 1), (goal, 1), unknown_first, steps)
+            if ans:
+                return ans
         if x is not None:
             steps.append(f"'{left[1]}' is {_law_note(brain, op[1])}")
             steps.append(f"no whole number from {span} works, so I looked at amounts: pieces "
                          f"of cakes cut into 2, 3, ... and found {amounts.show(brain, x)}")
             return Answer(x, amounts.show(brain, x), steps)
         return Answer(None, f"no number or amount I know works: I looked through amounts cut "
-                            f"into up to {max(60, abs(known))} pieces, and none gives {goal}",
+                            f"into up to {amounts.LAST_CUT[0]} pieces, and none gives {goal}",
                       steps)
     return Answer(None, f"no number I know works: I tried every number from {span} "
                         f"and none of them gives {goal}", steps)
+
+
+def _in_a_gap(brain, op, left, known, goal, unknown_first, steps):
+    """No pile of pieces answers it: is the answer a number in a gap of the line?"""
+    from . import gaps
+    if not gaps.invented(brain):
+        return None
+    gap = gaps.squeezed(brain, op[1], op[2], known, goal, unknown_first)
+    if gap is None:
+        return None
+    pinned, text, used = gaps.describe(brain, gap)
+    if pinned is None:
+        return None
+    lo, hi = pinned
+    steps.append(f"'{left[1]}' is {_law_note(brain, op[1])}")
+    steps.append("no whole number and no pile of pieces works, but the answer is squeezed "
+                 "between piles however finely I cut: it is a number in a gap of my line")
+    steps.append(f"pinned as tightly as I can count (cakes cut into {used}): {text}")
+    return Answer(("between", lo, hi), text, steps)
 
 
 def physics(brain, target, knowns, objects=None):

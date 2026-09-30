@@ -7,6 +7,8 @@ Ultron's trainer. Write your own questions here and score Ultron on them.
 
 One question per line: `question | expected answer`.
 Use `refuse` as the expected answer when the only right response is "I can't".
+Use `~1.41421` for a number Ultron can only pin between two fractions (it passes if
+the value lies inside Ultron's range).
 Lines starting with `#` are comments.
 
 ```
@@ -16,6 +18,7 @@ what times 6 equals 54 | 9
 find a given F=30 m=6 | 5
 find T given r=227956000000 system=Sun | 59355072
 what is 7 divided 2 | 7/2
+what power 2 equals 2 | ~1.41421
 ```
 
 - Arithmetic answers are compared exactly as Ultron writes them (e.g. `-3`).

@@ -1178,6 +1178,272 @@
    {
     "examples": [
      {
+      "question": "gaps",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "invented numbers in the gaps of its line by reasoning, before this lesson",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "diagonal",
+      "truth": [
+       2,
+       1
+      ],
+      "ultron": [
+       2,
+       1
+      ]
+     }
+    ],
+    "name": "concluded the diagonal is the gap number whose square is 2 tiles",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "marks": 217
+      },
+      "truth": 306,
+      "ultron": 306
+     },
+     {
+      "question": {
+       "marks": 230
+      },
+      "truth": 325,
+      "ultron": 325
+     },
+     {
+      "question": {
+       "marks": 209
+      },
+      "truth": 295,
+      "ultron": 295
+     }
+    ],
+    "name": "rulers never used (31-300 marks): the reading, predicted before measuring",
+    "scores": {
+     "lookup": [
+      0,
+      10
+     ],
+     "nearest": [
+      0,
+      10
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": 60,
+      "truth": 7.745966692414834,
+      "ultron": [
+       "between",
+       [
+        387,
+        50
+       ],
+       [
+        31,
+        4
+       ]
+      ]
+     },
+     {
+      "question": 50,
+      "truth": 7.0710678118654755,
+      "ultron": [
+       "between",
+       [
+        707,
+        100
+       ],
+       [
+        177,
+        25
+       ]
+      ]
+     },
+     {
+      "question": 32,
+      "truth": 5.656854249492381,
+      "ultron": [
+       "between",
+       [
+        113,
+        20
+       ],
+       [
+        283,
+        50
+       ]
+      ]
+     }
+    ],
+    "name": "square roots of non-squares, pinned in a gap (to within 1/20)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.05
+   },
+   {
+    "examples": [
+     {
+      "question": 2,
+      "truth": 1.2599210498948732,
+      "ultron": [
+       "between",
+       [
+        5,
+        4
+       ],
+       [
+        63,
+        50
+       ]
+      ]
+     },
+     {
+      "question": 3,
+      "truth": 1.4422495703074083,
+      "ultron": [
+       "between",
+       [
+        36,
+        25
+       ],
+       [
+        29,
+        20
+       ]
+      ]
+     },
+     {
+      "question": 5,
+      "truth": 1.7099759466766968,
+      "ultron": [
+       "between",
+       [
+        17,
+        10
+       ],
+       [
+        171,
+        100
+       ]
+      ]
+     }
+    ],
+    "name": "cube roots of non-cubes, pinned in a gap (to within 1/10)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": 0.1
+   },
+   {
+    "examples": [
+     {
+      "question": 5,
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": 12,
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "still impossible: zero groups of anything is zero",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      2,
+      2
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 15,
+  "passed": true,
+  "story": "I asked myself grow(2, ?) = 2. No whole number works, and no pile of pieces either (I tried cakes cut into up to 60). But the answer is squeezed: 7/5 gives too little, 8/5 too much, and however finely I cut, it is always caught between two piles, never on one. So my finer line has GAPS: places no pile of pieces reaches. I'll treat each such place as a number too: I can't write it as pieces, but I can pin it between two piles as tightly as I can count.",
+  "threshold": 0.99
+ },
+ "16": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
       "question": "what power 2 equals 16",
       "truth": "4",
       "ultron": "4"
@@ -1389,21 +1655,51 @@
     "examples": [
      {
       "question": 2,
-      "truth": "I can't",
-      "ultron": null
+      "truth": 1.4142135623730951,
+      "ultron": [
+       "between",
+       [
+        141,
+        100
+       ],
+       [
+        71,
+        50
+       ]
+      ]
      },
      {
       "question": 3,
-      "truth": "I can't",
-      "ultron": null
+      "truth": 1.7320508075688772,
+      "ultron": [
+       "between",
+       [
+        173,
+        100
+       ],
+       [
+        87,
+        50
+       ]
+      ]
      },
      {
       "question": 5,
-      "truth": "I can't",
-      "ultron": null
+      "truth": 2.23606797749979,
+      "ultron": [
+       "between",
+       [
+        223,
+        100
+       ],
+       [
+        56,
+        25
+       ]
+      ]
      }
     ],
-    "name": "'what power 2 equals 2': no fraction works, so the right answer is 'I can't'",
+    "name": "'what power 2 equals 2': no fraction works; pinned in a gap of its line (to within 1/20)",
     "scores": {
      "lookup": [
       0,
@@ -1418,10 +1714,10 @@
       5
      ]
     },
-    "tolerance": null
+    "tolerance": 0.05
    }
   ],
-  "lesson": 15,
+  "lesson": 16,
   "passed": true,
   "threshold": 0.99
  },

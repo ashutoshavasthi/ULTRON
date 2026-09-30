@@ -10,7 +10,7 @@ from ..brain.memory import Spec
 from ..brain.perception import count, present, read_marks
 from ..env import dataworld
 from ..env.physics import PhysicsSandbox, SpringTrack, Track
-from ..env.toyworld import Bakery, Dish, ShopWorld, ToyWorld, Wheel
+from ..env.toyworld import Bakery, Dish, ShopWorld, Tiles, ToyWorld, Wheel
 
 NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
                 "nine", "ten"]
@@ -676,8 +676,40 @@ class SpringyHills(Lesson):
 
 
 # ---------------------------------------------------------------- lesson 15
+class Diagonal(Lesson):
+    number, title = 15, "The diagonal of a tile"
+    goal = ("Ultron invented numbers in the gaps of its line by reasoning alone. Here the "
+            "world checks it: counting tiles in squares, then the half-tiles in the square "
+            "on a tile's diagonal, it must conclude the diagonal is the gap number whose "
+            "square is 2, and predict every ruler reading before measuring.")
+    kind = "guided"
+    budget = 80
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.world = Tiles(seed)
+        self.rng = self.world.rng
+
+    def specs(self):
+        return [Spec("square", "program", {"side": INT}, "tiles", out_type=INT)]
+
+    def ruler_spec(self):
+        return Spec("ruler", "measure", {"marks": INT}, "diagonal", out_type=INT)
+
+    def options(self, name):
+        return [{"side": s} for s in range(0, 7)]
+
+    def scene(self, name, wide=False, request=None):
+        side = request["side"] if request else self.rng.randint(0, 6)
+        return {"side": side}, count(self.world.square(side))
+
+    def ruler(self, marks):
+        return {"marks": marks}, self.world.ruler_reading(marks)
+
+
+# ---------------------------------------------------------------- lesson 16
 class Phase2Exam(Lesson):
-    number, title = 15, "Phase 2 final exam"
+    number, title = 16, "Phase 2 final exam"
     goal = ("No teaching. Questions that combine Phase 2's inventions in ways never "
             "practised: square roots, logarithms and negative powers (never taught), "
             "fractions raised to powers, clock numbers with huge backward spins, energy for "
@@ -690,4 +722,4 @@ def all_lessons(seed=0):
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
             Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10),
             WheelLesson(seed + 11), Ramps(seed + 12), Growing(seed + 13),
-            SpringyHills(seed + 14), Phase2Exam(seed + 15)]
+            SpringyHills(seed + 14), Diagonal(seed + 15), Phase2Exam(seed + 16)]

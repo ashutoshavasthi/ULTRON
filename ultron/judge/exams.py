@@ -64,6 +64,10 @@ class Tally:
     def ok(self, got, truth):
         if truth == REFUSE:
             return got is None
+        if isinstance(got, tuple) and got and got[0] == "between":
+            lo, hi = got[1], got[2]
+            return (isinstance(truth, float) and lo[0] / lo[1] <= truth <= hi[0] / hi[1]
+                    and hi[0] / hi[1] - lo[0] / lo[1] <= (self.tol or 1.0))
         if got is None:
             return False
         if self.tol is None:
@@ -716,11 +720,11 @@ def exam_phase2(brain, seed=1014):
         b.experience("roll", {"y": h, "m": 1.0, "run": run}, 0.0)
         ans = reasoner.physics(b, "v", {"y": 0.0}, {"run": run})
         drop.item(h, world.speed_at(0.0), ans.value)
-    irrational = Tally("'what power 2 equals 2': no fraction works, so the right answer is "
-                       "'I can't'")
+    irrational = Tally("'what power 2 equals 2': no fraction works; pinned in a gap of its line "
+                       "(to within 1/20)", tol=0.05)
     for n in (2, 3, 5, 7, 8):
-        irrational.item(n, REFUSE, reasoner.arithmetic(b, f"what power 2 equals {n}").value)
-    return _result(15, [roots, logs, neg, clock, chains, drop, irrational], 0.99)
+        irrational.item(n, n ** 0.5, reasoner.arithmetic(b, f"what power 2 equals {n}").value)
+    return _result(16, [roots, logs, neg, clock, chains, drop, irrational], 0.99)
 
 
 def exam_springy(brain, seed=1015):
@@ -759,6 +763,40 @@ def exam_springy(brain, seed=1015):
                    {"story": inv["story"] if inv else None})
 
 
+def exam_diagonal(brain, seed=1016):
+    from ..env.toyworld import Tiles
+    from ..brain import gaps
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    world = Tiles(seed)
+    first = next((e["lesson"] for e in b.log if e["kind"] == "invent"
+                  and "GAPS" in e["text"]), None)
+    invented = Tally("invented numbers in the gaps of its line by reasoning, before this lesson")
+    invented.item("gaps", True, first is not None and first < 15)
+    diag = Tally("concluded the diagonal is the gap number whose square is 2 tiles")
+    idea = b.quantities.get("diagonal")
+    diag.item("diagonal", [2, 1], idea and idea.get("goal"))
+    ruler = Tally("rulers never used (31-300 marks): the reading, predicted before measuring")
+    for _ in range(10):
+        m = rng.randint(31, 300)
+        ruler.item({"marks": m}, world.ruler_reading(m), b.predict("ruler", {"marks": m}),
+                   b.memory.of("ruler"), "diagonal", {"marks": m})
+    roots = Tally("square roots of non-squares, pinned in a gap (to within 1/20)", tol=0.05)
+    for _ in range(10):
+        n = rng.randint(2, 60)
+        while int(n ** 0.5) ** 2 == n:
+            n += 1
+        roots.item(n, n ** 0.5, reasoner.arithmetic(b, f"what power 2 equals {n}").value)
+    cubes = Tally("cube roots of non-cubes, pinned in a gap (to within 1/10)", tol=0.1)
+    for n in (2, 3, 5):
+        cubes.item(n, n ** (1 / 3), reasoner.arithmetic(b, f"what power 3 equals {n}").value)
+    refuse = Tally("still impossible: zero groups of anything is zero")
+    for n in (5, 12):
+        refuse.item(n, REFUSE, reasoner.arithmetic(b, f"what times 0 equals {n}").value)
+    inv = b.inventions.get("gaps")
+    return _result(15, [invented, diag, ruler, roots, cubes, refuse], 0.99,
+                   {"story": inv["story"] if inv else None})
+
+
 def compression_benefit(upto=13):
     """Growing lesson with and without compression: how much searching did it take?"""
     from ..trainer.trainer import Trainer
@@ -785,4 +823,4 @@ def show_law(brain, name):
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
-         13: exam_growing, 14: exam_springy, 15: exam_phase2}
+         13: exam_growing, 14: exam_springy, 15: exam_diagonal, 16: exam_phase2}

@@ -77,14 +77,41 @@ def same(brain, x, y):
     return c1 == c2
 
 
+def _fits_evenly(brain, d, n):
+    """Do some whole number q of d-pieces make exactly n? (q·d = n, found by halving)"""
+    lo, hi = 1, n
+    while lo <= hi:
+        q = (lo + hi) // 2
+        got = _times(brain, q, d)
+        if got == n:
+            return True
+        if got < n:
+            lo = q + 1
+        else:
+            hi = q - 1
+    return False
+
+
 def simplest(brain, x):
-    """The same amount written with the fewest pieces per cake."""
+    """The same amount written with the fewest pieces per cake. Only kinds of piece
+    that fit evenly into the n-cut can give the same amount; for each of those it asks
+    whether some count c of them is the same as x (more pieces always weigh more, so
+    it finds c by halving)."""
     k, n = x
     for d in range(1, n + 1):
-        for c in range(0, abs(k) + 1):
-            for cand in ((c, d), (-c, d)) if c else ((0, d),):
-                if same(brain, cand, x):
-                    return cand
+        if d != n and not _fits_evenly(brain, d, n):
+            continue
+        target = _times(brain, k, d)
+        lo, hi = -abs(k), abs(k)
+        while lo <= hi:
+            c = (lo + hi) // 2
+            got = _times(brain, c, n)
+            if got == target:
+                return (c, d)
+            if got < target:
+                lo = c + 1
+            else:
+                hi = c - 1
     return x
 
 
@@ -263,6 +290,10 @@ def bind_division(brain, token, demos):
     return None
 
 
+SOLVE_EFFORT = 1_500_000     # how much counting it will spend looking for a pile
+LAST_CUT = [0]               # the finest cut the last search reached (for honest answers)
+
+
 def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
     """Find the simplest amount x with law(x, known) == goal (or law(known, x)).
 
@@ -279,10 +310,16 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
         c1, c2, _ = common(brain, res, goal)
         return c1 - c2
 
+    from . import dsl
     if max_cut is None:
         # enough kinds of piece to hold any answer built from these two amounts
         max_cut = max(60, goal[1] * max(1, abs(known[0])) * known[1])
+    start = dsl.STEPS[0]
+    last = None
     for d in range(1, max_cut + 1):
+        LAST_CUT[0] = d
+        if dsl.STEPS[0] - start > SOLVE_EFFORT:
+            break                   # looking further would cost more counting than it's worth
         try:
             g0, g1 = gap((0, d)), gap((1, d))
         except Overflow:
@@ -294,20 +331,33 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
         if g1 == g0:
             continue            # more pieces change nothing: no count of this kind works
         up = g1 > g0
-        # step out 1, 2, 4, 8... in the direction that closes the gap, until it is passed
-        direction = 1 if (g0 < 0) == up else -1
-        near, far = 0, direction
-        try:
-            while abs(far) <= 10 ** 6:
-                g = gap((far, d))
-                if g == 0 or (g > 0) != (g0 > 0):
-                    break
-                near, far = far, far * 2
-            else:
+        lo = hi = None
+        if last is not None:
+            # the answer lay between two piles of the last kind of piece; for this kind
+            # it must lie between the same two amounts, so only look there
+            a, b_, e = last
+            near, far = (a * d) // e - 1, -((-b_ * d) // e) + 1
+            try:
+                gn, gf = gap((near, d)), gap((far, d))
+                if gn is not None and gf is not None and (gn <= 0 <= gf or gf <= 0 <= gn):
+                    lo, hi = near, far
+            except Overflow:
+                pass
+        if lo is None:
+            # step out 1, 2, 4, 8... in the direction that closes the gap, until passed
+            direction = 1 if (g0 < 0) == up else -1
+            near, far = 0, direction
+            try:
+                while abs(far) <= 10 ** 6:
+                    g = gap((far, d))
+                    if g == 0 or (g > 0) != (g0 > 0):
+                        break
+                    near, far = far, far * 2
+                else:
+                    continue
+            except Overflow:
                 continue
-        except Overflow:
-            continue
-        lo, hi = min(near, far), max(near, far)
+            lo, hi = min(near, far), max(near, far)
         while lo <= hi:
             mid = (lo + hi) // 2
             try:
@@ -320,6 +370,8 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
                 lo = mid + 1
             else:
                 hi = mid - 1
+        if hi < lo:
+            last = (min(hi, lo), max(hi, lo), d)
     return None
 
 

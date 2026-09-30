@@ -6,6 +6,7 @@ class Spec:
     """What Ultron can perceive about one kind of experiment.
 
     kind:
+      "measure"       a ruler reading of a length Ultron holds an idea about
       "program"       discrete inputs -> discrete outcome; law = small program
       "quantity"      measured numbers; law = invariant combination
       "conservation"  objects before/after an event; law = conserved total

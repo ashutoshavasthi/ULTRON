@@ -164,3 +164,27 @@ class Dish:
 
     def day(self, split):
         self.cells = [c for c in self.cells for _ in range(split)]
+
+
+class Tiles:
+    """Square floor tiles, one unit on each side. Ultron can build squares from them,
+    cut tiles into halves along the diagonal, and measure with rulers. The world knows
+    how long a tile's diagonal is; Ultron is only shown counts and ruler readings."""
+
+    def __init__(self, seed=0):
+        import math
+        self._isqrt = math.isqrt
+        self.rng = random.Random(seed)
+
+    def square(self, side):
+        """All the tiles in a square of `side` tiles on each side."""
+        return [0] * (side * side)
+
+    def square_on_a_diagonal(self):
+        """The square built on one tile's diagonal is covered by four half-tiles."""
+        return ["half"] * 4
+
+    def ruler_reading(self, marks):
+        """Measuring one tile's diagonal with a ruler marked `marks` times per tile side:
+        the last whole mark it passes (the diagonal never ends exactly on a mark)."""
+        return self._isqrt(2 * marks * marks)

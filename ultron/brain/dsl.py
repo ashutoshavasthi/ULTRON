@@ -187,6 +187,9 @@ def apply_step(F, acc, t, library):
     return check(library.call(F[1], acc, t))
 
 
+STEPS = [0]     # how much counting has been done (a deterministic measure of effort)
+
+
 def iterate(F, n, x, t, library):
     if F[0] == "call1" and F[1] in library.cycles:
         # on a cycle, k repeats change nothing, and going back = going on round
@@ -199,6 +202,7 @@ def iterate(F, n, x, t, library):
         F, n = G, -n
     if n > MAX_ITER:
         raise Overflow()
+    STEPS[0] += n
     acc = x
     for _ in range(n):
         acc = apply_step(F, acc, t, library)

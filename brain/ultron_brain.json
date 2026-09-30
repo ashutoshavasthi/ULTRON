@@ -426,6 +426,17 @@
     1.0,
     0.0
    ],
+   "ruler": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "spend_coins": [
     1.0,
     1.0,
@@ -469,6 +480,25 @@
     1.0,
     0.0,
     1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "square": [
+    1.0,
+    1.0,
+    0.0,
     0.0,
     0.0,
     0.0,
@@ -569,6 +599,7 @@
   "spend_coins": "pred(coins)",
   "spend_notes": "take_away(succ(notes), coins)",
   "spin": "repeat ticks times [tick] starting from start",
+  "square": "groups(side, side)",
   "take_away": "repeat n_taken times [pred] starting from nA",
   "tick": "if eq(slot, 5) then 0 else succ(slot)"
  },
@@ -598,6 +629,26 @@
    "scale": "groups",
    "shape": "finer line",
    "story": "Walking by single pieces of a cake cut into 2, I pass a whole every 2 steps, and in between I'm at places no whole number reaches: one piece balances no whole number of cakes, yet 2 of them balance exactly 1. So my number line is FINER than I thought: there are numbers *between* my numbers. Every pile of equal pieces is one. And since scaling the count and the kind of piece together with my 'groups' law never changes what balances, two piles are the same number when, cut into the same kind of piece, they have the same count. My whole numbers are piles of pieces 'cut into 1'."
+  },
+  "gaps": {
+   "first": {
+    "goal": [
+     2,
+     1
+    ],
+    "known": [
+     2,
+     1
+    ],
+    "law": "grow",
+    "one_input": false,
+    "order": "xy",
+    "unknown_first": false
+   },
+   "lesson": 13,
+   "primitives": [],
+   "shape": "gaps in the finer line",
+   "story": "I asked myself grow(2, ?) = 2. No whole number works, and no pile of pieces either (I tried cakes cut into up to 60). But the answer is squeezed: 7/5 gives too little, 8/5 too much, and however finely I cut, it is always caught between two piles, never on one. So my finer line has GAPS: places no pile of pieces reaches. I'll treat each such place as a number too: I can't write it as pieces, but I can pin it between two piles as tightly as I can count."
   },
   "hidden:bounce": {
    "law": "bounce",
@@ -1107,6 +1158,31 @@
     "found_after": 4,
     "lesson": 11,
     "size": 4
+   }
+  },
+  "square": {
+   "expr": [
+    "call",
+    "groups",
+    [
+     "var",
+     "side"
+    ],
+    [
+     "var",
+     "side"
+    ]
+   ],
+   "name": "square",
+   "out_type": "int",
+   "params": [
+    "side"
+   ],
+   "provenance": {
+    "experiences": 10,
+    "found_after": 2,
+    "lesson": 15,
+    "size": 3
    }
   },
   "take_away": {
@@ -5392,6 +5468,11 @@
    "text": "Repeating 'repeated_groups' could mean two different things: repeated_groups(2, 3) is not repeated_groups(3, 2), so I can't tell which input to feed back in. The REPEAT pattern stops telling me what comes next here, so I won't guess."
   },
   {
+   "kind": "invent",
+   "lesson": 13,
+   "text": "I asked myself grow(2, ?) = 2. No whole number works, and no pile of pieces either (I tried cakes cut into up to 60). But the answer is squeezed: 7/5 gives too little, 8/5 too much, and however finely I cut, it is always caught between two piles, never on one. So my finer line has GAPS: places no pile of pieces reaches. I'll treat each such place as a number too: I can't write it as pieces, but I can pin it between two piles as tightly as I can count."
+  },
+  {
    "kind": "word",
    "lesson": 13,
    "text": "'power' behaves exactly like my law 'grow' (arguments yx) in all 6 demonstrations"
@@ -5641,17 +5722,204 @@
   {
    "kind": "trainer",
    "lesson": 15,
-   "text": "Lesson 15: Phase 2 final exam"
+   "text": "Lesson 15: The diagonal of a tile"
+  },
+  {
+   "kind": "meet",
+   "lesson": 15,
+   "text": "new kind of experience: square"
   },
   {
    "kind": "trainer",
    "lesson": 15,
-   "text": "No teaching today. Show me what you can do."
+   "text": "Here are square tiles. Build squares and count the tiles in them."
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "kind": "design",
+   "lesson": 15,
+   "text": "square: my ideas agree, but I've never tried a situation like {'side': 0}; I'll set that up"
+  },
+  {
+   "kind": "revise",
+   "lesson": 15,
+   "text": "square: surprised; new best explanation is side (was nothing; 1 experiences, 18 programs searched)"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "kind": "design",
+   "lesson": 15,
+   "text": "square: my 4 explanations disagree about {'side': 6}; I'll set that up to find out"
+  },
+  {
+   "kind": "revise",
+   "lesson": 15,
+   "text": "square: surprised; new best explanation is groups(side, side) (was side; 2 experiences, 2528 programs searched)"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "kind": "design",
+   "lesson": 15,
+   "text": "square: my 8 explanations disagree about {'side': 5}; I'll set that up to find out"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 15,
+   "text": "square: groups(side, side) predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "choice": "square",
+   "kind": "choice",
+   "lesson": 15,
+   "text": "chose to play with square"
+  },
+  {
+   "kind": "bored",
+   "lesson": 15,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 15,
+   "text": "the square built on a tile's diagonal is covered by 4 half-tiles: 2 tiles"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 15,
+   "text": "a square is a square: my 'square' law holds for the square on the diagonal too, so the diagonal is the side whose square holds 2 tiles: a number in a gap of my line, between 141/100 and 71/50"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 15,
+   "text": "Now measure the diagonal with rulers. Say what each will read first."
+  },
+  {
+   "kind": "meet",
+   "lesson": 15,
+   "text": "new kind of experience: ruler"
   },
   {
    "kind": "trainer",
    "lesson": 15,
    "text": "Exam for lesson 15, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 15,
+   "text": "What you found in 'gaps' is what people call irrational numbers (the real numbers)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 15,
+   "text": "What you found in 'diagonal' is what people call the square root of 2 (\u221a2), a tile's diagonal."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 16,
+   "text": "Lesson 16: Phase 2 final exam"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 16,
+   "text": "No teaching today. Show me what you can do."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 16,
+   "text": "Exam for lesson 16, attempt 1: passed"
   }
  ],
  "memory": {
@@ -8227,6 +8495,62 @@
      "y": 1.792
     }
    ],
+   "ruler": [
+    {
+     "inputs": {
+      "marks": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "marks": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "marks": 3
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "marks": 5
+     },
+     "outcome": 7
+    },
+    {
+     "inputs": {
+      "marks": 7
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "marks": 10
+     },
+     "outcome": 14
+    },
+    {
+     "inputs": {
+      "marks": 12
+     },
+     "outcome": 16
+    },
+    {
+     "inputs": {
+      "marks": 20
+     },
+     "outcome": 28
+    },
+    {
+     "inputs": {
+      "marks": 30
+     },
+     "outcome": 42
+    }
+   ],
    "spend_coins": [
     {
      "inputs": {
@@ -8637,6 +8961,110 @@
       "ticks": 4
      },
      "outcome": 1
+    }
+   ],
+   "square": [
+    {
+     "inputs": {
+      "side": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "side": 6
+     },
+     "outcome": 36
+    },
+    {
+     "inputs": {
+      "side": 5
+     },
+     "outcome": 25
+    },
+    {
+     "inputs": {
+      "side": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "side": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "side": 4
+     },
+     "outcome": 16
+    },
+    {
+     "inputs": {
+      "side": 5
+     },
+     "outcome": 25
+    },
+    {
+     "inputs": {
+      "side": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "side": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "side": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "side": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "side": 0
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "side": 6
+     },
+     "outcome": 36
+    },
+    {
+     "inputs": {
+      "side": 5
+     },
+     "outcome": 25
+    },
+    {
+     "inputs": {
+      "side": 1
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "side": 6
+     },
+     "outcome": 36
+    },
+    {
+     "inputs": {
+      "side": 5
+     },
+     "outcome": 25
     }
    ],
    "stretch": [
@@ -9507,6 +9935,22 @@
      ]
     }
    },
+   "ruler": {
+    "action": null,
+    "group_by": null,
+    "inputs": {
+     "marks": "int"
+    },
+    "kind": "measure",
+    "name": "ruler",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "diagonal",
+    "tol": 1e-09,
+    "units": {}
+   },
    "spend_coins": {
     "action": "spend",
     "group_by": null,
@@ -9555,6 +9999,22 @@
     "state_var": null,
     "surprise": 1e-06,
     "target": "end",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "square": {
+    "action": null,
+    "group_by": null,
+    "inputs": {
+     "side": "int"
+    },
+    "kind": "program",
+    "name": "square",
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "tiles",
     "tol": 1e-09,
     "units": {}
    },
@@ -9629,7 +10089,9 @@
   "bounce": "conservation of energy with a spring",
   "collide": "conservation of momentum",
   "cycle:tick": "clock numbers (arithmetic modulo 6)",
+  "diagonal": "the square root of 2 (\u221a2), a tile's diagonal",
   "finer:cake_balance": "fractions (the rational numbers)",
+  "gaps": "irrational numbers (the real numbers)",
   "gas": "Boyle's law",
   "groups": "multiplication",
   "grow": "exponential growth",
@@ -9648,6 +10110,22 @@
   "roll": "conservation of energy",
   "stretch": "stiffness (Hooke's law)",
   "take_away": "subtraction"
+ },
+ "quantities": {
+  "diagonal": {
+   "goal": [
+    2,
+    1
+   ],
+   "known": [
+    0,
+    1
+   ],
+   "law": "square",
+   "one_input": true,
+   "order": "xy",
+   "unknown_first": true
+  }
  },
  "quantity_laws": {
   "bounce": {
@@ -9846,7 +10324,7 @@
  "search_steps": {
   "bounce": 2060,
   "cake_balance": 187467,
-  "collide": 110,
+  "collide": 120,
   "earn_coins": 9906,
   "earn_notes": 19,
   "gas": 28,
@@ -9867,6 +10345,7 @@
   "spend_coins": 35,
   "spend_notes": 27565,
   "spin": 136187,
+  "square": 2546,
   "stretch": 176,
   "take_away": 705,
   "tick": 2189102

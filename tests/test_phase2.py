@@ -73,3 +73,14 @@ def test_energy_with_three_parts(trained):
     law = brain.qlaws["bounce"]
     assert [p for p, _ in law.terms] == [{"y": 1}, {"v": 2}, {"c": 2}]
     assert abs(law.terms[2][1] - 400 / (2 * 2 * 9.81)) < 1e-6    # k / 2mg, found not given
+
+
+def test_invents_irrational_numbers_and_the_world_agrees(trained):
+    brain, results = trained
+    assert results[15]["passed"]
+    first = next(e for e in brain.log if e["kind"] == "invent" and "GAPS" in e["text"])
+    assert first["lesson"] < 15                      # by reasoning, before any tiles
+    ans = reasoner.arithmetic(brain, "what power 2 equals 2")
+    kind, lo, hi = ans.value
+    assert kind == "between" and lo[0] / lo[1] < 2 ** 0.5 < hi[0] / hi[1]
+    assert brain.predict("ruler", {"marks": 1000}) == 1414   # predicted, never measured
