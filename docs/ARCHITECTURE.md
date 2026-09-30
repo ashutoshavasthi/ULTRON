@@ -98,6 +98,19 @@ Also in Phase 2:
 - Predictions are candidate explanations: tested first, trusted only after 3 fits.
 - The program language gained "if ... then ... else" and one-input laws.
 
+## Closing Phase 2's gaps
+
+| Gap | File | Fix |
+|---|---|---|
+| Counting is slow and imprecise | `columns.py` | From its place-value law it checks four identities (columns add, ten carries, times spreads, a 0 is times ten) and builds column methods from its own single-digit facts, known by heart once counted. A column method is used for a law only after it agrees with the law on 60 examples. Its laws of repeating also let it square: a^(2k) = (a^k)². 20-digit products are exact; training takes 29 s instead of 90 s. |
+| "Repeat 1.58 times" meant nothing | `compression.py` (`look_for_exponent_laws`) | It checks, with its own laws, that repeating p times then q more is repeating p+q times, and that repeating p times, done q times, is repeating p·q times. The only meaning of "repeat 1/2 time" that keeps those laws true is "whatever, repeated twice, is repeating once", so fractional powers and logarithms become questions about whole repeats. |
+| No new kind of hypothesis | `metalaws.py` | Its own invented properties (each spring's stiffness) become data, and it runs its hypothesis engine one level up: stiffness × coils = 600. That is a law about a law, and it predicts springs it has never stretched. It is still composition of the kinds it has, not a new kind. |
+| No blind test | `blind/SYLLABUS.md` | A public syllabus (what it experienced, how to ask) that independent examiners write tests from without seeing code, tests or exams. |
+
+The reasoner also answers questions about two moments: energy along a run
+(start values written `y0`, `v0`, `c0`) and momentum across a collision, solving
+for any one unknown.
+
 ## Curiosity (`curiosity.py`)
 
 For each kind of experiment, Ultron tracks how fast its prediction error is
@@ -146,12 +159,13 @@ python -m pytest                  # tests
 ## File map
 
 ```
-ultron/brain/     dsl, synth, invariants, invention, amounts, gaps, compression, curiosity, memory, perception, units, language, reasoner, brain
+ultron/brain/     dsl, synth, invariants, invention, amounts, gaps, compression, columns, metalaws, curiosity, memory, perception, units, language, reasoner, brain
 ultron/env/       toyworld, physics, dataworld, data/*.csv (real measurements, sources in headers)
 ultron/trainer/   lessons: Phase 1 = 0-10 (7 noisy lab, 8 owing, 9 sharing cakes, 10 final exam);
                   Phase 2 = 11 wheel, 12 hills and valleys, 13 growing, 14 hills and a spring,
-                  15 the diagonal of a tile, 16 Phase 2 final exam
-blind/            write your own blind test; `python -m ultron blind FILE` (mastery gate, naming after understanding)
+                  15 the diagonal of a tile, 16 Phase 2 final exam;
+                  closing the gaps = 17 coiled springs, 18 exam (columns, fractional repeats)
+blind/            SYLLABUS.md (public), independent examiners' tests; write your own; `python -m ultron blind FILE` (mastery gate, naming after understanding)
 ultron/judge/     exams (held-out + memoriser baselines), report
 ultron/logic/     peano (rules from learned laws + proof checker)
 brain/            Ultron's saved brain

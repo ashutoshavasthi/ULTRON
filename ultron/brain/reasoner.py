@@ -392,9 +392,100 @@ def physics(brain, target, knowns, objects=None):
                          f"{U.name(units.get(unknown[0]))}")
             progress = True
     if target not in known:
+        _before_and_after(brain, target, known, steps)
+    if target not in known:
         return Answer(None, f"I can't work out {target} from what I know", steps)
-    dims = units.get(target)
+    counted = {spec.target for spec in brain.memory.specs.values() if spec.kind == "feature"}
+    if target in counted:
+        v = known[target]
+        text = f"{target} = {v:.6g} (counted)"
+        if abs(v - round(v)) > 1e-6:
+            text += (f"; but I've only ever counted whole {target}, so nothing I've met "
+                     f"is like that: the nearest are {int(v)} and {int(v) + 1}")
+        return Answer(v, text, steps)
+    base = target.replace("_after", "").rstrip("0123456789")
+    dims = units.get(target) or units.get(base)
     return Answer(known[target], f"{target} = {known[target]:.6g} {U.name(dims)}", steps)
+
+
+def _before_and_after(brain, target, known, steps):
+    """Questions about two moments: what it has found stays the same between them.
+
+    Along a run (start values written y0, v0, c0): its hidden quantity (energy) is the
+    same at the start as now. In a collision (m1, v1, m2, v2, v1_after, v2_after): its
+    conserved quantity (momentum) is the same before as after."""
+    from .invariants import SumLaw
+    sums = [(n, l) for n, l in brain.qlaws.items()
+            if isinstance(l, SumLaw) and brain.trusts_quantity(n)]
+    at_start = target.endswith("0") and target[:-1] in {v for _, l in sums for v in l.variables()}
+    base = target[:-1] if at_start else target
+
+    def mentioned(v):
+        return v in known or v + "0" in known or v == base
+
+    # the law that uses the most of what was mentioned describes this situation best
+    for name, law in sorted(sums, key=lambda nl: (-sum(map(mentioned, nl[1].variables())),
+                                                  len(nl[1].variables()), nl[0])):
+        vs = law.variables()
+        if base not in vs or not all(mentioned(v) for v in vs):
+            continue
+        if not (any(v + "0" in known for v in vs) and any(v in known for v in vs)):
+            continue        # it needs to be told something about both moments
+        now = {v: known.get(v) for v in vs}
+        start = {v: known.get(v + "0") for v in vs}
+        (now if not at_start else start)[base] = None
+        # mentioned at one moment but not the other: nothing there (e.g. no squash)
+        assumed = []
+        for v in vs:
+            for state, mark in ((now, ""), (start, "0")):
+                if state[v] is None and v + mark != target:
+                    state[v] = 0.0
+                    assumed.append(v + mark)
+        known_state, other = (start, now) if not at_start else (now, start)
+        e = law.total(known_state)
+        value = SumLaw(law.etype, law.terms, law.group_by, {"_": e}).solve(
+            base, {k: x for k, x in other.items() if k != base}, "_")
+        label = brain.names.get(name, name)
+        note = (f" (not mentioned, so I take {', '.join(assumed)} as 0)" if assumed else "")
+        if value is None:
+            steps.append(f"{label}: {law.formula()} = {e:.6g}{note}, but no {target} "
+                         f"makes it the same at both moments")
+            return
+        known[target] = value
+        steps.append(f"{label}: {law.formula()} stays the same along a run{note}; "
+                     f"{'now' if at_start else 'at the start'} it is {e:.6g}  =>  "
+                     f"{target} = {value:.6g}")
+        return
+    for name, laws in sorted(brain.claws.items()):
+        for law in laws:
+            if law.scope != "all" or law.powers.get("v") != 1:
+                continue
+            p = law.powers.get("m", 0)
+            parts = [("m1", "v1", 1), ("m2", "v2", 1), ("m1", "v1_after", -1),
+                     ("m2", "v2_after", -1)]
+            names = {"m1", "m2", "v1", "v2", "v1_after", "v2_after"}
+            if target not in names or not all(n in known for n in names - {target}):
+                continue
+            if target in ("m1", "m2"):
+                if p != 1:
+                    continue
+                # m1·(v1 - v1_after) = m2·(v2_after - v2)
+                other = "m2" if target == "m1" else "m1"
+                i, j = ("1", "2") if target == "m1" else ("2", "1")
+                dv_t = known["v" + i] - known[f"v{i}_after"]
+                dv_o = known[f"v{j}_after"] - known["v" + j]
+                if dv_t == 0:
+                    continue
+                value = known[other] * dv_o / dv_t
+            else:
+                total = sum(sign * known[m] ** p * known[v] for m, v, sign in parts
+                            if v != target)
+                mass = next((m, sign) for m, v, sign in parts if v == target)
+                value = -total / (mass[1] * known[mass[0]] ** p)
+            known[target] = value
+            steps.append(f"{brain.names.get(name, name)}: the total of {law.formula()} is the "
+                         f"same before and after  =>  {target} = {value:.6g}")
+            return
 
 
 def parse_physics(text):

@@ -1,0 +1,67 @@
+# arithmetic
+what is 123456789012345678 times 98765432109876543 | 12193263113702179407559823419631154
+999999999999999999 plus 1 | 1000000000000000000
+-98765432109876543210 minus 12345678901234567890 | -111111111011111111100
+what plus 314159265358979 equals 271828182845904 | -42331082513075
+-3/4 plus 5/6 minus 7/8 | -19/24
+seven times -3/7 plus 2 | -1
+negative 4 minus -9/2 | 1/2
+ten times nine minus 3 divided 4 | 87/4
+8 power 2/3 | 4
+2 power -3 | 1/8
+27/8 power -2/3 | 4/9
+six power negative 2 | 1/36
+-7 after 2 | 1
+-100 after 0 | 2
+1000000000000000000001 after 5 | 4
+what minus 17/3 equals -2/9 | 49/9
+5/6 divided what equals -10/3 | -1/4
+12 times what equals -3/4 | -1/16
+what power 3 equals 343/1000 | 7/10
+16/81 power 3/4 | 8/27
+what power 2 equals 3 | ~1.73205
+2 power what equals 10 | ~3.32193
+10 power 1/3 | ~2.15443
+5 power what equals 7/2 | ~0.778385
+# physics
+find m given F=0.000000003 a=0.00015 | 2e-05
+find F given m=6000000000000000000000000 a=0.0000000002 | 1.2e+15
+find a given F=-250 m=0.04 | -6250
+find a given spring=S2 x=0 m=5 | 0
+find x given spring=S4 F=0 | 0
+find F given coils=12 x=0.35 | 17.5
+find coils given F=4 x=0.2 | 30
+find x given coils=7 F=1000 | 11.6667
+find a given coils=8 x=0.02 m=0.003 | 500
+find m given coils=5 x=0.5 a=20 | 3
+find coils given x=0.1 m=2 a=1.5 | 20
+find v2_after given m1=3 v1=4 m2=5 v2=-2 v1_after=-3.5 | 2.5
+find m2 given m1=0.25 v1=12 v2=0 v1_after=-4 v2_after=4 | 1
+find v1 given m1=1000 m2=0.001 v2=5000 v1_after=2 v2_after=2 | 1.995
+find v given y=0 y0=1000 v0=0 | 140.071
+find y0 given y=3 v=10 v0=2 | 7.89297
+find v0 given y=20 v=1 y0=0.5 | 19.5855
+find c given y=0 v=0 y0=5 v0=0 c0=0 | 0.700357
+find y given v=0 c=0 y0=0 v0=0 c0=0.3 | 0.917431
+find v given y=0.1 c=0.05 y0=0 v0=0 c0=0.2 | 2.3533
+find T given r=1000000000 system=Sun | 17247.4
+find T given r=100000000000000 system=Sun | 5.45411e+11
+find r given T=86400 system=Sun | 2.9277e+09
+find P given V=1000 | 1.40799
+find V given P=0.5 | 2815.99
+# refuse
+find F given spring=S6 x=0.1 | refuse
+find T given r=100000000000 system=Saturn | refuse
+find a given F=10 m=0 | refuse
+find m given F=10 a=0 | refuse
+find P given V=0 | refuse
+find v given y=10 y0=0 v0=5 | refuse
+find F given coils=0 x=0.1 | refuse
+find v1_after given m1=2 v1=3 m2=1 v2=0 | refuse
+what is 7 divided 0 | refuse
+0 divided 0 | refuse
+0 power -1 | refuse
+what times 0 equals 5 | refuse
+what power 2 equals -4 | refuse
+2 power what equals 0 | refuse
+what power 0 equals 5 | refuse
