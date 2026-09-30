@@ -32,6 +32,23 @@ tests or the trainer's exams: that would make the test not blind.
 16. **Coiled springs.** Springs wound from the same wire with different numbers
     of coils: stretching one shows its pull, looking at it shows its coils.
 
+### Phase 3: senses, new kinds, acting
+
+17. **Handling things.** Ultron picked things up while a camera watched. It learned to
+    see from that, and after this lesson it only ever looks.
+18. **Seeing numbers, watching motion.** Adding and taking away trays of things, pushing
+    loaded pucks, hanging blocks on springs, balls rolling in a valley: all of it seen
+    only as noisy camera pictures with a ruler in view.
+19. **Cooling cups.** Hot cups, with a thermometer read once a minute.
+20. **Bouncing, charging, hanging, burning, wandering.**
+    - Balls bounce lower each time; the bounce heights are measured.
+    - Batteries on a charger; the charge meter is read every minute.
+    - Springs whose *whole length* is read as weights (in newtons) are hung on them.
+    - Candles whose height is read at odd times.
+    - A marker blown about by random gusts.
+21. **Kicking pucks.** Pucks kicked along a wooden floor at a chosen speed; Ultron sees
+    where they stop. It has never kicked on any other floor.
+
 ## How to ask
 
 ### Arithmetic
@@ -69,6 +86,27 @@ fraction is exactly right (e.g. `what power 2 equals 2`), Ultron gives a range
 | orbits | `r` (m), `T` (s), `system=Sun` |
 | Boyle's air | `P`, `V` in the data's own units |
 
+### Things that change step by step (Phase 3)
+
+Give readings of ONE quantity as `name@when=value`, then ask about another moment.
+Readings taken once a minute (or once a bounce) must be evenly spaced. Ask
+`find rest given ...` for where something settles.
+
+```
+find T given t=10 T@0=80 T@1=70 T@2=62       (a cooling cup, read each minute)
+find rest given T@0=80 T@1=70 T@2=62         (the temperature it settles at)
+find h given k=6 h@0=2 h@1=1.4 h@2=0.98      (bounce heights; k counts bounces)
+find q given t=10 q@0=0 q@1=20 q@2=36        (a battery's charge)
+find L given F=20 L@2=0.31 L@10=0.39         (a spring's whole length with weight F in N)
+find H given t=7 H@0=20 H@3=18.5             (a candle, read at any times)
+```
+
+Names that go together: `T` with `t`, `h` with `k`, `q` with `t`, `L` with `F`, `H`
+with `t`. The random marker is `x` with `t`.
+
+Kicked pucks: `find d given u=2 floor=wood` (d is the slide distance in m, u the kick
+speed in m/s), or backwards, `find u given d=1 floor=wood`.
+
 ### What the world really is (Ultron was never told this)
 
 Use these to work out the true answers.
@@ -79,6 +117,11 @@ Use these to work out the true answers.
 - The stiffness of S1–S5 is hidden and random, so don't ask for exact values about
   them. You can ask questions whose answers cancel it out, or check that it
   refuses springs it has never met.
+- Cooling cups: T(t) = room + (start − room)·kᵗ; each cup has its own k. Bounces:
+  h(k) = drop·eᵏ. Batteries: q(t) = full·(1 − kᵗ). Springs by length: L = rest + F/stiffness.
+  Candles: H = tall − rate·t. Given readings consistent with these, answers are exact
+  up to rounding. The marker's steps are random; nothing predicts it.
+- Kicked pucks on wood: d = u²/(2·0.30·g). Other floors have different, unknown friction.
 
 ## Scoring format
 

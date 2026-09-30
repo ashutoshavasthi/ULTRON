@@ -111,6 +111,27 @@ The reasoner also answers questions about two moments: energy along a run
 (start values written `y0`, `v0`, `c0`) and momentum across a collision, solving
 for any one unknown.
 
+## Phase 3: senses, new kinds of explanation, a minimal body
+
+| Part | File | What it does |
+|---|---|---|
+| Camera | `senses/camera.py`, `senses/world.py` | The world as grayscale pixels only: sensor noise (8%), blur, uneven light, a camera that shakes a pixel, spoiled frames (2%). Trays, a push table, a spring stand, a valley (a finer 96-pixel camera), floors to kick pucks on. The true state stays with the simulator. |
+| Eyes | `senses/eyes.py` | A 3-layer convolutional network (3×3 filters, 1→8→8→1), forward and backward passes written in numpy, trained with Adam from **touch**: while handling things, its hands say where each thing is (lesson 19). Local peaks of its map are things; the threshold is the one that best matched touch. It looks again when two glances disagree. |
+| Measuring | `senses/measure.py` | Positions are read against a ruler in the same picture (a line through all its marks), so shaking doesn't matter. Robust fits drop bad frames. Each reading carries the uncertainty Ultron measured itself. |
+| Noise-aware laws | `invariants.py` (`_noise_check`) | With self-measured uncertainties, a sum of terms is accepted only when its leftovers are noise-sized (median z ≤ 1.5, ≤ 10% beyond 4σ). Wrong forms (y + c·v, y + c·v³) are rejected. |
+| Kinds of explanation | `kinds.py` | Kinds are data: a transform from a small grammar (Δ, ρ, composed; Δy/Δx) and a scope (global, per object). When no innate kind fits, it searches the grammar shortest first and keeps the winner as a new kind, which it tries first next time. `brain.inventing = False` is the ablation. |
+| Body | `body.py` | To reach a goal it runs its law backwards. On a floor it never touched, it makes a cautious first try (aimed at half the distance), treats what it sees as a measurement of that floor's constant, and plans again. |
+
+Lessons: 19 handling things, 20 seeing numbers, 21 watching motion, 22 cooling cups,
+23 bouncing/charging/hanging/burning/wandering, 24 using what it knows, 25 exam.
+Everything is deterministic (numpy on one thread; the eyes' weights live in the
+brain file).
+
+What stays hand-made in Phase 3: the grammar of kinds (Δ, ρ, composition, two
+scopes), the network's shape, the camera simulator, and the idea of looking for
+peaks. The kinds themselves, the eyes' weights and threshold, the laws, and each
+floor's friction are learned.
+
 ## Curiosity (`curiosity.py`)
 
 For each kind of experiment, Ultron tracks how fast its prediction error is
@@ -146,25 +167,29 @@ are derived from Ultron's own programs and checked independently
 ## Running it
 
 ```bash
-python -m ultron train            # train from scratch, save brain/ultron_brain.json, write reports/
+python -m ultron train            # train from scratch (~60 s; numpy needed from lesson 19), save brain/ultron_brain.json, write reports/
 python -m ultron show             # what Ultron knows
 python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
 python -m ultron why "3 + 2"      # checked proof
 python -m ultron exam             # re-run held-out exams on the saved brain
 python -m ultron blind blind/example_not_blind.txt   # score it on someone else's questions
+python -m ultron look pic.npy     # what its eyes see in a picture
+python -m ultron ask "find rest given T@0=80 T@1=70 T@2=62"
 python -m pytest                  # tests
 ```
 
 ## File map
 
 ```
-ultron/brain/     dsl, synth, invariants, invention, amounts, gaps, compression, columns, metalaws, curiosity, memory, perception, units, language, reasoner, brain
+ultron/brain/     dsl, synth, invariants, invention, amounts, gaps, compression, columns, metalaws, kinds, body, curiosity, memory, perception, units, language, reasoner, brain
 ultron/env/       toyworld, physics, dataworld, data/*.csv (real measurements, sources in headers)
 ultron/trainer/   lessons: Phase 1 = 0-10 (7 noisy lab, 8 owing, 9 sharing cakes, 10 final exam);
                   Phase 2 = 11 wheel, 12 hills and valleys, 13 growing, 14 hills and a spring,
                   15 the diagonal of a tile, 16 Phase 2 final exam;
-                  closing the gaps = 17 coiled springs, 18 exam (columns, fractional repeats)
+                  closing the gaps = 17 coiled springs, 18 exam (columns, fractional repeats);
+                  Phase 3 = 19-21 senses, 22-23 new kinds, 24 acting, 25 exam (senses_lessons.py)
+ultron/senses/    camera, eyes (learned CNN), world (visual worlds), measure
 blind/            SYLLABUS.md (public), independent examiners' tests; write your own; `python -m ultron blind FILE` (mastery gate, naming after understanding)
 ultron/judge/     exams (held-out + memoriser baselines), report
 ultron/logic/     peano (rules from learned laws + proof checker)
