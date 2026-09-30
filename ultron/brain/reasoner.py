@@ -110,7 +110,7 @@ def arithmetic(brain, question):
     raw = _join_prefix_words(brain, question.lower().replace("?", " ").split())
     if any(t in EQUALS for t in raw) and UNKNOWN in raw[1:] or (
             any(t in EQUALS for t in raw) and raw and raw[0] == UNKNOWN
-            and len(raw) > 1 and brain.vocab.get(raw[1], ("",))[0] == "op"):
+            and len(raw) > 1 and brain.vocab.get(raw[1], ("",))[0] in ("op", "inv_op")):
         return inverse(brain, raw)
     tokens = [t for t in raw if t not in FILLER]
     if not tokens:
@@ -171,6 +171,8 @@ def arithmetic(brain, question):
                     if rest:
                         return arithmetic(brain, f"{amounts.show(brain, res)} {rest}")
                     return Answer(res, amounts.show(brain, res), steps)
+                if how:
+                    return Answer(None, f"I can't answer that: {how}", steps)
             return Answer(None, "that is more than I am willing to count", steps)
         steps.append(f"'{tokens[i]}' is {_law_note(brain, op[1])}; with {a} and {b} it gives "
                      f"{result}")
@@ -194,6 +196,8 @@ def inverse(brain, raw):
         return Answer(None, "I can only answer 'what OP number equals number' or "
                             "'number OP what equals number'", [])
     op = brain.vocab.get(left[1])
+    if op and op[0] == "inv_op":
+        return _inverse_of_division(brain, left, right[0], op)
     if not op or op[0] != "op":
         return Answer(None, f"I don't know what '{left[1]}' means as an operation", [])
     steps = []
@@ -224,9 +228,16 @@ def inverse(brain, raw):
     tried = 0
     last_reason = None
     # with numbers below zero invented, the unknown may be on either side of zero
-    candidates = [0] + [v for k in range(1, limit + 1)
-                        for v in ((k, -k) if brain.inventions else (k,))]
-    for x in candidates:
+    def candidates():
+        yield 0
+        for k in range(1, min(limit, 2000) + 1):
+            yield from ((k, -k) if brain.inventions else (k,))
+
+    big, passed = None, False
+    if limit > 2000:
+        big, passed = _step_out_and_halve(brain, op, known, goal, unknown_first)
+    # passed without an exact hit: no whole number works (it only ever passed once)
+    for x in ([big] if big is not None else [] if passed else candidates()):
         xy = (x, known) if unknown_first else (known, x)
         a, b = xy if op[2] == "xy" else (xy[1], xy[0])
         why_not = outside_experience(brain, op[1], a, b)
@@ -241,8 +252,13 @@ def inverse(brain, raw):
             continue        # can't work this one out; try the next
         steps.append(f"'{left[1]}' is {_law_note(brain, op[1])}")
         order = "0, 1, -1, 2, -2" if brain.inventions else "0, 1, 2"
-        steps.append(f"I tried numbers {order}, ... in its place and {x} was the first that "
-                     f"gives {goal} ({tried} tried)")
+        if big is not None:
+            steps.append(f"the numbers are too big to try one by one, so I stepped out 1, 2, "
+                         f"4, 8, ... until I passed {goal}, then halved the range; {x} gives "
+                         f"exactly {goal}")
+        else:
+            steps.append(f"I tried numbers {order}, ... in its place and {x} was the first "
+                         f"that gives {goal} ({tried} tried)")
         spoken = speak_number(brain, x)
         return Answer(x, spoken if spoken is not None else str(x), steps)
     span = f"-{limit} to {limit}" if brain.inventions else f"0 to {limit}"
@@ -265,6 +281,84 @@ def inverse(brain, raw):
         return Answer(None, f"no number or amount I know works{looked}", steps)
     return Answer(None, f"no number I know works: I tried every number from {span} "
                         f"and none of them gives {goal}", steps)
+
+
+def _inverse_of_division(brain, left, goal_tok, op):
+    """'what divided 2 equals 3' or '6 divided what equals 3'. 'a divided b' is the
+    amount that, {op} b, gives a; so both questions are about that same law."""
+    from . import amounts
+    goal, why = amounts.read_amount(brain, goal_tok)
+    known_tok = left[2] if left[0] == UNKNOWN else left[0]
+    known, why2 = amounts.read_amount(brain, known_tok)
+    if goal is None or known is None:
+        return Answer(None, why if goal is None else why2, [])
+    word = op[3]
+    if left[0] == UNKNOWN:
+        # x divided known = goal  <=>  goal, {word} known, gives x
+        res, how = amounts.combine(brain, op[1], known, goal, op[2])
+        if res is None:
+            return Answer(None, f"I can't answer that: {how}", [])
+        steps = [f"'{left[1]}' means: the amount that, {word} {amounts.show(brain, known)}, "
+                 f"gives the first one; so it is {amounts.show(brain, goal)} {word} "
+                 f"{amounts.show(brain, known)}", how]
+        return Answer(res, amounts.show(brain, res), steps)
+    # known divided x = goal  <=>  goal, {word} x, gives known
+    res = amounts.solve(brain, op[1], op[2], goal, known, unknown_first=False)
+    if res is None:
+        return Answer(None, f"no amount works: nothing, {word} {amounts.show(brain, goal)}, "
+                            f"gives {amounts.show(brain, known)}", [])
+    steps = [f"'{left[1]}' means: {amounts.show(brain, goal)}, {word} the answer, gives "
+             f"{amounts.show(brain, known)}; I looked through cakes cut into 1, 2, 3... "
+             f"pieces and found {amounts.show(brain, res)}"]
+    return Answer(res, amounts.show(brain, res), steps)
+
+
+def _step_out_and_halve(brain, op, known, goal, unknown_first):
+    """For big numbers: step out 1, 2, 4, ... (both ways) until the result passes the
+    goal, then halve the range. Only an exact hit counts; the caller checks it again.
+    Returns (number or None, whether the goal was passed in one direction)."""
+    def f(x):
+        xy = (x, known) if unknown_first else (known, x)
+        a, b = xy if op[2] == "xy" else (xy[1], xy[0])
+        why_not = outside_experience(brain, op[1], a, b)
+        if why_not and not ("below zero" in why_not and brain.library.inverses):
+            return None
+        try:
+            v = brain.library.call(op[1], a, b)
+        except Overflow:
+            return None
+        return None if v is None else (v > goal) - (v < goal)
+
+    s0 = f(0)
+    if s0 is None:
+        return None, False
+    if s0 == 0:
+        return 0, True
+    for sign in ((1, -1) if brain.inventions else (1,)):
+        near, far = 0, sign
+        while abs(far) <= 10 ** 60:
+            s = f(far)
+            if s is None:
+                break
+            if s == 0:
+                return far, True
+            if s != s0:
+                lo, hi = sorted((near, far))
+                s_lo = f(lo)
+                while hi - lo > 1:
+                    mid = (lo + hi) // 2
+                    sm = f(mid)
+                    if sm is None:
+                        return None, False
+                    if sm == 0:
+                        return mid, True
+                    if sm == s_lo:
+                        lo = mid
+                    else:
+                        hi = mid
+                return None, True
+            near, far = far, far * 2
+    return None, False
 
 
 def _fractional_gap(brain, tokens, steps):

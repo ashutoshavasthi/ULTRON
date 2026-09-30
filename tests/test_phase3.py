@@ -79,3 +79,28 @@ def test_counted_answers_say_so(trained):
     brain, _ = trained
     assert "counted" in reasoner.physics(brain, "coils", {"F": 50, "x": 0.5}).text
     assert "whole coils" in reasoner.physics(brain, "coils", {"F": 36, "x": 0.4}).text
+
+
+def test_blind_failures_stay_fixed(trained):
+    """Questions from the independent examiners that Ultron once got wrong."""
+    brain, _ = trained
+    ask = lambda q: reasoner.arithmetic(brain, q)
+    assert ask("what plus 314159265358979 equals 271828182845904").text == "-42331082513075"
+    assert ask("what times 7 equals 1234567").text == "1234567/7"
+    assert ask("27/8 power -2/3").text == "4/9"
+    assert ask("5/6 divided what equals -10/3").text == "-1/4"
+    assert ask("what divided 2 equals 3").text == "6"
+    assert ask("0 divided 0").value is None                      # every amount works
+    assert ask("0 power -1").value is None                       # nothing undoes times 0
+    assert reasoner.physics(brain, "a", {"x": 0, "m": 5}, {"spring": "S2"}).value == 0
+    assert reasoner.physics(brain, "a", {"F": 10, "m": 0}).value is None
+
+
+def test_independent_blind_tests_pass(trained):
+    """Written by examiners who never saw code, tests or exams (see blind/SYLLABUS.md)."""
+    import pathlib
+    from ultron.__main__ import score_blind
+    for name in ("independent_1.txt", "independent_2.txt"):
+        path = pathlib.Path(__file__).parent.parent / "blind" / name
+        right, total, _ = score_blind(trained[0], path.read_text())
+        assert right == total, name

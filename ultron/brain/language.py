@@ -129,6 +129,10 @@ def speak_number(brain, n):
         return marks[n]
     if brain.library.get(NUMERAL_LAW) is None:
         return None
+    cols = getattr(brain.library, "_columns", None)
+    if cols is not None and all(d in marks for d in range(10)):
+        # with column arithmetic, a count is already held as its column marks
+        return "".join(marks[d] for d in reversed(cols.digits(n)))
     for last in sorted(marks):
         lo, hi = 1, n
         while lo <= hi:     # the law grows with its first argument: search by halving

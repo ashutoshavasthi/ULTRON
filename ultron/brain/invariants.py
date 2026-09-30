@@ -58,12 +58,22 @@ class QuantityLaw:
         if not p or c is None:
             return None
         rest = 1.0
+        zero = False
         for var, power in self.powers.items():
             if var == target:
                 continue
-            if var not in known or known[var] == 0:
+            if var not in known:
                 return None
+            if known[var] == 0:
+                # target = c^(1/p) · Π known^(-power/p): a zero makes the target zero
+                # when its exponent there is positive, and no number when negative
+                if -power / p < 0:
+                    return None
+                zero = True
+                continue
             rest *= known[var] ** power
+        if zero:
+            return 0.0
         x = c / rest
         if x < 0 and p % 2 == 0:
             return None

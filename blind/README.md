@@ -36,3 +36,10 @@ python -m ultron blind blind/my_test.txt
 
 `example_not_blind.txt` was written by the trainer (Claude) and is **not**
 blind. It only shows the format.
+
+`independent_1.txt` and `independent_2.txt` were written from
+[`SYLLABUS.md`](SYLLABUS.md) by separate agents that never saw the code, tests or
+exams. First-sight scores: 55/60 and 54/60. The failures were fixed afterwards, so
+those files are now regression tests. The examiners were the same underlying model
+as the trainer, so a test written by a person is still the real proof. Start
+from `SYLLABUS.md`.

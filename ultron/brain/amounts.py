@@ -78,18 +78,34 @@ def same(brain, x, y):
 
 
 def _fits_evenly(brain, d, n):
-    """Do some whole number q of d-pieces make exactly n? (q·d = n, found by halving)"""
+    """How many d-pieces make exactly n, if a whole number q does (q·d = n, found by
+    halving); else None."""
     lo, hi = 1, n
     while lo <= hi:
         q = (lo + hi) // 2
         got = _times(brain, q, d)
         if got == n:
-            return True
+            return q
         if got < n:
             lo = q + 1
         else:
             hi = q - 1
-    return False
+    return None
+
+
+def _kinds_that_fit(brain, n):
+    """Every kind of piece that fits evenly into an n-cut, smallest first. When d fits
+    q times, q fits d times too, so it only needs to try d up to where d·d passes n."""
+    small, large = [], []
+    d = 1
+    while _times(brain, d, d) <= n:
+        q = _fits_evenly(brain, d, n)
+        if q is not None:
+            small.append(d)
+            if q != d:
+                large.append(q)
+        d += 1
+    return small + large[::-1]
 
 
 def simplest(brain, x):
@@ -98,9 +114,16 @@ def simplest(brain, x):
     whether some count c of them is the same as x (more pieces always weigh more, so
     it finds c by halving)."""
     k, n = x
-    for d in range(1, n + 1):
-        if d != n and not _fits_evenly(brain, d, n):
-            continue
+    memo = brain.library._memo
+    if ("simplest", k, n) in memo:
+        return memo[("simplest", k, n)]
+    memo[("simplest", k, n)] = result = _simplest(brain, k, n)
+    return result
+
+
+def _simplest(brain, k, n):
+    x = (k, n)
+    for d in _kinds_that_fit(brain, n):
         target = _times(brain, k, d)
         lo, hi = -abs(k), abs(k)
         while lo <= hi:
@@ -132,6 +155,9 @@ def _plus_one(brain, acc, sign):
     if law not in brain.library:
         return None
     return apply_law(brain, law, acc, (1, 1)) if sign > 0 else apply_law(brain, law, (1, 1), acc)
+
+
+WHY_NOT = [None]     # why the last run on amounts failed, when it knows
 
 
 def evaluate_amount(brain, expr, env):
@@ -168,7 +194,12 @@ def evaluate_amount(brain, expr, env):
             if F[0] == "call" and n[0] > 0:
                 acc = apply_law(brain, F[1], acc, t)
             elif F[0] == "call":
+                before = acc
                 acc = solve(brain, F[1], "xy", t, acc, unknown_first=True)   # undo one step
+                if acc is None:
+                    WHY_NOT[0] = (f"repeating a below-zero number of times means undoing a "
+                                  f"step: finding what, put through '{F[1]}' with "
+                                  f"{show(brain, t)}, gives {show(brain, before)}; nothing does")
             elif F[0] in ("succ", "down"):
                 up = (F[0] == "succ") == (n[0] > 0)
                 acc = _plus_one(brain, acc, 1 if up else -1)
@@ -210,6 +241,7 @@ def combine(brain, law, x, y, order):
         how = (f"I cut both piles into pieces of a cake cut into {kind} (my recut law): "
                f"{c1} and {c2} such pieces, then use my law '{law}' on the counts")
         return res, how
+    WHY_NOT[0] = None
     res = apply_law(brain, law, a, b)
     if res is None:
         from .compression import fractional_power, ladder_view
@@ -225,7 +257,7 @@ def combine(brain, law, x, y, order):
                                     f"whose {count[1]}-fold repeat equals the {count[0]}-fold "
                                     f"repeat (the only meaning that keeps the laws of repeating "
                                     f"true)")
-        return None, f"I can't run my law '{law}' on these amounts"
+        return None, WHY_NOT[0] or f"I can't run my law '{law}' on these amounts"
     return res, (f"I ran my law '{law}' step by step on amounts, using what I know about "
                  f"adding, taking away and multiplying pieces")
 
@@ -340,8 +372,19 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
         max_cut = max(60, goal[1] * max(1, abs(known[0])) * known[1])
     start = dsl.STEPS[0]
     last = None
-    for d in range(1, max_cut + 1):
-        LAST_CUT[0] = d
+    # first, kinds of piece suggested by the question's own numbers (products of its
+    # cuts and counts): a guess, checked exactly like any other
+    parts = [goal[1], abs(goal[0]), known[1], abs(known[0])]
+    guesses = set()
+    for mask in range(1, 16):
+        d = 1
+        for i, v in enumerate(parts):
+            if mask >> i & 1 and v:
+                d *= v
+        if 60 < d <= 10 ** 6:
+            guesses.add(d)
+    for d in sorted(guesses) + [d for d in range(1, max_cut + 1) if d not in guesses]:
+        LAST_CUT[0] = max(LAST_CUT[0], d) if d in guesses else d
         if dsl.STEPS[0] - start > SOLVE_EFFORT:
             break                   # looking further would cost more counting than it's worth
         try:
@@ -372,7 +415,7 @@ def solve(brain, law, order, known, goal, unknown_first, max_cut=None):
             direction = 1 if (g0 < 0) == up else -1
             near, far = 0, direction
             try:
-                while abs(far) <= 10 ** 6:
+                while abs(far) <= 10 ** 60:
                     g = gap((far, d))
                     if g is None:
                         far = None
@@ -433,6 +476,10 @@ def arithmetic(brain, tokens):
             if res is None:
                 return None, (f"no amount, {op[3]} {show(brain, right)}, gives "
                               f"{show(brain, value)}"), steps
+            other, _ = combine(brain, op[1], right, _plus_one(brain, res, 1), op[2])
+            if other is not None and same(brain, other, value):
+                return None, (f"every amount, {op[3]} {show(brain, right)}, gives "
+                              f"{show(brain, value)}, so there is no one answer"), steps
             steps.append(f"'{tokens[i]}' asks what, {op[3]} {show(brain, right)}, gives "
                          f"{show(brain, value)}; I looked through cakes cut into 1, 2, 3... "
                          f"pieces and found {show(brain, res)}")

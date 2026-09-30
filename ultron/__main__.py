@@ -97,43 +97,50 @@ def cmd_why(args):
     print(f"\nResult: {value}.  Checker: {msg if ok else 'REJECTED - ' + msg}")
 
 
+def score_blind(brain, text):
+    """Score Ultron on a question file's text. Returns (right, total, rows)."""
+    right = total = 0
+    rows = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "|" not in line:
+            continue
+        q, expected = (x.strip() for x in line.rsplit("|", 1))
+        if q.startswith("find"):
+            target, knowns, objects = reasoner.parse_physics(q)
+            ans = reasoner.physics(brain, target, knowns, objects)
+            got = ans.value
+        else:
+            ans = reasoner.arithmetic(brain, q)
+            got = None if ans.value is None else ans.text
+        if expected.lower() == "refuse":
+            ok = got is None
+        elif expected.startswith("~"):
+            want = float(expected[1:])
+            v = ans.value
+            if isinstance(v, tuple) and v and v[0] == "between":
+                ok = v[1][0] / v[1][1] <= want <= v[2][0] / v[2][1]
+            else:
+                ok = isinstance(v, (int, float)) and abs(v - want) <= 0.02 * abs(want)
+        elif got is None:
+            ok = False
+        elif isinstance(got, float):
+            want = float(expected)
+            ok = abs(got - want) <= 0.02 * abs(want) if want else abs(got) <= 1e-9
+        else:
+            ok = got == expected
+        right += ok
+        total += 1
+        shown = ans.text if got is None else (f"{got:.6g}" if isinstance(got, float) else got)
+        rows.append(f"{'PASS' if ok else 'FAIL'}  {q}  ->  {shown}   (expected {expected})")
+    return right, total, rows
+
+
 def cmd_blind(args):
     """Score Ultron on a question file (see blind/README.md)."""
     brain = Brain.load(args.brain)
-    right = total = 0
-    rows = []
     with open(args.file) as f:
-        for line in f:
-            line = line.strip()
-            if not line or line.startswith("#") or "|" not in line:
-                continue
-            q, expected = (x.strip() for x in line.rsplit("|", 1))
-            if q.startswith("find"):
-                target, knowns, objects = reasoner.parse_physics(q)
-                ans = reasoner.physics(brain, target, knowns, objects)
-                got = ans.value
-            else:
-                ans = reasoner.arithmetic(brain, q)
-                got = None if ans.value is None else ans.text
-            if expected.lower() == "refuse":
-                ok = got is None
-            elif expected.startswith("~"):
-                want = float(expected[1:])
-                v = ans.value
-                if isinstance(v, tuple) and v and v[0] == "between":
-                    ok = v[1][0] / v[1][1] <= want <= v[2][0] / v[2][1]
-                else:
-                    ok = isinstance(v, (int, float)) and abs(v - want) <= 0.02 * abs(want)
-            elif got is None:
-                ok = False
-            elif isinstance(got, float):
-                ok = abs(got - float(expected)) <= 0.02 * abs(float(expected))
-            else:
-                ok = got == expected
-            right += ok
-            total += 1
-            shown = ans.text if got is None else (f"{got:.6g}" if isinstance(got, float) else got)
-            rows.append(f"{'PASS' if ok else 'FAIL'}  {q}  ->  {shown}   (expected {expected})")
+        right, total, rows = score_blind(brain, f.read())
     print("\n".join(rows))
     print(f"\nScore: {right}/{total}")
 

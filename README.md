@@ -27,6 +27,17 @@ words for them only afterwards.
   meeting them, and declines to guess what comes after.
 - It works out roots, logarithms and negative powers it was never taught.
 
+**Closing Phase 2's gaps** (see the [verdict](reports/phase3_verdict.md)):
+- It invents **column arithmetic** from its own place-value law, so 20-digit sums,
+  products and powers come out exact.
+- Its laws of repeating give "repeat 2/3 of a time" its only consistent meaning, so it
+  works out **fractional powers and logarithms**.
+- It finds a **law about its own law** (stiffness × coils = 600) and predicts the pull
+  of springs it has never stretched.
+- It sat two **blind tests** written from a public [syllabus](blind/SYLLABUS.md) by
+  examiners who never saw its code, tests or exams: 55/60 and 54/60 on first sight,
+  every failure fair and since fixed.
+
 It then passes a tough final exam with no teaching. The exam includes:
 - division, which it was never taught (it reasons backwards through its
   multiplication law);
@@ -38,14 +49,14 @@ Every law is a small program or formula it wrote and can explain. Every answer
 comes with its reasons.
 
 ```bash
-python -m ultron train                          # ~35 s; no dependencies beyond Python 3.10+
+python -m ultron train                          # ~25 s; no dependencies beyond Python 3.10+
 python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
 python -m ultron why "3 + 2"
-python -m ultron blind blind/example_not_blind.txt   # then write your own blind test
+python -m ultron blind blind/independent_2.txt       # an independent examiner's test; write your own
 ```
 
 - [How it works](docs/ARCHITECTURE.md)
-- [Report card](reports/report_card.md), the [Phase 1 verdict](reports/judge_verdict.md) and the [Phase 2 verdict](reports/phase2_verdict.md)
+- [Report card](reports/report_card.md), the [Phase 1 verdict](reports/judge_verdict.md) the [Phase 2 verdict](reports/phase2_verdict.md) and the [verdict on closing its gaps](reports/phase3_verdict.md)
 - [Roadmap to a self-improving expert](docs/ROADMAP.md)
 - Original requirements: [PRD v1](ULTRON_PRD_V1.md), [PRD v2](ULTRON_PRD_V2.md)
