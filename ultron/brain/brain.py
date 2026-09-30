@@ -10,7 +10,9 @@ import json
 from . import units as U
 from .curiosity import Curiosity
 from .dsl import BOOL, Law, Library, safe_evaluate, show, size
-from .invariants import ConservationLaw, QuantityLaw, search_conservation, search_invariant
+from .invariants import (ConservationLaw, QuantityLaw, SumLaw, law_from_json,
+                         search_conservation, search_invariant, search_sum_invariant)
+from .invariants import monomial_str
 from .memory import Memory, Spec
 from .synth import synthesize
 
@@ -129,7 +131,7 @@ class Brain:
         return None
 
     def known_forms(self):
-        return [law.powers for law in self.qlaws.values()]
+        return [law.powers for law in self.qlaws.values() if not isinstance(law, SumLaw)]
 
     # ------------------------------------------------------------- predicting
     def predict(self, spec_name, inputs):
@@ -269,10 +271,17 @@ class Brain:
         result = search_invariant(name, eps, names, spec.tol, group_by=spec.group_by,
                                   prior_powers=self.known_forms(), precision=spec.precision)
         self.search_steps[name] = self.search_steps.get(name, 0) + result.steps
+        if result.law is None and spec.group_by:
+            # no single product stays constant: is something *shared* between two forms?
+            result = search_sum_invariant(name, eps, names, spec.tol + 4 * spec.precision,
+                                          spec.group_by)
+            self.search_steps[name] += result.steps
         if result.law is None:
             self.note("stuck", f"{name}: nothing stays constant yet ({len(eps)} experiences)")
             return None
         new = result.law
+        if isinstance(new, SumLaw):
+            return self._adopt_sum_law(spec, law, new, eps)
         if (law is not None and law.kind == new.kind == "grouped"
                 and law.powers == new.powers):
             # same law, new object: just measure the newcomer's property
@@ -292,8 +301,47 @@ class Brain:
                             f"until it predicts {ESTABLISHED} new experiences)")
         return new.formula()
 
+    def _adopt_sum_law(self, spec, old, new, eps):
+        name = spec.name
+        if isinstance(old, SumLaw) and old.a == new.a and old.b == new.b:
+            old.properties, old.coef = new.properties, new.coef
+            group = eps[-1][spec.group_by]
+            self.note("measure", f"{name}: new {spec.group_by} {group}; its hidden amount is "
+                                 f"{old.properties[group]:.6g}")
+            return None
+        new.provenance = {"lesson": self.lesson, "experiences": len(eps), "support": 0}
+        self.qlaws[name] = new
+        dims_a = U.of_monomial(new.a, spec.units)
+        dims_b = U.of_monomial(new.b, spec.units)
+        coef_dims = tuple(x - y for x, y in zip(dims_a, dims_b)) if dims_a and dims_b else None
+        a, b = monomial_str(new.a), monomial_str(new.b)
+        story = (f"Along each {spec.group_by}, neither {a} nor {b} stays the same, but "
+                 f"{a} + {new.coef:.6g}·{b} does [coefficient in {U.name(coef_dims)}]. Each "
+                 f"{spec.group_by} has its own amount of this hidden quantity: whatever {a} is "
+                 f"lost turns up as {b}, and the total never changes.")
+        if coef_dims is not None:
+            inv_dims = tuple(-x for x in coef_dims)
+            like = next(((v, n) for n, sp in sorted(self.memory.specs.items())
+                         for v, d in sorted(sp.units.items()) if tuple(d) == inv_dims), None)
+            if like:
+                story += (f" (Its coefficient is one over {1 / new.coef:.4g} {U.name(inv_dims)}: "
+                          f"the same units as '{like[0]}' in my '{like[1]}' experiences.)")
+        self.note("revise", f"{name}: {story}")
+        key = f"hidden:{name}"
+        if key not in self.inventions:
+            self.inventions[key] = {"shape": "hidden quantity", "law": name, "primitives": [],
+                                    "lesson": self.lesson, "story": story}
+            self.note("invent", story)
+        return new.formula()
+
     def _refine(self, law, eps):
         """Keep improving the constant's estimate as evidence accumulates."""
+        if isinstance(law, SumLaw):
+            groups = {}
+            for e in eps:
+                groups.setdefault(e[law.group_by], []).append(law.total(e))
+            law.properties = {k: sum(v) / len(v) for k, v in sorted(groups.items())}
+            return
         if law.kind == "global":
             vals = [self._monomial(e, law.powers) for e in eps]
             law.constant = sum(vals) / len(vals)
@@ -391,7 +439,7 @@ class Brain:
         for k, v in d["library"].items():
             b.library.add(Law.from_json(v))
             b.hypotheses[k] = b.library.get(k).expr
-        b.qlaws = {k: QuantityLaw.from_json(v) for k, v in d["quantity_laws"].items()}
+        b.qlaws = {k: law_from_json(v) for k, v in d["quantity_laws"].items()}
         b.claws = {k: [ConservationLaw.from_json(l) for l in v]
                    for k, v in d["conservation_laws"].items()}
         b.vocab = {k: tuple(v) for k, v in d["vocabulary"].items()}

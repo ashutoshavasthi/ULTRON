@@ -58,3 +58,28 @@ class PhysicsSandbox:
     def secret_stiffness(self, spring):
         """Only the Judge may look at this, to grade answers."""
         return self._stiffness[spring]
+
+
+class Track:
+    """A frictionless roller-coaster track. A ball is let go from rest somewhere
+    high; at points along its run, instruments read its height (m) and speed (m/s).
+    The world obeys gravity; Ultron is told nothing about energy."""
+
+    G = 9.81
+
+    def __init__(self, seed=0, prefix="R"):
+        self.rng = random.Random(seed)
+        self.prefix = prefix
+        self.run = 0
+        self.release = None
+        self.mass = None
+
+    def new_run(self, height, mass):
+        self.run += 1
+        self.release, self.mass = height, mass
+        return f"{self.prefix}{self.run}"
+
+    def speed_at(self, height):
+        """None if the ball can never get that high on this run."""
+        drop = self.release - height
+        return None if drop < 0 else _r((2 * self.G * drop) ** 0.5)

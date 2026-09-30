@@ -628,6 +628,192 @@
   "threshold": 0.99,
   "tick_law": "earn_coins(slot, groups(6, take_away(slot, 4)))"
  },
+ "12": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "ramps",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "invented a hidden quantity shared by height and speed",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "m": 2.1585311534065985,
+       "run": "Exam1",
+       "y": 4.90158416433331
+      },
+      "truth": 19.1224188769,
+      "ultron": 19.122418876887966
+     },
+     {
+      "question": {
+       "m": 2.1585311534065985,
+       "run": "Exam1",
+       "y": 0.7010046386260874
+      },
+      "truth": 21.1679539398,
+      "ultron": 21.16795393980006
+     },
+     {
+      "question": {
+       "m": 2.1585311534065985,
+       "run": "Exam1",
+       "y": 6.035197769077039
+      },
+      "truth": 18.5317404681,
+      "ultron": 18.53174046812927
+     }
+    ],
+    "name": "runs 10-50 m high (trained: 1-5 m): speed, after one look at the release",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "Exam1",
+      "truth": 23.539041029946915,
+      "ultron": 23.539041029946915
+     },
+     {
+      "question": "Exam2",
+      "truth": 44.019482264414535,
+      "ultron": 44.019482264414535
+     },
+     {
+      "question": "Exam3",
+      "truth": 25.979528562240255,
+      "ultron": 25.979528562240255
+     }
+    ],
+    "name": "NEVER TRAINED: how high does it climb on the far side?",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": 8.314894679703595,
+      "truth": 3.5238263779084176,
+      "ultron": 3.52382637791013
+     },
+     {
+      "question": 32.656210906848884,
+      "truth": 54.35413408728828,
+      "ultron": 54.35413408731469
+     },
+     {
+      "question": 26.787073601485393,
+      "truth": 36.57223813105992,
+      "ultron": 36.5722381310777
+     }
+    ],
+    "name": "NEVER TRAINED: a ball thrown straight up at 5-40 m/s: how high?",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": 0.01
+   },
+   {
+    "examples": [
+     {
+      "question": "Exam1",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "Exam2",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "Exam3",
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "impossible: its speed at a height above where it was let go",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      10,
+      10
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 12,
+  "passed": true,
+  "story": "Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)",
+  "threshold": 0.99
+ },
  "2": {
   "attempt": 1,
   "items": [

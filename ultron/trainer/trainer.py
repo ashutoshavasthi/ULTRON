@@ -187,6 +187,8 @@ class Trainer:
         8: {"line:earn/spend": "negative numbers (the integers)"},
         9: {"amounts:cake": "fractions (the rational numbers)"},
         11: {"cycle:tick": "clock numbers (arithmetic modulo 6)"},
+        12: {"hidden:roll": "energy (height + speed²/2g, per unit of weight)",
+             "roll": "conservation of energy"},
     }
 
     def name_concepts(self, number):
@@ -195,7 +197,7 @@ class Trainer:
             self.brain.names[concept] = word
             self.say(f"What you found in '{concept}' is what people call {word}.")
 
-    def run_all(self, upto=11):
+    def run_all(self, upto=12):
         for n in range(upto + 1):
             self.run(n)
         return self.results

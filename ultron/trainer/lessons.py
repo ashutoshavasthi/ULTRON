@@ -9,7 +9,7 @@ from ..brain.dsl import BOOL, INT
 from ..brain.memory import Spec
 from ..brain.perception import count, present, read_marks
 from ..env import dataworld
-from ..env.physics import PhysicsSandbox
+from ..env.physics import PhysicsSandbox, Track
 from ..env.toyworld import Bakery, ShopWorld, ToyWorld, Wheel
 
 NUMBER_WORDS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
@@ -572,8 +572,39 @@ class WheelLesson(Lesson):
         return out
 
 
+# ---------------------------------------------------------------- lesson 12
+class Ramps(Lesson):
+    number, title = 12, "Hills and valleys"
+    goal = ("Balls roll on a frictionless track. Nobody mentions energy. Can Ultron find "
+            "a hidden quantity, shared between height and speed, that never changes along "
+            "a run, and use it on runs 10 times higher and on balls thrown upwards?")
+    budget = 120
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.world = Track(seed)
+        self.rng = self.world.rng
+        self.current = None
+        self.left = 0
+
+    def specs(self):
+        return [Spec("roll", "quantity", {"y": LENGTH, "m": MASS}, "v", group_by="run",
+                     units={"y": LENGTH, "m": MASS, "v": SPEED}, tol=1e-6)]
+
+    def scene(self, name, wide=False, request=None):
+        rng, w = self.rng, self.world
+        if self.current is None or self.left == 0:
+            self.current = w.new_run(round(rng.uniform(1, 5), 3), round(rng.uniform(1, 5), 3))
+            self.left = rng.randint(3, 6)
+            y = w.release                       # first reading: where it was let go
+        else:
+            y = round(rng.uniform(0, w.release), 3)
+        self.left -= 1
+        return {"y": y, "m": w.mass, "run": self.current}, w.speed_at(y)
+
+
 def all_lessons(seed=0):
     return [Permanence(seed), Pairing(seed + 1), Combining(seed + 2), Groups(seed + 3),
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
             Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10),
-            WheelLesson(seed + 11)]
+            WheelLesson(seed + 11), Ramps(seed + 12)]

@@ -239,3 +239,22 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: I spun the wheel and said '3 after 5 equals 2' and so on.
 - **Trainer**: Exam for lesson 11, attempt 1: passed
 - **Trainer**: What you found in 'cycle:tick' is what people call clock numbers (arithmetic modulo 6).
+
+## Lesson 12
+
+- **Trainer**: Lesson 12: Hills and valleys
+- Ultron _meet_: new kind of experience: roll
+- Ultron _stuck_: roll: nothing stays constant yet (1 experiences)
+- Ultron _stuck_: roll: nothing stays constant yet (2 experiences)
+- Ultron _stuck_: roll: nothing stays constant yet (3 experiences)
+- Ultron _stuck_: roll: nothing stays constant yet (4 experiences)
+- Ultron _stuck_: roll: nothing stays constant yet (5 experiences)
+- Ultron _stuck_: roll: nothing stays constant yet (6 experiences)
+- Ultron _revise_: roll: Along each run, neither y nor v^2 stays the same, but y + 0.0509684·v^2 does [coefficient in m^-1·s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s²: the same units as 'a' in my 'lab_push' experiences.)
+- Ultron _measure_: roll: new run R3; its hidden amount is 2.76
+- Ultron _measure_: roll: new run R4; its hidden amount is 3.748
+- Ultron _measure_: roll: new run R5; its hidden amount is 1.893
+- Ultron _bored_: nothing here is teaching me anything new any more
+- **Trainer**: Exam for lesson 12, attempt 1: passed
+- **Trainer**: What you found in 'hidden:roll' is what people call energy (height + speed²/2g, per unit of weight).
+- **Trainer**: What you found in 'roll' is what people call conservation of energy.

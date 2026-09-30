@@ -28,8 +28,16 @@ def laws_section(brain):
     lines += ["", "### Laws about measurements", "",
               "| Experience | Law | Constant | Units | Trust | Called |",
               "|---|---|---|---|---|---|"]
+    from ..brain.invariants import SumLaw
     for name, law in sorted(brain.qlaws.items()):
         spec = brain.memory.specs[name]
+        if isinstance(law, SumLaw):
+            dims = U.of_monomial(law.a, spec.units)
+            trust = f"{brain.status(name)} ({law.provenance.get('support', 0)} confirmations)"
+            lines.append(f"| `{name}` | `{law.formula()}` = hidden amount | one per "
+                         f"{law.group_by} ({len(law.properties)} {law.group_by}s) | "
+                         f"{U.name(dims)} | {trust} | {brain.names.get(name, '')} |")
+            continue
         dims = U.of_monomial(law.powers, spec.units) if spec.units else None
         if law.kind == "global":
             const = f"{law.constant:.6g} (same everywhere)"
@@ -143,6 +151,10 @@ def special_section(results, brain):
                      "and weighed piles of pieces, then noticed: _" + r9["story"] + "_ Afterwards "
                      "it answers 'what times 3 equals -7' with -7/3, and '1/2 plus 1/3' by "
                      "re-cutting both piles into sixths.")
+    for n, what in ((11, "Inventing clock numbers"), (12, "Inventing energy")):
+        r = results.get(str(n)) or results.get(n)
+        if r and r.get("story"):
+            lines.append(f"- **{what}** (lesson {n}, Phase 2): _{r['story']}_")
     r10 = results.get("10") or results.get(10)
     if r10:
         lines.append("- **Tough final exam** (lesson 10): no teaching; kinds of question never "

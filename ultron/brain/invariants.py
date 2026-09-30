@@ -14,6 +14,11 @@ must pay for one extra constant per object.
 
 Conservation laws (collisions) use the same idea: a per-object quantity whose
 total before equals its total after.
+
+Hidden quantities: when no single product stays constant, Ultron also tries
+*sums*: A + λ·B, where A and B are simple products and it fits λ itself. If that
+stays constant along each run (but differs between runs), it has found a hidden
+quantity that flows between A and B while its total never changes.
 """
 
 import itertools
@@ -66,8 +71,11 @@ class QuantityLaw:
     def formula(self):
         return monomial_str(self.powers)
 
+    def variables(self):
+        return list(self.powers)
+
     def to_json(self):
-        return {"etype": self.etype, "powers": self.powers, "kind": self.kind,
+        return {"form": "product", "etype": self.etype, "powers": self.powers, "kind": self.kind,
                 "constant": self.constant, "group_by": self.group_by,
                 "properties": self.properties, "spread": self.spread,
                 "provenance": self.provenance}
@@ -76,6 +84,139 @@ class QuantityLaw:
     def from_json(cls, d):
         return cls(d["etype"], d["powers"], d["kind"], d.get("constant"), d.get("group_by"),
                    d.get("properties"), d.get("spread", 0.0), d.get("provenance"))
+
+
+class SumLaw:
+    """A + coef·B == property(group): a hidden quantity conserved along each group
+    (e.g. each run of a ball), shared between two measurable forms."""
+
+    kind = "grouped"
+
+    def __init__(self, etype, a, b, coef, group_by, properties, spread=0.0, provenance=None):
+        self.etype = etype
+        self.a = dict(a)
+        self.b = dict(b)
+        self.coef = coef
+        self.group_by = group_by
+        self.properties = dict(properties)
+        self.spread = spread
+        self.provenance = provenance or {}
+
+    @property
+    def powers(self):
+        """Every quantity the law involves (for chaining)."""
+        out = dict(self.a)
+        out.update(self.b)
+        return out
+
+    def variables(self):
+        return sorted(set(self.a) | set(self.b))
+
+    def value_for(self, group=None):
+        return self.properties.get(group)
+
+    def total(self, values):
+        return _mono(values, self.a) + self.coef * _mono(values, self.b)
+
+    def solve(self, target, known, group=None):
+        e = self.value_for(group)
+        if e is None:
+            return None
+        for mono, other, scale in ((self.a, self.b, 1.0), (self.b, self.a, self.coef)):
+            if target in mono and target not in other:
+                try:
+                    rest = _mono(known, {k: v for k, v in mono.items() if k != target})
+                    other_part = _mono(known, other) * (self.coef if scale == 1.0 else 1.0)
+                except (KeyError, ZeroDivisionError):
+                    return None
+                x = (e - other_part) / (scale * rest)
+                p = mono[target]
+                if x < 0 and p % 2 == 0:
+                    return None     # e.g. a speed that would need a negative square
+                return math.copysign(abs(x) ** (1.0 / p), x)
+        return None
+
+    def formula(self):
+        return f"{monomial_str(self.a)} + {self.coef:.6g}·{monomial_str(self.b)}"
+
+    def to_json(self):
+        return {"form": "sum", "etype": self.etype, "a": self.a, "b": self.b,
+                "coef": self.coef, "group_by": self.group_by, "properties": self.properties,
+                "spread": self.spread, "provenance": self.provenance}
+
+    @classmethod
+    def from_json(cls, d):
+        return cls(d["etype"], d["a"], d["b"], d["coef"], d["group_by"], d["properties"],
+                   d.get("spread", 0.0), d.get("provenance"))
+
+
+def law_from_json(d):
+    return SumLaw.from_json(d) if d.get("form") == "sum" else QuantityLaw.from_json(d)
+
+
+def _mono(values, powers):
+    v = 1.0
+    for var, p in powers.items():
+        v *= values[var] ** p
+    return v
+
+
+def monomials(names, max_complexity=2):
+    """Simple products (one quantity allowed), simplest first; powers are positive."""
+    out = []
+    for c in range(1, max_complexity + 1):
+        for combo in itertools.product(range(0, MAX_POWER + 1), repeat=len(names)):
+            if sum(combo) == c:
+                out.append({n: p for n, p in zip(names, combo) if p})
+    return out
+
+
+def search_sum_invariant(etype, episodes, names, tol, group_by, max_complexity=2):
+    """Find A + λ·B constant within each group (not across groups), smallest first."""
+    names = sorted(names)
+    monos = monomials(names, max_complexity)
+    groups = {}
+    for ep in episodes:
+        groups.setdefault(ep[group_by], []).append(ep)
+    multi = [g for g in groups.values() if len(g) >= 2]
+    steps = 0
+    if len(multi) < 2:
+        return InvariantResult(None, steps)
+    best = None
+    for i, a in enumerate(monos):
+        for b in monos[i + 1:]:
+            steps += 1
+            if set(a) & set(b):
+                continue
+            lambdas = []
+            for g in multi:
+                av = [_mono(e, a) for e in g]
+                bv = [_mono(e, b) for e in g]
+                for k in range(1, len(g)):
+                    db = bv[k] - bv[0]
+                    if abs(db) > 1e-12:
+                        lambdas.append(-(av[k] - av[0]) / db)
+            if len(lambdas) < 2:
+                continue
+            lam = sum(lambdas) / len(lambdas)
+            if lam == 0 or _spread(lambdas) > tol * 10:
+                continue
+            props, worst = {}, 0.0
+            for key, g in groups.items():
+                vals = [_mono(e, a) + lam * _mono(e, b) for e in g]
+                props[key] = sum(vals) / len(vals)
+                if len(vals) >= 2:
+                    worst = max(worst, (max(vals) - min(vals)) / (abs(props[key]) or 1.0))
+            if worst > tol:
+                continue
+            distinct = len({round(v, 9) for v in props.values()}) > 1
+            if not distinct:
+                continue    # the same everywhere: a plain law, not a hidden quantity
+            score = sum(a.values()) + sum(b.values()) + 1 + len(groups)
+            if best is None or score < best[0]:
+                best = (score, SumLaw(etype, a, b, lam, group_by,
+                                      dict(sorted(props.items())), worst))
+    return InvariantResult(best[1] if best else None, steps)
 
 
 class ConservationLaw:

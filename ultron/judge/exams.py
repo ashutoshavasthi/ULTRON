@@ -611,6 +611,40 @@ def exam_wheel(brain, seed=1011):
                     "tick_law": show_law(b, "tick")})
 
 
+def exam_ramps(brain, seed=1012):
+    from ..env.physics import Track
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    world = Track(seed, prefix="Exam")
+    invented = Tally("invented a hidden quantity shared by height and speed")
+    invented.item("ramps", True, "hidden:roll" in b.inventions)
+    high = Tally("runs 10-50 m high (trained: 1-5 m): speed, after one look at the release",
+                 tol=0.01)
+    climb = Tally("NEVER TRAINED: how high does it climb on the far side?", tol=0.01)
+    throw = Tally("NEVER TRAINED: a ball thrown straight up at 5-40 m/s: how high?", tol=0.01)
+    refuse = Tally("impossible: its speed at a height above where it was let go")
+    for _ in range(10):
+        h, m = rng.uniform(10, 50), rng.uniform(1, 9)
+        run = world.new_run(h, m)
+        b.experience("roll", {"y": h, "m": m, "run": run}, 0.0)
+        for _ in range(3):
+            y = rng.uniform(0, h)
+            inputs = {"y": y, "m": m, "run": run}
+            high.item(inputs, world.speed_at(y), b.predict("roll", inputs),
+                      b.memory.of("roll"), "v", inputs)
+        ans = reasoner.physics(b, "y", {"v": 0.0}, {"run": run})
+        climb.item(run, h, ans.value)
+        refuse.item(run, REFUSE, b.predict("roll", {"y": h * 1.5, "m": m, "run": run}))
+    for _ in range(10):
+        u = rng.uniform(5, 40)
+        run = world.new_run(u * u / (2 * world.G), 1.0)
+        b.experience("roll", {"y": 0.0, "m": 1.0, "run": run}, u)
+        ans = reasoner.physics(b, "y", {"v": 0.0}, {"run": run})
+        throw.item(u, u * u / (2 * world.G), ans.value)
+    inv = b.inventions.get("hidden:roll")
+    return _result(12, [invented, high, climb, throw, refuse], 0.99,
+                   {"story": inv["story"] if inv else None})
+
+
 def show_law(brain, name):
     from ..brain.dsl import show as show_expr
     law = brain.library.get(name)
@@ -619,4 +653,4 @@ def show_law(brain, name):
 
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
-         8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel}
+         8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps}

@@ -364,6 +364,29 @@
     0.0,
     0.0
    ],
+   "roll": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+   ],
    "spend_coins": [
     1.0,
     1.0,
@@ -531,6 +554,13 @@
    "vars": [
     "slot"
    ]
+  },
+  "hidden:roll": {
+   "law": "roll",
+   "lesson": 12,
+   "primitives": [],
+   "shape": "hidden quantity",
+   "story": "Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
   },
   "line:earn/spend": {
    "counted": "coins",
@@ -4795,6 +4825,222 @@
    "kind": "trainer",
    "lesson": 11,
    "text": "What you found in 'cycle:tick' is what people call clock numbers (arithmetic modulo 6)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 12,
+   "text": "Lesson 12: Hills and valleys"
+  },
+  {
+   "kind": "meet",
+   "lesson": 12,
+   "text": "new kind of experience: roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 12,
+   "text": "roll: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 12,
+   "text": "roll: nothing stays constant yet (2 experiences)"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 12,
+   "text": "roll: nothing stays constant yet (3 experiences)"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 12,
+   "text": "roll: nothing stays constant yet (4 experiences)"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 12,
+   "text": "roll: nothing stays constant yet (5 experiences)"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 12,
+   "text": "roll: nothing stays constant yet (6 experiences)"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "revise",
+   "lesson": 12,
+   "text": "roll: Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
+  },
+  {
+   "kind": "invent",
+   "lesson": 12,
+   "text": "Along each run, neither y nor v^2 stays the same, but y + 0.0509684\u00b7v^2 does [coefficient in m^-1\u00b7s^2]. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (Its coefficient is one over 19.62 m/s\u00b2: the same units as 'a' in my 'lab_push' experiences.)"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "measure",
+   "lesson": 12,
+   "text": "roll: new run R3; its hidden amount is 2.76"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "establish",
+   "lesson": 12,
+   "text": "roll: y + 0.0509684\u00b7v^2 has now predicted 3 new experiences; no longer tentative"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "measure",
+   "lesson": 12,
+   "text": "roll: new run R4; its hidden amount is 3.748"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "measure",
+   "lesson": 12,
+   "text": "roll: new run R5; its hidden amount is 1.893"
+  },
+  {
+   "choice": "roll",
+   "kind": "choice",
+   "lesson": 12,
+   "text": "chose to play with roll"
+  },
+  {
+   "kind": "bored",
+   "lesson": 12,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 12,
+   "text": "Exam for lesson 12, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 12,
+   "text": "What you found in 'hidden:roll' is what people call energy (height + speed\u00b2/2g, per unit of weight)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 12,
+   "text": "What you found in 'roll' is what people call conservation of energy."
   }
  ],
  "memory": {
@@ -6992,6 +7238,134 @@
      "outcome": 4
     }
    ],
+   "roll": [
+    {
+     "m": 3.63,
+     "run": "R1",
+     "v": 0.0,
+     "y": 2.898
+    },
+    {
+     "m": 3.63,
+     "run": "R1",
+     "v": 6.98252819543,
+     "y": 0.413
+    },
+    {
+     "m": 3.63,
+     "run": "R1",
+     "v": 7.50003599991,
+     "y": 0.031
+    },
+    {
+     "m": 3.63,
+     "run": "R1",
+     "v": 5.96250283019,
+     "y": 1.086
+    },
+    {
+     "m": 3.63,
+     "run": "R1",
+     "v": 6.42498871594,
+     "y": 0.794
+    },
+    {
+     "m": 3.762,
+     "run": "R2",
+     "v": 0.0,
+     "y": 4.241
+    },
+    {
+     "m": 3.762,
+     "run": "R2",
+     "v": 6.06365236471,
+     "y": 2.367
+    },
+    {
+     "m": 3.762,
+     "run": "R2",
+     "v": 5.30794875635,
+     "y": 2.805
+    },
+    {
+     "m": 3.762,
+     "run": "R2",
+     "v": 8.43341567812,
+     "y": 0.616
+    },
+    {
+     "m": 1.649,
+     "run": "R3",
+     "v": 0.0,
+     "y": 2.76
+    },
+    {
+     "m": 1.649,
+     "run": "R3",
+     "v": 7.13952099234,
+     "y": 0.162
+    },
+    {
+     "m": 1.649,
+     "run": "R3",
+     "v": 3.13209195267,
+     "y": 2.26
+    },
+    {
+     "m": 1.649,
+     "run": "R3",
+     "v": 7.07880498389,
+     "y": 0.206
+    },
+    {
+     "m": 2.348,
+     "run": "R4",
+     "v": 0.0,
+     "y": 3.748
+    },
+    {
+     "m": 2.348,
+     "run": "R4",
+     "v": 3.85641802713,
+     "y": 2.99
+    },
+    {
+     "m": 2.348,
+     "run": "R4",
+     "v": 8.19268087991,
+     "y": 0.327
+    },
+    {
+     "m": 2.348,
+     "run": "R4",
+     "v": 2.44222849054,
+     "y": 3.444
+    },
+    {
+     "m": 2.348,
+     "run": "R4",
+     "v": 3.64185666934,
+     "y": 3.072
+    },
+    {
+     "m": 2.348,
+     "run": "R4",
+     "v": 4.98583393225,
+     "y": 2.481
+    },
+    {
+     "m": 4.958,
+     "run": "R5",
+     "v": 0.0,
+     "y": 1.893
+    },
+    {
+     "m": 4.958,
+     "run": "R5",
+     "v": 1.40770025218,
+     "y": 1.792
+    }
+   ],
    "spend_coins": [
     {
      "inputs": {
@@ -8191,6 +8565,47 @@
     "tol": 1e-09,
     "units": {}
    },
+   "roll": {
+    "action": null,
+    "group_by": "run",
+    "inputs": {
+     "m": [
+      1,
+      0,
+      0
+     ],
+     "y": [
+      0,
+      1,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "roll",
+    "out_type": null,
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "v",
+    "tol": 1e-06,
+    "units": {
+     "m": [
+      1,
+      0,
+      0
+     ],
+     "v": [
+      0,
+      1,
+      -1
+     ],
+     "y": [
+      0,
+      1,
+      0
+     ]
+    }
+   },
    "spend_coins": {
     "action": "spend",
     "group_by": null,
@@ -8315,6 +8730,7 @@
   "cycle:tick": "clock numbers (arithmetic modulo 6)",
   "gas": "Boyle's law",
   "groups": "multiplication",
+  "hidden:roll": "energy (height + speed\u00b2/2g, per unit of weight)",
   "lab_push": "Newton's second law (measured with noise)",
   "lab_stretch": "stiffness (measured with noise)",
   "line:earn/spend": "negative numbers (the integers)",
@@ -8324,6 +8740,7 @@
   "pair_off": "same number (one-to-one correspondence)",
   "peekaboo": "object permanence",
   "push": "Newton's second law",
+  "roll": "conservation of energy",
   "stretch": "stiffness (Hooke's law)",
   "take_away": "subtraction"
  },
@@ -8331,6 +8748,7 @@
   "gas": {
    "constant": 1409.3076923076924,
    "etype": "gas",
+   "form": "product",
    "group_by": null,
    "kind": "global",
    "powers": {
@@ -8348,6 +8766,7 @@
   "lab_push": {
    "constant": 1.0011411428312733,
    "etype": "lab_push",
+   "form": "product",
    "group_by": null,
    "kind": "global",
    "powers": {
@@ -8366,6 +8785,7 @@
   "lab_stretch": {
    "constant": null,
    "etype": "lab_stretch",
+   "form": "product",
    "group_by": "spring",
    "kind": "grouped",
    "powers": {
@@ -8389,6 +8809,7 @@
   "orbit": {
    "constant": 2.9685067667562683e-19,
    "etype": "orbit",
+   "form": "product",
    "group_by": null,
    "kind": "global",
    "powers": {
@@ -8406,6 +8827,7 @@
   "push": {
    "constant": 0.9999999999999528,
    "etype": "push",
+   "form": "product",
    "group_by": null,
    "kind": "global",
    "powers": {
@@ -8421,9 +8843,35 @@
    },
    "spread": 4.120481733598893e-12
   },
+  "roll": {
+   "a": {
+    "y": 1
+   },
+   "b": {
+    "v": 2
+   },
+   "coef": 0.050968399592258025,
+   "etype": "roll",
+   "form": "sum",
+   "group_by": "run",
+   "properties": {
+    "R1": 2.8979999999991803,
+    "R2": 4.2410000000008266,
+    "R3": 2.760000000000012,
+    "R4": 3.7480000000002214,
+    "R5": 1.8929999999996903
+   },
+   "provenance": {
+    "experiences": 7,
+    "lesson": 12,
+    "support": 11
+   },
+   "spread": 1.337324546018854e-12
+  },
   "stretch": {
    "constant": null,
    "etype": "stretch",
+   "form": "product",
    "group_by": "spring",
    "kind": "grouped",
    "powers": {
@@ -8447,7 +8895,7 @@
  },
  "search_steps": {
   "cake_balance": 89566,
-  "collide": 80,
+  "collide": 90,
   "earn_coins": 40011,
   "earn_notes": 1266,
   "gas": 28,
@@ -8464,6 +8912,7 @@
   "peekaboo": 8,
   "push": 180,
   "recut": 5516,
+  "roll": 1724,
   "spend_coins": 1066,
   "spend_notes": 40790,
   "spin": 64096,
