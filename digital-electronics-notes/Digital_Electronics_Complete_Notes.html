@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Digital Electronics Complete Notes</title><style>:root{--bg:#fff;--fg:#1c2330;--mut:#5b6678;--card:#f5f7fb;--bd:#d9dfeb;--acc:#2563eb;--ok:#15803d;--warn:#b45309;--bad:#b91c1c;--code:#eef2f9;--ex:#f0f7ff;--exb:#bcd6ff}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f141c;--fg:#e4e9f2;--mut:#9aa6b8;--card:#171e29;--bd:#2a3445;--acc:#7aa7ff;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--code:#1b2431;--ex:#14233a;--exb:#2b4a7a}}
+:root[data-theme=dark]{--bg:#0f141c;--fg:#e4e9f2;--mut:#9aa6b8;--card:#171e29;--bd:#2a3445;--acc:#7aa7ff;--ok:#4ade80;--warn:#fbbf24;--bad:#f87171;--code:#1b2431;--ex:#14233a;--exb:#2b4a7a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.wrap{max-width:900px;margin:0 auto;padding:0 16px 80px}
+header.hero{padding:44px 0 20px;border-bottom:2px solid var(--bd)}
+header.hero h1{margin:0;font-size:2.1rem;line-height:1.2}
+header.hero p{color:var(--mut);margin:.5rem 0 0}
+h2{font-size:1.65rem;margin:3rem 0 .6rem;padding-top:1rem;border-top:3px solid var(--acc)}
+h3{font-size:1.2rem;margin:2rem 0 .4rem;color:var(--acc)}
+h4{font-size:1.02rem;margin:1.3rem 0 .3rem}
+p{margin:.55rem 0}
+nav.toc{background:var(--card);border:1px solid var(--bd);border-radius:10px;padding:14px 20px;margin:20px 0}
+nav.toc ol{margin:.3rem 0;columns:2;column-gap:30px;padding-left:20px}
+nav.toc a{color:var(--fg);text-decoration:none}nav.toc a:hover{color:var(--acc)}
+.mono,code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.92em}
+code{background:var(--code);padding:1px 5px;border-radius:4px}
+.box{border-left:4px solid var(--acc);background:var(--card);padding:10px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.box.key{border-color:var(--ok)}.box.warn{border-color:var(--warn)}.box.bad{border-color:var(--bad)}
+.box>b:first-child{display:block;margin-bottom:2px}
+.ex{background:var(--ex);border:1px solid var(--exb);border-radius:10px;padding:10px 18px 14px;margin:18px 0}
+.ex>.t{font-weight:700;color:var(--acc);margin-bottom:4px}
+.fx{font-family:ui-monospace,Menlo,Consolas,monospace;background:var(--code);padding:8px 12px;border-radius:6px;margin:8px 0;overflow-x:auto;white-space:pre;font-size:.92rem;line-height:1.5}
+table{border-collapse:collapse;margin:10px 0;max-width:100%}
+.scroll{overflow-x:auto}
+th,td{border:1px solid var(--bd);padding:4px 10px;text-align:center}
+th{background:var(--card)}
+table.tt td,table.tt th{padding:3px 9px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.9rem}
+table.left td{text-align:left}
+table.kmap{margin:10px auto 2px}
+table.kmap caption{caption-side:top;font-weight:600;padding:4px;font-size:.9rem}
+table.kmap td{width:58px;height:50px;position:relative;padding:2px}
+table.kmap td b{font-size:1.1rem}
+table.kmap td small{position:absolute;top:1px;left:4px;font-size:.62rem;color:var(--mut)}
+table.kmap td.zero b{color:var(--mut);font-weight:400}
+table.kmap td.dc b{color:var(--warn)}
+table.kmap .dots{position:absolute;bottom:2px;left:0;right:0;display:flex;justify-content:center;gap:3px}
+table.kmap .dots i,.glegend i{display:inline-block;width:9px;height:9px;border-radius:50%}
+table.kmap th.corner{font-size:.72rem;font-weight:400}
+.glegend{list-style:none;padding:0;margin:4px 0 12px;text-align:center;font-size:.88rem}
+.glegend li{display:inline-block;margin:0 10px}
+.pair{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;align-items:flex-start}
+svg.circ{display:block;margin:10px auto;background:transparent}
+svg.circ *{stroke:var(--fg);stroke-width:1.6}
+svg.circ text{stroke:none;fill:var(--fg)}
+svg.circ .t{font:12px sans-serif}svg.circ .b{font-weight:700}svg.circ .sm{font-size:10px;fill:var(--mut)}
+svg.circ .bx{fill:var(--card)}svg.circ .gate path{fill:var(--card)}svg.circ .jd{fill:var(--fg)}
+svg .gl{font:10px sans-serif}
+.gates{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.gates .g{border:1px solid var(--bd);border-radius:10px;padding:8px 12px;background:var(--card)}
+.gates .g h4{margin:0}.gates svg *{stroke:var(--fg);stroke-width:1.6}.gates svg .gate path{fill:var(--card)}
+.gates svg text{stroke:none}
+.sol{border-top:1px dashed var(--exb);margin-top:8px;padding-top:6px}
+details{background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:6px 14px;margin:8px 0}
+summary{cursor:pointer;font-weight:600}
+.ok{color:var(--ok)}.bad{color:var(--bad)}
+.ov{overline:none;text-decoration:overline}
+@media print{details{display:block}details>*{display:block}.ex,.box,table{break-inside:avoid}h2{break-before:page}}
+@media(max-width:600px){nav.toc ol{columns:1}table.kmap td{width:46px;height:44px}}
+
+.kmwrap{display:inline-block;text-align:center;vertical-align:top;max-width:100%}
+</style></head>
+<body><div class="wrap">
+<header class="hero"><h1>Digital Electronics — Complete Study Notes</h1>
+<p>Number systems → complements → gates → Boolean algebra → K-maps → codes → combinational circuits. Rebuilt from your class notes with full explanations, derivations and worked examples.</p></header>
+<nav class="toc"><b>Contents</b><ol><li><a href="#s1">Number Systems & Conversions</a></li><li><a href="#s2">Subtraction Using Complements</a></li><li><a href="#s3">Signed Numbers</a></li><li><a href="#s4">Logic Gates</a></li><li><a href="#s5">Boolean Algebra</a></li><li><a href="#s6">Minterms, Maxterms & Canonical Forms</a></li><li><a href="#s7">Karnaugh Maps</a></li><li><a href="#s8">Codes (BCD, 2421, XS-3, Gray…)</a></li><li><a href="#s9">Combinational Circuits (MUX, DEMUX, Encoder, Decoder, BCD Adder)</a></li><li><a href="#s10">Exam Toolkit: formula sheet, mistakes, practice</a></li></ol></nav>
+<div class="box"><b>How to read these notes</b>Every section starts with the idea, then the rules, then worked examples tagged <i>(your notes)</i> where they come from your notebook. Prime (') means complement: A' = Ā. Σ = sum of minterms, Π = product of maxterms. Coloured dots in K-maps mark which group(s) a cell belongs to. Open the <i>practice</i> answers only after trying.</div>
+
+<h2 id="s1">1. Number Systems &amp; Conversions</h2>
+<p>A <b>number system</b> is a way of writing numbers using a fixed set of symbols (<b>digits</b>). The count of distinct digits is the <b>base</b> (also called <b>radix</b>, written <code>r</code>). A number is written <code>(N)<sub>r</sub></code>, meaning "N written in base r".</p>
+
+<h3>1.1 Positional (weighted) notation</h3>
+<p>In every positional system, each digit is multiplied by a power of the base that depends on its position. Positions to the left of the point have powers <code>r<sup>0</sup>, r<sup>1</sup>, r<sup>2</sup>…</code>; positions to the right have <code>r<sup>-1</sup>, r<sup>-2</sup>…</code>.</p>
+<div class="fx">(d<sub>n</sub> … d<sub>1</sub> d<sub>0</sub> . d<sub>-1</sub> d<sub>-2</sub> …)<sub>r</sub>  =  Σ d<sub>i</sub> × r<sup>i</sup></div>
+<p>Your notes' example: <code>(56)<sub>10</sub> = 5×10<sup>1</sup> + 6×10<sup>0</sup></code>.</p>
+
+<table class="left"><tr><th>System</th><th>Base r</th><th>Digits</th><th>Typical use</th></tr>
+<tr><td>Decimal</td><td>10</td><td>0–9</td><td>Everyday numbers</td></tr>
+<tr><td>Binary</td><td>2</td><td>0, 1 (<b>bits</b>)</td><td>All digital hardware (a gate is ON/OFF)</td></tr>
+<tr><td>Octal</td><td>8</td><td>0–7</td><td>Compact shorthand: 1 octal digit = 3 bits</td></tr>
+<tr><td>Hexadecimal</td><td>16</td><td>0–9, A–F (A=10 … F=15)</td><td>Compact shorthand: 1 hex digit = 4 bits</td></tr></table>
+
+<div class="box key"><b>Why binary?</b>A transistor switch has two reliable states (high/low voltage), so the base-2 system maps perfectly onto hardware. LSB = <i>least significant bit</i> (rightmost, weight 2<sup>0</sup>); MSB = <i>most significant bit</i> (leftmost, largest weight).</div>
+
+<h3>1.2 Binary → Decimal</h3>
+<p>Multiply each bit by its weight and add.</p>
+<div class="ex"><div class="t">Example 1.1 — (101101)<sub>2</sub> to decimal</div>
+<div class="fx">1×32 + 0×16 + 1×8 + 1×4 + 0×2 + 1×1 = 32 + 8 + 4 + 1 = 45</div>
+<div class="t" style="margin-top:8px">Example 1.2 — (111000.0110)<sub>2</sub> to decimal (the answer of your notes' 56.42 example)</div>
+<div class="fx">Integer part : 32 + 16 + 8        = 56
+Fraction part: 0×½ + 1×¼ + 1×⅛ + 0×1/16 = 0.25 + 0.125 = 0.375
+Total        : 56.375   (≈ 56.42, not exactly — see 1.3)</div></div>
+
+<h3>1.3 Decimal → Binary</h3>
+<h4>(a) Integer part: repeated division by 2</h4>
+<p>Divide by 2 again and again, record each <b>remainder</b>, stop at quotient 0. Read the remainders <b>from bottom to top</b> (last remainder = MSB).</p>
+<div class="ex"><div class="t">Example 1.3 — (56)<sub>10</sub> → binary (your notes)</div>
+<table class="tt "><tr><th>÷</th><th>Quotient</th><th>Remainder</th></tr><tr><td>56 ÷ 2</td><td>28</td><td>0 (LSB)</td></tr><tr><td>28 ÷ 2</td><td>14</td><td>0</td></tr><tr><td>14 ÷ 2</td><td>7</td><td>0</td></tr><tr><td>7 ÷ 2</td><td>3</td><td>1</td></tr><tr><td>3 ÷ 2</td><td>1</td><td>1</td></tr><tr><td>1 ÷ 2</td><td>0</td><td>1 (MSB)</td></tr></table>
+<p>Read upward: <b>(111000)<sub>2</sub></b>. Check: 32+16+8 = 56 ✓.</p></div>
+
+<h4>(b) Fraction part: repeated multiplication by 2</h4>
+<p>Multiply the fraction by 2. The <b>integer part</b> that pops out (0 or 1) is the next bit; keep only the new fraction and repeat. Read bits <b>top to bottom</b> (first bit = ½ place).</p>
+<div class="ex"><div class="t">Example 1.4 — (0.42)<sub>10</sub> → binary (your notes)</div>
+<table class="tt "><tr><th>Step</th><th>Calculation</th><th>Integer bit</th><th>New fraction</th></tr><tr><td>1</td><td>0.42 × 2 = 0.84</td><td>0</td><td>0.84</td></tr><tr><td>2</td><td>0.84 × 2 = 1.68</td><td>1</td><td>0.68</td></tr><tr><td>3</td><td>0.68 × 2 = 1.36</td><td>1</td><td>0.36</td></tr><tr><td>4</td><td>0.36 × 2 = 0.72</td><td>0</td><td>0.72</td></tr></table>
+<p>So 0.42 ≈ <b>(0.0110)<sub>2</sub></b>, and therefore <b>(56.42)<sub>10</sub> ≈ (111000.0110)<sub>2</sub></b>.</p>
+<p><i>Why "≈"?</i> Many decimal fractions never terminate in binary (like ⅓ in decimal). Four bits give 0.375; more steps (0.72→1.44→1, 0.44→0.88→0, …) give 0.0110101110… getting closer to 0.42. In an exam, stop at the number of bits asked for.</p>
+<p class="box warn"><b>Margin note in your notebook</b>"42 → 101010" is the conversion of the <i>whole number</i> 42. Don't mix it up with the fraction .42, which is handled by multiplication, not division.</p></div>
+
+<h3>1.4 Octal and Hexadecimal shortcuts</h3>
+<p>Because 8 = 2<sup>3</sup> and 16 = 2<sup>4</sup>, conversion with binary is just <b>grouping bits</b> — no arithmetic.</p>
+<ul><li><b>Binary → Octal:</b> group in 3s starting at the binary point (pad with zeros outward). </li>
+<li><b>Binary → Hex:</b> group in 4s the same way.</li>
+<li><b>Octal/Hex → Binary:</b> replace each digit by its 3-bit / 4-bit pattern.</li></ul>
+<div class="ex"><div class="t">Example 1.5 — (111000.0110)<sub>2</sub></div>
+<div class="fx">Octal: 111 000 . 011 000  →  (70.30)<sub>8</sub>      (7×8 = 56, .3 = 3/8 = 0.375 ✓)
+Hex  : 0011 1000 . 0110  →  (38.6)<sub>16</sub>      (3×16+8 = 56, .6 = 6/16 = 0.375 ✓)</div></div>
+<table class="tt "><tr><th>Dec</th><th>Bin</th><th>Oct</th><th>Hex</th></tr><tr><td>0</td><td>0000</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0001</td><td>1</td><td>1</td></tr><tr><td>2</td><td>0010</td><td>2</td><td>2</td></tr><tr><td>3</td><td>0011</td><td>3</td><td>3</td></tr><tr><td>4</td><td>0100</td><td>4</td><td>4</td></tr><tr><td>5</td><td>0101</td><td>5</td><td>5</td></tr><tr><td>6</td><td>0110</td><td>6</td><td>6</td></tr><tr><td>7</td><td>0111</td><td>7</td><td>7</td></tr><tr><td>8</td><td>1000</td><td>10</td><td>8</td></tr><tr><td>9</td><td>1001</td><td>11</td><td>9</td></tr><tr><td>10</td><td>1010</td><td>12</td><td>A</td></tr><tr><td>11</td><td>1011</td><td>13</td><td>B</td></tr><tr><td>12</td><td>1100</td><td>14</td><td>C</td></tr><tr><td>13</td><td>1101</td><td>15</td><td>D</td></tr><tr><td>14</td><td>1110</td><td>16</td><td>E</td></tr><tr><td>15</td><td>1111</td><td>17</td><td>F</td></tr></table>
+
+<h3>1.5 Binary arithmetic</h3>
+<table class="tt"><tr><th colspan="2">Addition</th><th colspan="2">Subtraction</th></tr>
+<tr><td>0+0 = 0</td><td>1+0 = 1</td><td>0−0 = 0</td><td>1−0 = 1</td></tr>
+<tr><td>1+1 = 10 (sum 0, carry 1)</td><td>1+1+1 = 11 (sum 1, carry 1)</td><td>1−1 = 0</td><td>0−1 = 1 with <b>borrow 1</b></td></tr></table>
+<p><b>Borrow</b> works like decimal: to compute 0−1 you borrow 1 from the next-higher bit, which is worth 2 in the current column, so 2−1 = 1.</p>
+<div class="ex"><div class="t">Example 1.6 — (100)<sub>2</sub> − (011)<sub>2</sub> (your notes: answer 001)</div>
+<div class="fx">  column 0: 0−1 → borrow from column 1 (which is 0, so it must borrow from column 2)
+  column 2 becomes 0, column 1 becomes 2 → lends 1 → column 1 = 1, column 0 = 2
+  column 0: 2−1 = 1 ;  column 1: 1−1 = 0 ;  column 2: 0−0 = 0
+  Result = 001     (check: 4 − 3 = 1 ✓)</div></div>
+<p>Borrow chains get error-prone for long numbers; hardware avoids them by using <b>complements</b> — the next section.</p>
+
+<h2 id="s2">2. Subtraction Using Complements</h2>
+<p>Computers have no separate subtractor in the CPU's core: they turn <code>A − B</code> into <code>A + (complement of B)</code> and reuse the adder. There are two complements for any base r:</p>
+<table class="left"><tr><th>Name</th><th>Binary (r=2)</th><th>Decimal (r=10)</th><th>How to get it (n-digit number N)</th></tr>
+<tr><td><b>Radix complement</b> (r's)</td><td>2's complement</td><td>10's complement</td><td><code>r<sup>n</sup> − N</code></td></tr>
+<tr><td><b>Diminished radix complement</b> ((r−1)'s)</td><td>1's complement</td><td>9's complement</td><td><code>(r<sup>n</sup> − 1) − N</code></td></tr></table>
+<div class="box key"><b>Fast hand methods</b>
+<ul><li><b>1's complement</b>: flip every bit (0↔1). Equivalent: 9's complement = subtract every digit from 9.</li>
+<li><b>2's complement</b>: 1's complement + 1. Shortcut: copy bits from the right up to <i>and including</i> the first 1, then flip all bits to the left.</li>
+<li><b>10's complement</b> = 9's complement + 1 (add 1 at the last digit).</li></ul></div>
+
+<h3>2.1 Subtraction by 2's complement (radix complement)</h3>
+<ol><li><b>Equalise digits:</b> pad the shorter number with leading zeros so both have the same number of digits.</li>
+<li><b>Complement the subtrahend</b> (the number being subtracted) → take its 2's complement.</li>
+<li><b>Add</b> it to the minuend.</li>
+<li><b>Look at the end carry (EOC / end-around carry):</b>
+  <ul><li><b>Carry generated</b> → result is positive and correct. <b>Discard (ignore) the carry.</b></li>
+  <li><b>No carry</b> → result is negative and is in 2's-complement form. Take the <b>2's complement of the sum and put a minus sign</b> (your note: "if EAC not generated, 2's complement again, put −ve sign").</li></ul></li></ol>
+<div class="ex"><div class="t">Example 2.1 — 101101 − 11011 (your notes' example; 45 − 27)</div>
+<div class="fx">Minuend  X = 101101
+Subtrahend Y = 11011  → pad → 011011
+2's comp of Y: flip → 100100, +1 → 100101
+
+   101101
+ + 100101
+ ---------
+ 1 010010      ← carry generated → ignore it
+   010010  = 10010 = 18   ✓ (45 − 27 = 18)</div></div>
+<div class="ex"><div class="t">Example 2.2 — 011011 − 101101 (27 − 45, a negative answer)</div>
+<div class="fx">2's comp of 101101: flip → 010010, +1 → 010011
+   011011
+ + 010011
+ ---------
+   101110   ← no carry → answer is negative
+2's comp of 101110: flip → 010001, +1 → 010010 = 18  → result = −18 ✓</div></div>
+
+<h3>2.2 Subtraction by 1's complement (diminished radix)</h3>
+<p>Same steps, but with the 1's complement, and the carry rule is different:</p>
+<ol><li>Pad to equal length; take the <b>1's complement</b> of the subtrahend; add.</li>
+<li><b>Carry generated</b> → add that carry to the LSB of the sum (<b>end-around carry</b>); the result is positive.</li>
+<li><b>No carry</b> → take the 1's complement of the sum and put a minus sign.</li></ol>
+<div class="ex"><div class="t">Example 2.3 — 101101 − 011011 with 1's complement</div>
+<div class="fx">1's comp of 011011 = 100100
+  101101
++ 100100
+--------
+1 010001   ← carry out → wrap around: 010001 + 1 = 010010 = 18 ✓</div></div>
+<div class="ex"><div class="t">Example 2.4 — 011011 − 101101 with 1's complement</div>
+<div class="fx">1's comp of 101101 = 010010
+  011011 + 010010 = 101101   ← no carry
+1's comp of 101101 = 010010 = 18 → −18 ✓</div></div>
+
+<h3>2.3 The same idea in decimal (10's and 9's complement)</h3>
+<div class="ex"><div class="t">Example 2.5 — 463.42 − 546.001 using 10's complement (your notes)</div>
+<div class="fx">Step 1 — equal digits: X = 463.420,  Y = 546.001
+Step 2 — 10's comp of Y: 9's comp = 453.998, +0.001 → 453.999
+Step 3 — add:  463.420 + 453.999 = 917.419   ← no carry out
+Step 4 — no carry ⇒ negative: 10's comp of 917.419
+          9's comp = 082.580, +0.001 → 082.581
+Answer = −82.581      check: 463.42 − 546.001 = −82.581 ✓</div></div>
+<div class="box warn"><b>Mnemonic</b>Carry → positive → drop it (r's) or add it back (r−1's). No carry → negative → complement the sum again and write "−". "Radix complement discards, diminished radix wraps around."</div>
+<p><b>Why does it work?</b> A − B = A + (r<sup>n</sup> − B) − r<sup>n</sup>. The extra r<sup>n</sup> shows up as the carry out of the n-th digit, so discarding the carry removes it. If A &lt; B, the sum is r<sup>n</sup> − (B−A), i.e. the complement of the (negative) answer — hence complement it back.</p>
+
+<h3>2.4 Practice</h3>
+<details><summary>Q: Compute 1001 − 0110 and 0110 − 1001 using 2's complement</summary>
+<div class="fx">9−6: 2's comp of 0110 = 1010; 1001+1010 = 1 0011 → drop carry → 0011 = 3 ✓
+6−9: 2's comp of 1001 = 0111; 0110+0111 = 1101 (no carry) → 2's comp = 0011 → −3 ✓</div></details>
+
+<h2 id="s3">3. Signed Numbers</h2>
+<p>To store negative numbers in hardware we dedicate the <b>MSB as the sign bit S</b>: <b>0 → positive (+ve), 1 → negative (−ve)</b>. The remaining bits hold the magnitude (or its complement). There are three standard formats. The notes use 4 bits and the number 6:</p>
+<table class="tt "><tr><th>Format</th><th>+6</th><th>−6</th><th>How −6 is made</th></tr><tr><td>Sign-magnitude</td><td>0110</td><td>1110</td><td>Flip only the sign bit</td></tr><tr><td>1's complement</td><td>0110</td><td>1001</td><td>Flip <i>all</i> bits of +6</td></tr><tr><td>2's complement</td><td>0110</td><td>1010</td><td>1's complement + 1 (1001 + 1)</td></tr></table>
+<p>(Your notes show these three codes for −6: <code>1001, 1010, 1110</code>.)</p>
+
+<h3>3.1 Range of n-bit numbers</h3>
+<table class="tt "><tr><th>Format</th><th>Range (n bits)</th><th>n = 4</th><th>Zeros</th></tr><tr><td>Sign-magnitude</td><td>−(2<sup>n−1</sup>−1) … +(2<sup>n−1</sup>−1)</td><td>−7 … +7</td><td>Two (+0 = 0000, −0 = 1000)</td></tr><tr><td>1's complement</td><td>−(2<sup>n−1</sup>−1) … +(2<sup>n−1</sup>−1)</td><td>−7 … +7</td><td>Two (0000, 1111)</td></tr><tr><td>2's complement</td><td>−2<sup>n−1</sup> … +(2<sup>n−1</sup>−1)</td><td>−8 … +7</td><td><b>One</b> (0000)</td></tr></table>
+<p>(Your note "−2³ to 2³" is the rough range; precisely it is <b>−2<sup>3</sup> to 2<sup>3</sup>−1</b> for 2's complement with 4 bits.)</p>
+<div class="box key"><b>Why 2's complement wins</b>One zero, a single adder works for both signed and unsigned operands, and subtraction = addition. Almost every computer uses it.</div>
+
+<h3>3.2 Reading a signed number</h3>
+<div class="ex"><div class="t">Example 3.1 — what does 1011 mean (4-bit)?</div>
+<div class="fx">Sign-magnitude : sign 1, magnitude 011 = 3          → −3
+1's complement : negative, flip → 0100 = 4          → −4
+2's complement : negative, flip+1 → 0101 = 5        → −5
+Weighted view (2's comp): −8 + 0 + 2 + 1 = −5  ✓</div></div>
+
+<h3>3.3 Overflow</h3>
+<p>If the true result doesn't fit in n bits, the answer is wrong. For 2's-complement addition: overflow occurs when two operands of the <b>same sign</b> give a result of the <b>opposite sign</b> (equivalently carry into the MSB ≠ carry out of the MSB). Adding numbers of opposite sign can never overflow.</p>
+<div class="ex"><div class="t">Example 3.2 — 4-bit: 5 + 6</div>
+<div class="fx">0101 + 0110 = 1011 → looks like −5 : OVERFLOW (11 is outside −8…+7)</div></div>
+
+<h3>3.4 Sign extension</h3>
+<p>To widen a 2's-complement number copy the sign bit leftwards: 1010 (−6) → 11111010 (−6); 0110 (+6) → 00000110.</p>
+
+<h2 id="s4">4. Logic Gates</h2>
+<p>A <b>logic gate</b> is an electronic circuit with one or more inputs and one output that implements a Boolean function. Inputs/outputs are <b>HIGH (1)</b> or <b>LOW (0)</b>. A <b>truth table</b> lists the output for every input combination (2<sup>n</sup> rows for n inputs).</p>
+
+<h3>4.1 The seven gates</h3>
+<div class="gates">
+<div class="g"><h4>1. AND</h4><svg viewBox="-14 -2 84 44" width="110" height="58"><g transform="translate(0,0)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><path d="M48,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g></svg><div class="mono">Y = A·B</div><table class="tt "><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td></tr></table><p style="font-size:.85rem;margin:4px 0 0">Output 1 only if <b>all</b> inputs are 1.</p></div><div class="g"><h4>2. OR</h4><svg viewBox="-14 -2 84 44" width="110" height="58"><g transform="translate(0,0)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><path d="M48,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g></svg><div class="mono">Y = A+B</div><table class="tt "><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td></tr></table><p style="font-size:.85rem;margin:4px 0 0">Output 1 if <b>at least one</b> input is 1.</p></div><div class="g"><h4>3. NOT (inverter)</h4><svg viewBox="-14 -2 84 44" width="110" height="58"><g transform="translate(0,0)" class="gate"><path d="M0,4 L34,20 L0,36 Z"/><circle cx="38" cy="20" r="4" fill="#fff"/><path d="M42,20 H60" fill="none"/><path d="M-10,20 H0" fill="none"/></g></svg><div class="mono">Y = A' = Ā</div><table class="tt "><tr><th>A</th><th>Y</th></tr><tr><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td></tr></table><p style="font-size:.85rem;margin:4px 0 0">Single input; flips it. The bubble ○ always means inversion.</p></div><div class="g"><h4>4. NAND (A↑B)</h4><svg viewBox="-14 -2 84 44" width="110" height="58"><g transform="translate(0,0)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g></svg><div class="mono">Y = (A·B)'</div><table class="tt "><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></table><p style="font-size:.85rem;margin:4px 0 0">AND followed by NOT. Output 0 only when all inputs are 1. <b>Universal.</b></p></div><div class="g"><h4>5. NOR (A↓B)</h4><svg viewBox="-14 -2 84 44" width="110" height="58"><g transform="translate(0,0)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g></svg><div class="mono">Y = (A+B)'</div><table class="tt "><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></table><p style="font-size:.85rem;margin:4px 0 0">OR followed by NOT. Output 1 only when all inputs are 0. <b>Universal.</b></p></div><div class="g"><h4>6. XOR (A⊕B)</h4><svg viewBox="-14 -2 84 44" width="110" height="58"><g transform="translate(0,0)" class="gate"><path d="M6,0 Q28,0 52,20 Q28,40 6,40 Q18,20 6,0 Z"/><path d="M0,0 Q12,20 0,40" fill="none"/><path d="M52,20 H60" fill="none"/><path d="M-10,10 H8 M-10,30 H8" fill="none"/></g></svg><div class="mono">Y = A⊕B = A'B + AB'</div><table class="tt "><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td></tr></table><p style="font-size:.85rem;margin:4px 0 0"><b>Odd number of 1s → output high.</b> Detects <i>difference</i>.</p></div><div class="g"><h4>7. XNOR (A⊙B)</h4><svg viewBox="-14 -2 84 44" width="110" height="58"><g transform="translate(0,0)" class="gate"><path d="M6,0 Q28,0 52,20 Q28,40 6,40 Q18,20 6,0 Z"/><path d="M0,0 Q12,20 0,40" fill="none"/><circle cx="56" cy="20" r="4" fill="#fff"/><path d="M60,20 H60" fill="none"/><path d="M-10,10 H8 M-10,30 H8" fill="none"/></g></svg><div class="mono">Y = (A⊕B)' = AB + A'B'</div><table class="tt "><tr><th>A</th><th>B</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td></tr></table><p style="font-size:.85rem;margin:4px 0 0">Complement of XOR. <b>Even number of 1s → high.</b> Also called <i>equivalence</i> — high when inputs are equal.</p></div>
+</div>
+<div class="box warn"><b>Correction of a small slip in the class note</b>The note says XNOR is high "if there are even 0's". For 2 inputs that is true, but the general (n-input) rule is: <b>XNOR is high when the number of 1s is even</b> (including zero 1s). Example 3 inputs 000: XNOR = 1 although there are three (odd) zeros. Use "even number of 1s".</div>
+<p><b>Useful XOR identities:</b> A⊕0 = A, A⊕1 = A', A⊕A = 0, A⊕A' = 1, commutative and associative (so A⊕B⊕C = parity of the three bits). XOR is the "sum" bit of an adder and the heart of Gray-code conversion (Section 8).</p>
+
+<h3>4.2 Universal gates</h3>
+<p>A gate is <b>universal</b> if NOT, AND and OR (hence <i>any</i> function) can be built from it alone. <b>NAND and NOR are universal</b>. In practice a whole design is often built from one gate type because it is cheaper and faster.</p>
+<h4>Using only NAND</h4><div class="pair"><div><b>NOT from NAND</b><svg class="circ" viewBox="-16 -18 126 78" width="126" style="max-width:100%"><g transform="translate(30,10)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><polyline points="0,30 10,30" fill="none"/><polyline points="10,20 10,40" fill="none"/><polyline points="10,20 20,20" fill="none"/><polyline points="10,40 20,40" fill="none"/><circle cx="10" cy="30" r="2.8" class="jd"/><text x="0" y="24" text-anchor="start" class="t">A</text><text x="94" y="34" text-anchor="start" class="t">A'</text><polyline points="90,30 100,30" fill="none"/></svg><p class="sm">Tie both inputs together: (A·A)' = A'</p></div><div><b>AND from NAND</b><svg class="circ" viewBox="-16 -18 246 78" width="246" style="max-width:100%"><g transform="translate(30,10)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(130,10)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><polyline points="0,20 20,20" fill="none"/><polyline points="0,40 20,40" fill="none"/><polyline points="90,30 110,30" fill="none"/><polyline points="110,20 110,40" fill="none"/><polyline points="110,20 120,20" fill="none"/><polyline points="110,40 120,40" fill="none"/><circle cx="110" cy="30" r="2.8" class="jd"/><polyline points="190,30 210,30" fill="none"/><text x="0" y="16" text-anchor="start" class="t">A</text><text x="0" y="36" text-anchor="start" class="t">B</text><text x="212" y="34" text-anchor="start" class="t">Y</text></svg><p class="sm">NAND followed by an inverter. (AB)'' = AB</p></div><div><b>OR from NAND</b><svg class="circ" viewBox="-16 -18 246 128" width="246" style="max-width:100%"><g transform="translate(30,0)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(30,60)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(130,30)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><polyline points="0,20 10,20" fill="none"/><polyline points="10,10 10,30" fill="none"/><polyline points="10,10 20,10" fill="none"/><polyline points="10,30 20,30" fill="none"/><circle cx="10" cy="20" r="2.8" class="jd"/><polyline points="0,80 10,80" fill="none"/><polyline points="10,70 10,90" fill="none"/><polyline points="10,70 20,70" fill="none"/><polyline points="10,90 20,90" fill="none"/><circle cx="10" cy="80" r="2.8" class="jd"/><polyline points="90,20 105,20 105,40 120,40" fill="none"/><polyline points="90,80 105,80 105,60 120,60" fill="none"/><polyline points="190,50 210,50" fill="none"/><text x="0" y="16" text-anchor="start" class="t">A</text><text x="0" y="76" text-anchor="start" class="t">B</text><text x="212" y="54" text-anchor="start" class="t">Y</text></svg><p class="sm">Invert both inputs, then NAND. (A'·B')' = A+B (De Morgan)</p></div></div>
+<h4>Using only NOR</h4><div class="pair"><div><b>NOT from NOR</b><svg class="circ" viewBox="-16 -18 126 78" width="126" style="max-width:100%"><g transform="translate(30,10)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><polyline points="0,30 10,30" fill="none"/><polyline points="10,20 10,40" fill="none"/><polyline points="10,20 20,20" fill="none"/><polyline points="10,40 20,40" fill="none"/><circle cx="10" cy="30" r="2.8" class="jd"/><text x="0" y="24" text-anchor="start" class="t">A</text><text x="94" y="34" text-anchor="start" class="t">A'</text><polyline points="90,30 100,30" fill="none"/></svg><p class="sm">Tie both inputs together: (A+A)' = A'</p></div><div><b>OR from NOR</b><svg class="circ" viewBox="-16 -18 246 78" width="246" style="max-width:100%"><g transform="translate(30,10)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(130,10)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><polyline points="0,20 20,20" fill="none"/><polyline points="0,40 20,40" fill="none"/><polyline points="90,30 110,30" fill="none"/><polyline points="110,20 110,40" fill="none"/><polyline points="110,20 120,20" fill="none"/><polyline points="110,40 120,40" fill="none"/><circle cx="110" cy="30" r="2.8" class="jd"/><polyline points="190,30 210,30" fill="none"/><text x="0" y="16" text-anchor="start" class="t">A</text><text x="0" y="36" text-anchor="start" class="t">B</text><text x="212" y="34" text-anchor="start" class="t">Y</text></svg><p class="sm">NOR followed by an inverter. (A+B)'' = A+B</p></div><div><b>AND from NOR</b><svg class="circ" viewBox="-16 -18 246 128" width="246" style="max-width:100%"><g transform="translate(30,0)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(30,60)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(130,30)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><polyline points="0,20 10,20" fill="none"/><polyline points="10,10 10,30" fill="none"/><polyline points="10,10 20,10" fill="none"/><polyline points="10,30 20,30" fill="none"/><circle cx="10" cy="20" r="2.8" class="jd"/><polyline points="0,80 10,80" fill="none"/><polyline points="10,70 10,90" fill="none"/><polyline points="10,70 20,70" fill="none"/><polyline points="10,90 20,90" fill="none"/><circle cx="10" cy="80" r="2.8" class="jd"/><polyline points="90,20 105,20 105,40 120,40" fill="none"/><polyline points="90,80 105,80 105,60 120,60" fill="none"/><polyline points="190,50 210,50" fill="none"/><text x="0" y="16" text-anchor="start" class="t">A</text><text x="0" y="76" text-anchor="start" class="t">B</text><text x="212" y="54" text-anchor="start" class="t">Y</text></svg><p class="sm">Invert both inputs, then NOR. (A'+B')' = A·B (De Morgan)</p></div></div>
+<div class="ex"><div class="t">Example 4.1 — XOR using only NAND (4 gates)</div>
+<div class="fx">Let P = (A·B)'
+Q = (A·P)'      R = (B·P)'
+A⊕B = (Q·R)'
+Check A=1,B=0: P=1, Q=(1·1)'=0, R=(0·1)'=1, out=(0·1)'=1 ✓</div></div>
+
+<h3>4.3 De Morgan's laws</h3>
+<div class="fx">(x·y)' = x' + y'       "break the bar, change the sign"
+(x+y)' = x'·y'</div>
+<p>Valid for any number of variables: (ABC)' = A'+B'+C'. In words: <b>NAND = OR with inverted inputs (bubbled OR)</b> and <b>NOR = AND with inverted inputs (bubbled AND)</b> — exactly what your notes say. This is the key to redrawing circuits with NANDs/NORs.</p>
+<table class="tt "><tr><th>x</th><th>y</th><th>(x·y)'</th><th>x'+y'</th><th>(x+y)'</th><th>x'·y'</th></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr></table>
+
+<h3>4.4 Two-level implementation (SOP with NAND-NAND)</h3>
+<p>A <b>two-level</b> circuit has an AND level feeding one OR level (sum of products). To convert to <b>NAND only</b>: replace <i>every</i> gate by a NAND. Why it works: draw a NAND as a bubbled OR; the bubble on each first-level NAND output and the bubble at the second-level inputs <b>cancel</b> ("put two bubbles always" in your note).</p>
+<div class="ex"><div class="t">Example 4.2 — f = A·B + A·C with NAND gates (your notes)</div>
+<div class="pair"><div><b>AND–OR (SOP)</b><svg class="circ" viewBox="-16 -18 276 128" width="276" style="max-width:100%"><g transform="translate(40,0)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><path d="M48,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(40,60)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><path d="M48,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(140,30)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><path d="M48,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><polyline points="0,10 30,10" fill="none"/><polyline points="15,10 15,70 30,70" fill="none"/><circle cx="15" cy="10" r="2.8" class="jd"/><polyline points="0,30 30,30" fill="none"/><polyline points="0,90 30,90" fill="none"/><polyline points="100,20 115,20 115,40 130,40" fill="none"/><polyline points="100,80 115,80 115,60 130,60" fill="none"/><polyline points="200,50 230,50" fill="none"/><text x="0" y="6" text-anchor="start" class="t">A</text><text x="0" y="26" text-anchor="start" class="t">B</text><text x="0" y="86" text-anchor="start" class="t">C</text><text x="232" y="54" text-anchor="start" class="t">f</text></svg></div><div><b>NAND–NAND (same function)</b><svg class="circ" viewBox="-16 -18 276 128" width="276" style="max-width:100%"><g transform="translate(40,0)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(40,60)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><g transform="translate(140,30)" class="gate"><path d="M0,0 H28 A20,20 0 0 1 28,40 H0 Z"/><circle cx="52" cy="20" r="4" fill="#fff"/><path d="M56,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><polyline points="0,10 30,10" fill="none"/><polyline points="15,10 15,70 30,70" fill="none"/><circle cx="15" cy="10" r="2.8" class="jd"/><polyline points="0,30 30,30" fill="none"/><polyline points="0,90 30,90" fill="none"/><polyline points="100,20 115,20 115,40 130,40" fill="none"/><polyline points="100,80 115,80 115,60 130,60" fill="none"/><polyline points="200,50 230,50" fill="none"/><text x="0" y="6" text-anchor="start" class="t">A</text><text x="0" y="26" text-anchor="start" class="t">B</text><text x="0" y="86" text-anchor="start" class="t">C</text><text x="232" y="54" text-anchor="start" class="t">f</text></svg></div></div>
+<div class="fx">f = ((A·B)' · (A·C)')'  = (AB)'' + (AC)''  = AB + AC     (De Morgan on the last NAND)</div>
+<p>Rule: <b>SOP → NAND–NAND</b>. Likewise <b>POS → NOR–NOR</b> (OR level then AND level; each replaced by NOR). If a literal feeds the 2nd level directly (e.g. f = AB + C), pass C through an inverter (a NAND with tied inputs) or equivalently feed C' — otherwise the double-bubble rule breaks.</p></div>
+
+<h3>4.5 Multi-level implementation</h3>
+<p>If the expression is allowed to have more than two levels (factored form such as <code>A(B+C)</code> or <code>(A+B)(C+D)E</code>) there is <b>no need to convert to SOP or POS</b>: implement the expression as it stands. It often needs fewer gates and fan-in but takes more gate delays (slower). Trade-off: two-level = fast, multi-level = small.</p>
+
+<h2 id="s5">5. Boolean Algebra</h2>
+<p><b>Boolean algebra</b> is algebra over the two-element set {0,1} with operations + (OR), · (AND) and ' (NOT). Every digital circuit corresponds to a Boolean expression, and simplifying the expression simplifies the circuit.</p>
+
+<h3>5.1 Basic laws (definitions)</h3>
+<table class="left"><tr><th>Law</th><th>OR form</th><th>AND form</th></tr>
+<tr><td>Commutative</td><td>x + y = y + x</td><td>x·y = y·x</td></tr>
+<tr><td>Associative</td><td>x + (y+z) = (x+y) + z</td><td>x(yz) = (xy)z</td></tr>
+<tr><td>Identity element</td><td>x + 0 = x (0 is the identity of +)</td><td>x·1 = x (1 is the identity of ·)</td></tr>
+<tr><td>Inverse (complement)</td><td>x + x' = 1</td><td>x·x' = 0</td></tr>
+<tr><td>Distributive</td><td>x(y+z) = xy + xz</td><td><b>x + yz = (x+y)(x+z)</b></td></tr></table>
+<p class="box warn"><b>Watch out</b>The second distributive law (+ over ·) is <i>false</i> in ordinary algebra but <i>true</i> in Boolean algebra. Examiners love it.</p>
+
+<h3>5.2 Duality principle</h3>
+<p>The <b>dual</b> of a Boolean expression is obtained by interchanging <b>+ ↔ ·</b> and <b>0 ↔ 1</b> (variables and complements stay). <b>If an identity is true, its dual is also true</b> — this holds in Boolean algebra (that is why every law above comes in a pair). E.g. dual of x + 0 = x is x·1 = x; dual of x + x'y = x + y is x(x'+y) = xy.</p>
+<div class="box bad"><b>Careful</b>The dual of an <i>expression</i> is not equal to the expression. Duality gives you a second true <i>theorem</i>, not an equality between f and f<sup>d</sup>. (Don't confuse with complement: f' = f<sup>d</sup> with every variable complemented.)</div>
+
+<h3>5.3 Postulates &amp; theorems (with the labels used in your notes)</h3>
+<table class="left"><tr><th>Label</th><th>Name</th><th>(a)</th><th>(b) dual</th></tr>
+<tr><td>P2</td><td>Identity</td><td>x + 0 = x</td><td>x·1 = x</td></tr>
+<tr><td>P3</td><td>Commutative</td><td>x + y = y + x</td><td>xy = yx</td></tr>
+<tr><td>P4</td><td>Distributive</td><td>x(y+z) = xy + xz</td><td>x + yz = (x+y)(x+z)</td></tr>
+<tr><td>P5</td><td>Complement</td><td>x + x' = 1</td><td>x·x' = 0</td></tr>
+<tr><td>T1</td><td>Idempotent</td><td>x + x = x</td><td>x·x = x</td></tr>
+<tr><td>T2</td><td>Null / dominance</td><td>x + 1 = 1</td><td>x·0 = 0</td></tr>
+<tr><td>T3</td><td>Involution</td><td colspan="2">(x')' = x</td></tr>
+<tr><td>T4</td><td>Associative</td><td>x + (y+z) = (x+y)+z</td><td>x(yz) = (xy)z</td></tr>
+<tr><td>T5</td><td>De Morgan</td><td>(x+y)' = x'y'</td><td>(xy)' = x'+y'</td></tr>
+<tr><td>T6</td><td>Absorption</td><td>x + xy = x</td><td>x(x+y) = x</td></tr></table>
+
+<h4>Two more very useful (not in your list)</h4>
+<div class="fx">Simplification 1:  x + x'y = x + y        dual: x(x'+y) = xy
+Simplification 2:  xy + xy' = x  (combining/adjacency)    dual: (x+y)(x+y') = x</div>
+<div class="ex"><div class="t">Proof of absorption x + xy = x</div>
+<div class="fx">x + xy = x·1 + xy       (P2)
+       = x(1 + y)       (P4)
+       = x·1            (T2)
+       = x              (P2)   ∎</div>
+<div class="t" style="margin-top:8px">Proof of x + x'y = x + y</div>
+<div class="fx">x + x'y = (x + x')(x + y)   (second distributive law)
+        = 1·(x + y) = x + y   ∎</div></div>
+
+<h3>5.4 Consensus theorem</h3>
+<div class="fx">(a)  xy + x'z + yz = xy + x'z
+(b)  (x+y)(x'+z)(y+z) = (x+y)(x'+z)</div>
+<p>The term <code>yz</code> (the <i>consensus</i> of xy and x'z) is <b>redundant</b>: whenever yz = 1, either x=1 (then xy = 1) or x=0 (then x'z = 1), so the sum is already 1.</p>
+<div class="ex"><div class="t">Proof of (a)</div>
+<div class="fx">xy + x'z + yz = xy + x'z + yz(x + x')
+              = xy + x'z + xyz + x'yz
+              = xy(1+z) + x'z(1+y) = xy + x'z   ∎</div></div>
+<div class="ex"><div class="t">Example 5.1 — simplify F = AB + A'C + BC + BCD</div>
+<div class="fx">BC is the consensus of AB and A'C → delete BC; BCD is absorbed by BC (and also redundant)
+F = AB + A'C</div></div>
+
+<h3>5.5 Worked proofs</h3>
+<div class="ex"><div class="t">Example 5.2 — Prove (A+B)(A'C'+C)·(B'+AC)' = A'B (your notes' exercise)</div>
+<p><i>(In the notes the last factor is the complement of (B' + AC).)</i></p>
+<div class="fx">Step 1  A'C' + C = A' + C            (x + x'y = x + y with x = C)
+Step 2  (B' + AC)' = B·(AC)' = B(A' + C')     (De Morgan twice)
+Step 3  LHS = (A+B)(A'+C)·B(A'+C')
+Step 4  B(A+B) = B                            (absorption)
+        LHS = B·(A'+C)(A'+C')
+Step 5  (A'+C)(A'+C') = A' + CC' = A' + 0 = A'   (2nd distributive)
+Step 6  LHS = B·A' = A'B  = RHS   ∎</div></div>
+<div class="ex"><div class="t">Example 5.3 — simplify F = A'B'C + A'BC + AB'C + ABC + AB'C'</div>
+<div class="fx">Group the first four: C(A'B' + A'B + AB' + AB) = C(1) = C
+F = C + AB'C' = C + AB'      (x + x'y = x + y, with C' ≡ x')</div></div>
+<div class="ex"><div class="t">Example 5.4 — simplify and give the NAND implementation of F = (A+B)(A+C)</div>
+<div class="fx">F = A + BC  (second distributive law)
+NAND form: F = ((A')·(BC)')' → NAND(A', NAND(B,C))</div></div>
+
+<h3>5.6 Strategy when simplifying</h3>
+<ol><li>Look for common factors; apply x+x'=1 and xy+xy'=x.</li><li>Apply absorption and x+x'y = x+y repeatedly.</li><li>Use consensus to kill redundant terms.</li><li>If it gets messy, <b>switch to a K-map</b> (Section 7) — it is mechanical and gives the minimum.</li><li>To prove an identity, work on the more complicated side only, or evaluate both sides with a truth table.</li></ol>
+
+<h2 id="s6">6. Minterms, Maxterms &amp; Canonical Forms</h2>
+<p>Any Boolean function can be written in two standard ("canonical") forms in which <b>every term contains every variable</b>:</p>
+<ul><li><b>SOP</b> — Sum of Products (OR of AND terms) built from <b>minterms</b>.</li><li><b>POS</b> — Product of Sums (AND of OR terms) built from <b>maxterms</b>.</li></ul>
+<h3>6.1 Definitions</h3>
+<div class="box key"><b>Minterm m<sub>i</sub></b> — a product (AND) of all variables, each variable in true form if its bit is <b>1</b> and complemented if its bit is 0. It equals 1 for <b>exactly one</b> input combination (number i).<br>
+<b>Maxterm M<sub>i</sub></b> — a sum (OR) of all variables, each variable in true form if its bit is <b>0</b> and complemented if 1. It equals 0 for <b>exactly one</b> combination.<br>
+<b>Relation:</b> M<sub>i</sub> = (m<sub>i</sub>)'  and  m<sub>i</sub> = (M<sub>i</sub>)'.</div>
+<p>Your notes' shortcut: <b>SOP (·) → "choose 1"</b> (read the rows where f = 1); <b>POS (+) → "choose 0"</b> (read the rows where f = 0).</p>
+<div class="scroll"><table class="tt "><tr><th>x y z</th><th>Minterm index</th><th>Minterm</th><th>Maxterm index</th><th>Maxterm</th></tr><tr><td>000</td><td>m<sub>0</sub></td><td>x'y'z'</td><td>M<sub>0</sub></td><td>(x+y+z)</td></tr><tr><td>001</td><td>m<sub>1</sub></td><td>x'y'z</td><td>M<sub>1</sub></td><td>(x+y+z')</td></tr><tr><td>010</td><td>m<sub>2</sub></td><td>x'yz'</td><td>M<sub>2</sub></td><td>(x+y'+z)</td></tr><tr><td>011</td><td>m<sub>3</sub></td><td>x'yz</td><td>M<sub>3</sub></td><td>(x+y'+z')</td></tr><tr><td>100</td><td>m<sub>4</sub></td><td>xy'z'</td><td>M<sub>4</sub></td><td>(x'+y+z)</td></tr><tr><td>101</td><td>m<sub>5</sub></td><td>xy'z</td><td>M<sub>5</sub></td><td>(x'+y+z')</td></tr><tr><td>110</td><td>m<sub>6</sub></td><td>xyz'</td><td>M<sub>6</sub></td><td>(x'+y'+z)</td></tr><tr><td>111</td><td>m<sub>7</sub></td><td>xyz</td><td>M<sub>7</sub></td><td>(x'+y'+z')</td></tr></table></div>
+
+<h3>6.2 Writing f in canonical form</h3>
+<p>Notation: <code>f = Σ m(…)</code> lists rows where f = 1; <code>f = Π M(…)</code> lists rows where f = 0. For an n-variable function, <b>the indices missing from Σ are exactly those in Π</b> (from 0 to 2<sup>n</sup>−1).</p>
+<div class="ex"><div class="t">Example 6.1 — the notes' f<sub>1</sub> = Σ(m<sub>0</sub>, m<sub>3</sub>, m<sub>7</sub>)</div>
+<table class="tt "><tr><th>x y z</th><th>f<sub>1</sub></th></tr><tr><td>000</td><td>1</td></tr><tr><td>001</td><td>0</td></tr><tr><td>010</td><td>0</td></tr><tr><td>011</td><td>1</td></tr><tr><td>100</td><td>0</td></tr><tr><td>101</td><td>0</td></tr><tr><td>110</td><td>0</td></tr><tr><td>111</td><td>1</td></tr></table>
+<div class="fx">SOP: f<sub>1</sub> = Σ(0,3,7) = x'y'z' + x'yz + xyz
+POS: rows with f=0 are 1,2,4,5,6 →
+     f<sub>1</sub> = Π(1,2,4,5,6) = (x+y+z')(x+y'+z)(x'+y+z)(x'+y+z')(x'+y'+z)</div>
+<p class="box warn"><b>Why Π(0,3,7) is wrong</b>(it is crossed out in your notes). Π lists the <i>zero</i> rows, not the same numbers as Σ. Σ(0,3,7) ≠ Π(0,3,7); the correct partner is Π(1,2,4,5,6) = "the rest".</p></div>
+
+<div class="ex"><div class="t">Example 6.2 — going via the complement (your notes' working)</div>
+<p>Suppose we know f' = x'y'z' + x'yz' + x'yz + xy'z + xyz' = Σ(0,2,3,5,6). Then f = (f')' — complementing by De Morgan:</p>
+<div class="fx">f = (x'y'z')'·(x'yz')'·(x'yz)'·(xy'z)'·(xyz')'
+  = (x+y+z)(x+y'+z)(x+y'+z')(x'+y+z')(x'+y'+z)
+  = M<sub>0</sub>·M<sub>2</sub>·M<sub>3</sub>·M<sub>5</sub>·M<sub>6</sub> = Π(0,2,3,5,6) = Σ(1,4,7)</div>
+<p><b>Rule:</b> f' = Σ(list) ⟹ f = Π(same list). Complement of a function swaps Σ ↔ Π with the <i>same</i> index list.</p></div>
+
+<h3>6.3 Expanding a non-canonical expression</h3>
+<p>To convert to canonical SOP: for every term missing a variable v, multiply by (v + v') and expand. For POS, add v·v' to a sum term and distribute.</p>
+<div class="ex"><div class="t">Example 6.3 — F(A,B,C) = A + B'C in canonical SOP and POS</div>
+<div class="fx">A      = A(B+B')(C+C') = ABC + ABC' + AB'C + AB'C'  = m7+m6+m5+m4
+B'C    = B'C(A+A')       = AB'C + A'B'C                = m5+m1
+F = Σ(1,4,5,6,7)
+POS: zeros are 0,2,3 → F = Π(0,2,3) = (A+B+C)(A+B'+C)(A+B'+C')</div></div>
+<h3>6.4 Counting</h3>
+<p>n variables → 2<sup>n</sup> minterms and 2<sup>2<sup>n</sup></sup> distinct functions (n=2: 16 functions; n=3: 256; n=4: 65 536).</p>
+<h3>6.5 Non-canonical (minimal) forms</h3>
+<p>A canonical form is long. We want a <b>minimal SOP/POS</b> (fewest terms, then fewest literals) — found with K-maps (next section).</p>
+
+<h2 id="s7">7. Karnaugh Maps (K-maps)</h2>
+<p>A <b>K-map</b> is a graphical truth table arranged so that <b>physically adjacent cells differ in exactly one variable</b>. Merging adjacent 1s applies <code>xy + xy' = x</code> visually, giving the minimal SOP without algebra.</p>
+
+<h3>7.1 Layout</h3>
+<ul><li>n variables → 2<sup>n</sup> cells. Each cell = one minterm; the small number in the corner of each cell below is the minterm index.</li>
+<li><b>Row/column labels follow Gray code</b> — 00, 01, <b>11</b>, <b>10</b> (not 00,01,10,11!) so neighbours differ by one bit.</li>
+<li>The map is a <b>torus</b>: the left edge is adjacent to the right edge, the top edge to the bottom edge, and the four corners are mutually adjacent.</li></ul>
+
+<h3>7.2 Rules for grouping</h3>
+<ol><li>Groups contain only 1s (or X's — see don't cares) and are <b>rectangles</b> (including wrap-around).</li>
+<li>Group size must be a <b>power of 2</b>: 1, 2, 4, 8, 16. No diagonals, no L-shapes.</li>
+<li>Make each group <b>as large as possible</b> (a largest possible group = a <b>prime implicant</b>, PI).</li>
+<li>Cover <b>every 1</b> using the <b>fewest</b> groups. Start with 1s that can be covered by only one PI (<b>essential PIs</b>), then cover the rest.</li>
+<li>Groups may <b>overlap</b>; a group that is entirely covered by others is redundant — drop it.</li>
+<li><b>Reading a group:</b> a variable that is constant in the group appears in the product (as x if constant 1, x' if constant 0); variables that change inside the group disappear. A group of 2<sup>k</sup> cells eliminates k variables.</li></ol>
+
+<h3>7.3 Two-variable map</h3>
+<div class="ex"><div class="t">Example 7.1 — f = xy + xy' (your notes)</div>
+<div class="pair"><div class="kmwrap"><table class="kmap"><caption>f(x,y)</caption><tr><th class="corner"><span class="rv">x</span>\<span class="cv">y</span></th><th>0</th><th>1</th></tr><tr><th>0</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="zero"><b>0</b><small>1</small><span class="dots"></span></td></tr><tr><th>1</th><td class="one" style="background:#e11d4822"><b>1</b><small>2</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>3</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> x = 1 row (both cells) &nbsp;<span class="mono">(cells 2,3)</span></li></ul></div><table class="tt "><tr><th>x</th><th>y</th><th>f</th></tr><tr><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td></tr></table></div>
+<p>In the group x stays 1 while y takes both values → y disappears. <b>f = x</b> (algebra: xy + xy' = x(y+y') = x).</p></div>
+
+<h3>7.4 Three-variable map</h3>
+<div class="ex"><div class="t">Example 7.2 — f = Σ(1,3,5,6) (map 1 of your notes)</div>
+<div class="kmwrap"><table class="kmap"><caption>f(x,y,z)</caption><tr><th class="corner"><span class="rv">x</span>\<span class="cv">yz</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>0</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>1</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>3</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>1</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>5</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="one" style="background:#16a34a22"><b>1</b><small>6</small><span class="dots"><i style="background:#16a34a"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> x'z &nbsp;<span class="mono">(cells 1,3)</span></li><li><i style="background:#2563eb"></i> y'z &nbsp;<span class="mono">(cells 1,5)</span></li><li><i style="background:#16a34a"></i> xyz' &nbsp;<span class="mono">(cells 6)</span></li></ul></div>
+<p>Cell 1 belongs to two groups (overlap is fine). Cell 6 has no neighbour that is 1 → stays a full minterm. <b>f = x'z + y'z + xyz'</b> ✓ (matches the notes).</p></div>
+
+<div class="ex"><div class="t">Example 7.3 — four corners: f<sub>1</sub> = Σ(0,2,4,6) and f<sub>2</sub> = Π(0,2,4,6)</div>
+<div class="pair"><div class="kmwrap"><table class="kmap"><caption>f1 = Σ(0,2,4,6)</caption><tr><th class="corner"><span class="rv">x</span>\<span class="cv">yz</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>0</th><td class="one" style="background:#e11d4822"><b>1</b><small>0</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>1</small><span class="dots"></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>2</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>1</th><td class="one" style="background:#e11d4822"><b>1</b><small>4</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>5</small><span class="dots"></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>6</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> z' (4 cells, wrap-around) &nbsp;<span class="mono">(cells 0,2,4,6)</span></li></ul></div><div class="kmwrap"><table class="kmap"><caption>f2 = Π(0,2,4,6)  (ones are the other cells)</caption><tr><th class="corner"><span class="rv">x</span>\<span class="cv">yz</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>0</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>1</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>3</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>1</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>5</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>7</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>6</small><span class="dots"></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> z &nbsp;<span class="mono">(cells 1,3,5,7)</span></li></ul></div></div>
+<p>In f<sub>1</sub> the 1s are at columns yz = 00 and 10, which are adjacent through the wrap-around. Both y and x vary → only z' remains: <b>f<sub>1</sub> = z'</b>. For f<sub>2</sub>, a Π list names the <i>zeros</i>, so the ones are 1,3,5,7 → <b>f<sub>2</sub> = z</b>. (Notice f<sub>2</sub> = f<sub>1</sub>'.)</p></div>
+
+<div class="ex"><div class="t">Example 7.4 — f = Σ(0,1,4,6)</div>
+<div class="kmwrap"><table class="kmap"><tr><th class="corner"><span class="rv">x</span>\<span class="cv">yz</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>0</th><td class="one" style="background:#e11d4822"><b>1</b><small>0</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>1</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>1</th><td class="one" style="background:#2563eb22"><b>1</b><small>4</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>5</small><span class="dots"></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>6</small><span class="dots"><i style="background:#2563eb"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> x'y' &nbsp;<span class="mono">(cells 0,1)</span></li><li><i style="background:#2563eb"></i> xz' &nbsp;<span class="mono">(cells 4,6)</span></li></ul></div>
+<p><b>f = x'y' + xz'</b> (notes ✓). The pair (4,6) shares x=1, z=0; the pair (0,1) shares x=0, y=0.</p></div>
+
+<div class="ex"><div class="t">Example 7.5 — more 3-variable maps from your notes</div>
+<div class="pair"><div class="kmwrap"><table class="kmap"><caption>Σ(0,1,2,4,5,6)</caption><tr><th class="corner"><span class="rv">x</span>\<span class="cv">yz</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>0</th><td class="one" style="background:#e11d4822"><b>1</b><small>0</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>1</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>2</small><span class="dots"><i style="background:#2563eb"></i></span></td></tr><tr><th>1</th><td class="one" style="background:#e11d4822"><b>1</b><small>4</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>5</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>6</small><span class="dots"><i style="background:#2563eb"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> y' &nbsp;<span class="mono">(cells 0,1,4,5)</span></li><li><i style="background:#2563eb"></i> z' &nbsp;<span class="mono">(cells 0,2,4,6)</span></li></ul></div><div class="kmwrap"><table class="kmap"><caption>Σ(0,1,3,5)</caption><tr><th class="corner"><span class="rv">x</span>\<span class="cv">yz</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>0</th><td class="one" style="background:#e11d4822"><b>1</b><small>0</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>1</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i><i style="background:#16a34a"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>3</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>1</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="one" style="background:#16a34a22"><b>1</b><small>5</small><span class="dots"><i style="background:#16a34a"></i></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="zero"><b>0</b><small>6</small><span class="dots"></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> x'y' &nbsp;<span class="mono">(cells 0,1)</span></li><li><i style="background:#2563eb"></i> x'z &nbsp;<span class="mono">(cells 1,3)</span></li><li><i style="background:#16a34a"></i> y'z &nbsp;<span class="mono">(cells 1,5)</span></li></ul></div><div class="kmwrap"><table class="kmap"><caption>Σ(0..6) (all but 7)</caption><tr><th class="corner"><span class="rv">x</span>\<span class="cv">yz</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>0</th><td class="one" style="background:#e11d4822"><b>1</b><small>0</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i><i style="background:#16a34a"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>1</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>3</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>2</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#16a34a"></i></span></td></tr><tr><th>1</th><td class="one" style="background:#2563eb22"><b>1</b><small>4</small><span class="dots"><i style="background:#2563eb"></i><i style="background:#16a34a"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>5</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="one" style="background:#16a34a22"><b>1</b><small>6</small><span class="dots"><i style="background:#16a34a"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> x' &nbsp;<span class="mono">(cells 0,1,2,3)</span></li><li><i style="background:#2563eb"></i> y' &nbsp;<span class="mono">(cells 0,1,4,5)</span></li><li><i style="background:#16a34a"></i> z' &nbsp;<span class="mono">(cells 0,2,4,6)</span></li></ul></div></div>
+<p>Results: <b>y' + z'</b>; <b>x'y' + x'z + y'z</b> (all three groups are essential — each covers a minterm no other group covers); <b>x' + y' + z'</b> (= (xyz)').</p></div>
+
+<h3>7.5 Four-variable map</h3>
+<p>16 cells; rows = first two variables, columns = last two, both in Gray order. Possible groups: 1, 2, 4 (a row, a column, a 2×2 block or the four corners), 8 (two adjacent rows/columns) and 16.</p>
+<div class="ex"><div class="t">Example 7.6 — your notes' 4-variable map (variables x y z w)</div>
+<div class="kmwrap"><table class="kmap"><caption>f(x,y,z,w)</caption><tr><th class="corner"><span class="rv">xy</span>\<span class="cv">zw</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="one" style="background:#e11d4822"><b>1</b><small>0</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#16a34a"></i></span></td><td class="one" style="background:#16a34a22"><b>1</b><small>1</small><span class="dots"><i style="background:#16a34a"></i></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>01</th><td class="one" style="background:#e11d4822"><b>1</b><small>4</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>5</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>7</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>6</small><span class="dots"></span></td></tr><tr><th>11</th><td class="one" style="background:#e11d4822"><b>1</b><small>12</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>13</small><span class="dots"></span></td><td class="one" style="background:#d9770622"><b>1</b><small>15</small><span class="dots"><i style="background:#d97706"></i></span></td><td class="one" style="background:#d9770622"><b>1</b><small>14</small><span class="dots"><i style="background:#d97706"></i></span></td></tr><tr><th>10</th><td class="one" style="background:#e11d4822"><b>1</b><small>8</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#16a34a"></i></span></td><td class="one" style="background:#16a34a22"><b>1</b><small>9</small><span class="dots"><i style="background:#16a34a"></i></span></td><td class="one" style="background:#d9770622"><b>1</b><small>11</small><span class="dots"><i style="background:#d97706"></i></span></td><td class="one" style="background:#d9770622"><b>1</b><small>10</small><span class="dots"><i style="background:#d97706"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> z'w' (column 00) &nbsp;<span class="mono">(cells 0,4,8,12)</span></li><li><i style="background:#2563eb"></i> x'yw &nbsp;<span class="mono">(cells 5,7)</span></li><li><i style="background:#16a34a"></i> y'z' &nbsp;<span class="mono">(cells 0,1,8,9)</span></li><li><i style="background:#d97706"></i> xz &nbsp;<span class="mono">(cells 10,11,14,15)</span></li></ul></div>
+<p><b>f = z'w' + x'yw + y'z' + xz</b> — identical to the answer in your notes. Two groups of 4 plus another 4 (y'z' is a 2×2 block formed with wrap-around from rows 00 and 10) and one pair.</p></div>
+
+<div class="ex"><div class="t">Example 7.7 — f(A,B,C,D) = Σ(0,1,2,5,8,9,10), worked fully</div>
+<div class="kmwrap"><table class="kmap"><caption>f(A,B,C,D)</caption><tr><th class="corner"><span class="rv">AB</span>\<span class="cv">CD</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="one" style="background:#e11d4822"><b>1</b><small>0</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>1</small><span class="dots"><i style="background:#2563eb"></i><i style="background:#16a34a"></i></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>2</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>01</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="one" style="background:#16a34a22"><b>1</b><small>5</small><span class="dots"><i style="background:#16a34a"></i></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="zero"><b>0</b><small>6</small><span class="dots"></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>12</small><span class="dots"></span></td><td class="zero"><b>0</b><small>13</small><span class="dots"></span></td><td class="zero"><b>0</b><small>15</small><span class="dots"></span></td><td class="zero"><b>0</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="one" style="background:#e11d4822"><b>1</b><small>8</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>9</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>11</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>10</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> B'D' (four corners) &nbsp;<span class="mono">(cells 0,2,8,10)</span></li><li><i style="background:#2563eb"></i> B'C' &nbsp;<span class="mono">(cells 0,1,8,9)</span></li><li><i style="background:#16a34a"></i> A'C'D &nbsp;<span class="mono">(cells 1,5)</span></li></ul></div>
+<ol><li>Four corners {0,2,8,10} → B'D'.</li><li>Rows 00 and 10 in columns 00/01 {0,1,8,9} → B'C'.</li><li>Cell 5 is only adjacent (as a 1) to cell 1 → pair {1,5} → A'C'D.</li></ol>
+<p><b>f = B'D' + B'C' + A'C'D</b>. Check minterm 5 (A=0,B=1,C=0,D=1): A'C'D = 1 ✓; minterm 7 (0111): B'D'=0, B'C'=0, A'C'D=0 → 0 ✓.</p></div>
+
+<h3>7.6 Don't-care conditions</h3>
+<p>For some input combinations the output is <b>irrelevant</b> — they never occur (e.g. BCD inputs 1010–1111) or we don't care. Mark them <b>X</b> (written d(…)). In the K-map an X can be treated as <b>1 if it helps make a bigger group</b>, otherwise ignored (as 0). Never create a group made only of X's.</p>
+<div class="ex"><div class="t">Example 7.8 — f = Σ(1,2,6,8,10) + d(0,4,9) (your notes)</div>
+<div class="kmwrap"><table class="kmap"><caption>f(x,y,z,w)</caption><tr><th class="corner"><span class="rv">xy</span>\<span class="cv">zw</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="dc" style="background:#e11d4822"><b>X</b><small>0</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i><i style="background:#16a34a"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>1</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>2</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#16a34a"></i></span></td></tr><tr><th>01</th><td class="dc" style="background:#16a34a22"><b>X</b><small>4</small><span class="dots"><i style="background:#16a34a"></i></span></td><td class="zero"><b>0</b><small>5</small><span class="dots"></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="one" style="background:#16a34a22"><b>1</b><small>6</small><span class="dots"><i style="background:#16a34a"></i></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>12</small><span class="dots"></span></td><td class="zero"><b>0</b><small>13</small><span class="dots"></span></td><td class="zero"><b>0</b><small>15</small><span class="dots"></span></td><td class="zero"><b>0</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="one" style="background:#e11d4822"><b>1</b><small>8</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="dc" style="background:#2563eb22"><b>X</b><small>9</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>11</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>10</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> y'w' &nbsp;<span class="mono">(cells 0,2,8,10)</span></li><li><i style="background:#2563eb"></i> y'z' &nbsp;<span class="mono">(cells 0,1,8,9)</span></li><li><i style="background:#16a34a"></i> x'w' &nbsp;<span class="mono">(cells 0,2,4,6)</span></li></ul></div>
+<p>The X at 0 joins all three groups; X at 9 completes y'z'; X at 4 helps x'w'. <b>f = y'w' + y'z' + x'w'</b> ✓ (matches the notes). Without don't cares the groups would be far smaller.</p></div>
+<div class="ex"><div class="t">Example 7.9 — f = Σ(1,5,6,10) + d(3,8) (your notes; variables a b c d)</div>
+<div class="kmwrap"><table class="kmap"><caption>f(a,b,c,d)</caption><tr><th class="corner"><span class="rv">ab</span>\<span class="cv">cd</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>1</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="dc"><b>X</b><small>3</small><span class="dots"></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>01</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>5</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="one" style="background:#16a34a22"><b>1</b><small>6</small><span class="dots"><i style="background:#16a34a"></i></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>12</small><span class="dots"></span></td><td class="zero"><b>0</b><small>13</small><span class="dots"></span></td><td class="zero"><b>0</b><small>15</small><span class="dots"></span></td><td class="zero"><b>0</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="dc" style="background:#e11d4822"><b>X</b><small>8</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>9</small><span class="dots"></span></td><td class="zero"><b>0</b><small>11</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>10</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> ab'd' &nbsp;<span class="mono">(cells 8,10)</span></li><li><i style="background:#2563eb"></i> a'c'd &nbsp;<span class="mono">(cells 1,5)</span></li><li><i style="background:#16a34a"></i> a'bcd' &nbsp;<span class="mono">(cells 6)</span></li></ul></div>
+<p>X at 8 pairs with 10 → ab'd'. X at 3 is <i>not</i> needed (using it would not enlarge any group), so we leave it as 0. <b>f = ab'd' + a'c'd + a'bcd'</b> ✓.</p></div>
+
+<h3>7.7 POS K-map (product of sums)</h3>
+<p>To get the minimal <b>POS</b>, group the <b>0s</b> instead of the 1s (X's still usable). Each group gives a <b>sum term</b> in which a variable is written <b>complemented if it is constant 1</b> in the group and <b>true if constant 0</b> (the opposite of SOP reading). The product of all sum terms is f. Reason: grouping zeros gives f' as SOP; complementing with De Morgan flips the polarity.</p>
+<div class="ex"><div class="t">Example 7.10 — f = Σ(0,1,4,6,8,12,14) + d(2,3,5), minimal POS</div>
+<p>The notes write this as Π(7,8,9,10,11,13,15). Listing all 16 cells: ones {0,1,4,6,8,12,14}, don't-cares {2,3,5} ⇒ zeros are {7,9,10,11,13,15}. (Minterm 8 appears in the notes' Π list but also in the Σ list — one of those is a slip. I solved with the Σ list.)</p>
+<div class="kmwrap"><table class="kmap"><caption>Group the 0s</caption><tr><th class="corner"><span class="rv">xy</span>\<span class="cv">zw</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="zero"><b>1</b><small>0</small><span class="dots"></span></td><td class="zero"><b>1</b><small>1</small><span class="dots"></span></td><td class="dc" style="background:#16a34a22"><b>X</b><small>3</small><span class="dots"><i style="background:#16a34a"></i></span></td><td class="dc" style="background:#16a34a22"><b>X</b><small>2</small><span class="dots"><i style="background:#16a34a"></i></span></td></tr><tr><th>01</th><td class="zero"><b>1</b><small>4</small><span class="dots"></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>5</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>0</b><small>7</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>1</b><small>6</small><span class="dots"></span></td></tr><tr><th>11</th><td class="zero"><b>1</b><small>12</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>0</b><small>13</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="one" style="background:#e11d4822"><b>0</b><small>15</small><span class="dots"><i style="background:#e11d48"></i><i style="background:#2563eb"></i></span></td><td class="zero"><b>1</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="zero"><b>1</b><small>8</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>0</b><small>9</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="one" style="background:#2563eb22"><b>0</b><small>11</small><span class="dots"><i style="background:#2563eb"></i><i style="background:#16a34a"></i></span></td><td class="one" style="background:#16a34a22"><b>0</b><small>10</small><span class="dots"><i style="background:#16a34a"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> yw → (y'+w') &nbsp;<span class="mono">(cells 5,7,13,15)</span></li><li><i style="background:#2563eb"></i> xw → (x'+w') &nbsp;<span class="mono">(cells 9,11,13,15)</span></li><li><i style="background:#16a34a"></i> y'z → (y+z') &nbsp;<span class="mono">(cells 2,3,10,11)</span></li></ul></div>
+<div class="fx">f = (y' + w')(x' + w')(y + z')</div>
+<p>Check: minterm 7 (0111) → y'+w' = 0+0 = 0 ✓ (should be 0); minterm 0 (0000) → all three sums are 1 ✓. Equivalent SOP of complement: f' = yw + xw + y'z.</p></div>
+<div class="box key"><b>Which to choose?</b>If the problem asks for SOP use the 1s; for POS use the 0s. Both give a correct minimal circuit; use whichever has fewer/larger groups when the form is not specified. SOP → NAND-NAND; POS → NOR-NOR.</div>
+
+<h3>7.8 Five-variable map</h3>
+<p>Variables x y z w r (x = MSB, r = LSB). Use <b>two 4-variable maps</b> stacked on top of each other: one for x = 0 (minterms 0–15) and one for x = 1 (minterms 16–31). Rows are yz and columns wr (Gray order) in both. Your notes show this layout, and an alternative that splits on r instead (r = 0 holds the even minterms, r = 1 the odd ones).</p>
+<div class="pair"><div class="kmwrap"><table class="kmap"><caption>x = 0 (minterms 0–15)</caption><tr><th class="corner"><span class="rv">yz</span>\<span class="cv">wr</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="zero"><b>0</b><small>1</small><span class="dots"></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>01</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="zero"><b>0</b><small>5</small><span class="dots"></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="zero"><b>0</b><small>6</small><span class="dots"></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>12</small><span class="dots"></span></td><td class="zero"><b>0</b><small>13</small><span class="dots"></span></td><td class="zero"><b>0</b><small>15</small><span class="dots"></span></td><td class="zero"><b>0</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="zero"><b>0</b><small>8</small><span class="dots"></span></td><td class="zero"><b>0</b><small>9</small><span class="dots"></span></td><td class="zero"><b>0</b><small>11</small><span class="dots"></span></td><td class="zero"><b>0</b><small>10</small><span class="dots"></span></td></tr></table></div><div class="kmwrap"><table class="kmap"><caption>x = 1 (minterms 16–31)</caption><tr><th class="corner"><span class="rv">yz</span>\<span class="cv">wr</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="zero"><b>0</b><small>16</small><span class="dots"></span></td><td class="zero"><b>0</b><small>17</small><span class="dots"></span></td><td class="zero"><b>0</b><small>19</small><span class="dots"></span></td><td class="zero"><b>0</b><small>18</small><span class="dots"></span></td></tr><tr><th>01</th><td class="zero"><b>0</b><small>20</small><span class="dots"></span></td><td class="zero"><b>0</b><small>21</small><span class="dots"></span></td><td class="zero"><b>0</b><small>23</small><span class="dots"></span></td><td class="zero"><b>0</b><small>22</small><span class="dots"></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>28</small><span class="dots"></span></td><td class="zero"><b>0</b><small>29</small><span class="dots"></span></td><td class="zero"><b>0</b><small>31</small><span class="dots"></span></td><td class="zero"><b>0</b><small>30</small><span class="dots"></span></td></tr><tr><th>10</th><td class="zero"><b>0</b><small>24</small><span class="dots"></span></td><td class="zero"><b>0</b><small>25</small><span class="dots"></span></td><td class="zero"><b>0</b><small>27</small><span class="dots"></span></td><td class="zero"><b>0</b><small>26</small><span class="dots"></span></td></tr></table></div></div>
+<p><b>Adjacency in 5 variables:</b> (i) the usual 4-variable adjacency inside each layer (including wrap-around); (ii) <b>the same cell position in the two layers is adjacent</b> (x changes, nothing else) — imagine the x = 1 map laid directly over the x = 0 map. Groups can therefore span both layers: a group of 8 gives a 2-variable term, 16 gives 1 variable, etc.</p>
+<div class="ex"><div class="t">Example 7.11 — f = Σ(0,2,4,6,11,15,16,18,20,22,27,31)</div>
+<div class="pair"><div class="kmwrap"><table class="kmap"><caption>x = 0</caption><tr><th class="corner"><span class="rv">yz</span>\<span class="cv">wr</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="one" style="background:#e11d4822"><b>1</b><small>0</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>1</small><span class="dots"></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>2</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>01</th><td class="one" style="background:#e11d4822"><b>1</b><small>4</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>5</small><span class="dots"></span></td><td class="zero"><b>0</b><small>7</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>6</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>12</small><span class="dots"></span></td><td class="zero"><b>0</b><small>13</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>15</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="zero"><b>0</b><small>8</small><span class="dots"></span></td><td class="zero"><b>0</b><small>9</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>11</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>10</small><span class="dots"></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> y'r' (layer 0 part) &nbsp;<span class="mono">(cells 0,2,4,6)</span></li><li><i style="background:#2563eb"></i> ywr (layer 0 part) &nbsp;<span class="mono">(cells 11,15)</span></li></ul></div><div class="kmwrap"><table class="kmap"><caption>x = 1</caption><tr><th class="corner"><span class="rv">yz</span>\<span class="cv">wr</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="one" style="background:#e11d4822"><b>1</b><small>16</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>17</small><span class="dots"></span></td><td class="zero"><b>0</b><small>19</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>18</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>01</th><td class="one" style="background:#e11d4822"><b>1</b><small>20</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>21</small><span class="dots"></span></td><td class="zero"><b>0</b><small>23</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>22</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>28</small><span class="dots"></span></td><td class="zero"><b>0</b><small>29</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>31</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>30</small><span class="dots"></span></td></tr><tr><th>10</th><td class="zero"><b>0</b><small>24</small><span class="dots"></span></td><td class="zero"><b>0</b><small>25</small><span class="dots"></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>27</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>26</small><span class="dots"></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> y'r' (layer 1 part) &nbsp;<span class="mono">(cells 16,18,20,22)</span></li><li><i style="background:#2563eb"></i> ywr (layer 1 part) &nbsp;<span class="mono">(cells 27,31)</span></li></ul></div></div>
+<ul><li>Group A: cells 0,2,4,6 (layer 0) <i>and</i> 16,18,20,22 (layer 1) — 8 cells. Constant in the group: y=0 and r=0. x, z, w change. → <b>y'r'</b>.</li>
+<li>Group B: cells 11,15 and 27,31 — 4 cells. Constant: y=1, w=1, r=1. → <b>ywr</b>.</li></ul>
+<p><b>f = y'r' + ywr.</b> (Verified by listing all 12 minterms.)</p></div>
+<p>For six variables use four 4-variable maps; beyond that use the <b>Quine–McCluskey</b> tabular method (same idea, computer-friendly).</p>
+
+<h3>7.9 K-map checklist for the exam</h3>
+<ol><li>Fill the map from the truth table / minterm list (double-check the Gray-order row/column labels).</li><li>Mark isolated 1s first, then 1s with exactly one possible largest group.</li><li>Use X's only to enlarge groups.</li><li>Verify by testing two or three cells against your final expression.</li></ol>
+
+<h2 id="s8">8. Codes</h2>
+<p>A <b>code</b> is a systematic way to represent symbols (here, decimal digits or numbers) by bit patterns. Different codes are chosen for ease of arithmetic, error reduction, or hardware simplicity.</p>
+
+<h3>8.1 Classification</h3>
+<div class="fx">Codes
+ ├─ Weighted      (each bit position has a fixed weight; value = Σ weight × bit)
+ │    ├─ Positively weighted : 8 4 2 1 (BCD), 2 4 2 1, 5 2 1 1
+ │    └─ Negatively weighted : 8 4 −2 −1,  6 4 2 −3   (some weights are negative)
+ └─ Non-weighted  (no positional weights)   : Excess-3 (XS-3), Gray</div>
+
+<h3>8.2 Weighted codes and BCD</h3>
+<p><b>BCD (Binary Coded Decimal, 8421)</b> writes each decimal digit 0–9 as its 4-bit binary value. A multi-digit number is coded digit by digit: <code>92 → 1001 0010</code> and <code>69 → 0110 1001</code> (your notes). It is <b>not</b> the same as the binary value of 92 (1011100). Codes 1010–1111 are <b>invalid</b> in BCD (6 wasted combinations) — they become <b>don't cares</b> in design.</p>
+<h4>How to choose weights for a valid decimal code (your notes)</h4>
+<ul><li>The <b>sum of all weights must be at least 9</b> (otherwise 9 cannot be made).</li><li>There must be a weight of <b>1</b> (so that the digit 1 can be represented).</li></ul>
+<p>Examples that work: 8 4 2 1 (sum 15), 2 4 2 1 (sum 9), 5 2 1 1 (sum 9).</p>
+
+<h3>8.3 Self-complementary codes</h3>
+<div class="box key"><b>Definition</b>A decimal code is <b>self-complementary</b> if the <b>9's complement</b> of a digit is obtained by simply <b>inverting all four bits</b> of its code word: code(9−N) = (code(N))'. Useful because decimal subtraction by 9's complement needs no extra circuit.<br>
+<b>Condition (weighted codes):</b> the weights must add up to exactly <b>9</b>. So 2421, 5211, 8 4 −2 −1, 6 4 2 −3 and (non-weighted) Excess-3 are self-complementary; <b>8421 BCD is not</b> (sum = 15).</div>
+<h4>The 2421 code (from your notes)</h4>
+<p>Generation trick: write digits 0–4 as 0000,0001,0010,0011,0100 and obtain <b>5–9 by complementing the codes of 4–0</b> (5 = comp(4), 6 = comp(3), …). That guarantees self-complementation.</p>
+<div class="scroll"><table class="tt"><tr><th>Digit</th><th>BCD 8421</th><th>2421</th><th>5211</th><th>8 4 −2 −1</th><th>Excess-3</th><th>Gray (4-bit idx)</th></tr><tr><td>0</td><td>0000</td><td>0000</td><td>0000</td><td>0000</td><td>0011</td><td>0000</td></tr><tr><td>1</td><td>0001</td><td>0001</td><td>0001</td><td>0111</td><td>0100</td><td>0001</td></tr><tr><td>2</td><td>0010</td><td>0010</td><td>0011</td><td>0110</td><td>0101</td><td>0011</td></tr><tr><td>3</td><td>0011</td><td>0011</td><td>0101</td><td>0101</td><td>0110</td><td>0010</td></tr><tr><td>4</td><td>0100</td><td>0100</td><td>0111</td><td>0100</td><td>0111</td><td>0110</td></tr><tr><td>5</td><td>0101</td><td>1011</td><td>1000</td><td>1011</td><td>1000</td><td>0111</td></tr><tr><td>6</td><td>0110</td><td>1100</td><td>1010</td><td>1010</td><td>1001</td><td>0101</td></tr><tr><td>7</td><td>0111</td><td>1101</td><td>1100</td><td>1001</td><td>1010</td><td>0100</td></tr><tr><td>8</td><td>1000</td><td>1110</td><td>1110</td><td>1000</td><td>1011</td><td>1100</td></tr><tr><td>9</td><td>1001</td><td>1111</td><td>1111</td><td>1111</td><td>1100</td><td>1101</td></tr></table></div>
+<p>Check weights for 2421, digit 7 = 1101 → 2+4+0+1 = 7 ✓; digit 5 = 1011 → 2+0+2+1 = 5 ✓. For 8 4 −2 −1, digit 7 = 1001 → 8 −1 = 7 ✓. For 5211, digit 8 = 1110 → 5+2+1 = 8 ✓. (Several code words can represent the same digit in these weight systems; the table lists the self-complementary choice.)</p>
+<div class="ex"><div class="t">Example 8.1 — verify self-complementing for 2421: digit 3 and 6</div>
+<div class="fx">3 → 0011,  complement → 1100 → that is digit 6 = 9 − 3 ✓
+2 → 0010,  complement → 1101 → digit 7 = 9 − 2 ✓</div></div>
+
+<h3>8.4 Converting 2421 to BCD (design with K-maps)</h3>
+<p>Let the 2421 input bits be <b>x y z w</b> (weights 2,4,2,1) and the BCD output bits be <b>B3 B2 B1 B0</b>. Valid 2421 words are digits 0–9 (cells 0,1,2,3,4,11,12,13,14,15); cells 5,6,7,8,9,10 never occur → <b>don't cares</b>. Solve four K-maps (the notes show B<sub>0</sub> and B<sub>1</sub>).</p>
+<p>Truth table (input → desired BCD):</p>
+<div class="scroll"><table class="tt "><tr><th>Digit</th><th>x y z w (2421)</th><th>B3 B2 B1 B0 (BCD)</th></tr><tr><td>0</td><td>0000</td><td>0000</td></tr><tr><td>1</td><td>0001</td><td>0001</td></tr><tr><td>2</td><td>0010</td><td>0010</td></tr><tr><td>3</td><td>0011</td><td>0011</td></tr><tr><td>4</td><td>0100</td><td>0100</td></tr><tr><td>5</td><td>1011</td><td>0101</td></tr><tr><td>6</td><td>1100</td><td>0110</td></tr><tr><td>7</td><td>1101</td><td>0111</td></tr><tr><td>8</td><td>1110</td><td>1000</td></tr><tr><td>9</td><td>1111</td><td>1001</td></tr></table></div>
+<div class="pair"><div class="kmwrap"><table class="kmap"><caption>B0 = w</caption><tr><th class="corner"><span class="rv">xy</span>\<span class="cv">zw</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>1</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>3</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>01</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>5</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>7</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="dc"><b>X</b><small>6</small><span class="dots"></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>12</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>13</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>15</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="dc"><b>X</b><small>8</small><span class="dots"></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>9</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>11</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="dc"><b>X</b><small>10</small><span class="dots"></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> w (all odd cells) &nbsp;<span class="mono">(cells 1,3,5,7,9,11,13,15)</span></li></ul></div><div class="kmwrap"><table class="kmap"><caption>B1 = x'z + xz'</caption><tr><th class="corner"><span class="rv">xy</span>\<span class="cv">zw</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="zero"><b>0</b><small>1</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>3</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>2</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>01</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="dc"><b>X</b><small>5</small><span class="dots"></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>7</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>6</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>11</th><td class="one" style="background:#2563eb22"><b>1</b><small>12</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>13</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>15</small><span class="dots"></span></td><td class="zero"><b>0</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="dc" style="background:#2563eb22"><b>X</b><small>8</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="dc" style="background:#2563eb22"><b>X</b><small>9</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="zero"><b>0</b><small>11</small><span class="dots"></span></td><td class="dc"><b>X</b><small>10</small><span class="dots"></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> x'z &nbsp;<span class="mono">(cells 2,3,6,7)</span></li><li><i style="background:#2563eb"></i> xz' &nbsp;<span class="mono">(cells 8,9,12,13)</span></li></ul></div></div>
+<div class="pair"><div class="kmwrap"><table class="kmap"><caption>B2 = yz' + xy'</caption><tr><th class="corner"><span class="rv">xy</span>\<span class="cv">zw</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="zero"><b>0</b><small>1</small><span class="dots"></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>01</th><td class="one" style="background:#e11d4822"><b>1</b><small>4</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>5</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="dc"><b>X</b><small>7</small><span class="dots"></span></td><td class="dc"><b>X</b><small>6</small><span class="dots"></span></td></tr><tr><th>11</th><td class="one" style="background:#e11d4822"><b>1</b><small>12</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>13</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="zero"><b>0</b><small>15</small><span class="dots"></span></td><td class="zero"><b>0</b><small>14</small><span class="dots"></span></td></tr><tr><th>10</th><td class="dc" style="background:#2563eb22"><b>X</b><small>8</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="dc" style="background:#2563eb22"><b>X</b><small>9</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="one" style="background:#2563eb22"><b>1</b><small>11</small><span class="dots"><i style="background:#2563eb"></i></span></td><td class="dc" style="background:#2563eb22"><b>X</b><small>10</small><span class="dots"><i style="background:#2563eb"></i></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> yz' &nbsp;<span class="mono">(cells 4,5,12,13)</span></li><li><i style="background:#2563eb"></i> xy' &nbsp;<span class="mono">(cells 8,9,10,11)</span></li></ul></div><div class="kmwrap"><table class="kmap"><caption>B3 = yz</caption><tr><th class="corner"><span class="rv">xy</span>\<span class="cv">zw</span></th><th>00</th><th>01</th><th>11</th><th>10</th></tr><tr><th>00</th><td class="zero"><b>0</b><small>0</small><span class="dots"></span></td><td class="zero"><b>0</b><small>1</small><span class="dots"></span></td><td class="zero"><b>0</b><small>3</small><span class="dots"></span></td><td class="zero"><b>0</b><small>2</small><span class="dots"></span></td></tr><tr><th>01</th><td class="zero"><b>0</b><small>4</small><span class="dots"></span></td><td class="dc"><b>X</b><small>5</small><span class="dots"></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>7</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="dc" style="background:#e11d4822"><b>X</b><small>6</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>11</th><td class="zero"><b>0</b><small>12</small><span class="dots"></span></td><td class="zero"><b>0</b><small>13</small><span class="dots"></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>15</small><span class="dots"><i style="background:#e11d48"></i></span></td><td class="one" style="background:#e11d4822"><b>1</b><small>14</small><span class="dots"><i style="background:#e11d48"></i></span></td></tr><tr><th>10</th><td class="dc"><b>X</b><small>8</small><span class="dots"></span></td><td class="dc"><b>X</b><small>9</small><span class="dots"></span></td><td class="zero"><b>0</b><small>11</small><span class="dots"></span></td><td class="dc"><b>X</b><small>10</small><span class="dots"></span></td></tr></table><ul class="glegend"><li><i style="background:#e11d48"></i> yz &nbsp;<span class="mono">(cells 6,7,14,15)</span></li></ul></div></div>
+<div class="fx">B0 = w          B1 = x'z + xz' = x ⊕ z          B2 = yz' + xy'          B3 = yz</div>
+<p>Test: digit 8 = 1110 (x=1,y=1,z=1,w=0): B3 = 1·1 = 1; B2 = 1·0 + 1·0 = 0; B1 = 1⊕1 = 0; B0 = 0 → 1000 = 8 ✓. Digit 5 = 1011: B3 = 0·1 = 0; B2 = 0·0 + 1·1 = 1; B1 = 1⊕1 = 0; B0 = 1 → 0101 ✓.</p>
+
+<h3>8.5 Excess-3 (XS-3) code</h3>
+<p><b>XS-3 = BCD + 3 (0011)</b>. It is non-weighted. Its purpose, as in your note: <b>to avoid the all-zero code word</b> (a dead line looks like 0000) — and it is self-complementary, which simplifies subtraction.</p>
+<table class="tt "><tr><th>Digit</th><th>BCD</th><th>XS-3</th><th>Digit</th><th>BCD</th><th>XS-3</th></tr><tr><td>0</td><td>0000</td><td>0011</td><td>5</td><td>0101</td><td>1000</td></tr><tr><td>1</td><td>0001</td><td>0100</td><td>6</td><td>0110</td><td>1001</td></tr><tr><td>2</td><td>0010</td><td>0101</td><td>7</td><td>0111</td><td>1010</td></tr><tr><td>3</td><td>0011</td><td>0110</td><td>8</td><td>1000</td><td>1011</td></tr><tr><td>4</td><td>0100</td><td>0111</td><td>9</td><td>1001</td><td>1100</td></tr></table>
+<p>Unused XS-3 words: 0000, 0001, 0010, 1101, 1110, 1111. Self-complement check: 3 → 0110, complement 1001 = 6 = 9−3 ✓ (arrow in your notes).</p>
+<div class="ex"><div class="t">Example 8.2 — XS-3 addition rule</div>
+<p>Adding two XS-3 digits adds an excess of 6. <b>If a carry results, add 3 (0011) to the sum; if no carry, subtract 3 (add 1101, ignore carry).</b></p>
+<div class="fx">4 + 3:  0111 + 0110 = 1101 (no carry) → subtract 3 → 1010 = XS-3 of 7 ✓
+8 + 7:  1011 + 1010 = 1 0101 (carry) → add 3 to 0101 → 1000 = XS-3 of 5, carry digit 1 → XS-3 0100
+        result 0100 1000 = XS-3 of 15 ✓</div></div>
+
+<h3>8.6 Gray code</h3>
+<p>The <b>Gray code</b> (reflected binary code) is a <b>cyclic, non-weighted</b> code in which <b>only one bit changes between consecutive code words</b> (including from the last word back to the first). This prevents transient errors when several bits would otherwise change at once (e.g. in rotary encoders) and is the reason K-map axes use 00,01,11,10.</p>
+<h4>Reflect-and-prefix construction (shown in your notes)</h4>
+<ol><li>1-bit Gray: <code>0, 1</code>.</li><li>To get the (n+1)-bit code: write the n-bit list, then <b>reflect</b> (write it again in reverse order below a mirror line); prefix <b>0</b> to the top half and <b>1</b> to the mirrored bottom half.</li></ol>
+<div class="fx">1 bit: 0 1
+2 bit: 00 01 | 11 10         (mirror after 01; prefix 0 on top, 1 on bottom)
+3 bit: 000 001 011 010 | 110 111 101 100
+4 bit: (above, with 0 prefix) | (reflected with 1 prefix) → table below</div>
+<table class="tt "><tr><th>Dec</th><th>Binary</th><th>Gray</th></tr><tr><td>0</td><td>0000</td><td>0000</td></tr><tr><td>1</td><td>0001</td><td>0001</td></tr><tr><td>2</td><td>0010</td><td>0011</td></tr><tr><td>3</td><td>0011</td><td>0010</td></tr><tr><td>4</td><td>0100</td><td>0110</td></tr><tr><td>5</td><td>0101</td><td>0111</td></tr><tr><td>6</td><td>0110</td><td>0101</td></tr><tr><td>7</td><td>0111</td><td>0100</td></tr><tr><td>8</td><td>1000</td><td>1100</td></tr><tr><td>9</td><td>1001</td><td>1101</td></tr><tr><td>10</td><td>1010</td><td>1111</td></tr><tr><td>11</td><td>1011</td><td>1110</td></tr><tr><td>12</td><td>1100</td><td>1010</td></tr><tr><td>13</td><td>1101</td><td>1011</td></tr><tr><td>14</td><td>1110</td><td>1001</td></tr><tr><td>15</td><td>1111</td><td>1000</td></tr></table>
+<h4>Binary ⇄ Gray with XOR</h4>
+<div class="box key"><b>Binary → Gray:</b> MSB copied as is; every other Gray bit = <b>XOR of two adjacent binary bits</b>: G<sub>i</sub> = B<sub>i+1</sub> ⊕ B<sub>i</sub>.<br>
+<b>Gray → Binary:</b> MSB copied as is; every other binary bit = <b>previous (higher) <u>binary</u> bit XOR current Gray bit</b>: B<sub>i</sub> = B<sub>i+1</sub> ⊕ G<sub>i</sub>. (Running XOR down the word.)</div>
+<p class="box warn"><b>Notebook clarification</b>The notes list "second = first ⊕ second, third = second ⊕ third, …". Applied to the <i>given</i> bits (adjacent pairs of the input) that is the <b>binary → Gray</b> rule (as the arrow picture for 1110 shows). For Gray → binary you XOR with the <i>already-computed binary</i> bit, not with the previous Gray bit.</p>
+<div class="ex"><div class="t">Example 8.3 — binary 1110 → Gray</div>
+<div class="fx">G3 = 1
+G2 = B3⊕B2 = 1⊕1 = 0
+G1 = B2⊕B1 = 1⊕1 = 0
+G0 = B1⊕B0 = 1⊕0 = 1        → Gray = 1001   (table: 14 → 1001 ✓)</div>
+<div class="t" style="margin-top:8px">Example 8.4 — Gray 1011 → binary</div>
+<div class="fx">B3 = 1
+B2 = B3⊕G2 = 1⊕0 = 1
+B1 = B2⊕G1 = 1⊕1 = 0
+B0 = B1⊕G0 = 0⊕1 = 1        → binary = 1101 = 13   (table: 13 → 1011 ✓)</div></div>
+
+<h3>8.7 Summary table of all codes</h3>
+<div class="scroll"><table class="tt"><tr><th>Digit</th><th>BCD 8421</th><th>2421</th><th>5211</th><th>8 4 −2 −1</th><th>Excess-3</th><th>Gray (4-bit idx)</th></tr><tr><td>0</td><td>0000</td><td>0000</td><td>0000</td><td>0000</td><td>0011</td><td>0000</td></tr><tr><td>1</td><td>0001</td><td>0001</td><td>0001</td><td>0111</td><td>0100</td><td>0001</td></tr><tr><td>2</td><td>0010</td><td>0010</td><td>0011</td><td>0110</td><td>0101</td><td>0011</td></tr><tr><td>3</td><td>0011</td><td>0011</td><td>0101</td><td>0101</td><td>0110</td><td>0010</td></tr><tr><td>4</td><td>0100</td><td>0100</td><td>0111</td><td>0100</td><td>0111</td><td>0110</td></tr><tr><td>5</td><td>0101</td><td>1011</td><td>1000</td><td>1011</td><td>1000</td><td>0111</td></tr><tr><td>6</td><td>0110</td><td>1100</td><td>1010</td><td>1010</td><td>1001</td><td>0101</td></tr><tr><td>7</td><td>0111</td><td>1101</td><td>1100</td><td>1001</td><td>1010</td><td>0100</td></tr><tr><td>8</td><td>1000</td><td>1110</td><td>1110</td><td>1000</td><td>1011</td><td>1100</td></tr><tr><td>9</td><td>1001</td><td>1111</td><td>1111</td><td>1111</td><td>1100</td><td>1101</td></tr></table></div>
+
+<h2 id="s9">9. Combinational Circuits &amp; Building Blocks</h2>
+<p>A <b>combinational circuit</b> is a digital circuit whose outputs depend <b>only on the present inputs</b> (no memory, no feedback). Contrast: a <i>sequential</i> circuit has memory (flip-flops). Design procedure: (1) read the specification, (2) make a truth table, (3) simplify each output with K-maps, (4) draw with gates. Standard MSI blocks are the <b>multiplexer, demultiplexer, encoder, decoder</b> and the <b>adders</b>.</p>
+<div class="gates" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">
+<div class="g"><h4>Multiplexer</h4><p>2<sup>n</sup> data inputs → <b>1</b> output; <b>n select lines</b> choose which input passes. "Data selector".</p></div>
+<div class="g"><h4>Demultiplexer</h4><p>1 input → one of 2<sup>n</sup> outputs; n select lines choose which output gets the data. "Data distributor".</p></div>
+<div class="g"><h4>Encoder</h4><p>2<sup>n</sup> input lines → <b>n</b>-bit binary code (the number of the active line). Enable E.</p></div>
+<div class="g"><h4>Decoder</h4><p><b>n</b>-bit code → 2<sup>n</sup> lines, exactly one active ("minterm generator"). Enable E.</p></div></div>
+<p>An <b>Enable</b> pin allows the block to work only when asserted: <b>high-enabled → E</b>, <b>low-enabled → Ē (bar)</b> (your note "for noise").</p>
+
+<h3>9.1 Multiplexer (MUX)</h3>
+<h4>2:1 MUX</h4>
+<div class="fx">M = S0'·I0 + S0·I1       S0 = 0 → M = I0 ;  S0 = 1 → M = I1</div>
+<div class="pair"><div><svg class="circ" viewBox="-16 -18 412 184" width="412" style="max-width:100%"><text x="40" y="10" text-anchor="middle" class="t">I1</text><polyline points="40,14 40,148" fill="none"/><circle cx="40" cy="22" r="2.8" class="jd"/><text x="82" y="10" text-anchor="middle" class="t">I0</text><polyline points="82,14 82,148" fill="none"/><circle cx="82" cy="22" r="2.8" class="jd"/><text x="124" y="10" text-anchor="middle" class="t">S0</text><polyline points="124,14 124,148" fill="none"/><circle cx="124" cy="22" r="2.8" class="jd"/><polyline points="124,22 131,22" fill="none"/><path d="M131,16 L143,22 L131,28 Z"/><circle cx="146" cy="22" r="3" fill="none"/><polyline points="149,22 154,22" fill="none"/><polyline points="154,22 154,148" fill="none"/><path d="M204,56 H228 A18,18 0 0 1 228,92 H204 Z" class="gp" style="fill:var(--card)"/><polyline points="82,68 204,68" fill="none"/><circle cx="82" cy="68" r="2.8" class="jd"/><polyline points="154,80 204,80" fill="none"/><circle cx="154" cy="80" r="2.8" class="jd"/><polyline points="246,74 276,74" fill="none"/><path d="M204,106 H228 A18,18 0 0 1 228,142 H204 Z" class="gp" style="fill:var(--card)"/><polyline points="40,118 204,118" fill="none"/><circle cx="40" cy="118" r="2.8" class="jd"/><polyline points="124,130 204,130" fill="none"/><circle cx="124" cy="130" r="2.8" class="jd"/><polyline points="246,124 276,124" fill="none"/><path d="M276,50 Q316,50 342,99 Q316,148 276,148 Q290,99 276,50 Z" class="gp" style="fill:var(--card)"/><polyline points="342,99 372,99" fill="none"/><text x="376" y="103" text-anchor="start" class="t">M</text></svg><p class="sm" style="text-align:center">Gate-level 2:1 MUX: AND gate A passes I0 when S0' = 1, AND gate B passes I1 when S0 = 1; the OR combines.</p></div></div>
+<p>Your notes' example: inputs I1 = 0, I0 = 1, S0 = 0 → M = I0 = 1. 4:1 example: data (I0,I1,I2,I3) = (0,1,0,0), select S1S0 = 01 → output = I1 = 1.</p>
+<h4>4:1 MUX</h4>
+<div class="fx">Y = S1'S0'·I0 + S1'S0·I1 + S1S0'·I2 + S1S0·I3</div>
+<table class="tt "><tr><th>S1</th><th>S0</th><th>Y</th></tr><tr><td>0</td><td>0</td><td>I0</td></tr><tr><td>0</td><td>1</td><td>I1</td></tr><tr><td>1</td><td>0</td><td>I2</td></tr><tr><td>1</td><td>1</td><td>I3</td></tr></table><svg class="circ" viewBox="-16 -18 572 332" width="572" style="max-width:100%"><text x="40" y="10" text-anchor="middle" class="t">I0</text><polyline points="40,14 40,296" fill="none"/><circle cx="40" cy="22" r="2.8" class="jd"/><text x="82" y="10" text-anchor="middle" class="t">I1</text><polyline points="82,14 82,296" fill="none"/><circle cx="82" cy="22" r="2.8" class="jd"/><text x="124" y="10" text-anchor="middle" class="t">I2</text><polyline points="124,14 124,296" fill="none"/><circle cx="124" cy="22" r="2.8" class="jd"/><text x="166" y="10" text-anchor="middle" class="t">I3</text><polyline points="166,14 166,296" fill="none"/><circle cx="166" cy="22" r="2.8" class="jd"/><text x="208" y="10" text-anchor="middle" class="t">S1</text><polyline points="208,14 208,296" fill="none"/><circle cx="208" cy="22" r="2.8" class="jd"/><polyline points="208,22 215,22" fill="none"/><path d="M215,16 L227,22 L215,28 Z"/><circle cx="230" cy="22" r="3" fill="none"/><polyline points="233,22 238,22" fill="none"/><polyline points="238,22 238,296" fill="none"/><text x="278" y="10" text-anchor="middle" class="t">S0</text><polyline points="278,14 278,296" fill="none"/><circle cx="278" cy="22" r="2.8" class="jd"/><polyline points="278,22 285,22" fill="none"/><path d="M285,16 L297,22 L285,28 Z"/><circle cx="300" cy="22" r="3" fill="none"/><polyline points="303,22 308,22" fill="none"/><polyline points="308,22 308,296" fill="none"/><path d="M358,56 H382 A24,24 0 0 1 382,104 H358 Z" class="gp" style="fill:var(--card)"/><polyline points="40,68 358,68" fill="none"/><circle cx="40" cy="68" r="2.8" class="jd"/><polyline points="238,80 358,80" fill="none"/><circle cx="238" cy="80" r="2.8" class="jd"/><polyline points="308,92 358,92" fill="none"/><circle cx="308" cy="92" r="2.8" class="jd"/><polyline points="406,80 436,80" fill="none"/><path d="M358,118 H382 A24,24 0 0 1 382,166 H358 Z" class="gp" style="fill:var(--card)"/><polyline points="82,130 358,130" fill="none"/><circle cx="82" cy="130" r="2.8" class="jd"/><polyline points="238,142 358,142" fill="none"/><circle cx="238" cy="142" r="2.8" class="jd"/><polyline points="278,154 358,154" fill="none"/><circle cx="278" cy="154" r="2.8" class="jd"/><polyline points="406,142 436,142" fill="none"/><path d="M358,180 H382 A24,24 0 0 1 382,228 H358 Z" class="gp" style="fill:var(--card)"/><polyline points="124,192 358,192" fill="none"/><circle cx="124" cy="192" r="2.8" class="jd"/><polyline points="208,204 358,204" fill="none"/><circle cx="208" cy="204" r="2.8" class="jd"/><polyline points="308,216 358,216" fill="none"/><circle cx="308" cy="216" r="2.8" class="jd"/><polyline points="406,204 436,204" fill="none"/><path d="M358,242 H382 A24,24 0 0 1 382,290 H358 Z" class="gp" style="fill:var(--card)"/><polyline points="166,254 358,254" fill="none"/><circle cx="166" cy="254" r="2.8" class="jd"/><polyline points="208,266 358,266" fill="none"/><circle cx="208" cy="266" r="2.8" class="jd"/><polyline points="278,278 358,278" fill="none"/><circle cx="278" cy="278" r="2.8" class="jd"/><polyline points="406,266 436,266" fill="none"/><path d="M436,50 Q476,50 502,173 Q476,296 436,296 Q450,173 436,50 Z" class="gp" style="fill:var(--card)"/><polyline points="502,173 532,173" fill="none"/><text x="536" y="177" text-anchor="start" class="t">Y</text></svg>
+<p><b>General:</b> 2<sup>n</sup>:1 MUX has n select lines; Y = Σ m<sub>i</sub>·I<sub>i</sub> where m<sub>i</sub> is the select-line minterm. A MUX is itself a <b>universal logic block</b>.</p>
+
+<h3>9.2 Demultiplexer (DEMUX)</h3>
+<p>Opposite of a MUX: <b>I</b> is routed to the output chosen by the select lines; all other outputs are 0.</p>
+<div class="pair"><div><b>1:2</b><svg class="circ" viewBox="-16 -18 310 184" width="310" style="max-width:100%"><text x="40" y="10" text-anchor="middle" class="t">I</text><polyline points="40,14 40,148" fill="none"/><circle cx="40" cy="22" r="2.8" class="jd"/><text x="82" y="10" text-anchor="middle" class="t">S0</text><polyline points="82,14 82,148" fill="none"/><circle cx="82" cy="22" r="2.8" class="jd"/><polyline points="82,22 89,22" fill="none"/><path d="M89,16 L101,22 L89,28 Z"/><circle cx="104" cy="22" r="3" fill="none"/><polyline points="107,22 112,22" fill="none"/><polyline points="112,22 112,148" fill="none"/><path d="M162,56 H186 A18,18 0 0 1 186,92 H162 Z" class="gp" style="fill:var(--card)"/><polyline points="40,68 162,68" fill="none"/><circle cx="40" cy="68" r="2.8" class="jd"/><polyline points="112,80 162,80" fill="none"/><circle cx="112" cy="80" r="2.8" class="jd"/><polyline points="204,74 234,74" fill="none"/><text x="238" y="78" text-anchor="start" class="t">m0</text><path d="M162,106 H186 A18,18 0 0 1 186,142 H162 Z" class="gp" style="fill:var(--card)"/><polyline points="40,118 162,118" fill="none"/><circle cx="40" cy="118" r="2.8" class="jd"/><polyline points="82,130 162,130" fill="none"/><circle cx="82" cy="130" r="2.8" class="jd"/><polyline points="204,124 234,124" fill="none"/><text x="238" y="128" text-anchor="start" class="t">m1</text></svg><div class="fx">m0 = S0'·I
+m1 = S0·I</div></div></div>
+<div><b>1:4</b><svg class="circ" viewBox="-16 -18 386 332" width="386" style="max-width:100%"><text x="40" y="10" text-anchor="middle" class="t">I</text><polyline points="40,14 40,296" fill="none"/><circle cx="40" cy="22" r="2.8" class="jd"/><text x="82" y="10" text-anchor="middle" class="t">S1</text><polyline points="82,14 82,296" fill="none"/><circle cx="82" cy="22" r="2.8" class="jd"/><polyline points="82,22 89,22" fill="none"/><path d="M89,16 L101,22 L89,28 Z"/><circle cx="104" cy="22" r="3" fill="none"/><polyline points="107,22 112,22" fill="none"/><polyline points="112,22 112,296" fill="none"/><text x="152" y="10" text-anchor="middle" class="t">S0</text><polyline points="152,14 152,296" fill="none"/><circle cx="152" cy="22" r="2.8" class="jd"/><polyline points="152,22 159,22" fill="none"/><path d="M159,16 L171,22 L159,28 Z"/><circle cx="174" cy="22" r="3" fill="none"/><polyline points="177,22 182,22" fill="none"/><polyline points="182,22 182,296" fill="none"/><path d="M232,56 H256 A24,24 0 0 1 256,104 H232 Z" class="gp" style="fill:var(--card)"/><polyline points="40,68 232,68" fill="none"/><circle cx="40" cy="68" r="2.8" class="jd"/><polyline points="112,80 232,80" fill="none"/><circle cx="112" cy="80" r="2.8" class="jd"/><polyline points="182,92 232,92" fill="none"/><circle cx="182" cy="92" r="2.8" class="jd"/><polyline points="280,80 310,80" fill="none"/><text x="314" y="84" text-anchor="start" class="t">m0</text><path d="M232,118 H256 A24,24 0 0 1 256,166 H232 Z" class="gp" style="fill:var(--card)"/><polyline points="40,130 232,130" fill="none"/><circle cx="40" cy="130" r="2.8" class="jd"/><polyline points="112,142 232,142" fill="none"/><circle cx="112" cy="142" r="2.8" class="jd"/><polyline points="152,154 232,154" fill="none"/><circle cx="152" cy="154" r="2.8" class="jd"/><polyline points="280,142 310,142" fill="none"/><text x="314" y="146" text-anchor="start" class="t">m1</text><path d="M232,180 H256 A24,24 0 0 1 256,228 H232 Z" class="gp" style="fill:var(--card)"/><polyline points="40,192 232,192" fill="none"/><circle cx="40" cy="192" r="2.8" class="jd"/><polyline points="82,204 232,204" fill="none"/><circle cx="82" cy="204" r="2.8" class="jd"/><polyline points="182,216 232,216" fill="none"/><circle cx="182" cy="216" r="2.8" class="jd"/><polyline points="280,204 310,204" fill="none"/><text x="314" y="208" text-anchor="start" class="t">m2</text><path d="M232,242 H256 A24,24 0 0 1 256,290 H232 Z" class="gp" style="fill:var(--card)"/><polyline points="40,254 232,254" fill="none"/><circle cx="40" cy="254" r="2.8" class="jd"/><polyline points="82,266 232,266" fill="none"/><circle cx="82" cy="266" r="2.8" class="jd"/><polyline points="152,278 232,278" fill="none"/><circle cx="152" cy="278" r="2.8" class="jd"/><polyline points="280,266 310,266" fill="none"/><text x="314" y="270" text-anchor="start" class="t">m3</text></svg><div class="fx">m0 = S1'S0'·I     m1 = S1'S0·I     m2 = S1S0'·I     m3 = S1S0·I</div></div>
+<div class="box key"><b>DEMUX = decoder</b>A 1:2<sup>n</sup> demultiplexer and an n:2<sup>n</sup> decoder with enable are the same circuit: the DEMUX data input I plays the role of the decoder's enable E. Look at the two diagrams — they are identical.</div>
+
+<h3>9.3 Decoder</h3>
+<p>An <b>n:2<sup>n</sup> decoder</b> activates exactly <b>one</b> of 2<sup>n</sup> output lines according to the binary input. Each output is a <b>minterm</b> of the inputs: D<sub>i</sub> = m<sub>i</sub> (when enabled).</p>
+<svg class="circ" viewBox="-16 -18 386 332" width="386" style="max-width:100%"><text x="40" y="10" text-anchor="middle" class="t">E</text><polyline points="40,14 40,296" fill="none"/><circle cx="40" cy="22" r="2.8" class="jd"/><text x="82" y="10" text-anchor="middle" class="t">A1</text><polyline points="82,14 82,296" fill="none"/><circle cx="82" cy="22" r="2.8" class="jd"/><polyline points="82,22 89,22" fill="none"/><path d="M89,16 L101,22 L89,28 Z"/><circle cx="104" cy="22" r="3" fill="none"/><polyline points="107,22 112,22" fill="none"/><polyline points="112,22 112,296" fill="none"/><text x="152" y="10" text-anchor="middle" class="t">A0</text><polyline points="152,14 152,296" fill="none"/><circle cx="152" cy="22" r="2.8" class="jd"/><polyline points="152,22 159,22" fill="none"/><path d="M159,16 L171,22 L159,28 Z"/><circle cx="174" cy="22" r="3" fill="none"/><polyline points="177,22 182,22" fill="none"/><polyline points="182,22 182,296" fill="none"/><path d="M232,56 H256 A24,24 0 0 1 256,104 H232 Z" class="gp" style="fill:var(--card)"/><polyline points="40,68 232,68" fill="none"/><circle cx="40" cy="68" r="2.8" class="jd"/><polyline points="112,80 232,80" fill="none"/><circle cx="112" cy="80" r="2.8" class="jd"/><polyline points="182,92 232,92" fill="none"/><circle cx="182" cy="92" r="2.8" class="jd"/><polyline points="280,80 310,80" fill="none"/><text x="314" y="84" text-anchor="start" class="t">D0</text><path d="M232,118 H256 A24,24 0 0 1 256,166 H232 Z" class="gp" style="fill:var(--card)"/><polyline points="40,130 232,130" fill="none"/><circle cx="40" cy="130" r="2.8" class="jd"/><polyline points="112,142 232,142" fill="none"/><circle cx="112" cy="142" r="2.8" class="jd"/><polyline points="152,154 232,154" fill="none"/><circle cx="152" cy="154" r="2.8" class="jd"/><polyline points="280,142 310,142" fill="none"/><text x="314" y="146" text-anchor="start" class="t">D1</text><path d="M232,180 H256 A24,24 0 0 1 256,228 H232 Z" class="gp" style="fill:var(--card)"/><polyline points="40,192 232,192" fill="none"/><circle cx="40" cy="192" r="2.8" class="jd"/><polyline points="82,204 232,204" fill="none"/><circle cx="82" cy="204" r="2.8" class="jd"/><polyline points="182,216 232,216" fill="none"/><circle cx="182" cy="216" r="2.8" class="jd"/><polyline points="280,204 310,204" fill="none"/><text x="314" y="208" text-anchor="start" class="t">D2</text><path d="M232,242 H256 A24,24 0 0 1 256,290 H232 Z" class="gp" style="fill:var(--card)"/><polyline points="40,254 232,254" fill="none"/><circle cx="40" cy="254" r="2.8" class="jd"/><polyline points="82,266 232,266" fill="none"/><circle cx="82" cy="266" r="2.8" class="jd"/><polyline points="152,278 232,278" fill="none"/><circle cx="152" cy="278" r="2.8" class="jd"/><polyline points="280,266 310,266" fill="none"/><text x="314" y="270" text-anchor="start" class="t">D3</text></svg>
+<table class="tt "><tr><th>E</th><th>A1</th><th>A0</th><th>D3</th><th>D2</th><th>D1</th><th>D0</th></tr><tr><td>0</td><td>X</td><td>X</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr></table>
+<p>Your notes' example: inputs (A1,A0) = (1,0) with E = 1 → D2 = 1, all other outputs 0.</p>
+<p><b>Complementary (active-low) decoder:</b> outputs are the <b>inverted</b> minterms, D<sub>i</sub>' = M<sub>i</sub> — the selected line is 0 and all others are 1. Built by replacing the AND gates with NAND gates. (Real chips such as the 74138 are of this kind.)</p>
+<h4>Decoder tree (building a big decoder from small ones)</h4>
+<ul><li><b>3:8 from two 2:4 decoders:</b> use A2 as the enable — A2' enables the first decoder (outputs D0–D3), A2 enables the second (D4–D7); A1,A0 go to both.</li>
+<li><b>4:16 from five 2:4 decoders:</b> one decoder decodes A3A2 and each of its four outputs enables one of four decoders that decode A1A0 (1 + 4 = 5).</li></ul>
+
+<h3>9.4 Encoder</h3>
+<p>A <b>2<sup>n</sup>:n encoder</b> is the opposite of a decoder: exactly one of the 2<sup>n</sup> inputs is high and the output is the <b>binary number of that input</b>.</p>
+<table class="tt "><tr><th>E3</th><th>E2</th><th>E1</th><th>E0</th><th>Y1</th><th>Y0</th><th>Meaning</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>X</td><td>X</td><td>no input active – meaningless</td></tr><tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>input 0 (zeroth pin) is high</td></tr><tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>input 1 is high</td></tr><tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>input 2 is high</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>input 3 is high</td></tr></table>
+<div class="fx">Y1 = E2 + E3          Y0 = E1 + E3</div><svg class="circ" viewBox="-16 -18 266 168" width="266" style="max-width:100%"><g transform="translate(100,10)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><path d="M48,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><text x="30" y="24" text-anchor="end" class="t">E2</text><polyline points="36,20 90,20" fill="none"/><text x="30" y="44" text-anchor="end" class="t">E3</text><polyline points="36,40 90,40" fill="none"/><polyline points="160,30 190,30" fill="none"/><text x="194" y="34" text-anchor="start" class="t">Y1</text><g transform="translate(100,80)" class="gate"><path d="M0,0 Q22,0 48,20 Q22,40 0,40 Q12,20 0,0 Z"/><path d="M48,20 H60" fill="none"/><path d="M-10,10 H4 M-10,30 H4" fill="none"/></g><text x="30" y="94" text-anchor="end" class="t">E1</text><polyline points="36,90 90,90" fill="none"/><text x="30" y="114" text-anchor="end" class="t">E3</text><polyline points="36,110 90,110" fill="none"/><polyline points="160,100 190,100" fill="none"/><text x="194" y="104" text-anchor="start" class="t">Y0</text></svg>
+<p><b>Problems of a plain encoder:</b> (a) when <b>no</b> input is high the output 00 is ambiguous with "input 0 active"; (b) if <b>two inputs</b> are high (e.g. 1100) the OR gates give a wrong code (11 = input 3). Solution: the <b>priority encoder</b>.</p>
+<h4>Priority encoder</h4>
+<p>When several inputs are high, the output shows the <b>highest-priority</b> one (convention: highest index = highest priority — E3 in your notes). Inputs below the winner are don't cares. A <b>valid bit V</b> (V = E3+E2+E1+E0) tells whether any input is active, resolving the all-zeros ambiguity.</p>
+<table class="tt "><tr><th>E3</th><th>E2</th><th>E1</th><th>E0</th><th>Y1</th><th>Y0</th><th>V</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>X</td><td>X</td><td>0</td></tr><tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>0</td><td>1</td><td>X</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>X</td><td>X</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>X</td><td>X</td><td>X</td><td>1</td><td>1</td><td>1</td></tr></table>
+<div class="fx">Y1 = E3 + E2            Y0 = E3 + E2'·E1            V = E3+E2+E1+E0</div>
+<div class="ex"><div class="t">Example 9.1 — input 1100 into a priority encoder</div>
+<p>E3 = 1 has the highest priority → Y1Y0 = 11, regardless of E2. Equations: Y1 = 1+1 = 1; Y0 = 1 + 1'·0 = 1 → 11 ✓. A plain encoder would also give 11 here but by accident; for 0110 a plain encoder gives Y1 = 1, Y0 = 1 (wrong, 3 instead of 2), the priority encoder gives Y0 = 0 + 1'·1 = 0 → 10 ✓.</p></div>
+
+<h3>9.5 Implementing functions with a MUX</h3>
+<p>A 2<sup>n</sup>:1 MUX with the n variables on the select lines can implement <b>any</b> n-variable function: tie each data input I<sub>i</sub> to <b>1 if m<sub>i</sub> is in the function, else 0</b>. A smarter trick implements an n-variable function on a <b>2<sup>n−1</sup>:1</b> MUX: put n−1 variables on the select lines and connect the remaining variable (or its complement, 0, or 1) to the data inputs.</p>
+<div class="ex"><div class="t">Example 9.2 — F(A,B,C) = Σ(0,1,3,7) (your notes)</div>
+<table class="tt "><tr><th>A</th><th>B</th><th>C</th><th>F</th></tr><tr><td>0</td><td>0</td><td>0</td><td>1</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td></tr></table>
+<h4>(a) 8:1 MUX, select = ABC</h4>
+<div class="fx">I0 = 1, I1 = 1, I2 = 0, I3 = 1, I4 = 0, I5 = 0, I6 = 0, I7 = 1      (S2 S1 S0 = A B C)</div>
+<h4>(b) 4:1 MUX, select = A,B; data from C</h4>
+<table class="tt "><tr><th>A B</th><th>Minterm pair</th><th>Data input</th></tr><tr><td>00</td><td>m0, m1</td><td>I<sub>0</sub> = 1</td></tr><tr><td>01</td><td>m2, m3</td><td>I<sub>1</sub> = C</td></tr><tr><td>10</td><td>m4, m5</td><td>I<sub>2</sub> = 0</td></tr><tr><td>11</td><td>m6, m7</td><td>I<sub>3</sub> = C</td></tr></table>
+<p>So I0 = 1, I1 = C, I2 = 0, I3 = C (matches the notes' sketch).</p>
+<h4>(c) 4:1 MUX, select = B,C; data from A</h4>
+<table class="tt "><tr><th>B C</th><th>Minterm pair</th><th>Data input</th></tr><tr><td>00</td><td>m0, m4</td><td>I<sub>0</sub> = A'</td></tr><tr><td>01</td><td>m1, m5</td><td>I<sub>1</sub> = A'</td></tr><tr><td>10</td><td>m2, m6</td><td>I<sub>2</sub> = 0</td></tr><tr><td>11</td><td>m3, m7</td><td>I<sub>3</sub> = 1</td></tr></table>
+<p>So I0 = A', I1 = A', I2 = 0, I3 = 1 (matches the notes).</p>
+<h4>(d) 2:1 MUX, select = C; data are functions of A,B</h4>
+<p>C = 0: F = Σ(0) → only A'B'C' → F|<sub>C=0</sub> = A'B' = (A+B)'  → I0 = NOR(A,B).<br>
+C = 1: F = Σ(1,3,7) → A'B' + A'B + AB = A' + B → I1 = A' + B (a 2-input OR with inverted A).</p>
+<p>The little K-maps in your notes (C=0 → A'B'; C=1 → A'+B) are exactly this step.</p></div>
+<p><b>Procedure with a 2<sup>n−1</sup>:1 MUX:</b> pair the minterms that differ only in the data variable (the "minterm pair" column); for each pair the data input is 0 (neither), 1 (both), the variable (only the "1" half) or its complement (only the "0" half).</p>
+
+<h3>9.6 Implementing functions with a decoder</h3>
+<p>A decoder produces all minterms; <b>OR gates</b> (outside) combine the ones needed: <code>F = Σ m(…)</code> → OR the decoder outputs for the listed minterms. Several functions can share one decoder (one OR gate per function).</p>
+<div class="ex"><div class="t">Example 9.3 — F(A,B,C) = Σ(1,2,4,6) (your notes' table)</div>
+<table class="tt "><tr><th>A</th><th>B</th><th>C</th><th>F</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>0</td></tr></table>
+<p>3:8 decoder with inputs A,B,C → outputs D1, D2, D4, D6 are ORed: <b>F = D1 + D2 + D4 + D6</b> (a 4-input OR gate).</p></div>
+<div class="box key"><b>Minimum-hardware choice (your note)</b>
+<table class="left"><tr><th>Decoder type</th><th>Use the 1-minterms</th><th>Use the 0-minterms (if fewer)</th></tr>
+<tr><td>Normal (active-high) decoder</td><td><b>OR</b> gate of the 1-minterms</td><td><b>NOR</b> gate of the 0-minterms (F = (Σ zeros)')</td></tr>
+<tr><td>Complementary (active-low) decoder</td><td><b>NAND</b> gate of the 1-minterm outputs (F = (D'<sub>a</sub>·D'<sub>b</sub>…)')</td><td><b>AND</b> gate of the 0-minterm outputs</td></tr></table>
+Pick whichever list (ones or zeros) is shorter so the output gate has fewer inputs.</div>
+<div class="ex"><div class="t">Example 9.4 — Full adder with one 3:8 decoder</div>
+<div class="fx">Sum  = Σ(1,2,4,7)  = D1 + D2 + D4 + D7       (4-input OR)
+Cout = Σ(3,5,6,7)  = D3 + D5 + D6 + D7       (4-input OR)</div></div>
+
+<h3>9.7 MUX tree</h3>
+<p>Bigger multiplexers are built from smaller ones in a tree: the <b>low-order select lines drive the first level</b>, the high-order select lines drive the next level.</p>
+<ul><li><b>8:1 from 4:1 and 2:1</b>: two 4:1 MUXes (both with S1,S0) take I0–I3 and I4–I7; a 2:1 MUX controlled by S2 picks between their outputs.</li>
+<li><b>16:1 from 4:1</b>: four 4:1 MUXes (S1,S0) feed one 4:1 MUX (S3,S2): 5 MUXes in total.</li>
+<li>2<sup>n</sup>:1 from 2:1 MUXes needs <b>2<sup>n</sup> − 1</b> MUXes.</li></ul>
+
+<h3>9.8 Adders (needed for the BCD adder)</h3>
+<p><b>Half adder</b> (adds two bits): Sum = A⊕B, Carry = A·B.<br>
+<b>Full adder</b> (adds two bits + carry-in): Sum = A⊕B⊕C<sub>in</sub>, C<sub>out</sub> = AB + C<sub>in</sub>(A⊕B) = AB + BC<sub>in</sub> + AC<sub>in</sub>.</p>
+<table class="tt "><tr><th>A</th><th>B</th><th>Cin</th><th>Sum</th><th>Cout</th></tr><tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr><tr><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td></tr><tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td></tr><tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td></tr><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr><tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr></table>
+<p>A <b>4-bit ripple-carry adder</b> chains four full adders: each carry-out feeds the next stage's carry-in. Delay grows with the number of bits (carry must ripple); carry-look-ahead adders fix this.</p>
+
+<h3>9.9 BCD adder</h3>
+<p>BCD stores one decimal digit in 4 bits. If we add two BCD digits with a <i>binary</i> adder, the result is right only while the sum is ≤ 9. Your notes' examples:</p>
+<div class="fx">2 + 9:  0010 + 1001 = 1011   → 1011 is not a valid BCD digit (it's 11)
+7 + 9:  0111 + 1001 = 1 0000 → carry 1 and digit 0000 — but 7+9 = 16, expected 0001 0110</div>
+<p><b>Why?</b> 4 bits have 16 combinations but a decimal digit wraps at 10. Six codes (1010–1111) are skipped. So whenever the binary sum is ≥ 10 we are "6 short" in the units digit — <b>add 6 (0110)</b> to skip the invalid codes and generate the proper decimal carry.</p>
+<div class="box key"><b>Correction rule</b> Add 0110 when:  (a) the binary adder produced a carry (K = 1: sum ≥ 16), <b>or</b> (b) the 4-bit sum is 1010–1111 i.e. S3·S2 = 1 or S3·S1 = 1.<br>
+<code>X = K + S3·S2 + S3·S1</code> (your note: "AB + AC" form). X is also the carry-out to the next BCD digit.</div>
+<svg class="circ" viewBox="-16 -18 736 318" width="736" style="max-width:100%"><rect x="20" y="30" width="210" height="54" rx="4" class="bx"/><text x="125" y="57" text-anchor="middle" class="t b">4-bit binary adder I</text><polyline points="60,0 60,30" fill="none"/><text x="60" y="-6" text-anchor="middle" class="t">A3..A0 (digit 1)</text><polyline points="190,0 190,30" fill="none"/><text x="190" y="-6" text-anchor="middle" class="t">B3..B0 (digit 2)</text><polyline points="230,40 290,40 290,122 320,122" fill="none"/><text x="236" y="36" text-anchor="start" class="t">K (carry-out)</text><polyline points="60,84 60,196" fill="none"/><text x="66" y="112" text-anchor="start" class="t">S3 S2 S1 S0 (binary sum)</text><circle cx="60" cy="142" r="2.8" class="jd"/><polyline points="60,142 320,142" fill="none"/><text x="160" y="138" text-anchor="start" class="t">S3 S2 S1</text><rect x="320" y="106" width="230" height="50" rx="4" class="bx"/><text x="435" y="129" text-anchor="middle" class="t b">Correction logic</text><text x="435" y="145" text-anchor="middle" class="t sm">X = K + S3.S2 + S3.S1</text><polyline points="550,131 590,131" fill="none"/><text x="594" y="135" text-anchor="start" class="t">X = carry-out</text><rect x="20" y="196" width="210" height="54" rx="4" class="bx"/><text x="125" y="223" text-anchor="middle" class="t b">4-bit binary adder II</text><polyline points="435,156 435,223 230,223" fill="none"/><text x="320" y="218" text-anchor="start" class="t">adds 0 X X 0 (= 0110 when X = 1)</text><polyline points="125,250 125,282" fill="none"/><text x="125" y="296" text-anchor="middle" class="t">corrected BCD digit (BCD sum)</text></svg>
+<p>Operation: Adder I adds the two digits (and the carry-in from the previous digit). If X = 1, Adder II adds <code>0 X X 0</code> = 0110 to the sum; otherwise it adds 0000. Adder II's carry-out is ignored (it only occurs when X = 1 and is already represented by X).</p>
+<div class="ex"><div class="t">Example 9.5 — BCD addition cases</div>
+<table class="tt "><tr><th>Sum</th><th>Binary adder (K S3 S2 S1 S0)</th><th>X</th><th>After +0110</th><th>Result</th></tr><tr><td>5 + 4</td><td>0 1001</td><td>0</td><td>—</td><td>9 (1001)</td></tr><tr><td>2 + 9</td><td>0 1011</td><td>1 (S3S1)</td><td>1011 + 0110 = 1 0001</td><td>carry 1, digit 0001 → 11</td></tr><tr><td>7 + 9</td><td>1 0000</td><td>1 (K)</td><td>0000 + 0110 = 0110</td><td>carry 1, digit 0110 → 16</td></tr><tr><td>8 + 7</td><td>0 1111</td><td>1 (S3S2)</td><td>1111 + 0110 = 1 0101</td><td>carry 1, digit 0101 → 15</td></tr><tr><td>9 + 9 + 1(cin)</td><td>1 0011</td><td>1 (K)</td><td>0011 + 0110 = 1001</td><td>carry 1, digit 1001 → 19</td></tr></table>
+</div>
+<div class="ex"><div class="t">Example 9.6 — two-digit BCD addition: 69 + 92 (your notes' digits)</div>
+<div class="fx">69 = 0110 1001      92 = 1001 0010
+Units : 1001 + 0010 = 1011 → X=1 → +0110 → 0001, carry 1
+Tens  : 0110 + 1001 + 1(carry) = 1 0000 → K=1 → X=1 → +0110 → 0110, carry 1
+Result: carry 1 | 0110 | 0001 = 161  ✓ (69 + 92 = 161)</div></div>
+
+<h2 id="s10">10. Exam Toolkit</h2>
+<h3>10.1 One-page formula sheet</h3>
+<div class="fx">COMPLEMENTS  r's: rⁿ − N   |  (r−1)'s: (rⁿ − 1) − N
+2's = 1's + 1 ; carry → drop (2's) / add to LSB (1's) ; no carry → complement result, negative
+SIGNED (n bits)  SM & 1's: ±(2ⁿ⁻¹−1)  |  2's: −2ⁿ⁻¹ … 2ⁿ⁻¹−1
+DE MORGAN  (xy)' = x'+y'   (x+y)' = x'y'      NAND = bubbled OR, NOR = bubbled AND
+XOR  A⊕B = A'B+AB'  (odd # of 1s)   XNOR = AB+A'B' (even # of 1s)
+LAWS  x+x'y = x+y ; x+xy = x ; xy+xy' = x ; x+yz = (x+y)(x+z) ; xy+x'z+yz = xy+x'z
+Σ(list of 1s) ↔ Π(list of 0s) ;  f' = Σ(L) ⇒ f = Π(L)
+K-MAP  Gray order 00 01 11 10 ; groups 1,2,4,8,16 ; SOP: group 1s, const 1 → x, const 0 → x'
+       POS: group 0s, const 1 → x', const 0 → x ; X = free
+CODES  BCD 8421 | 2421, 5211, 84(−2)(−1), 642(−3): Σweights = 9 → self-compl. | XS-3 = BCD+3
+GRAY   G = B ⊕ (B>>1) ;  B(i) = B(i+1) ⊕ G(i)
+MUX    Y = Σ mᵢ·Iᵢ ; 2ⁿ:1 → n select ; 2ⁿ−1 two-to-one MUXes in a tree
+DECODER Dᵢ = mᵢ (n:2ⁿ) ; DEMUX = decoder with E as data ; ENCODER 2ⁿ:n ; priority: Y1=E3+E2, Y0=E3+E2'E1
+FULL ADDER S = A⊕B⊕C ; Cout = AB + C(A⊕B)
+BCD ADDER  add 0110 if X = K + S3S2 + S3S1</div>
+
+<h3>10.2 Common mistakes (and how to avoid them)</h3>
+<ul>
+<li><b>K-map labels 00,01,10,11</b> — must be 00,01,<b>11,10</b>.</li>
+<li>Forgetting wrap-around groups (corners, left–right edges).</li>
+<li>Groups of 3, 5, 6 — only powers of 2.</li>
+<li>In POS K-map: writing the term in SOP polarity. Remember: constant 1 → complemented in the <b>sum</b> term.</li>
+<li>Using Π(0,3,7) as the "POS of Σ(0,3,7)" — Π lists the <i>missing</i> minterms.</li>
+<li>Using a don't-care as 1 when it doesn't enlarge any group (adds a needless term).</li>
+<li>2's-complement subtraction: not padding to equal length; mis-reading the end carry (carry → positive in both methods).</li>
+<li>Gray→binary: XOR-ing with the previous <i>Gray</i> bit instead of the previous <i>binary</i> bit.</li>
+<li>Reading minterm index with the wrong bit order — first variable = MSB.</li>
+<li>BCD adder: forgetting that a carry out of the first adder also needs correction (e.g. 7+9).</li>
+</ul>
+
+<h3>10.3 Practice problems</h3>
+<p>Try each one before opening the answer.</p>
+<details><summary>1. Convert (101101.101)<sub>2</sub> to decimal and (75.3125)<sub>10</sub> to binary.</summary>
+<div class="fx">101101.101 = 32+8+4+1 + 0.5 + 0.125 = 45.625
+75 = 1001011 ; 0.3125×2 = 0.625(0), ×2 = 1.25(1), 0.25×2 = 0.5(0), 0.5×2 = 1.0(1) → .0101
+75.3125 = 1001011.0101</div></details>
+<details><summary>2. Compute 1101 − 0111 using 2's complement and using 1's complement.</summary>
+<div class="fx">2's: 2's comp of 0111 = 1001; 1101 + 1001 = 1 0110 → drop carry → 0110 = 6
+1's: 1's comp of 0111 = 1000; 1101 + 1000 = 1 0101 → add carry: 0101 + 1 = 0110 = 6 ✓</div></details>
+<details><summary>3. Write −13 in 8-bit sign-magnitude, 1's complement, 2's complement.</summary>
+<div class="fx">+13 = 00001101
+SM: 10001101 ; 1's: 11110010 ; 2's: 11110011</div></details>
+<details><summary>4. Prove (A+B')(A'+B) = AB + A'B' and name the gate.</summary>
+<div class="fx">(A+B')(A'+B) = AA' + AB + A'B' + BB' = 0 + AB + A'B' + 0 = AB + A'B'  → XNOR</div></details>
+<details><summary>5. Simplify F = Σ(0,2,5,7,8,10,13,15) (A,B,C,D).</summary>
+<div class="fx">{0,2,8,10} = B'D' (four corners) ; {5,7,13,15} = BD  → F = B'D' + BD = (B ⊙ D)</div></details>
+<details><summary>6. Write F = x'y + xz as Σ and Π.</summary>
+<div class="fx">x'y → 010,011 = 2,3 ; xz → 101,111 = 5,7  → F = Σ(2,3,5,7) = Π(0,1,4,6)</div></details>
+<details><summary>7. Draw F = AB + CD using only NAND gates.</summary>
+<div class="fx">F = ((AB)'·(CD)')' → three 2-input NANDs: NAND(A,B), NAND(C,D), then NAND of both outputs.</div></details>
+<details><summary>8. Implement F = Σ(1,2,4,7) with a 4:1 MUX (select A,B).</summary>
+<table class="tt "><tr><th>A B</th><th>Minterm pair</th><th>Data input</th></tr><tr><td>00</td><td>m0, m1</td><td>I<sub>0</sub> = C</td></tr><tr><td>01</td><td>m2, m3</td><td>I<sub>1</sub> = C'</td></tr><tr><td>10</td><td>m4, m5</td><td>I<sub>2</sub> = C'</td></tr><tr><td>11</td><td>m6, m7</td><td>I<sub>3</sub> = C</td></tr></table>
+<p>F is the 3-input XOR (odd parity): I0 = C, I1 = C', I2 = C', I3 = C.</p></details>
+<details><summary>9. Convert Gray 1101 to binary and binary 0110 to Gray.</summary>
+<div class="fx">Gray 1101 → B3=1, B2=1⊕1=0, B1=0⊕0=0, B0=0⊕1=1 → 1001
+Binary 0110 → G3=0, G2=0⊕1=1, G1=1⊕1=0, G0=1⊕0=1 → 0101</div></details>
+<details><summary>10. Add 47 + 38 in BCD.</summary>
+<div class="fx">Units: 0111 + 1000 = 1111 → X = S3S2 = 1 → +0110 = 1 0101 → digit 5, carry 1
+Tens : 0100 + 0011 + 1 = 1000 → no correction → 8      → 85 ✓</div></details>
+<details><summary>11. Which of these is a valid self-complementary weighted code: 3 3 2 1, 4 2 2 1, 6 3 1 1, 7 4 2 1?</summary>
+<p>Sum of weights must be 9 (and include a 1): 3+3+2+1 = 9 ✓, 4+2+2+1 = 9 ✓, 6+3+1+1 = 11 ✗, 7+4+2+1 = 14 ✗. (Also check that all digits 0–9 can be formed; 3321 and 4221 can.)</p></details>
+<details><summary>12. Draw a 3:8 decoder-based full adder.</summary>
+<p>3:8 decoder with inputs A,B,Cin; Sum = OR(D1,D2,D4,D7); Cout = OR(D3,D5,D6,D7).</p></details>
+<details><summary>13. A priority encoder receives E3E2E1E0 = 0110. What is Y1Y0?</summary>
+<p>E2 is the highest active input → Y1Y0 = 10. (Using the equations: Y1 = E3+E2 = 1, Y0 = E3 + E2'E1 = 0.)</p></details>
+<details><summary>14. How many 2:1 MUXes make a 16:1 MUX, and how many 2:4 decoders make a 4:16 decoder?</summary>
+<p>15 (2<sup>4</sup>−1); 5 (1 + 4).</p></details>
+
+<h3>10.4 Discrepancies found while rewriting your class notes</h3>
+<ul>
+<li><b>XNOR rule</b>: "even 0s" should be "even number of 1s" (equal only for 2 inputs).</li>
+<li><b>Gray ⇄ binary labels</b> on the bracket are swapped relative to the procedure written beside them (see 8.6).</li>
+<li><b>Π(0,3,7)</b> crossed out in your notes is indeed wrong for Σ(0,3,7); the right answer is Π(1,2,4,5,6).</li>
+<li><b>Signed range</b>: "−2³ to 2³" should be −2³ … 2³−1 for 4-bit 2's complement.</li>
+<li><b>POS K-map example</b>: Π list includes 8, while the Σ list also includes 8 — I solved with the Σ list (see 7.7).</li>
+<li>A few handwritten K-maps (the fourth 4-variable map with answer "a'd' + cd' + ab'c + abd", the 5-variable examples and the first POS map) were too unclear to reproduce exactly; I replaced them with fully verified examples of the same type (7.7, 7.11). Please compare with your notebook.</li>
+</ul>
+
+<p style="margin-top:40px;color:var(--mut)">End of notes — good luck!</p>
+</div></body></html>
