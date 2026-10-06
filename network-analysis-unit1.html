@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Network Analysis and Synthesis (DSC-8) – Unit 1 Notes</title>
+<style>
+:root{--bg:#fafaf7;--fg:#1d1f23;--mute:#5d6470;--card:#fff;--line:#dcdcd4;--accent:#0b5fa5;--hl:#fff6d6;--ok:#14733a;--warn:#a33a00;--code:#f0f0ea}
+@media (prefers-color-scheme:dark){:root{--bg:#14161a;--fg:#e6e7ea;--mute:#9aa1ad;--card:#1c1f25;--line:#333842;--accent:#6cb4f0;--hl:#3a3418;--ok:#59d68a;--warn:#ff9a5c;--code:#23272e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+header,main{max-width:900px;margin:0 auto;padding:0 16px}
+header{padding-top:28px}
+h1{font-size:1.8rem;margin:0 0 4px}
+.sub{color:var(--mute);margin:0 0 16px}
+nav{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:12px 0 24px}
+nav ol{margin:0;columns:2;padding-left:20px}
+@media(max-width:600px){nav ol{columns:1}}
+nav a{color:var(--accent);text-decoration:none}
+section{margin:0 0 36px}
+h2{font-size:1.4rem;border-bottom:2px solid var(--accent);padding-bottom:4px;margin-top:40px}
+h3{font-size:1.1rem;margin:20px 0 6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 16px;margin:12px 0}
+.key{background:var(--hl);border-left:4px solid #e0a800;padding:10px 14px;border-radius:6px;margin:12px 0}
+.trap{border-left:4px solid var(--warn);background:var(--card);padding:10px 14px;border-radius:6px;margin:12px 0}
+.trap b.t{color:var(--warn)}
+table{border-collapse:collapse;width:100%;margin:10px 0;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code)}
+.scroll{overflow-x:auto}
+.eq{font-family:Cambria,"Times New Roman",serif;font-size:1.05rem;background:var(--code);padding:6px 12px;border-radius:6px;margin:8px 0;overflow-x:auto;white-space:nowrap}
+code,pre{font-family:ui-monospace,Consolas,monospace;background:var(--code);border-radius:4px}
+code{padding:1px 5px}
+pre{padding:10px 12px;overflow-x:auto;line-height:1.35}
+details{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 14px;margin:10px 0}
+summary{cursor:pointer;font-weight:600;color:var(--accent)}
+.ans{color:var(--ok);font-weight:700}
+.tag{display:inline-block;font-size:.75rem;padding:1px 8px;border-radius:99px;border:1px solid var(--accent);color:var(--accent);margin-right:6px}
+svg{max-width:100%;height:auto;background:var(--card);border:1px solid var(--line);border-radius:8px}
+svg *{stroke:var(--fg);fill:none;stroke-width:1.6}
+svg text{fill:var(--fg);stroke:none;font:13px system-ui,sans-serif}
+svg .f{fill:var(--card)}
+footer{max-width:900px;margin:40px auto;padding:0 16px;color:var(--mute);font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+<h1>Network Analysis and Synthesis (DSC-8)</h1>
+<p class="sub">Unit 1 – Revision notes + GATE-level problems with independent and dependent sources</p>
+<nav>
+<strong>Contents</strong>
+<ol>
+<li><a href="#elements">Review of network elements</a></li>
+<li><a href="#lumped">Lumped vs distributed</a></li>
+<li><a href="#linear">Linear vs non-linear</a></li>
+<li><a href="#tv">Time-variant vs time-invariant</a></li>
+<li><a href="#passive">Passive vs active</a></li>
+<li><a href="#llfpb">LLFPB networks</a></li>
+<li><a href="#stable">Stable and unstable networks</a></li>
+<li><a href="#theorems">Network theorems</a></li>
+<li><a href="#stardelta">Star–Delta transformation</a></li>
+<li><a href="#gate">GATE-level problems</a></li>
+<li><a href="#mcq">Quick MCQs</a></li>
+<li><a href="#cheat">One-page cheat sheet</a></li>
+</ol>
+</nav>
+</header>
+<main>
+
+<section id="elements">
+<h2>1. Review of network elements</h2>
+<div class="scroll"><table>
+<tr><th>Element</th><th>v–i relation</th><th>Energy / power</th><th>Notes</th></tr>
+<tr><td>Resistor R</td><td>v = iR</td><td>p = i²R (dissipated)</td><td>Memoryless, passive</td></tr>
+<tr><td>Inductor L</td><td>v = L di/dt</td><td>W = ½Li² (stored)</td><td>Current cannot change instantly; acts as open circuit at t=0⁺ with zero initial current, short at dc</td></tr>
+<tr><td>Capacitor C</td><td>i = C dv/dt</td><td>W = ½Cv² (stored)</td><td>Voltage cannot change instantly; short at t=0⁺ with zero initial voltage, open at dc</td></tr>
+<tr><td>Mutual inductance M</td><td>v₁ = L₁di₁/dt ± M di₂/dt</td><td>M = k√(L₁L₂), 0 ≤ k ≤ 1</td><td>Dot convention fixes sign</td></tr>
+</table></div>
+
+<h3>Sources</h3>
+<div class="scroll"><table>
+<tr><th>Type</th><th>Symbol / value</th><th>Ideal internal resistance</th><th>When "turned off"</th></tr>
+<tr><td>Independent voltage source</td><td>v = V<sub>s</sub> (fixed)</td><td>0</td><td>Replace by a <b>short circuit</b></td></tr>
+<tr><td>Independent current source</td><td>i = I<sub>s</sub> (fixed)</td><td>∞</td><td>Replace by an <b>open circuit</b></td></tr>
+<tr><td>VCVS</td><td>v = μ·v<sub>x</sub> (μ dimensionless)</td><td colspan="2" rowspan="4"><b>Dependent sources are never turned off</b> (in superposition) – their value depends on a variable elsewhere in the circuit. They can only be dropped if the controlling variable becomes 0.</td></tr>
+<tr><td>VCCS</td><td>i = g<sub>m</sub>·v<sub>x</sub> (siemens)</td></tr>
+<tr><td>CCVS</td><td>v = r·i<sub>x</sub> (ohm)</td></tr>
+<tr><td>CCCS</td><td>i = β·i<sub>x</sub> (dimensionless)</td></tr>
+</table></div>
+<div class="key"><b>Remember:</b> a dependent source is an <em>active</em> element, but it is <em>not</em> an independent excitation. The network containing it is not bilateral/reciprocal in general.</div>
+</section>
+
+<section id="lumped">
+<h2>2. Lumped versus distributed networks</h2>
+<div class="scroll"><table>
+<tr><th></th><th>Lumped</th><th>Distributed</th></tr>
+<tr><td>Size vs wavelength</td><td>Physical dimension d ≪ λ (rule of thumb d &lt; λ/10)</td><td>d comparable to λ (transmission lines, antennas, waveguides)</td></tr>
+<tr><td>Signal propagation</td><td>Assumed instantaneous; same current in all parts of a wire</td><td>Finite delay; v and i depend on position <em>and</em> time</td></tr>
+<tr><td>Governing equations</td><td>Ordinary differential equations (KCL/KVL valid)</td><td>Partial differential equations (telegrapher's equations)</td></tr>
+<tr><td>Elements</td><td>R, L, C concentrated at a point</td><td>R, L, C spread uniformly along length</td></tr>
+<tr><td>Transfer functions</td><td>Rational functions of s</td><td>Contain e<sup>−sτ</sup>, hyperbolic functions (non-rational)</td></tr>
+</table></div>
+<div class="card">Example: at 50 Hz, λ = c/f = 3×10⁸/50 = 6000 km, so a house wiring is lumped. At 3 GHz, λ = 10 cm, so a 5 cm trace is distributed.</div>
+</section>
+
+<section id="linear">
+<h2>3. Linear versus non-linear networks</h2>
+<p>A network is <b>linear</b> if it obeys the <b>principle of superposition</b>, which has two parts:</p>
+<div class="eq">Additivity: f(x₁ + x₂) = f(x₁) + f(x₂) &nbsp;&nbsp; Homogeneity: f(a·x) = a·f(x)</div>
+<ul>
+<li>Linear: R, L, C (constant), linear dependent sources, ideal transformers.</li>
+<li>Non-linear: diode, transistor large-signal, iron-core inductor (saturation), varistor, resistor with v = i² law, any element where R depends on v or i.</li>
+<li>A circuit with only linear elements <b>and</b> independent sources is still linear with respect to the sources (zero-state response). With non-zero initial conditions it is "incrementally linear".</li>
+</ul>
+<div class="trap"><b class="t">GATE trap:</b> <b>Power is NOT linear</b> (p = i²R). Superposition applies to voltages and currents only, never to power. A line y = mx + c is <em>not</em> linear in the system sense (c ≠ 0 violates homogeneity), though it is "incrementally linear".</div>
+</section>
+
+<section id="tv">
+<h2>4. Time-variant and time-invariant networks</h2>
+<ul>
+<li><b>Time-invariant (LTI):</b> element values do not change with time. A delay in the input produces the same delay in the output: x(t − t₀) → y(t − t₀).</li>
+<li><b>Time-variant:</b> some parameter depends on t, e.g. R(t) = R₀(1 + sin ωt), a switch operating periodically, a varactor driven by a pump, a rotating-machine inductance L(θ(t)).</li>
+</ul>
+<div class="key">Test: Apply x(t), get y(t). Apply x(t − t₀). If output is y(t − t₀) for every t₀, the system is time-invariant. Note that switching a switch <em>once</em> at t = 0 is usually treated as an initial-condition problem, and the network is still LTI for t ≥ 0.</div>
+</section>
+
+<section id="passive">
+<h2>5. Passive versus active networks</h2>
+<p><b>Passive:</b> the total energy delivered to the network from t = −∞ to t is never negative:</p>
+<div class="eq">W(t) = ∫<sub>−∞</sub><sup>t</sup> v(τ)·i(τ) dτ ≥ 0 &nbsp; for all t and all possible v, i</div>
+<ul>
+<li>Passive: R, L, C, mutual inductance (k ≤ 1), ideal transformer, gyrator.</li>
+<li>Active: independent sources, <b>dependent sources</b>, op-amps, transistors, negative resistance, tunnel diode in its negative-slope region.</li>
+<li>A passive network cannot give a power gain. It can store energy and return it later, but never more than it absorbed.</li>
+<li>Passive network driving-point functions are <b>positive real</b>; poles on the jω axis must be simple with positive real residues.</li>
+</ul>
+</section>
+
+<section id="llfpb">
+<h2>6. Linear, lumped, finite, passive, bilateral (LLFPB) networks</h2>
+<div class="scroll"><table>
+<tr><th>Letter</th><th>Meaning</th><th>Why it matters</th></tr>
+<tr><td>L</td><td>Linear</td><td>Superposition, Thevenin and Norton hold</td></tr>
+<tr><td>L</td><td>Lumped</td><td>Finite-order ODE; KCL/KVL apply</td></tr>
+<tr><td>F</td><td>Finite</td><td>Finite number of elements (no infinite ladders; infinite ladders may need distributed treatment)</td></tr>
+<tr><td>P</td><td>Passive</td><td>No internal energy sources; ∫vi dt ≥ 0</td></tr>
+<tr><td>B</td><td>Bilateral</td><td>Same v–i relation for either direction of current; this gives <b>reciprocity</b> (and symmetric Z, Y matrices)</td></tr>
+</table></div>
+<ul>
+<li>Bilateral: R, L, C. Unilateral: diode, transistor, any element whose behaviour depends on direction.</li>
+<li>Networks with <b>dependent sources are generally non-reciprocal</b>, so Z₁₂ ≠ Z₂₁ and the reciprocity theorem fails.</li>
+<li>Thevenin/Norton/superposition require <b>linearity</b> only. Bilateral is not required (they work with dependent sources). Reciprocity needs LLFPB.</li>
+</ul>
+</section>
+
+<section id="stable">
+<h2>7. Stable and unstable networks</h2>
+<p>A network is <b>BIBO stable</b> if every bounded input gives a bounded output. For a lumped LTI network, check the poles (roots of the characteristic equation):</p>
+<div class="scroll"><table>
+<tr><th>Pole location</th><th>Natural response</th><th>Verdict</th></tr>
+<tr><td>All in the open left half plane (σ &lt; 0)</td><td>Decays to zero</td><td><b>Stable</b></td></tr>
+<tr><td>Simple poles on the jω axis (e.g. ±jω₀)</td><td>Sustained oscillation (lossless LC)</td><td>Marginally stable (not BIBO stable: resonant input makes the output unbounded)</td></tr>
+<tr><td>Repeated poles on jω axis</td><td>Grows like t·sin ω₀t</td><td>Unstable</td></tr>
+<tr><td>Any pole in the right half plane</td><td>Grows like e<sup>σt</sup></td><td><b>Unstable</b></td></tr>
+</table></div>
+<div class="key">Any RLC network with positive R, L, C and only independent sources is stable (poles in the left half plane, or simple on the jω axis if lossless). Instability needs an <b>active element</b>: negative resistance or a dependent source with enough gain / positive feedback.</div>
+<div class="card"><b>Example.</b> A source v with series 2 Ω feeding a node that has 4 Ω and a CCCS drawing 5·(v/4) from the node: the port sees R<sub>eq</sub> = −2 Ω. With a capacitor across it, the characteristic equation becomes RC s − 1 = 0 → s = +1/(RC) → growing exponential → unstable (see Problem 4).</div>
+</section>
+
+<section id="theorems">
+<h2>8. Network theorems</h2>
+
+<h3>8.1 Superposition theorem</h3>
+<p>In a linear network with several independent sources, the response (voltage or current) = algebraic sum of responses due to each independent source acting alone.</p>
+<ol>
+<li>Keep one independent source; turn others off: voltage source → <b>short</b>, current source → <b>open</b>.</li>
+<li><b>Keep every dependent source in the circuit</b> (and re-express the control variable for that sub-circuit).</li>
+<li>Add the partial responses with signs.</li>
+</ol>
+<div class="trap"><b class="t">Traps:</b> (i) Never kill a dependent source. (ii) Not valid for power. (iii) Control variable changes in each sub-circuit: v<sub>x</sub> = v<sub>x</sub>′ + v<sub>x</sub>″, not the same number.</div>
+
+<h3>8.2 Thevenin's theorem</h3>
+<p>Any linear two-terminal network ≡ a voltage source V<sub>th</sub> (= open-circuit voltage V<sub>oc</sub>) in series with R<sub>th</sub>.</p>
+<div class="scroll"><table>
+<tr><th>Circuit has…</th><th>Method for R<sub>th</sub></th></tr>
+<tr><td>Only independent sources and resistors</td><td>Turn off independent sources, find R<sub>eq</sub> at the terminals</td></tr>
+<tr><td>Independent <b>and</b> dependent sources</td><td><b>R<sub>th</sub> = V<sub>oc</sub> / I<sub>sc</sub></b> (find both), or turn off independent sources only, apply a test source V<sub>t</sub> (or I<sub>t</sub>) and compute V<sub>t</sub>/I<sub>t</sub></td></tr>
+<tr><td>Only dependent sources</td><td>V<sub>oc</sub> = 0 (no independent excitation, assuming zero initial energy), so find R<sub>th</sub> with a test source. The result may be <b>negative</b>.</td></tr>
+</table></div>
+<div class="trap"><b class="t">Trap:</b> Do not turn off a dependent source when computing R<sub>th</sub>, and do not use R<sub>th</sub> = V<sub>oc</sub>/I<sub>sc</sub> if V<sub>oc</sub> = I<sub>sc</sub> = 0 (use the test-source method instead).</div>
+
+<h3>8.3 Norton's theorem</h3>
+<p>Any linear two-terminal network ≡ a current source I<sub>N</sub> (= I<sub>sc</sub>) in parallel with R<sub>N</sub> = R<sub>th</sub>. Source transformation: V<sub>th</sub> = I<sub>N</sub>·R<sub>th</sub>.</p>
+<div class="key"><b>Source transformation with dependent sources</b> is allowed, but do not transform away the branch that contains the controlling variable (or keep the control variable explicitly tracked).</div>
+
+<h3>8.4 Maximum power transfer theorem</h3>
+<div class="scroll"><table>
+<tr><th>Case</th><th>Condition</th><th>P<sub>max</sub></th></tr>
+<tr><td>DC / resistive load, R<sub>L</sub> variable</td><td>R<sub>L</sub> = R<sub>th</sub></td><td>V<sub>th</sub>² / (4R<sub>th</sub>) = I<sub>N</sub>²R<sub>th</sub>/4</td></tr>
+<tr><td>AC, Z<sub>L</sub> fully adjustable</td><td>Z<sub>L</sub> = Z<sub>th</sub>* (conjugate match)</td><td>|V<sub>th</sub>|² / (8R<sub>th</sub>) for peak phasor, |V<sub>th</sub>|²/(4R<sub>th</sub>) for rms</td></tr>
+<tr><td>AC, only |Z<sub>L</sub>| adjustable (phase fixed)</td><td>|Z<sub>L</sub>| = |Z<sub>th</sub>|</td><td>Less than the conjugate-match value</td></tr>
+<tr><td>AC, only R<sub>L</sub> adjustable (X<sub>L</sub> fixed)</td><td>R<sub>L</sub> = √(R<sub>th</sub>² + (X<sub>th</sub> + X<sub>L</sub>)²)</td><td>—</td></tr>
+</table></div>
+<ul>
+<li>Efficiency at max power = 50 % (for the Thevenin equivalent; the real internal circuit may dissipate differently, since R<sub>th</sub> is not the actual dissipation when dependent sources are present).</li>
+<li>Maximum <em>efficiency</em> (→ 100 %) needs R<sub>L</sub> ≫ R<sub>th</sub>, which is a different condition from max power.</li>
+<li>If <b>R<sub>th</sub> &lt; 0</b>, the theorem does not apply in the usual form (see Problem 4).</li>
+<li>If the source resistance is fixed and the <em>load is fixed</em> but the source side can vary, max load power is when R<sub>source</sub> = 0, not a match.</li>
+</ul>
+</section>
+
+<section id="stardelta">
+<h2>9. Star–Delta (Y–Δ) transformation</h2>
+<svg viewBox="0 0 520 190" role="img" aria-label="Delta and star networks" width="520">
+<g>
+<polygon points="70,150 150,150 110,50" />
+<circle cx="110" cy="50" r="3" class="f"/><circle cx="70" cy="150" r="3" class="f"/><circle cx="150" cy="150" r="3" class="f"/>
+<text x="102" y="40">A</text><text x="52" y="165">B</text><text x="154" y="165">C</text>
+<text x="46" y="95">R<tspan dy="4" font-size="10">AB</tspan></text><text x="125" y="95">R<tspan dy="4" font-size="10">AC</tspan></text><text x="98" y="170">R<tspan dy="4" font-size="10">BC</tspan></text>
+<text x="85" y="185">Delta (Δ)</text>
+<text x="225" y="105" font-size="22">⇄</text>
+<line x1="380" y1="100" x2="380" y2="50"/><line x1="380" y1="100" x2="340" y2="150"/><line x1="380" y1="100" x2="420" y2="150"/>
+<circle cx="380" cy="100" r="3" class="f"/>
+<text x="373" y="40">A</text><text x="322" y="165">B</text><text x="424" y="165">C</text>
+<text x="386" y="78">R<tspan dy="4" font-size="10">A</tspan></text><text x="346" y="125">R<tspan dy="4" font-size="10">B</tspan></text><text x="405" y="125">R<tspan dy="4" font-size="10">C</tspan></text>
+<text x="350" y="185">Star (Y)</text>
+</g></svg>
+<div class="eq">Δ → Y: R<sub>A</sub> = R<sub>AB</sub>R<sub>AC</sub> / (R<sub>AB</sub> + R<sub>BC</sub> + R<sub>CA</sub>) &nbsp; (resistors <em>adjacent</em> to node A, over the sum)</div>
+<div class="eq">Y → Δ: R<sub>AB</sub> = (R<sub>A</sub>R<sub>B</sub> + R<sub>B</sub>R<sub>C</sub> + R<sub>C</sub>R<sub>A</sub>) / R<sub>C</sub> &nbsp; (sum of pairwise products over the resistor <em>opposite</em>)</div>
+<div class="key">Balanced case: R<sub>Δ</sub> = 3R<sub>Y</sub>. Same for impedances (Z<sub>Δ</sub> = 3Z<sub>Y</sub>), valid for complex Z. Use it to solve unbalanced bridges, and note that the transformation is valid only if the network's internal nodes are not connected to anything else (the star centre is internal).</div>
+</section>
+
+<section id="gate">
+<h2>10. GATE-level problems</h2>
+<p>All answers below were cross-checked with an exact-fraction nodal-analysis solver. Try each yourself before opening the solution.</p>
+
+<h3><span class="tag">Problem 1</span> Thevenin, Norton and max power (independent V + I, CCCS)</h3>
+<div class="card">
+<p>In the circuit, a 10 V source with 2 Ω in series feeds node 1. Node 1 has a 4 Ω resistor to ground (current I<sub>x</sub> flows down through it) and a 2 Ω resistor to terminal <b>a</b>. At terminal a there is also an independent 1 A current source pushing current <b>into</b> a, and a dependent current source 2I<sub>x</sub> also pushing current <b>into</b> a (both from ground). Terminal b is ground.</p>
+<pre>
+ 10V ─(+) ── 2Ω ──●node1────── 2Ω ──●a ←─ 1A (from ground)
+                  │                 ←─ 2·Ix (from ground)
+                 4Ω ↓Ix             
+                  │                 
+                 GND ───────────────●b (ground)
+</pre>
+<p>(a) Find V<sub>th</sub> and R<sub>th</sub> seen from a–b. (b) Find the Norton current. (c) Find the maximum power deliverable to a load R<sub>L</sub> connected across a–b, and the value of R<sub>L</sub>.</p>
+<details><summary>Solution</summary>
+<p><b>Open circuit (no current leaves a):</b> I<sub>x</sub> = v₁/4. At node a: current leaving through the 2 Ω = injected current.</p>
+<div class="eq">(v<sub>a</sub> − v₁)/2 = 1 + 2(v₁/4) ⟹ v<sub>a</sub> = 2v₁ + 2</div>
+<p>Node 1: (v₁ − 10)/2 + v₁/4 + (v₁ − v<sub>a</sub>)/2 = 0 → 1.25v₁ − 5 − (v₁ + 1) = 0 → 0.25v₁ = 6 → v₁ = 24 V, v<sub>a</sub> = 50 V.</p>
+<p><b>Short circuit (v<sub>a</sub> = 0):</b> node 1: v₁/2 − 5 + v₁/4 + v₁/2 = 0 → v₁ = 4 V, so I<sub>x</sub> = 1 A. I<sub>sc</sub> = v₁/2 + 1 + 2I<sub>x</sub> = 2 + 1 + 2 = <span class="ans">5 A</span>.</p>
+<p>(a) <span class="ans">V<sub>th</sub> = 50 V, R<sub>th</sub> = 50/5 = 10 Ω</span>. (b) <span class="ans">I<sub>N</sub> = 5 A</span> (parallel with 10 Ω). (c) R<sub>L</sub> = R<sub>th</sub> = <span class="ans">10 Ω</span>, P<sub>max</sub> = V<sub>th</sub>²/(4R<sub>th</sub>) = 2500/40 = <span class="ans">62.5 W</span>.</p>
+<p class="key"><b>Check by test source:</b> short the 10 V, open the 1 A, keep 2I<sub>x</sub>. Apply a test source V at a. Node 1: v₁/2 + v₁/4 + (v₁ − V)/2 = 0 → v₁ = 0.4V, so I<sub>x</sub> = 0.1V. The test source supplies I into a: I + 2I<sub>x</sub> = (V − v₁)/2 = 0.3V → I = 0.1V → R<sub>th</sub> = V/I = 10 Ω ✓.</p>
+</details>
+</div>
+
+<h3><span class="tag">Problem 2</span> Superposition with a VCVS (independent V + I, dependent V)</h3>
+<div class="card">
+<p>A node x is connected to: an 18 V source through a 5 Ω resistor; ground through 10 Ω; ground through a series branch of 4 Ω and a VCVS with value 0.4V<sub>x</sub> (its + terminal toward the 4 Ω resistor, − terminal at ground); and an independent current source of 2.7 A injecting into x.</p>
+<p>(a) Find V<sub>x</sub> using superposition. (b) Find the power delivered by the 18 V source.</p>
+<details><summary>Solution</summary>
+<p>Branch current into the 4 Ω + VCVS branch = (V<sub>x</sub> − 0.4V<sub>x</sub>)/4 = 0.15V<sub>x</sub>. Nodal equation at x: (V<sub>x</sub> − 18)/5 + V<sub>x</sub>/10 + 0.15V<sub>x</sub> = 2.7, i.e. total conductance 0.2 + 0.1 + 0.15 = 0.45 S.</p>
+<p><b>18 V alone</b> (current source open, VCVS kept): 0.45V<sub>x</sub>′ = 18/5 = 3.6 → V<sub>x</sub>′ = 8 V.</p>
+<p><b>2.7 A alone</b> (18 V shorted, VCVS kept): 0.45V<sub>x</sub>″ = 2.7 → V<sub>x</sub>″ = 6 V.</p>
+<p>(a) <span class="ans">V<sub>x</sub> = 8 + 6 = 14 V</span>.</p>
+<p>(b) Current out of the 18 V source = (18 − 14)/5 = 0.8 A → P = 18 × 0.8 = <span class="ans">14.4 W</span> (delivered).</p>
+<p>Check: KCL at x: 0.8 + 2.7 = 3.5 A in; out = 14/10 + 0.15×14 = 1.4 + 2.1 = 3.5 A ✓.</p>
+</details>
+</div>
+
+
+<h3><span class="tag">Problem 3</span> Star–Delta on an unbalanced bridge, then a source</h3>
+<div class="card">
+<p>A bridge has nodes A, B, C, D with resistors R<sub>AB</sub> = 6 Ω, R<sub>AC</sub> = 3 Ω, R<sub>BC</sub> = 3 Ω (the bridge arm), R<sub>BD</sub> = 3 Ω, R<sub>CD</sub> = 6 Ω. A 21 V source is connected across A and D. Find the total current from the source.</p>
+<details><summary>Solution</summary>
+<p>Convert Δ(A,B,C) to Y with centre O: sum = 6 + 3 + 3 = 12 Ω.</p>
+<div class="eq">R<sub>A</sub> = (6×3)/12 = 1.5 Ω, &nbsp; R<sub>B</sub> = (6×3)/12 = 1.5 Ω, &nbsp; R<sub>C</sub> = (3×3)/12 = 0.75 Ω</div>
+<p>From O to D: path via B: 1.5 + 3 = 4.5 Ω; via C: 0.75 + 6 = 6.75 Ω. In parallel: (4.5×6.75)/(11.25) = 2.7 Ω.</p>
+<p>R<sub>AD</sub> = 1.5 + 2.7 = <span class="ans">4.2 Ω</span>, so I = 21/4.2 = <span class="ans">5 A</span>.</p>
+</details>
+</div>
+
+<h3><span class="tag">Problem 4</span> Negative Thevenin resistance (independent V, CCCS) and stability</h3>
+<div class="card">
+<p>A 10 V source in series with 2 Ω feeds node a. Node a has a 4 Ω resistor to ground (current I<sub>x</sub> = v<sub>a</sub>/4 flowing down) and a CCCS that injects 5I<sub>x</sub> into node a from ground. Terminals: a and ground.</p>
+<p>(a) Find V<sub>oc</sub>, I<sub>sc</sub>, R<sub>th</sub>. (b) Can the maximum power transfer theorem be applied? (c) If a capacitor C is connected across a–ground, comment on stability.</p>
+<details><summary>Solution</summary>
+<p><b>Open circuit:</b> (v<sub>a</sub> − 10)/2 + v<sub>a</sub>/4 − 5v<sub>a</sub>/4 = 0 → 0.5v<sub>a</sub> − 5 − v<sub>a</sub> = 0 → <span class="ans">V<sub>oc</sub> = −10 V</span>.</p>
+<p><b>Short circuit</b> (v<sub>a</sub> = 0 so I<sub>x</sub> = 0): I<sub>sc</sub> = 10/2 = <span class="ans">5 A</span>.</p>
+<p>R<sub>th</sub> = V<sub>oc</sub>/I<sub>sc</sub> = <span class="ans">−2 Ω</span>. Check with a test source (10 V shorted): I = V/2 + V/4 − 5V/4 = −V/2 ⟹ V/I = −2 Ω ✓.</p>
+<p>(b) <b>No.</b> The standard theorem (R<sub>L</sub> = R<sub>th</sub>) needs R<sub>th</sub> &gt; 0. Here the equivalent source is active and R<sub>L</sub> = 2 Ω gives V = V<sub>th</sub>R<sub>L</sub>/(R<sub>L</sub> + R<sub>th</sub>) → division by zero: power grows without bound in the model, which signals instability, not a maximum.</p>
+<p>(c) With the capacitor: C dv/dt = −(v − v<sub>th</sub>)/R<sub>th</sub> → the pole is at s = −1/(R<sub>th</sub>C) = +1/(2C) &gt; 0 → <span class="ans">unstable</span> (growing exponential until the circuit saturates).</p>
+</details>
+</div>
+
+<h3><span class="tag">Problem 5</span> Capstone – all six source types in one Thevenin problem</h3>
+<div class="card">
+<p>Circuit (ground is the common node):</p>
+<ul>
+<li><b>Independent voltage source</b> 12 V from node 1 to ground.</li>
+<li>R₁ = 2 Ω between nodes 1 and 2. R₂ = 4 Ω from node 2 to ground; I<sub>x</sub> is the current through R₂ (node 2 → ground), so I<sub>x</sub> = v₂/4.</li>
+<li><b>Independent current source</b> 2 A injected into node 2.</li>
+<li>R₃ = 2 Ω between nodes 2 and 3. R₄ = 4 Ω from node 3 to ground.</li>
+<li><b>CCCS</b> 3I<sub>x</sub> injected into node 3 (from ground).</li>
+<li><b>VCCS</b> g<sub>m</sub>v₂ with g<sub>m</sub> = 0.25 S, drawing current <b>out of</b> node 3 into ground.</li>
+<li>From node 3, in series: <b>VCVS</b> of value 0.5v₂ (v<sub>p</sub> = v₃ + 0.5v₂), then <b>CCVS</b> of value 2I<sub>x</sub> (volts, with r = 2 Ω; v<sub>q</sub> = v<sub>p</sub> + 2I<sub>x</sub>), then R₅ = 3 Ω to the output terminal <b>a</b>.</li>
+</ul>
+<pre>
+12V─●1─2Ω─●2─2Ω─●3──(+0.5v2)──(+2Ix)──3Ω──● a
+        │   │ ↓Ix  │  │    ↑3Ix (CCCS in)
+        │   4Ω  ↑2A  4Ω   ↓0.25·v2 (VCCS out)
+       GND  GND     GND  GND                ● b = ground
+</pre>
+<p>(a) Find V<sub>th</sub> and R<sub>th</sub> across a–ground. (b) Find the maximum power to a load. (c) What is the voltage across a load of 7 Ω?</p>
+<details><summary>Solution</summary>
+<p><b>Open circuit</b> (no current in R₅, so the VCVS/CCVS branch carries no current):</p>
+<p>Node 2: (v₂ − 12)/2 + v₂/4 + (v₂ − v₃)/2 = 2 → 1.25v₂ − 0.5v₃ = 8 … (i)</p>
+<p>Node 3: (v₃ − v₂)/2 + v₃/4 + 0.25v₂ = 3(v₂/4) → 0.75v₃ = v₂ → v₃ = (4/3)v₂ … (ii)</p>
+<p>(ii) in (i): 1.25v₂ − (2/3)v₂ = 8 → v₂ = 96/7 V, v₃ = 128/7 V.</p>
+<p>v<sub>a</sub> = v₃ + 0.5v₂ + 2I<sub>x</sub> = v₃ + 0.5v₂ + 0.5v₂ = v₃ + v₂ = 224/7 = <span class="ans">32 V</span>. So V<sub>th</sub> = 32 V.</p>
+<p><b>Short circuit</b> (v<sub>a</sub> = 0): the branch now carries I<sub>sc</sub>, which leaves node 3 (adds I<sub>sc</sub> to node 3 outflow). Since v<sub>q</sub> = v₃ + v₂ and I<sub>sc</sub> = v<sub>q</sub>/3 = (v₃ + v₂)/3.</p>
+<p>Node 3: 0.75v₃ − 0.5v₂ + 0.25v₂ + I<sub>sc</sub> = 0.75v₂ → 0.75v₃ + (v₃ + v₂)/3 = v₂ → (13/12)v₃ = (2/3)v₂ → v₃ = (8/13)v₂.</p>
+<p>Node 2 (i): 1.25v₂ − (4/13)v₂ = 8 → v₂ = 416/49 V, v₃ = 256/49 V. I<sub>sc</sub> = (256 + 416)/(49×3) = 672/147 = <span class="ans">32/7 A</span>.</p>
+<p>R<sub>th</sub> = 32 / (32/7) = <span class="ans">7 Ω</span>.</p>
+<p>(b) R<sub>L</sub> = 7 Ω, P<sub>max</sub> = 32²/(4×7) = 1024/28 = <span class="ans">256/7 ≈ 36.6 W</span>.</p>
+<p>(c) With R<sub>L</sub> = 7 Ω (matched): V<sub>L</sub> = 32 × 7/14 = <span class="ans">16 V</span>.</p>
+<p class="key"><b>Lesson:</b> R<sub>th</sub> = V<sub>oc</sub>/I<sub>sc</sub> works even when all four kinds of dependent sources are buried inside. The hard part is writing nodal equations carefully, with the VCCS direction (out of node 3) and the CCCS direction (into node 3) handled with the correct signs.</p>
+</details>
+</div>
+</section>
+
+<section id="mcq">
+<h2>11. Quick MCQs</h2>
+<details><summary>Q1. In superposition, when one independent voltage source is considered, the other independent voltage sources are ___ and dependent sources are ___.</summary>
+<p><span class="ans">Short-circuited; retained (left as they are).</span></p></details>
+<details><summary>Q2. A source has V<sub>oc</sub> = 10 V and I<sub>sc</sub> = 2 A. Max power to a load?</summary>
+<p>R<sub>th</sub> = 5 Ω; P<sub>max</sub> = 10²/(4×5) = <span class="ans">5 W</span>.</p></details>
+<details><summary>Q3. Delta of three 30 Ω resistors → equivalent star resistor?</summary>
+<p><span class="ans">10 Ω</span> each.</p></details>
+<details><summary>Q4. Thevenin source V<sub>th</sub> = 20 V, R<sub>th</sub> = 5 Ω. Max power?</summary>
+<p>400/20 = <span class="ans">20 W</span> at R<sub>L</sub> = 5 Ω; efficiency 50 %.</p></details>
+<details><summary>Q5. A network contains only a CCVS and resistors. V<sub>th</sub> = ?</summary>
+<p><span class="ans">0 V</span> (no independent source). R<sub>th</sub> is found by a test source and may even be negative.</p></details>
+<details><summary>Q6. Which is true: (a) dependent sources make a network non-linear; (b) power obeys superposition; (c) lossless LC circuit is marginally stable; (d) a diode is bilateral.</summary>
+<p><span class="ans">(c).</span> Linear dependent sources keep the network linear; power does not obey superposition; a diode is unilateral.</p></details>
+<details><summary>Q7. R(t) = R₀(1 + 0.5 cos ωt) with a v–i relation v = R(t)i. Is it linear? Time-invariant?</summary>
+<p><span class="ans">Linear: yes. Time-invariant: no</span> (the parameter varies with time).</p></details>
+<details><summary>Q8. Circuit with a port characterised by v = −3i (a negative resistance). Passive or active?</summary>
+<p>Power absorbed = vi = −3i² &lt; 0 → <span class="ans">active</span>.</p></details>
+</section>
+
+<section id="cheat">
+<h2>12. One-page cheat sheet</h2>
+<div class="scroll"><table>
+<tr><th>Topic</th><th>Remember</th></tr>
+<tr><td>Lumped</td><td>d ≪ λ → ODE, KCL/KVL valid</td></tr>
+<tr><td>Linear</td><td>Additivity + homogeneity; power is non-linear</td></tr>
+<tr><td>Time-invariant</td><td>Constant parameters; x(t−t₀)→y(t−t₀)</td></tr>
+<tr><td>Passive</td><td>∫vi dt ≥ 0; dependent sources are active</td></tr>
+<tr><td>LLFPB</td><td>Reciprocity and symmetric Z/Y need bilateral passive networks</td></tr>
+<tr><td>Stability</td><td>All poles in the LHP; RHP or repeated jω poles → unstable</td></tr>
+<tr><td>Superposition</td><td>Short V, open I; keep dependent sources</td></tr>
+<tr><td>Thevenin</td><td>R<sub>th</sub> = V<sub>oc</sub>/I<sub>sc</sub> or test source (if dependent sources)</td></tr>
+<tr><td>Norton</td><td>I<sub>N</sub> = I<sub>sc</sub>, R<sub>N</sub> = R<sub>th</sub></td></tr>
+<tr><td>Max power</td><td>R<sub>L</sub> = R<sub>th</sub>; P = V<sub>th</sub>²/4R<sub>th</sub>; AC: Z<sub>L</sub> = Z<sub>th</sub>*</td></tr>
+<tr><td>Y–Δ</td><td>R<sub>Y</sub> = product of adjacent Δ / sum; R<sub>Δ</sub> = Σpairs / opposite; balanced Δ = 3Y</td></tr>
+</table></div>
+</section>
+
+</main>
+<footer>Notes prepared for Network Analysis and Synthesis (DSC-8), Unit 1. Verify against your prescribed textbook before exams.</footer>
+</body>
+</html>
