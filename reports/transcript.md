@@ -41,7 +41,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _stuck_: lamps: no simple law explains all 8 experiences (searched 1636 programs)
 - Ultron _confirm_: merge: repeat nA times [succ] starting from nB predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: take_away: repeat n_taken times [pred] starting from nA predicted 8 new experiences in a row; added to my library of building blocks
-- Ultron _stuck_: lamps: no simple law explains all 16 experiences (searched 3836 programs)
+- Ultron _stuck_: lamps: no simple law explains all 16 experiences (searched 3594 programs)
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _reflect_: 'merge' gives the same answer either way round, so I can count along the smaller number
 - **Trainer**: Exam for lesson 2, attempt 1: passed
@@ -204,13 +204,13 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Here are cakes, a knife that cuts into equal pieces, and a balance. Play.
 - Ultron _revise_: cake_balance: surprised; new best explanation is true (was nothing; 1 experiences, 51 programs searched)
 - Ultron _revise_: recut: a prediction I had in mind, repeated_groups(cut, recut), fits my first 1 experience(s); only a suspicion, so I'll test it before searching for anything else
-- Ultron _revise_: cake_balance: surprised; new best explanation is lt(pieces, cut) (was true; 2 experiences, 2444 programs searched)
+- Ultron _revise_: cake_balance: surprised; new best explanation is lt(pieces, cut) (was true; 2 experiences, 2300 programs searched)
 - Ultron _revise_: recut: a prediction I had in mind, repeated_groups(recut, cut), fits my first 2 experience(s); only a suspicion, so I'll test it before searching for anything else
-- Ultron _revise_: recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(recut, cut); 3 experiences, 2300 programs searched)
+- Ultron _revise_: recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(recut, cut); 3 experiences, 2134 programs searched)
 - Ultron _revise_: cake_balance: surprised; my other idea eq(pieces, wholes) fits everything (was lt(pieces, cut))
 - Ultron _confirm_: recut: groups(cut, recut) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: cake_balance: eq(pieces, wholes) predicted 8 new experiences in a row; added to my library of building blocks
-- Ultron _revise_: cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 184972 programs searched)
+- Ultron _revise_: cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 157078 programs searched)
 - Ultron _confirm_: cake_balance: eq(pieces, groups(cut, wholes)) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _reflect_: 'recut' gives the same answer either way round, so I can count along the smaller number
@@ -236,16 +236,16 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: tick
 - **Trainer**: Here is a wheel with a pointer. You can make it tick. Play.
 - Ultron _revise_: tick: surprised; new best explanation is 1 (was nothing; 1 experiences, 21 programs searched)
-- Ultron _revise_: tick: surprised; new best explanation is spend_notes(slot, 0) (was 1; 2 experiences, 2126 programs searched)
-- Ultron _revise_: tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2373714 programs searched)
+- Ultron _revise_: tick: surprised; new best explanation is spend_notes(slot, 0) (was 1; 2 experiences, 1838 programs searched)
+- Ultron _revise_: tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2042715 programs searched)
 - Ultron _confirm_: tick: if eq(slot, 5) then 0 else succ(slot) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _invent_: Repeating 'tick' from the start, slot counts 1, 2, ... 5, and the 6th 'tick' brings me back to the start. So here numbers go round: after 5 comes 0 again. 6 'tick's change nothing, and going back one is the same as going on 5. These are a new kind of number that repeats every 6.
 - **Trainer**: Now spin it as many ticks as you like and watch where it stops.
 - Ultron _meet_: new kind of experience: spin
 - Ultron _revise_: spin: surprised; new best explanation is start (was nothing; 1 experiences, 15 programs searched)
-- Ultron _revise_: spin: surprised; new best explanation is take_away(start, 4) (was start; 2 experiences, 2467 programs searched)
-- Ultron _revise_: spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 133689 programs searched)
+- Ultron _revise_: spin: surprised; new best explanation is take_away(start, 4) (was start; 2 experiences, 2129 programs searched)
+- Ultron _revise_: spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 114651 programs searched)
 - Ultron _confirm_: spin: repeat ticks times [tick] starting from start predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _word_: 'after' behaves exactly like my law 'spin' (arguments yx) in all 6 demonstrations
@@ -320,7 +320,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: square
 - **Trainer**: Here are square tiles. Build squares and count the tiles in them.
 - Ultron _revise_: square: surprised; new best explanation is side (was nothing; 1 experiences, 18 programs searched)
-- Ultron _revise_: square: surprised; new best explanation is groups(side, side) (was side; 2 experiences, 2528 programs searched)
+- Ultron _revise_: square: surprised; new best explanation is groups(side, side) (was side; 2 experiences, 2240 programs searched)
 - Ultron _confirm_: square: groups(side, side) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _reflect_: the square built on a tile's diagonal is covered by 4 half-tiles: 2 tiles
@@ -376,9 +376,9 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: see_take
 - Ultron _revise_: see_merge: surprised; new best explanation is nA (was nothing; 1 experiences, 15 programs searched)
 - Ultron _revise_: see_take: surprised; new best explanation is nA (was nothing; 1 experiences, 15 programs searched)
-- Ultron _revise_: see_merge: surprised; new best explanation is get_paid(nA, nB) (was nA; 2 experiences, 3031 programs searched)
-- Ultron _revise_: see_take: surprised; new best explanation is take_away(nA, n_taken) (was nA; 2 experiences, 3036 programs searched)
-- Ultron _confirm_: see_merge: get_paid(nA, nB) predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _revise_: see_merge: surprised; new best explanation is merge(nA, nB) (was nA; 2 experiences, 10544 programs searched)
+- Ultron _revise_: see_take: surprised; new best explanation is take_away(nA, n_taken) (was nA; 2 experiences, 2698 programs searched)
+- Ultron _confirm_: see_merge: merge(nA, nB) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: see_take: take_away(nA, n_taken) predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - Ultron _reflect_: 'see_merge' gives the same answer either way round, so I can count along the smaller number
@@ -520,15 +520,16 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: two_rows
 - Ultron _revise_: basket: surprised; new best explanation is 2 (was nothing; 1 experiences, 29 programs searched)
 - Ultron _revise_: tall: surprised; new best explanation is 0 (was nothing; 1 experiences, 25 programs searched)
-- Ultron _revise_: rise: surprised; new best explanation is [succ] each of prices (was nothing; 1 experiences, 6938 programs searched)
-- Ultron _revise_: two_rows: surprised; new best explanation is get_paid pair by pair of row_a and row_b (was nothing; 1 experiences, 7440 programs searched)
-- Ultron _revise_: basket: surprised; new best explanation is start at 0 and get_paid in each of prices (was 2; 2 experiences, 7195 programs searched)
-- Ultron _revise_: tall: surprised; new best explanation is spend_notes(mark, 3) (was 0; 3 experiences, 2880 programs searched)
-- Ultron _revise_: tall: surprised; new best explanation is spend_notes(mark, how many in heights) (was spend_notes(mark, 3); 4 experiences, 31409 programs searched)
-- Ultron _revise_: tall: surprised; new best explanation is how many in those of heights above mark (was spend_notes(mark, how many in heights); 6 experiences, 917020 programs searched)
+- Ultron _revise_: rise: surprised; new best explanation is [succ] each of prices (was nothing; 1 experiences, 5684 programs searched)
+- Ultron _revise_: two_rows: surprised; new best explanation is merge pair by pair of row_a and row_b (was nothing; 1 experiences, 6128 programs searched)
+- Ultron _revise_: basket: surprised; new best explanation is start at 1 and groups in each of prices (was 2; 2 experiences, 5875 programs searched)
+- Ultron _revise_: basket: surprised; my other idea start at 0 and merge in each of prices fits everything (was start at 1 and groups in each of prices)
+- Ultron _revise_: tall: surprised; new best explanation is spend_notes(mark, 3) (was 0; 3 experiences, 2606 programs searched)
+- Ultron _revise_: tall: surprised; new best explanation is spend_notes(mark, how many in heights) (was spend_notes(mark, 3); 4 experiences, 26275 programs searched)
+- Ultron _revise_: tall: surprised; new best explanation is how many in those of heights above mark (was spend_notes(mark, how many in heights); 6 experiences, 740532 programs searched)
 - Ultron _confirm_: rise: [succ] each of prices predicted 8 new experiences in a row; added to my library of building blocks
-- Ultron _confirm_: two_rows: get_paid pair by pair of row_a and row_b predicted 8 new experiences in a row; added to my library of building blocks
-- Ultron _confirm_: basket: start at 0 and get_paid in each of prices predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _confirm_: two_rows: merge pair by pair of row_a and row_b predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _confirm_: basket: start at 0 and merge in each of prices predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _confirm_: tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 28, attempt 1: passed

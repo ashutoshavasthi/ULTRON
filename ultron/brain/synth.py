@@ -146,12 +146,35 @@ def synthesize(inputs, targets, var_types, out_type, library, consts=(0, 1),
     much longer. This is how a few wrongly recorded experiences stop being fatal.
     """
     with dsl.limits(20000, 10 ** 7):
-        return _synthesize(inputs, targets, var_types, out_type, library, consts,
-                           max_size, max_bank, rivals, tuple(extra), exceptions)
+        if exceptions or len(inputs) <= SAMPLE:
+            return _synthesize(inputs, targets, var_types, out_type, library, consts,
+                               max_size, max_bank, rivals, tuple(extra), exceptions)
+        # imagine candidates on a few examples first; check every example only for the
+        # candidates that get those right (a law is still checked on everything)
+        n = len(inputs)
+        pick = sorted({round(i * (n - 1) / (SAMPLE - 1)) for i in range(SAMPLE)})
+
+        def full(expr):
+            for x, y in zip(inputs, targets):
+                try:
+                    v = dsl.evaluate(expr, x, library)
+                except (dsl.Overflow, KeyError, TypeError):
+                    return False
+                if (tuple(v) if isinstance(v, (list, tuple)) else v) != \
+                        (tuple(y) if isinstance(y, (list, tuple)) else y):
+                    return False
+            return True
+        res = _synthesize([inputs[i] for i in pick], [targets[i] for i in pick], var_types,
+                          out_type, library, consts, max_size, max_bank, rivals,
+                          tuple(extra), 0, verify=full)
+        return res
+
+
+SAMPLE = 8      # examples a candidate is first imagined on
 
 
 def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size, max_bank,
-                n_rivals, extra, n_exceptions=0):
+                n_rivals, extra, n_exceptions=0, verify=None):
     target = tuple(targets)
     names = sorted(var_types)
     bank = {INT: {}, BOOL: {}, LIST: {}}    # type -> size -> [(expr, vec)]
@@ -170,7 +193,7 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
                 dl = s + EXCEPTION_COST * len(wrong)
                 if state["near"] is None or dl < state["near"][0]:
                     state["near"] = (dl, expr, wrong)
-        if typ == out_type and vec == target:
+        if typ == out_type and vec == target and (verify is None or verify(expr)):
             state["matches"].append((s, expr))
             if state["first_size"] is None:
                 state["first_size"] = s
@@ -192,8 +215,7 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
     def at(typ, s):
         return bank[typ].get(s, [])
 
-    libs = library.binary_int_laws()
-    ulibs = library.unary_int_laws()
+    libs, ulibs = library.search_laws()     # laws that behave the same, once
     unary = [("succ", lambda x: x + 1), ("pred", lambda x: x - 1 if x > 0 else 0)]
     steps = [("succ",), ("pred",)]
     if "down" in extra:

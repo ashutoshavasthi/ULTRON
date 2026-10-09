@@ -2396,11 +2396,11 @@
     "name": "PICTURES: a tray of 10-25, some taken away: how many left?",
     "scores": {
      "lookup": [
-      1,
+      0,
       25
      ],
      "nearest": [
-      2,
+      1,
       25
      ],
      "ultron": [
@@ -2412,7 +2412,7 @@
    }
   ],
   "laws": {
-   "see_merge": "get_paid(nA, nB)",
+   "see_merge": "merge(nA, nB)",
    "see_take": "take_away(nA, n_taken)"
   },
   "lesson": 20,
@@ -4207,10 +4207,10 @@
    }
   ],
   "laws": {
-   "basket": "start at 0 and get_paid in each of prices",
+   "basket": "start at 0 and merge in each of prices",
    "rise": "[succ] each of prices",
    "tall": "how many in those of heights above mark",
-   "two_rows": "get_paid pair by pair of row_a and row_b"
+   "two_rows": "merge pair by pair of row_a and row_b"
   },
   "lesson": 28,
   "passed": true,

@@ -110,3 +110,20 @@ def test_lists_built_from_laws_it_already_has():
     long = list(range(20))
     assert evaluate(total, {"L": long, "t": 0}, lib) == sum(long)
     assert evaluate(above, {"L": long, "t": 12}, lib) == 7
+
+
+def test_sleep_finds_a_shared_piece_only_when_it_pays():
+    from ultron.brain import abstraction
+    from ultron.brain.dsl import INT, Law, Library, evaluate
+    lib = Library()
+    lib.add(Law("groups", ["a", "b"], ("iter", ("succ",), ("const", 0), ("var", "a")), INT))
+    v = lambda n: ("var", n)
+    S = lambda x, y: ("call", "groups", ("succ", x), ("succ", y))
+    progs = [("pred", S(v("a"), ("succ", v("b")))), ("succ", S(v("b"), v("a"))),
+             ("call", "groups", v("a"), S(v("a"), v("b"))), ("pred", S(v("b"), v("b")))]
+    pieces, rewritten = abstraction.sleep(progs, lib)
+    assert pieces and pieces[0][1] == S(v("x1"), v("x2"))
+    assert all("piece1" in repr(p) for p in rewritten)
+    # pieces with nothing in common: no piece is worth writing down
+    lone = Library()
+    assert abstraction.sleep([("succ", v("a")), ("pred", v("b"))], lone)[0] == []

@@ -100,6 +100,12 @@ class Law:
         return cls(d["name"], d["params"], from_json(d["expr"]), d["out_type"], d.get("provenance"))
 
 
+def _is_alias(law):
+    """A law defined as nothing but a call to another law."""
+    e = law.expr
+    return e[0] in ("call", "call1") and all(a[0] == "var" for a in e[2:])
+
+
 class Library:
     """Laws the brain has confirmed. Each one becomes a single building block."""
 
@@ -145,6 +151,39 @@ class Library:
         """Building blocks: confirmed laws only (a prediction is not a building block)."""
         return [self.laws[k] for k in sorted(self.laws)
                 if self.laws[k].is_binary_int and not self.laws[k].provenance.get("predicted")]
+
+    PROBE2 = [(a, b) for a in range(7) for b in range(7)] + [(13, 4), (4, 13), (21, 9), (9, 21)]
+    PROBE1 = list(range(12)) + [17, 25]
+
+    def search_laws(self):
+        """The building blocks a search should try: laws that behave identically (merge,
+        get_paid and see_merge are all addition) count once, as identical programs
+        already do. The one kept is the original, not one defined as a call to it."""
+        key = (len(self.laws), len(self.inverses))
+        if getattr(self, "_search_key", None) == key:
+            return self._search_cache
+        out = []
+        for laws, probe in ((self.binary_int_laws(), self.PROBE2),
+                            (self.unary_int_laws(), self.PROBE1)):
+            kept, seen = [], {}
+            ranked = sorted(laws, key=lambda l: (_is_alias(l), size(l.expr), l.name))
+            for law in ranked:
+                sig = []
+                with limits(20000, 10 ** 7):
+                    for args in probe:
+                        try:
+                            sig.append(self.call(law.name, *args) if isinstance(args, tuple)
+                                       else self.call1(law.name, args))
+                        except Overflow:
+                            sig.append("too big")
+                sig = tuple(sig)
+                if sig not in seen:
+                    seen[sig] = law.name
+                    kept.append(law)
+            kept.sort(key=lambda l: l.name)
+            out.append(kept)
+        self._search_key, self._search_cache = key, tuple(out)
+        return self._search_cache
 
     def unary_int_laws(self):
         return [self.laws[k] for k in sorted(self.laws)

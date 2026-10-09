@@ -20,6 +20,7 @@ The digits of a count are read and written the way Ultron reads and writes
 numerals: as the marks of its own place-value notation.
 """
 
+import math
 import random
 
 from .dsl import Overflow
@@ -339,6 +340,18 @@ def fast_call(brain_library, name, a, b):
         dsl.STEPS[0] += max(da, db)
     if label == "repeated times" and y > 0 and len(str(abs(x))) * y > MAX_DIGITS * 2:
         raise Overflow()        # far too big to write out
+    # while imagining many candidates (tighter limits), an answer bigger than it is
+    # willing to hold is refused before it is written out: the number of columns alone
+    # says how big it will be
+    if dsl.MAX_VALUE < dsl._DEFAULT_LIMITS[1]:
+        limit = len(str(dsl.MAX_VALUE)) + 1
+        if label == "times" and da + db - 1 > limit:
+            raise Overflow()
+        if label == "repeated times" and y > 1 and abs(x) > 1 and \
+                y * math.log10(abs(x)) > limit:
+            raise Overflow()
+        if label == "add" and max(da, db) > limit:
+            raise Overflow()
     v = _methods(cols)[label](x, y)
     if v is None or len(str(abs(v))) > MAX_DIGITS:
         raise Overflow()

@@ -32,6 +32,7 @@
    "basket": [
     1.0,
     1.0,
+    1.0,
     0.0,
     0.0,
     0.0,
@@ -2177,7 +2178,7 @@
   ]
  },
  "hypotheses": {
-  "basket": "start at 0 and get_paid in each of prices",
+  "basket": "start at 0 and merge in each of prices",
   "cake_balance": "eq(pieces, groups(cut, wholes))",
   "earn_coins": "take_away(succ(coins), notes)",
   "earn_notes": "pred(notes)",
@@ -2191,7 +2192,7 @@
   "peekaboo": "hidden",
   "recut": "groups(cut, recut)",
   "rise": "[succ] each of prices",
-  "see_merge": "get_paid(nA, nB)",
+  "see_merge": "merge(nA, nB)",
   "see_take": "take_away(nA, n_taken)",
   "spend_coins": "pred(coins)",
   "spend_notes": "take_away(succ(notes), coins)",
@@ -2200,7 +2201,7 @@
   "take_away": "repeat n_taken times [pred] starting from nA",
   "tall": "how many in those of heights above mark",
   "tick": "if eq(slot, 5) then 0 else succ(slot)",
-  "two_rows": "get_paid pair by pair of row_a and row_b"
+  "two_rows": "merge pair by pair of row_a and row_b"
  },
  "inventions": {
   "columns": {
@@ -2560,7 +2561,7 @@
   "basket": {
    "expr": [
     "fold",
-    "get_paid",
+    "merge",
     [
      "var",
      "prices"
@@ -2576,8 +2577,8 @@
     "prices"
    ],
    "provenance": {
-    "experiences": 10,
-    "found_after": 2,
+    "experiences": 11,
+    "found_after": 3,
     "lesson": 28,
     "list_params": true,
     "size": 4
@@ -2971,7 +2972,7 @@
   "see_merge": {
    "expr": [
     "call",
-    "get_paid",
+    "merge",
     [
      "var",
      "nA"
@@ -3223,7 +3224,7 @@
   "two_rows": {
    "expr": [
     "zip",
-    "get_paid",
+    "merge",
     [
      "var",
      "row_a"
@@ -3988,7 +3989,7 @@
   {
    "kind": "stuck",
    "lesson": 2,
-   "text": "lamps: no simple law explains all 16 experiences (searched 3836 programs)"
+   "text": "lamps: no simple law explains all 16 experiences (searched 3594 programs)"
   },
   {
    "choice": "take_away",
@@ -6277,7 +6278,7 @@
   {
    "kind": "revise",
    "lesson": 9,
-   "text": "cake_balance: surprised; new best explanation is lt(pieces, cut) (was true; 2 experiences, 2444 programs searched)"
+   "text": "cake_balance: surprised; new best explanation is lt(pieces, cut) (was true; 2 experiences, 2300 programs searched)"
   },
   {
    "choice": "recut",
@@ -6320,7 +6321,7 @@
   {
    "kind": "revise",
    "lesson": 9,
-   "text": "recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(recut, cut); 3 experiences, 2300 programs searched)"
+   "text": "recut: surprised; new best explanation is groups(cut, recut) (was repeated_groups(recut, cut); 3 experiences, 2134 programs searched)"
   },
   {
    "choice": "cake_balance",
@@ -6565,7 +6566,7 @@
   {
    "kind": "revise",
    "lesson": 9,
-   "text": "cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 184972 programs searched)"
+   "text": "cake_balance: surprised; new best explanation is eq(pieces, groups(cut, wholes)) (was eq(pieces, wholes); 16 experiences, 157078 programs searched)"
   },
   {
    "choice": "recut",
@@ -6778,7 +6779,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "tick: surprised; new best explanation is spend_notes(slot, 0) (was 1; 2 experiences, 2126 programs searched)"
+   "text": "tick: surprised; new best explanation is spend_notes(slot, 0) (was 1; 2 experiences, 1838 programs searched)"
   },
   {
    "choice": "tick",
@@ -6789,7 +6790,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2373714 programs searched)"
+   "text": "tick: surprised; new best explanation is if eq(slot, 5) then 0 else succ(slot) (was spend_notes(slot, 0); 3 experiences, 2042715 programs searched)"
   },
   {
    "choice": "tick",
@@ -6941,7 +6942,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "spin: surprised; new best explanation is take_away(start, 4) (was start; 2 experiences, 2467 programs searched)"
+   "text": "spin: surprised; new best explanation is take_away(start, 4) (was start; 2 experiences, 2129 programs searched)"
   },
   {
    "choice": "spin",
@@ -6968,7 +6969,7 @@
   {
    "kind": "revise",
    "lesson": 11,
-   "text": "spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 133689 programs searched)"
+   "text": "spin: surprised; new best explanation is repeat ticks times [tick] starting from start (was take_away(start, 4); 4 experiences, 114651 programs searched)"
   },
   {
    "choice": "spin",
@@ -7788,7 +7789,7 @@
   {
    "kind": "revise",
    "lesson": 15,
-   "text": "square: surprised; new best explanation is groups(side, side) (was side; 2 experiences, 2528 programs searched)"
+   "text": "square: surprised; new best explanation is groups(side, side) (was side; 2 experiences, 2240 programs searched)"
   },
   {
    "choice": "square",
@@ -7799,7 +7800,7 @@
   {
    "kind": "design",
    "lesson": 15,
-   "text": "square: my 8 explanations disagree about {'side': 5}; I'll set that up to find out"
+   "text": "square: my 5 explanations disagree about {'side': 5}; I'll set that up to find out"
   },
   {
    "choice": "square",
@@ -8342,7 +8343,7 @@
   {
    "kind": "revise",
    "lesson": 20,
-   "text": "see_merge: surprised; new best explanation is get_paid(nA, nB) (was nA; 2 experiences, 3031 programs searched)"
+   "text": "see_merge: surprised; new best explanation is merge(nA, nB) (was nA; 2 experiences, 10544 programs searched)"
   },
   {
    "choice": "see_take",
@@ -8358,7 +8359,7 @@
   {
    "kind": "revise",
    "lesson": 20,
-   "text": "see_take: surprised; new best explanation is take_away(nA, n_taken) (was nA; 2 experiences, 3036 programs searched)"
+   "text": "see_take: surprised; new best explanation is take_away(nA, n_taken) (was nA; 2 experiences, 2698 programs searched)"
   },
   {
    "choice": "see_merge",
@@ -8369,7 +8370,7 @@
   {
    "kind": "design",
    "lesson": 20,
-   "text": "see_merge: my ideas agree, but I've never tried a situation like {'nA': 0, 'nB': 1}; I'll set that up"
+   "text": "see_merge: my 4 explanations disagree about {'nA': 12, 'nB': 12}; I'll set that up to find out"
   },
   {
    "choice": "see_take",
@@ -8391,7 +8392,7 @@
   {
    "kind": "design",
    "lesson": 20,
-   "text": "see_merge: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 0}; I'll set that up"
+   "text": "see_merge: my ideas agree, but I've never tried a situation like {'nA': 0, 'nB': 1}; I'll set that up"
   },
   {
    "choice": "see_take",
@@ -8413,7 +8414,7 @@
   {
    "kind": "design",
    "lesson": 20,
-   "text": "see_merge: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 1}; I'll set that up"
+   "text": "see_merge: my ideas agree, but I've never tried a situation like {'nA': 1, 'nB': 0}; I'll set that up"
   },
   {
    "choice": "see_take",
@@ -8483,7 +8484,7 @@
   {
    "kind": "confirm",
    "lesson": 20,
-   "text": "see_merge: get_paid(nA, nB) predicted 8 new experiences in a row; added to my library of building blocks"
+   "text": "see_merge: merge(nA, nB) predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "see_take",
@@ -11056,7 +11057,7 @@
   {
    "kind": "revise",
    "lesson": 28,
-   "text": "rise: surprised; new best explanation is [succ] each of prices (was nothing; 1 experiences, 6938 programs searched)"
+   "text": "rise: surprised; new best explanation is [succ] each of prices (was nothing; 1 experiences, 5684 programs searched)"
   },
   {
    "choice": "two_rows",
@@ -11067,7 +11068,7 @@
   {
    "kind": "revise",
    "lesson": 28,
-   "text": "two_rows: surprised; new best explanation is get_paid pair by pair of row_a and row_b (was nothing; 1 experiences, 7440 programs searched)"
+   "text": "two_rows: surprised; new best explanation is merge pair by pair of row_a and row_b (was nothing; 1 experiences, 6128 programs searched)"
   },
   {
    "choice": "basket",
@@ -11078,7 +11079,94 @@
   {
    "kind": "revise",
    "lesson": 28,
-   "text": "basket: surprised; new best explanation is start at 0 and get_paid in each of prices (was 2; 2 experiences, 7195 programs searched)"
+   "text": "basket: surprised; new best explanation is start at 1 and groups in each of prices (was 2; 2 experiences, 5875 programs searched)"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "basket: surprised; my other idea start at 0 and merge in each of prices fits everything (was start at 1 and groups in each of prices)"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "tall: surprised; new best explanation is spend_notes(mark, 3) (was 0; 3 experiences, 2606 programs searched)"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "tall: surprised; new best explanation is spend_notes(mark, how many in heights) (was spend_notes(mark, 3); 4 experiences, 26275 programs searched)"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
   },
   {
    "choice": "tall",
@@ -11113,89 +11201,7 @@
   {
    "kind": "revise",
    "lesson": 28,
-   "text": "tall: surprised; new best explanation is spend_notes(mark, 3) (was 0; 3 experiences, 2880 programs searched)"
-  },
-  {
-   "choice": "rise",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with rise"
-  },
-  {
-   "choice": "two_rows",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with two_rows"
-  },
-  {
-   "choice": "basket",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with basket"
-  },
-  {
-   "choice": "tall",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with tall"
-  },
-  {
-   "kind": "revise",
-   "lesson": 28,
-   "text": "tall: surprised; new best explanation is spend_notes(mark, how many in heights) (was spend_notes(mark, 3); 4 experiences, 31409 programs searched)"
-  },
-  {
-   "choice": "rise",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with rise"
-  },
-  {
-   "choice": "two_rows",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with two_rows"
-  },
-  {
-   "choice": "basket",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with basket"
-  },
-  {
-   "choice": "tall",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with tall"
-  },
-  {
-   "choice": "rise",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with rise"
-  },
-  {
-   "choice": "two_rows",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with two_rows"
-  },
-  {
-   "choice": "basket",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with basket"
-  },
-  {
-   "choice": "tall",
-   "kind": "choice",
-   "lesson": 28,
-   "text": "chose to play with tall"
-  },
-  {
-   "kind": "revise",
-   "lesson": 28,
-   "text": "tall: surprised; new best explanation is how many in those of heights above mark (was spend_notes(mark, how many in heights); 6 experiences, 917020 programs searched)"
+   "text": "tall: surprised; new best explanation is how many in those of heights above mark (was spend_notes(mark, how many in heights); 6 experiences, 740532 programs searched)"
   },
   {
    "choice": "rise",
@@ -11289,18 +11295,13 @@
   {
    "kind": "confirm",
    "lesson": 28,
-   "text": "two_rows: get_paid pair by pair of row_a and row_b predicted 8 new experiences in a row; added to my library of building blocks"
+   "text": "two_rows: merge pair by pair of row_a and row_b predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "basket",
    "kind": "choice",
    "lesson": 28,
    "text": "chose to play with basket"
-  },
-  {
-   "kind": "confirm",
-   "lesson": 28,
-   "text": "basket: start at 0 and get_paid in each of prices predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "tall",
@@ -11325,6 +11326,11 @@
    "kind": "choice",
    "lesson": 28,
    "text": "chose to play with basket"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 28,
+   "text": "basket: start at 0 and merge in each of prices predicted 8 new experiences in a row; added to my library of building blocks"
   },
   {
    "choice": "tall",
@@ -11474,6 +11480,12 @@
    "kind": "choice",
    "lesson": 28,
    "text": "chose to play with tall"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
   },
   {
    "choice": "tall",
@@ -11666,12 +11678,19 @@
     {
      "inputs": {
       "prices": [
-       2,
+       4
+      ]
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "prices": [
        0,
        3
       ]
      },
-     "outcome": 5
+     "outcome": 3
     }
    ],
    "bounce": [
@@ -15499,6 +15518,13 @@
     },
     {
      "inputs": {
+      "nA": 12,
+      "nB": 12
+     },
+     "outcome": 24
+    },
+    {
+     "inputs": {
       "nA": 0,
       "nB": 1
      },
@@ -15513,13 +15539,6 @@
     },
     {
      "inputs": {
-      "nA": 1,
-      "nB": 1
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
       "nA": 2,
       "nB": 1
      },
@@ -15527,80 +15546,80 @@
     },
     {
      "inputs": {
-      "nA": 7,
-      "nB": 5
-     },
-     "outcome": 12
-    },
-    {
-     "inputs": {
-      "nA": 12,
+      "nA": 11,
       "nB": 11
-     },
-     "outcome": 23
-    },
-    {
-     "inputs": {
-      "nA": 9,
-      "nB": 1
-     },
-     "outcome": 10
-    },
-    {
-     "inputs": {
-      "nA": 12,
-      "nB": 10
      },
      "outcome": 22
     },
     {
      "inputs": {
-      "nA": 1,
-      "nB": 5
+      "nA": 5,
+      "nB": 9
      },
-     "outcome": 6
+     "outcome": 14
+    },
+    {
+     "inputs": {
+      "nA": 4,
+      "nB": 6
+     },
+     "outcome": 10
     },
     {
      "inputs": {
       "nA": 6,
-      "nB": 6
+      "nB": 2
      },
-     "outcome": 12
+     "outcome": 8
     },
     {
      "inputs": {
-      "nA": 9,
+      "nA": 8,
       "nB": 11
-     },
-     "outcome": 20
-    },
-    {
-     "inputs": {
-      "nA": 12,
-      "nB": 7
      },
      "outcome": 19
     },
     {
      "inputs": {
-      "nA": 9,
-      "nB": 4
-     },
-     "outcome": 13
-    },
-    {
-     "inputs": {
       "nA": 0,
-      "nB": 5
+      "nB": 0
      },
-     "outcome": 5
+     "outcome": 0
     },
     {
      "inputs": {
       "nA": 8,
-      "nB": 5
+      "nB": 12
      },
-     "outcome": 13
+     "outcome": 20
+    },
+    {
+     "inputs": {
+      "nA": 7,
+      "nB": 8
+     },
+     "outcome": 15
+    },
+    {
+     "inputs": {
+      "nA": 9,
+      "nB": 7
+     },
+     "outcome": 16
+    },
+    {
+     "inputs": {
+      "nA": 7,
+      "nB": 7
+     },
+     "outcome": 14
+    },
+    {
+     "inputs": {
+      "nA": 11,
+      "nB": 4
+     },
+     "outcome": 15
     }
    ],
    "see_push": [
@@ -16013,80 +16032,10 @@
     },
     {
      "inputs": {
-      "nA": 5,
-      "n_taken": 5
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "nA": 9,
-      "n_taken": 6
-     },
-     "outcome": 3
-    },
-    {
-     "inputs": {
-      "nA": 12,
-      "n_taken": 8
-     },
-     "outcome": 4
-    },
-    {
-     "inputs": {
-      "nA": 7,
-      "n_taken": 6
+      "nA": 3,
+      "n_taken": 2
      },
      "outcome": 1
-    },
-    {
-     "inputs": {
-      "nA": 9,
-      "n_taken": 7
-     },
-     "outcome": 2
-    },
-    {
-     "inputs": {
-      "nA": 11,
-      "n_taken": 11
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "nA": 0,
-      "n_taken": 0
-     },
-     "outcome": 0
-    },
-    {
-     "inputs": {
-      "nA": 11,
-      "n_taken": 8
-     },
-     "outcome": 3
-    },
-    {
-     "inputs": {
-      "nA": 10,
-      "n_taken": 2
-     },
-     "outcome": 8
-    },
-    {
-     "inputs": {
-      "nA": 8,
-      "n_taken": 1
-     },
-     "outcome": 7
-    },
-    {
-     "inputs": {
-      "nA": 6,
-      "n_taken": 2
-     },
-     "outcome": 4
     },
     {
      "inputs": {
@@ -16097,10 +16046,80 @@
     },
     {
      "inputs": {
-      "nA": 10,
-      "n_taken": 8
+      "nA": 1,
+      "n_taken": 1
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 12,
+      "n_taken": 10
      },
      "outcome": 2
+    },
+    {
+     "inputs": {
+      "nA": 8,
+      "n_taken": 3
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 3,
+      "n_taken": 3
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "nA": 12,
+      "n_taken": 8
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "nA": 10,
+      "n_taken": 9
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "nA": 5,
+      "n_taken": 0
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 11,
+      "n_taken": 6
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "nA": 8,
+      "n_taken": 4
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "nA": 7,
+      "n_taken": 3
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "nA": 10,
+      "n_taken": 3
+     },
+     "outcome": 7
     }
    ],
    "slide": [
@@ -17284,23 +17303,22 @@
     {
      "inputs": {
       "heights": [
+       6,
+       0,
        4
       ],
-      "mark": 5
+      "mark": 6
      },
      "outcome": 0
     },
     {
      "inputs": {
       "heights": [
-       0,
-       4,
-       6,
-       1
+       6
       ],
-      "mark": 6
+      "mark": 4
      },
-     "outcome": 0
+     "outcome": 1
     },
     {
      "inputs": {
@@ -19558,12 +19576,12 @@
   }
  },
  "search_steps": {
-  "basket": 7224,
+  "basket": 5904,
   "bounce": 2060,
   "bounces": 36,
   "bumps": 2730,
   "burn": 40,
-  "cake_balance": 372439,
+  "cake_balance": 316507,
   "charge": 48,
   "coil_stretch": 162,
   "collide": 200,
@@ -19577,7 +19595,7 @@
   "hang": 32,
   "lab_push": 165,
   "lab_stretch": 116,
-  "lamps": 11718,
+  "lamps": 11476,
   "merge": 532,
   "numeral": 11273,
   "orbit": 46,
@@ -19585,25 +19603,25 @@
   "pay": 2940,
   "peekaboo": 8,
   "push": 180,
-  "recut": 2300,
-  "rise": 6938,
+  "recut": 2134,
+  "rise": 5684,
   "roll": 1724,
-  "see_merge": 3046,
+  "see_merge": 10559,
   "see_push": 165,
   "see_roll": 450,
   "see_stretch": 228,
-  "see_take": 3051,
+  "see_take": 2713,
   "slide": 32,
   "spend_coins": 15,
   "spend_notes": 38925,
-  "spin": 136171,
-  "square": 2546,
+  "spin": 116795,
+  "square": 2258,
   "stretch": 176,
   "swings": 3364,
   "take_away": 705,
-  "tall": 951334,
-  "tick": 2375861,
-  "two_rows": 7440,
+  "tall": 769438,
+  "tick": 2044574,
+  "two_rows": 6128,
   "wander": 9780,
   "yeast": 1056
  },

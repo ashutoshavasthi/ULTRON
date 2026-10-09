@@ -9,7 +9,7 @@ import json
 
 from . import units as U
 from .curiosity import Curiosity
-from .dsl import BOOL, LIST, Law, Library, safe_evaluate, show, size
+from .dsl import BOOL, INT, LIST, Law, Library, safe_evaluate, show, size
 from .invariants import (ConservationLaw, QuantityLaw, SumLaw, law_from_json,
                          search_conservation, search_invariant, search_sum_invariant)
 from .invariants import monomial_str
@@ -752,6 +752,19 @@ class Brain:
         from .metalaws import look_for_property_laws
         look_for_property_laws(self)
         look_for_gaps(self)
+        self._sleep()
+
+    def _sleep(self):
+        """Do my laws share a piece nobody taught me, worth writing once (it makes the
+        description of everything I know shorter)? Then it becomes a building block."""
+        from . import abstraction
+        progs = [l.expr for n, l in sorted(self.library.laws.items())
+                 if l.on_numbers and l.out_type == INT and not l.provenance.get("abstraction")]
+        pieces, _ = abstraction.sleep(progs, self.library)
+        for name, expr, sv in pieces:
+            self.note("invent", f"while sleeping I noticed my laws share a piece: {name} = "
+                                f"{show(expr)}; writing it once makes everything I know "
+                                f"{sv} pieces shorter, so it is a building block now")
 
     def _check_symmetry(self):
         """Which of my laws give the same result either way round? (checked, not assumed)"""

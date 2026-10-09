@@ -79,6 +79,86 @@ def program_size(brain):
                       "with the size of the law.")
 
 
+def _unfold(expr, library):
+    """A program with every learned piece written out in full: its size in the pieces
+    Ultron already had."""
+    from ..brain.dsl import Law  # noqa: F401
+    tag = expr[0]
+    if tag in ("call", "call1") and library.get(expr[1]) is not None and \
+            library.get(expr[1]).provenance.get("abstraction"):
+        law = library.get(expr[1])
+        args = [_unfold(a, library) for a in expr[2:]]
+        return _subst(law.expr, dict(zip(law.params, args)), library)
+    if tag in ("var", "const"):
+        return expr
+    if tag == "iter":
+        return expr[:2] + tuple(_unfold(e, library) for e in expr[2:])
+    if tag in ("call", "call1"):
+        return expr[:2] + tuple(_unfold(e, library) for e in expr[2:])
+    return (tag,) + tuple(_unfold(e, library) if isinstance(e, tuple) else e for e in expr[1:])
+
+
+def _subst(expr, env, library):
+    if expr[0] == "var":
+        return env.get(expr[1], expr)
+    if expr[0] == "const":
+        return expr
+    if expr[0] in ("call", "call1", "iter"):
+        return _unfold(expr[:2] + tuple(_subst(e, env, library) for e in expr[2:]), library)
+    return (expr[0],) + tuple(_subst(e, env, library) if isinstance(e, tuple) else e
+                              for e in expr[1:])
+
+
+def library_learning(brain):
+    """S1: practise a family of laws that share a piece never taught on its own; sleep on
+    them (find the pieces worth having); then laws far beyond the search's reach."""
+    from ..brain import abstraction
+    from ..brain.dsl import size
+    rng = random.Random(15)
+    S = lambda x, y: (x + 1) * (y + 1)
+    T = lambda x, y: (x + 1) * (y + 2)
+    practice = [lambda a, b: S(a, b) + a, lambda a, b: S(a, b) - b,
+                lambda a, b: S(a + 1, b), lambda a, b: S(a, b) * a,
+                lambda a, b: S(a, b) + b]
+    held_out = [("S(S(a,b),a)+S(a,b)", lambda a, b: S(S(a, b), a) + S(a, b)),
+                ("S(S(a,b),S(a,a))", lambda a, b: S(S(a, b), S(a, a))),
+                ("S(S(a,b),S(b,b))", lambda a, b: S(S(a, b), S(b, b))),
+                ("S(S(a,b),S(a,b))+a", lambda a, b: S(S(a, b), S(a, b)) + a),
+                # asymmetric, so no shortcut through "square": 12+ pieces written out
+                ("S(T(a,b),T(b,a))", lambda a, b: S(T(a, b), T(b, a))),
+                ("T(T(a,b),T(b,a))", lambda a, b: T(T(a, b), T(b, a)))]
+    lib = copy.deepcopy(brain.library)
+    solved = []
+    for f in practice:
+        xs = _pairs(rng, 20)
+        res = synthesize(xs, [f(x["a"], x["b"]) for x in xs], {"a": INT, "b": INT}, INT, lib)
+        if res.expr is not None:
+            solved.append(res.expr)
+    pieces, _ = abstraction.sleep(solved, lib)
+    rows = [_row(f"practice: {len(solved)} of {len(practice)} laws found; sleep",
+                 "; ".join(f"{n} = {show(e)} (saves {sv})" for n, e, sv in pieces) or
+                 "no piece worth having", bool(pieces))]
+    plain = copy.deepcopy(brain.library)
+    for label, f in held_out:
+        xs = _pairs(rng, 20)
+        ys = [f(x["a"], x["b"]) for x in xs]
+        t = time.time()
+        res = synthesize(xs, ys, {"a": INT, "b": INT}, INT, lib)
+        sec = time.time() - t
+        ok = res.expr is not None and _check(res.expr, f, lib, rng) and sec < 60
+        full = size(_unfold(res.expr, lib)) if res.expr is not None else None
+        base = synthesize(xs, ys, {"a": INT, "b": INT}, INT, plain).expr
+        rows.append(_row(label, (show(res.expr) if res.expr else "nothing found") +
+                         (f" — {full} pieces written out" if full else ""), ok,
+                         seconds=round(sec, 1), size_written_out=full,
+                         without_pieces=show(base) if base else "nothing found"))
+    return experiment("library learning", "After sleeping on laws that share a piece nobody "
+                      "taught it, does it find laws bigger than its search can reach?",
+                      "held-out law", rows, "Its search alone stops at 7 pieces. The held-out "
+                      "laws are compositions of the family's pieces (S = (x+1)(y+1), T = "
+                      "(x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.")
+
+
 def wrong_labels(brain):
     """Some experiences recorded wrongly: does it still find the law (with Ultron's own
     policy: a law plus a list of exceptions, if that is the shorter description)?"""
@@ -459,7 +539,7 @@ def false_laws(brain):
                       "audit", rows)
 
 
-EXPERIMENTS = [program_size, wrong_labels, hidden_cause, few_examples, program_compute,
+EXPERIMENTS = [program_size, library_learning, wrong_labels, hidden_cause, few_examples, program_compute,
                noise_ramp, noise_unknown, outliers, distractors, confounder, magnitudes, changing_world,
                law_forms, eyes_stress, false_laws]
 

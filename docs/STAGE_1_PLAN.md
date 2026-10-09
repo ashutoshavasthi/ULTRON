@@ -107,7 +107,9 @@ grid).
 | R1, R3, R4, R6 | ✅ met (20% wrong records; 20% outliers; 10 irrelevant in 0.04 s; 0 false laws in 100) |
 | R2 | ✅ met. Not told its noise, it **measures it from repeated trials** (1.3% for a true 1%, 12.5% for 10%) and finds F = m·a up to ±20%. Repeated trials also expose a ±5% hidden cause (0 false laws). Without repeats it accepts only a law that explains ≥ 90% of the spread, so it holds to ±2%: without repeating a measurement nobody can tell noise from a small hidden cause |
 | R5 | ✅ met. When two measurement laws tie, it sets up the offered experiment where they disagree most. Starting from a wrong law (a label that always equalled the mass), one designed experiment gave F = m·a |
-| S1, S2 | ❌ open |
+| S1 | ✅ met. **Abstraction sleep** (`brain/abstraction.py`) lines its laws up against each other (anti-unification) to find pieces they share that nobody taught. A piece is kept only if it makes the total description shorter. From five practice laws it extracted (x+1)(y+1), then (x+1)(y+2) built from it, and found held-out laws of **15 and 16 pieces written out in 12 s and 9 s**; without the pieces, nothing (lab: *library learning*). On its real library MDL accepts no piece yet (the best saves 0), so the curriculum is unchanged |
+| WP2 speed | Search **5× faster** (a³+b²: 59 s → 12 s). Answers too big to hold are refused before the columns are written out (they were being written to about 200 digits), laws that behave identically are tried once, and candidates are first imagined on 8 examples and checked on all only if they pass |
+| S2 | ❌ open (intuition v2 in progress) |
 | E1 | ✅ met. Two generic additions to the grammar of kinds: a kind applied to a **power of the reading**, and a **recurrence** (the next reading a fixed mix of the last few). Oscillation, damped oscillation, logistic growth (1/y settles) and t^1.5 (y^(2/3) rises evenly) are explained and **predicted for a new object** (lab). Lesson 27 adds pendulums, shock absorbers, yeast and funnels. The never-measured period, damping, capacity and emptying time all come out within about 0.1–0.5%, first attempt |
 | E2 | ✅ met. Rows of numbers in the brain's own language: how many, each one stepped, those above or below or equal to something, combined with a law from its library, paired by a law. Lesson 28: "the total" is found as a fold with **its own addition**. On rows 3× longer than any it saw: 120/120; lookup and nearest-neighbour baselines 0–8/30 |
 | A0, A1 | ✅ met (C0, C2) |
@@ -221,7 +223,7 @@ example, and it answers only when no symbolic program fits.
 | 1b ✅ | WP6 data and harness; operations frozen; laws about things | **A0**, **A1** (C0–C2) |
 | 1c ✅ | R2 (noise measured by Ultron), R5 (separating experiments for measurement ties) | R2, R5 |
 | 1d ✅ | WP5: laws of change; lists | E1, E2 (lessons 27, 28) |
-| 1e | WP2 speed, then WP3 library learning on the brain's laws | S1 |
+| 1e ✅ | WP2 speed, then WP3 library learning on the brain's laws | S1 |
 | 1f | WP4 intuition v2 (and dreams) | S2 |
 | 1g | ARC: compose learned laws, new law families, guided search, per-puzzle MDL engine, library learning on ARC again | **A2**, then **A3** |
 | 1h | Independent blind test; `reports/stage1_verdict.md` | Stage 1 verdict |

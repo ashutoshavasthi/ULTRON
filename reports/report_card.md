@@ -62,11 +62,11 @@ Every law below was found by Ultron's own search from its own experiences. The n
 | `spin(start, ticks)` | `repeat ticks times [tick] starting from start` | 4 | 4 experiences |  |
 | `grow(days, split)` | `repeated_groups(split, days)` | 3 | 1 experiences | exponential growth |
 | `square(side)` | `groups(side, side)` | 3 | 2 experiences |  |
-| `see_merge(nA, nB)` | `get_paid(nA, nB)` | 3 | 2 experiences | addition, seen |
+| `see_merge(nA, nB)` | `merge(nA, nB)` | 3 | 2 experiences | addition, seen |
 | `see_take(nA, n_taken)` | `take_away(nA, n_taken)` | 3 | 2 experiences | subtraction, seen |
 | `rise(prices)` | `[succ] each of prices` | 3 | 1 experiences |  |
-| `two_rows(row_a, row_b)` | `get_paid pair by pair of row_a and row_b` | 4 | 1 experiences |  |
-| `basket(prices)` | `start at 0 and get_paid in each of prices` | 4 | 2 experiences |  |
+| `two_rows(row_a, row_b)` | `merge pair by pair of row_a and row_b` | 4 | 1 experiences |  |
+| `basket(prices)` | `start at 0 and merge in each of prices` | 4 | 3 experiences |  |
 | `tall(heights, mark)` | `how many in those of heights above mark` | 5 | 6 experiences |  |
 
 ### Laws about measurements
@@ -228,7 +228,7 @@ Invented:
 | 19 | finds where each thing is, to within half a pixel | **228/229 (100%)** | n/a | n/a |
 | 20 | recognised that what it sees obeys the addition and subtraction it knows | **2/2 (100%)** | n/a | n/a |
 | 20 | PICTURES of trays of 5-25 things: how many together? (played with up to 12) | **25/25 (100%)** | 0/25 (0%) | 0/25 (0%) |
-| 20 | PICTURES: a tray of 10-25, some taken away: how many left? | **25/25 (100%)** | 1/25 (4%) | 2/25 (8%) |
+| 20 | PICTURES: a tray of 10-25, some taken away: how many left? | **25/25 (100%)** | 0/25 (0%) | 1/25 (4%) |
 | 21 | rediscovered F = m·a, stiffness and energy from video alone | **3/3 (100%)** | n/a | n/a |
 | 21 | a BLANK brain with only these eyes rediscovers all three too | **3/3 (100%)** | n/a | n/a |
 | 21 | new pushes: acceleration predicted BEFORE watching, vs the true one | **12/12 (100%)** | 1/12 (8%) | 1/12 (8%) |
