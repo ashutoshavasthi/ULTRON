@@ -18,6 +18,7 @@ import random
 import numpy as np
 
 from . import dsl
+from .dsl import INT
 
 N_FEATURES = 16
 
@@ -195,3 +196,27 @@ def first_guess(intuition, inputs, outputs, names, k=3, library=None):
     p = intuition.guess(look(inputs, outputs, names, library, intuition.names))
     return sorted(p, key=lambda n: (-p[n], n))[:k]
 
+
+
+def guided(inputs, targets, var_types, out_type, library, model, k=3, **kw):
+    """Search with intuition: first only with the laws it guesses; if that finds a law
+    of size s, make sure nothing shorter exists with all its laws (search everything up
+    to size s-1), so the shortest description still wins; if the guess finds nothing,
+    search everything. Returns (SearchResult, steps in all)."""
+    from .synth import synthesize
+    names = sorted(var_types)
+    if model is None or len(names) != 2 or out_type != INT:
+        r = synthesize(inputs, targets, var_types, out_type, library, **kw)
+        return r, r.steps
+    guess = set(first_guess(model, inputs, targets, names, k, library))
+    r1 = synthesize(inputs, targets, var_types, out_type, library, only=guess, **kw)
+    if r1.expr is None:
+        r2 = synthesize(inputs, targets, var_types, out_type, library, **kw)
+        return r2, r1.steps + r2.steps
+    s = dsl.size(r1.expr)
+    if s <= 1:
+        return r1, r1.steps
+    kw2 = dict(kw)
+    kw2["max_size"] = s - 1
+    r0 = synthesize(inputs, targets, var_types, out_type, library, **kw2)
+    return (r0 if r0.expr is not None else r1), r1.steps + r0.steps
