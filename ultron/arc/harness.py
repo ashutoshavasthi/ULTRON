@@ -40,7 +40,7 @@ def steps(program):
                     name, q = step
                 out.append([name, _plain(library._fill(q, colour))])
         else:
-            out.append([n, None if n in ("colourmap", "cells") else _plain(p)])
+            out.append([n, None if n in ("colourmap", "cells", "things") else _plain(p)])
     return out
 
 

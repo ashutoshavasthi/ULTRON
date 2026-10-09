@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **22.8%** (91.0) | 647.3 | 40000 |
+| ARC-AGI-1 | training | 400 | **24.2%** (97.0) | 149.3 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-91 tasks solved; 8 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 301 with no program within budget.
+97 tasks solved; 12 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 291 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -50,7 +50,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 6150a2bd | `rot180` |
 | 62c24649 | `mirror_tile(both)` |
 | 6430c8c4 | `combine(('lines', 'nor', 3))` |
-| 67385a82 | `recolour_all(8) ▸ local law on (colour, size): 1 situations change colour` |
+| 67385a82 | `thing law on (size): 8 except 1 kind` |
 | 67a3c6ac | `flip_h` |
 | 67e8384a | `mirror_tile(both)` |
 | 68b16354 | `flip_v` |
@@ -58,12 +58,14 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 6c434453 | `local law on (colour, count8, rank): 4 situations change colour` |
 | 6d0aefbc | `mirror_tile(h)` |
 | 6d75e8bb | `frame_things(2) ▸ local law on (colour, line): 4 situations change colour` |
-| 6e82a1ae | `local law on (colour, size): 3 situations change colour` |
+| 6e82a1ae | `thing law on (size): 3 kinds of thing` |
 | 6f8cd79b | `outline(8)` |
 | 6fa7a44f | `mirror_tile(v)` |
 | 7468f01a | `flip_h ▸ crop_content` |
 | 74dd1130 | `transpose` |
 | 7b6016b9 | `fill_enclosed(2) ▸ recolour 0→3` |
+| 810b9b61 | `thing law on (holes): 3 except 1 kind` |
+| 868de0fa | `fill_enclosed(2) ▸ thing law on (size): keep except 3 kinds` |
 | 8be77c9e | `mirror_tile(v)` |
 | 8f2ea7aa | `crop_content ▸ fractal` |
 | 9172f3a0 | `upscale(3)` |
@@ -73,31 +75,35 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 9dfd6313 | `transpose` |
 | a416b8f3 | `tile((1, 2))` |
 | a5313dff | `fill_enclosed(1)` |
+| a61f2674 | `thing law on (size_rank): 3 kinds of thing` |
 | a699fb00 | `local law on (colour, line): 2 situations change colour` |
 | a740d043 | `crop_content ▸ recolour 1→0` |
 | ae3edfdc | `frame_things(7) ▸ local law on (colour, line, orth_set): 16 situations change colour` |
 | ae4f1146 | `keep_colour(1) ▸ crop_thing(('largest', True)) ▸ recolour 0→8` |
+| aedd82e4 | `thing law on (size): keep except 1 kind` |
 | b1948b0a | `recolour 6→2` |
+| b2862040 | `thing law on (holes): 8 except 1 kind` |
 | b6afb2da | `local law on (colour, count8): 3 situations change colour` |
 | bb43febb | `local law on (colour, count8): 1 situations change colour` |
 | bdad9b1f | `lines_through((2, 'h')) ▸ local law on (colour, col): 2 situations change colour` |
 | be94b721 | `crop_thing(('largest', False))` |
-| c0f76784 | `fill_enclosed(6) ▸ local law on (colour, size): 2 situations change colour` |
+| c0f76784 | `fill_enclosed(6) ▸ thing law on (size): keep except 2 kinds` |
 | c3f564a4 | `complete_pattern(0)` |
 | c59eb873 | `upscale(2)` |
 | c8f0f002 | `recolour 7→5` |
 | c9e6f938 | `mirror_tile(h)` |
 | ce22a75a | `frame_things(1) ▸ recolour 5→1` |
 | ce4f8723 | `combine(('lines', 'or', 3))` |
+| d2abd087 | `thing law on (size): 1 except 1 kind` |
 | d511f180 | `recolour 5→8, 8→5` |
 | d5d6de2d | `fill_enclosed(3) ▸ recolour 2→0` |
 | d90796e8 | `local law on (colour, orth_set): 2 situations change colour` |
 | dae9d2b5 | `combine(('halves_lr', 'or', 6))` |
 | ded97339 | `local law on (colour, line): 2 situations change colour` |
 | e3497940 | `symmetrize(h) ▸ pick_part(first)` |
-| e8593010 | `local law on (colour, size): 3 situations change colour` |
+| e8593010 | `thing law on (size): 3 kinds of thing` |
 | e98196ab | `overlay_parts` |
-| ea32f347 | `local law on (colour, rank): 3 situations change colour` |
+| ea32f347 | `thing law on (size_rank): 3 kinds of thing` |
 | ed36ccf7 | `rot90` |
 | f25fbde4 | `crop_content ▸ upscale(2)` |
 | f25ffba3 | `symmetrize(v)` |

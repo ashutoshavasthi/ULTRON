@@ -10,7 +10,7 @@ the same answer on any machine.
 
 import numpy as np
 
-from . import cells
+from . import cells, objects
 from . import ops as O
 from .grid import colours, key
 
@@ -64,6 +64,9 @@ def run(program, g):
         if name == "cells":
             g = cells.apply(p, g)
             continue
+        if name == "things":
+            g = objects.apply(p, g)
+            continue
         if name == "colourmap":
             g = np.vectorize(lambda v: p.get(int(v), int(v)), otypes=[np.int8])(g)
             continue
@@ -87,6 +90,8 @@ def show(program):
             out.append("recolour " + ", ".join(f"{a}→{b}" for a, b in sorted(p.items()) if a != b))
         elif name == "cells":
             out.append(cells.describe(p))
+        elif name == "things":
+            out.append(objects.describe(p))
         elif name.startswith("block") and LIBRARY[0]:
             from . import library
             out.append(library.show_use(LIBRARY[0][int(name[5:]) - 1], p))
@@ -105,6 +110,8 @@ def length(program):
         elif name == "cells":
             fs, table = p
             total += 1 + 0.5 * len(fs) * sum(1 for k, v in table.items() if k[0] != v)
+        elif name == "things":
+            total += objects.length(p)
         else:
             total += 1
     return total
@@ -151,6 +158,9 @@ def _search(train, budget, max_depth, want):
     rule = cells.learn(ins, targets)
     if rule is not None:
         found.append((("cells", rule),))
+    law = objects.learn(ins, targets)
+    if law is not None:
+        found.append((("things", law),))
     frontier = [((), ins)]
     seen = {tuple(key(g) for g in ins)}
     cache = {}
@@ -196,6 +206,9 @@ def _search(train, budget, max_depth, want):
                         rule = cells.learn(outs, targets)
                         if rule is not None:
                             found.append(p2 + (("cells", rule),))
+                        law = objects.learn(outs, targets)
+                        if law is not None:
+                            found.append(p2 + (("things", law),))
                 if depth < max_depth:
                     nxt.append((p2, outs))
         frontier = nxt
