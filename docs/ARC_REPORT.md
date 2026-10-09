@@ -138,6 +138,9 @@ default and reported as a null result.
 | **C3 (symmetry laws, where a colour is)** | ARC-AGI-1 | evaluation (400) | **11.75%** (47 of 59 answered right) | yes |
 | C3 | ARC-AGI-2 | evaluation (120) | **0.83%** (1 task) | yes |
 | C3 | ARC-AGI-1 | training (400) | 30.8% | dev split |
+| **C4 (copies, lines, summaries)** | ARC-AGI-1 | evaluation (400) | **12.75%** (51 of 63 answered right) | yes |
+| C4 | ARC-AGI-2 | evaluation (120) | 0.83% | yes |
+| C4 | ARC-AGI-1 | training (400) | 33.6% | dev split |
 | C2 | ARC-AGI-2 training, the 233 tasks in no evaluation split (never looked at in development) | held-out check | 1.3% (C1 code: 0.4%) | |
 
 Reproduce: `python -m ultron arc --split evaluation --sets arc1 arc2 --workers 4`.

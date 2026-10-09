@@ -51,6 +51,7 @@ A0–A3 are below):
 | C1 | Hand-written operations **frozen at 38**; local laws, pattern ops | 22.8% | **7.75%** (right 31 of 33 answered) | 0% |
 | C2 | Ultron's law-finding applied to things: thing laws, marks and rays, which thing is the answer, how things move | 28.2% | **10.0%** (right 40 of 52 answered) | 0% |
 | C3 | Symmetry laws (about the picture's own centre, repairing what is missing); the box where a colour is (chosen by a trait); search speedups | 30.8% | **11.75%** (right 47 of 59 answered) | **0.83%** (1 of 120: the first ARC-AGI-2 task solved) |
+| C4 | Copies of a template; lines between things; summaries (a colour, a count, one cell per block) | 33.6% | **12.75%** (right 51 of 63 answered) | 0.83% |
 
 C2 meets criterion **A1** (≥ 10%).
 

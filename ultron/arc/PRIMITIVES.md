@@ -110,6 +110,8 @@ description that agrees with every example.
 
 | summary (`summary.py`) | The answer is about the picture: a colour (that of the thing a law singles out, or a class of the picture by one trait: symmetry, how many things, colours, its one shape), a row, column, diagonal or square as long as a count (things, coloured cells, cells of a colour), or one cell per uniform block | A class table must be shorter than its examples; an unseen kind of picture gives no answer |
 
+| arrangement (`tiles.py`) | The answer is copies of the picture in a grid, each place holding it turned or mirrored in its own way (or nothing), or a copy wherever the picture's own cell has a chosen colour | Every example must agree on each place; otherwise no law |
+
 Perception added for summaries (counted): a picture's symmetry, number of things and colours, its one shape; uniform blocks (runs of identical rows and columns).
 
 Traits of a colour (perception, counted): drawn as an outline, drawn as a solid block, how common it is compared with the others.

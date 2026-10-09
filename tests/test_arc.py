@@ -244,3 +244,13 @@ def test_summary_laws_count_and_blocks():
     # stripes of uniform colour: one cell per block
     pic = np.repeat(np.repeat(np.array([[1, 2], [3, 4]], dtype=np.int8), 3, 0), [2, 4], 1)
     assert np.array_equal(summary.blocks(pic, False), [[1, 2], [3, 4]])
+
+
+def test_copies_arranged_in_a_grid():
+    from ultron.arc import grid, tiles
+    grid.TASK_BACKGROUND[0] = 0
+    rng = np.random.default_rng(6)
+    pics = [rng.integers(0, 4, size=(3, 3)).astype(np.int8) for _ in range(4)]
+    make = lambda g: np.block([[g, np.rot90(g, 3)], [np.rot90(g, 1), g[::-1, ::-1]]])
+    rule = tiles.learn(pics[:3], [make(g) for g in pics[:3]])
+    assert rule is not None and np.array_equal(tiles.apply(rule, pics[3]), make(pics[3]))

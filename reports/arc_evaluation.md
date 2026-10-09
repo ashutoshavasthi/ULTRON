@@ -4,12 +4,12 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | evaluation | 400 | **11.8%** (47.0) | 650.0 | 40000 |
-| ARC-AGI-2 | evaluation | 120 | **0.8%** (1.0) | 454.6 | 40000 |
+| ARC-AGI-1 | evaluation | 400 | **12.8%** (51.0) | 633.7 | 40000 |
+| ARC-AGI-2 | evaluation | 120 | **0.8%** (1.0) | 430.2 | 40000 |
 
 ## ARC-AGI-1 evaluation: what it found
 
-47 tasks solved; 12 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 341 with no program within budget.
+51 tasks solved; 12 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 337 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -18,6 +18,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 0c9aba6e | `combine(('lines', 'nor', 8))` |
 | 12eac192 | `thing law on (size): keep except 2 kinds` |
 | 195ba7dc | `combine(('lines', 'or', 1))` |
+| 1a2e2828 | `the colour of the thing with colour_count=1` |
 | 1d0a4b61 | `complete_pattern(0)` |
 | 2072aba6 | `upscale(2) ▸ local law on (colour, parity): 4 situations change colour` |
 | 21f83797 | `lines_through((2, 'both')) ▸ fill_enclosed(1)` |
@@ -41,17 +42,20 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 929ab4e9 | `remove_colour(2) ▸ symmetrize(both)` |
 | 981571dc | `symmetry (h+v) about its own centre fills what colour 0 hides` |
 | 9a4bb226 | `crop_thing(('most_colours', True))` |
+| aa18de87 | `lines between things: what fills a gap depends on whether the ends match (1 kinds of gap)` |
 | ae58858e | `thing law on (size): 6 except 3 kinds` |
 | af22c60d | `symmetry (h+v) about its own centre fills what colour 0 hides` |
 | be03b35f | `rot270 ▸ continue_pattern(((2, 5), (2, 5)))` |
 | c663677b | `complete_pattern(0)` |
 | ca8f78db | `complete_pattern(0)` |
 | cd3c21df | `crop_thing(('rarest_colour', True))` |
+| ce8d95cc | `one cell per uniform block` |
 | d19f7514 | `combine(('halves_tb', 'or', 4))` |
 | d282b262 | `slide_things(left)` |
 | d56f2372 | `the thing with symmetric=True` |
 | e0fb7511 | `thing law on (size): 8 except 1 kind` |
 | e133d23d | `combine(('lines', 'or', 2))` |
+| e1baa8a4 | `one cell per uniform block` |
 | e345f17b | `combine(('halves_lr', 'nor', 4))` |
 | e66aafb8 | `symmetry (v) about its own centre fills what colour 0 hides, answer is the repaired patch` |
 | e95e3d8e | `complete_pattern(0)` |

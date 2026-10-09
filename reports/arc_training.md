@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **33.6%** (134.5) | 358.1 | 40000 |
+| ARC-AGI-1 | training | 400 | **34.6%** (138.5) | 352.3 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-135 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 252 with no program within budget.
+139 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 248 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -53,10 +53,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 4347f46a | `hollow_things` |
 | 445eab21 | `gravity(right) ▸ continue_pattern(((1, 5), (1, 5))) ▸ recolour 6→7, 7→8` |
 | 44f52bb0 | `a colour for each kind of picture, by its symmetry (2 kinds)` |
+| 46442a0e | `copies in a 2x2 grid: as it is, three quarter turn | quarter turn, half turn` |
 | 484b58aa | `complete_pattern(0)` |
 | 48d8fb45 | `crop_thing(('most_colours', True)) ▸ the box where the most common colour is` |
 | 496994bd | `symmetrize(v)` |
-| 4c4377d9 | `flip_v ▸ mirror_tile(v)` |
+| 4c4377d9 | `copies in a 2x1 grid: mirrored top-bottom | as it is` |
 | 50cb2852 | `hollow_things ▸ fill_enclosed(8)` |
 | 543a7ed5 | `fill_enclosed(4) ▸ frame_things(3)` |
 | 5521c0d9 | `things move by (): 1 kinds (moves by its own size)` |
@@ -79,11 +80,13 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 746b3537 | `one cell per uniform block` |
 | 74dd1130 | `transpose` |
 | 7b6016b9 | `fill_enclosed(2) ▸ recolour 0→3` |
+| 7fe24cdd | `copies in a 2x2 grid: as it is, three quarter turn | quarter turn, half turn` |
 | 810b9b61 | `thing law on (holes): 3 except 1 kind` |
 | 868de0fa | `fill_enclosed(2) ▸ thing law on (size): keep except 3 kinds` |
 | 88a10436 | `copies of the thing with size_rank=largest centred on every other thing` |
 | 88a62173 | `the thing with shape_count=1` |
 | 8be77c9e | `mirror_tile(v)` |
+| 8d5021e8 | `copies in a 3x2 grid: half turn, mirrored top-bottom | mirrored left-right, as it is | half turn, mirrored top-bottom` |
 | 8f2ea7aa | `crop_content ▸ fractal` |
 | 90c28cc7 | `one cell per uniform block of what is drawn` |
 | 913fb3ed | `marks around things by (colour): 3 kinds leave marks` |
@@ -94,7 +97,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 99b1bc43 | `combine(('lines', 'xor', 3))` |
 | 9dfd6313 | `transpose` |
 | 9ecd008a | `symmetry (h) about its own centre fills what colour 0 hides, answer is the repaired patch` |
-| a416b8f3 | `tile((1, 2))` |
+| a416b8f3 | `copies in a 1x2 grid: as it is, as it is` |
 | a5313dff | `fill_enclosed(1)` |
 | a61f2674 | `thing law on (size_rank): 3 kinds of thing` |
 | a65b410d | `marks around things by (): 1 kinds leave marks` |
@@ -118,6 +121,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | c59eb873 | `upscale(2)` |
 | c8f0f002 | `recolour 7→5` |
 | c9e6f938 | `mirror_tile(h)` |
+| cce03e0d | `the picture drawn with itself: a copy where its cell is 2` |
 | ce22a75a | `frame_things(1) ▸ recolour 5→1` |
 | ce4f8723 | `combine(('lines', 'or', 3))` |
 | d0f5fe59 | `a diagonal as long as the number of things(False, False), in their colour` |
