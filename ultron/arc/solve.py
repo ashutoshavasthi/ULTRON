@@ -190,6 +190,11 @@ def solve(train, budget=BUDGET, max_depth=MAX_DEPTH, want=2):
 
 
 GUIDE = [None]          # intuition (guide.py), when one has been learned and switched on
+INTUITION = [None]      # intuition.py: which half-built programs to expand first
+RECORD = [None]         # when a list: every one-step program and how it looked (to learn)
+FIRST = [None]          # operations spent when the first searched program was found
+LEARNED = {"colourmap", "cells", "things", "marks", "pick", "moves", "symmetry", "copies",
+           "gaps", "summary", "tiles"}
 LIBRARY = [None]        # building blocks Ultron learned itself (library.py), when switched on
 
 
@@ -242,6 +247,10 @@ def _search(train, budget, max_depth, want):
     frontier = [((), ins)]
     seen = {tuple(key(g) for g in ins)}
     cache = {}
+    looks = {(): None}
+    if INTUITION[0] is not None or RECORD[0] is not None:
+        from . import intuition as I
+        looks[()] = I._look(ins, targets)
     for depth in range(1, max_depth + 1):
         best = sorted(length(f) for f in found)
         if len(best) >= want and best[want - 1] <= depth:
@@ -276,6 +285,8 @@ def _search(train, budget, max_depth, want):
                 p2 = prog + ((name, p),)
                 if k == goal:
                     found.append(p2)
+                    if FIRST[0] is None:
+                        FIRST[0] = spent
                 else:
                     cm = _colour_map(outs, targets)
                     if cm is not None:
@@ -292,9 +303,22 @@ def _search(train, budget, max_depth, want):
                         pick = objects.learn_pick(outs, targets)
                         if pick is not None:
                             found.append(p2 + (("pick", pick),))
-                if depth < max_depth:
-                    nxt.append((p2, outs))
-        frontier = nxt
+                if depth < max_depth or RECORD[0] is not None:
+                    if looks[()] is not None:
+                        f, now = I.features(outs, targets, looks[prog], depth, name)
+                        looks[p2] = now
+                        if RECORD[0] is not None and depth == 1:
+                            RECORD[0].append((p2, f))
+                        score = I.Model.score(INTUITION[0], f) if INTUITION[0] else 0.0
+                    else:
+                        score = 0.0
+                    if depth < max_depth:
+                        nxt.append((p2, outs, score))
+        # intuition: the most promising half-built programs are expanded first (a stable
+        # sort, so without intuition the order is unchanged)
+        if INTUITION[0] is not None:
+            nxt.sort(key=lambda n: -n[2])
+        frontier = [(p, o) for p, o, _ in nxt]
     return found, spent
 
 

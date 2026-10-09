@@ -59,9 +59,10 @@ def _one(job):
             "seconds": round(time.time() - t0, 2)}
 
 
-def _init(library, guide):
+def _init(library, guide, intuition=None):
     solve.LIBRARY[0] = library
     solve.GUIDE[0] = guide
+    solve.INTUITION[0] = intuition
 
 
 def score_set(name, split, limit=None, budget=solve.BUDGET, scoring=False, ids=None,
@@ -74,7 +75,8 @@ def score_set(name, split, limit=None, budget=solve.BUDGET, scoring=False, ids=N
     jobs = [(tid, tasks[tid], budget) for tid in ids]
     if workers > 1:
         import multiprocessing as mp
-        with mp.get_context("fork").Pool(workers, _init, (solve.LIBRARY[0], solve.GUIDE[0])) as pool:
+        with mp.get_context("fork").Pool(workers, _init, (solve.LIBRARY[0], solve.GUIDE[0],
+                                                           solve.INTUITION[0])) as pool:
             rows = pool.map(_one, jobs, chunksize=1)
     else:
         rows = [_one(j) for j in jobs]

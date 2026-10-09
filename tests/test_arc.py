@@ -254,3 +254,16 @@ def test_copies_arranged_in_a_grid():
     make = lambda g: np.block([[g, np.rot90(g, 3)], [np.rot90(g, 1), g[::-1, ::-1]]])
     rule = tiles.learn(pics[:3], [make(g) for g in pics[:3]])
     assert rule is not None and np.array_equal(tiles.apply(rule, pics[3]), make(pics[3]))
+
+
+def test_intuition_learns_to_rank_the_step_that_leads_somewhere():
+    from ultron.arc import intuition as I
+    rng = np.random.default_rng(7)
+    # looks of half-built programs: those on the way are closer to the target
+    X = rng.normal(size=(200, 17))
+    y = (X[:, 1] + 0.5 * X[:, 3] > 0.8).astype(float)
+    model = I.Model().train(X, y)
+    on, off = X[y == 1].mean(axis=0), X[y == 0].mean(axis=0)
+    assert model.score(on.copy()) > model.score(off.copy())
+    again = I.Model().train(X, y)                       # deterministic
+    assert np.allclose(again.w, model.w)
