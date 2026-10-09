@@ -73,3 +73,33 @@ identical on any machine.
 | each_thing (flip, rotate or transpose every thing in place) | "Each one does the same" |
 | slide_things | Things move as wholes until they bump into something |
 | frame_things, hollow_things | Borders around things; things as outlines |
+
+## Added after the freeze: perception of things, and laws learned per task
+
+The 38 operations stay frozen. What was added is **perception**: the quantities Ultron
+measures on a thing, listed and counted here. It is also **learning**: laws found from
+each task's own examples by the same rule Ultron uses everywhere, the shortest
+description that agrees with every example.
+
+### Quantities of a thing (`objects.describe_things`): 13, plus "most / least"
+
+| Quantity | Why it's generic |
+|---|---|
+| colour, size, height, width | Basic properties of any object |
+| shape (the exact pattern), number of colours | What it looks like |
+| holes (enclosed background) | Inside vs outside, again |
+| touches the border | Where it is |
+| symmetric, filled (a solid rectangle) | Regularity |
+| how many things share its shape / its colour | Same and different |
+| size rank, and "most / middle / least" for every count above | Comparison: the biggest, the most common |
+
+### Laws learned from a task's own examples (`objects.py`)
+
+| Law | What it says | Guard against fooling itself |
+|---|---|---|
+| thing law | A thing's new colour (or "stays") depends on its quantities | A default with exceptions is allowed only if it is really the rule; when two laws explain the examples equally well, both are kept as the two attempts |
+| marks | What each kind of thing paints around itself: fixed marks, and rays to the edge or to the next thing | A kind seen once gives no evidence; a mark must be shown by two things; the law must compress the painted cells at least two to one |
+| pick | Which thing is the answer, as a value of its quantities | Every thing with that value must give the same answer |
+| moves | How each kind of thing moves: toward what stays put, slide, by its own size, or a step | Ranked by what each takes to say; a kind seen moving once gives no evidence |
+
+In every case, a kind of thing never seen in the examples gets **no answer**, not a guess.
