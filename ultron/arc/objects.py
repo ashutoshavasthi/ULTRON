@@ -736,3 +736,185 @@ def describe_moves(rule):
              "toward": "goes toward what stays put"}
     how = sorted({words[m[0]] for m in table.values()})
     return f"things move by ({', '.join(fs)}): {len(table)} kinds ({', '.join(how)})"
+
+
+# ------------------------------------------------------------- copies of a template
+
+def _place(out, g, th, r, c, bg, recolour=None):
+    """Paint the template's cells with its top-left at (r, c); background cells of the
+    picture only, and only inside it."""
+    h, w = out.shape
+    for (tr, tc) in th.cells:
+        rr, cc = r + tr - th.r0, c + tc - th.c0
+        if 0 <= rr < h and 0 <= cc < w and out[rr, cc] == bg:
+            out[rr, cc] = g[tr, tc] if recolour is None else recolour
+
+
+def _copies(g, setting, pick_fs, pick_value, anchor, recolour):
+    """Copy the template (the thing with that value) onto every other thing (a marker)."""
+    bg = background(g)
+    ts, qs = describe_things(g, setting)
+    if not qs:
+        return None
+    tmpl = [th for th, q in zip(ts, qs) if tuple(q[f] for f in pick_fs) == pick_value]
+    if len(tmpl) != 1:
+        return None
+    t = tmpl[0]
+    markers = [th for th in ts if th is not t]
+    if not markers:
+        return None
+    out = g.copy()
+    for m in markers:                   # a marker is replaced by its copy
+        for r, c in m.cells:
+            out[r, c] = bg
+    for m in markers:
+        if anchor == "centre":
+            r = (m.r0 + m.r1 - 1) // 2 - (t.r1 - t.r0 - 1) // 2
+            c = (m.c0 + m.c1 - 1) // 2 - (t.c1 - t.c0 - 1) // 2
+        else:                       # the template's cell of the marker's colour goes there
+            same = [(tr, tc) for tr, tc in t.cells if g[tr, tc] == m.colour]
+            if len(same) != 1 or m.size != 1:
+                return None
+            (tr, tc), (mr, mc) = same[0], m.cells[0]
+            r, c = t.r0 + mr - tr, t.c0 + mc - tc
+        _place(out, g, t, r, c, bg, m.colour if recolour else None)
+    return out
+
+
+def learn_copies(grids, targets):
+    """Pictures where copies of one thing (the template) appear at the other things (the
+    markers): which thing is the template, how a copy sits on its marker, and whether it
+    takes the marker's colour, learned from the examples (shortest first)."""
+    if any(g.shape != t.shape for g, t in zip(grids, targets)):
+        return None
+    if all((g == t).all() for g, t in zip(grids, targets)):
+        return None
+    for setting in [(False, True), (True, True), (False, False), (True, False)]:
+        described = [describe_things(g, setting) for g in grids]
+        if any(not qs or len(ts) > 12 for ts, qs in described):
+            continue
+        for fs in FEATURE_SETS[1:1 + len(QUANTITIES)]:      # one quantity says which
+            values = None
+            for ts, qs in described:
+                vs = {tuple(q[f] for f in fs) for q in qs}
+                once = {v for v in vs if sum(1 for q in qs if tuple(q[f] for f in fs) == v) == 1}
+                values = once if values is None else values & once
+            for value in sorted(values or [], key=str):
+                for anchor in ("centre", "colour"):
+                    for recolour in (False, True):
+                        if all((lambda o: o is not None and np.array_equal(o, t))(
+                                _copies(g, setting, fs, value, anchor, recolour))
+                               for g, t in zip(grids, targets)):
+                            return (setting, fs, value, anchor, recolour)
+    return None
+
+
+def apply_copies(rule, g):
+    setting, fs, value, anchor, recolour = rule
+    return _copies(g, setting, fs, value, anchor, recolour)
+
+
+def copies_length(rule):
+    return 2 + 0.5 * len(rule[1]) + (0.5 if rule[4] else 0)
+
+
+def describe_copies(rule):
+    setting, fs, value, anchor, recolour = rule
+    v = ", ".join(f"{f}={'…' if f == 'shape' else x}" for f, x in zip(fs, value))
+    how = "centred on" if anchor == "centre" else "matching colours with"
+    return (f"copies of the thing with {v} {how} every other thing" +
+            (", in that thing's colour" if recolour else ""))
+
+
+# -------------------------------------------------------------- lines between things
+
+def _gaps(g, bg):
+    """Every run of background between two coloured cells on a row or a column:
+    (direction, end colour a, end colour b, cells)."""
+    h, w = g.shape
+    out = []
+    for r in range(h):
+        idx = [c for c in range(w) if g[r, c] != bg]
+        for a, b in zip(idx, idx[1:]):
+            if b > a + 1:
+                out.append(("row", int(g[r, a]), int(g[r, b]), [(r, c) for c in range(a + 1, b)]))
+    for c in range(w):
+        idx = [r for r in range(h) if g[r, c] != bg]
+        for a, b in zip(idx, idx[1:]):
+            if b > a + 1:
+                out.append(("col", int(g[a, c]), int(g[b, c]), [(r, c) for r in range(a + 1, b)]))
+    return out
+
+
+GAP_KEYS = [
+    ("whether the ends match", lambda d, a, b: (a == b,)),
+    ("whether the ends match and which way", lambda d, a, b: (d, a == b)),
+    ("same colour", lambda d, a, b: (a == b, a if a == b else None)),
+    ("the two colours", lambda d, a, b: (min(a, b), max(a, b))),
+    ("direction, same colour", lambda d, a, b: (d, a == b, a if a == b else None)),
+    ("direction, the two colours", lambda d, a, b: (d, min(a, b), max(a, b))),
+]
+ENDS = "the ends' colour"      # a gap filled with the colour its two (matching) ends share
+
+
+def learn_gaps(grids, targets):
+    """Pictures where lines are drawn between things: what fills a gap between two
+    coloured cells on a row or column (a colour, or nothing) is a law of the two ends."""
+    if any(g.shape != t.shape for g, t in zip(grids, targets)):
+        return None
+    bgs = [background(g) for g in grids]
+    if any(((g != t) & (g != bg)).any() for g, t, bg in zip(grids, targets, bgs)):
+        return None
+    if all((g == t).all() for g, t in zip(grids, targets)):
+        return None
+    for kname, key in GAP_KEYS:
+        table, ok = {}, True
+        for g, t, bg in zip(grids, targets, bgs):
+            for d, a, b, cells in _gaps(g, bg):
+                vals = {int(t[r, c]) for r, c in cells}
+                if len(vals) != 1:
+                    vals = {bg} if all(t[r, c] == bg for r, c in cells) else vals
+                if len(vals) != 1:
+                    ok = False
+                    break
+                v = vals.pop()
+                if a == b and v == a:
+                    v = ENDS
+                if table.setdefault(key(d, a, b), v) != v:
+                    ok = False
+                    break
+            if not ok:
+                break
+        if not ok or all(v == bgs[0] for v in table.values()):
+            continue
+        rule = (kname, table)
+        if all((lambda o: o is not None and np.array_equal(o, t))(apply_gaps(rule, g))
+               for g, t in zip(grids, targets)):
+            return rule
+    return None
+
+
+def apply_gaps(rule, g):
+    kname, table = rule
+    key = dict(GAP_KEYS)[kname]
+    bg = background(g)
+    out = g.copy()
+    for d, a, b, cells in _gaps(g, bg):
+        k = key(d, a, b)
+        if k not in table:
+            return None             # a kind of gap never seen in the examples: no guess
+        v = a if table[k] == ENDS else table[k]
+        if v != bg:
+            for r, c in cells:
+                out[r, c] = v
+    return out
+
+
+def gaps_length(rule):
+    return 1 + 0.5 * sum(1 for v in rule[1].values())
+
+
+def describe_gaps(rule):
+    kname, table = rule
+    n = sum(1 for v in table.values())
+    return f"lines between things: what fills a gap depends on {kname} ({n} kinds of gap)"

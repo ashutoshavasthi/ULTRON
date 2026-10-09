@@ -79,6 +79,12 @@ def run(program, g):
         if name == "symmetry":
             g = symmetry.apply(p, g)
             continue
+        if name == "copies":
+            g = objects.apply_copies(p, g)
+            continue
+        if name == "gaps":
+            g = objects.apply_gaps(p, g)
+            continue
         if name == "colourmap":
             g = np.vectorize(lambda v: p.get(int(v), int(v)), otypes=[np.int8])(g)
             continue
@@ -112,6 +118,10 @@ def show(program):
             out.append(objects.describe_moves(p))
         elif name == "symmetry":
             out.append(symmetry.describe(p))
+        elif name == "copies":
+            out.append(objects.describe_copies(p))
+        elif name == "gaps":
+            out.append(objects.describe_gaps(p))
         elif name.startswith("block") and LIBRARY[0]:
             from . import library
             out.append(library.show_use(LIBRARY[0][int(name[5:]) - 1], p))
@@ -140,6 +150,10 @@ def length(program):
             total += objects.moves_length(p)
         elif name == "symmetry":
             total += symmetry.length(p)
+        elif name == "copies":
+            total += objects.copies_length(p)
+        elif name == "gaps":
+            total += objects.gaps_length(p)
         else:
             total += 1
     return total
@@ -199,6 +213,12 @@ def _search(train, budget, max_depth, want):
         found.append((("moves", moves),))
     for law in symmetry.rivals(ins, targets, ctx["in_colours"]):
         found.append((("symmetry", law),))
+    copies = objects.learn_copies(ins, targets)
+    if copies is not None:
+        found.append((("copies", copies),))
+    gaps = objects.learn_gaps(ins, targets)
+    if gaps is not None:
+        found.append((("gaps", gaps),))
     frontier = [((), ins)]
     seen = {tuple(key(g) for g in ins)}
     cache = {}

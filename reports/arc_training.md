@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **30.8%** (123.0) | 372.4 | 40000 |
+| ARC-AGI-1 | training | 400 | **31.8%** (127.0) | 350.6 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-123 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 264 with no program within budget.
+127 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 260 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -33,8 +33,9 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 1f85a75f | `crop_thing(('largest', False))` |
 | 1f876c06 | `connect(diagonals)` |
 | 22168020 | `connect(rows)` |
+| 22eb0ac0 | `lines between things: what fills a gap depends on whether the ends match (2 kinds of gap)` |
 | 23b5c85d | `crop_thing(('smallest', False))` |
-| 253bf280 | `local law on (colour, line): 2 situations change colour` |
+| 253bf280 | `lines between things: what fills a gap depends on whether the ends match (1 kinds of gap)` |
 | 25ff71a9 | `things move by (): 1 kinds (steps)` |
 | 29ec7d0e | `complete_pattern(0)` |
 | 2dc579da | `pick_part(odd_one)` |
@@ -77,6 +78,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 7b6016b9 | `fill_enclosed(2) ▸ recolour 0→3` |
 | 810b9b61 | `thing law on (holes): 3 except 1 kind` |
 | 868de0fa | `fill_enclosed(2) ▸ thing law on (size): keep except 3 kinds` |
+| 88a10436 | `copies of the thing with size_rank=largest centred on every other thing` |
 | 88a62173 | `the thing with shape_count=1` |
 | 8be77c9e | `mirror_tile(v)` |
 | 8f2ea7aa | `crop_content ▸ fractal` |
@@ -120,10 +122,12 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | d90796e8 | `local law on (colour, orth_set): 2 situations change colour` |
 | d9fac9be | `crop_thing(('largest', True)) ▸ the thing with border=False` |
 | dae9d2b5 | `combine(('halves_lr', 'or', 6))` |
+| dbc1a6ce | `lines between things: what fills a gap depends on whether the ends match (1 kinds of gap)` |
 | dc0a314f | `symmetry (rot180) about its own centre fills what colour 3 hides, answer is the repaired patch` |
-| ded97339 | `local law on (colour, line): 2 situations change colour` |
+| ded97339 | `lines between things: what fills a gap depends on whether the ends match (1 kinds of gap)` |
 | e3497940 | `symmetrize(h) ▸ pick_part(first)` |
 | e40b9e2f | `symmetry (quarter turns) about its own centre fills blank cells` |
+| e76a88a6 | `copies of the thing with colour_count=1 centred on every other thing` |
 | e8593010 | `thing law on (size): 3 kinds of thing` |
 | e98196ab | `overlay_parts` |
 | ea32f347 | `thing law on (size_rank): 3 kinds of thing` |

@@ -183,3 +183,39 @@ def test_symmetry_about_its_own_centre_repairs_what_is_hidden():
     assert rule is not None and rule[1] == 9
     x, want = picture()
     assert np.array_equal(symmetry.apply(rule, x), want)
+
+
+def test_copies_of_a_template_and_lines_between_things():
+    from ultron.arc import grid, objects
+    grid.TASK_BACKGROUND[0] = 0
+    rng = np.random.default_rng(4)
+    shape = np.array([[2, 2, 0], [2, 1, 3], [0, 3, 0]], dtype=np.int8)
+
+    def pic():
+        x = np.zeros((14, 14), dtype=np.int8)
+        x[0:3, 0:3] = shape                              # the template
+        y = x.copy()
+        for _ in range(2):
+            r, c = rng.integers(5, 12), rng.integers(5, 12)
+            while x[r - 1:r + 2, c - 1:c + 2].any() or y[r - 1:r + 2, c - 1:c + 2].any():
+                r, c = rng.integers(5, 12), rng.integers(5, 12)
+            x[r, c] = 5                                  # a marker
+            sub = y[r - 1:r + 2, c - 1:c + 2]
+            sub[shape != 0] = shape[shape != 0]
+        return x, y
+    train = [pic() for _ in range(3)]
+    rule = objects.learn_copies([i for i, _ in train], [o for _, o in train])
+    assert rule is not None and rule[3] == "centre"
+    x, want = pic()
+    assert np.array_equal(objects.apply_copies(rule, x), want)
+    # cells of one colour on a row or column are joined, in their own colour
+    def joined(colour):
+        x = np.zeros((8, 8), dtype=np.int8)
+        x[2, 1] = x[2, 6] = x[5, 3] = colour
+        y = x.copy()
+        y[2, 2:6] = colour
+        return x, y
+    train = [joined(c) for c in (1, 3, 4)]
+    rule = objects.learn_gaps([i for i, _ in train], [o for _, o in train])
+    x, want = joined(7)                                  # a colour it never saw
+    assert rule is not None and np.array_equal(objects.apply_gaps(rule, x), want)

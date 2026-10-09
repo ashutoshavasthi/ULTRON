@@ -105,6 +105,9 @@ description that agrees with every example.
 | symmetry (`symmetry.py`) | The picture's own symmetry (a mirror, two mirrors, quarter turns, a diagonal) about its own centre, found where the cells it can see agree with their images, fills what is missing: blank, or hidden under a colour; optionally the answer is the repaired patch | The centre must be backed by at least half the visible cells; images that disagree, or a hidden cell with no visible image, give no answer; rival laws are the two attempts |
 | where a colour is (`objects.py`) | The answer is the box around a colour (or what it holds inside), the colour named outright or chosen by a trait: drawn as a rectangle outline, a solid block, the most or least common | Exactly one colour may have the trait, else no answer |
 
+| copies (`objects.py`) | Copies of one thing (the template, chosen by a value of its quantities) replace every other thing (the markers), centred on them or matching colours with them, optionally in the marker's colour | Exactly one thing may be the template; no markers, or an ambiguous anchor, gives no answer |
+| lines between things (`objects.py`) | What fills a gap between two coloured cells on a row or column (a colour, the ends' own colour, or nothing) is a law of the two ends | The smallest key that explains every gap wins; a kind of gap never seen gives no answer |
+
 Traits of a colour (perception, counted): drawn as an outline, drawn as a solid block, how common it is compared with the others.
 
 In every case, a kind of thing never seen in the examples gets **no answer**, not a guess.
