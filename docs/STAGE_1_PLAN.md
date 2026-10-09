@@ -42,6 +42,25 @@ Step 1e has begun on training failures: local laws (`cells.py`), pattern complet
 and description-length ranking (which fixed an overfit) take the first 100 training tasks
 from 11% to 17%.
 
+**Milestones since A0** (every evaluation run is in `reports/arc_runs.log`):
+
+| Milestone | What changed | ARC-AGI-1 training | ARC-AGI-1 evaluation | ARC-AGI-2 evaluation |
+|---|---|---|---|---|
+| A0 | First engine | 11.0% | 3.75% | 0% |
+| A1 | Hand-written operations **frozen at 38**; local laws, pattern ops | 22.8% | **7.75%** (right 31 of 33 answered) | 0% |
+| A2 | Ultron's law-finding applied to things: thing laws, marks and rays, which thing is the answer, how things move | 28.2% | **10.0%** (right 40 of 52 answered) | 0% |
+
+A2 meets the A1 target (≥10%).
+
+**Library learning: an honest null result so far.** Ultron's solved programs are almost
+all one operation plus a learned law. No piece recurs often enough to pay for itself
+under MDL, even at 10× search budget and with blocks that leave a colour or a whole step
+open. So **no blocks are learned**, and the cross-validated learning curve is flat
+(15.19% → 15.19% on the unseen half). We do not lower the bar to manufacture blocks.
+
+**Leak found and closed.** ARC-AGI-2's training set contains 376 of ARC-AGI-1's
+evaluation tasks. Ultron's experience (`data.experience()`) excludes them by name.
+
 ## Exit criteria (fixed before work starts)
 
 **Robustness (R)**, all measured by the failure lab:

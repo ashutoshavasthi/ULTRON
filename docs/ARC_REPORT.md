@@ -19,10 +19,10 @@ the total description of everything solved.
 
 Results so far (official scoring, evaluation split opened only by the logged scoring
 command):
-- **ARC-AGI-1 evaluation: 7.75%**;
+- **ARC-AGI-1 evaluation: 10.0%**;
 - **ARC-AGI-2 evaluation: 0%**;
-- at about 2.4 CPU-seconds per task;
-- when Ultron does answer, it is right **31 times out of 33**.
+- at about 6 CPU-seconds per task;
+- when Ultron does answer, it is right **40 times out of 52**.
 
 ## 1. What is being measured, and how it is kept honest
 
@@ -71,7 +71,29 @@ A test enforces the freeze: `tests/test_arc.py::test_hand_written_operations_are
   every example. A test situation never seen in the examples gives *no answer*, not a
   guess.
 
-### 2.4 Search
+### 2.4 Laws about things (`objects.py`)
+
+Ultron's oldest skill is finding a law among quantities. Here it is applied to the
+things it sees. Each thing is measured by 13 generic quantities (colour, size, shape,
+holes, border, symmetric, how many share its shape, ...), plus "most / least"
+comparisons. From each task's own examples it then looks for the shortest law of four
+kinds:
+
+| Law | Example found on training |
+|---|---|
+| a thing's new colour | "things become 3, except things with no hole" (810b9b61) |
+| the marks a kind of thing leaves around itself, and rays | "red dots get yellow corners, blue dots get orange sides" (0ca9ddb6) |
+| which thing is the answer | "the one whose shape appears most often" (39a8645d) |
+| how things move | "the shape goes toward what stays put until it touches" (05f2a901) |
+
+Each law guards against fooling itself with the principles Ultron uses everywhere else:
+- a kind seen once is no evidence;
+- a law must compress what it explains;
+- a default must really be the rule;
+- when two laws explain the examples equally well, both are kept, and they become the
+  two attempts.
+
+### 2.5 Search
 
 Programs are chains of operations, enumerated shortest first. The search:
 - drops programs that do the same thing to every example (observational equivalence);
@@ -81,7 +103,7 @@ Programs are chains of operations, enumerated shortest first. The search:
 Programs are ranked by description length: 1 per operation, plus what a learned table
 must spell out. The two shortest different answers are submitted.
 
-### 2.5 Library learning (`library.py`): Ultron grows its own operations
+### 2.6 Library learning (`library.py`): Ultron grows its own operations
 
 From the programs Ultron found for tasks in its experience, it collects every piece of
 2–4 steps. Each piece also gets abstracted variants:
@@ -95,7 +117,7 @@ A piece becomes a block only if
 that is, only if it shortens the total description of everything solved. The search
 then tries each block as a single step, so programs too long to reach become short.
 
-### 2.6 Intuition (`guide.py`), a null result
+### 2.7 Intuition (`guide.py`), a null result
 
 Ultron counted which operations helped under which task features (output smaller,
 colours added, panels, ...) and tried promising operations first. Cross-validated on
@@ -108,19 +130,25 @@ default and reported as a null result.
 |---|---|---|---|---|
 | A0 (first engine) | ARC-AGI-1 | evaluation (400) | 3.75% | yes |
 | A0 | ARC-AGI-2 | evaluation (120) | 0% | yes |
-| **A1 (operations frozen)** | ARC-AGI-1 | evaluation (400) | **7.75%** | yes |
+| A1 (operations frozen) | ARC-AGI-1 | evaluation (400) | 7.75% | yes |
 | A1 | ARC-AGI-2 | evaluation (120) | 0% | yes |
-| | ARC-AGI-1 | training (400) | 22.8% (24.1% at 10× budget) | dev split |
+| **A2 (laws about things)** | ARC-AGI-1 | evaluation (400) | **10.0%** | yes |
+| A2 | ARC-AGI-2 | evaluation (120) | 0% | yes |
+| A2 | ARC-AGI-1 | training (400) | 28.2% | dev split |
+| A2 | ARC-AGI-2 training, the 233 tasks in no evaluation split (never looked at in development) | held-out check | 1.3% (A1 code: 0.4%) | |
 
 Reproduce: `python -m ultron arc --split evaluation --sets arc1 arc2 --workers 4`.
 
 **Cost.**
-- 2.4 s per task on average (max 15 s) on one CPU core.
-- The whole ARC-AGI-1 evaluation takes 4 minutes on 4 cores.
+- About 6 s per task on one CPU core.
+- The whole ARC-AGI-1 evaluation takes 10 minutes on 4 cores.
 - No GPU, no network.
 
-**It knows when it doesn't know.** On the evaluation split Ultron found a program for 33
-tasks and was right on 31. On the other 367 it gave no answer rather than a guess.
+**It mostly knows when it doesn't know.**
+- At A2, Ultron answered 52 evaluation tasks and was right on 40. On the other 348 it
+  gave no answer rather than a guess.
+- At A1 it was right on 31 of 33 answered. The laws about things answer more, and are
+  wrong more often.
 
 **Transparency.** Every answer comes with its program in words, for example
 `crop_content ▸ upscale(2)`, or `fill_enclosed(2) ▸ recolour 0→3`. Lists for every task
@@ -132,6 +160,12 @@ are in `reports/arc_evaluation.md` and `reports/arc_training.md`.
 experience, learn blocks, test on the unseen half with and without them; two rounds so
 learning can compound).*
 
+**Round 1 (measured).**
+- Practising on one half of the experience (316 tasks), Ultron solved 47 and learned
+  **0** blocks.
+- The unseen half scored 15.19% with and without them.
+- Round 2 would repeat the same computation, so the experiment stops there.
+
 **First finding.** On ARC-AGI-1 training alone, even at 10× budget, Ultron's 96 solutions
 contain no piece that recurs often enough to pay for itself. Almost all are single
 operations with a learned recolouring or local law. MDL therefore learns **no** blocks.
@@ -140,7 +174,7 @@ We report this rather than lower the bar.
 ## 5. Limits, stated plainly
 
 - Most ARC tasks need a concept that no short chain of the 38 operations expresses.
-  Ultron then says nothing. That accounts for most of the 92% it misses on ARC-AGI-1
+  Ultron then says nothing. That accounts for most of the 90% it misses on ARC-AGI-1
   evaluation.
 - ARC-AGI-2 is designed against exactly this kind of search, and Ultron scores 0% there.
 - The perception and operations were written by a person (counted and frozen). The
