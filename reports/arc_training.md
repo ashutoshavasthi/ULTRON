@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **27.0%** (108.0) | 303.9 | 40000 |
+| ARC-AGI-1 | training | 400 | **27.5%** (110.0) | 317.4 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-108 tasks solved; 11 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 281 with no program within budget.
+110 tasks solved; 12 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 278 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -83,6 +83,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | a416b8f3 | `tile((1, 2))` |
 | a5313dff | `fill_enclosed(1)` |
 | a61f2674 | `thing law on (size_rank): 3 kinds of thing` |
+| a65b410d | `marks around things by (colour): 1 kinds leave marks` |
 | a699fb00 | `local law on (colour, line): 2 situations change colour` |
 | a740d043 | `crop_content ▸ recolour 1→0` |
 | a87f7484 | `the thing with size_rank=largest` |
@@ -115,6 +116,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | e8593010 | `thing law on (size): 3 kinds of thing` |
 | e98196ab | `overlay_parts` |
 | ea32f347 | `thing law on (size_rank): 3 kinds of thing` |
+| ea786f4a | `marks around things by (colour): 1 kinds leave marks` |
 | ed36ccf7 | `rot90` |
 | f25fbde4 | `crop_content ▸ upscale(2)` |
 | f25ffba3 | `symmetrize(v)` |

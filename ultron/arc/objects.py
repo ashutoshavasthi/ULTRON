@@ -223,6 +223,7 @@ def learn_marks(grids, targets):
     if all((g == t).all() for g, t in zip(grids, targets)):
         return None
     best = None
+    RAYS.clear()
     for setting in SETTINGS:
         seen = []
         for g, t in zip(grids, targets):
@@ -240,34 +241,95 @@ def learn_marks(grids, targets):
     return best
 
 
+RAYS = {}                   # rays already traced while learning one law
+
+DIRS = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+
+
+def _ray(g, th, dr, dc, stop, bg):
+    """The background cells a ray reaches, sent from every cell of a thing in one
+    direction until the edge (or, if stop, until it meets something)."""
+    own = set(th.cells)
+    out = set()
+    h, w = g.shape
+    for r, c in th.cells:
+        r, c = r + dr, c + dc
+        while 0 <= r < h and 0 <= c < w:
+            if (r, c) not in own:
+                if g[r, c] != bg:
+                    if stop:
+                        break
+                else:
+                    out.add((r, c))
+            r, c = r + dr, c + dc
+    return out
+
+
+def _mark_cells(g, th, mark, bg):
+    if mark[0] == "ray":
+        _, dr, dc, col, stop = mark
+        return {(r, c, col) for r, c in _ray(g, th, dr, dc, stop, bg)}
+    dr, dc, col = mark
+    r, c = th.r0 + dr, th.c0 + dc
+    if 0 <= r < g.shape[0] and 0 <= c < g.shape[1] and g[r, c] == bg:
+        return {(r, c, col)}
+    return set()
+
+
 def _marks(setting, fs, seen):
     bgs = [background(g) for g, _, _, _ in seen]
-    inst = {}                   # kind -> [(grid index, anchor)]
+    inst = {}                   # kind -> [(grid index, thing)]
     for gi, (g, t, ts, qs) in enumerate(seen):
         for th, q in zip(ts, qs):
-            inst.setdefault(tuple(q[f] for f in fs), []).append((gi, th.r0, th.c0))
+            inst.setdefault(tuple(q[f] for f in fs), []).append((gi, th))
+    colours = sorted({int(v) for g, t, _, _ in seen for v in t[g != t].tolist()})
     stamps = {}
     for kind, places in inst.items():
         if len(places) < 2:
             stamps[kind] = frozenset()      # seen once: no evidence of what it does
             continue
+        keep = set()
+        # rays: lines a thing sends out until the edge (or until they meet something)
+        for dr, dc in DIRS:
+            for stop in (True, False):
+                for col in colours:
+                    ok, shown = True, 0
+                    for gi, th in places:
+                        g, t = seen[gi][0], seen[gi][1]
+                        rk = (id(th), dr, dc, stop)
+                        if rk not in RAYS:
+                            RAYS[rk] = _ray(g, th, dr, dc, stop, bgs[gi])
+                        cells = RAYS[rk]
+                        if any(t[r, c] != col for r, c in cells):
+                            ok = False
+                            break
+                        shown += bool(cells)
+                    if ok and shown >= 2:
+                        keep.add(("ray", dr, dc, col, stop))
+                        break
+        if any(m[0] == "ray" and m[4] for m in keep):      # a stopping ray says it all
+            keep = {m for m in keep if m[4] or ("ray",) + m[1:4] + (True,) not in keep}
+        covered = {}
+        for gi, th in places:
+            covered[id(th)] = {(r, c) for m in keep
+                               for r, c, _ in _mark_cells(seen[gi][0], th, m, bgs[gi])}
+        # marks at fixed places around the thing
         cand = set()
-        for gi, r0, c0 in places:
+        for gi, th in places:
             g, t = seen[gi][0], seen[gi][1]
             rr, cc = np.nonzero(g != t)
-            cand |= {(int(r) - r0, int(c) - c0, int(t[r, c])) for r, c in zip(rr, cc)}
-        keep = set()
+            cand |= {(int(r) - th.r0, int(c) - th.c0, int(t[r, c])) for r, c in zip(rr, cc)
+                     if (int(r), int(c)) not in covered[id(th)]}
         for dr, dc, col in cand:
             ok, shown = True, 0
-            for gi, r0, c0 in places:
+            for gi, th in places:
                 g, t = seen[gi][0], seen[gi][1]
-                r, c = r0 + dr, c0 + dc
+                r, c = th.r0 + dr, th.c0 + dc
                 # marks go only on background: an occupied cell says nothing
-                if 0 <= r < g.shape[0] and 0 <= c < g.shape[1] and \
-                        g[r, c] == bgs[gi] and t[r, c] != col:
-                    ok = False
-                    break
                 if 0 <= r < g.shape[0] and 0 <= c < g.shape[1] and g[r, c] == bgs[gi]:
+                    if t[r, c] != col:
+                        ok = False
+                        break
                     shown += 1
             if ok and shown >= 2:           # a mark at least two things actually show
                 keep.add((dr, dc, col))
@@ -276,9 +338,8 @@ def _marks(setting, fs, seen):
     for gi, (g, t, ts, qs) in enumerate(seen):
         painted = np.zeros(g.shape, bool)
         for th, q in zip(ts, qs):
-            for dr, dc, col in stamps[tuple(q[f] for f in fs)]:
-                r, c = th.r0 + dr, th.c0 + dc
-                if 0 <= r < g.shape[0] and 0 <= c < g.shape[1]:
+            for m in stamps[tuple(q[f] for f in fs)]:
+                for r, c, _ in _mark_cells(g, th, m, bgs[gi]):
                     painted[r, c] = True
         if (painted != (g != t)).any():
             return None
@@ -313,9 +374,8 @@ def apply_marks(rule, g):
         k = tuple(q[f] for f in fs)
         if k not in stamps:
             return None         # a kind of thing never seen in the examples: no guess
-        for dr, dc, col in stamps[k]:
-            r, c = th.r0 + dr, th.c0 + dc
-            if 0 <= r < g.shape[0] and 0 <= c < g.shape[1] and g[r, c] == bg:
+        for m in stamps[k]:
+            for r, c, col in _mark_cells(g, th, m, bg):
                 out[r, c] = col
     return out
 
