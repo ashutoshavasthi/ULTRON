@@ -24,7 +24,7 @@ stands on this core. If the core is fragile or can't scale, the rest falls.
 | Tiny and huge numbers | ✅ 10⁻¹² to 10¹² |
 | A changing world | ✅ **fixed**: after 3 failures that agree with each other, it re-measures (believes 80) and keeps the old value as history |
 | Shapes of law | ✅ settling, straight lines, and **quadratic (invented a new kind on its own)**; ❌ oscillation, damped oscillation, logistic growth, power law t^1.5 |
-| Eyes | ✅ 25/25 at the noise it grew up with; ❌ double noise, faint and touching things. Two redesigns tried (dilated 8- and 16-channel networks with contrast adaptation): big things 25/25 and faint 16/25, but the original trays dropped to 37/40, so they weren't adopted. **Open** |
+| Eyes | ✅ 25/25 at the noise it grew up with; ❌ double noise, faint and touching things. Two redesigns tried (dilated 8- and 16-channel networks with contrast adaptation): big things 25/25 and faint 16/25, but the original trays dropped to 37/40, so they weren't adopted. **Moved to Stage 2**, where the eyes meet real footage |
 
 **Also measured:** with laws with exceptions, wrong records are survived up to **20%**, and the
 false-law audit found **0 false laws in 100** datasets with nothing to find.
@@ -42,15 +42,16 @@ Step 1e has begun on training failures: local laws (`cells.py`), pattern complet
 and description-length ranking (which fixed an overfit) take the first 100 training tasks
 from 11% to 17%.
 
-**Milestones since A0** (every evaluation run is in `reports/arc_runs.log`):
+**Checkpoints** (every evaluation run is in `reports/arc_runs.log`; the exit criteria
+A0–A3 are below):
 
-| Milestone | What changed | ARC-AGI-1 training | ARC-AGI-1 evaluation | ARC-AGI-2 evaluation |
+| Checkpoint | What changed | ARC-AGI-1 training | ARC-AGI-1 evaluation | ARC-AGI-2 evaluation |
 |---|---|---|---|---|
-| A0 | First engine | 11.0% | 3.75% | 0% |
-| A1 | Hand-written operations **frozen at 38**; local laws, pattern ops | 22.8% | **7.75%** (right 31 of 33 answered) | 0% |
-| A2 | Ultron's law-finding applied to things: thing laws, marks and rays, which thing is the answer, how things move | 28.2% | **10.0%** (right 40 of 52 answered) | 0% |
+| C0 | First engine (criterion **A0** met) | 11.0% | 3.75% | 0% |
+| C1 | Hand-written operations **frozen at 38**; local laws, pattern ops | 22.8% | **7.75%** (right 31 of 33 answered) | 0% |
+| C2 | Ultron's law-finding applied to things: thing laws, marks and rays, which thing is the answer, how things move | 28.2% | **10.0%** (right 40 of 52 answered) | 0% |
 
-A2 meets the A1 target (≥10%).
+C2 meets criterion **A1** (≥ 10%).
 
 **Library learning: an honest null result so far.** Ultron's solved programs are almost
 all one operation plus a learned law. No piece recurs often enough to pay for itself
@@ -99,6 +100,19 @@ grid).
 | A3 | ≥ **40%**: the conquest target for this stage |
 | Dream | ≥ **60%** on ARC-AGI-1, and a real score on ARC-AGI-2 |
 
+**Status of every criterion** (updated as each is met):
+
+| Criterion | Status |
+|---|---|
+| R1, R3, R4, R6 | ✅ met (20% wrong records; 20% outliers; 10 irrelevant in 0.04 s; 0 false laws in 100) |
+| R2 | 🟡 ±20% when told the noise; Ultron must still **estimate the noise itself** |
+| R5 | 🟡 ties reported; a separating experiment for **measurement-law** ties is still to come |
+| S1, S2 | ❌ open |
+| E1 | 🟡 quadratic invented; oscillation, damped oscillation, logistic and t^1.5 open |
+| E2 | 🟡 grids and objects in `ultron/arc`; lists not yet in the brain's own language |
+| A0, A1 | ✅ met (C0, C2) |
+| A2, A3 | ❌ open |
+
 **No regressions:** all 26 lessons pass on the first attempt, every blind test stays at
 100%, and retraining is identical byte for byte.
 
@@ -136,6 +150,12 @@ and the wall moves.
 Done when S1 is met on law families with shared structure, and every new primitive is
 justified by the compression it buys (reported).
 
+**Correction (measured).** Built for ARC first (`arc/library.py`, `arc/curve.py`). It
+learned **no** blocks: Ultron's ARC solutions are one or two steps of big hand-written
+operations, so nothing recurs often enough to pay for itself. The cross-validated
+learning curve was flat (15.19% → 15.19%). Library learning now runs first on the
+brain's own laws, where structure recurs, and returns to ARC once learned laws compose.
+
 ### WP4. Intuition (the neural guide)
 
 - **Model:** a small network (numpy, deterministic) that reads a task's examples and
@@ -147,6 +167,15 @@ justified by the compression it buys (reported).
   never make it wrong.**
 
 Done when S2 is met (≥ 10× fewer steps on held-out law families), with determinism kept.
+
+**Correction (measured).** v1 (`arc/guide.py`) ordered operations by four task features.
+Cross-validated, it changed nothing (20.5% → 20.5%, 23.5% → 23.5%). v2 predicts *law
+families and quantities* (for `arc/objects.py`) and *program pieces* (for `synth.py`).
+It is trained on solved searches plus dreams.
+
+On ARC only, a per-puzzle MDL network (in the style of CompressARC) is allowed as a
+second engine. It trains on the puzzle alone, its answer is checked against every
+example, and it answers only when no symbolic program fits.
 
 ### WP5. Expressiveness
 
@@ -184,15 +213,18 @@ Done when S2 is met (≥ 10× fewer steps on held-out law families), with determ
   A solver made of a thousand special cases is not intelligence.
 - Blind tests and the 26 lessons stay green.
 
-## Order of attack
+## Order of attack (corrected after 1a–1b)
 
-| Step | Packages | Milestone |
+| Step | Work | Milestone |
 |---|---|---|
-| 1a | WP1 robustness, WP2 speed | R1–R6 met; lab report published |
-| 1b | WP6 data and harness, WP5 grids | **A0**: an honest ARC baseline |
-| 1c | WP3 library learning | S1; **A1** |
-| 1d | WP4 intuition | S2; **A2** |
-| 1e | All, iterated on ARC failures | **A3**; Stage 1 verdict |
+| 1a ✅ | WP1 robustness | R1, R3, R4, R6 met; lab report published |
+| 1b ✅ | WP6 data and harness; operations frozen; laws about things | **A0**, **A1** (C0–C2) |
+| 1c | R2 (noise estimated by Ultron), R5 (separating experiments for measurement ties) | R2, R5 |
+| 1d | WP5: laws of change; lists | E1, E2 |
+| 1e | WP2 speed, then WP3 library learning on the brain's laws | S1 |
+| 1f | WP4 intuition v2 (and dreams) | S2 |
+| 1g | ARC: compose learned laws, new law families, guided search, per-puzzle MDL engine, library learning on ARC again | **A2**, then **A3** |
+| 1h | Independent blind test; `reports/stage1_verdict.md` | Stage 1 verdict |
 
 ## Risks and how we beat them
 

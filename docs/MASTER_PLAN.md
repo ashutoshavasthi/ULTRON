@@ -92,21 +92,40 @@ unlimited. The claims follow the evidence.
 
 ## 2. The campaign
 
+The same numbering as [ROADMAP.md](ROADMAP.md). A stage becomes the main line only once
+the stage before it has passed every exit test on held-out problems, with no regressions.
+
 | Stage | Conquest | Exit test, fixed in advance |
 |---|---|---|
-| **1. The scalable, unbreakable core** | ①②③ made robust and fast; ARC-AGI as the battlefield | See [STAGE_1_PLAN.md](STAGE_1_PLAN.md) |
-| **2. The real world through its eyes** | Real videos at scale: falling, swinging, bouncing, colliding, diffusing | Recovers g, pendulum periods, restitution and diffusion from real footage within measured error; detection on par with lab tools |
-| **3. The reader** | Learning from the internet as checked evidence | Learns laws from open data it was never taught; catches ≥ 90% of planted false claims; reaches a target accuracy with ≥ 100× less reading than a language-model baseline on the same questions |
-| **4. Language** | Words → sentences → conversation, all grounded | Understands and produces new sentences about its worlds; detects false statements; asks informative questions; human blind evaluation |
-| **5. The body** | 3D simulated bodies, then tools | Solves new manipulation tasks by planning (a tower taller than any it has seen; using an object as a tool) |
-| **6. Code, self and Engc** | General programs; its own source as a world; Engc and its twin | Correct programs on unseen specs; predicts its own modules; the Engc twin passes every exam identically |
-| **7. Self-improvement** | Proposes changes to its own code and grammar, in a sandbox | Learning efficiency measurably up, zero regressions, every change human-approved; invents a primitive no one gave it |
-| **8. The scientist** | New knowledge | A discovery in a field it was never taught, verified independently |
-| **AGI** | Stages 1–6 together | Learns new skills from a few examples and some reading, across fields it was never trained on, at the level of a capable human learner; public benchmarks plus human blind tests |
-| **ASI** | Stage 8 at scale | Consistently produces verified knowledge beyond the best human experts, under governance that grew with it |
+| **1. The scalable, unbreakable core** *(now)* | ①②③ made robust, expressive and fast; ARC-AGI as the battlefield | R1–R6, S1–S2, E1–E2, A2–A3 in [STAGE_1_PLAN.md](STAGE_1_PLAN.md) |
+| **2. The real world through its eyes** | Eyes that generalise first; then real videos at scale: falling, swinging, bouncing, colliding, diffusing | Eyes: every failure-lab row ≥ 23/25 with no regressions. Then g, pendulum periods, restitution and diffusion from real footage within measured error; detection on par with lab tools |
+| **3. Interactive worlds** *(new)* | ⑤ agency and ⑥ curiosity with a learned ④ world model: grid games with unknown rules and goals (like ARC-AGI-3) | Wins held-out games in close to the fewest actions; laws learned in one game cut the actions needed in later ones |
+| **4. The reader** | Learning from the internet as checked evidence | Learns laws from open data it was never taught; catches ≥ 90% of planted false claims; reaches a target accuracy with ≥ 100× fewer bytes read than a fixed, named small language-model baseline on the same questions |
+| **5. Language** | Words → sentences → conversation, all grounded | Understands and produces new sentences about its worlds; detects false statements; asks informative questions; human blind evaluation |
+| **6. The body in 3D** | 3D simulated bodies, then tools | Solves new manipulation tasks by planning (a tower taller than any it has seen; using an object as a tool) |
+| **7. Code, self and Engc** | General programs; its own source as a world; Engc and its twin | Correct programs on unseen specs; predicts its own modules; the Engc twin passes every exam identically |
+| **8. Self-improvement** | Proposes changes to its own code and grammar, in a sandbox | Learning efficiency measurably up, zero regressions, every change human-approved; invents a primitive no one gave it |
+| **9. The scientist** | New knowledge | A discovery in a field it was never taught, verified independently |
+| **AGI** | Stages 1–7 together | The fixed battery: ARC-AGI-1, -2 and -3 on held-out sets; every stage's held-out exams; human blind tests; data efficiency against fixed baselines. Learns new skills from a few examples and some reading, across fields it was never trained on, at the level of a capable human learner |
+| **ASI** | Stage 9 at scale | Consistently produces verified knowledge beyond the best human experts, under governance that grew with it |
 
-Stages overlap. Stage 2 can start while stage 1 runs, but stage 1 comes first because
-everything rests on the core.
+**The safety track runs alongside the stages.** Governance is built *before* the stage
+that needs it:
+- **Before stage 4** (the first text written to deceive): exams and sandbox Ultron cannot
+  modify, an audit log of belief changes, and the rule that untrusted text is only ever a
+  claim, never an instruction.
+- **Before stage 8**: human approval of self-changes, rollback and a kill switch.
+
+**Corrections made after building Stage 1:**
+- Library learning starts on the brain's own laws (on ARC it had nothing to compress:
+  a recorded null result).
+- Intuition v2 predicts law families and program pieces (v1 was a recorded null result).
+- A per-puzzle MDL network is allowed as a second ARC engine. It is trained only on the
+  puzzle and verified, and answers only when no symbolic program fits.
+- Eyes moved to stage 2.
+- Interactive worlds added as stage 3.
+- A measurable reader baseline.
+- The safety track moved earlier.
 
 ---
 
@@ -117,6 +136,7 @@ everything rests on the core.
 | **Failure lab** (`python -m ultron stress`) | Breakpoints of every mechanism | After every change; breakpoints only move outward |
 | **Held-out exams** | Understanding vs memorising | Every lesson |
 | **Blind tests** | Written by examiners who never saw the code (humans wanted) | Every stage |
-| **Public benchmarks** | ARC-AGI first; others per stage | Published scores |
+| **Public benchmarks** | ARC-AGI-1 and -2 first, ARC-AGI-3 in stage 3; others per stage. Score **and precision** (how many answers were right), on held-out sets, every evaluation run logged | Checkpoints only |
+| **Competitions** | Entered only when our logged held-out score beats the best published score for that track (ARC Prize 2026: checked, not entered) | When the rule is met |
 | **Efficiency** | Data and search per law, against baselines | Every stage |
 | **Determinism** | A retrain is identical byte for byte | Every commit |

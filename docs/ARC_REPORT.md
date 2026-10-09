@@ -126,16 +126,16 @@ default and reported as a null result.
 
 ## 3. Results
 
-| Milestone | Set | Split | Score | Logged |
+| Checkpoint | Set | Split | Score | Logged |
 |---|---|---|---|---|
-| A0 (first engine) | ARC-AGI-1 | evaluation (400) | 3.75% | yes |
-| A0 | ARC-AGI-2 | evaluation (120) | 0% | yes |
-| A1 (operations frozen) | ARC-AGI-1 | evaluation (400) | 7.75% | yes |
-| A1 | ARC-AGI-2 | evaluation (120) | 0% | yes |
-| **A2 (laws about things)** | ARC-AGI-1 | evaluation (400) | **10.0%** | yes |
-| A2 | ARC-AGI-2 | evaluation (120) | 0% | yes |
-| A2 | ARC-AGI-1 | training (400) | 28.2% | dev split |
-| A2 | ARC-AGI-2 training, the 233 tasks in no evaluation split (never looked at in development) | held-out check | 1.3% (A1 code: 0.4%) | |
+| C0 (first engine) | ARC-AGI-1 | evaluation (400) | 3.75% | yes |
+| C0 | ARC-AGI-2 | evaluation (120) | 0% | yes |
+| C1 (operations frozen) | ARC-AGI-1 | evaluation (400) | 7.75% | yes |
+| C1 | ARC-AGI-2 | evaluation (120) | 0% | yes |
+| **C2 (laws about things)** | ARC-AGI-1 | evaluation (400) | **10.0%** | yes |
+| C2 | ARC-AGI-2 | evaluation (120) | 0% | yes |
+| C2 | ARC-AGI-1 | training (400) | 28.2% | dev split |
+| C2 | ARC-AGI-2 training, the 233 tasks in no evaluation split (never looked at in development) | held-out check | 1.3% (C1 code: 0.4%) | |
 
 Reproduce: `python -m ultron arc --split evaluation --sets arc1 arc2 --workers 4`.
 
@@ -145,9 +145,9 @@ Reproduce: `python -m ultron arc --split evaluation --sets arc1 arc2 --workers 4
 - No GPU, no network.
 
 **It mostly knows when it doesn't know.**
-- At A2, Ultron answered 52 evaluation tasks and was right on 40. On the other 348 it
+- At C2, Ultron answered 52 evaluation tasks and was right on 40. On the other 348 it
   gave no answer rather than a guess.
-- At A1 it was right on 31 of 33 answered. The laws about things answer more, and are
+- At C1 it was right on 31 of 33 answered. The laws about things answer more, and are
   wrong more often.
 
 **Transparency.** Every answer comes with its program in words, for example
