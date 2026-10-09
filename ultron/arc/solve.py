@@ -123,9 +123,15 @@ def solve(train, budget=BUDGET, max_depth=MAX_DEPTH, want=2):
     return [found[i] for i in order], spent
 
 
+GUIDE = [None]          # intuition (guide.py), when one has been learned and switched on
+
+
 def _search(train, budget, max_depth, want):
     ctx = context(train)
     reg = O.registry(ctx)
+    if GUIDE[0] is not None:
+        from . import guide
+        reg = guide.order(GUIDE[0], train, reg)
     for name, f, _ in reg:
         _OPS[name] = f
     ins = [i for i, _ in train]

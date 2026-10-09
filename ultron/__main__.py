@@ -87,6 +87,10 @@ def cmd_arc(args):
     out = os.path.join("reports", f"arc_{args.split}.md")
     with open(out, "w") as f:
         f.write(harness.report(results))
+    import json as _json
+    with open(os.path.join("reports", f"arc_{args.split}.json"), "w") as f:
+        _json.dump([{k: v for k, v in r.items()} for r in results], f, indent=0, default=str)
+        f.write("\n")
     print(f"written to {out}")
 
 

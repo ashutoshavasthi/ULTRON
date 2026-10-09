@@ -63,3 +63,6 @@ identical on any machine.
 | continue_pattern | A repeating picture continued to a new size |
 | count_parts, count_things | Counting panels and things |
 | cell features: neighbour colour sets (orthogonal, diagonal), uniform row or column, size order of the thing | What a cell can see around it |
+| each_thing (flip, rotate or transpose every thing in place) | "Each one does the same" |
+| slide_things | Things move as wholes until they bump into something |
+| frame_things, hollow_things | Borders around things; things as outlines |

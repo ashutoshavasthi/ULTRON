@@ -419,6 +419,81 @@ def count_things(g, c):
     return np.full((1, n), c, dtype=g.dtype)
 
 
+# --------------------------------------------------------------- each thing
+def each_thing(g, p):
+    """Every thing is turned in place (p = (how, multicolour); how: flip_h, flip_v,
+    rot180, transpose) inside its own box."""
+    how, multi = p
+    bg = background(g)
+    out = np.full_like(g, bg)
+    ts = things(g, bg, multicolour=multi, diagonal=multi)
+    if not ts:
+        return None
+    covered = np.zeros(g.shape, dtype=bool)
+    for t in ts:
+        patch = {"flip_h": t.patch[:, ::-1], "flip_v": t.patch[::-1],
+                 "rot180": t.patch[::-1, ::-1], "transpose": t.patch.T}[how]
+        if patch.shape != t.patch.shape:
+            return None
+        region = out[t.r0:t.r1, t.c0:t.c1]
+        m = patch != bg
+        region[m] = patch[m]
+        covered[t.r0:t.r1, t.c0:t.c1] |= m
+    return None if (out == g).all() else out
+
+
+def slide_things(g, d):
+    """Every thing slides (keeping its shape) toward one side until it meets the edge or
+    another thing (d: 'down', 'up', 'left', 'right')."""
+    bg = background(g)
+    k = {"down": 0, "right": 1, "up": 2, "left": 3}[d]
+    a = np.rot90(g, k).copy()
+    ts = sorted(things(a, bg, diagonal=True, multicolour=True), key=lambda t: -t.r1)
+    out = np.full_like(a, bg)
+    h = a.shape[0]
+    for t in ts:
+        cells = [(r, c, a[r, c]) for r, c in t.cells]
+        step = 0
+        while all(r + step + 1 < h and out[r + step + 1, c] == bg for r, c, _ in cells):
+            step += 1
+        for r, c, v in cells:
+            out[r + step, c] = v
+    out = np.rot90(out, -k)
+    return None if (out == g).all() else out
+
+
+def frame_things(g, c):
+    """Draw a frame of colour c around every thing (just outside its box)."""
+    bg = background(g)
+    out = g.copy()
+    h, w = g.shape
+    ts = things(g, bg, diagonal=True, multicolour=True)
+    if not ts:
+        return None
+    for t in ts:
+        for r in range(t.r0 - 1, t.r1 + 1):
+            for x in range(t.c0 - 1, t.c1 + 1):
+                if 0 <= r < h and 0 <= x < w and out[r, x] == bg and not (
+                        t.r0 <= r < t.r1 and t.c0 <= x < t.c1):
+                    out[r, x] = c
+    return None if (out == g).all() else out
+
+
+def hollow_things(g, p=None):
+    """Keep only each thing's outline: cells with all four neighbours in the same thing
+    become background."""
+    bg = background(g)
+    out = g.copy()
+    h, w = g.shape
+    for r in range(1, h - 1):
+        for x in range(1, w - 1):
+            v = g[r, x]
+            if v != bg and g[r - 1, x] == v and g[r + 1, x] == v and g[r, x - 1] == v \
+                    and g[r, x + 1] == v:
+                out[r, x] = bg
+    return None if (out == g).all() else out
+
+
 # --------------------------------------------------------------- parts and logic
 def _pair(g, how):
     """Two equal parts of the grid: split by separator lines, or as halves."""
@@ -522,6 +597,11 @@ def registry(ctx):
            ("continue_pattern", continue_pattern, ctx["ratios"]),
            ("count_parts", count_parts, [None]),
            ("count_things", count_things, cols),
+           ("each_thing", each_thing, [(h, m) for m in (False, True)
+                                       for h in ("flip_h", "flip_v", "rot180", "transpose")]),
+           ("slide_things", slide_things, ["down", "up", "left", "right"]),
+           ("frame_things", frame_things, cols),
+           ("hollow_things", hollow_things, [None]),
            ("extend_rays", extend_rays, [(c, d) for c in ctx["in_colours"]
                                          for d in ("up", "down", "left", "right", "all")])]
     return [(n, f, p) for n, f, ps in ops for p in ps]

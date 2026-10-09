@@ -17,9 +17,10 @@ from . import data, solve
 LOG = os.path.join(data.ROOT, "reports", "arc_runs.log")
 
 
-def score_set(name, split, limit=None, budget=solve.BUDGET, scoring=False):
-    tasks = data.load(name, split, i_am_scoring=scoring)
-    ids = sorted(tasks)[:limit] if limit else sorted(tasks)
+def score_set(name, split, limit=None, budget=solve.BUDGET, scoring=False, ids=None,
+              tasks=None):
+    tasks = tasks or data.load(name, split, i_am_scoring=scoring)
+    ids = ids or (sorted(tasks)[:limit] if limit else sorted(tasks))
     rows, total, started = [], 0.0, time.time()
     for tid in ids:
         t = tasks[tid]
@@ -31,6 +32,7 @@ def score_set(name, split, limit=None, budget=solve.BUDGET, scoring=False):
         s = sum(ok) / len(ok)
         total += s
         rows.append({"task": tid, "score": s, "program": solve.show(used[0]) if used else None,
+                     "ops": [n for n, _ in used[0]] if used else [],
                      "found": bool(used), "operations": spent,
                      "seconds": round(time.time() - t0, 2)})
     result = {"set": data.SETS[name], "split": split, "tasks": len(ids), "score": total,
@@ -70,3 +72,11 @@ def report(results):
         for x in solved:
             lines.append(f"| {x['task']} | `{x['program']}` |")
     return "\n".join(lines) + "\n"
+
+
+def learn_guide(result, tasks):
+    """Intuition from solved training tasks: their features and the operations used."""
+    from . import guide
+    solved = [(guide.task_features(tasks[r["task"]]["train"]), r["ops"])
+              for r in result["rows"] if r["score"] > 0 and r["ops"]]
+    return guide.learn(solved)
