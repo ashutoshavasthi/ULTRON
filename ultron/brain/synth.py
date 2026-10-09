@@ -97,19 +97,19 @@ def _each(f, *vecs):
     return tuple(out)
 
 
-def _lists(s, at, consider, steps, ulibs, libs, library):
+def _lists(s, at, consider, steps, ulibs, libs, library, cost=lambda law: 1):
     from .dsl import RELS, apply_step, keep
     for L, lv in list(at(LIST, s - 1)):
         consider(("len", L), INT, tuple(len(x) for x in lv), s)
-    for F in list(steps) + [("call1", l.name) for l in ulibs]:
-        for L, lv in list(at(LIST, s - 2)):
+    for F, fc in [(F, 1) for F in steps] + [(("call1", l.name), cost(l)) for l in ulibs]:
+        for L, lv in list(at(LIST, s - 1 - fc)):
             consider(("map", F, L), LIST,
                      _each(lambda l: tuple(apply_step(F, x, None, library) for x in l), lv), s)
     for law in libs:
-        for ts in range(1, s - 2):
+        for ts in range(1, s - 1 - cost(law)):
             for t, tv in list(at(INT, ts)):
                 F = ("call", law.name, t)
-                for L, lv in list(at(LIST, s - 2 - ts)):
+                for L, lv in list(at(LIST, s - 1 - cost(law) - ts)):
                     consider(("map", F, L), LIST, _each(
                         lambda l, tt: tuple(apply_step(F, x, tt, library) for x in l), lv, tv), s)
     for i in range(1, s - 2):
@@ -120,6 +120,8 @@ def _lists(s, at, consider, steps, ulibs, libs, library):
                     consider(("filter", rel, t, L), LIST, _each(
                         lambda l, tt: tuple(x for x in l if keep(rel, x, tt)), lv, tv), s)
         for law in libs:
+            if cost(law) != 1:
+                continue
             for L, lv in list(at(LIST, i)):
                 for x, xv in list(at(INT, j)):
                     def fold(l, acc, name=law.name):
@@ -135,7 +137,7 @@ def _lists(s, at, consider, steps, ulibs, libs, library):
 
 
 def synthesize(inputs, targets, var_types, out_type, library, consts=(0, 1),
-               max_size=7, max_bank=60000, rivals=0, extra=(), exceptions=0, only=None):
+               max_size=7, max_bank=60000, rivals=0, extra=(), exceptions=0, costs=None):
     """Search for the smallest program mapping each inputs[i] to targets[i].
 
     extra: invented primitives the brain may use (e.g. "down": one step lower,
@@ -145,11 +147,15 @@ def synthesize(inputs, targets, var_types, out_type, library, consts=(0, 1),
     the shortest whole description wins, so an exact law is preferred unless it is
     much longer. This is how a few wrongly recorded experiences stop being fatal.
     """
+    if costs:
+        # the budget is measured in the same currency as the description: an unexpected
+        # law may cost up to 3 more to name, so the budget grows by that much
+        max_size += 3
     with dsl.limits(20000, 10 ** 7):
         if exceptions or len(inputs) <= SAMPLE:
             return _synthesize(inputs, targets, var_types, out_type, library, consts,
                                max_size, max_bank, rivals, tuple(extra), exceptions,
-                               only=only)
+                               costs=costs)
         # imagine candidates on a few examples first; check every example only for the
         # candidates that get those right (a law is still checked on everything)
         n = len(inputs)
@@ -167,7 +173,7 @@ def synthesize(inputs, targets, var_types, out_type, library, consts=(0, 1),
             return True
         res = _synthesize([inputs[i] for i in pick], [targets[i] for i in pick], var_types,
                           out_type, library, consts, max_size, max_bank, rivals,
-                          tuple(extra), 0, verify=full, only=only)
+                          tuple(extra), 0, verify=full, costs=costs)
         return res
 
 
@@ -175,7 +181,7 @@ SAMPLE = 8      # examples a candidate is first imagined on
 
 
 def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size, max_bank,
-                n_rivals, extra, n_exceptions=0, verify=None, only=None):
+                n_rivals, extra, n_exceptions=0, verify=None, costs=None):
     target = tuple(targets)
     names = sorted(var_types)
     bank = {INT: {}, BOOL: {}, LIST: {}}    # type -> size -> [(expr, vec)]
@@ -217,9 +223,12 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
         return bank[typ].get(s, [])
 
     libs, ulibs = library.search_laws()     # laws that behave the same, once
-    if only is not None:                    # intuition's first guess: just these laws
-        libs = [l for l in libs if l.name in only]
-        ulibs = [l for l in ulibs if l.name in only]
+    # what naming each law costs: 1 for all (counting nodes), or less for a law its
+    # intuition expects here than for one it doesn't (description length in bits)
+    cost = (lambda law: 1) if not costs else (lambda law: costs.get(law.name, 1))
+    dear = sorted({cost(l) for l in libs + ulibs} - {1})
+    libs1 = [l for l in libs if cost(l) == 1]
+    ulibs1 = [l for l in ulibs if cost(l) == 1]
     unary = [("succ", lambda x: x + 1), ("pred", lambda x: x - 1 if x > 0 else 0)]
     steps = [("succ",), ("pred",)]
     if "down" in extra:
@@ -264,8 +273,14 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
             for e, v in list(at(INT, s - 1)):
                 for name, f in unary:
                     consider((name, e), INT, tuple(f(x) for x in v), s)
-                for law in ulibs:
+                for law in ulibs1:
                     consider(("call1", law.name, e), INT, _vec_call1(law.name, v, library), s)
+            for k in dear:                  # laws it didn't expect cost more to name
+                for e, v in list(at(INT, s - k)):
+                    for law in ulibs:
+                        if cost(law) == k:
+                            consider(("call1", law.name, e), INT,
+                                     _vec_call1(law.name, v, library), s)
             for e, v in list(at(BOOL, s - 1)):
                 consider(("not", e), BOOL, tuple(not x for x in v), s)
 
@@ -276,12 +291,21 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
                     for b, bv in list(at(INT, j)):
                         consider(("eq", a, b), BOOL, tuple(x == y for x, y in zip(av, bv)), s)
                         consider(("lt", a, b), BOOL, tuple(x < y for x, y in zip(av, bv)), s)
-                        for law in libs:
+                        for law in libs1:
                             consider(("call", law.name, a, b), INT,
                                      _vec_call(law.name, av, bv, library), s)
                 for a, av in list(at(BOOL, i)):
                     for b, bv in list(at(BOOL, j)):
                         consider(("and", a, b), BOOL, tuple(x and y for x, y in zip(av, bv)), s)
+            for k in dear:
+                for i in range(1, s - k):
+                    j = s - k - i
+                    for a, av in list(at(INT, i)):
+                        for b, bv in list(at(INT, j)):
+                            for law in libs:
+                                if cost(law) == k:
+                                    consider(("call", law.name, a, b), INT,
+                                             _vec_call(law.name, av, bv, library), s)
 
             # "if c then a else b" (simple conditions only: size 3 or less)
             for i in range(1, min(3, s - 3) + 1):
@@ -296,14 +320,17 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
             # rows of things: how many, each one stepped, those below/above/equal to
             # something, everything combined with a law, two rows paired by a law
             if bank[LIST]:
-                _lists(s, at, consider, steps, ulibs, libs, library)
+                _lists(s, at, consider, steps, ulibs, libs, library, cost)
+                if dear:
+                    _lists_dear(s, at, consider, libs, library, cost)
 
             # repetition: "start at x and do F, n times"
-            options = [(F, 1, None) for F in steps] + [(("call1", l.name), 1, None) for l in ulibs]
+            options = [(F, 1, None) for F in steps] + \
+                [(("call1", l.name), cost(l), None) for l in ulibs]
             for law in libs:
-                for ts in range(1, s - 3):
+                for ts in range(1, s - 2 - cost(law)):
                     for t, tv in list(at(INT, ts)):
-                        options.append((("call", law.name, t), 1 + ts, tv))
+                        options.append((("call", law.name, t), cost(law) + ts, tv))
             for F, f_cost, tv in options:
                 rest = s - 1 - f_cost
                 for ns in range(1, rest):
@@ -317,3 +344,25 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
     except _Done:
         return result(False)
     return result(True)
+
+
+def _lists_dear(s, at, consider, libs, library, cost):
+    """fold and zip with laws that cost more than 1 to name."""
+    for law in libs:
+        k = cost(law)
+        if k == 1:
+            continue
+        for i in range(1, s - 1 - k):
+            j = s - 1 - k - i
+            for L, lv in list(at(LIST, i)):
+                for x, xv in list(at(INT, j)):
+                    def fold(l, acc, name=law.name):
+                        for v in l:
+                            acc = dsl.check(library.call(name, acc, v))
+                        return acc
+                    consider(("fold", law.name, L, x), INT, _each(fold, lv, xv), s)
+            for A, av in list(at(LIST, i)):
+                for B, bv in list(at(LIST, j)):
+                    consider(("zip", law.name, A, B), LIST, _each(
+                        lambda a, b, name=law.name: tuple(dsl.check(library.call(name, p, q))
+                                                          for p, q in zip(a, b)), av, bv), s)

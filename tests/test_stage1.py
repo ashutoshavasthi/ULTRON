@@ -127,3 +127,23 @@ def test_sleep_finds_a_shared_piece_only_when_it_pays():
     # pieces with nothing in common: no piece is worth writing down
     lone = Library()
     assert abstraction.sleep([("succ", v("a")), ("pred", v("b"))], lone)[0] == []
+
+
+def test_costs_absent_change_nothing_and_cost_counts_nodes():
+    from ultron.brain.dsl import INT, Law, Library, cost, size
+    from ultron.brain.synth import synthesize
+    lib = Library()
+    lib.add(Law("merge", ["a", "b"], ("iter", ("succ",), ("var", "b"), ("var", "a")), INT))
+    rng = random.Random(8)
+    xs = [{"a": rng.randint(0, 9), "b": rng.randint(0, 9)} for _ in range(12)]
+    ys = [x["a"] + x["b"] + 1 for x in xs]
+    plain = synthesize(xs, ys, {"a": INT, "b": INT}, INT, lib)
+    same = synthesize(xs, ys, {"a": INT, "b": INT}, INT, lib, costs={})
+    assert plain.expr == same.expr and plain.steps == same.steps
+    assert cost(plain.expr, None) == size(plain.expr) == cost(plain.expr, {"merge": 1})
+    # a law it expects is cheap to name; an unexpected one dearer, still found
+    dear = synthesize(xs, ys, {"a": INT, "b": INT}, INT, lib, costs={"merge": 3})
+    assert dear.expr is not None and all(
+        __import__("ultron.brain.dsl", fromlist=["evaluate"]).evaluate(dear.expr, x, lib) == y
+        for x, y in zip(xs, ys))
+    assert cost(dear.expr, {"merge": 3}) >= size(dear.expr)

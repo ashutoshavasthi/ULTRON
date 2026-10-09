@@ -384,6 +384,43 @@ def size(expr):
     raise ValueError(tag)
 
 
+def cost(expr, costs=None):
+    """Description length when naming a law costs what Ultron's intuition says (a law it
+    expects here is cheap to name, one it doesn't is dearer). With no costs this is the
+    plain count of nodes (size)."""
+    if not costs:
+        return size(expr)
+    c = lambda name: costs.get(name, 1)
+    tag = expr[0]
+    if tag in ("var", "const"):
+        return 1
+    if tag in ("succ", "pred", "down", "not", "len"):
+        return 1 + cost(expr[1], costs)
+    if tag in ("and", "eq", "lt"):
+        return 1 + cost(expr[1], costs) + cost(expr[2], costs)
+    if tag == "call":
+        return c(expr[1]) + cost(expr[2], costs) + cost(expr[3], costs)
+    if tag == "call1":
+        return c(expr[1]) + cost(expr[2], costs)
+    if tag == "ite":
+        return 1 + sum(cost(e, costs) for e in expr[1:])
+    if tag == "iter":
+        F = expr[1]
+        f_cost = (c(F[1]) + cost(F[2], costs) if F[0] == "call" else
+                  c(F[1]) if F[0] == "call1" else 1)
+        return 1 + f_cost + cost(expr[2], costs) + cost(expr[3], costs)
+    if tag == "map":
+        F = expr[1]
+        f_cost = (c(F[1]) + cost(F[2], costs) if F[0] == "call" else
+                  c(F[1]) if F[0] == "call1" else 1)
+        return 1 + f_cost + cost(expr[2], costs)
+    if tag == "filter":
+        return 2 + cost(expr[2], costs) + cost(expr[3], costs)
+    if tag in ("fold", "zip"):
+        return 1 + c(expr[1]) + cost(expr[2], costs) + cost(expr[3], costs)
+    raise ValueError(tag)
+
+
 def show(expr):
     """Readable form of a program."""
     tag = expr[0]

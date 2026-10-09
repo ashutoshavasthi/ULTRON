@@ -116,6 +116,7 @@ def hunches(inputs, outputs, names, library, laws):
     way round, or on one input twice). A quick look, not a search."""
     y = np.log1p(np.abs(np.array([float(v) for v in outputs])))
     out = []
+    names = list(names)
     pairs = [(names[0], names[1]), (names[1], names[0]), (names[0], names[0]),
              (names[1], names[1])] if len(names) > 1 else [(names[0], names[0])]
     for law in laws:
@@ -197,26 +198,19 @@ def first_guess(intuition, inputs, outputs, names, k=3, library=None):
     return sorted(p, key=lambda n: (-p[n], n))[:k]
 
 
+MAX_EXTRA = 3       # an unexpected law costs at most this much more to name
 
-def guided(inputs, targets, var_types, out_type, library, model, k=3, **kw):
-    """Search with intuition: first only with the laws it guesses; if that finds a law
-    of size s, make sure nothing shorter exists with all its laws (search everything up
-    to size s-1), so the shortest description still wins; if the guess finds nothing,
-    search everything. Returns (SearchResult, steps in all)."""
-    from .synth import synthesize
-    names = sorted(var_types)
-    if model is None or len(names) != 2 or out_type != INT:
-        r = synthesize(inputs, targets, var_types, out_type, library, **kw)
-        return r, r.steps
-    guess = set(first_guess(model, inputs, targets, names, k, library))
-    r1 = synthesize(inputs, targets, var_types, out_type, library, only=guess, **kw)
-    if r1.expr is None:
-        r2 = synthesize(inputs, targets, var_types, out_type, library, **kw)
-        return r2, r1.steps + r2.steps
-    s = dsl.size(r1.expr)
-    if s <= 1:
-        return r1, r1.steps
-    kw2 = dict(kw)
-    kw2["max_size"] = s - 1
-    r0 = synthesize(inputs, targets, var_types, out_type, library, **kw2)
-    return (r0 if r0.expr is not None else r1), r1.steps + r0.steps
+
+def costs(model, inputs, outputs, names, library):
+    """What naming each law costs for this task, in whole units: description length in
+    bits given what intuition expects. The law it expects most costs 1 (as before); a law
+    it thinks 2^k times less likely costs 1 + k (at most 1 + MAX_EXTRA, so nothing is
+    ever out of reach)."""
+    import math as _m
+    if model is None:
+        return None
+    p = model.guess(look(inputs, outputs, names, library, model.names))
+    total = sum(p.values()) or 1.0
+    q = {n: max(v / total, 1e-9) for n, v in p.items()}
+    best = max(q.values())
+    return {n: 1 + min(MAX_EXTRA, int(_m.floor(_m.log2(best / v)))) for n, v in q.items()}

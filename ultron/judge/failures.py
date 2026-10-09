@@ -159,6 +159,42 @@ def library_learning(brain):
                       "(x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.")
 
 
+def intuition_prior(brain):
+    """S2, intuition alone: description length in bits given what its intuition expects
+    (a law it expects is cheap to name). Does that cut search, without losing laws or
+    choosing worse ones? Held-out: the lab's laws and dreams from an unseen seed."""
+    from ..brain import intuition
+    from ..brain.dsl import size
+    model = intuition.learn(brain.library, seed=0)
+    rng = random.Random(7)
+    tasks = []
+    for label, f in TARGETS[:-1]:
+        xs = _pairs(rng, 20)
+        tasks.append((label, xs, [f(x["a"], x["b"]) for x in xs]))
+    drng = random.Random(12345)
+    while len(tasks) < len(TARGETS) - 1 + 30:
+        d = intuition.dream(brain.library, drng)
+        if d is not None:
+            tasks.append(("dream", d[1], d[2]))
+    plain_steps = prior_steps = lost = worse = 0
+    for label, xs, ys in tasks:
+        p = synthesize(xs, ys, {"a": INT, "b": INT}, INT, brain.library)
+        c = intuition.costs(model, xs, ys, ["a", "b"], brain.library)
+        q = synthesize(xs, ys, {"a": INT, "b": INT}, INT, brain.library, costs=c)
+        plain_steps += p.steps
+        prior_steps += q.steps
+        lost += p.expr is not None and q.expr is None
+        worse += p.expr is not None and q.expr is not None and size(q.expr) > size(p.expr)
+    ratio = plain_steps / max(1, prior_steps)
+    rows = [_row(f"{len(tasks)} held-out laws (lab laws and unseen dreams)",
+                 f"search {ratio:.1f}x less with the prior; {lost} lost, {worse} longer",
+                 ratio >= 10 and lost == 0, plain=plain_steps, prior=prior_steps)]
+    return experiment("intuition", "Does measuring description length against what its "
+                      "intuition expects cut search (S2, intuition alone)?", "held-out set",
+                      rows, "Kept out of the brain until it pays: a wrong guess pushes a "
+                      "needed law to a dearer level, and search grows exponentially per level.")
+
+
 def wrong_labels(brain):
     """Some experiences recorded wrongly: does it still find the law (with Ultron's own
     policy: a law plus a list of exceptions, if that is the shorter description)?"""
@@ -539,7 +575,7 @@ def false_laws(brain):
                       "audit", rows)
 
 
-EXPERIMENTS = [program_size, library_learning, wrong_labels, hidden_cause, few_examples, program_compute,
+EXPERIMENTS = [program_size, library_learning, intuition_prior, wrong_labels, hidden_cause, few_examples, program_compute,
                noise_ramp, noise_unknown, outliers, distractors, confounder, magnitudes, changing_world,
                law_forms, eyes_stress, false_laws]
 
