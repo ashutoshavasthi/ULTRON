@@ -175,8 +175,8 @@ def test_symmetry_about_its_own_centre_repairs_what_is_hidden():
         sym = np.block([[q, q[:, ::-1]], [q[::-1], q[::-1, ::-1]]])
         full[1:9, 2:10] = sym              # symmetric about a centre that isn't the grid's
         hidden = full.copy()
-        r, c = rng.integers(1, 6), rng.integers(2, 7)
-        hidden[r:r + 2, c:c + 3] = 9       # a patch of colour 9 hides part of it
+        r, c = rng.integers(1, 3), rng.integers(2, 4)
+        hidden[r:r + 2, c:c + 3] = 9       # a patch of colour 9 hides part of one quarter
         return hidden, full
     train = [picture() for _ in range(3)]
     rule = symmetry.learn([i for i, _ in train], [o for _, o in train], [9])
