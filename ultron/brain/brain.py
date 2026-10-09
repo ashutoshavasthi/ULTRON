@@ -9,7 +9,7 @@ import json
 
 from . import units as U
 from .curiosity import Curiosity
-from .dsl import BOOL, Law, Library, safe_evaluate, show, size
+from .dsl import BOOL, LIST, Law, Library, safe_evaluate, show, size
 from .invariants import (ConservationLaw, QuantityLaw, SumLaw, law_from_json,
                          search_conservation, search_invariant, search_sum_invariant)
 from .invariants import monomial_str
@@ -59,6 +59,7 @@ class Brain:
         self.eyes = None                    # learned in Phase 3 (senses/eyes.py)
         self.exceptions = {}                # spec -> experiences its law doesn't fit
         self.ambiguous = {}                 # spec -> equally simple rival laws
+        self.quantity_rivals = {}           # spec -> their powers (to design experiments)
         self.group_fails = {}               # (spec, object) -> failures in a row
         self.since = {}                     # spec -> first experience after the world changed
         self.active = True                  # design experiments when ideas disagree
@@ -119,14 +120,17 @@ class Brain:
     def unsure(self, options):
         """Kinds of experience where I hold an idea I haven't confirmed yet, or where I
         haven't yet watched enough to test any idea at all (a few readings of one cup
-        can't be boring: they can't say anything yet)."""
+        can't be boring: they can't say anything yet). A fair look at a world of objects
+        is several WHOLE objects: the one I'm still watching doesn't count yet."""
         from .kinds import MIN_GROUPS, sequences
         for name in options:
             spec = self.memory.specs.get(name)
             if spec is not None and spec.kind == "sequence" and name not in self.slaws:
-                seqs = sequences(self.memory.of(name), spec.target, spec.order_by,
-                                 spec.group_by)
-                if sum(1 for xs, ys in seqs.values() if len(ys) >= 4) < MIN_GROUPS:
+                eps = self.memory.of(name)
+                seqs = sequences(eps, spec.target, spec.order_by, spec.group_by)
+                current = eps[-1].get(spec.group_by) if eps else None
+                whole = sum(1 for g, (xs, ys) in seqs.items() if len(ys) >= 4 and g != current)
+                if whole < MIN_GROUPS:
                     return name
             if spec is None or spec.kind != "program" or self.hypotheses.get(name) is None:
                 continue
@@ -149,6 +153,13 @@ class Brain:
         agree everywhere I could look, a kind of situation I have never tried: my
         ideas might all be wrong in the same way there."""
         if not self.active or not options:
+            return None
+        spec = self.memory.specs.get(spec_name)
+        if spec is not None and spec.kind == "quantity" and self.quantity_rivals.get(spec_name):
+            pick = self._separate_quantity_laws(spec, options)
+            if pick is not None:
+                return pick
+        if spec is not None and spec.kind == "quantity":
             return None
         expr = self.hypotheses.get(spec_name)
         ideas = ([expr] if expr is not None else []) + self.rivals.get(spec_name, [])
@@ -174,6 +185,47 @@ class Brain:
                 self.note("design", f"{spec_name}: my ideas agree, but I've never tried a "
                                     f"situation like {inputs}; I'll set that up")
                 return inputs
+        return None
+
+    def _separate_quantity_laws(self, spec, options):
+        """Equally simple measurement laws fit everything seen (two quantities always
+        moved together): set up the experiment where their predictions differ most."""
+        law = self.qlaws.get(spec.name)
+        if law is None or law.kind != "global":
+            return None
+        eps = self.memory.of(spec.name)
+        laws = [law]
+        for powers in self.quantity_rivals[spec.name]:
+            vals = []
+            for ep in eps:
+                v = 1.0
+                for q, p in powers.items():
+                    v *= ep[q] ** p if ep.get(q) else float("nan")
+                vals.append(v)
+            vals = sorted(v for v in vals if v == v)
+            if vals:
+                laws.append(QuantityLaw(spec.name, powers, "global",
+                                        constant=vals[len(vals) // 2]))
+        if len(laws) < 2:
+            return None
+        best, best_gap = None, 0.0
+        for inputs in options:
+            try:
+                preds = [l.solve(spec.target, inputs) for l in laws]
+            except (KeyError, ZeroDivisionError, ValueError, TypeError):
+                continue
+            preds = [p for p in preds if p is not None]
+            if len(preds) < 2:
+                continue
+            mean = sum(abs(p) for p in preds) / len(preds)
+            gap = (max(preds) - min(preds)) / mean if mean else 0.0
+            if gap > best_gap:
+                best, best_gap = inputs, gap
+        if best is not None and best_gap > 0.01:
+            self.note("design", f"{spec.name}: {law.formula()} and its rivals "
+                                f"{', '.join(QuantityLaw(spec.name, r, 'global').formula() for r in self.quantity_rivals[spec.name])} "
+                                f"disagree most about {best}; I'll set that up to find out")
+            return best
         return None
 
     def known_forms(self):
@@ -329,6 +381,10 @@ class Brain:
     def error(predicted, actual):
         if predicted is None:
             return 1.0
+        if isinstance(actual, (list, tuple)) or isinstance(predicted, (list, tuple)):
+            same = isinstance(actual, (list, tuple)) and isinstance(predicted, (list, tuple)) \
+                and tuple(actual) == tuple(predicted)
+            return 0.0 if same else 1.0
         if isinstance(actual, bool) or isinstance(predicted, bool):
             return 0.0 if predicted == actual else 1.0
         if isinstance(actual, int) and isinstance(predicted, int):
@@ -489,6 +545,8 @@ class Brain:
         law = Law(spec.name, sorted(spec.inputs), expr, spec.out_type, {
             "lesson": self.lesson, "experiences": len(self.memory.of(spec.name)),
             "found_after": self.found_at.get(spec.name), "size": size(expr)})
+        if any(t == LIST for t in spec.inputs.values()):
+            law.provenance["list_params"] = True
         self.library.add(law)
         self.note("confirm", f"{spec.name}: {show(expr)} predicted {CONFIRM_STREAK} new "
                              f"experiences in a row; added to my library of building blocks")
@@ -522,6 +580,7 @@ class Brain:
                                   prior_powers=self.known_forms(), precision=spec.precision,
                                   require=spec.target)
         self.search_steps[name] = self.search_steps.get(name, 0) + result.steps
+        self.quantity_rivals[name] = list(result.rivals[:3]) if result.law is not None else []
         if result.law is not None and result.rivals:
             rivals = [QuantityLaw(name, r, "global").formula() for r in result.rivals[:3]]
             if self.ambiguous.get(name) != rivals:

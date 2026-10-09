@@ -1,0 +1,564 @@
+[
+ {
+  "name": "program size",
+  "question": "How big a law can it find by search?",
+  "dial": "the law's size",
+  "rows": [
+   {
+    "level": "a+b",
+    "outcome": "get_paid(a, b)",
+    "ok": true,
+    "steps": 356,
+    "seconds": 0.01
+   },
+   {
+    "level": "a\u00b7b",
+    "outcome": "groups(a, b)",
+    "ok": true,
+    "steps": 360,
+    "seconds": 0.0
+   },
+   {
+    "level": "a\u00b7b+a",
+    "outcome": "groups(a, succ(b))",
+    "ok": true,
+    "steps": 1920,
+    "seconds": 0.06
+   },
+   {
+    "level": "a\u00b7b+a+b",
+    "outcome": "pred(groups(succ(a), succ(b)))",
+    "ok": true,
+    "steps": 116117,
+    "seconds": 3.75
+   },
+   {
+    "level": "a\u00b2+b",
+    "outcome": "get_paid(b, square(a))",
+    "ok": true,
+    "steps": 2071,
+    "seconds": 0.01
+   },
+   {
+    "level": "(a+b)\u00b2",
+    "outcome": "square(get_paid(a, b))",
+    "ok": true,
+    "steps": 2089,
+    "seconds": 0.01
+   },
+   {
+    "level": "a\u00b7b\u00b2+a",
+    "outcome": "groups(a, succ(square(b)))",
+    "ok": true,
+    "steps": 17372,
+    "seconds": 0.29
+   },
+   {
+    "level": "a\u00b3+b\u00b2",
+    "outcome": "get_paid(square(b), groups(a, square(a)))",
+    "ok": true,
+    "steps": 915958,
+    "seconds": 64.54
+   },
+   {
+    "level": "(a+1)(b+2)(a+b)",
+    "outcome": "nothing found",
+    "ok": false,
+    "steps": 738820,
+    "seconds": 51.12
+   }
+  ],
+  "breakpoint": "(a+1)(b+2)(a+b)",
+  "note": "Search is size-ordered and exhaustive: cost grows exponentially with the size of the law.",
+  "seconds": 119.8
+ },
+ {
+  "name": "wrong labels (programs)",
+  "question": "If some experiences are recorded wrongly, does it still find multiplication?",
+  "dial": "share of wrong records",
+  "rows": [
+   {
+    "level": "0% wrong",
+    "outcome": "groups(a, b)",
+    "ok": true
+   },
+   {
+    "level": "5% wrong",
+    "outcome": "groups(a, b)",
+    "ok": true
+   },
+   {
+    "level": "10% wrong",
+    "outcome": "groups(a, b)",
+    "ok": true
+   },
+   {
+    "level": "20% wrong",
+    "outcome": "groups(a, b)",
+    "ok": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 196.7
+ },
+ {
+  "name": "hidden causes and noise",
+  "question": "When the outcome depends on something unseen, or on nothing, does it refuse to claim a law?",
+  "dial": "case",
+  "rows": [
+   {
+    "level": "hidden cause",
+    "outcome": "no law (right)",
+    "ok": true
+   },
+   {
+    "level": "pure noise",
+    "outcome": "no law (right)",
+    "ok": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 98.5
+ },
+ {
+  "name": "few examples",
+  "question": "How few examples does it need to find a\u00b7b+a?",
+  "dial": "examples",
+  "rows": [
+   {
+    "level": "1 examples",
+    "outcome": "pred(square(b))",
+    "ok": false
+   },
+   {
+    "level": "2 examples",
+    "outcome": "groups(a, succ(b))",
+    "ok": true
+   },
+   {
+    "level": "3 examples",
+    "outcome": "groups(a, succ(b))",
+    "ok": true
+   },
+   {
+    "level": "4 examples",
+    "outcome": "groups(a, succ(b))",
+    "ok": true
+   },
+   {
+    "level": "6 examples",
+    "outcome": "groups(a, succ(b))",
+    "ok": true
+   },
+   {
+    "level": "8 examples",
+    "outcome": "groups(a, succ(b))",
+    "ok": true
+   }
+  ],
+  "breakpoint": "1 examples",
+  "note": "Failing with very few examples is expected: many laws fit. The point is how fast it converges.",
+  "seconds": 0.1
+ },
+ {
+  "name": "compute vs data",
+  "question": "How does search time grow with more examples?",
+  "dial": "examples",
+  "rows": [
+   {
+    "level": "20 examples",
+    "outcome": "6.3 s",
+    "ok": true,
+    "seconds": 6.34
+   },
+   {
+    "level": "100 examples",
+    "outcome": "7.9 s",
+    "ok": true,
+    "seconds": 7.86
+   },
+   {
+    "level": "400 examples",
+    "outcome": "20.1 s",
+    "ok": true,
+    "seconds": 20.05
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 34.3
+ },
+ {
+  "name": "noise",
+  "question": "How noisy can measurements be before F = m\u00b7a is lost?",
+  "dial": "noise per reading (known to it)",
+  "rows": [
+   {
+    "level": "\u00b10.5%",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00b11.0%",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00b12.0%",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00b15.0%",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00b110.0%",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00b120.0%",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 0.0
+ },
+ {
+  "name": "noise unknown",
+  "question": "Not told how noisy its readings are, does it work the noise out and still find F = m\u00b7a?",
+  "dial": "noise per reading (unknown to it)",
+  "rows": [
+   {
+    "level": "\u00b11%, repeated trials",
+    "outcome": "F / (a\u00b7m) (noise measured \u00b11.3%)",
+    "ok": true
+   },
+   {
+    "level": "\u00b12%, repeated trials",
+    "outcome": "F / (a\u00b7m) (noise measured \u00b12.3%)",
+    "ok": true
+   },
+   {
+    "level": "\u00b15%, repeated trials",
+    "outcome": "F / (a\u00b7m) (noise measured \u00b14.2%)",
+    "ok": true
+   },
+   {
+    "level": "\u00b110%, repeated trials",
+    "outcome": "F / (a\u00b7m) (noise measured \u00b112.5%)",
+    "ok": true
+   },
+   {
+    "level": "\u00b120%, repeated trials",
+    "outcome": "F / (a\u00b7m) (noise measured \u00b131.0%)",
+    "ok": true
+   },
+   {
+    "level": "\u00b11%, no repeats",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00b12%, no repeats",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00b15%, no repeats",
+    "outcome": "nothing",
+    "ok": false
+   },
+   {
+    "level": "\u00b110%, no repeats",
+    "outcome": "nothing",
+    "ok": false
+   }
+  ],
+  "breakpoint": "\u00b15%, no repeats",
+  "note": "",
+  "seconds": 0.0
+ },
+ {
+  "name": "outliers",
+  "question": "If some readings are badly wrong (a slipped ruler), is F = m\u00b7a still found?",
+  "dial": "share of bad readings",
+  "rows": [
+   {
+    "level": "0.0% bad readings",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "2.5% bad readings",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "5.0% bad readings",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "10.0% bad readings",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "20.0% bad readings",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 0.0
+ },
+ {
+  "name": "irrelevant measurements",
+  "question": "If it also measures things that don't matter (colour, time of day...), does it still find F = m\u00b7a?",
+  "dial": "irrelevant quantities",
+  "rows": [
+   {
+    "level": "0 irrelevant",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true,
+    "steps": 22,
+    "seconds": 0.0
+   },
+   {
+    "level": "2 irrelevant",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true,
+    "steps": 100,
+    "seconds": 0.0
+   },
+   {
+    "level": "4 irrelevant",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true,
+    "steps": 266,
+    "seconds": 0.01
+   },
+   {
+    "level": "6 irrelevant",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true,
+    "steps": 552,
+    "seconds": 0.01
+   },
+   {
+    "level": "10 irrelevant",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true,
+    "steps": 1612,
+    "seconds": 0.04
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 0.1
+ },
+ {
+  "name": "confounders",
+  "question": "When two things always move together, does it notice it can't tell which one matters (and design an experiment)?",
+  "dial": "case",
+  "rows": [
+   {
+    "level": "mass and a label always equal",
+    "outcome": "picked F / (a\u00b7c); ambiguity noticed: True",
+    "ok": true
+   },
+   {
+    "level": "\u2026and it may choose its experiments",
+    "outcome": "F / (a\u00b7c) \u2192 F / (a\u00b7m); 1 designed",
+    "ok": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 0.0
+ },
+ {
+  "name": "magnitudes",
+  "question": "Does it work with tiny and huge numbers?",
+  "dial": "scale",
+  "rows": [
+   {
+    "level": "\u00d71e-12",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00d71e-06",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00d71",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00d71e+06",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   },
+   {
+    "level": "\u00d71e+12",
+    "outcome": "F / (a\u00b7m)",
+    "ok": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 0.0
+ },
+ {
+  "name": "a changing world",
+  "question": "When the world changes under the same name, does it notice and update?",
+  "dial": "case",
+  "rows": [
+   {
+    "level": "stiffness 50 \u2192 80",
+    "outcome": "believes 80",
+    "ok": true,
+    "noticed_change": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 0.0
+ },
+ {
+  "name": "kinds of law",
+  "question": "Which shapes of law can it explain, and then predict for a new object?",
+  "dial": "law",
+  "rows": [
+   {
+    "level": "settling (known kind)",
+    "outcome": "\u03c1(\u0394(y))",
+    "ok": true
+   },
+   {
+    "level": "straight line (known kind)",
+    "outcome": "\u03c1(\u0394(y))",
+    "ok": true
+   },
+   {
+    "level": "quadratic",
+    "outcome": "\u0394(\u0394(y))",
+    "ok": true
+   },
+   {
+    "level": "oscillation",
+    "outcome": "y[n] = a1\u00b7y[n-1] + a2\u00b7y[n-2]",
+    "ok": true
+   },
+   {
+    "level": "damped oscillation",
+    "outcome": "y[n] = a1\u00b7y[n-1] + a2\u00b7y[n-2]",
+    "ok": true
+   },
+   {
+    "level": "logistic growth",
+    "outcome": "\u03c1(\u0394(y^-1))",
+    "ok": true
+   },
+   {
+    "level": "power law t^1.5",
+    "outcome": "\u0394(y^2/3)",
+    "ok": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "Its grammar: \u0394, \u03c1, composed; applied to a power of the reading; and recurrences (the next reading a fixed mix of the last few).",
+  "seconds": 0.0
+ },
+ {
+  "name": "eyes",
+  "question": "How robust is its learned vision?",
+  "dial": "condition",
+  "rows": [
+   {
+    "level": "normal (8% noise)",
+    "outcome": "25/25 trays counted right",
+    "ok": true
+   },
+   {
+    "level": "16% noise",
+    "outcome": "1/25 trays counted right",
+    "ok": false
+   },
+   {
+    "level": "32% noise",
+    "outcome": "0/25 trays counted right",
+    "ok": false
+   },
+   {
+    "level": "big things (r 4-6)",
+    "outcome": "0/25 trays counted right",
+    "ok": false
+   },
+   {
+    "level": "faint things (30% brightness)",
+    "outcome": "2/25 trays counted right",
+    "ok": false
+   },
+   {
+    "level": "touching (gap = diameter)",
+    "outcome": "19/25 trays counted right",
+    "ok": false
+   },
+   {
+    "level": "overlapping (gap < diameter)",
+    "outcome": "14/25 trays counted right (merged blobs: a physical limit, reported only)",
+    "ok": true
+   }
+  ],
+  "breakpoint": "16% noise",
+  "note": "",
+  "seconds": 1.1
+ },
+ {
+  "name": "false laws",
+  "question": "On data with nothing to find, does it ever claim a law?",
+  "dial": "audit",
+  "rows": [
+   {
+    "level": "50 program datasets with nothing to find",
+    "outcome": "0 false laws",
+    "ok": true
+   },
+   {
+    "level": "25 sequence worlds with nothing to find",
+    "outcome": "0 false laws",
+    "ok": true
+   },
+   {
+    "level": "50 measurement datasets with nothing to find",
+    "outcome": "0 false laws",
+    "ok": true
+   },
+   {
+    "level": "25 datasets of pure noise, noise not told",
+    "outcome": "0 false laws",
+    "ok": true
+   },
+   {
+    "level": "25 hidden causes (\u00b15%) with repeated trials, noise not told",
+    "outcome": "0 false laws",
+    "ok": true
+   }
+  ],
+  "breakpoint": null,
+  "note": "",
+  "seconds": 15.2
+ }
+]

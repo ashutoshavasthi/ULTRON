@@ -413,10 +413,45 @@ def _values(episodes, names, combo):
 
 
 class InvariantResult:
-    def __init__(self, law, steps, rivals=()):
+    def __init__(self, law, steps, rivals=(), noise=None):
         self.law = law
         self.steps = steps
         self.rivals = list(rivals)  # equally short laws: the data can't decide between them
+        self.noise = noise          # when Ultron wasn't told its noise: what it worked out
+
+
+TRIAL = "trial"     # episodes with the same trial label repeat one setting
+
+
+def _robust_sd(xs):
+    med = statistics.median(xs)
+    return 1.4826 * statistics.median([abs(x - med) for x in xs])
+
+
+def estimate_noise(episodes, names):
+    """How much a reading wobbles, measured the way a scientist does: repeat the same
+    setting and see how far the repeats disagree. Returns {quantity: relative noise}, or
+    None if no setting was repeated."""
+    trials = {}
+    for ep in episodes:
+        if TRIAL in ep:
+            trials.setdefault(ep[TRIAL], []).append(ep)
+    groups = [g for g in trials.values() if len(g) >= 2]
+    if len(groups) < 3:
+        return None
+    out = {}
+    for n in names:
+        diffs = []
+        for g in groups:
+            for a, b in zip(g, g[1:]):
+                mean = (abs(a[n]) + abs(b[n])) / 2
+                if mean > 0:
+                    diffs.append((a[n] - b[n]) / mean)
+        if len(diffs) < 3:
+            return None
+        # a difference of two readings wobbles √2 times as much as one reading
+        out[n] = 1.4826 * statistics.median([abs(d) for d in diffs]) / math.sqrt(2)
+    return out
 
 
 def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=6,
@@ -428,9 +463,33 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
     still has to beat every simpler candidate on description length.
     """
     names = sorted(names)
+    noise = None
+    per_quantity = None
+    if precision is None:
+        # not told how noisy its readings are: measure it from repeated trials if it
+        # can; otherwise accept only laws that explain nearly all the variation
+        per_quantity = estimate_noise(episodes, names)
+        if per_quantity is not None:
+            noise = {"how": "measured from repeated trials", "per_quantity": per_quantity}
+            precision = max(per_quantity.values())
+        else:
+            noise = {"how": "inferred from the law itself (no repeated trials)"}
+            precision = 0.0
+    unknown = noise is not None and per_quantity is None
     steps = 0
     best = None  # (score, complexity, law)
     ties = []    # other laws exactly as short: the data can't tell them apart
+
+    def sigma(combo):
+        if per_quantity is not None:
+            return math.sqrt(sum((p * per_quantity[n]) ** 2 for n, p in zip(names, combo)))
+        return precision * math.sqrt(sum(p * p for p in combo))
+
+    logs = {}
+    if unknown:
+        for n in names:
+            xs = [ep[n] for ep in episodes]
+            logs[n] = _robust_sd([math.log(abs(x)) for x in xs]) if all(xs) else 0.0
 
     def allowed(c):
         # error propagation: each reading is off by up to ±precision, and a
@@ -438,9 +497,15 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
         # (max - min) can be twice that
         return tol + 2 * c * precision
 
-    def _tie(score, powers):
+    def _tie(score, powers, fit=0.0):
+        # with noisy readings, how well a law fits is part of its description: at equal
+        # size, a law whose scatter is much larger (relative to the noise expected) is
+        # not a real rival
         if best is not None and score == best[0][0] and powers != best[2].powers:
-            ties.append(dict(powers))
+            if fit <= 1.5 * best[3] and best[3] <= 1.5 * fit or fit == best[3]:
+                ties.append(dict(powers))
+            elif fit < best[3]:
+                ties.clear()
         elif best is None or score < best[0][0]:
             ties.clear()
 
@@ -456,18 +521,22 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
         c = sum(abs(p) for p in combo)
         spread = _spread(vals)
         robust = None
-        if spread > allowed(c) and precision > 0:
+        if unknown and spread > allowed(c):
+            robust = _explains_nearly_all(vals, [logs[n] for n in powers])
+        elif spread > allowed(c) and precision > 0:
             # real noise has tails, and some readings are simply wrong: judge the typical
             # scatter against the noise expected, and set the far-off readings aside
-            robust = _robust_constant(vals, precision * math.sqrt(sum(p * p for p in combo)))
+            robust = _robust_constant(vals, sigma(combo))
         if spread <= allowed(c) or robust is not None:
             score = c + 1
-            _tie(score, powers)
-            if best is None or (score, ordering) < best[0]:
+            fit = 0.0 if robust is None else robust[1] / max(sigma(combo), 1e-12)
+            _tie(score, powers, fit)
+            if best is None or (score, ordering) < best[0] or \
+                    ((score, ordering) == best[0] and fit < best[3] / 1.5):
                 const = sum(vals) / len(vals) if robust is None else robust[0]
                 law = QuantityLaw(etype, powers, "global", constant=const,
                                   spread=spread if robust is None else robust[1])
-                best = ((score, ordering), c, law)
+                best = ((score, ordering), c, law, fit)
             return
         if group_by is None:
             return
@@ -479,9 +548,11 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
             return
         worst = max(_spread(g) for g in multi)
         fits = {}
+        if unknown and worst > allowed(c):
+            return      # grouped laws need repeated trials to know what noise looks like
         if worst > allowed(c) and precision > 0:
-            sigma = precision * math.sqrt(sum(p * p for p in combo))
-            fits = {k: _robust_constant(g, sigma) for k, g in groups.items() if len(g) >= 2}
+            sd = sigma(combo)
+            fits = {k: _robust_constant(g, sd) for k, g in groups.items() if len(g) >= 2}
             if not fits or any(f is None for f in fits.values()):
                 return
             worst = max(f[1] for f in fits.values())
@@ -489,13 +560,13 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
             return
         if True:
             score = c + len(groups)
-            _tie(score, powers)
+            _tie(score, powers, 0.0 if best is None else best[3])
             if best is None or (score, ordering) < best[0]:
                 props = {k: (fits[k][0] if k in fits else sum(g) / len(g))
                          for k, g in sorted(groups.items())}
                 law = QuantityLaw(etype, powers, "grouped", group_by=group_by,
                                   properties=props, spread=worst)
-                best = ((score, ordering), c, law)
+                best = ((score, ordering), c, law, 0.0)
 
     tried = set()
     for pp in prior_powers:
@@ -516,7 +587,29 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
             evaluate(combo, 1, min_group_members)
     law = best[2] if best else None
     rivals = [t for t in ties if law is None or t != law.powers]
-    return InvariantResult(law, steps, rivals)
+    if unknown and law is not None:
+        noise["law_scatter"] = law.spread
+    return InvariantResult(law, steps, rivals, noise)
+
+
+EXPLAINS = 0.1      # without repeats, a law must leave at most a tenth of the spread
+
+
+def _explains_nearly_all(vals, quantity_spreads):
+    """Without knowing the noise: is this combination nearly constant compared with how
+    much the quantities in it vary (on a log scale, so products and ratios compare
+    fairly)? A few readings may be far off. Returns (constant, scatter) or None."""
+    if len(vals) < 5 or any(v <= 0 for v in vals) or not quantity_spreads:
+        return None
+    lv = [math.log(v) for v in vals]
+    sd = _robust_sd(lv)
+    if sd > EXPLAINS * min(quantity_spreads):
+        return None
+    med = statistics.median(lv)
+    inliers = [v for v, x in zip(vals, lv) if abs(x - med) <= 4 * max(sd, 1e-12)]
+    if len(inliers) < 0.75 * len(vals):
+        return None
+    return sum(inliers) / len(inliers), sd
 
 
 def search_conservation(etype, episodes, max_complexity=4, tol=1e-6):

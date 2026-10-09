@@ -21,12 +21,27 @@ save as JSON:
         where ("call", law, t)
         means "acc -> law(acc, t)"
 
+Lists (a row of things: prices in a basket, children's heights):
+
+    ("len", L)                    how many there are
+    ("map", F, L)                 do the step F to each one (F as for "iter")
+    ("filter", rel, t, L)         keep those below / above / equal to t
+    ("fold", law, L, x)           start at x and combine each one in, with a law
+                                  from the library ("the total" is a fold with the
+                                  addition Ultron invented; nobody gives it "sum")
+    ("zip", law, L1, L2)          pair two rows one by one with a law
+
 These primitives are the only thing designed by hand. Addition,
 subtraction, multiplication and place value are not here: the brain has to
 discover them as programs built from these pieces.
 """
 
-INT, BOOL = "int", "bool"
+INT, BOOL, LIST = "int", "bool", "list"
+RELS = ("below", "above", "equal")
+
+
+def keep(rel, x, t):
+    return x < t if rel == "below" else x > t if rel == "above" else x == t
 
 import contextlib
 
@@ -68,8 +83,13 @@ class Law:
         self.provenance = provenance or {}
 
     @property
+    def on_numbers(self):
+        """Its inputs are numbers (not rows): it can be a building block for numbers."""
+        return not self.provenance.get("list_params")
+
+    @property
     def is_binary_int(self):
-        return self.out_type == INT and len(self.params) == 2
+        return self.out_type == INT and len(self.params) == 2 and self.on_numbers
 
     def to_json(self):
         return {"name": self.name, "params": self.params, "expr": to_json(self.expr),
@@ -128,7 +148,8 @@ class Library:
 
     def unary_int_laws(self):
         return [self.laws[k] for k in sorted(self.laws)
-                if self.laws[k].out_type == INT and len(self.laws[k].params) == 1]
+                if self.laws[k].out_type == INT and len(self.laws[k].params) == 1
+                and self.laws[k].on_numbers]
 
     def call1(self, name, a):
         key = (name, a, len(self.inverses), len(self.cycles))
@@ -264,6 +285,23 @@ def evaluate(expr, env, library):
         F = expr[1]
         t = evaluate(F[2], env, library) if F[0] == "call" else None
         return iterate(F, evaluate(expr[2], env, library), evaluate(expr[3], env, library), t, library)
+    if tag == "len":
+        return len(evaluate(expr[1], env, library))
+    if tag == "map":
+        F = expr[1]
+        t = evaluate(F[2], env, library) if F[0] == "call" else None
+        return tuple(apply_step(F, x, t, library) for x in evaluate(expr[2], env, library))
+    if tag == "filter":
+        t = evaluate(expr[2], env, library)
+        return tuple(x for x in evaluate(expr[3], env, library) if keep(expr[1], x, t))
+    if tag == "fold":
+        acc = evaluate(expr[3], env, library)
+        for x in evaluate(expr[2], env, library):
+            acc = check(library.call(expr[1], acc, x))
+        return acc
+    if tag == "zip":
+        return tuple(check(library.call(expr[1], a, b)) for a, b in
+                     zip(evaluate(expr[2], env, library), evaluate(expr[3], env, library)))
     raise ValueError(f"unknown program node {tag!r}")
 
 
@@ -293,6 +331,17 @@ def size(expr):
         F = expr[1]
         f_cost = 1 + (size(F[2]) if F[0] == "call" else 0)
         return 1 + f_cost + size(expr[2]) + size(expr[3])
+    if tag == "len":
+        return 1 + size(expr[1])
+    if tag == "map":
+        F = expr[1]
+        return 2 + (size(F[2]) if F[0] == "call" else 0) + size(expr[2])
+    if tag == "filter":
+        return 2 + size(expr[2]) + size(expr[3])
+    if tag == "fold":
+        return 2 + size(expr[2]) + size(expr[3])
+    if tag == "zip":
+        return 2 + size(expr[2]) + size(expr[3])
     raise ValueError(tag)
 
 
@@ -318,6 +367,19 @@ def show(expr):
         f = (f"{F[1]}(·, {show(F[2])})" if F[0] == "call"
              else F[1] if F[0] == "call1" else F[0])
         return f"repeat {show(expr[2])} times [{f}] starting from {show(expr[3])}"
+    if tag == "len":
+        return f"how many in {show(expr[1])}"
+    if tag == "map":
+        F = expr[1]
+        f = (f"{F[1]}(·, {show(F[2])})" if F[0] == "call"
+             else F[1] if F[0] == "call1" else F[0])
+        return f"[{f}] each of {show(expr[2])}"
+    if tag == "filter":
+        return f"those of {show(expr[3])} {expr[1]} {show(expr[2])}"
+    if tag == "fold":
+        return f"start at {show(expr[3])} and {expr[1]} in each of {show(expr[2])}"
+    if tag == "zip":
+        return f"{expr[1]} pair by pair of {show(expr[2])} and {show(expr[3])}"
     raise ValueError(tag)
 
 

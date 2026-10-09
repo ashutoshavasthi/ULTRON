@@ -23,7 +23,7 @@ stands on this core. If the core is fragile or can't scale, the rest falls.
 | Confounders | ✅ **fixed**: a law must involve its outcome; equally short rivals are reported ("what I've seen can't tell them apart") |
 | Tiny and huge numbers | ✅ 10⁻¹² to 10¹² |
 | A changing world | ✅ **fixed**: after 3 failures that agree with each other, it re-measures (believes 80) and keeps the old value as history |
-| Shapes of law | ✅ settling, straight lines, and **quadratic (invented a new kind on its own)**; ❌ oscillation, damped oscillation, logistic growth, power law t^1.5 |
+| Shapes of law | ✅ settling, straight lines, quadratic, and now **oscillation, damped oscillation, logistic growth and t^1.5**, each predicted for a new object (E1) |
 | Eyes | ✅ 25/25 at the noise it grew up with; ❌ double noise, faint and touching things. Two redesigns tried (dilated 8- and 16-channel networks with contrast adaptation): big things 25/25 and faint 16/25, but the original trays dropped to 37/40, so they weren't adopted. **Moved to Stage 2**, where the eyes meet real footage |
 
 **Also measured:** with laws with exceptions, wrong records are survived up to **20%**, and the
@@ -105,11 +105,11 @@ grid).
 | Criterion | Status |
 |---|---|
 | R1, R3, R4, R6 | ✅ met (20% wrong records; 20% outliers; 10 irrelevant in 0.04 s; 0 false laws in 100) |
-| R2 | 🟡 ±20% when told the noise; Ultron must still **estimate the noise itself** |
-| R5 | 🟡 ties reported; a separating experiment for **measurement-law** ties is still to come |
+| R2 | ✅ met. Not told its noise, it **measures it from repeated trials** (1.3% for a true 1%, 12.5% for 10%) and finds F = m·a up to ±20%. Repeated trials also expose a ±5% hidden cause (0 false laws). Without repeats it accepts only a law that explains ≥ 90% of the spread, so it holds to ±2%: without repeating a measurement nobody can tell noise from a small hidden cause |
+| R5 | ✅ met. When two measurement laws tie, it sets up the offered experiment where they disagree most. Starting from a wrong law (a label that always equalled the mass), one designed experiment gave F = m·a |
 | S1, S2 | ❌ open |
-| E1 | 🟡 quadratic invented; oscillation, damped oscillation, logistic and t^1.5 open |
-| E2 | 🟡 grids and objects in `ultron/arc`; lists not yet in the brain's own language |
+| E1 | ✅ met. Two generic additions to the grammar of kinds: a kind applied to a **power of the reading**, and a **recurrence** (the next reading a fixed mix of the last few). Oscillation, damped oscillation, logistic growth (1/y settles) and t^1.5 (y^(2/3) rises evenly) are explained and **predicted for a new object** (lab). Lesson 27 adds pendulums, shock absorbers, yeast and funnels. The never-measured period, damping, capacity and emptying time all come out within about 0.1–0.5%, first attempt |
+| E2 | ✅ met. Rows of numbers in the brain's own language: how many, each one stepped, those above or below or equal to something, combined with a law from its library, paired by a law. Lesson 28: "the total" is found as a fold with **its own addition**. On rows 3× longer than any it saw: 120/120; lookup and nearest-neighbour baselines 0–8/30 |
 | A0, A1 | ✅ met (C0, C2) |
 | A2, A3 | ❌ open |
 
@@ -219,8 +219,8 @@ example, and it answers only when no symbolic program fits.
 |---|---|---|
 | 1a ✅ | WP1 robustness | R1, R3, R4, R6 met; lab report published |
 | 1b ✅ | WP6 data and harness; operations frozen; laws about things | **A0**, **A1** (C0–C2) |
-| 1c | R2 (noise estimated by Ultron), R5 (separating experiments for measurement ties) | R2, R5 |
-| 1d | WP5: laws of change; lists | E1, E2 |
+| 1c ✅ | R2 (noise measured by Ultron), R5 (separating experiments for measurement ties) | R2, R5 |
+| 1d ✅ | WP5: laws of change; lists | E1, E2 (lessons 27, 28) |
 | 1e | WP2 speed, then WP3 library learning on the brain's laws | S1 |
 | 1f | WP4 intuition v2 (and dreams) | S2 |
 | 1g | ARC: compose learned laws, new law families, guided search, per-puzzle MDL engine, library learning on ARC again | **A2**, then **A3** |

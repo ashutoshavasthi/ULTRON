@@ -5,7 +5,7 @@ scenes are set up in a world, and the world does what it does.
 The `goal` text is for humans reading the reports; Ultron never sees it.
 """
 
-from ..brain.dsl import BOOL, INT
+from ..brain.dsl import BOOL, INT, LIST
 from ..brain.memory import Spec
 from ..brain.perception import count, present, read_marks
 from ..env import dataworld
@@ -853,6 +853,82 @@ class SettlingLesson(_Sequences):
         return super().xs(name)
 
 
+class ChangeLesson(_Sequences):
+    number, title = 27, "Swinging, dying down, growing, emptying"
+    goal = ("Four worlds where none of Ultron's kinds fit: pendulums swing, a car's body "
+            "bobs and settles after a bump, yeast multiplies until its jar is crowded, and "
+            "funnels empty faster when full. Can it invent kinds where how the state changes "
+            "is a law of the state (the next reading a fixed mix of the last two), or a law "
+            "about a power of the reading, reuse them across worlds, and work out what it "
+            "never measured: a pendulum's period, how fast a bounce dies, a jar's capacity, "
+            "when a funnel will be empty?")
+    budget = 400
+    READS = {"swings": 8, "bumps": 8, "yeast": 10, "funnel_h": 8}
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        from ..env.sequences import Funnels, Pendulums, ShockAbsorbers, YeastJars
+        self.pendulums, self.cars = Pendulums(seed), ShockAbsorbers(seed + 1)
+        self.jars, self.funnels = YeastJars(seed + 2), Funnels(seed + 3)
+
+    def specs(self):
+        seq = lambda name, x, y, g, tol=0.01: Spec(name, "sequence", {x: None}, y, group_by=g,
+                                                  order_by=x, tol=tol, surprise=tol / 2)
+        return [seq("swings", "t", "angle", "pendulum"), seq("bumps", "t", "z", "car"),
+                seq("yeast", "t", "cells", "jar"), seq("funnel_h", "t", "h", "funnel")]
+
+    def worlds(self):
+        s = {spec.name: spec for spec in self.specs()}
+        return {"swings": (self.pendulums, self.pendulums.new_pendulum, s["swings"]),
+                "bumps": (self.cars, self.cars.new_car, s["bumps"]),
+                "yeast": (self.jars, self.jars.new_jar, s["yeast"]),
+                "funnel_h": (self.funnels, self.funnels.new_funnel, s["funnel_h"])}
+
+
+class RowsLesson(Lesson):
+    number, title = 28, "Rows of things"
+    goal = ("A market stall: a basket of fruit with a price on each, a line of children "
+            "against a height mark, a price list the day every price goes up by one, two "
+            "rows of baskets put together. Each experience is a ROW of numbers, of any "
+            "length. Can Ultron find laws about rows (how many, the total, those above a "
+            "mark, each one stepped, two rows paired) built from laws it already knows, and "
+            "use them on rows far longer than any it has seen?")
+    budget = 240
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        import random
+        self.rng = random.Random(seed)
+
+    def specs(self):
+        return [Spec("basket", "program", {"prices": LIST}, "to_pay", out_type=INT),
+                Spec("tall", "program", {"heights": LIST, "mark": INT}, "taller",
+                     out_type=INT),
+                Spec("rise", "program", {"prices": LIST}, "new_prices", out_type=LIST),
+                Spec("two_rows", "program", {"row_a": LIST, "row_b": LIST}, "together",
+                     out_type=LIST)]
+
+    def _row(self, n=None, top=None):
+        rng = self.rng
+        n = n if n is not None else rng.randint(1, 4)
+        return [rng.randint(0, top or self.top + 4) for _ in range(n)]
+
+    def scene(self, name, wide=False, request=None):
+        rng = self.rng
+        if name == "basket":
+            p = self._row()
+            return {"prices": p}, sum(p)
+        if name == "tall":
+            h, m = self._row(), rng.randint(0, self.top + 4)
+            return {"heights": h, "mark": m}, sum(1 for x in h if x > m)
+        if name == "rise":
+            p = self._row()
+            return {"prices": p}, [x + 1 for x in p]
+        n = rng.randint(1, 4)
+        a, b = self._row(n), self._row(n)
+        return {"row_a": a, "row_b": b}, [x + y for x, y in zip(a, b)]
+
+
 def all_lessons(seed=0):
     return [Permanence(seed), Pairing(seed + 1), Combining(seed + 2), Groups(seed + 3),
             Names(seed + 4), Mechanics(seed + 5), RealData(seed + 6), NoisyLab(seed + 7),
@@ -869,4 +945,4 @@ def _phase3(seed):
     except ImportError:
         return []
     return (senses_lessons(seed) + [CoolingLesson(seed + 22), SettlingLesson(seed + 23)]
-            + later_lessons(seed))
+            + later_lessons(seed) + [ChangeLesson(seed + 27), RowsLesson(seed + 28)])

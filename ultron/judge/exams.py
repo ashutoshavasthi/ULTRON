@@ -1326,10 +1326,102 @@ def exam_microscope(brain, seed=1026):
                     "story": info["story"]})
 
 
+def exam_change(brain, seed=1027):
+    """Lesson 27: laws where how the state changes is a law of the state."""
+    from ..env.sequences import Funnels, Pendulums, ShockAbsorbers, YeastJars
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    names = ("swings", "bumps", "yeast", "funnel_h")
+    explained = Tally("explained all four worlds, with kinds it invented itself")
+    for n in names:
+        explained.item(n, True, n in b.slaws)
+    reused = Tally("REUSED: swinging and bobbing are one kind (the next reading a fixed mix "
+                   "of the last two); only one of them needed a new kind")
+    reused.item("swing+bob", True, "swings" in b.slaws and "bumps" in b.slaws and
+                b.slaws["swings"].template == b.slaws["bumps"].template and
+                not ("kind:swings" in b.inventions and "kind:bumps" in b.inventions))
+    ablation = Tally("the same brain without inventing kinds can't explain any of them")
+    for n in names:
+        ablation.item(n, True, _ablated_fails(b, n))
+    future = Tally("new objects, after 6 readings: readings 2-10 steps later", tol=0.02)
+    period = Tally("NEVER MEASURED: a new pendulum's period, after 6 readings", tol=0.02)
+    keep = Tally("NEVER MEASURED: how much of a car's bounce is left each tenth of a second",
+                 tol=0.02)
+    cap = Tally("NEVER MEASURED: a new jar's capacity, after 8 hourly counts", tol=0.05)
+    empty = Tally("NEVER MEASURED: when a new funnel will be empty, after 6 readings",
+                  tol=0.02)
+    worlds = {"swings": Pendulums(seed, prefix="ExamPendulum"),
+              "bumps": ShockAbsorbers(seed, prefix="ExamCar"),
+              "yeast": YeastJars(seed, prefix="ExamJar"),
+              "funnel_h": Funnels(seed, prefix="ExamFunnel")}
+    new = {"swings": "new_pendulum", "bumps": "new_car", "yeast": "new_jar", "funnel_h": "new_funnel"}
+    for n in names:
+        w = worlds[n]
+        spec = b.memory.specs[n]
+        for _ in range(5):
+            obj = getattr(w, new[n])()
+            looks = {"yeast": list(range(8))}.get(n, list(range(6)))
+            _watch(b, n, w, obj, looks)
+            law = b.slaws.get(n)
+            hist = b.history(spec, obj)
+            last = looks[-1]
+            later = [last + k for k in rng.sample(range(2, 11), 3)]
+            if n == "funnel_h":
+                later = [x for x in later if w.read(obj, x) > 0.5]
+            for x in later:
+                inputs = {spec.order_by: x, spec.group_by: obj}
+                future.item(inputs, w.read(obj, x), b.predict(n, inputs), b.memory.of(n),
+                            spec.target, inputs)
+            if n == "swings":
+                period.item(obj, w.period(obj), law.period(hist, obj) * w.DT if law else None)
+            if n == "bumps":
+                keep.item(obj, w.keep(obj), law.shrink(hist, obj) if law else None)
+            if n == "yeast":
+                cap.item(obj, w.capacity(obj), law.resting_value(hist, obj) if law else None)
+            if n == "funnel_h":
+                empty.item(obj, w.empty_at(obj), law.reaches_zero(hist, obj) if law else None)
+    stories = {n: b.inventions[f"kind:{n}"]["story"] for n in names
+               if f"kind:{n}" in b.inventions}
+    return _result(27, [explained, reused, ablation, future, period, keep, cap, empty], 0.9,
+                   {"laws": {n: b.slaws[n].formula() for n in names if n in b.slaws},
+                    "stories": stories})
+
+
+def exam_rows(brain, seed=1028):
+    """Lesson 28: laws about rows, used on rows far longer (6-12) and with bigger numbers
+    (up to 30) than any it saw (1-4, up to 9): a memoriser can't do this."""
+    b, rng = copy.deepcopy(brain), random.Random(seed)
+    row = lambda n=None: [rng.randint(0, 30) for _ in range(n or rng.randint(6, 12))]
+    basket = Tally("the total of a basket of 6-12 prices")
+    tall = Tally("how many of 6-12 children are taller than the mark")
+    rise = Tally("a price list of 6-12 after every price goes up by one")
+    two = Tally("two rows of 6-12 baskets put together, basket by basket")
+    for _ in range(30):
+        p = row()
+        basket.item({"prices": p}, sum(p), b.predict("basket", {"prices": p}),
+                    b.memory.of("basket"), "to_pay", {"prices": p})
+        h, m = row(), rng.randint(0, 30)
+        tall.item({"heights": h, "mark": m}, sum(1 for x in h if x > m),
+                  b.predict("tall", {"heights": h, "mark": m}), b.memory.of("tall"), "taller",
+                  {"heights": h, "mark": m})
+        got = b.predict("rise", {"prices": p})
+        rise.item({"prices": p}, tuple(x + 1 for x in p), None if got is None else tuple(got),
+                  b.memory.of("rise"), "new_prices", {"prices": p})
+        n = rng.randint(6, 12)
+        a, c = row(n), row(n)
+        got = b.predict("two_rows", {"row_a": a, "row_b": c})
+        two.item({"row_a": a, "row_b": c}, tuple(x + y for x, y in zip(a, c)),
+                 None if got is None else tuple(got), b.memory.of("two_rows"), "together",
+                 {"row_a": a, "row_b": c})
+    laws = {n: show(b.hypotheses[n]) for n in ("basket", "tall", "rise", "two_rows")
+            if b.hypotheses.get(n) is not None}
+    return _result(28, [basket, tall, rise, two], 0.99, {"laws": laws})
+
+
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
          13: exam_growing, 14: exam_springy, 15: exam_diagonal, 16: exam_phase2,
          17: exam_coils, 18: exam_phase3, 19: exam_eyes, 20: exam_seeing_numbers,
          21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
-         25: exam_phase3_senses, 26: exam_microscope}
+         25: exam_phase3_senses, 26: exam_microscope,
+         27: exam_change, 28: exam_rows}

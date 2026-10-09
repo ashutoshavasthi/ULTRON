@@ -58,9 +58,25 @@ def _apply(op, seq):
     return out
 
 
+def _raise(ys, q):
+    """The readings raised to a power (a fractional power is a fractional repeat, so the
+    readings must be positive; a power of -1 needs them nonzero)."""
+    if q is None:
+        return list(ys)
+    if q != int(q) and any(y <= 0 for y in ys):
+        return None
+    if q < 0 and any(y == 0 for y in ys):
+        return None
+    return [float(y) ** q for y in ys]
+
+
 def transform(template, xs, ys):
     """The template's values along one ordered sequence (xs: what was changed)."""
-    zs = list(ys)
+    if template.get("rec"):
+        return None             # a recurrence is fitted, not computed (see _fit)
+    zs = _raise(ys, template.get("pow"))
+    if zs is None:
+        return None
     for op in template["y_ops"]:
         zs = _apply(op, zs)
         if zs is None:
@@ -73,23 +89,51 @@ def transform(template, xs, ys):
     return zs
 
 
+# powers a reading may be raised to before a kind is applied: the small whole and
+# fractional repeats Ultron already knows (-1: "one over")
+POWERS = (-1, 2, 0.5, 3, 1 / 3, 1.5, 2 / 3)
+MAX_REC = 3     # a reading may depend on at most the last 3
+
+
 def grammar():
-    """Every template, shortest description first."""
+    """Every template, shortest description first. Beyond Δ and ρ composed:
+      a kind applied to a power of the reading ("y^(2/3) goes up by equal steps"), and
+      a recurrence: the next reading is the same mix of the last few ("the change of
+      the state is a law of the state": oscillation, damping)."""
     out = []
     for depth in range(1, MAX_DEPTH + 1):
         for ops in itertools.product(OPS, repeat=depth):
             out.append({"y_ops": list(ops), "x_op": None})
         if depth == 1:
             out.append({"y_ops": ["Δ"], "x_op": "Δ"})
+    for q in POWERS:
+        for ops in (["Δ"], ["ρ"], ["Δ", "ρ"]):
+            out.append({"y_ops": list(ops), "x_op": None, "pow": q})
+    for k in range(2, MAX_REC + 1):
+        for bias in (False, True):
+            out.append({"y_ops": [], "x_op": None, "rec": k, "bias": bias})
     return sorted(out, key=size)
 
 
 def size(template):
-    return len(template["y_ops"]) + (1 if template.get("x_op") else 0)
+    if template.get("rec"):
+        return template["rec"] + (1 if template.get("bias") else 0) + 1
+    return len(template["y_ops"]) + (1 if template.get("x_op") else 0) + \
+        (2 if template.get("pow") is not None else 0)
+
+
+def _qtext(q):
+    from fractions import Fraction
+    f = Fraction(q).limit_denominator(6)
+    return str(f.numerator) if f.denominator == 1 else f"{f.numerator}/{f.denominator}"
 
 
 def describe(template, y="y", x="x"):
-    inner = y
+    if template.get("rec"):
+        k = template["rec"]
+        terms = " + ".join(f"a{j}·{y}[n-{j}]" for j in range(1, k + 1))
+        return f"{y}[n] = {terms}" + (" + b" if template.get("bias") else "")
+    inner = y if template.get("pow") is None else f"{y}^{_qtext(template['pow'])}"
     for op in template["y_ops"]:
         inner = f"{op}({inner})"
     return f"{inner}/Δ({x})" if template.get("x_op") else inner
@@ -97,6 +141,12 @@ def describe(template, y="y", x="x"):
 
 def words(template):
     """The kind in plain words (used in Ultron's own story about it)."""
+    if template.get("rec"):
+        return (f"the next reading is the same mix of the last {template['rec']}: how the "
+                f"state changes is a law of the state (it swings, or swings and dies down)")
+    if template.get("pow") is not None:
+        base = words({"y_ops": template["y_ops"], "x_op": template.get("x_op")})
+        return f"not the reading itself but its power {_qtext(template['pow'])}: {base}"
     ops = template["y_ops"]
     if template.get("x_op"):
         return "equal steps in what I change give equal steps in what I read"
@@ -146,8 +196,78 @@ class Found:
         self.steps, self.spread = steps, spread
 
 
+def _solve(a, b):
+    """Least squares: the coefficients c minimising |a·c - b| (normal equations, by
+    elimination; tiny systems only). None if they aren't determined."""
+    n = len(a[0])
+    m = [[sum(r[i] * r[j] for r in a) for j in range(n)] + [sum(r[i] * v for r, v in zip(a, b))]
+         for i in range(n)]
+    scale = max(abs(m[i][i]) for i in range(n)) or 1.0
+    for col in range(n):
+        piv = max(range(col, n), key=lambda r: abs(m[r][col]))
+        if abs(m[piv][col]) < 1e-10 * scale:
+            return None
+        m[col], m[piv] = m[piv], m[col]
+        for r in range(n):
+            if r != col:
+                f = m[r][col] / m[col][col]
+                m[r] = [x - f * y for x, y in zip(m[r], m[col])]
+    return [m[i][n] / m[i][i] for i in range(n)]
+
+
+def _rows(template, ys):
+    k, bias = template["rec"], template.get("bias")
+    a = [list(ys[i:i + k][::-1]) + ([1.0] if bias else []) for i in range(len(ys) - k)]
+    return a, list(ys[k:])
+
+
+def _fit(template, ys_list, tol):
+    """One set of coefficients for these sequences, checked on every reading: it must be
+    fitted on fewer readings than it explains (at least 3 to spare in each)."""
+    a, b = [], []
+    for ys in ys_list:
+        ra, rb = _rows(template, ys)
+        a += ra
+        b += rb
+    params = template["rec"] + (1 if template.get("bias") else 0)
+    if len(b) < params + 3 * len(ys_list) or len(b) < params + 3:
+        return None
+    c = _solve(a, b)
+    if c is None:
+        return None
+    scale = max(max(abs(y) for y in ys) for ys in ys_list) or 1.0
+    worst = max(abs(sum(x * w for x, w in zip(r, c)) - v) for r, v in zip(a, b))
+    if worst > tol * scale:
+        return None
+    return [round(x, 12) for x in c], worst / scale
+
+
+def _test_rec(template, scope, seqs, tol):
+    if not all(_even(xs) for xs, ys in seqs.values()):
+        return None, 0
+    # a group too short to test says nothing either way (as for the other kinds)
+    need = 2 * template["rec"] + (1 if template.get("bias") else 0) + 3
+    groups = {g: ys for g, (xs, ys) in seqs.items() if len(ys) >= need}
+    if len(groups) < MIN_GROUPS:
+        return None, 0
+    steps = sum(len(ys) for ys in groups.values())
+    if scope == "global":
+        r = _fit(template, list(groups.values()), tol)
+        return (None if r is None else Found(template, scope, r[0], {}, steps, r[1])), steps
+    props, worst = {}, 0.0
+    for g, ys in groups.items():
+        r = _fit(template, [ys], tol)
+        if r is None:
+            return None, steps
+        props[g] = r[0]
+        worst = max(worst, r[1])
+    return Found(template, scope, None, props, steps, worst), steps
+
+
 def test(template, scope, seqs, tol, needs_even=True):
     """Does this template stay the same under this scope? Returns (Found or None, steps)."""
+    if template.get("rec"):
+        return _test_rec(template, scope, seqs, tol)
     per_group, steps = {}, 0
     for g, (xs, ys) in seqs.items():
         if not template.get("x_op") and needs_even and not _even(xs):
@@ -208,7 +328,9 @@ class SequenceLaw:
                  properties=None, spread=0.0, provenance=None):
         self.etype, self.target = etype, target
         self.order_by, self.group_by = order_by, group_by
-        self.template = {"y_ops": list(template["y_ops"]), "x_op": template.get("x_op")}
+        self.template = {k: (list(v) if isinstance(v, list) else v)
+                         for k, v in template.items()}
+        self.template.setdefault("x_op", None)
         self.scope = scope
         self.constant = constant
         self.properties = dict(properties or {})
@@ -225,6 +347,12 @@ class SequenceLaw:
             return self.constant
         if group in self.properties:
             return self.properties[group]
+        if history and self.template.get("rec"):
+            xs, ys = history
+            if len(ys) >= 2 * self.template["rec"] + 1:
+                a, b = _rows(self.template, ys)
+                return _solve(a, b)
+            return None
         if history:
             xs, ys = history
             zs = transform(self.template, xs, ys)
@@ -241,6 +369,32 @@ class SequenceLaw:
             return ys[xs.index(x_new)]
         if not xs:
             return None
+        if self.template.get("pow") is not None:
+            # work with the power of the readings, then undo the power
+            q = self.template["pow"]
+            zs = _raise(ys, q)
+            if zs is None:
+                return None
+            inner = SequenceLaw(self.etype, self.target, self.order_by, self.group_by,
+                                {"y_ops": self.template["y_ops"], "x_op": self.template["x_op"]},
+                                self.scope, self.constant, self.properties, self.spread, {})
+            z = inner.predict((xs, zs), x_new, group)
+            if z is None or (q != int(q) and z <= 0) or z == 0:
+                return None
+            return z ** (1 / q)
+        if self.template.get("rec"):
+            if len(xs) < 2 or not _even(xs):
+                return None
+            n = (x_new - xs[-1]) / (xs[1] - xs[0])
+            c = self.value_for(group, history)
+            k = self.template["rec"]
+            if c is None or n < 0 or abs(n - round(n)) > 1e-9 or n > 10_000 or len(ys) < k:
+                return None
+            seq = list(ys)
+            for _ in range(int(round(n))):
+                row = seq[-1:-k - 1:-1] + ([1.0] if self.template.get("bias") else [])
+                seq.append(sum(x * w for x, w in zip(row, c)))
+            return seq[-1]
         if self.template.get("x_op"):
             c = self.value_for(group, history)
             # Δy/Δx = c: from the last reading, one straight step
@@ -301,9 +455,99 @@ class SequenceLaw:
         """If every object I've met settles at the same value, that value."""
         return self.provenance.get("common_rest")
 
+    def _swing(self, history, group):
+        """For a two-step recurrence that swings: (steps per swing, how much of the swing
+        is left after each step), from the law's own two numbers."""
+        import math
+        if self.template.get("rec") != 2 or self.template.get("bias"):
+            return None
+        c = self.value_for(group, history)
+        if c is None:
+            return None
+        a1, a2 = c
+        if a2 >= 0 or a1 * a1 + 4 * a2 >= 0:
+            return None             # it doesn't swing
+        keep = math.sqrt(-a2)
+        cos = max(-1.0, min(1.0, a1 / (2 * keep)))
+        angle = math.acos(cos)
+        return (2 * math.pi / angle if angle > 0 else None), keep
+
+    def period(self, history, group=None):
+        """NEVER MEASURED: how long one full swing takes, in the units of what is ordered."""
+        sw = self._swing(history, group)
+        xs = history[0]
+        if sw is None or sw[0] is None or len(xs) < 2:
+            return None
+        return sw[0] * (xs[1] - xs[0])
+
+    def shrink(self, history, group=None):
+        """NEVER MEASURED: the fraction of the swing left after each step."""
+        sw = self._swing(history, group)
+        return None if sw is None else sw[1]
+
+    def reaches_zero(self, history, group=None, horizon=1000):
+        """When the reading, following this law forward, reaches nothing (a funnel is
+        empty): where it crosses zero, or where it comes down to touch zero and stops
+        (within the 1% a law is held to). In the units of what is ordered; None if never."""
+        xs, ys = history
+        if len(xs) < 2 or ys[-1] <= 0:
+            return None
+        step = xs[1] - xs[0]
+        near = 0.01 * max(abs(y) for y in ys)
+
+        def at(n):
+            v = self.predict(history, xs[-1] + n * step, group)
+            return None if v is None or isinstance(v, complex) else v
+        n, prev = 0.0, ys[-1]
+        while True:                             # walk forward until it stops falling
+            n += 0.25
+            v = at(n)
+            if v is None or n > horizon:
+                return None
+            if v >= prev:
+                break
+            prev = v
+        lo, hi = max(0.0, n - 0.5), n           # the lowest point lies in here
+        for _ in range(80):
+            a, b = lo + (hi - lo) / 3, hi - (hi - lo) / 3
+            fa, fb = at(a), at(b)
+            if fa is None or fb is None:
+                return None
+            lo, hi = (lo, b) if fa < fb else (a, hi)
+        bottom_n = (lo + hi) / 2
+        bottom = at(bottom_n)
+        if bottom is None or bottom > near:
+            return None                         # it never comes down to nothing
+        if bottom >= -near:
+            return xs[-1] + bottom_n * step     # it touches zero there
+        lo, hi = 0.0, bottom_n                  # it truly crosses zero: find where
+        for _ in range(80):
+            mid = (lo + hi) / 2
+            m = at(mid)
+            if m is None:
+                return None
+            lo, hi = (mid, hi) if m > 0 else (lo, mid)
+        return xs[-1] + hi * step
+
     def resting_value(self, history, group=None):
-        """For a settling law (ρ of the steps below 1 in size): where it ends up."""
-        if self.template["y_ops"] != ["Δ", "ρ"] or self.template.get("x_op"):
+        """For a settling law (ρ of the steps below 1 in size): where it ends up. For a
+        power of the reading that settles, where the reading itself ends up."""
+        q = self.template.get("pow")
+        if q is not None and self.template["y_ops"] == ["Δ", "ρ"] and \
+                not self.template.get("x_op"):
+            xs, ys = history
+            zs = _raise(ys, q)
+            if zs is None:
+                return None
+            inner = SequenceLaw(self.etype, self.target, self.order_by, self.group_by,
+                                {"y_ops": ["Δ", "ρ"], "x_op": None}, self.scope,
+                                self.constant, self.properties, self.spread, {})
+            rz = inner.resting_value((xs, zs), group)
+            if rz is None or rz == 0 or (q != int(q) and rz < 0):
+                return None
+            return rz ** (1 / q)
+        if self.template["y_ops"] != ["Δ", "ρ"] or self.template.get("x_op") or \
+                q is not None:
             return None
         xs, ys = history
         r = self.value_for(group, history)

@@ -25,10 +25,11 @@ measurable
 | Measurement laws, bell-curve noise | Broke at ±0.5% → **fixed**: robust acceptance; F = m·a found at ±20% |
 | Measurement laws, outliers | Broke at 0% → **fixed**: F = m·a found with 20% badly wrong readings |
 | Irrelevant measurements | Was 312 s → **fixed**: 10 irrelevant quantities in 0.04 s |
-| Confounders | **Fixed**: the law must involve the outcome; ties are reported |
+| Confounders | **Fixed**: the law must involve the outcome; ties are reported; when it can act, it designs the experiment that separates them and ends with the right law |
+| Noise it isn't told | **Fixed**: measured from repeated trials (F = m·a to ±20%; a ±5% hidden cause is not mistaken for noise). Without repeats: only a law explaining ≥ 90% of the spread (holds to ±2%) |
 | Tiny and huge numbers | ✅ |
 | A changing world | **Fixed**: re-measures after a lasting change; keeps history |
-| Law shapes | ✅ settling, lines, quadratic (a new kind invented on the spot); ❌ oscillation, logistic, fractional powers |
+| Law shapes | ✅ settling, lines, quadratic, oscillation, damped oscillation, logistic, t^1.5: each explained and predicted for a new object (kinds over a power of the reading; recurrences) |
 | Eyes | ❌ over-specialised (double noise, faint, touching). Wider dilated networks fixed big things (25/25) but cost accuracy elsewhere; not yet adopted |
 | Wrong records, up to 20% | ✅ |
 | False laws on 100 datasets with nothing to find | ✅ 0 |
@@ -50,7 +51,7 @@ Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 |---|---|---|---|---|
 | **Exact program search breaks on a single wrong record** | Lab: *wrong labels* | see lab | Tolerant fitting for programs: the shortest program that fits all but a few experiences wins, if the exceptions cost less to list than to explain (MDL with an exception list). Exceptions get re-checked by re-doing the experiment | B |
 | Gross outliers in measurements | Lab: *outliers* | see lab | Robust fitting everywhere (median, trimming, RANSAC-style consensus), not just in the eyes | B |
-| Noise beyond what it expects | Lab: *noise* | see lab | It estimates its own noise from repeats (it already does in Phase 3). Extend that to every instrument | B |
+| Noise beyond what it expects | Lab: *noise*, *noise unknown* | 🟢 | It measures its own noise from repeated trials (Stage 1, R2). Next: ask for repeats when it has none | B |
 | **Internet claims that are false, stale or planted** | ⬜ planted false claims in stage C | 🔴 | Every claim has a source and a trust score per source. Claims are checked against its laws, other sources and experiment. Sources that were wrong lose trust | C |
 | Text written to steer the reader (prompt injection) | ⬜ | 🔴 | What it reads is data, never instructions. The reader has no channel to act | C |
 
@@ -58,7 +59,7 @@ Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 
 | Failure | How we provoke it | Status | Fix | Stage |
 |---|---|---|---|---|
-| **Confounders**: two things always move together, so it picks one arbitrarily | Lab: *confounders* | see lab | Notice ties: when two explanations fit equally, say so, and **design the experiment that separates them** (it already designs experiments for rival programs; extend that to quantities) | A |
+| **Confounders**: two things always move together, so it picks one arbitrarily | Lab: *confounders* | 🟢 | Notice ties: when two explanations fit equally, say so, and **design the experiment that separates them** (it already designs experiments for rival programs; extend that to quantities) | A |
 | Hidden causes: the outcome depends on something unseen | Lab: *hidden causes and noise* | see lab | Refuse a law, and say "something I can't see matters". Then look for new things to measure | B |
 | Correlation taken for causation in passive data (internet tables) | ⬜ | 🔴 | Separate "seen together" from "made to happen" (do-experiments). Laws learned only from passive data are marked as such | C |
 
@@ -66,7 +67,7 @@ Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 
 | Failure | How we provoke it | Status | Fix | Stage |
 |---|---|---|---|---|
-| **Laws outside its grammar** (oscillations, logistic growth, power laws with fractional exponents, differential equations) | Lab: *kinds of law* | see lab | Grow the grammar: the state of a thing (position *and* speed) as a vector, laws about change (Δ of a state = f(state)), so oscillation is "the change of speed opposes the position". Non-integer exponents through its fractional repeats | A |
+| **Laws outside its grammar** (oscillations, logistic growth, power laws with fractional exponents, differential equations) | Lab: *kinds of law* | 🟢 for these shapes (E1); differential equations with several states still open | Grow the grammar: the state of a thing (position *and* speed) as a vector, laws about change (Δ of a state = f(state)), so oscillation is "the change of speed opposes the position". Non-integer exponents through its fractional repeats | A |
 | Probabilistic laws (diffusion, radioactive decay, genetics) | Real microscope film: it found Einstein's law, but I chose the statistic (spread) | 🟡 | Distributions as things: it should invent "spread" and "average" as summaries of many unpredictable things | B |
 | Structured objects (lists, trees, graphs, recursion) | ⬜ | 🔴 | Types and recursion in the program language (needed for ARC and for code) | A, F |
 | Its building blocks are designed by people | — | 🔴 | Library learning first. Then self-proposed primitives, accepted only if they shrink the description of everything it knows | G |

@@ -187,6 +187,43 @@ def noise_ramp(brain):
                       "noise per reading (known to it)", rows)
 
 
+def _push_trials(rng, settings, repeats, noise, hidden=0.0):
+    """Each setting (a mass and a force) measured `repeats` times; a hidden cause, if any,
+    changes from setting to setting but not between repeats of one setting."""
+    rows = []
+    for t in range(settings):
+        m, F = rng.uniform(1, 10), rng.uniform(1, 50)
+        a = F / m * (1 + rng.uniform(-hidden, hidden))
+        for _ in range(repeats):
+            rows.append({"trial": t, "F": F * (1 + rng.gauss(0, noise)),
+                         "m": m * (1 + rng.gauss(0, noise)), "a": a * (1 + rng.gauss(0, noise))})
+    return rows
+
+
+def noise_unknown(brain):
+    """It isn't told how noisy its readings are. With repeated trials it measures the
+    noise; without, it accepts only a law that explains nearly all the variation."""
+    rng = random.Random(16)
+    rows = []
+    for noise in (0.01, 0.02, 0.05, 0.1, 0.2):
+        res = search_invariant("push", _push_trials(rng, 20, 2, noise), ["F", "m", "a"],
+                               1e-9, precision=None)
+        est = max(res.noise["per_quantity"].values()) if res.noise and \
+            "per_quantity" in res.noise else None
+        rows.append(_row(f"±{noise:.0%}, repeated trials",
+                         (res.law.formula() if res.law else "nothing") +
+                         (f" (noise measured ±{est:.1%})" if est else ""),
+                         _is_fma(res.law) and est is not None and 0.5 < est / noise < 2))
+    for noise in (0.01, 0.02, 0.05, 0.1):
+        res = search_invariant("push", _push_rows(rng, 40, noise), ["F", "m", "a"], 1e-9,
+                               precision=None)
+        rows.append(_row(f"±{noise:.0%}, no repeats", res.law.formula() if res.law else
+                         "nothing", _is_fma(res.law)))
+    return experiment("noise unknown", "Not told how noisy its readings are, does it work "
+                      "the noise out and still find F = m·a?", "noise per reading (unknown "
+                      "to it)", rows)
+
+
 def outliers(brain):
     rng = random.Random(7)
     rows = []
@@ -228,6 +265,29 @@ def confounder(brain):
     about = res.law is not None and "a" in res.law.powers
     rows = [_row("mass and a label always equal", f"picked {picked}; ambiguity noticed: "
                  f"{noticed}", noticed and about)]
+    # now it may act: offered experiments where the label and the mass can differ, does
+    # it choose one that separates its rival laws, and end with the right one?
+    b = Brain("lab")
+    b.meet(Spec("push", "quantity", {"F": (1, 1, -2), "m": (1, 0, 0), "c": (1, 0, 0)}, "a",
+                units={"F": (1, 1, -2), "m": (1, 0, 0), "c": (1, 0, 0), "a": (0, 1, -2)}))
+    for e in eps[:20]:
+        b.experience("push", {"F": e["F"], "m": e["m"], "c": e["c"]}, e["a"])
+    first = b.qlaws.get("push")
+    designed = 0
+    for _ in range(6):
+        options = [{"F": rng.uniform(1, 50), "m": rng.uniform(1, 10), "c": rng.uniform(1, 10)}
+                   for _ in range(8)]
+        x = b.propose("push", options)
+        designed += x is not None
+        x = x or options[0]
+        b.experience("push", x, x["F"] / x["m"])
+    law = b.qlaws.get("push")
+    right = law is not None and law.powers in ({"F": 1, "a": -1, "m": -1},
+                                               {"F": -1, "a": 1, "m": 1})
+    rows.append(_row("…and it may choose its experiments",
+                     f"{first.formula() if first else 'nothing'} → "
+                     f"{law.formula() if law else 'nothing'}; {designed} designed",
+                     right and designed > 0))
     return experiment("confounders", "When two things always move together, does it notice "
                       "it can't tell which one matters (and design an experiment)?", "case", rows)
 
@@ -289,9 +349,20 @@ def law_forms(brain):
             for t in range(10):
                 b.experience("w", {"t": t, "obj": f"O{o}"}, round(f(t, p), 6))
         law = b.slaws.get("w")
-        rows.append(_row(label, law.formula() if law else "no explanation", law is not None))
-    return experiment("kinds of law", "Which shapes of law can it explain at all?", "law",
-                      rows, "Anything outside its grammar (Δ, ρ, composed) is out of reach.")
+        # the test that counts: a new object, 6 readings seen, the next 4 predicted
+        p = (rng.uniform(1, 5), rng.uniform(0.3, 0.9), rng.uniform(0.7, 0.95))
+        xs = list(range(6))
+        ys = [round(f(t, p), 6) for t in xs]
+        right = law is not None
+        for t in range(6, 10):
+            guess = law.predict((xs, ys), t, "new") if law is not None else None
+            true = f(t, p)
+            right = right and guess is not None and abs(guess - true) <= 0.02 * max(1, abs(true))
+        rows.append(_row(label, law.formula() if law else "no explanation", right))
+    return experiment("kinds of law", "Which shapes of law can it explain, and then predict "
+                      "for a new object?", "law", rows,
+                      "Its grammar: Δ, ρ, composed; applied to a power of the reading; and "
+                      "recurrences (the next reading a fixed mix of the last few).")
 
 
 # ------------------------------------------------------------------ perception
@@ -350,16 +421,46 @@ def false_laws(brain):
         res = search_invariant("noise", eps, ["x", "y", "z"], 1e-9, precision=0.02,
                                require="z")
         false_quantities += res.law is not None
+    # not told its noise: pure noise without repeats, and a small hidden cause (±5%)
+    # that only repeated trials can tell from noise
+    unknown_noise = hidden = 0
+    for i in range(25):
+        eps = [{"x": rng.uniform(1, 10), "y": rng.uniform(1, 10), "z": rng.uniform(1, 10)}
+               for _ in range(30)]
+        unknown_noise += search_invariant("noise", eps, ["x", "y", "z"], 1e-9, precision=None,
+                                          require="z").law is not None
+        eps = _push_trials(rng, 20, 2, 0.005, hidden=0.05)
+        hidden += search_invariant("push", eps, ["F", "m", "a"], 1e-9,
+                                   precision=None).law is not None
+    # sequences with nothing to find: random walks and pure noise, in sequence worlds
+    false_kinds = 0
+    for i in range(25):
+        b = Brain("audit")
+        b.kinds = copy.deepcopy(brain.kinds)
+        b.meet(Spec("w", "sequence", {"t": None}, "y", group_by="obj", order_by="t",
+                    tol=0.01, surprise=0.005))
+        for o in range(6):
+            y = rng.uniform(1, 5)
+            for t in range(10):
+                y = y + rng.uniform(-1, 1) if i % 2 else rng.uniform(1, 5)
+                b.experience("w", {"t": t, "obj": f"O{o}"}, round(y, 6))
+        false_kinds += b.slaws.get("w") is not None
     rows = [_row("50 program datasets with nothing to find", f"{false_programs} false laws",
                  false_programs == 0),
+            _row("25 sequence worlds with nothing to find", f"{false_kinds} false laws",
+                 false_kinds == 0),
             _row("50 measurement datasets with nothing to find",
-                 f"{false_quantities} false laws", false_quantities == 0)]
+                 f"{false_quantities} false laws", false_quantities == 0),
+            _row("25 datasets of pure noise, noise not told", f"{unknown_noise} false laws",
+                 unknown_noise == 0),
+            _row("25 hidden causes (±5%) with repeated trials, noise not told",
+                 f"{hidden} false laws", hidden == 0)]
     return experiment("false laws", "On data with nothing to find, does it ever claim a law?",
                       "audit", rows)
 
 
 EXPERIMENTS = [program_size, wrong_labels, hidden_cause, few_examples, program_compute,
-               noise_ramp, outliers, distractors, confounder, magnitudes, changing_world,
+               noise_ramp, noise_unknown, outliers, distractors, confounder, magnitudes, changing_world,
                law_forms, eyes_stress, false_laws]
 
 

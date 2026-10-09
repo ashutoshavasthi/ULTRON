@@ -29,6 +29,25 @@
  },
  "curiosity": {
   "errors": {
+   "basket": [
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "bounce": [
     1.0,
     1.0,
@@ -54,6 +73,31 @@
     1.0
    ],
    "bounces": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "bumps": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
     1.0,
     1.0,
     1.0,
@@ -270,6 +314,28 @@
     0.0,
     0.0,
     0.0
+   ],
+   "funnel_h": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
    ],
    "gas": [
     1.0,
@@ -557,6 +623,24 @@
     0.0,
     0.0
    ],
+   "rise": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "roll": [
     1.0,
     1.0,
@@ -821,11 +905,58 @@
     0.0,
     0.0
    ],
+   "swings": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
    "take_away": [
     1.0,
     1.0,
     1.0,
     0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "tall": [
+    1.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    1.0,
     0.0,
     0.0,
     0.0,
@@ -861,7 +992,58 @@
     0.0,
     0.0
    ],
+   "two_rows": [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
    "wander": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "yeast": [
     1.0,
     1.0,
     1.0,
@@ -1995,6 +2177,7 @@
   ]
  },
  "hypotheses": {
+  "basket": "start at 0 and get_paid in each of prices",
   "cake_balance": "eq(pieces, groups(cut, wholes))",
   "earn_coins": "take_away(succ(coins), notes)",
   "earn_notes": "pred(notes)",
@@ -2007,6 +2190,7 @@
   "pay": "repeat price times [down] starting from purse",
   "peekaboo": "hidden",
   "recut": "groups(cut, recut)",
+  "rise": "[succ] each of prices",
   "see_merge": "get_paid(nA, nB)",
   "see_take": "take_away(nA, n_taken)",
   "spend_coins": "pred(coins)",
@@ -2014,7 +2198,9 @@
   "spin": "repeat ticks times [tick] starting from start",
   "square": "groups(side, side)",
   "take_away": "repeat n_taken times [pred] starting from nA",
-  "tick": "if eq(slot, 5) then 0 else succ(slot)"
+  "tall": "how many in those of heights above mark",
+  "tick": "if eq(slot, 5) then 0 else succ(slot)",
+  "two_rows": "get_paid pair by pair of row_a and row_b"
  },
  "inventions": {
   "columns": {
@@ -2133,12 +2319,33 @@
    "shape": "new kind of explanation",
    "story": "None of the kinds of explanation I was born with fits 'cool': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u03c1(\u0394(T)) stays the same for each cup (3 cups). That is a new KIND of explanation, not just a new law: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time."
   },
+  "kind:funnel_h": {
+   "kind": "kind 5",
+   "lesson": 27,
+   "primitives": [],
+   "shape": "new kind of explanation",
+   "story": "None of the kinds of explanation I was born with fits 'funnel_h': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u0394(\u0394(h)) stays the same for each funnel (3 funnels). That is a new KIND of explanation, not just a new law: the steps between readings change by the same amount each time. I'll keep it and try it first next time."
+  },
   "kind:hang": {
    "kind": "kind 2",
    "lesson": 23,
    "primitives": [],
    "shape": "new kind of explanation",
    "story": "None of the kinds of explanation I was born with fits 'hang': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u0394(L)/\u0394(F) stays the same for each spring (3 springs). That is a new KIND of explanation, not just a new law: equal steps in what I change give equal steps in what I read. I'll keep it and try it first next time."
+  },
+  "kind:swings": {
+   "kind": "kind 3",
+   "lesson": 27,
+   "primitives": [],
+   "shape": "new kind of explanation",
+   "story": "None of the kinds of explanation I was born with fits 'swings': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. angle[n] = a1\u00b7angle[n-1] + a2\u00b7angle[n-2] stays the same for each pendulum (3 pendulums). That is a new KIND of explanation, not just a new law: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down). I'll keep it and try it first next time."
+  },
+  "kind:yeast": {
+   "kind": "kind 4",
+   "lesson": 27,
+   "primitives": [],
+   "shape": "new kind of explanation",
+   "story": "None of the kinds of explanation I was born with fits 'yeast': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u03c1(\u0394(cells^-1)) stays the same for each jar (3 jars). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time."
   },
   "ladder": {
    "confirmed": 1,
@@ -2205,6 +2412,12 @@
    "invent": 0,
    "reuse": 36
   },
+  "bumps": {
+   "innate": 46,
+   "invent": 2340,
+   "reuse": 390,
+   "stuck_at": 3
+  },
   "burn": {
    "innate": 46,
    "invent": 0,
@@ -2220,16 +2433,32 @@
    "invent": 240,
    "reuse": 0
   },
+  "funnel_h": {
+   "innate": 46,
+   "invent": 120,
+   "reuse": 120
+  },
   "hang": {
    "innate": 46,
    "invent": 32,
    "reuse": 0
   },
+  "swings": {
+   "innate": 46,
+   "invent": 3020,
+   "reuse": 344,
+   "stuck_at": 3
+  },
   "wander": {
    "innate": 46,
-   "invent": 240,
-   "reuse": 96,
-   "stuck_at": 3
+   "invent": 8900,
+   "reuse": 880,
+   "stuck_at": 4
+  },
+  "yeast": {
+   "innate": 46,
+   "invent": 960,
+   "reuse": 96
   }
  },
  "kinds": {
@@ -2270,9 +2499,90 @@
     "burn"
    ],
    "words": "equal steps in what I change give equal steps in what I read"
+  },
+  "kind 3": {
+   "found_in": "swings",
+   "lesson": 27,
+   "name": "kind 3",
+   "order": 2,
+   "story": "None of the kinds of explanation I was born with fits 'swings': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. angle[n] = a1\u00b7angle[n-1] + a2\u00b7angle[n-2] stays the same for each pendulum (3 pendulums). That is a new KIND of explanation, not just a new law: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down). I'll keep it and try it first next time.",
+   "template": {
+    "bias": false,
+    "rec": 2,
+    "x_op": null,
+    "y_ops": []
+   },
+   "uses": [
+    "swings",
+    "bumps"
+   ],
+   "words": "the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down)"
+  },
+  "kind 4": {
+   "found_in": "yeast",
+   "lesson": 27,
+   "name": "kind 4",
+   "order": 3,
+   "story": "None of the kinds of explanation I was born with fits 'yeast': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u03c1(\u0394(cells^-1)) stays the same for each jar (3 jars). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time.",
+   "template": {
+    "pow": -1,
+    "x_op": null,
+    "y_ops": [
+     "\u0394",
+     "\u03c1"
+    ]
+   },
+   "uses": [
+    "yeast"
+   ],
+   "words": "not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value"
+  },
+  "kind 5": {
+   "found_in": "funnel_h",
+   "lesson": 27,
+   "name": "kind 5",
+   "order": 4,
+   "story": "None of the kinds of explanation I was born with fits 'funnel_h': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u0394(\u0394(h)) stays the same for each funnel (3 funnels). That is a new KIND of explanation, not just a new law: the steps between readings change by the same amount each time. I'll keep it and try it first next time.",
+   "template": {
+    "x_op": null,
+    "y_ops": [
+     "\u0394",
+     "\u0394"
+    ]
+   },
+   "uses": [
+    "funnel_h"
+   ],
+   "words": "the steps between readings change by the same amount each time"
   }
  },
  "library": {
+  "basket": {
+   "expr": [
+    "fold",
+    "get_paid",
+    [
+     "var",
+     "prices"
+    ],
+    [
+     "const",
+     0
+    ]
+   ],
+   "name": "basket",
+   "out_type": "int",
+   "params": [
+    "prices"
+   ],
+   "provenance": {
+    "experiences": 10,
+    "found_after": 2,
+    "lesson": 28,
+    "list_params": true,
+    "size": 4
+   }
+  },
   "cake_balance": {
    "expr": [
     "eq",
@@ -2634,6 +2944,30 @@
     "size": 5
    }
   },
+  "rise": {
+   "expr": [
+    "map",
+    [
+     "succ"
+    ],
+    [
+     "var",
+     "prices"
+    ]
+   ],
+   "name": "rise",
+   "out_type": "list",
+   "params": [
+    "prices"
+   ],
+   "provenance": {
+    "experiences": 9,
+    "found_after": 1,
+    "lesson": 28,
+    "list_params": true,
+    "size": 3
+   }
+  },
   "see_merge": {
    "expr": [
     "call",
@@ -2818,6 +3152,36 @@
     "size": 4
    }
   },
+  "tall": {
+   "expr": [
+    "len",
+    [
+     "filter",
+     "above",
+     [
+      "var",
+      "mark"
+     ],
+     [
+      "var",
+      "heights"
+     ]
+    ]
+   ],
+   "name": "tall",
+   "out_type": "int",
+   "params": [
+    "heights",
+    "mark"
+   ],
+   "provenance": {
+    "experiences": 14,
+    "found_after": 6,
+    "lesson": 28,
+    "list_params": true,
+    "size": 5
+   }
+  },
   "tick": {
    "expr": [
     "ite",
@@ -2854,6 +3218,33 @@
     "found_after": 3,
     "lesson": 11,
     "size": 7
+   }
+  },
+  "two_rows": {
+   "expr": [
+    "zip",
+    "get_paid",
+    [
+     "var",
+     "row_a"
+    ],
+    [
+     "var",
+     "row_b"
+    ]
+   ],
+   "name": "two_rows",
+   "out_type": "list",
+   "params": [
+    "row_a",
+    "row_b"
+   ],
+   "provenance": {
+    "experiences": 9,
+    "found_after": 1,
+    "lesson": 28,
+    "list_params": true,
+    "size": 4
    }
   }
  },
@@ -9726,6 +10117,53 @@
    "text": "wander: nothing I can express stays the same (3 walkers, 24 readings)"
   },
   {
+   "choice": "wander",
+   "kind": "choice",
+   "lesson": 23,
+   "text": "chose to play with wander"
+  },
+  {
+   "choice": "wander",
+   "kind": "choice",
+   "lesson": 23,
+   "text": "chose to play with wander"
+  },
+  {
+   "choice": "wander",
+   "kind": "choice",
+   "lesson": 23,
+   "text": "chose to play with wander"
+  },
+  {
+   "choice": "wander",
+   "kind": "choice",
+   "lesson": 23,
+   "text": "chose to play with wander"
+  },
+  {
+   "choice": "wander",
+   "kind": "choice",
+   "lesson": 23,
+   "text": "chose to play with wander"
+  },
+  {
+   "choice": "wander",
+   "kind": "choice",
+   "lesson": 23,
+   "text": "chose to play with wander"
+  },
+  {
+   "choice": "wander",
+   "kind": "choice",
+   "lesson": 23,
+   "text": "chose to play with wander"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 23,
+   "text": "wander: nothing I can express stays the same (4 walkers, 31 readings)"
+  },
+  {
    "kind": "bored",
    "lesson": 23,
    "text": "nothing here is teaching me anything new any more"
@@ -9916,10 +10354,1326 @@
    "kind": "trainer",
    "lesson": 25,
    "text": "Exam for lesson 25, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 27,
+   "text": "Lesson 27: Swinging, dying down, growing, emptying"
+  },
+  {
+   "kind": "meet",
+   "lesson": 27,
+   "text": "new kind of experience: swings"
+  },
+  {
+   "kind": "meet",
+   "lesson": 27,
+   "text": "new kind of experience: bumps"
+  },
+  {
+   "kind": "meet",
+   "lesson": 27,
+   "text": "new kind of experience: yeast"
+  },
+  {
+   "kind": "meet",
+   "lesson": 27,
+   "text": "new kind of experience: funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 27,
+   "text": "swings: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 27,
+   "text": "swings: nothing I can express stays the same (3 pendulums, 20 readings)"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "choice": "swings",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with swings"
+  },
+  {
+   "kind": "invent",
+   "lesson": 27,
+   "text": "None of the kinds of explanation I was born with fits 'swings': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. angle[n] = a1\u00b7angle[n-1] + a2\u00b7angle[n-2] stays the same for each pendulum (3 pendulums). That is a new KIND of explanation, not just a new law: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down). I'll keep it and try it first next time."
+  },
+  {
+   "kind": "revise",
+   "lesson": 27,
+   "text": "swings: angle[n] = a1\u00b7angle[n-1] + a2\u00b7angle[n-2] stays the same for each pendulum (kind 3: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 27,
+   "text": "bumps: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 27,
+   "text": "bumps: nothing I can express stays the same (3 cars, 20 readings)"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "choice": "bumps",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with bumps"
+  },
+  {
+   "kind": "reuse",
+   "lesson": 27,
+   "text": "bumps: nothing I was born with explains it, but a kind of explanation I invented does: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down) (z[n] = a1\u00b7z[n-1] + a2\u00b7z[n-2] stays the same for each car); 138 steps of checking"
+  },
+  {
+   "kind": "revise",
+   "lesson": 27,
+   "text": "bumps: z[n] = a1\u00b7z[n-1] + a2\u00b7z[n-2] stays the same for each car (kind 3: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "choice": "yeast",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with yeast"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 27,
+   "text": "yeast: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits"
+  },
+  {
+   "kind": "invent",
+   "lesson": 27,
+   "text": "None of the kinds of explanation I was born with fits 'yeast': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u03c1(\u0394(cells^-1)) stays the same for each jar (3 jars). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time."
+  },
+  {
+   "kind": "revise",
+   "lesson": 27,
+   "text": "yeast: \u03c1(\u0394(cells^-1)) stays the same for each jar (kind 4: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "choice": "funnel_h",
+   "kind": "choice",
+   "lesson": 27,
+   "text": "chose to play with funnel_h"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 27,
+   "text": "funnel_h: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits"
+  },
+  {
+   "kind": "invent",
+   "lesson": 27,
+   "text": "None of the kinds of explanation I was born with fits 'funnel_h': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u0394(\u0394(h)) stays the same for each funnel (3 funnels). That is a new KIND of explanation, not just a new law: the steps between readings change by the same amount each time. I'll keep it and try it first next time."
+  },
+  {
+   "kind": "revise",
+   "lesson": 27,
+   "text": "funnel_h: \u0394(\u0394(h)) stays the same for each funnel (kind 5: the steps between readings change by the same amount each time)"
+  },
+  {
+   "kind": "bored",
+   "lesson": 27,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 27,
+   "text": "Exam for lesson 27, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 28,
+   "text": "Lesson 28: Rows of things"
+  },
+  {
+   "kind": "meet",
+   "lesson": 28,
+   "text": "new kind of experience: basket"
+  },
+  {
+   "kind": "meet",
+   "lesson": 28,
+   "text": "new kind of experience: tall"
+  },
+  {
+   "kind": "meet",
+   "lesson": 28,
+   "text": "new kind of experience: rise"
+  },
+  {
+   "kind": "meet",
+   "lesson": 28,
+   "text": "new kind of experience: two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "basket: surprised; new best explanation is 2 (was nothing; 1 experiences, 29 programs searched)"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "tall: surprised; new best explanation is 0 (was nothing; 1 experiences, 25 programs searched)"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "rise: surprised; new best explanation is [succ] each of prices (was nothing; 1 experiences, 6938 programs searched)"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "two_rows: surprised; new best explanation is get_paid pair by pair of row_a and row_b (was nothing; 1 experiences, 7440 programs searched)"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "basket: surprised; new best explanation is start at 0 and get_paid in each of prices (was 2; 2 experiences, 7195 programs searched)"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "tall: surprised; new best explanation is spend_notes(mark, 3) (was 0; 3 experiences, 2880 programs searched)"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "tall: surprised; new best explanation is spend_notes(mark, how many in heights) (was spend_notes(mark, 3); 4 experiences, 31409 programs searched)"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "kind": "revise",
+   "lesson": 28,
+   "text": "tall: surprised; new best explanation is how many in those of heights above mark (was spend_notes(mark, how many in heights); 6 experiences, 917020 programs searched)"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 28,
+   "text": "rise: [succ] each of prices predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 28,
+   "text": "two_rows: get_paid pair by pair of row_a and row_b predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 28,
+   "text": "basket: start at 0 and get_paid in each of prices predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "kind": "confirm",
+   "lesson": 28,
+   "text": "tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "rise",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with rise"
+  },
+  {
+   "choice": "two_rows",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with two_rows"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "choice": "basket",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with basket"
+  },
+  {
+   "choice": "tall",
+   "kind": "choice",
+   "lesson": 28,
+   "text": "chose to play with tall"
+  },
+  {
+   "kind": "bored",
+   "lesson": 28,
+   "text": "nothing here is teaching me anything new any more"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 28,
+   "text": "Exam for lesson 28, attempt 1: passed"
   }
  ],
  "memory": {
   "episodes": {
+   "basket": [
+    {
+     "inputs": {
+      "prices": [
+       2
+      ]
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "prices": [
+       6
+      ]
+     },
+     "outcome": 6
+    },
+    {
+     "inputs": {
+      "prices": [
+       4,
+       1,
+       8
+      ]
+     },
+     "outcome": 13
+    },
+    {
+     "inputs": {
+      "prices": [
+       2,
+       6,
+       4
+      ]
+     },
+     "outcome": 12
+    },
+    {
+     "inputs": {
+      "prices": [
+       5
+      ]
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "prices": [
+       0
+      ]
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "prices": [
+       9
+      ]
+     },
+     "outcome": 9
+    },
+    {
+     "inputs": {
+      "prices": [
+       8,
+       7,
+       6
+      ]
+     },
+     "outcome": 21
+    },
+    {
+     "inputs": {
+      "prices": [
+       7,
+       2,
+       1,
+       6
+      ]
+     },
+     "outcome": 16
+    },
+    {
+     "inputs": {
+      "prices": [
+       4
+      ]
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "prices": [
+       5
+      ]
+     },
+     "outcome": 5
+    },
+    {
+     "inputs": {
+      "prices": [
+       6,
+       9,
+       4
+      ]
+     },
+     "outcome": 19
+    },
+    {
+     "inputs": {
+      "prices": [
+       0,
+       8,
+       5
+      ]
+     },
+     "outcome": 13
+    },
+    {
+     "inputs": {
+      "prices": [
+       0,
+       0,
+       8,
+       5
+      ]
+     },
+     "outcome": 13
+    },
+    {
+     "inputs": {
+      "prices": [
+       4,
+       5,
+       8,
+       3
+      ]
+     },
+     "outcome": 20
+    },
+    {
+     "inputs": {
+      "prices": [
+       7,
+       3,
+       3,
+       9
+      ]
+     },
+     "outcome": 22
+    },
+    {
+     "inputs": {
+      "prices": [
+       2,
+       0,
+       3
+      ]
+     },
+     "outcome": 5
+    }
+   ],
    "bounce": [
     {
      "c": 0.0,
@@ -10144,6 +11898,123 @@
      "ball": "Ball3",
      "h": 0.5946,
      "k": 3
+    }
+   ],
+   "bumps": [
+    {
+     "car": "Car1",
+     "t": 0,
+     "z": 1.656
+    },
+    {
+     "car": "Car1",
+     "t": 1,
+     "z": -0.758
+    },
+    {
+     "car": "Car1",
+     "t": 2,
+     "z": -2.064
+    },
+    {
+     "car": "Car1",
+     "t": 3,
+     "z": -2.082
+    },
+    {
+     "car": "Car1",
+     "t": 4,
+     "z": -1.226
+    },
+    {
+     "car": "Car1",
+     "t": 5,
+     "z": -0.141
+    },
+    {
+     "car": "Car1",
+     "t": 6,
+     "z": 0.647
+    },
+    {
+     "car": "Car1",
+     "t": 7,
+     "z": 0.907
+    },
+    {
+     "car": "Car2",
+     "t": 0,
+     "z": 0.897
+    },
+    {
+     "car": "Car2",
+     "t": 1,
+     "z": -1.262
+    },
+    {
+     "car": "Car2",
+     "t": 2,
+     "z": -2.478
+    },
+    {
+     "car": "Car2",
+     "t": 3,
+     "z": -2.582
+    },
+    {
+     "car": "Car2",
+     "t": 4,
+     "z": -1.81
+    },
+    {
+     "car": "Car2",
+     "t": 5,
+     "z": -0.629
+    },
+    {
+     "car": "Car2",
+     "t": 6,
+     "z": 0.47
+    },
+    {
+     "car": "Car2",
+     "t": 7,
+     "z": 1.147
+    },
+    {
+     "car": "Car3",
+     "t": 0,
+     "z": 2.195
+    },
+    {
+     "car": "Car3",
+     "t": 1,
+     "z": -0.39
+    },
+    {
+     "car": "Car3",
+     "t": 2,
+     "z": -2.529
+    },
+    {
+     "car": "Car3",
+     "t": 3,
+     "z": -3.852
+    },
+    {
+     "car": "Car3",
+     "t": 4,
+     "z": -4.206
+    },
+    {
+     "car": "Car3",
+     "t": 5,
+     "z": -3.659
+    },
+    {
+     "car": "Car3",
+     "t": 6,
+     "z": -2.448
     }
    ],
    "burn": [
@@ -11318,6 +13189,108 @@
       "notes": 0
      },
      "outcome": 0
+    }
+   ],
+   "funnel_h": [
+    {
+     "funnel": "Funnel1",
+     "h": 41.563,
+     "t": 0
+    },
+    {
+     "funnel": "Funnel1",
+     "h": 37.689,
+     "t": 1
+    },
+    {
+     "funnel": "Funnel1",
+     "h": 34.004,
+     "t": 2
+    },
+    {
+     "funnel": "Funnel1",
+     "h": 30.508,
+     "t": 3
+    },
+    {
+     "funnel": "Funnel1",
+     "h": 27.202,
+     "t": 4
+    },
+    {
+     "funnel": "Funnel1",
+     "h": 24.086,
+     "t": 5
+    },
+    {
+     "funnel": "Funnel1",
+     "h": 21.159,
+     "t": 6
+    },
+    {
+     "funnel": "Funnel1",
+     "h": 18.422,
+     "t": 7
+    },
+    {
+     "funnel": "Funnel2",
+     "h": 21.201,
+     "t": 0
+    },
+    {
+     "funnel": "Funnel2",
+     "h": 17.84,
+     "t": 1
+    },
+    {
+     "funnel": "Funnel2",
+     "h": 14.769,
+     "t": 2
+    },
+    {
+     "funnel": "Funnel2",
+     "h": 11.988,
+     "t": 3
+    },
+    {
+     "funnel": "Funnel2",
+     "h": 9.496,
+     "t": 4
+    },
+    {
+     "funnel": "Funnel2",
+     "h": 7.295,
+     "t": 5
+    },
+    {
+     "funnel": "Funnel2",
+     "h": 5.383,
+     "t": 6
+    },
+    {
+     "funnel": "Funnel2",
+     "h": 3.761,
+     "t": 7
+    },
+    {
+     "funnel": "Funnel3",
+     "h": 28.4,
+     "t": 0
+    },
+    {
+     "funnel": "Funnel3",
+     "h": 25.278,
+     "t": 1
+    },
+    {
+     "funnel": "Funnel3",
+     "h": 22.338,
+     "t": 2
+    },
+    {
+     "funnel": "Funnel3",
+     "h": 19.579,
+     "t": 3
     }
    ],
    "gas": [
@@ -13111,6 +15084,220 @@
      "outcome": 4
     }
    ],
+   "rise": [
+    {
+     "inputs": {
+      "prices": [
+       3,
+       3,
+       2,
+       6
+      ]
+     },
+     "outcome": [
+      4,
+      4,
+      3,
+      7
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       2,
+       2,
+       8
+      ]
+     },
+     "outcome": [
+      3,
+      3,
+      9
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       5,
+       1
+      ]
+     },
+     "outcome": [
+      6,
+      2
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       8,
+       6
+      ]
+     },
+     "outcome": [
+      9,
+      7
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       8,
+       3,
+       8,
+       7
+      ]
+     },
+     "outcome": [
+      9,
+      4,
+      9,
+      8
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       7
+      ]
+     },
+     "outcome": [
+      8
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       1,
+       2,
+       3,
+       2
+      ]
+     },
+     "outcome": [
+      2,
+      3,
+      4,
+      3
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       9,
+       9,
+       8
+      ]
+     },
+     "outcome": [
+      10,
+      10,
+      9
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       3,
+       0,
+       2,
+       9
+      ]
+     },
+     "outcome": [
+      4,
+      1,
+      3,
+      10
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       5
+      ]
+     },
+     "outcome": [
+      6
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       9,
+       2
+      ]
+     },
+     "outcome": [
+      10,
+      3
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       8,
+       3,
+       5,
+       5
+      ]
+     },
+     "outcome": [
+      9,
+      4,
+      6,
+      6
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       5,
+       8
+      ]
+     },
+     "outcome": [
+      6,
+      9
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       9,
+       4,
+       6
+      ]
+     },
+     "outcome": [
+      10,
+      5,
+      7
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       8
+      ]
+     },
+     "outcome": [
+      9
+     ]
+    },
+    {
+     "inputs": {
+      "prices": [
+       3,
+       0
+      ]
+     },
+     "outcome": [
+      4,
+      1
+     ]
+    }
+   ],
    "roll": [
     {
      "m": 3.63,
@@ -14638,6 +16825,123 @@
      "x": 0.479
     }
    ],
+   "swings": [
+    {
+     "angle": 14.194,
+     "pendulum": "Pendulum1",
+     "t": 0
+    },
+    {
+     "angle": 14.718,
+     "pendulum": "Pendulum1",
+     "t": 1
+    },
+    {
+     "angle": 13.873,
+     "pendulum": "Pendulum1",
+     "t": 2
+    },
+    {
+     "angle": 11.738,
+     "pendulum": "Pendulum1",
+     "t": 3
+    },
+    {
+     "angle": 8.51,
+     "pendulum": "Pendulum1",
+     "t": 4
+    },
+    {
+     "angle": 4.491,
+     "pendulum": "Pendulum1",
+     "t": 5
+    },
+    {
+     "angle": 0.055,
+     "pendulum": "Pendulum1",
+     "t": 6
+    },
+    {
+     "angle": -4.387,
+     "pendulum": "Pendulum1",
+     "t": 7
+    },
+    {
+     "angle": 3.573,
+     "pendulum": "Pendulum2",
+     "t": 0
+    },
+    {
+     "angle": 6.847,
+     "pendulum": "Pendulum2",
+     "t": 1
+    },
+    {
+     "angle": 7.94,
+     "pendulum": "Pendulum2",
+     "t": 2
+    },
+    {
+     "angle": 6.503,
+     "pendulum": "Pendulum2",
+     "t": 3
+    },
+    {
+     "angle": 2.994,
+     "pendulum": "Pendulum2",
+     "t": 4
+    },
+    {
+     "angle": -1.469,
+     "pendulum": "Pendulum2",
+     "t": 5
+    },
+    {
+     "angle": -5.463,
+     "pendulum": "Pendulum2",
+     "t": 6
+    },
+    {
+     "angle": -7.717,
+     "pendulum": "Pendulum2",
+     "t": 7
+    },
+    {
+     "angle": 3.961,
+     "pendulum": "Pendulum3",
+     "t": 0
+    },
+    {
+     "angle": 7.244,
+     "pendulum": "Pendulum3",
+     "t": 1
+    },
+    {
+     "angle": 9.365,
+     "pendulum": "Pendulum3",
+     "t": 2
+    },
+    {
+     "angle": 9.985,
+     "pendulum": "Pendulum3",
+     "t": 3
+    },
+    {
+     "angle": 9.004,
+     "pendulum": "Pendulum3",
+     "t": 4
+    },
+    {
+     "angle": 6.58,
+     "pendulum": "Pendulum3",
+     "t": 5
+    },
+    {
+     "angle": 3.1,
+     "pendulum": "Pendulum3",
+     "t": 6
+    }
+   ],
    "take_away": [
     {
      "inputs": {
@@ -14794,6 +17098,222 @@
      "outcome": 4
     }
    ],
+   "tall": [
+    {
+     "inputs": {
+      "heights": [
+       3,
+       2
+      ],
+      "mark": 7
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       1,
+       1
+      ],
+      "mark": 6
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       1,
+       9,
+       6
+      ],
+      "mark": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "heights": [
+       8,
+       2,
+       3,
+       2
+      ],
+      "mark": 4
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "heights": [
+       6,
+       1,
+       7
+      ],
+      "mark": 2
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "heights": [
+       6,
+       8,
+       4,
+       7
+      ],
+      "mark": 2
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "heights": [
+       1,
+       4
+      ],
+      "mark": 8
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       6,
+       1,
+       5,
+       3
+      ],
+      "mark": 8
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       0,
+       2
+      ],
+      "mark": 4
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       5,
+       5,
+       6,
+       5
+      ],
+      "mark": 3
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "heights": [
+       1
+      ],
+      "mark": 9
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       6,
+       0
+      ],
+      "mark": 4
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "heights": [
+       5,
+       9
+      ],
+      "mark": 6
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "heights": [
+       7
+      ],
+      "mark": 4
+     },
+     "outcome": 1
+    },
+    {
+     "inputs": {
+      "heights": [
+       2,
+       7,
+       4,
+       9
+      ],
+      "mark": 6
+     },
+     "outcome": 2
+    },
+    {
+     "inputs": {
+      "heights": [
+       4,
+       4
+      ],
+      "mark": 9
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       6,
+       5,
+       9,
+       9
+      ],
+      "mark": 3
+     },
+     "outcome": 4
+    },
+    {
+     "inputs": {
+      "heights": [
+       4
+      ],
+      "mark": 5
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       0,
+       4,
+       6,
+       1
+      ],
+      "mark": 6
+     },
+     "outcome": 0
+    },
+    {
+     "inputs": {
+      "heights": [
+       7,
+       3,
+       0
+      ],
+      "mark": 3
+     },
+     "outcome": 1
+    }
+   ],
    "tick": [
     {
      "inputs": {
@@ -14902,6 +17422,294 @@
       "slot": 3
      },
      "outcome": 4
+    }
+   ],
+   "two_rows": [
+    {
+     "inputs": {
+      "row_a": [
+       2,
+       9
+      ],
+      "row_b": [
+       3,
+       3
+      ]
+     },
+     "outcome": [
+      5,
+      12
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       9,
+       3,
+       7
+      ],
+      "row_b": [
+       2,
+       3,
+       0
+      ]
+     },
+     "outcome": [
+      11,
+      6,
+      7
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       6
+      ],
+      "row_b": [
+       7
+      ]
+     },
+     "outcome": [
+      13
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       3
+      ],
+      "row_b": [
+       3
+      ]
+     },
+     "outcome": [
+      6
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       2,
+       6,
+       3,
+       7
+      ],
+      "row_b": [
+       4,
+       7,
+       3,
+       3
+      ]
+     },
+     "outcome": [
+      6,
+      13,
+      6,
+      10
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       5,
+       1,
+       3
+      ],
+      "row_b": [
+       6,
+       3,
+       8
+      ]
+     },
+     "outcome": [
+      11,
+      4,
+      11
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       7
+      ],
+      "row_b": [
+       8
+      ]
+     },
+     "outcome": [
+      15
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       8,
+       1,
+       5
+      ],
+      "row_b": [
+       1,
+       6,
+       4
+      ]
+     },
+     "outcome": [
+      9,
+      7,
+      9
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       0,
+       7,
+       0,
+       3
+      ],
+      "row_b": [
+       1,
+       1,
+       6,
+       0
+      ]
+     },
+     "outcome": [
+      1,
+      8,
+      6,
+      3
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       0,
+       5
+      ],
+      "row_b": [
+       8,
+       1
+      ]
+     },
+     "outcome": [
+      8,
+      6
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       7,
+       6,
+       7
+      ],
+      "row_b": [
+       8,
+       2,
+       3
+      ]
+     },
+     "outcome": [
+      15,
+      8,
+      10
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       4,
+       9,
+       5
+      ],
+      "row_b": [
+       8,
+       2,
+       6
+      ]
+     },
+     "outcome": [
+      12,
+      11,
+      11
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       5,
+       9
+      ],
+      "row_b": [
+       7,
+       0
+      ]
+     },
+     "outcome": [
+      12,
+      9
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       1,
+       6,
+       1
+      ],
+      "row_b": [
+       7,
+       2,
+       1
+      ]
+     },
+     "outcome": [
+      8,
+      8,
+      2
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       7,
+       6,
+       8,
+       9
+      ],
+      "row_b": [
+       4,
+       3,
+       1,
+       1
+      ]
+     },
+     "outcome": [
+      11,
+      9,
+      9,
+      10
+     ]
+    },
+    {
+     "inputs": {
+      "row_a": [
+       9,
+       3,
+       8
+      ],
+      "row_b": [
+       2,
+       3,
+       7
+      ]
+     },
+     "outcome": [
+      11,
+      6,
+      15
+     ]
     }
    ],
    "wander": [
@@ -15024,10 +17832,185 @@
      "t": 3,
      "walker": "Walker3",
      "x": -3.627
+    },
+    {
+     "t": 4,
+     "walker": "Walker3",
+     "x": -4.018
+    },
+    {
+     "t": 5,
+     "walker": "Walker3",
+     "x": -4.099
+    },
+    {
+     "t": 6,
+     "walker": "Walker3",
+     "x": -4.079
+    },
+    {
+     "t": 7,
+     "walker": "Walker3",
+     "x": -2.55
+    },
+    {
+     "t": 8,
+     "walker": "Walker3",
+     "x": -3.725
+    },
+    {
+     "t": 9,
+     "walker": "Walker3",
+     "x": -3.794
+    },
+    {
+     "t": 0,
+     "walker": "Walker4",
+     "x": 4.012
+    }
+   ],
+   "yeast": [
+    {
+     "cells": 20.56,
+     "jar": "Jar1",
+     "t": 0
+    },
+    {
+     "cells": 45.21,
+     "jar": "Jar1",
+     "t": 1
+    },
+    {
+     "cells": 97.18,
+     "jar": "Jar1",
+     "t": 2
+    },
+    {
+     "cells": 199.58,
+     "jar": "Jar1",
+     "t": 3
+    },
+    {
+     "cells": 376.7,
+     "jar": "Jar1",
+     "t": 4
+    },
+    {
+     "cells": 623.66,
+     "jar": "Jar1",
+     "t": 5
+    },
+    {
+     "cells": 881.58,
+     "jar": "Jar1",
+     "t": 6
+    },
+    {
+     "cells": 1081.07,
+     "jar": "Jar1",
+     "t": 7
+    },
+    {
+     "cells": 1202.5,
+     "jar": "Jar1",
+     "t": 8
+    },
+    {
+     "cells": 1265.96,
+     "jar": "Jar1",
+     "t": 9
+    },
+    {
+     "cells": 27.97,
+     "jar": "Jar2",
+     "t": 0
+    },
+    {
+     "cells": 45.5,
+     "jar": "Jar2",
+     "t": 1
+    },
+    {
+     "cells": 73.14,
+     "jar": "Jar2",
+     "t": 2
+    },
+    {
+     "cells": 115.38,
+     "jar": "Jar2",
+     "t": 3
+    },
+    {
+     "cells": 177.0,
+     "jar": "Jar2",
+     "t": 4
+    },
+    {
+     "cells": 261.03,
+     "jar": "Jar2",
+     "t": 5
+    },
+    {
+     "cells": 365.64,
+     "jar": "Jar2",
+     "t": 6
+    },
+    {
+     "cells": 482.1,
+     "jar": "Jar2",
+     "t": 7
+    },
+    {
+     "cells": 596.64,
+     "jar": "Jar2",
+     "t": 8
+    },
+    {
+     "cells": 696.35,
+     "jar": "Jar2",
+     "t": 9
+    },
+    {
+     "cells": 48.82,
+     "jar": "Jar3",
+     "t": 0
+    },
+    {
+     "cells": 68.83,
+     "jar": "Jar3",
+     "t": 1
+    },
+    {
+     "cells": 96.3,
+     "jar": "Jar3",
+     "t": 2
+    },
+    {
+     "cells": 133.35,
+     "jar": "Jar3",
+     "t": 3
     }
    ]
   },
   "specs": {
+   "basket": {
+    "action": null,
+    "errors": null,
+    "group_by": null,
+    "inputs": {
+     "prices": "list"
+    },
+    "kind": "program",
+    "name": "basket",
+    "order_by": null,
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "to_pay",
+    "tol": 1e-09,
+    "units": {}
+   },
    "bounce": {
     "action": null,
     "errors": null,
@@ -15086,6 +18069,24 @@
     "state_var": null,
     "surprise": 0.005,
     "target": "h",
+    "tol": 0.01,
+    "units": {}
+   },
+   "bumps": {
+    "action": null,
+    "errors": null,
+    "group_by": "car",
+    "inputs": {
+     "t": null
+    },
+    "kind": "sequence",
+    "name": "bumps",
+    "order_by": "t",
+    "out_type": null,
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 0.005,
+    "target": "z",
     "tol": 0.01,
     "units": {}
    },
@@ -15277,6 +18278,24 @@
     "surprise": 1e-06,
     "target": "notes_after",
     "tol": 1e-09,
+    "units": {}
+   },
+   "funnel_h": {
+    "action": null,
+    "errors": null,
+    "group_by": "funnel",
+    "inputs": {
+     "t": null
+    },
+    "kind": "sequence",
+    "name": "funnel_h",
+    "order_by": "t",
+    "out_type": null,
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 0.005,
+    "target": "h",
+    "tol": 0.01,
     "units": {}
    },
    "gas": {
@@ -15656,6 +18675,24 @@
     "tol": 1e-09,
     "units": {}
    },
+   "rise": {
+    "action": null,
+    "errors": null,
+    "group_by": null,
+    "inputs": {
+     "prices": "list"
+    },
+    "kind": "program",
+    "name": "rise",
+    "order_by": null,
+    "out_type": "list",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "new_prices",
+    "tol": 1e-09,
+    "units": {}
+   },
    "roll": {
     "action": null,
     "errors": null,
@@ -16003,6 +19040,24 @@
      ]
     }
    },
+   "swings": {
+    "action": null,
+    "errors": null,
+    "group_by": "pendulum",
+    "inputs": {
+     "t": null
+    },
+    "kind": "sequence",
+    "name": "swings",
+    "order_by": "t",
+    "out_type": null,
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 0.005,
+    "target": "angle",
+    "tol": 0.01,
+    "units": {}
+   },
    "take_away": {
     "action": null,
     "errors": null,
@@ -16019,6 +19074,25 @@
     "state_var": null,
     "surprise": 1e-06,
     "target": "left",
+    "tol": 1e-09,
+    "units": {}
+   },
+   "tall": {
+    "action": null,
+    "errors": null,
+    "group_by": null,
+    "inputs": {
+     "heights": "list",
+     "mark": "int"
+    },
+    "kind": "program",
+    "name": "tall",
+    "order_by": null,
+    "out_type": "int",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "taller",
     "tol": 1e-09,
     "units": {}
    },
@@ -16040,6 +19114,25 @@
     "tol": 1e-09,
     "units": {}
    },
+   "two_rows": {
+    "action": null,
+    "errors": null,
+    "group_by": null,
+    "inputs": {
+     "row_a": "list",
+     "row_b": "list"
+    },
+    "kind": "program",
+    "name": "two_rows",
+    "order_by": null,
+    "out_type": "list",
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "together",
+    "tol": 1e-09,
+    "units": {}
+   },
    "wander": {
     "action": null,
     "errors": null,
@@ -16055,6 +19148,24 @@
     "state_var": null,
     "surprise": 0.005,
     "target": "x",
+    "tol": 0.01,
+    "units": {}
+   },
+   "yeast": {
+    "action": null,
+    "errors": null,
+    "group_by": "jar",
+    "inputs": {
+     "t": null
+    },
+    "kind": "sequence",
+    "name": "yeast",
+    "order_by": "t",
+    "out_type": null,
+    "precision": 0.0,
+    "state_var": null,
+    "surprise": 0.005,
+    "target": "cells",
     "tol": 0.01,
     "units": {}
    }
@@ -16447,16 +19558,19 @@
   }
  },
  "search_steps": {
+  "basket": 7224,
   "bounce": 2060,
   "bounces": 36,
+  "bumps": 2730,
   "burn": 40,
   "cake_balance": 372439,
   "charge": 48,
   "coil_stretch": 162,
-  "collide": 180,
+  "collide": 200,
   "cool": 240,
   "earn_coins": 39976,
   "earn_notes": 1247,
+  "funnel_h": 240,
   "gas": 28,
   "get_paid": 86,
   "groups": 1205,
@@ -16472,6 +19586,7 @@
   "peekaboo": 8,
   "push": 180,
   "recut": 2300,
+  "rise": 6938,
   "roll": 1724,
   "see_merge": 3046,
   "see_push": 165,
@@ -16484,9 +19599,13 @@
   "spin": 136171,
   "square": 2546,
   "stretch": 176,
+  "swings": 3364,
   "take_away": 705,
+  "tall": 951334,
   "tick": 2375861,
-  "wander": 336
+  "two_rows": 7440,
+  "wander": 9780,
+  "yeast": 1056
  },
  "sequence_laws": {
   "bounces": {
@@ -16515,6 +19634,41 @@
      "\u0394",
      "\u03c1"
     ]
+   }
+  },
+  "bumps": {
+   "constant": null,
+   "etype": "bumps",
+   "form": "sequence",
+   "group_by": "car",
+   "order_by": "t",
+   "properties": {
+    "Car1": [
+     1.255281369673,
+     -0.671843876381
+    ],
+    "Car2": [
+     1.426689975238,
+     -0.756085026807
+    ],
+    "Car3": [
+     1.65542330131,
+     -0.857977996309
+    ]
+   },
+   "provenance": {
+    "groups": 3,
+    "lesson": 27,
+    "support": 0
+   },
+   "scope": "per group",
+   "spread": 0.00043605890635646104,
+   "target": "z",
+   "template": {
+    "bias": false,
+    "rec": 2,
+    "x_op": null,
+    "y_ops": []
    }
   },
   "burn": {
@@ -16597,6 +19751,33 @@
     ]
    }
   },
+  "funnel_h": {
+   "constant": null,
+   "etype": "funnel_h",
+   "form": "sequence",
+   "group_by": "funnel",
+   "order_by": "t",
+   "properties": {
+    "Funnel1": 0.1894999999999989,
+    "Funnel2": 0.2899999999999996,
+    "Funnel3": 0.18149999999999977
+   },
+   "provenance": {
+    "groups": 3,
+    "lesson": 27,
+    "support": 0
+   },
+   "scope": "per group",
+   "spread": 0.003448275862065528,
+   "target": "h",
+   "template": {
+    "x_op": null,
+    "y_ops": [
+     "\u0394",
+     "\u0394"
+    ]
+   }
+  },
   "hang": {
    "constant": null,
    "etype": "hang",
@@ -16620,6 +19801,69 @@
     "x_op": "\u0394",
     "y_ops": [
      "\u0394"
+    ]
+   }
+  },
+  "swings": {
+   "constant": null,
+   "etype": "swings",
+   "form": "sequence",
+   "group_by": "pendulum",
+   "order_by": "t",
+   "properties": {
+    "Pendulum1": [
+     1.90701847973,
+     -1.00003075392
+    ],
+    "Pendulum2": [
+     1.681393047567,
+     -0.999986758189
+    ],
+    "Pendulum3": [
+     1.839715407834,
+     -1.000054198203
+    ]
+   },
+   "provenance": {
+    "groups": 3,
+    "lesson": 27,
+    "support": 0
+   },
+   "scope": "per group",
+   "spread": 0.0001167179966592357,
+   "target": "angle",
+   "template": {
+    "bias": false,
+    "rec": 2,
+    "x_op": null,
+    "y_ops": []
+   }
+  },
+  "yeast": {
+   "constant": null,
+   "etype": "yeast",
+   "form": "sequence",
+   "group_by": "jar",
+   "order_by": "t",
+   "properties": {
+    "Jar1": 0.44623662815403264,
+    "Jar2": 0.6027500489390973,
+    "Jar3": 0.69606321888615
+   },
+   "provenance": {
+    "groups": 3,
+    "lesson": 27,
+    "support": 0
+   },
+   "scope": "per group",
+   "spread": 0.00042175963535015976,
+   "target": "cells",
+   "template": {
+    "pow": -1,
+    "x_op": null,
+    "y_ops": [
+     "\u0394",
+     "\u03c1"
     ]
    }
   }

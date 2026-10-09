@@ -2804,9 +2804,9 @@
    },
    "wander": {
     "innate": 46,
-    "invent": 167440,
-    "reuse": 66976,
-    "stuck_at": 11
+    "invent": 686180,
+    "reuse": 72240,
+    "stuck_at": 12
    }
   },
   "items": [
@@ -3471,6 +3471,750 @@
   "lesson": 25,
   "passed": true,
   "threshold": 0.9
+ },
+ "27": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "swings",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "bumps",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "yeast",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "explained all four worlds, with kinds it invented itself",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      4,
+      4
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "swing+bob",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "REUSED: swinging and bobbing are one kind (the next reading a fixed mix of the last two); only one of them needed a new kind",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "swings",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "bumps",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "yeast",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "the same brain without inventing kinds can't explain any of them",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      4,
+      4
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "pendulum": "ExamPendulum1",
+       "t": 7
+      },
+      "truth": 2.773,
+      "ultron": 2.7696023119272386
+     },
+     {
+      "question": {
+       "pendulum": "ExamPendulum1",
+       "t": 8
+      },
+      "truth": 3.865,
+      "ultron": 3.8594951469988246
+     },
+     {
+      "question": {
+       "pendulum": "ExamPendulum1",
+       "t": 15
+      },
+      "truth": 2.361,
+      "ultron": 2.349282895973281
+     }
+    ],
+    "name": "new objects, after 6 readings: readings 2-10 steps later",
+    "scores": {
+     "lookup": [
+      0,
+      53
+     ],
+     "nearest": [
+      1,
+      53
+     ],
+     "ultron": [
+      53,
+      53
+     ]
+    },
+    "tolerance": 0.02
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamPendulum1",
+      "truth": 2.3597078071800683,
+      "ultron": 2.35883410056685
+     },
+     {
+      "question": "ExamPendulum2",
+      "truth": 2.242075137599036,
+      "ultron": 2.2413432152569372
+     },
+     {
+      "question": "ExamPendulum3",
+      "truth": 1.8960413165301344,
+      "ultron": 1.8962627211350254
+     }
+    ],
+    "name": "NEVER MEASURED: a new pendulum's period, after 6 readings",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      5,
+      5
+     ]
+    },
+    "tolerance": 0.02
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamCar1",
+      "truth": 0.9359707807180068,
+      "ultron": 0.936035972769967
+     },
+     {
+      "question": "ExamCar2",
+      "truth": 0.8737214895551308,
+      "ultron": 0.8736945235303305
+     },
+     {
+      "question": "ExamCar3",
+      "truth": 0.9309782549432941,
+      "ultron": 0.9309793957829159
+     }
+    ],
+    "name": "NEVER MEASURED: how much of a car's bounce is left each tenth of a second",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      5,
+      5
+     ]
+    },
+    "tolerance": 0.02
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamJar1",
+      "truth": 530.4361669368968,
+      "ultron": 530.4169540730328
+     },
+     {
+      "question": "ExamJar2",
+      "truth": 1847.393449186487,
+      "ultron": 1847.333341257421
+     },
+     {
+      "question": "ExamJar3",
+      "truth": 504.2169902492769,
+      "ultron": 504.22356344778626
+     }
+    ],
+    "name": "NEVER MEASURED: a new jar's capacity, after 8 hourly counts",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      5,
+      5
+     ]
+    },
+    "tolerance": 0.05
+   },
+   {
+    "examples": [
+     {
+      "question": "ExamFunnel1",
+      "truth": 10.57740823859975,
+      "ultron": 10.577957052711112
+     },
+     {
+      "question": "ExamFunnel2",
+      "truth": 15.018381739912442,
+      "ultron": 15.023035257049548
+     },
+     {
+      "question": "ExamFunnel3",
+      "truth": 20.9261621186327,
+      "ultron": 20.937113424747363
+     }
+    ],
+    "name": "NEVER MEASURED: when a new funnel will be empty, after 6 readings",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      5,
+      5
+     ]
+    },
+    "tolerance": 0.02
+   }
+  ],
+  "laws": {
+   "bumps": "z[n] = a1\u00b7z[n-1] + a2\u00b7z[n-2]",
+   "funnel_h": "\u0394(\u0394(h))",
+   "swings": "angle[n] = a1\u00b7angle[n-1] + a2\u00b7angle[n-2]",
+   "yeast": "\u03c1(\u0394(cells^-1))"
+  },
+  "lesson": 27,
+  "passed": true,
+  "stories": {
+   "funnel_h": "None of the kinds of explanation I was born with fits 'funnel_h': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u0394(\u0394(h)) stays the same for each funnel (3 funnels). That is a new KIND of explanation, not just a new law: the steps between readings change by the same amount each time. I'll keep it and try it first next time.",
+   "swings": "None of the kinds of explanation I was born with fits 'swings': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. angle[n] = a1\u00b7angle[n-1] + a2\u00b7angle[n-2] stays the same for each pendulum (3 pendulums). That is a new KIND of explanation, not just a new law: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down). I'll keep it and try it first next time.",
+   "yeast": "None of the kinds of explanation I was born with fits 'yeast': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. \u03c1(\u0394(cells^-1)) stays the same for each jar (3 jars). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time."
+  },
+  "threshold": 0.9
+ },
+ "28": {
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": {
+       "prices": [
+        19,
+        12,
+        27,
+        20,
+        29,
+        8,
+        24,
+        28,
+        6
+       ]
+      },
+      "truth": 173,
+      "ultron": 173
+     },
+     {
+      "question": {
+       "prices": [
+        4,
+        23,
+        21,
+        26,
+        9,
+        3,
+        10,
+        12,
+        16,
+        16
+       ]
+      },
+      "truth": 140,
+      "ultron": 140
+     },
+     {
+      "question": {
+       "prices": [
+        28,
+        23,
+        12,
+        6,
+        3,
+        8
+       ]
+      },
+      "truth": 80,
+      "ultron": 80
+     }
+    ],
+    "name": "the total of a basket of 6-12 prices",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "heights": [
+        11,
+        17,
+        12,
+        27,
+        6,
+        0,
+        0,
+        3,
+        21
+       ],
+       "mark": 24
+      },
+      "truth": 1,
+      "ultron": 1
+     },
+     {
+      "question": {
+       "heights": [
+        3,
+        18,
+        5,
+        26,
+        14,
+        1,
+        8,
+        22,
+        23,
+        17,
+        23,
+        2
+       ],
+       "mark": 13
+      },
+      "truth": 7,
+      "ultron": 7
+     },
+     {
+      "question": {
+       "heights": [
+        9,
+        15,
+        18,
+        29,
+        6,
+        2,
+        7,
+        7,
+        26,
+        14
+       ],
+       "mark": 3
+      },
+      "truth": 9,
+      "ultron": 9
+     }
+    ],
+    "name": "how many of 6-12 children are taller than the mark",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      8,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "prices": [
+        19,
+        12,
+        27,
+        20,
+        29,
+        8,
+        24,
+        28,
+        6
+       ]
+      },
+      "truth": [
+       20,
+       13,
+       28,
+       21,
+       30,
+       9,
+       25,
+       29,
+       7
+      ],
+      "ultron": [
+       20,
+       13,
+       28,
+       21,
+       30,
+       9,
+       25,
+       29,
+       7
+      ]
+     },
+     {
+      "question": {
+       "prices": [
+        4,
+        23,
+        21,
+        26,
+        9,
+        3,
+        10,
+        12,
+        16,
+        16
+       ]
+      },
+      "truth": [
+       5,
+       24,
+       22,
+       27,
+       10,
+       4,
+       11,
+       13,
+       17,
+       17
+      ],
+      "ultron": [
+       5,
+       24,
+       22,
+       27,
+       10,
+       4,
+       11,
+       13,
+       17,
+       17
+      ]
+     },
+     {
+      "question": {
+       "prices": [
+        28,
+        23,
+        12,
+        6,
+        3,
+        8
+       ]
+      },
+      "truth": [
+       29,
+       24,
+       13,
+       7,
+       4,
+       9
+      ],
+      "ultron": [
+       29,
+       24,
+       13,
+       7,
+       4,
+       9
+      ]
+     }
+    ],
+    "name": "a price list of 6-12 after every price goes up by one",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": {
+       "row_a": [
+        20,
+        20,
+        29,
+        2,
+        27,
+        30,
+        29,
+        6,
+        18,
+        2,
+        2,
+        21
+       ],
+       "row_b": [
+        3,
+        30,
+        10,
+        28,
+        28,
+        1,
+        24,
+        5,
+        11,
+        19,
+        13,
+        7
+       ]
+      },
+      "truth": [
+       23,
+       50,
+       39,
+       30,
+       55,
+       31,
+       53,
+       11,
+       29,
+       21,
+       15,
+       28
+      ],
+      "ultron": [
+       23,
+       50,
+       39,
+       30,
+       55,
+       31,
+       53,
+       11,
+       29,
+       21,
+       15,
+       28
+      ]
+     },
+     {
+      "question": {
+       "row_a": [
+        18,
+        8,
+        4,
+        15,
+        25,
+        5,
+        19
+       ],
+       "row_b": [
+        1,
+        14,
+        24,
+        3,
+        11,
+        0,
+        3
+       ]
+      },
+      "truth": [
+       19,
+       22,
+       28,
+       18,
+       36,
+       5,
+       22
+      ],
+      "ultron": [
+       19,
+       22,
+       28,
+       18,
+       36,
+       5,
+       22
+      ]
+     },
+     {
+      "question": {
+       "row_a": [
+        16,
+        9,
+        5,
+        11,
+        4,
+        23,
+        24
+       ],
+       "row_b": [
+        13,
+        3,
+        30,
+        21,
+        23,
+        13,
+        2
+       ]
+      },
+      "truth": [
+       29,
+       12,
+       35,
+       32,
+       27,
+       36,
+       26
+      ],
+      "ultron": [
+       29,
+       12,
+       35,
+       32,
+       27,
+       36,
+       26
+      ]
+     }
+    ],
+    "name": "two rows of 6-12 baskets put together, basket by basket",
+    "scores": {
+     "lookup": [
+      0,
+      30
+     ],
+     "nearest": [
+      0,
+      30
+     ],
+     "ultron": [
+      30,
+      30
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "laws": {
+   "basket": "start at 0 and get_paid in each of prices",
+   "rise": "[succ] each of prices",
+   "tall": "how many in those of heights above mark",
+   "two_rows": "get_paid pair by pair of row_a and row_b"
+  },
+  "lesson": 28,
+  "passed": true,
+  "threshold": 0.99
  },
  "3": {
   "attempt": 1,

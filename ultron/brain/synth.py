@@ -12,7 +12,7 @@ Rivals are what make designing an experiment possible.
 """
 
 from . import dsl
-from .dsl import BOOL, INT, Overflow, apply_step
+from .dsl import BOOL, INT, LIST, Overflow, apply_step
 
 
 class SearchResult:
@@ -86,6 +86,54 @@ def _vec_call(name, avec, bvec, library):
     return tuple(out)
 
 
+def _each(f, *vecs):
+    """f on each example; None if any example can't be worked out."""
+    out = []
+    try:
+        for args in zip(*vecs):
+            out.append(f(*args))
+    except dsl.Overflow:
+        return None
+    return tuple(out)
+
+
+def _lists(s, at, consider, steps, ulibs, libs, library):
+    from .dsl import RELS, apply_step, keep
+    for L, lv in list(at(LIST, s - 1)):
+        consider(("len", L), INT, tuple(len(x) for x in lv), s)
+    for F in list(steps) + [("call1", l.name) for l in ulibs]:
+        for L, lv in list(at(LIST, s - 2)):
+            consider(("map", F, L), LIST,
+                     _each(lambda l: tuple(apply_step(F, x, None, library) for x in l), lv), s)
+    for law in libs:
+        for ts in range(1, s - 2):
+            for t, tv in list(at(INT, ts)):
+                F = ("call", law.name, t)
+                for L, lv in list(at(LIST, s - 2 - ts)):
+                    consider(("map", F, L), LIST, _each(
+                        lambda l, tt: tuple(apply_step(F, x, tt, library) for x in l), lv, tv), s)
+    for i in range(1, s - 2):
+        j = s - 2 - i
+        for t, tv in list(at(INT, i)):
+            for L, lv in list(at(LIST, j)):
+                for rel in RELS:
+                    consider(("filter", rel, t, L), LIST, _each(
+                        lambda l, tt: tuple(x for x in l if keep(rel, x, tt)), lv, tv), s)
+        for law in libs:
+            for L, lv in list(at(LIST, i)):
+                for x, xv in list(at(INT, j)):
+                    def fold(l, acc, name=law.name):
+                        for v in l:
+                            acc = dsl.check(library.call(name, acc, v))
+                        return acc
+                    consider(("fold", law.name, L, x), INT, _each(fold, lv, xv), s)
+            for A, av in list(at(LIST, i)):
+                for B, bv in list(at(LIST, j)):
+                    consider(("zip", law.name, A, B), LIST, _each(
+                        lambda a, b, name=law.name: tuple(dsl.check(library.call(name, p, q))
+                                                          for p, q in zip(a, b)), av, bv), s)
+
+
 def synthesize(inputs, targets, var_types, out_type, library, consts=(0, 1),
                max_size=7, max_bank=60000, rivals=0, extra=(), exceptions=0):
     """Search for the smallest program mapping each inputs[i] to targets[i].
@@ -106,8 +154,10 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
                 n_rivals, extra, n_exceptions=0):
     target = tuple(targets)
     names = sorted(var_types)
-    bank = {INT: {}, BOOL: {}}          # type -> size -> [(expr, vec)]
-    seen = {INT: set(), BOOL: set()}
+    bank = {INT: {}, BOOL: {}, LIST: {}}    # type -> size -> [(expr, vec)]
+    seen = {INT: set(), BOOL: set(), LIST: set()}
+    if out_type == LIST:
+        target = tuple(tuple(t) for t in target)
     state = {"steps": 0, "total": 0, "matches": [], "first_size": None, "near": None}
 
     def consider(expr, typ, vec, s):
@@ -167,7 +217,10 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
     try:
         # size 1: what it perceives, and the constants it knows
         for n in names:
-            consider(("var", n), var_types[n], tuple(inp[n] for inp in inputs), 1)
+            if var_types[n] == LIST:
+                consider(("var", n), LIST, tuple(tuple(inp[n]) for inp in inputs), 1)
+            else:
+                consider(("var", n), var_types[n], tuple(inp[n] for inp in inputs), 1)
         for c in consts:
             typ = BOOL if isinstance(c, bool) else INT
             consider(("const", c), typ, tuple(c for _ in inputs), 1)
@@ -213,6 +266,11 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
                             for b, bv in list(at(INT, k)):
                                 consider(("ite", c, a, b), INT,
                                          tuple(x if q else y for q, x, y in zip(cv, av, bv)), s)
+
+            # rows of things: how many, each one stepped, those below/above/equal to
+            # something, everything combined with a law, two rows paired by a law
+            if bank[LIST]:
+                _lists(s, at, consider, steps, ulibs, libs, library)
 
             # repetition: "start at x and do F, n times"
             options = [(F, 1, None) for F in steps] + [(("call1", l.name), 1, None) for l in ulibs]

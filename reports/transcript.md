@@ -462,6 +462,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _revise_: burn: Δ(H)/Δ(t) stays the same for each candle (kind 2: equal steps in what I change give equal steps in what I read)
 - Ultron _stuck_: wander: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _stuck_: wander: nothing I can express stays the same (3 walkers, 24 readings)
+- Ultron _stuck_: wander: nothing I can express stays the same (4 walkers, 31 readings)
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 23, attempt 1: passed
 - **Trainer**: What you found in 'kind:hang' is what people call a linear relationship (a constant rate of change).
@@ -485,3 +486,49 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Lesson 25: Phase 3 exam: seeing, inventing, acting
 - **Trainer**: No teaching today. Show me what you can do.
 - **Trainer**: Exam for lesson 25, attempt 1: passed
+
+## Lesson 27
+
+- **Trainer**: Lesson 27: Swinging, dying down, growing, emptying
+- Ultron _meet_: new kind of experience: swings
+- Ultron _meet_: new kind of experience: bumps
+- Ultron _meet_: new kind of experience: yeast
+- Ultron _meet_: new kind of experience: funnel_h
+- Ultron _stuck_: swings: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
+- Ultron _stuck_: swings: nothing I can express stays the same (3 pendulums, 20 readings)
+- Ultron _invent_: None of the kinds of explanation I was born with fits 'swings': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. angle[n] = a1·angle[n-1] + a2·angle[n-2] stays the same for each pendulum (3 pendulums). That is a new KIND of explanation, not just a new law: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down). I'll keep it and try it first next time.
+- Ultron _revise_: swings: angle[n] = a1·angle[n-1] + a2·angle[n-2] stays the same for each pendulum (kind 3: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))
+- Ultron _stuck_: bumps: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
+- Ultron _stuck_: bumps: nothing I can express stays the same (3 cars, 20 readings)
+- Ultron _reuse_: bumps: nothing I was born with explains it, but a kind of explanation I invented does: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down) (z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car); 138 steps of checking
+- Ultron _revise_: bumps: z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car (kind 3: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))
+- Ultron _stuck_: yeast: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
+- Ultron _invent_: None of the kinds of explanation I was born with fits 'yeast': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(Δ(cells^-1)) stays the same for each jar (3 jars). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time.
+- Ultron _revise_: yeast: ρ(Δ(cells^-1)) stays the same for each jar (kind 4: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
+- Ultron _stuck_: funnel_h: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
+- Ultron _invent_: None of the kinds of explanation I was born with fits 'funnel_h': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. Δ(Δ(h)) stays the same for each funnel (3 funnels). That is a new KIND of explanation, not just a new law: the steps between readings change by the same amount each time. I'll keep it and try it first next time.
+- Ultron _revise_: funnel_h: Δ(Δ(h)) stays the same for each funnel (kind 5: the steps between readings change by the same amount each time)
+- Ultron _bored_: nothing here is teaching me anything new any more
+- **Trainer**: Exam for lesson 27, attempt 1: passed
+
+## Lesson 28
+
+- **Trainer**: Lesson 28: Rows of things
+- Ultron _meet_: new kind of experience: basket
+- Ultron _meet_: new kind of experience: tall
+- Ultron _meet_: new kind of experience: rise
+- Ultron _meet_: new kind of experience: two_rows
+- Ultron _revise_: basket: surprised; new best explanation is 2 (was nothing; 1 experiences, 29 programs searched)
+- Ultron _revise_: tall: surprised; new best explanation is 0 (was nothing; 1 experiences, 25 programs searched)
+- Ultron _revise_: rise: surprised; new best explanation is [succ] each of prices (was nothing; 1 experiences, 6938 programs searched)
+- Ultron _revise_: two_rows: surprised; new best explanation is get_paid pair by pair of row_a and row_b (was nothing; 1 experiences, 7440 programs searched)
+- Ultron _revise_: basket: surprised; new best explanation is start at 0 and get_paid in each of prices (was 2; 2 experiences, 7195 programs searched)
+- Ultron _revise_: tall: surprised; new best explanation is spend_notes(mark, 3) (was 0; 3 experiences, 2880 programs searched)
+- Ultron _revise_: tall: surprised; new best explanation is spend_notes(mark, how many in heights) (was spend_notes(mark, 3); 4 experiences, 31409 programs searched)
+- Ultron _revise_: tall: surprised; new best explanation is how many in those of heights above mark (was spend_notes(mark, how many in heights); 6 experiences, 917020 programs searched)
+- Ultron _confirm_: rise: [succ] each of prices predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _confirm_: two_rows: get_paid pair by pair of row_a and row_b predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _confirm_: basket: start at 0 and get_paid in each of prices predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _confirm_: tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks
+- Ultron _bored_: nothing here is teaching me anything new any more
+- **Trainer**: Exam for lesson 28, attempt 1: passed
