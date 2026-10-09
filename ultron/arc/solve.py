@@ -70,6 +70,9 @@ def run(program, g):
         if name == "marks":
             g = objects.apply_marks(p, g)
             continue
+        if name == "pick":
+            g = objects.apply_pick(p, g)
+            continue
         if name == "colourmap":
             g = np.vectorize(lambda v: p.get(int(v), int(v)), otypes=[np.int8])(g)
             continue
@@ -97,6 +100,8 @@ def show(program):
             out.append(objects.describe(p))
         elif name == "marks":
             out.append(objects.describe_marks(p))
+        elif name == "pick":
+            out.append(objects.describe_pick(p))
         elif name.startswith("block") and LIBRARY[0]:
             from . import library
             out.append(library.show_use(LIBRARY[0][int(name[5:]) - 1], p))
@@ -119,6 +124,8 @@ def length(program):
             total += objects.length(p)
         elif name == "marks":
             total += objects.marks_length(p)
+        elif name == "pick":
+            total += objects.pick_length(p)
         else:
             total += 1
     return total
@@ -170,6 +177,9 @@ def _search(train, budget, max_depth, want):
     marks = objects.learn_marks(ins, targets)
     if marks is not None:
         found.append((("marks", marks),))
+    pick = objects.learn_pick(ins, targets)
+    if pick is not None:
+        found.append((("pick", pick),))
     frontier = [((), ins)]
     seen = {tuple(key(g) for g in ins)}
     cache = {}
@@ -220,6 +230,9 @@ def _search(train, budget, max_depth, want):
                         marks = objects.learn_marks(outs, targets)
                         if marks is not None:
                             found.append(p2 + (("marks", marks),))
+                        pick = objects.learn_pick(outs, targets)
+                        if pick is not None:
+                            found.append(p2 + (("pick", pick),))
                 if depth < max_depth:
                     nxt.append((p2, outs))
         frontier = nxt

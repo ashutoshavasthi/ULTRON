@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **25.5%** (102.0) | 214.7 | 40000 |
+| ARC-AGI-1 | training | 400 | **27.0%** (108.0) | 303.9 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-102 tasks solved; 11 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 287 with no program within budget.
+108 tasks solved; 11 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 281 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -37,6 +37,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 3428a4f5 | `combine(('lines', 'xor', 3))` |
 | 3618c87e | `keep_thing(('largest', False)) ▸ local law on (colour, n4): 2 situations change colour` |
 | 3906de3d | `gravity(up)` |
+| 39a8645d | `the thing with shape_count_rank=most` |
 | 3af2c5a8 | `mirror_tile(both)` |
 | 3c9b0459 | `rot180` |
 | 4258a5f9 | `frame_things(1)` |
@@ -44,6 +45,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 4347f46a | `hollow_things` |
 | 445eab21 | `gravity(right) ▸ continue_pattern(((1, 5), (1, 5))) ▸ recolour 6→7, 7→8` |
 | 484b58aa | `complete_pattern(0)` |
+| 48d8fb45 | `crop_thing(('most_colours', True)) ▸ the thing with size_rank=largest` |
 | 496994bd | `symmetrize(v)` |
 | 4c4377d9 | `flip_v ▸ mirror_tile(v)` |
 | 50cb2852 | `hollow_things ▸ fill_enclosed(8)` |
@@ -62,11 +64,13 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 6e82a1ae | `thing law on (size): 3 kinds of thing` |
 | 6f8cd79b | `outline(8)` |
 | 6fa7a44f | `mirror_tile(v)` |
+| 72ca375d | `the thing with symmetric=True` |
 | 7468f01a | `flip_h ▸ crop_content` |
 | 74dd1130 | `transpose` |
 | 7b6016b9 | `fill_enclosed(2) ▸ recolour 0→3` |
 | 810b9b61 | `thing law on (holes): 3 except 1 kind` |
 | 868de0fa | `fill_enclosed(2) ▸ thing law on (size): keep except 3 kinds` |
+| 88a62173 | `the thing with shape_count=1` |
 | 8be77c9e | `mirror_tile(v)` |
 | 8f2ea7aa | `crop_content ▸ fractal` |
 | 913fb3ed | `marks around things by (colour): 3 kinds leave marks` |
@@ -81,6 +85,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | a61f2674 | `thing law on (size_rank): 3 kinds of thing` |
 | a699fb00 | `local law on (colour, line): 2 situations change colour` |
 | a740d043 | `crop_content ▸ recolour 1→0` |
+| a87f7484 | `the thing with size_rank=largest` |
 | ae3edfdc | `frame_things(7) ▸ local law on (colour, line, orth_set): 16 situations change colour` |
 | ae4f1146 | `keep_colour(1) ▸ crop_thing(('largest', True)) ▸ recolour 0→8` |
 | aedd82e4 | `thing law on (size): keep except 1 kind` |
@@ -103,6 +108,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | d511f180 | `recolour 5→8, 8→5` |
 | d5d6de2d | `fill_enclosed(3) ▸ recolour 2→0` |
 | d90796e8 | `local law on (colour, orth_set): 2 situations change colour` |
+| d9fac9be | `crop_thing(('largest', True)) ▸ the thing with border=False` |
 | dae9d2b5 | `combine(('halves_lr', 'or', 6))` |
 | ded97339 | `local law on (colour, line): 2 situations change colour` |
 | e3497940 | `symmetrize(h) ▸ pick_part(first)` |

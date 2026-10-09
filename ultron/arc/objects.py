@@ -67,11 +67,21 @@ def describe_things(g, setting):
             "symmetric": bool((mask == mask[:, ::-1]).all() or (mask == mask[::-1]).all()),
             "filled": bool(mask.all()),
         })
+    # "the most" and "the least": every count compared with the other things'
+    for q in RANKED:
+        vals = sorted({d[q] for d in out})
+        for d in out:
+            d[q + "_rank"] = "most" if d[q] == vals[-1] else \
+                             "least" if d[q] == vals[0] else "middle"
     return ts, out
 
 
+RANKED = ["shape_count", "colour_count", "holes", "height", "width", "n_colours"]
+
+
 QUANTITIES = ["colour", "size", "size_rank", "shape", "shape_count", "colour_count",
-              "height", "width", "holes", "border", "n_colours", "symmetric", "filled"]
+              "height", "width", "holes", "border", "n_colours", "symmetric", "filled"] + \
+             [q + "_rank" for q in RANKED]
 FEATURE_SETS = [(q,) for q in QUANTITIES] + list(itertools.combinations(QUANTITIES, 2))
 
 
@@ -314,3 +324,72 @@ def describe_marks(rule):
     setting, fs, stamps = rule
     n = sum(1 for s in stamps.values() if s)
     return f"marks around things by ({', '.join(fs)}): {n} kinds leave marks"
+
+
+# ------------------------------------------------------------- which thing is the answer
+
+def learn_pick(grids, targets):
+    """Pictures whose answer is one of their things: the shortest description of which
+    one, as a value of its quantities (say, "the one whose shape appears once"); every
+    thing with that value must give the same answer. Returns (setting, mode, quantities,
+    value)."""
+    best = None
+    for setting in SETTINGS:
+        seen = []
+        for g, t in zip(grids, targets):
+            ts, qs = describe_things(g, setting)
+            if not qs:
+                seen = None
+                break
+            seen.append((g, t, ts, qs))
+        if seen is None:
+            continue
+        for mode in ("box", "patch"):
+            right = []
+            for g, t, ts, qs in seen:
+                right.append({i for i, th in enumerate(ts) if np.array_equal(_cut(g, th, mode), t)})
+            if not all(right):
+                continue
+            for fs in FEATURE_SETS:
+                if best is not None and 1 + 0.5 * len(fs) >= _pick_size(best):
+                    break
+                values = None
+                for (g, t, ts, qs), ok in zip(seen, right):
+                    keys = [tuple(q[f] for f in fs) for q in qs]
+                    # a value every thing with it gives the right answer
+                    fit = {keys[i] for i in ok
+                           if all(j in ok for j, k in enumerate(keys) if k == keys[i])}
+                    values = fit if values is None else values & fit
+                    if not values:
+                        break
+                if values:
+                    best = (setting, mode, fs, sorted(values, key=str)[0])
+                    break
+    return best
+
+
+def _cut(g, th, mode):
+    return g[th.r0:th.r1, th.c0:th.c1] if mode == "box" else th.patch
+
+
+def _pick_size(rule):
+    return 1 + 0.5 * len(rule[2])
+
+
+def apply_pick(rule, g):
+    setting, mode, fs, value = rule
+    ts, qs = describe_things(g, setting)
+    cuts = [_cut(g, th, mode) for th, q in zip(ts, qs) if tuple(q[f] for f in fs) == value]
+    if not cuts or any(not np.array_equal(c, cuts[0]) for c in cuts):
+        return None             # nothing, or things that disagree, fit the law: no guess
+    return cuts[0].copy()
+
+
+def pick_length(rule):
+    return _pick_size(rule)
+
+
+def describe_pick(rule):
+    setting, mode, fs, value = rule
+    v = ", ".join(f"{f}={'…' if f == 'shape' else x}" for f, x in zip(fs, value))
+    return f"the thing with {v}"
