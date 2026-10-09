@@ -17,27 +17,58 @@ from . import data, solve
 LOG = os.path.join(data.ROOT, "reports", "arc_runs.log")
 
 
+def _plain(p):
+    if isinstance(p, tuple):
+        return [_plain(x) for x in p]
+    if isinstance(p, (np.integer,)):
+        return int(p)
+    return p
+
+
+def steps(program):
+    """A program as plain data; a table learned from the task's own examples is kept only
+    as a marker (it is re-learned for every task)."""
+    return [[n, None if n in ("colourmap", "cells") else _plain(p)] for n, p in program]
+
+
+def _one(job):
+    tid, t, budget = job
+    t0 = time.time()
+    attempts, used, spent = solve.predict(t["train"], [i for i, _ in t["test"]],
+                                          budget=budget)
+    ok = [o is not None and any(np.array_equal(a, o) for a in att)
+          for att, (_, o) in zip(attempts, t["test"])]
+    s = sum(ok) / len(ok)
+    return {"task": tid, "score": s, "program": solve.show(used[0]) if used else None,
+            "ops": [n for n, _ in used[0]] if used else [],
+            "steps": steps(used[0]) if used else [],
+            "found": bool(used), "operations": spent,
+            "seconds": round(time.time() - t0, 2)}
+
+
+def _init(library, guide):
+    solve.LIBRARY[0] = library
+    solve.GUIDE[0] = guide
+
+
 def score_set(name, split, limit=None, budget=solve.BUDGET, scoring=False, ids=None,
-              tasks=None):
+              tasks=None, workers=1):
+    """Every task is solved on its own, so running several at once (workers) gives exactly
+    the same answers as running them one by one."""
     tasks = tasks or data.load(name, split, i_am_scoring=scoring)
     ids = ids or (sorted(tasks)[:limit] if limit else sorted(tasks))
-    rows, total, started = [], 0.0, time.time()
-    for tid in ids:
-        t = tasks[tid]
-        t0 = time.time()
-        attempts, used, spent = solve.predict(t["train"], [i for i, _ in t["test"]],
-                                              budget=budget)
-        ok = [o is not None and any(np.array_equal(a, o) for a in att)
-              for att, (_, o) in zip(attempts, t["test"])]
-        s = sum(ok) / len(ok)
-        total += s
-        rows.append({"task": tid, "score": s, "program": solve.show(used[0]) if used else None,
-                     "ops": [n for n, _ in used[0]] if used else [],
-                     "found": bool(used), "operations": spent,
-                     "seconds": round(time.time() - t0, 2)})
+    started = time.time()
+    jobs = [(tid, tasks[tid], budget) for tid in ids]
+    if workers > 1:
+        import multiprocessing as mp
+        with mp.get_context("fork").Pool(workers, _init, (solve.LIBRARY[0], solve.GUIDE[0])) as pool:
+            rows = pool.map(_one, jobs, chunksize=1)
+    else:
+        rows = [_one(j) for j in jobs]
+    total = sum(r["score"] for r in rows)
     result = {"set": data.SETS[name], "split": split, "tasks": len(ids), "score": total,
               "percent": 100 * total / len(ids), "seconds": round(time.time() - started, 1),
-              "budget": budget, "rows": rows}
+              "budget": budget, "library": len(solve.LIBRARY[0] or []), "rows": rows}
     if split == "evaluation":
         _log(result)
     return result
@@ -49,7 +80,7 @@ def _log(result):
         f.write(json.dumps({"when": datetime.datetime.now(datetime.timezone.utc).isoformat(
             timespec="seconds"), "set": result["set"], "split": result["split"],
             "tasks": result["tasks"], "percent": round(result["percent"], 2),
-            "budget": result["budget"]}) + "\n")
+            "budget": result["budget"], "library": result.get("library", 0)}) + "\n")
 
 
 def report(results):

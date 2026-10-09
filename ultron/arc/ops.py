@@ -562,6 +562,22 @@ def overlay_parts(g, p=None):
 
 
 # --------------------------------------------------------------- the registry
+# The hand-written operations are FROZEN at these 38. New abilities must come from Ultron
+# itself (library learning, library.py), not from its designer. A test enforces this.
+FROZEN = ("antitranspose", "combine", "complete_diagonal", "complete_pattern", "connect",
+          "continue_pattern", "count_parts", "count_things", "crop_content", "crop_thing",
+          "downscale", "each_thing", "extend_rays", "fill_enclosed", "flip_h", "flip_v",
+          "fractal", "frame_things", "gravity", "hollow_things", "keep_colour", "keep_thing",
+          "lines_through", "mirror_tile", "outline", "overlay_parts", "pick_part",
+          "recolour_all", "remove_colour", "remove_specks", "rot180", "rot270", "rot90",
+          "slide_things", "symmetrize", "tile", "transpose", "upscale")
+
+# operations whose parameter is (or contains, first) a colour: library learning may leave
+# that colour open, to be chosen per task
+COLOUR_PARAM = {"recolour_all", "keep_colour", "remove_colour", "fill_enclosed", "outline",
+                "frame_things", "count_things", "complete_pattern", "complete_diagonal"}
+COLOUR_IN_TUPLE = {"extend_rays": 0, "lines_through": 0, "combine": 2}
+
 # (name, function, parameter space from the task's context)
 def registry(ctx):
     cols = ctx["out_colours"]

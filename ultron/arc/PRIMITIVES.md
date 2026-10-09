@@ -6,6 +6,13 @@ Parameters (colours, sizes) come from the task's own examples, never from known 
 
 This list is counted, so a solver made of special cases would show here.
 
+> **Frozen at 38 hand-written operations** (`ops.FROZEN`, enforced by
+> `tests/test_arc.py::test_hand_written_operations_are_frozen`). From here on, new
+> abilities come only from Ultron itself: library learning (`library.py`) turns pieces
+> that recur in its own solved programs into new building blocks, kept only when they
+> shorten the total description of what it has solved. Learned blocks live in
+> `brain/arc_library.json`, each with the tasks it came from.
+
 ## Perception (`grid.py`): 5
 
 | Primitive | Why it's generic |

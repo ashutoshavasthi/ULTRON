@@ -75,11 +75,13 @@ def cmd_stress(args):
 
 def cmd_arc(args):
     """Score Ultron on ARC-AGI (official rule). Evaluation runs are logged."""
-    from .arc import harness
+    from .arc import harness, library, solve
+    if not args.no_library:
+        solve.LIBRARY[0] = library.load() or None
     results = []
     for name in args.sets:
         r = harness.score_set(name, args.split, limit=args.limit, budget=args.budget,
-                              scoring=args.split == "evaluation")
+                              scoring=args.split == "evaluation", workers=args.workers)
         results.append(r)
         print(f"{r['set']} {r['split']}: {r['percent']:.1f}% of {r['tasks']} tasks "
               f"({r['seconds']} s)")
@@ -271,6 +273,10 @@ def main(argv=None):
     ar.add_argument("--limit", type=int, default=None)
     from .arc.solve import BUDGET as _B
     ar.add_argument("--budget", type=int, default=_B)
+    ar.add_argument("--workers", type=int, default=1,
+                    help="tasks solved at once (same answers as one at a time)")
+    ar.add_argument("--no-library", action="store_true",
+                    help="without the building blocks Ultron learned itself")
     lk = sub.add_parser("look")
     lk.add_argument("file")
     args = p.parse_args(argv)

@@ -124,6 +124,7 @@ def solve(train, budget=BUDGET, max_depth=MAX_DEPTH, want=2):
 
 
 GUIDE = [None]          # intuition (guide.py), when one has been learned and switched on
+LIBRARY = [None]        # building blocks Ultron learned itself (library.py), when switched on
 
 
 def _search(train, budget, max_depth, want):
@@ -132,6 +133,9 @@ def _search(train, budget, max_depth, want):
     if GUIDE[0] is not None:
         from . import guide
         reg = guide.order(GUIDE[0], train, reg)
+    if LIBRARY[0]:
+        from . import library
+        reg = library.operations(LIBRARY[0], ctx) + reg     # its own blocks first
     for name, f, _ in reg:
         _OPS[name] = f
     ins = [i for i, _ in train]

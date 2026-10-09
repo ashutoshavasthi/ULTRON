@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **22.0%** (88.0) | 620.3 | 40000 |
+| ARC-AGI-1 | training | 400 | **22.8%** (91.0) | 647.3 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-88 tasks solved; 7 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 305 with no program within budget.
+91 tasks solved; 8 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 301 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -38,14 +38,15 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 3906de3d | `gravity(up)` |
 | 3af2c5a8 | `mirror_tile(both)` |
 | 3c9b0459 | `rot180` |
-| 4258a5f9 | `local law on (colour, count8): 1 situations change colour` |
+| 4258a5f9 | `frame_things(1)` |
 | 42a50994 | `remove_specks(1)` |
+| 4347f46a | `hollow_things` |
 | 445eab21 | `gravity(right) ▸ continue_pattern(((1, 5), (1, 5))) ▸ recolour 6→7, 7→8` |
 | 484b58aa | `complete_pattern(0)` |
 | 496994bd | `symmetrize(v)` |
 | 4c4377d9 | `flip_v ▸ mirror_tile(v)` |
-| 50cb2852 | `local law on (colour, count8): 3 situations change colour` |
-| 543a7ed5 | `fill_enclosed(4) ▸ local law on (colour, count8): 3 situations change colour` |
+| 50cb2852 | `hollow_things ▸ fill_enclosed(8)` |
+| 543a7ed5 | `fill_enclosed(4) ▸ frame_things(3)` |
 | 6150a2bd | `rot180` |
 | 62c24649 | `mirror_tile(both)` |
 | 6430c8c4 | `combine(('lines', 'nor', 3))` |
@@ -56,6 +57,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 694f12f3 | `local law on (colour, count8, rank): 2 situations change colour` |
 | 6c434453 | `local law on (colour, count8, rank): 4 situations change colour` |
 | 6d0aefbc | `mirror_tile(h)` |
+| 6d75e8bb | `frame_things(2) ▸ local law on (colour, line): 4 situations change colour` |
 | 6e82a1ae | `local law on (colour, size): 3 situations change colour` |
 | 6f8cd79b | `outline(8)` |
 | 6fa7a44f | `mirror_tile(v)` |
@@ -73,6 +75,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | a5313dff | `fill_enclosed(1)` |
 | a699fb00 | `local law on (colour, line): 2 situations change colour` |
 | a740d043 | `crop_content ▸ recolour 1→0` |
+| ae3edfdc | `frame_things(7) ▸ local law on (colour, line, orth_set): 16 situations change colour` |
 | ae4f1146 | `keep_colour(1) ▸ crop_thing(('largest', True)) ▸ recolour 0→8` |
 | b1948b0a | `recolour 6→2` |
 | b6afb2da | `local law on (colour, count8): 3 situations change colour` |
@@ -84,7 +87,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | c59eb873 | `upscale(2)` |
 | c8f0f002 | `recolour 7→5` |
 | c9e6f938 | `mirror_tile(h)` |
-| ce22a75a | `local law on (colour, count8): 2 situations change colour` |
+| ce22a75a | `frame_things(1) ▸ recolour 5→1` |
 | ce4f8723 | `combine(('lines', 'or', 3))` |
 | d511f180 | `recolour 5→8, 8→5` |
 | d5d6de2d | `fill_enclosed(3) ▸ recolour 2→0` |

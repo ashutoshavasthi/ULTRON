@@ -59,3 +59,43 @@ def test_learned_colour_map():
 def test_evaluation_split_is_locked():
     with pytest.raises(data.EvaluationLocked):
         data.load("arc1", "evaluation")
+
+
+def test_hand_written_operations_are_frozen():
+    # new abilities must come from Ultron's own library learning, not from its designer
+    ctx = {"out_colours": [1, 2], "in_colours": [1, 2], "scales_up": [2], "scales_down": [2],
+           "tiles": [(2, 2)], "ratios": [((2, 1), (2, 1))]}
+    names = {n for n, _, _ in ops.registry(ctx)}
+    assert names == set(ops.FROZEN) and len(ops.FROZEN) == 38
+
+
+def test_library_learns_a_recurring_piece_and_uses_it():
+    from ultron.arc import library
+    # three solved tasks share "flip, then fill holes" (with different colours)
+    programs = {"a": [["flip_h", None], ["fill_enclosed", 4]],
+                "b": [["flip_h", None], ["fill_enclosed", 3]],
+                "c": [["flip_h", None], ["fill_enclosed", 6], ["rot90", None]],
+                "d": [["rot180", None]]}
+    blocks = library.learn(programs)
+    top = blocks[0]
+    assert top["steps"] == [["flip_h", None], ["fill_enclosed", "C"]] and top["uses"] == 3
+    # a piece used once is never worth its own description
+    assert all(b["uses"] >= 2 for b in blocks)
+    # as one step, the block makes a 3-operation program a 2-step one, so it is preferred
+    from ultron.arc import grid
+    grid.TASK_BACKGROUND[0] = 0
+    train = []
+    rng = np.random.default_rng(1)
+    for _ in range(3):
+        x = np.zeros((7, 7), dtype=np.int8)
+        r, c = rng.integers(0, 4, size=2)
+        x[r:r + 3, c:c + 3] = 2
+        x[r + 1, c + 1] = 0
+        x[0, 6] = 1
+        train.append((x, ops.flip_v(ops.fill_enclosed(x[:, ::-1], 4), None)))
+    solve.LIBRARY[0] = [top]
+    try:
+        found, _ = solve.solve(train, max_depth=3)
+    finally:
+        solve.LIBRARY[0] = None
+    assert found and any(n.startswith("block") for n, _ in found[0])
