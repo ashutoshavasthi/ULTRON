@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **28.2%** (113.0) | 331.5 | 40000 |
+| ARC-AGI-1 | training | 400 | **30.2%** (121.0) | 385.7 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-113 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 274 with no program within budget.
+121 tasks solved; 12 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 267 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -22,6 +22,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 0ca9ddb6 | `marks around things by (colour): 2 kinds leave marks` |
 | 0d3d703e | `recolour 1→5, 2→6, 3→4, 4→3, 5→1, 6→2, 8→9, 9→8` |
 | 0dfd9992 | `complete_pattern(0)` |
+| 11852cab | `symmetry (h+v) about its own centre fills blank cells` |
 | 1190e5a7 | `count_parts` |
 | 178fcbfb | `lines_through((2, 'v')) ▸ local law on (colour, row): 4 situations change colour` |
 | 1b2d62fb | `combine(('lines', 'nor', 8))` |
@@ -38,6 +39,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 2dee498d | `continue_pattern(((1, 1), (1, 3)))` |
 | 3428a4f5 | `combine(('lines', 'xor', 3))` |
 | 3618c87e | `keep_thing(('largest', False)) ▸ local law on (colour, n4): 2 situations change colour` |
+| 3631a71a | `symmetry (h+v) about its own centre fills what colour 9 hides` |
 | 3906de3d | `gravity(up)` |
 | 39a8645d | `the thing with shape_count_rank=most` |
 | 3af2c5a8 | `mirror_tile(both)` |
@@ -83,6 +85,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 963e52fc | `continue_pattern(((1, 1), (2, 1)))` |
 | 99b1bc43 | `combine(('lines', 'xor', 3))` |
 | 9dfd6313 | `transpose` |
+| 9ecd008a | `symmetry (h) about its own centre fills what colour 0 hides, answer is the repaired patch` |
 | a416b8f3 | `tile((1, 2))` |
 | a5313dff | `fill_enclosed(1)` |
 | a61f2674 | `thing law on (size_rank): 3 kinds of thing` |
@@ -97,6 +100,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | b230c067 | `thing law on (shape_count): 2 kinds of thing` |
 | b2862040 | `thing law on (holes): 8 except 1 kind` |
 | b6afb2da | `local law on (colour, count8): 3 situations change colour` |
+| b8825c91 | `symmetry (rot180) about its own centre fills what colour 4 hides` |
 | bb43febb | `local law on (colour, count8): 1 situations change colour` |
 | bdad9b1f | `lines_through((2, 'h')) ▸ local law on (colour, col): 2 situations change colour` |
 | be94b721 | `crop_thing(('largest', False))` |
@@ -114,8 +118,10 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | d90796e8 | `local law on (colour, orth_set): 2 situations change colour` |
 | d9fac9be | `crop_thing(('largest', True)) ▸ the thing with border=False` |
 | dae9d2b5 | `combine(('halves_lr', 'or', 6))` |
+| dc0a314f | `symmetry (rot180) about its own centre fills what colour 3 hides, answer is the repaired patch` |
 | ded97339 | `local law on (colour, line): 2 situations change colour` |
 | e3497940 | `symmetrize(h) ▸ pick_part(first)` |
+| e40b9e2f | `symmetry (quarter turns) about its own centre fills blank cells` |
 | e8593010 | `thing law on (size): 3 kinds of thing` |
 | e98196ab | `overlay_parts` |
 | ea32f347 | `thing law on (size_rank): 3 kinds of thing` |
@@ -124,4 +130,6 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | f25fbde4 | `upscale(2) ▸ the thing with ` |
 | f25ffba3 | `symmetrize(v)` |
 | f2829549 | `combine(('lines', 'nor', 3))` |
+| f9012d9b | `symmetry (all) about its own centre fills what colour 0 hides, answer is the repaired patch` |
 | fafffa47 | `combine(('halves_tb', 'nor', 2))` |
+| ff805c23 | `symmetry (rot180) about its own centre fills what colour 1 hides, answer is the repaired patch` |

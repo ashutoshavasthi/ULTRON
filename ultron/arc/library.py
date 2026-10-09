@@ -49,7 +49,7 @@ def candidates(programs):
     """Pieces of solved programs: {piece: set of tasks that used it}."""
     seen = {}
     for task, prog in programs.items():
-        steps = [_norm(s) for s in prog if s[0] not in ("colourmap", "cells", "things", "marks", "pick", "moves")]
+        steps = [_norm(s) for s in prog if s[0] not in ("colourmap", "cells", "things", "marks", "pick", "moves", "symmetry")]
         steps = [(n, _tup(p)) for n, p in steps]
         for n in (2, 3, 4):
             for i in range(len(steps) - n + 1):

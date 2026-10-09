@@ -10,7 +10,7 @@ the same answer on any machine.
 
 import numpy as np
 
-from . import cells, objects
+from . import cells, objects, symmetry
 from . import ops as O
 from .grid import colours, key
 
@@ -76,6 +76,9 @@ def run(program, g):
         if name == "moves":
             g = objects.apply_moves(p, g)
             continue
+        if name == "symmetry":
+            g = symmetry.apply(p, g)
+            continue
         if name == "colourmap":
             g = np.vectorize(lambda v: p.get(int(v), int(v)), otypes=[np.int8])(g)
             continue
@@ -107,6 +110,8 @@ def show(program):
             out.append(objects.describe_pick(p))
         elif name == "moves":
             out.append(objects.describe_moves(p))
+        elif name == "symmetry":
+            out.append(symmetry.describe(p))
         elif name.startswith("block") and LIBRARY[0]:
             from . import library
             out.append(library.show_use(LIBRARY[0][int(name[5:]) - 1], p))
@@ -133,6 +138,8 @@ def length(program):
             total += objects.pick_length(p)
         elif name == "moves":
             total += objects.moves_length(p)
+        elif name == "symmetry":
+            total += symmetry.length(p)
         else:
             total += 1
     return total
@@ -190,6 +197,8 @@ def _search(train, budget, max_depth, want):
     moves = objects.learn_moves(ins, targets)
     if moves is not None:
         found.append((("moves", moves),))
+    for law in symmetry.rivals(ins, targets, ctx["in_colours"]):
+        found.append((("symmetry", law),))
     frontier = [((), ins)]
     seen = {tuple(key(g) for g in ins)}
     cache = {}

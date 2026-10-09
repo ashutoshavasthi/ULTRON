@@ -162,3 +162,24 @@ def test_things_move_toward_what_stays_put():
     assert rule is not None and set(m[0] for m in rule[2].values()) == {"toward"}
     out = objects.apply_moves(rule, pic((0, 6), (5, 6)))
     assert np.array_equal(out, pic((4, 6), (5, 6)))
+
+
+def test_symmetry_about_its_own_centre_repairs_what_is_hidden():
+    from ultron.arc import grid, symmetry
+    grid.TASK_BACKGROUND[0] = 0
+    rng = np.random.default_rng(3)
+
+    def picture():
+        q = rng.integers(1, 6, size=(4, 4)).astype(np.int8)
+        full = np.zeros((11, 12), dtype=np.int8)
+        sym = np.block([[q, q[:, ::-1]], [q[::-1], q[::-1, ::-1]]])
+        full[1:9, 2:10] = sym              # symmetric about a centre that isn't the grid's
+        hidden = full.copy()
+        r, c = rng.integers(1, 6), rng.integers(2, 7)
+        hidden[r:r + 2, c:c + 3] = 9       # a patch of colour 9 hides part of it
+        return hidden, full
+    train = [picture() for _ in range(3)]
+    rule = symmetry.learn([i for i, _ in train], [o for _, o in train], [9])
+    assert rule is not None and rule[1] == 9
+    x, want = picture()
+    assert np.array_equal(symmetry.apply(rule, x), want)
