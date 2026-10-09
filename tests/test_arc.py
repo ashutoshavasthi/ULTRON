@@ -99,3 +99,47 @@ def test_library_learns_a_recurring_piece_and_uses_it():
     finally:
         solve.LIBRARY[0] = None
     assert found and any(n.startswith("block") for n, _ in found[0])
+
+
+def test_thing_law_with_a_default_and_marks_around_things():
+    from ultron.arc import grid, objects
+    grid.TASK_BACKGROUND[0] = 0
+    # things with a hole turn 3; solid things stay as they are
+    def pic(holed, solid):
+        x = np.zeros((9, 9), dtype=np.int8)
+        for r, c, w in holed:
+            x[r:r + 3, c:c + w] = 1
+            x[r + 1, c + 1:c + w - 1] = 0
+        for r, c, h, w in solid:
+            x[r:r + h, c:c + w] = 1
+        return x
+    train = []
+    for holed, solid in [([(0, 0, 3)], [(5, 5, 2, 2)]), ([(4, 4, 4), (0, 5, 3)], [(0, 0, 3, 3)]),
+                         ([(5, 0, 4)], [(0, 0, 1, 3), (0, 6, 2, 3)])]:
+        x = pic(holed, solid)
+        y = x.copy()
+        for r, c, w in holed:
+            y[r:r + 3, c:c + w][x[r:r + 3, c:c + w] == 1] = 3
+        train.append((x, y))
+    law = objects.learn([i for i, _ in train], [o for _, o in train])
+    assert law is not None and law[1] == ("holes",)
+    test = pic([(6, 6, 3)], [(0, 0, 2, 2), (3, 3, 2, 3)])
+    out = objects.apply(law, test)
+    assert (out[6:9, 6:9][test[6:9, 6:9] == 1] == 3).all() and (out[0:2, 0:2] == 1).all()
+    # every red dot gets four yellow corners; nothing else is painted
+    train = []
+    for dots in ([(2, 2), (6, 5)], [(1, 6), (5, 2)], [(4, 4)]):
+        x = np.zeros((8, 8), dtype=np.int8)
+        y = x.copy()
+        for r, c in dots:
+            x[r, c] = y[r, c] = 2
+            for dr in (-1, 1):
+                for dc in (-1, 1):
+                    y[r + dr, c + dc] = 4
+        train.append((x, y))
+    rule = objects.learn_marks([i for i, _ in train], [o for _, o in train])
+    assert rule is not None
+    t = np.zeros((8, 8), dtype=np.int8)
+    t[3, 3] = 2
+    out = objects.apply_marks(rule, t)
+    assert out is not None and int((out == 4).sum()) == 4 and out[2, 2] == 4

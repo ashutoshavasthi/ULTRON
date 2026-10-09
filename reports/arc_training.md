@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **24.2%** (97.0) | 149.3 | 40000 |
+| ARC-AGI-1 | training | 400 | **25.5%** (102.0) | 214.7 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-97 tasks solved; 12 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 291 with no program within budget.
+102 tasks solved; 11 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 287 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -18,6 +18,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 0520fde7 | `combine(('lines', 'and', 2))` |
 | 05269061 | `complete_diagonal(0)` |
 | 08ed6ac7 | `local law on (colour, order): 4 situations change colour` |
+| 0ca9ddb6 | `marks around things by (colour): 2 kinds leave marks` |
 | 0d3d703e | `recolour 1→5, 2→6, 3→4, 4→3, 5→1, 6→2, 8→9, 9→8` |
 | 0dfd9992 | `complete_pattern(0)` |
 | 1190e5a7 | `count_parts` |
@@ -68,8 +69,10 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 868de0fa | `fill_enclosed(2) ▸ thing law on (size): keep except 3 kinds` |
 | 8be77c9e | `mirror_tile(v)` |
 | 8f2ea7aa | `crop_content ▸ fractal` |
+| 913fb3ed | `marks around things by (colour): 3 kinds leave marks` |
 | 9172f3a0 | `upscale(3)` |
 | 94f9d214 | `combine(('halves_tb', 'nor', 2))` |
+| 95990924 | `marks around things by (colour): 1 kinds leave marks` |
 | 963e52fc | `continue_pattern(((1, 1), (2, 1)))` |
 | 99b1bc43 | `combine(('lines', 'xor', 3))` |
 | 9dfd6313 | `transpose` |
@@ -82,6 +85,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | ae4f1146 | `keep_colour(1) ▸ crop_thing(('largest', True)) ▸ recolour 0→8` |
 | aedd82e4 | `thing law on (size): keep except 1 kind` |
 | b1948b0a | `recolour 6→2` |
+| b230c067 | `thing law on (shape_count): 2 kinds of thing` |
 | b2862040 | `thing law on (holes): 8 except 1 kind` |
 | b6afb2da | `local law on (colour, count8): 3 situations change colour` |
 | bb43febb | `local law on (colour, count8): 1 situations change colour` |
@@ -95,6 +99,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | ce22a75a | `frame_things(1) ▸ recolour 5→1` |
 | ce4f8723 | `combine(('lines', 'or', 3))` |
 | d2abd087 | `thing law on (size): 1 except 1 kind` |
+| d364b489 | `marks around things by (colour): 1 kinds leave marks` |
 | d511f180 | `recolour 5→8, 8→5` |
 | d5d6de2d | `fill_enclosed(3) ▸ recolour 2→0` |
 | d90796e8 | `local law on (colour, orth_set): 2 situations change colour` |

@@ -81,9 +81,16 @@ def learn(grids, targets):
     A law may name a default outcome and list only the exceptions to it, when that is
     the shorter description; the default then also covers kinds of thing the examples
     never showed (the law says what happens to them)."""
+    laws = rivals(grids, targets)
+    return laws[0] if laws else None
+
+
+def rivals(grids, targets, n=2):
+    """The n shortest laws: when the examples can't tell two laws apart (say, "things with
+    a hole" and "things of size 8"), both are kept, as Ultron does with any confounder."""
     if any(g.shape != t.shape for g, t in zip(grids, targets)):
-        return None
-    best = None
+        return []
+    found = []
     for setting in SETTINGS:
         seen = []
         ok = True
@@ -125,9 +132,17 @@ def learn(grids, targets):
             if not good:
                 continue
             for rule in _forms(setting, fs, table, counts):
-                if best is None or _size(rule) < _size(best):
-                    best = rule
-    return best
+                found.append(rule)
+    order = sorted(range(len(found)), key=lambda i: (_size(found[i]), i))
+    out, tables = [], []
+    for i in order:
+        if (found[i][2], found[i][3]) in tables and found[i][1] == out[-1][1]:
+            continue
+        out.append(found[i])
+        tables.append((found[i][2], found[i][3]))
+        if len(out) == n:
+            break
+    return out
 
 
 KEEP = "keep"
@@ -182,3 +197,120 @@ def describe(rule):
         return f"thing law on ({', '.join(fs)}): {len(table)} kinds of thing"
     return (f"thing law on ({', '.join(fs)}): {default} except {len(table)} kind"
             f"{'s' if len(table) != 1 else ''}")
+
+
+# ------------------------------------------------- what things do to their surroundings
+
+def learn_marks(grids, targets):
+    """Pictures where paint appears around things: for each kind of thing, the marks it
+    leaves around itself (cells at fixed places relative to it, with their colours). The
+    shortest law that explains every painted cell, and nothing else, wins."""
+    if any(g.shape != t.shape for g, t in zip(grids, targets)):
+        return None
+    bgs = [background(g) for g in grids]
+    if any(((g != t) & (g != bg)).any() for g, t, bg in zip(grids, targets, bgs)):
+        return None             # something other than background changed
+    if all((g == t).all() for g, t in zip(grids, targets)):
+        return None
+    best = None
+    for setting in SETTINGS:
+        seen = []
+        for g, t in zip(grids, targets):
+            ts, qs = describe_things(g, setting)
+            if not qs or len(ts) > 30:
+                seen = None
+                break
+            seen.append((g, t, ts, qs))
+        if seen is None:
+            continue
+        for fs in FEATURE_SETS:
+            rule = _marks(setting, fs, seen)
+            if rule is not None and (best is None or _marks_size(rule) < _marks_size(best)):
+                best = rule
+    return best
+
+
+def _marks(setting, fs, seen):
+    bgs = [background(g) for g, _, _, _ in seen]
+    inst = {}                   # kind -> [(grid index, anchor)]
+    for gi, (g, t, ts, qs) in enumerate(seen):
+        for th, q in zip(ts, qs):
+            inst.setdefault(tuple(q[f] for f in fs), []).append((gi, th.r0, th.c0))
+    stamps = {}
+    for kind, places in inst.items():
+        if len(places) < 2:
+            stamps[kind] = frozenset()      # seen once: no evidence of what it does
+            continue
+        cand = set()
+        for gi, r0, c0 in places:
+            g, t = seen[gi][0], seen[gi][1]
+            rr, cc = np.nonzero(g != t)
+            cand |= {(int(r) - r0, int(c) - c0, int(t[r, c])) for r, c in zip(rr, cc)}
+        keep = set()
+        for dr, dc, col in cand:
+            ok, shown = True, 0
+            for gi, r0, c0 in places:
+                g, t = seen[gi][0], seen[gi][1]
+                r, c = r0 + dr, c0 + dc
+                # marks go only on background: an occupied cell says nothing
+                if 0 <= r < g.shape[0] and 0 <= c < g.shape[1] and \
+                        g[r, c] == bgs[gi] and t[r, c] != col:
+                    ok = False
+                    break
+                if 0 <= r < g.shape[0] and 0 <= c < g.shape[1] and g[r, c] == bgs[gi]:
+                    shown += 1
+            if ok and shown >= 2:           # a mark at least two things actually show
+                keep.add((dr, dc, col))
+        stamps[kind] = frozenset(keep)
+    # the marks must explain every painted cell
+    for gi, (g, t, ts, qs) in enumerate(seen):
+        painted = np.zeros(g.shape, bool)
+        for th, q in zip(ts, qs):
+            for dr, dc, col in stamps[tuple(q[f] for f in fs)]:
+                r, c = th.r0 + dr, th.c0 + dc
+                if 0 <= r < g.shape[0] and 0 <= c < g.shape[1]:
+                    painted[r, c] = True
+        if (painted != (g != t)).any():
+            return None
+    if not any(stamps.values()):
+        return None
+    # a law must compress: the marks, written once, explain at least twice as many
+    # painted cells
+    painted = sum(int((g != t).sum()) for g, t, _, _ in seen)
+    if 2 * sum(len(s) for s in set(stamps.values())) > painted:
+        return None
+    return (setting, fs, stamps)
+
+
+def _marks_size(rule):
+    _, fs, stamps = rule
+    distinct = {s for s in stamps.values()}
+    return 1 + 0.5 * len(fs) * len(stamps) + 0.25 * sum(len(s) for s in distinct)
+
+
+def marks_length(rule):
+    return _marks_size(rule)
+
+
+def apply_marks(rule, g):
+    setting, fs, stamps = rule
+    ts, qs = describe_things(g, setting)
+    if not qs:
+        return None
+    out = g.copy()
+    bg = background(g)
+    for th, q in zip(ts, qs):
+        k = tuple(q[f] for f in fs)
+        if k not in stamps:
+            return None         # a kind of thing never seen in the examples: no guess
+        for dr, dc, col in stamps[k]:
+            r, c = th.r0 + dr, th.c0 + dc
+            if 0 <= r < g.shape[0] and 0 <= c < g.shape[1] and g[r, c] == bg:
+                out[r, c] = col
+    return out
+
+
+def describe_marks(rule):
+    setting, fs, stamps = rule
+    n = sum(1 for s in stamps.values() if s)
+    return f"marks around things by ({', '.join(fs)}): {n} kinds leave marks"
