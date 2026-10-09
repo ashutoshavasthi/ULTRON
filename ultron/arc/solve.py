@@ -87,6 +87,9 @@ def show(program):
             out.append("recolour " + ", ".join(f"{a}→{b}" for a, b in sorted(p.items()) if a != b))
         elif name == "cells":
             out.append(cells.describe(p))
+        elif name.startswith("block") and LIBRARY[0]:
+            from . import library
+            out.append(library.show_use(LIBRARY[0][int(name[5:]) - 1], p))
         else:
             out.append(name if p is None else f"{name}({p})")
     return " ▸ ".join(out) if out else "identity"

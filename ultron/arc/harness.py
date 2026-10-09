@@ -26,9 +26,22 @@ def _plain(p):
 
 
 def steps(program):
-    """A program as plain data; a table learned from the task's own examples is kept only
-    as a marker (it is re-learned for every task)."""
-    return [[n, None if n in ("colourmap", "cells") else _plain(p)] for n, p in program]
+    """A program as plain data, learned blocks spelled out as the steps they stand for (so
+    later library learning can find blocks made of blocks); a table learned from the
+    task's own examples is kept only as a marker (it is re-learned for every task)."""
+    out = []
+    for n, p in program:
+        if n.startswith("block") and solve.LIBRARY[0]:
+            from . import library
+            b = solve.LIBRARY[0][int(n[5:]) - 1]
+            colour, step = p
+            for name, q in b["steps"]:
+                if name == library.STEP:
+                    name, q = step
+                out.append([name, _plain(library._fill(q, colour))])
+        else:
+            out.append([n, None if n in ("colourmap", "cells") else _plain(p)])
+    return out
 
 
 def _one(job):

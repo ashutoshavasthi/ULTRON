@@ -1,0 +1,5578 @@
+[
+{
+"set": "ARC-AGI-1",
+"split": "evaluation",
+"tasks": 400,
+"score": 31.0,
+"percent": 7.75,
+"seconds": 244.5,
+"budget": 40000,
+"library": 0,
+"rows": [
+{
+"task": "00576224",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.4
+},
+{
+"task": "009d5c81",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 3.19
+},
+{
+"task": "00dbd492",
+"score": 1.0,
+"program": "fill_enclosed(3) \u25b8 local law on (colour, size): 2 situations change colour",
+"ops": [
+"fill_enclosed",
+"cells"
+],
+"steps": [
+[
+"fill_enclosed",
+3
+],
+[
+"cells",
+null
+]
+],
+"found": true,
+"operations": 40004,
+"seconds": 1.45
+},
+{
+"task": "03560426",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.61
+},
+{
+"task": "05a7bcf2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 11.32
+},
+{
+"task": "0607ce86",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.81
+},
+{
+"task": "0692e18c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.22
+},
+{
+"task": "070dd51e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 6.02
+},
+{
+"task": "08573cc6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.42
+},
+{
+"task": "0934a4d8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 3.88
+},
+{
+"task": "09c534e7",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 8.47
+},
+{
+"task": "0a1d4ef5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.6
+},
+{
+"task": "0a2355a6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.59
+},
+{
+"task": "0b17323b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.4
+},
+{
+"task": "0bb8deee",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.95
+},
+{
+"task": "0becf7df",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.15
+},
+{
+"task": "0c786b71",
+"score": 1.0,
+"program": "rot180 \u25b8 mirror_tile(both)",
+"ops": [
+"rot180",
+"mirror_tile"
+],
+"steps": [
+[
+"rot180",
+null
+],
+[
+"mirror_tile",
+"both"
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 0.35
+},
+{
+"task": "0c9aba6e",
+"score": 1.0,
+"program": "combine(('lines', 'nor', 8))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"lines",
+"nor",
+8
+]
+]
+],
+"found": true,
+"operations": 656,
+"seconds": 0.03
+},
+{
+"task": "0d87d2a6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.66
+},
+{
+"task": "0e671a1a",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.97
+},
+{
+"task": "0f63c0b9",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.03
+},
+{
+"task": "103eff5b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.28
+},
+{
+"task": "11e1fe23",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.29
+},
+{
+"task": "12422b43",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.63
+},
+{
+"task": "12997ef3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.27
+},
+{
+"task": "12eac192",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.0
+},
+{
+"task": "136b0064",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.07
+},
+{
+"task": "13713586",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.24
+},
+{
+"task": "137f0df0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.13
+},
+{
+"task": "140c817e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.91
+},
+{
+"task": "14754a24",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 3.06
+},
+{
+"task": "15113be4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.8
+},
+{
+"task": "15663ba9",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.44
+},
+{
+"task": "15696249",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.41
+},
+{
+"task": "16b78196",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 11.55
+},
+{
+"task": "17b80ad2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.42
+},
+{
+"task": "17cae0c1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.4
+},
+{
+"task": "18419cfa",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.57
+},
+{
+"task": "184a9768",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 6.36
+},
+{
+"task": "195ba7dc",
+"score": 1.0,
+"program": "combine(('lines', 'or', 1))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"lines",
+"or",
+1
+]
+]
+],
+"found": true,
+"operations": 608,
+"seconds": 0.05
+},
+{
+"task": "1990f7a8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.38
+},
+{
+"task": "19bb5feb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.35
+},
+{
+"task": "1a2e2828",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.81
+},
+{
+"task": "1a6449f1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.63
+},
+{
+"task": "1acc24af",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.9
+},
+{
+"task": "1c02dbbe",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.62
+},
+{
+"task": "1c0d0a4b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.07
+},
+{
+"task": "1c56ad9f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.42
+},
+{
+"task": "1d0a4b61",
+"score": 1.0,
+"program": "complete_pattern(0)",
+"ops": [
+"complete_pattern"
+],
+"steps": [
+[
+"complete_pattern",
+0
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 8.78
+},
+{
+"task": "1d398264",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.56
+},
+{
+"task": "1da012fc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.64
+},
+{
+"task": "1e81d6f9",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.26
+},
+{
+"task": "1e97544e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.31
+},
+{
+"task": "2037f2c7",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.87
+},
+{
+"task": "2072aba6",
+"score": 1.0,
+"program": "upscale(2) \u25b8 local law on (colour, parity): 4 situations change colour",
+"ops": [
+"upscale",
+"cells"
+],
+"steps": [
+[
+"upscale",
+2
+],
+[
+"cells",
+null
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 0.22
+},
+{
+"task": "20818e16",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.98
+},
+{
+"task": "20981f0e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.26
+},
+{
+"task": "212895b5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.43
+},
+{
+"task": "21f83797",
+"score": 1.0,
+"program": "lines_through((2, 'both')) \u25b8 fill_enclosed(1)",
+"ops": [
+"lines_through",
+"fill_enclosed"
+],
+"steps": [
+[
+"lines_through",
+[
+2,
+"both"
+]
+],
+[
+"fill_enclosed",
+1
+]
+],
+"found": true,
+"operations": 12084,
+"seconds": 0.47
+},
+{
+"task": "22a4bbc2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.32
+},
+{
+"task": "25094a63",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 10.55
+},
+{
+"task": "2546ccf6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.37
+},
+{
+"task": "256b0a75",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 7.16
+},
+{
+"task": "2685904e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.8
+},
+{
+"task": "2697da3f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.61
+},
+{
+"task": "2753e76c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.82
+},
+{
+"task": "27a77e38",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.52
+},
+{
+"task": "27f8ce4f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.47
+},
+{
+"task": "281123b4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.63
+},
+{
+"task": "292dd178",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.9
+},
+{
+"task": "29700607",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.61
+},
+{
+"task": "2a5f8217",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.76
+},
+{
+"task": "2b01abd0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.89
+},
+{
+"task": "2c0b0aff",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 4.92
+},
+{
+"task": "2c737e39",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.17
+},
+{
+"task": "2f0c5170",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.65
+},
+{
+"task": "310f3251",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.21
+},
+{
+"task": "3194b014",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.73
+},
+{
+"task": "319f2597",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 7.93
+},
+{
+"task": "31adaf00",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.16
+},
+{
+"task": "31d5ba1a",
+"score": 1.0,
+"program": "combine(('halves_tb', 'xor', 6))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"halves_tb",
+"xor",
+6
+]
+]
+],
+"found": true,
+"operations": 40005,
+"seconds": 0.4
+},
+{
+"task": "32e9702f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.35
+},
+{
+"task": "332efdb3",
+"score": 1.0,
+"program": "local law on (colour, parity): 3 situations change colour",
+"ops": [
+"cells"
+],
+"steps": [
+[
+"cells",
+null
+]
+],
+"found": true,
+"operations": 8763,
+"seconds": 0.14
+},
+{
+"task": "3391f8c0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.04
+},
+{
+"task": "33b52de3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 10.15
+},
+{
+"task": "3490cc26",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 5.45
+},
+{
+"task": "34b99a2b",
+"score": 1.0,
+"program": "combine(('lines', 'xor', 2))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"lines",
+"xor",
+2
+]
+]
+],
+"found": true,
+"operations": 40004,
+"seconds": 0.82
+},
+{
+"task": "351d6448",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.69
+},
+{
+"task": "358ba94e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.07
+},
+{
+"task": "37d3e8b2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.05
+},
+{
+"task": "3979b1a8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.07
+},
+{
+"task": "3a301edc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.43
+},
+{
+"task": "3b4c2228",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.57
+},
+{
+"task": "3d31c5b3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.79
+},
+{
+"task": "3ed85e70",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 12.3
+},
+{
+"task": "3ee1011a",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.35
+},
+{
+"task": "3f23242b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.38
+},
+{
+"task": "40f6cd08",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 8.08
+},
+{
+"task": "414297c0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.65
+},
+{
+"task": "423a55dc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.74
+},
+{
+"task": "42918530",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 4.19
+},
+{
+"task": "42a15761",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.11
+},
+{
+"task": "4364c1c4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.44
+},
+{
+"task": "456873bc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.53
+},
+{
+"task": "45737921",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.64
+},
+{
+"task": "45bbe264",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.09
+},
+{
+"task": "477d2879",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.2
+},
+{
+"task": "47996f11",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 14.82
+},
+{
+"task": "48131b3c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.39
+},
+{
+"task": "4852f2fa",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.19
+},
+{
+"task": "48f8583b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.35
+},
+{
+"task": "4aab4007",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 10.85
+},
+{
+"task": "4acc7107",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.35
+},
+{
+"task": "4b6b68e5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.45
+},
+{
+"task": "4c177718",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.8
+},
+{
+"task": "4cd1b7b2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.58
+},
+{
+"task": "4e45f183",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.67
+},
+{
+"task": "4e469f39",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.93
+},
+{
+"task": "4f537728",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.42
+},
+{
+"task": "4ff4c9da",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.24
+},
+{
+"task": "505fff84",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.32
+},
+{
+"task": "506d28a5",
+"score": 1.0,
+"program": "combine(('lines', 'or', 3))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"lines",
+"or",
+3
+]
+]
+],
+"found": true,
+"operations": 656,
+"seconds": 0.03
+},
+{
+"task": "50a16a69",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.97
+},
+{
+"task": "50aad11f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.89
+},
+{
+"task": "50f325b5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 3.52
+},
+{
+"task": "516b51b7",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.2
+},
+{
+"task": "5207a7b5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.93
+},
+{
+"task": "5289ad53",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.25
+},
+{
+"task": "52fd389e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 6.22
+},
+{
+"task": "54db823b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.9
+},
+{
+"task": "55059096",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.17
+},
+{
+"task": "551d5bf1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.64
+},
+{
+"task": "55783887",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.91
+},
+{
+"task": "575b1a71",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.04
+},
+{
+"task": "5783df64",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.7
+},
+{
+"task": "5833af48",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.78
+},
+{
+"task": "58743b76",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.48
+},
+{
+"task": "58e15b12",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.72
+},
+{
+"task": "59341089",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.23
+},
+{
+"task": "5a5a2103",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.11
+},
+{
+"task": "5af49b42",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.13
+},
+{
+"task": "5b526a93",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.27
+},
+{
+"task": "5b692c0f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.19
+},
+{
+"task": "5b6cbef5",
+"score": 1.0,
+"program": "fractal",
+"ops": [
+"fractal"
+],
+"steps": [
+[
+"fractal",
+null
+]
+],
+"found": true,
+"operations": 40005,
+"seconds": 0.43
+},
+{
+"task": "5d2a5c43",
+"score": 1.0,
+"program": "combine(('lines', 'or', 8))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"lines",
+"or",
+8
+]
+]
+],
+"found": true,
+"operations": 760,
+"seconds": 0.04
+},
+{
+"task": "5ffb2104",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.43
+},
+{
+"task": "604001fa",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.0
+},
+{
+"task": "60a26a3e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.2
+},
+{
+"task": "60c09cac",
+"score": 1.0,
+"program": "upscale(2)",
+"ops": [
+"upscale"
+],
+"steps": [
+[
+"upscale",
+2
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 0.47
+},
+{
+"task": "626c0bcc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.68
+},
+{
+"task": "62ab2642",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.89
+},
+{
+"task": "62b74c02",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.57
+},
+{
+"task": "639f5a19",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.27
+},
+{
+"task": "642248e4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.11
+},
+{
+"task": "642d658d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.99
+},
+{
+"task": "64a7c07e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.82
+},
+{
+"task": "66e6c45b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.48
+},
+{
+"task": "66f2d22f",
+"score": 1.0,
+"program": "combine(('halves_lr', 'nor', 5))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"halves_lr",
+"nor",
+5
+]
+]
+],
+"found": true,
+"operations": 608,
+"seconds": 0.03
+},
+{
+"task": "67636eac",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.52
+},
+{
+"task": "67b4a34d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.16
+},
+{
+"task": "67c52801",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.89
+},
+{
+"task": "68b67ca3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.67
+},
+{
+"task": "692cd3b6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.5
+},
+{
+"task": "695367ec",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 27048,
+"seconds": 0.3
+},
+{
+"task": "696d4842",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 11.59
+},
+{
+"task": "69889d6e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.54
+},
+{
+"task": "6a11f6da",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.04
+},
+{
+"task": "6ad5bdfd",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.14
+},
+{
+"task": "6df30ad6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.32
+},
+{
+"task": "6ea4a07e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.19
+},
+{
+"task": "6f473927",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.61
+},
+{
+"task": "7039b2d7",
+"score": 1.0,
+"program": "count_parts",
+"ops": [
+"count_parts"
+],
+"steps": [
+[
+"count_parts",
+null
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 1.44
+},
+{
+"task": "705a3229",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.46
+},
+{
+"task": "712bf12e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.29
+},
+{
+"task": "72207abc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.74
+},
+{
+"task": "72a961c9",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.92
+},
+{
+"task": "73182012",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.11
+},
+{
+"task": "73c3b0d8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.72
+},
+{
+"task": "73ccf9c2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.54
+},
+{
+"task": "759f3fd3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.52
+},
+{
+"task": "762cd429",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.41
+},
+{
+"task": "770cc55f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.77
+},
+{
+"task": "782b5218",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.33
+},
+{
+"task": "79369cc6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.23
+},
+{
+"task": "7953d61e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.41
+},
+{
+"task": "79fb03f4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.42
+},
+{
+"task": "7bb29440",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 2.34
+},
+{
+"task": "7c8af763",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.61
+},
+{
+"task": "7c9b52a0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.72
+},
+{
+"task": "7d18a6fb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.23
+},
+{
+"task": "7d1f7ee8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 6.51
+},
+{
+"task": "7d419a02",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.86
+},
+{
+"task": "7e02026e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.65
+},
+{
+"task": "7ee1c6ea",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.44
+},
+{
+"task": "817e6c09",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.72
+},
+{
+"task": "81c0276b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.77
+},
+{
+"task": "833dafe3",
+"score": 1.0,
+"program": "rot180 \u25b8 mirror_tile(both)",
+"ops": [
+"rot180",
+"mirror_tile"
+],
+"steps": [
+[
+"rot180",
+null
+],
+[
+"mirror_tile",
+"both"
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 0.44
+},
+{
+"task": "845d6e51",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.2
+},
+{
+"task": "84db8fc4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.51
+},
+{
+"task": "84f2aca1",
+"score": 1.0,
+"program": "fill_enclosed(5) \u25b8 local law on (colour, size): 1 situations change colour",
+"ops": [
+"fill_enclosed",
+"cells"
+],
+"steps": [
+[
+"fill_enclosed",
+5
+],
+[
+"cells",
+null
+]
+],
+"found": true,
+"operations": 40004,
+"seconds": 1.25
+},
+{
+"task": "8597cfd7",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.92
+},
+{
+"task": "85b81ff1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.35
+},
+{
+"task": "85fa5666",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.52
+},
+{
+"task": "8719f442",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.3
+},
+{
+"task": "88207623",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.66
+},
+{
+"task": "891232d6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 5.37
+},
+{
+"task": "896d5239",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.16
+},
+{
+"task": "8a371977",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.28
+},
+{
+"task": "8b28cd80",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.32
+},
+{
+"task": "8ba14f53",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.44
+},
+{
+"task": "8cb8642d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.92
+},
+{
+"task": "8dae5dfc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.53
+},
+{
+"task": "8e2edd66",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.4
+},
+{
+"task": "8ee62060",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.1
+},
+{
+"task": "8fbca751",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.76
+},
+{
+"task": "90347967",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.05
+},
+{
+"task": "903d1b4a",
+"score": 1.0,
+"program": "remove_colour(3) \u25b8 symmetrize(both)",
+"ops": [
+"remove_colour",
+"symmetrize"
+],
+"steps": [
+[
+"remove_colour",
+3
+],
+[
+"symmetrize",
+"both"
+]
+],
+"found": true,
+"operations": 40004,
+"seconds": 2.93
+},
+{
+"task": "9110e3c5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.42
+},
+{
+"task": "917bccba",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.09
+},
+{
+"task": "929ab4e9",
+"score": 0.0,
+"program": "remove_colour(2) \u25b8 symmetrize(both)",
+"ops": [
+"remove_colour",
+"symmetrize"
+],
+"steps": [
+[
+"remove_colour",
+2
+],
+[
+"symmetrize",
+"both"
+]
+],
+"found": true,
+"operations": 40004,
+"seconds": 8.04
+},
+{
+"task": "92e50de0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.58
+},
+{
+"task": "9356391f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.93
+},
+{
+"task": "93b4f4b3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.42
+},
+{
+"task": "93c31fbe",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.28
+},
+{
+"task": "94133066",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.8
+},
+{
+"task": "94414823",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.49
+},
+{
+"task": "94be5b80",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.81
+},
+{
+"task": "95a58926",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.16
+},
+{
+"task": "963f59bc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.39
+},
+{
+"task": "96a8c0cd",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.87
+},
+{
+"task": "97239e3d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.74
+},
+{
+"task": "9772c176",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.3
+},
+{
+"task": "981571dc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 14.57
+},
+{
+"task": "992798f6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.67
+},
+{
+"task": "99306f82",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.69
+},
+{
+"task": "9a4bb226",
+"score": 1.0,
+"program": "crop_thing(('most_colours', True))",
+"ops": [
+"crop_thing"
+],
+"steps": [
+[
+"crop_thing",
+[
+"most_colours",
+true
+]
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 2.8
+},
+{
+"task": "9b2a60aa",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.69
+},
+{
+"task": "9b365c51",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.56
+},
+{
+"task": "9b4c17c4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 3.04
+},
+{
+"task": "9bebae7a",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.09
+},
+{
+"task": "9c1e755f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.94
+},
+{
+"task": "9c56f360",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.1
+},
+{
+"task": "9caba7c3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.77
+},
+{
+"task": "9ddd00f0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.93
+},
+{
+"task": "9def23fe",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.87
+},
+{
+"task": "9f27f097",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.04
+},
+{
+"task": "a04b2602",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.9
+},
+{
+"task": "a096bf4d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.04
+},
+{
+"task": "a3f84088",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.1
+},
+{
+"task": "a406ac07",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.34
+},
+{
+"task": "a57f2f04",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.75
+},
+{
+"task": "a59b95c0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.35
+},
+{
+"task": "a680ac02",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.59
+},
+{
+"task": "a8610ef7",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.67
+},
+{
+"task": "a934301b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.87
+},
+{
+"task": "aa18de87",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.58
+},
+{
+"task": "aa300dc3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.6
+},
+{
+"task": "aa4ec2a5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.56
+},
+{
+"task": "aab50785",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.35
+},
+{
+"task": "ac0c5833",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 14.98
+},
+{
+"task": "ac2e8ecf",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.11
+},
+{
+"task": "ac3e2b04",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.23
+},
+{
+"task": "ac605cbb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.09
+},
+{
+"task": "ad7e01d0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.33
+},
+{
+"task": "ae58858e",
+"score": 1.0,
+"program": "recolour_all(6) \u25b8 local law on (colour, size): 3 situations change colour",
+"ops": [
+"recolour_all",
+"cells"
+],
+"steps": [
+[
+"recolour_all",
+6
+],
+[
+"cells",
+null
+]
+],
+"found": true,
+"operations": 40004,
+"seconds": 1.21
+},
+{
+"task": "aee291af",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.9
+},
+{
+"task": "af22c60d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 9.22
+},
+{
+"task": "af24b4cc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.68
+},
+{
+"task": "b0722778",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.11
+},
+{
+"task": "b0f4d537",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.24
+},
+{
+"task": "b15fca0b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.78
+},
+{
+"task": "b1fc8b8e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.55
+},
+{
+"task": "b20f7c8b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.18
+},
+{
+"task": "b457fec5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.57
+},
+{
+"task": "b4a43f3b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.0
+},
+{
+"task": "b7999b51",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.33
+},
+{
+"task": "b7cb93ac",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.03
+},
+{
+"task": "b7f8a4d8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 7.58
+},
+{
+"task": "b7fb29bc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.5
+},
+{
+"task": "b942fd60",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.14
+},
+{
+"task": "b9630600",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.85
+},
+{
+"task": "ba9d41b8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.14
+},
+{
+"task": "baf41dbf",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.62
+},
+{
+"task": "bb52a14b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.62
+},
+{
+"task": "bbb1b8b6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.73
+},
+{
+"task": "bc4146bd",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.45
+},
+{
+"task": "bcb3040b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.68
+},
+{
+"task": "bd14c3bf",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.73
+},
+{
+"task": "be03b35f",
+"score": 1.0,
+"program": "rot270 \u25b8 continue_pattern(((2, 5), (2, 5)))",
+"ops": [
+"rot270",
+"continue_pattern"
+],
+"steps": [
+[
+"rot270",
+null
+],
+[
+"continue_pattern",
+[
+[
+2,
+5
+],
+[
+2,
+5
+]
+]
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 0.7
+},
+{
+"task": "bf32578f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.67
+},
+{
+"task": "bf699163",
+"score": 0.0,
+"program": "remove_colour(7) \u25b8 crop_thing(('bottom', False)) \u25b8 recolour 6\u21921, 8\u21924",
+"ops": [
+"remove_colour",
+"crop_thing",
+"colourmap"
+],
+"steps": [
+[
+"remove_colour",
+7
+],
+[
+"crop_thing",
+[
+"bottom",
+false
+]
+],
+[
+"colourmap",
+null
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 2.83
+},
+{
+"task": "bf89d739",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.37
+},
+{
+"task": "c074846d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.69
+},
+{
+"task": "c1990cce",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.54
+},
+{
+"task": "c3202e5a",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.57
+},
+{
+"task": "c35c1b4c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.26
+},
+{
+"task": "c48954c1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.44
+},
+{
+"task": "c62e2108",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.45
+},
+{
+"task": "c64f1187",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.69
+},
+{
+"task": "c658a4bd",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.73
+},
+{
+"task": "c663677b",
+"score": 1.0,
+"program": "complete_pattern(0)",
+"ops": [
+"complete_pattern"
+],
+"steps": [
+[
+"complete_pattern",
+0
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 7.23
+},
+{
+"task": "c6e1b8da",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.01
+},
+{
+"task": "c7d4e6ad",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.26
+},
+{
+"task": "c87289bb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.5
+},
+{
+"task": "c8b7cc0f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.9
+},
+{
+"task": "c92b942c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.35
+},
+{
+"task": "c97c0139",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.93
+},
+{
+"task": "ca8de6ea",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.51
+},
+{
+"task": "ca8f78db",
+"score": 1.0,
+"program": "complete_pattern(0)",
+"ops": [
+"complete_pattern"
+],
+"steps": [
+[
+"complete_pattern",
+0
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 11.59
+},
+{
+"task": "cad67732",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.6
+},
+{
+"task": "cb227835",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.05
+},
+{
+"task": "ccd554ac",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.19
+},
+{
+"task": "cd3c21df",
+"score": 1.0,
+"program": "crop_thing(('rarest_colour', True))",
+"ops": [
+"crop_thing"
+],
+"steps": [
+[
+"crop_thing",
+[
+"rarest_colour",
+true
+]
+]
+],
+"found": true,
+"operations": 786,
+"seconds": 0.01
+},
+{
+"task": "ce039d91",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.91
+},
+{
+"task": "ce8d95cc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.07
+},
+{
+"task": "cf133acc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.35
+},
+{
+"task": "cfb2ce5a",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.97
+},
+{
+"task": "d017b73f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.42
+},
+{
+"task": "d19f7514",
+"score": 1.0,
+"program": "combine(('halves_tb', 'or', 4))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"halves_tb",
+"or",
+4
+]
+]
+],
+"found": true,
+"operations": 608,
+"seconds": 0.02
+},
+{
+"task": "d282b262",
+"score": 1.0,
+"program": "slide_things(left)",
+"ops": [
+"slide_things"
+],
+"steps": [
+[
+"slide_things",
+"left"
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 2.96
+},
+{
+"task": "d2acf2cb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.2
+},
+{
+"task": "d304284e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.86
+},
+{
+"task": "d37a1ef5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.72
+},
+{
+"task": "d47aa2ff",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.02
+},
+{
+"task": "d492a647",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.85
+},
+{
+"task": "d4b1c2b1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.26
+},
+{
+"task": "d4c90558",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.52
+},
+{
+"task": "d56f2372",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.4
+},
+{
+"task": "d5c634a2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.51
+},
+{
+"task": "d931c21c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.7
+},
+{
+"task": "d94c3b52",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.12
+},
+{
+"task": "da2b0fe3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.92
+},
+{
+"task": "da515329",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.74
+},
+{
+"task": "dc2aa30b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.84
+},
+{
+"task": "dc2e9a9d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.35
+},
+{
+"task": "dd2401ed",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.13
+},
+{
+"task": "de493100",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 4.33
+},
+{
+"task": "df8cc377",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.76
+},
+{
+"task": "e0fb7511",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.55
+},
+{
+"task": "e133d23d",
+"score": 1.0,
+"program": "combine(('lines', 'or', 2))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"lines",
+"or",
+2
+]
+]
+],
+"found": true,
+"operations": 820,
+"seconds": 0.03
+},
+{
+"task": "e1baa8a4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.14
+},
+{
+"task": "e1d2900e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 8.57
+},
+{
+"task": "e2092e0c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.94
+},
+{
+"task": "e21a174a",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.11
+},
+{
+"task": "e345f17b",
+"score": 1.0,
+"program": "combine(('halves_lr', 'nor', 4))",
+"ops": [
+"combine"
+],
+"steps": [
+[
+"combine",
+[
+"halves_lr",
+"nor",
+4
+]
+]
+],
+"found": true,
+"operations": 608,
+"seconds": 0.02
+},
+{
+"task": "e4075551",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.44
+},
+{
+"task": "e41c6fd3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.25
+},
+{
+"task": "e57337a4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.76
+},
+{
+"task": "e5790162",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.63
+},
+{
+"task": "e5c44e8f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.99
+},
+{
+"task": "e619ca6e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.9
+},
+{
+"task": "e633a9e5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.39
+},
+{
+"task": "e66aafb8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 2.82
+},
+{
+"task": "e681b708",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 6.83
+},
+{
+"task": "e69241bd",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.01
+},
+{
+"task": "e6de6e8f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.5
+},
+{
+"task": "e74e1818",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.76
+},
+{
+"task": "e760a62e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.37
+},
+{
+"task": "e7639916",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.06
+},
+{
+"task": "e78887d1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.97
+},
+{
+"task": "e7a25a18",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.6
+},
+{
+"task": "e7b06bea",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.69
+},
+{
+"task": "e7dd8335",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.8
+},
+{
+"task": "e872b94a",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.76
+},
+{
+"task": "e88171ec",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.64
+},
+{
+"task": "e95e3d8e",
+"score": 1.0,
+"program": "complete_pattern(0)",
+"ops": [
+"complete_pattern"
+],
+"steps": [
+[
+"complete_pattern",
+0
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 6.37
+},
+{
+"task": "e99362f0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.36
+},
+{
+"task": "e9ac8c9e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.85
+},
+{
+"task": "e9b4f6fc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.11
+},
+{
+"task": "e9bb6954",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 4.0
+},
+{
+"task": "e9c9d9a1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.07
+},
+{
+"task": "ea959feb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 7.38
+},
+{
+"task": "ea9794b1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.42
+},
+{
+"task": "ecaa0ec1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.28
+},
+{
+"task": "ed74f2f2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.6
+},
+{
+"task": "ed98d772",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.25
+},
+{
+"task": "ef26cbf6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.05
+},
+{
+"task": "f0afb749",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.52
+},
+{
+"task": "f0df5ff0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.94
+},
+{
+"task": "f21745ec",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.15
+},
+{
+"task": "f3b10344",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 8.26
+},
+{
+"task": "f3cdc58f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.63
+},
+{
+"task": "f3e62deb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.93
+},
+{
+"task": "f4081712",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 2.75
+},
+{
+"task": "f45f5ca7",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.21
+},
+{
+"task": "f5aa3634",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.23
+},
+{
+"task": "f5c89df1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.73
+},
+{
+"task": "f823c43c",
+"score": 1.0,
+"program": "complete_pattern(6)",
+"ops": [
+"complete_pattern"
+],
+"steps": [
+[
+"complete_pattern",
+6
+]
+],
+"found": true,
+"operations": 40002,
+"seconds": 2.78
+},
+{
+"task": "f83cb3f6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.59
+},
+{
+"task": "f8be4b64",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 6.58
+},
+{
+"task": "f9a67cb5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.7
+},
+{
+"task": "f9d67f8b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 12.94
+},
+{
+"task": "fafd9572",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.07
+},
+{
+"task": "fb791726",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.5
+},
+{
+"task": "fc754716",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.3
+},
+{
+"task": "fd096ab6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.57
+},
+{
+"task": "fd4b2b02",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.99
+},
+{
+"task": "fe9372f3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.0
+},
+{
+"task": "fea12743",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.43
+},
+{
+"task": "ff72ca3e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.1
+}
+]
+},
+{
+"set": "ARC-AGI-2",
+"split": "evaluation",
+"tasks": 120,
+"score": 0.0,
+"percent": 0.0,
+"seconds": 115.0,
+"budget": 40000,
+"library": 0,
+"rows": [
+{
+"task": "0934a4d8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 4.76
+},
+{
+"task": "135a2760",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.32
+},
+{
+"task": "136b0064",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.4
+},
+{
+"task": "13e47133",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.43
+},
+{
+"task": "142ca369",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.45
+},
+{
+"task": "16b78196",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 11.94
+},
+{
+"task": "16de56c4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.18
+},
+{
+"task": "1818057f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.48
+},
+{
+"task": "195c6913",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.41
+},
+{
+"task": "1ae2feb7",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.69
+},
+{
+"task": "20270e3b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.95
+},
+{
+"task": "20a9e565",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 17.9
+},
+{
+"task": "21897d95",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.0
+},
+{
+"task": "221dfab4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.75
+},
+{
+"task": "247ef758",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.74
+},
+{
+"task": "269e22fb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.61
+},
+{
+"task": "271d71e2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.54
+},
+{
+"task": "28a6681f",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.3
+},
+{
+"task": "291dc1e1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.75
+},
+{
+"task": "2b83f449",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.69
+},
+{
+"task": "2ba387bc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.27
+},
+{
+"task": "2c181942",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.75
+},
+{
+"task": "2d0172a1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.43
+},
+{
+"task": "31f7f899",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.12
+},
+{
+"task": "332f06d7",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.94
+},
+{
+"task": "35ab12c3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.26
+},
+{
+"task": "36a08778",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.75
+},
+{
+"task": "38007db0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.36
+},
+{
+"task": "3a25b0d8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 6.62
+},
+{
+"task": "3dc255db",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.63
+},
+{
+"task": "3e6067c3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.45
+},
+{
+"task": "409aa875",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.26
+},
+{
+"task": "446ef5d2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.05
+},
+{
+"task": "45a5af55",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.87
+},
+{
+"task": "4a21e3da",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.8
+},
+{
+"task": "4c3d4a41",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.18
+},
+{
+"task": "4c416de3",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.86
+},
+{
+"task": "4c7dc4dd",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 9.09
+},
+{
+"task": "4e34c42c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 7.44
+},
+{
+"task": "53fb4810",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.45
+},
+{
+"task": "5545f144",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.5
+},
+{
+"task": "581f7754",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.94
+},
+{
+"task": "58490d8a",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.02
+},
+{
+"task": "58f5dbd5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.49
+},
+{
+"task": "5961cc34",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 3.95
+},
+{
+"task": "5dbc8537",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.97
+},
+{
+"task": "62593bfd",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 6.42
+},
+{
+"task": "64efde09",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 9.59
+},
+{
+"task": "65b59efc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.16
+},
+{
+"task": "67e490f4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 10.85
+},
+{
+"task": "6e453dd6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.12
+},
+{
+"task": "6e4f6532",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.54
+},
+{
+"task": "6ffbe589",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.25
+},
+{
+"task": "71e489b6",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.95
+},
+{
+"task": "7491f3cf",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.25
+},
+{
+"task": "7666fa5d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.56
+},
+{
+"task": "78332cb0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.87
+},
+{
+"task": "7b0280bc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.0
+},
+{
+"task": "7b3084d4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.38
+},
+{
+"task": "7b5033c1",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.79
+},
+{
+"task": "7b80bb43",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.04
+},
+{
+"task": "7c66cb00",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.38
+},
+{
+"task": "7ed72f31",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.29
+},
+{
+"task": "800d221b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.0
+},
+{
+"task": "80a900e0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.88
+},
+{
+"task": "8698868d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.84
+},
+{
+"task": "88bcf3b4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.0
+},
+{
+"task": "88e364bc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.47
+},
+{
+"task": "89565ca0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.37
+},
+{
+"task": "898e7135",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.77
+},
+{
+"task": "8b7bacbf",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 3.2
+},
+{
+"task": "8b9c3697",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.38
+},
+{
+"task": "8e5c0c38",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.57
+},
+{
+"task": "8f215267",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.39
+},
+{
+"task": "8f3a5a89",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.23
+},
+{
+"task": "9385bd28",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.09
+},
+{
+"task": "97d7923e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.31
+},
+{
+"task": "981571dc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 14.18
+},
+{
+"task": "9aaea919",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 19.04
+},
+{
+"task": "9bbf930d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.69
+},
+{
+"task": "a251c730",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 8.23
+},
+{
+"task": "a25697e4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.81
+},
+{
+"task": "a32d8b75",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.35
+},
+{
+"task": "a395ee82",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.33
+},
+{
+"task": "a47bf94d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 6.45
+},
+{
+"task": "a6f40cea",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.28
+},
+{
+"task": "aa4ec2a5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.61
+},
+{
+"task": "abc82100",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.04
+},
+{
+"task": "b0039139",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 0.92
+},
+{
+"task": "b10624e5",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 11.56
+},
+{
+"task": "b5ca7ac4",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.73
+},
+{
+"task": "b6f77b65",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 3.46
+},
+{
+"task": "b99e7126",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 9.1
+},
+{
+"task": "b9e38dc0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.15
+},
+{
+"task": "bf45cf4b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.05
+},
+{
+"task": "c4d067a0",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 5.33
+},
+{
+"task": "c7f57c3e",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.81
+},
+{
+"task": "cb2d8a2c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.45
+},
+{
+"task": "cbebaa4b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 7.5
+},
+{
+"task": "d35bdbdc",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.35
+},
+{
+"task": "d59b0160",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.23
+},
+{
+"task": "d8e07eb2",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 14.15
+},
+{
+"task": "da515329",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.76
+},
+{
+"task": "db0c5428",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.94
+},
+{
+"task": "db695cfb",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 1.13
+},
+{
+"task": "dbff022c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.3
+},
+{
+"task": "dd6b8c4b",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.83
+},
+{
+"task": "de809cff",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.24
+},
+{
+"task": "dfadab01",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 2.76
+},
+{
+"task": "e12f9a14",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 4.66
+},
+{
+"task": "e3721c99",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 10.18
+},
+{
+"task": "e376de54",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 2.17
+},
+{
+"task": "e8686506",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 1.84
+},
+{
+"task": "e87109e9",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.32
+},
+{
+"task": "edb79dae",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.36
+},
+{
+"task": "eee78d87",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 0.64
+},
+{
+"task": "f560132c",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 4.35
+},
+{
+"task": "f931b4a8",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40005,
+"seconds": 0.66
+},
+{
+"task": "faa9f03d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40004,
+"seconds": 1.69
+},
+{
+"task": "fc7cae8d",
+"score": 0.0,
+"program": null,
+"ops": [],
+"steps": [],
+"found": false,
+"operations": 40002,
+"seconds": 3.1
+}
+]
+}
+]

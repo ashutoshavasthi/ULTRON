@@ -1,2 +1,4 @@
 {"when": "2026-10-09T08:15:59+00:00", "set": "ARC-AGI-1", "split": "evaluation", "tasks": 400, "percent": 3.75, "budget": 40000}
 {"when": "2026-10-09T08:18:58+00:00", "set": "ARC-AGI-2", "split": "evaluation", "tasks": 120, "percent": 0.0, "budget": 40000}
+{"when": "2026-10-09T09:53:37+00:00", "set": "ARC-AGI-1", "split": "evaluation", "tasks": 400, "percent": 7.75, "budget": 40000, "library": 0}
+{"when": "2026-10-09T09:55:32+00:00", "set": "ARC-AGI-2", "split": "evaluation", "tasks": 120, "percent": 0.0, "budget": 40000, "library": 0}

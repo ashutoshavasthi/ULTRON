@@ -20,6 +20,7 @@ from . import ops as O
 HERE = os.path.dirname(__file__)
 PATH = os.path.join(HERE, "..", "..", "brain", "arc_library.json")
 OPEN = "C"              # an open colour slot
+STEP = "?"              # an open step: any one operation, chosen per task
 
 
 def _abstract(step):
@@ -50,7 +51,7 @@ def candidates(programs):
     for task, prog in programs.items():
         steps = [_norm(s) for s in prog if s[0] not in ("colourmap", "cells")]
         steps = [(n, _tup(p)) for n, p in steps]
-        for n in (2, 3):
+        for n in (2, 3, 4):
             for i in range(len(steps) - n + 1):
                 piece = tuple(steps[i:i + n])
                 seen.setdefault(piece, set()).add(task)
@@ -60,7 +61,17 @@ def candidates(programs):
                     if ab is not None:
                         open_piece = piece[:j] + (ab,) + piece[j + 1:]
                         seen.setdefault(open_piece, set()).add(task)
+                # ... or with one inner step left open ("turn, do something, turn back")
+                if n == 3:
+                    seen.setdefault((piece[0], (STEP, None), piece[2]), set()).add(task)
     return seen
+
+
+def _cost(piece):
+    """What writing the block down costs (its fixed steps), and what each use saves
+    (the steps it replaces, minus the block's own name and any step left open)."""
+    fixed = sum(1 for name, _ in piece if name != STEP)
+    return fixed, fixed - 1
 
 
 def learn(programs):
@@ -69,10 +80,10 @@ def learn(programs):
     out = []
     for piece, tasks in candidates(programs).items():
         uses = len(tasks)
-        n = len(piece)
-        # written once it costs its n steps; each use then names 1 step instead of n (an
-        # open colour is named per use either way, so it costs nothing extra)
-        saving = uses * (n - 1) - n
+        # written once it costs its fixed steps; each use then names 1 step instead of
+        # them (an open colour or step is named per use either way)
+        cost, per_use = _cost(piece)
+        saving = uses * per_use - cost
         if uses >= 2 and saving > 0:
             out.append({"steps": [list(s) for s in piece], "uses": uses, "saving": saving,
                         "tasks": sorted(tasks)})
@@ -116,25 +127,44 @@ def operations(blocks, ctx):
     funcs = {name: f for name, f, _ in O.registry(ctx)}
     for i, b in enumerate(blocks):
         steps = [tuple(s) for s in b["steps"]]
-        if any(name not in funcs for name, _ in steps):
+        if any(name not in funcs and name != STEP for name, _ in steps):
             continue
         has_open = any(p == OPEN or (isinstance(p, (list, tuple)) and OPEN in p)
                        for _, p in steps)
         colours = sorted(set(ctx["out_colours"]) | set(ctx["in_colours"])) if has_open \
             else [None]
+        inner = [(n, q) for n, _, q in O.registry(ctx)] if any(n == STEP for n, _ in steps) \
+            else [None]
 
-        def run(g, colour, steps=steps):
+        def run(g, param, steps=steps):
+            colour, step = param
             for name, p in steps:
                 if g is None:
                     return None
+                if name == STEP:
+                    name, p = step
                 g = funcs[name](g, _fill(p, colour))
                 if g is not None and (g.size == 0 or g.shape[0] > 30 or g.shape[1] > 30):
                     return None
             return g
         for c in colours:
-            out.append((f"block{i + 1}", run, c))
+            for st in inner:
+                out.append((f"block{i + 1}", run, (c, st)))
     return out
 
 
 def describe(b):
-    return " ▸ ".join(name if p is None else f"{name}({p})" for name, p in b["steps"])
+    return " ▸ ".join("(any step)" if name == STEP else name if p is None else f"{name}({p})"
+                      for name, p in b["steps"])
+
+
+def show_use(b, param):
+    """A block as it was used in a task: its open colour and step filled in."""
+    colour, step = param
+    out = []
+    for name, p in b["steps"]:
+        if name == STEP:
+            name, p = step
+        p = _fill(p, colour)
+        out.append(name if p is None else f"{name}({p})")
+    return "[" + " ▸ ".join(out) + "]"

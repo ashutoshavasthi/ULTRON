@@ -73,3 +73,22 @@ def load(name="arc1", split="training", i_am_scoring=False):
                       np.array(p["output"], dtype=np.int8) if "output" in p else None)
                      for p in d["test"]]}
     return tasks
+
+
+def evaluation_names():
+    """The names (only the names, from the manifest; no file is opened) of every task in
+    any evaluation split."""
+    return {k.split("/")[1][:-5] for info in manifest()["sets"].values()
+            for k in info["files"] if k.startswith("evaluation/")}
+
+
+def experience():
+    """Everything Ultron may learn from: ARC-AGI-1 training, plus the ARC-AGI-2 training
+    tasks that appear in no evaluation split. (ARC-AGI-2's training set contains 376 of
+    ARC-AGI-1's evaluation tasks; those are left out so the evaluation stays unseen.)"""
+    held_out = evaluation_names()
+    tasks = dict(load("arc1", "training"))
+    for tid, t in load("arc2", "training").items():
+        if tid not in held_out and tid not in tasks:
+            tasks[tid] = t
+    return tasks
