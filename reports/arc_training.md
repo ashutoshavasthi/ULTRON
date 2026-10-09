@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **30.2%** (121.0) | 385.7 | 40000 |
+| ARC-AGI-1 | training | 400 | **30.8%** (123.0) | 372.4 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-121 tasks solved; 12 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 267 with no program within budget.
+123 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 264 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -19,6 +19,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 05269061 | `complete_diagonal(0)` |
 | 05f2a901 | `things move by (colour): 1 kinds (goes toward what stays put)` |
 | 08ed6ac7 | `local law on (colour, order): 4 situations change colour` |
+| 0b148d64 | `the box where the least common colour is` |
 | 0ca9ddb6 | `marks around things by (colour): 2 kinds leave marks` |
 | 0d3d703e | `recolour 1→5, 2→6, 3→4, 4→3, 5→1, 6→2, 8→9, 9→8` |
 | 0dfd9992 | `complete_pattern(0)` |
@@ -26,6 +27,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 1190e5a7 | `count_parts` |
 | 178fcbfb | `lines_through((2, 'v')) ▸ local law on (colour, row): 4 situations change colour` |
 | 1b2d62fb | `combine(('lines', 'nor', 8))` |
+| 1c786137 | `inside the box where the colour drawn as an outline is` |
 | 1cf80156 | `the thing with ` |
 | 1e0a9b12 | `gravity(down)` |
 | 1f85a75f | `crop_thing(('largest', False))` |
@@ -49,7 +51,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 4347f46a | `hollow_things` |
 | 445eab21 | `gravity(right) ▸ continue_pattern(((1, 5), (1, 5))) ▸ recolour 6→7, 7→8` |
 | 484b58aa | `complete_pattern(0)` |
-| 48d8fb45 | `crop_thing(('most_colours', True)) ▸ the thing with size_rank=largest` |
+| 48d8fb45 | `crop_thing(('most_colours', True)) ▸ the box where the most common colour is` |
 | 496994bd | `symmetrize(v)` |
 | 4c4377d9 | `flip_v ▸ mirror_tile(v)` |
 | 50cb2852 | `hollow_things ▸ fill_enclosed(8)` |
@@ -92,7 +94,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | a65b410d | `marks around things by (): 1 kinds leave marks` |
 | a699fb00 | `local law on (colour, line): 2 situations change colour` |
 | a740d043 | `crop_content ▸ recolour 1→0` |
-| a87f7484 | `the thing with size_rank=largest` |
+| a87f7484 | `the box where the most common colour is` |
 | ae3edfdc | `things move by (colour): 2 kinds (goes toward what stays put)` |
 | ae4f1146 | `keep_colour(1) ▸ crop_thing(('largest', True)) ▸ recolour 0→8` |
 | aedd82e4 | `thing law on (size): keep except 1 kind` |

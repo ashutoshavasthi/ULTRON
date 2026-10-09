@@ -394,7 +394,9 @@ def learn_pick(grids, targets):
     one, as a value of its quantities (say, "the one whose shape appears once"); every
     thing with that value must give the same answer. Returns (setting, mode, quantities,
     value)."""
-    best = None
+    if any(t.size >= g.size for g, t in zip(grids, targets)):
+        return None
+    best = _learn_colour_box(grids, targets)
     for setting in SETTINGS:
         seen = []
         for g, t in zip(grids, targets):
@@ -405,7 +407,7 @@ def learn_pick(grids, targets):
             seen.append((g, t, ts, qs))
         if seen is None:
             continue
-        for mode in ("box", "patch"):
+        for mode in ("box", "patch", "inside"):
             right = []
             for g, t, ts, qs in seen:
                 right.append({i for i, th in enumerate(ts) if np.array_equal(_cut(g, th, mode), t)})
@@ -429,7 +431,77 @@ def learn_pick(grids, targets):
     return best
 
 
+def _colour_box(g, colour, mode):
+    """Where a colour is: the box around all its cells (or what that box holds inside)."""
+    ys, xs = np.nonzero(g == colour)
+    if len(ys) == 0:
+        return None
+    r0, r1, c0, c1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+    if mode == "inside":
+        if r1 - r0 < 3 or c1 - c0 < 3:
+            return None
+        return g[r0 + 1:r1 - 1, c0 + 1:c1 - 1]
+    return g[r0:r1, c0:c1]
+
+
+def colour_traits(g):
+    """For each colour in the picture: how its cells lie (a rectangle's outline, a solid
+    block) and how common it is compared with the others."""
+    bg = background(g)
+    vals, counts = np.unique(g, return_counts=True)
+    present = [(int(v), int(n)) for v, n in zip(vals, counts) if v != bg]
+    if not present:
+        return {}
+    ns = sorted({n for _, n in present})
+    out = {}
+    for c, n in present:
+        ys, xs = np.nonzero(g == c)
+        r0, r1, c0, c1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+        box = np.zeros((r1 - r0, c1 - c0), bool)
+        box[ys - r0, xs - c0] = True
+        ring = np.ones_like(box)
+        if box.shape[0] > 2 and box.shape[1] > 2:
+            ring[1:-1, 1:-1] = False
+        out[c] = {"outline": bool(box.shape[0] > 2 and box.shape[1] > 2 and
+                                  np.array_equal(box, ring)),
+                  "solid": bool(box.all()),
+                  "count_rank": "most" if n == ns[-1] else "least" if n == ns[0] else "middle"}
+    return out
+
+
+def _learn_colour_box(grids, targets):
+    """The answer is the box where some colour is: a colour named outright, or chosen by a
+    trait (the one drawn as an outline, the rarest...), learned from the examples."""
+    colours = sorted(set.intersection(*[set(np.unique(g).tolist()) for g in grids]))
+    for mode in ("box", "inside"):
+        for c in colours:
+            if all((lambda cut: cut is not None and np.array_equal(cut, t))(_colour_box(g, c, mode))
+                   for g, t in zip(grids, targets)):
+                return ("where colour", mode, ("colour",), (c,))
+    traits = [colour_traits(g) for g in grids]
+    for mode in ("box", "inside"):
+        for trait, value in (("outline", True), ("solid", True), ("count_rank", "least"),
+                             ("count_rank", "most")):
+            ok = True
+            for g, t, tr in zip(grids, targets, traits):
+                chosen = [c for c, f in tr.items() if f[trait] == value]
+                if len(chosen) != 1:
+                    ok = False
+                    break
+                cut = _colour_box(g, chosen[0], mode)
+                if cut is None or not np.array_equal(cut, t):
+                    ok = False
+                    break
+            if ok:
+                return ("where colour", mode, (trait,), (value,))
+    return None
+
+
 def _cut(g, th, mode):
+    if mode == "inside":            # what a frame holds: its box without its border
+        if th.r1 - th.r0 < 3 or th.c1 - th.c0 < 3:
+            return np.zeros((0, 0), dtype=g.dtype)
+        return g[th.r0 + 1:th.r1 - 1, th.c0 + 1:th.c1 - 1]
     return g[th.r0:th.r1, th.c0:th.c1] if mode == "box" else th.patch
 
 
@@ -439,9 +511,18 @@ def _pick_size(rule):
 
 def apply_pick(rule, g):
     setting, mode, fs, value = rule
+    if setting == "where colour":
+        if fs == ("colour",):
+            cut = _colour_box(g, value[0], mode)
+        else:
+            chosen = [c for c, f in colour_traits(g).items() if f[fs[0]] == value[0]]
+            if len(chosen) != 1:
+                return None     # no single colour has the trait: no guess
+            cut = _colour_box(g, chosen[0], mode)
+        return None if cut is None else cut.copy()
     ts, qs = describe_things(g, setting)
     cuts = [_cut(g, th, mode) for th, q in zip(ts, qs) if tuple(q[f] for f in fs) == value]
-    if not cuts or any(not np.array_equal(c, cuts[0]) for c in cuts):
+    if not cuts or cuts[0].size == 0 or any(not np.array_equal(c, cuts[0]) for c in cuts):
         return None             # nothing, or things that disagree, fit the law: no guess
     return cuts[0].copy()
 
@@ -452,6 +533,11 @@ def pick_length(rule):
 
 def describe_pick(rule):
     setting, mode, fs, value = rule
+    if setting == "where colour":
+        which = f"colour {value[0]}" if fs == ("colour",) else \
+            {"outline": "the colour drawn as an outline", "solid": "the colour drawn as a block",
+             "count_rank": f"the {value[0]} common colour"}[fs[0]]
+        return f"{'inside ' if mode == 'inside' else ''}the box where {which} is"
     v = ", ".join(f"{f}={'…' if f == 'shape' else x}" for f, x in zip(fs, value))
     return f"the thing with {v}"
 
