@@ -1267,10 +1267,69 @@ def exam_phase3_senses(brain, seed=1025):
                     "ice_trace": traces[:1]})
 
 
+# ---------------------------------------------------------------- the real world
+def exam_microscope(brain, seed=1026):
+    from ..env import realvideo
+    from ..senses import real, track
+    b = copy.deepcopy(brain)
+    info = b.inventions.get("microscope")
+    if info is None:
+        t = Tally("the real film was watched")
+        t.item("film", True, False)
+        return _result(26, [t], 0.9)
+    film, label, ref = realvideo.frames(), realvideo.label(), realvideo.reference()
+    fps, ppm = label["fps"], label["pixels_per_micron"]
+    ch = info["channel"]
+    held = film[150:]
+    dets, tracks, shift = real.follow(b.eyes, held, ch)
+    sees = Tally("on 150 pictures it NEVER learned from, it finds the spheres the scientists' "
+                 "tool (trackpy) finds, within 1.5 pixels")
+    lasting_share = []
+    import numpy as np
+    for i in range(0, 150, 25):
+        truth = np.array(ref["detections"][str(150 + i)])
+        seen = np.array([(x, y) for x, y, _ in dets[i]]) if dets[i] else np.zeros((0, 2))
+        d = np.sqrt(((truth[:, None, :] - seen[None, :, :]) ** 2).sum(-1)) if len(seen) else None
+        for k in range(len(truth)):
+            sees.add("ultron", d is not None and d[k].min() <= 1.5, True)
+        last = sum(1 for t in tracks if i in t)
+        lasting_share.append(last / max(1, len(dets[i])))
+    law = b.qlaws.get("jiggle")
+    einstein = Tally("found the law of the jiggling from the film: spread² ∝ time")
+    einstein.item("jiggle", True, bool(law) and law.powers == {"s": 2, "tau": -1})
+    D = law.constant / 4 if law else None
+    ref_D = ref["A"] / 4
+    textbook = 1.380649e-23 * 295 / (6 * 3.141592653589793 * 0.95e-3 * 0.5e-6) * 1e12
+    value = Tally("its diffusion constant D agrees with the scientists' tool on the same film",
+                  tol=0.10)
+    value.item("D", ref_D, D)
+    physics = Tally("and with the textbook: D = kT/(6πηr) for 1-micron spheres in water at "
+                    "22°C", tol=0.25)
+    physics.item("D", textbook, D)
+    future = Tally("on the 150 pictures it never learned from: spread at 1-2 seconds "
+                   "(trained up to 1.25 s), predicted vs measured by trackpy", tol=0.10)
+    lags_s = ref["emsd_lag_s"]
+    for k, lag in enumerate(lags_s):
+        if 20 <= round(lag * fps) <= 40:
+            pred = law.constant * lag if law else None
+            future.item(round(lag * fps), ref["emsd_um2"][k], pred)
+    own = Tally("the same, against what its own eyes measure on those pictures", tol=0.10)
+    for lag in (20, 30, 40):
+        s, _ = track.spread(tracks, lag, shift, 1 / ppm)
+        own.item(lag, s * s, law.constant * lag / fps if law else None)
+    single = Tally("no single sphere's path can be predicted (and it doesn't pretend)")
+    single.item("one_sphere", True, "one_sphere" not in b.slaws)
+    return _result(26, [sees, einstein, value, physics, future, own, single], 0.75,
+                   {"D": D, "trackpy_D": ref_D, "textbook_D": textbook,
+                    "tracks_followed": len(tracks),
+                    "share_of_its_detections_that_last": sum(lasting_share) / len(lasting_share),
+                    "story": info["story"]})
+
+
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
          13: exam_growing, 14: exam_springy, 15: exam_diagonal, 16: exam_phase2,
          17: exam_coils, 18: exam_phase3, 19: exam_eyes, 20: exam_seeing_numbers,
          21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
-         25: exam_phase3_senses}
+         25: exam_phase3_senses, 26: exam_microscope}

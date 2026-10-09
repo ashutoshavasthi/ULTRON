@@ -223,9 +223,37 @@ class Phase3SensesExam(Lesson):
     kind = "exam"
 
 
+class RealMicroscope(Lesson):
+    number, title = 26, "The real world: a microscope film"
+    goal = ("A real film from a laboratory microscope, fetched from the internet: 1-micron "
+            "spheres in water, 300 pictures with real lighting, blur, dirt and a hair across "
+            "the view. Ultron's eyes grew up on a simulator. With a retina in front of them, "
+            "can they see real particles? Can it improve its own eyes on real pictures with "
+            "no labels (trusting what lasts)? And can it find the law of this jiggling "
+            "(Einstein's: the spread squared grows in proportion to time), measure the "
+            "diffusion constant, and see that no single sphere can be predicted?")
+    kind = "guided"
+    LEARN = 150             # frames it learns from; the rest are kept for the exam
+    LAGS = range(2, 31)
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.seed = seed
+
+    def specs(self):
+        return [Spec("jiggle", "quantity", {"tau": (0, 0, 1)}, "s",
+                     units={"tau": (0, 0, 1), "s": LENGTH}, precision=self.precision),
+                Spec("one_sphere", "sequence", {"frame": None}, "x", group_by="sphere",
+                     order_by="frame", tol=0.01, surprise=0.005)]
+
+    precision = 0.02
+
+
 def senses_lessons(seed=0):
     return [Handling(seed + 19), SeeingNumbers(seed + 20), WatchingMotion(seed + 21)]
 
 
 def later_lessons(seed=0):
+    # RealMicroscope (lesson 26) is work in progress and not yet run end to end; it is
+    # left out of the curriculum until it has been tested.
     return [UsingWhatItKnows(seed + 24), Phase3SensesExam(seed + 25)]

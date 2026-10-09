@@ -73,6 +73,8 @@ class Trainer:
                 self.teach_diagonal(lesson)
             elif lesson.number == 19:
                 self.teach_handling(lesson)
+            elif lesson.number == 26:
+                self.teach_microscope(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -235,6 +237,70 @@ class Trainer:
         brain.note("invent", brain.inventions["eyes"]["story"])
         self.say("Now put your hands behind your back. Only look.")
 
+    # ----------------------------------------------------------- lesson 26
+    def teach_microscope(self, lesson, adapt=True):
+        from ..env import realvideo
+        from ..senses import real, track
+        from ..senses.world import Trays
+        brain = self.brain
+        try:
+            film = realvideo.frames()
+        except realvideo.Unavailable as e:
+            self.say(f"I couldn't get the film ({e}). The lesson stops here.")
+            return
+        label = realvideo.label()
+        fps, ppm = label["fps"], label["pixels_per_micron"]
+        learn = film[:lesson.LEARN]
+        self.say(f"This is a real film from a laboratory microscope: spheres in water. The "
+                 f"label says {fps} pictures a second and {ppm} pixels per micron. Watch the "
+                 f"first {len(learn)} pictures.")
+        ch, frac, name = real.choose_channel(brain.eyes, learn[:30])
+        brain.note("reflect", f"through my retina's {name} channel, {frac:.0%} of what I see "
+                              f"lasts from picture to picture; the other channel shows things "
+                              f"that come and go. Real things last, so I'll look with {name}")
+        dets, tracks, shift = real.follow(brain.eyes, learn, ch)
+        before = sum(len(t) for t in tracks) / max(1, sum(len(d) for d in dets))
+        if adapt:
+            trays = Trays(lesson.seed)
+            replay = [trays.handle(int(trays.rng.integers(0, 20))) for _ in range(240)]
+            brain.eyes = real.self_teach(brain.eyes, learn, ch, tracks, replay, seed=lesson.seed)
+            dets, tracks, shift = real.follow(brain.eyes, learn, ch)
+            after = sum(len(t) for t in tracks) / max(1, sum(len(d) for d in dets))
+            brain.note("invent", f"I trained my eyes on these real pictures with no one telling "
+                                 f"me what is there: what lasted at least 25 pictures I took as "
+                                 f"a real thing, everything else as nothing (and I kept looking "
+                                 f"at my old toy scenes so I don't forget them). Before, "
+                                 f"{before:.0%} of what I saw lasted; now {after:.0%}.")
+        # how far things get in a while: my own careful measure of the jiggling
+        half = [tracks[0::2], tracks[1::2]]
+        a, _ = track.spread(half[0], 10, shift, 1 / ppm)
+        b, _ = track.spread(half[1], 10, shift, 1 / ppm)
+        precision = max(0.01, round(abs(a - b) / ((a + b) / 2), 3))
+        brain.memory.specs["jiggle"].precision = precision
+        brain.note("reflect", f"I followed {len(tracks)} spheres for at least 25 pictures each, "
+                              f"after taking out how the whole view drifted. Two halves of them "
+                              f"disagree by {precision:.1%} about how far spheres get: that's "
+                              f"how precise this measuring is")
+        for lag in lesson.LAGS:
+            s, n = track.spread(tracks, lag, shift, 1 / ppm)
+            brain.experience("jiggle", {"tau": lag / fps}, s)
+        # and one sphere at a time: can its path be predicted?
+        for i, t in enumerate(sorted(tracks, key=len, reverse=True)[:8]):
+            for f in sorted(t):
+                brain.experience("one_sphere", {"frame": f, "sphere": f"Sphere{i + 1}"},
+                                 (t[f][0] - shift[f][0]) / ppm)
+        law = brain.qlaws.get("jiggle")
+        brain.inventions["microscope"] = {
+            "shape": "the real world", "primitives": [], "lesson": brain.lesson,
+            "channel": ch, "precision": precision,
+            "story": (f"From a real microscope film: each sphere's path is unpredictable "
+                      f"(nothing I can express explains one), but all together "
+                      + (f"{law.formula()} stays the same, {law.constant:.4g}: the spread "
+                         f"squared grows in proportion to the time." if law else
+                         "I found no law.")
+                      )}
+        brain.note("invent", brain.inventions["microscope"]["story"])
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -269,6 +335,7 @@ class Trainer:
              "charge": "exponential approach to a limit", "hang": "Hooke's law with an "
              "unstretched length", "burn": "constant rate"},
         24: {"slide": "sliding friction (stopping distance ∝ speed²)"},
+        26: {"jiggle": "Brownian motion: Einstein's law (mean squared displacement = 4·D·t)"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }

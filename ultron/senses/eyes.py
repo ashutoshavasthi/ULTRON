@@ -64,9 +64,22 @@ class Eyes:
         return a, cache
 
     def heat(self, img):
-        """The 'something is here' map for one picture."""
-        out, _ = self._forward(np.asarray(img, dtype=float)[None, None])
-        return out[0, 0]
+        """The 'something is here' map for one picture. (Looking is the same sums as
+        learning, done a filter position at a time so big pictures need little memory.)"""
+        a = np.asarray(img, dtype=np.float32)[None]               # channels, h, w
+        for li, (w, b) in enumerate(self.params):
+            cin = a.shape[0]
+            h, wd = a.shape[1:]
+            p = np.pad(a, ((0, 0), (1, 1), (1, 1)))
+            k = w.astype(np.float32).reshape(cin, 9, -1)          # (c, position, out)
+            out = np.empty((w.shape[1], h, wd), dtype=np.float32)
+            out[:] = b.astype(np.float32)[:, None, None]
+            for pos in range(9):
+                i, j = divmod(pos, 3)
+                shifted = p[:, i:i + h, j:j + wd].reshape(cin, -1)
+                out += (k[:, pos, :].T @ shifted).reshape(-1, h, wd)
+            a = np.maximum(out, 0.0) if li < len(self.params) - 1 else out
+        return a[0].astype(float)
 
     def learn(self, images, touches, seed=0, epochs=14, batch=16, lr=0.01):
         """images: pictures; touches: for each, the (x, y) where its hands felt things."""
