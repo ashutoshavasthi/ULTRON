@@ -82,7 +82,8 @@ RANKED = ["shape_count", "colour_count", "holes", "height", "width", "n_colours"
 QUANTITIES = ["colour", "size", "size_rank", "shape", "shape_count", "colour_count",
               "height", "width", "holes", "border", "n_colours", "symmetric", "filled"] + \
              [q + "_rank" for q in RANKED]
-FEATURE_SETS = [(q,) for q in QUANTITIES] + list(itertools.combinations(QUANTITIES, 2))
+# the empty set first: "every thing does the same"
+FEATURE_SETS = [()] + [(q,) for q in QUANTITIES] + list(itertools.combinations(QUANTITIES, 2))
 
 
 def learn(grids, targets):
@@ -453,3 +454,199 @@ def describe_pick(rule):
     setting, mode, fs, value = rule
     v = ", ".join(f"{f}={'…' if f == 'shape' else x}" for f, x in zip(fs, value))
     return f"the thing with {v}"
+
+
+# ------------------------------------------------------------------ how things move
+
+def _move_cost(m):
+    """How much a way of moving takes to say: "toward the other thing" names nothing,
+    a slide names a direction, a step names a distance too."""
+    if m[0] == "toward":
+        return 0
+    if m[0] == "slide":
+        return 1
+    if m[0] == "own":
+        return 1.5
+    return 1 + (abs(m[1]) + abs(m[2]) > 1)
+
+
+def _displace(g, th, rule, bg, static):
+    """Where a thing goes: a fixed step, a slide until it meets something (or the edge),
+    or a step as long as its own height or width."""
+    kind = rule[0]
+    if kind == "step":
+        return rule[1], rule[2]
+    if kind == "own":
+        _, sign, dr, dc = rule
+        return sign * dr * (th.r1 - th.r0), sign * dc * (th.c1 - th.c0)
+    if kind == "toward":
+        dr, dc = _toward(g, th, static)
+        if (dr, dc) == (0, 0):
+            return 0, 0
+    else:
+        _, dr, dc = rule
+    h, w = g.shape
+    k = 0
+    while True:
+        nxt = [(r + (k + 1) * dr, c + (k + 1) * dc) for r, c in th.cells]
+        if any(not (0 <= r < h and 0 <= c < w) or static[r, c] for r, c in nxt):
+            return k * dr, k * dc
+        k += 1
+        if k > 30:
+            return k * dr, k * dc
+
+
+def _toward(g, th, static):
+    """The one direction in which the thing, going straight, would meet something that
+    stays put (or none, if there isn't exactly one)."""
+    h, w = g.shape
+    found = []
+    for dr, dc in DIRS[:4]:
+        for r, c in th.cells:
+            r, c = r + dr, c + dc
+            hit = False
+            while 0 <= r < h and 0 <= c < w:
+                if static[r, c]:
+                    hit = True
+                    break
+                r, c = r + dr, c + dc
+            if hit:
+                found.append((dr, dc))
+                break
+    return found[0] if len(found) == 1 else (0, 0)
+
+
+def _move_all(g, ts, rules, bg):
+    static = np.zeros(g.shape, bool)
+    for th, rule in zip(ts, rules):
+        if rule is None:
+            for r, c in th.cells:
+                static[r, c] = True
+    out = g.copy()
+    moves = []
+    for th, rule in zip(ts, rules):
+        if rule is not None:
+            moves.append((th, _displace(g, th, rule, bg, static)))
+            for r, c in th.cells:
+                out[r, c] = bg
+    h, w = g.shape
+    for th, (dr, dc) in moves:
+        for r, c in th.cells:
+            if 0 <= r + dr < h and 0 <= c + dc < w:
+                out[r + dr, c + dc] = g[r, c]
+    return out
+
+
+def _move_options(g, t, th, bg, static):
+    """The rules that would move this thing where the example shows it (if it moved)."""
+    h, w = g.shape
+    out = []
+    for dr in range(-h + 1, h):
+        for dc in range(-w + 1, w):
+            if all(0 <= r + dr < h and 0 <= c + dc < w and t[r + dr, c + dc] == g[r, c]
+                   for r, c in th.cells):
+                out.append((dr, dc))
+    rules = set()
+    for d in out:
+        if d == (0, 0):
+            rules.add(None)
+            continue
+        rules.add(("step",) + d)
+        if _displace(g, th, ("toward",), bg, static) == d:
+            rules.add(("toward",))
+        for dr, dc in DIRS[:4]:
+            if _displace(g, th, ("slide", dr, dc), bg, static) == d:
+                rules.add(("slide", dr, dc))
+            for sign in (1, -1):
+                if _displace(g, th, ("own", sign, dr, dc), bg, static) == d:
+                    rules.add(("own", sign, dr, dc))
+    return rules
+
+
+def learn_moves(grids, targets):
+    """Pictures where things move as wholes: for each kind of thing, how it moves (the
+    shortest law that puts every thing where every example shows it)."""
+    if any(g.shape != t.shape for g, t in zip(grids, targets)):
+        return None
+    if all((g == t).all() for g, t in zip(grids, targets)):
+        return None
+    best = None
+    for setting in SETTINGS:
+        seen = []
+        for g, t in zip(grids, targets):
+            ts, qs = describe_things(g, setting)
+            if not qs or len(ts) > 20:
+                seen = None
+                break
+            seen.append((g, t, ts, qs))
+        if seen is None:
+            continue
+        for fs in FEATURE_SETS:
+            if best is not None and 1 + 0.5 * len(fs) >= _moves_size(best):
+                break
+            rule = _moves(setting, fs, seen)
+            if rule is not None and (best is None or _moves_size(rule) < _moves_size(best)):
+                best = rule
+    return best
+
+
+def _moves(setting, fs, seen):
+    # first, which things stay put: kinds whose every instance is unmoved in the example
+    kinds = {}
+    for g, t, ts, qs in seen:
+        bg = background(g)
+        for th, q in zip(ts, qs):
+            k = tuple(q[f] for f in fs)
+            stays = all(t[r, c] == g[r, c] for r, c in th.cells)
+            kinds.setdefault(k, []).append(stays)
+    moving = {k for k, v in kinds.items() if not all(v)}
+    if not moving or any(len(kinds[k]) < 2 for k in moving):
+        return None             # a kind seen moving once: no evidence of how it moves
+    options = {}
+    for g, t, ts, qs in seen:
+        bg = background(g)
+        static = np.zeros(g.shape, bool)
+        for th, q in zip(ts, qs):
+            if tuple(q[f] for f in fs) not in moving:
+                for r, c in th.cells:
+                    static[r, c] = True
+        for th, q in zip(ts, qs):
+            k = tuple(q[f] for f in fs)
+            if k in moving:
+                o = _move_options(g, t, th, bg, static) - {None}
+                options[k] = o if k not in options else options[k] & o
+                if not options[k]:
+                    return None
+    table = {k: min(v, key=lambda m: (_move_cost(m), str(m))) for k, v in options.items()}
+    for g, t, ts, qs in seen:
+        rules = [table.get(tuple(q[f] for f in fs)) for q in qs]
+        if not np.array_equal(_move_all(g, ts, rules, background(g)), t):
+            return None
+    return (setting, fs, table)
+
+
+def _moves_size(rule):
+    return 1 + 0.5 * max(1, len(rule[1])) * sum(1 + _move_cost(m) for m in rule[2].values())
+
+
+def apply_moves(rule, g):
+    setting, fs, table = rule
+    ts, qs = describe_things(g, setting)
+    if not qs:
+        return None
+    rules = [table.get(tuple(q[f] for f in fs)) for q in qs]
+    if all(r is None for r in rules):
+        return None
+    return _move_all(g, ts, rules, background(g))
+
+
+def moves_length(rule):
+    return _moves_size(rule)
+
+
+def describe_moves(rule):
+    setting, fs, table = rule
+    words = {"step": "steps", "slide": "slides", "own": "moves by its own size",
+             "toward": "goes toward what stays put"}
+    how = sorted({words[m[0]] for m in table.values()})
+    return f"things move by ({', '.join(fs)}): {len(table)} kinds ({', '.join(how)})"

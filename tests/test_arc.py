@@ -143,3 +143,22 @@ def test_thing_law_with_a_default_and_marks_around_things():
     t[3, 3] = 2
     out = objects.apply_marks(rule, t)
     assert out is not None and int((out == 4).sum()) == 4 and out[2, 2] == 4
+
+
+def test_things_move_toward_what_stays_put():
+    from ultron.arc import grid, objects
+    grid.TASK_BACKGROUND[0] = 0
+    # a red bar slides toward the grey block until it touches it, whichever side it is on
+    def pic(bar, block):
+        x = np.zeros((8, 8), dtype=np.int8)
+        x[bar[0]:bar[0] + 1, bar[1]:bar[1] + 2] = 2
+        x[block[0]:block[0] + 2, block[1]:block[1] + 2] = 5
+        return x
+    train = []
+    for bar, block, end in [((1, 1), (6, 1), (5, 1)), ((6, 4), (0, 4), (2, 4)),
+                            ((3, 0), (3, 5), (3, 3))]:
+        train.append((pic(bar, block), pic(end, block)))
+    rule = objects.learn_moves([i for i, _ in train], [o for _, o in train])
+    assert rule is not None and set(m[0] for m in rule[2].values()) == {"toward"}
+    out = objects.apply_moves(rule, pic((0, 6), (5, 6)))
+    assert np.array_equal(out, pic((4, 6), (5, 6)))
