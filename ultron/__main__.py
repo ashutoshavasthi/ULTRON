@@ -55,6 +55,24 @@ def cmd_exam(args):
                   f"nearest {s['nearest'][0]}/{s['nearest'][1]}")
 
 
+def cmd_stress(args):
+    """The failure lab: break Ultron on purpose and report where each mechanism breaks."""
+    import json as _json
+    from .judge import failures
+    brain = Brain.load(args.brain)
+    results = failures.run_all(brain)
+    os.makedirs("reports", exist_ok=True)
+    with open(os.path.join("reports", "failure_lab.md"), "w") as f:
+        f.write(failures.report(results) + "\n")
+    with open(os.path.join("reports", "failure_lab.json"), "w") as f:
+        _json.dump(results, f, indent=1, default=str)
+        f.write("\n")
+    for r in results:
+        bp = r["breakpoint"]
+        print(f"{r['name']}: {'breaks at ' + str(bp) if bp is not None else 'did not break'}")
+    print("written to reports/failure_lab.md")
+
+
 def cmd_look(args):
     """Show Ultron a picture (a .npy array of brightness 0-1, or a plain PGM file)."""
     import numpy as np
@@ -225,12 +243,13 @@ def main(argv=None):
     bl = sub.add_parser("blind")
     bl.add_argument("file")
     sub.add_parser("experiment")
+    sub.add_parser("stress")
     lk = sub.add_parser("look")
     lk.add_argument("file")
     args = p.parse_args(argv)
     {"train": cmd_train, "exam": cmd_exam, "ask": cmd_ask, "why": cmd_why,
      "show": cmd_show, "blind": cmd_blind, "experiment": cmd_experiment,
-     "look": cmd_look}[args.cmd](args)
+     "look": cmd_look, "stress": cmd_stress}[args.cmd](args)
 
 
 if __name__ == "__main__":

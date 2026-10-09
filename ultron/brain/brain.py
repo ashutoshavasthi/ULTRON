@@ -21,6 +21,20 @@ ESTABLISHED = 3      # confirmations before a measured law stops being tentative
 N_RIVALS = 3         # alternative explanations kept to design experiments against
 
 
+MIN_FOR_EXCEPTIONS = 10    # fewer experiences than this: too few to call any of them wrong
+
+
+def worth_listing(law_size, n_odd, n):
+    """MDL: is a law plus a list of its exceptions a shorter description of n experiences
+    than no law at all (about one unit per experience)? Never more than a quarter odd."""
+    from .synth import EXCEPTION_COST
+    return n_odd <= n // 4 and law_size + EXCEPTION_COST * n_odd < n
+
+
+def allowed_exceptions(n):
+    return max(1, n // 4)
+
+
 class Brain:
     def __init__(self, name="Ultron"):
         self.name = name
@@ -43,6 +57,7 @@ class Brain:
         self.kind_steps = {}                # spec -> {"innate", "reuse", "invent"} effort
         self.inventing = True               # may it invent new kinds? (off: ablation)
         self.eyes = None                    # learned in Phase 3 (senses/eyes.py)
+        self.exceptions = {}                # spec -> experiences its law doesn't fit
         self.active = True                  # design experiments when ideas disagree
         self.found_at = {}                  # spec -> experiences when current idea was found
         self.compress = True                # look for patterns among its own laws
@@ -363,6 +378,26 @@ class Brain:
                 self._confirm_program(spec, expr)
             return None
         self.streak[name] = 0
+        held = self.hypotheses.get(name)
+        eps = self.memory.of(name)
+        if held is not None and len(eps) >= MIN_FOR_EXCEPTIONS:
+            odd = [e for e in eps if safe_evaluate(held, e["inputs"], self.library) != e["outcome"]]
+            if worth_listing(size(held), len(odd), len(eps)):
+                # a few anomalies don't bring a theory down at once: first a short look for
+                # a slightly bigger law that fits everything, and if there is none, keep the
+                # law and list the anomalies (cheaper than having no law)
+                quick = synthesize([e["inputs"] for e in eps], [e["outcome"] for e in eps],
+                                   spec.inputs, spec.out_type, self.library, self.constants(),
+                                   max_size=min(7, size(held) + 2), max_bank=20000,
+                                   rivals=N_RIVALS, extra=self.primitives())
+                self.search_steps[name] = self.search_steps.get(name, 0) + quick.steps
+                if quick.expr is None:
+                    self.exceptions[name] = odd
+                    self.note("doubt", f"{name}: {eps[-1]['inputs']} -> {eps[-1]['outcome']} "
+                                       f"doesn't fit {show(held)}, and no slightly bigger law fits "
+                                       f"everything; {len(odd)} of {len(eps)} don't fit, few "
+                                       f"enough to list as mis-recorded, so I keep my law")
+                    return None
         trusted = self.library.get(name)
         if trusted is not None and not trusted.provenance.get("doubted"):
             trusted.provenance["doubted"] = True
@@ -407,12 +442,37 @@ class Brain:
                             rivals=N_RIVALS, extra=self.primitives())
         self.search_steps[name] = self.search_steps.get(name, 0) + result.steps
         old = self.hypotheses.get(name)
+        if result.expr is None and len(eps) >= MIN_FOR_EXCEPTIONS:
+            # nothing fits everything: does something short fit all but a few? A few
+            # mis-recorded experiences shouldn't hide a law (if listing them is cheaper
+            # than having no law at all)
+            allowed = allowed_exceptions(len(eps))
+            tolerant = synthesize([e["inputs"] for e in eps], [e["outcome"] for e in eps],
+                                  spec.inputs, spec.out_type, self.library, self.constants(),
+                                  extra=self.primitives(), exceptions=allowed)
+            self.search_steps[name] += tolerant.steps
+            if tolerant.expr is not None and worth_listing(
+                    size(tolerant.expr), len(tolerant.exceptions), len(eps)):
+                odd = [eps[i] for i in tolerant.exceptions]
+                self.exceptions[name] = odd
+                self.failed_search.pop(name, None)
+                self.hypotheses[name] = tolerant.expr
+                self.rivals[name] = []
+                self.found_at[name] = len(eps)
+                shown = "; ".join(f"{e['inputs']} -> {e['outcome']}" for e in odd[:3])
+                self.note("revise", f"{name}: no law fits all {len(eps)} experiences, but "
+                                    f"{show(tolerant.expr)} fits all except {len(odd)} "
+                                    f"({shown}). Listing those few costs less than having no "
+                                    f"law, so I think they were mis-recorded; I'll trust the "
+                                    f"law only if it keeps predicting")
+                return show(tolerant.expr)
         if result.expr is None:
             self.failed_search[name] = len(eps)
             self.hypotheses.pop(name, None)
             self.note("stuck", f"{name}: no simple law explains all {len(eps)} experiences "
                                f"(searched {result.steps} programs)")
             return None
+        self.exceptions.pop(name, None)
         self.failed_search.pop(name, None)
         self.hypotheses[name] = result.expr
         self.rivals[name] = result.rivals
@@ -643,6 +703,7 @@ class Brain:
             "sequence_laws": {k: v.to_json() for k, v in sorted(self.slaws.items())},
             "kind_steps": dict(sorted(self.kind_steps.items())),
             "eyes": self.eyes.to_json() if self.eyes is not None else None,
+            "exceptions": dict(sorted(self.exceptions.items())),
             "quantities": dict(sorted(self.quantities.items())),
             "inverses": dict(sorted(self.library.inverses.items())),
             "cycles": dict(sorted(self.library.cycles.items())),
@@ -678,6 +739,7 @@ class Brain:
         b.kinds = dict(d.get("kinds", {}))
         b.slaws = {k: SequenceLaw.from_json(v) for k, v in d.get("sequence_laws", {}).items()}
         b.kind_steps = dict(d.get("kind_steps", {}))
+        b.exceptions = dict(d.get("exceptions", {}))
         if d.get("eyes"):
             from ..senses.eyes import Eyes
             b.eyes = Eyes.from_json(d["eyes"])

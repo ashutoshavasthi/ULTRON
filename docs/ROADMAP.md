@@ -1,5 +1,9 @@
 # Ultron roadmap: toward general intelligence
 
+> The full architecture and campaign are in [MASTER_PLAN.md](MASTER_PLAN.md). The first
+> stage is planned in detail in [STAGE_1_PLAN.md](STAGE_1_PLAN.md). Every known way to
+> fail is in [FAILURE_ATLAS.md](FAILURE_ATLAS.md).
+
 ## North star
 
 **Ultron's goal is general intelligence (AGI), and beyond it, superhuman intelligence

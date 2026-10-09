@@ -2506,7 +2506,7 @@
        "m": 9.0
       },
       "truth": 1.8888888888888888,
-      "ultron": 1.889318466400402
+      "ultron": 1.8893184653175528
      },
      {
       "question": {
@@ -2514,7 +2514,7 @@
        "m": 4.0
       },
       "truth": 1.5,
-      "ultron": 1.5003411350826723
+      "ultron": 1.5003411342227626
      },
      {
       "question": {
@@ -2522,7 +2522,7 @@
        "m": 9.0
       },
       "truth": 1.0,
-      "ultron": 1.0002274233884483
+      "ultron": 1.000227422815175
      }
     ],
     "name": "new pushes: acceleration predicted BEFORE watching, vs the true one",
@@ -2550,7 +2550,7 @@
        4
       ],
       "truth": 3.011554406442542,
-      "ultron": 3.007099781853659
+      "ultron": 3.007099782573994
      },
      {
       "question": [
@@ -2558,7 +2558,7 @@
        5
       ],
       "truth": 3.7644430080531777,
-      "ultron": 3.7588747273170733
+      "ultron": 3.7588747282174926
      },
      {
       "question": [
@@ -2566,7 +2566,7 @@
        4
       ],
       "truth": 3.5059977126153066,
-      "ultron": 3.4916726084941816
+      "ultron": 3.4916726115272656
      }
     ],
     "name": "NEVER HUNG: 4-5 blocks on its springs; how far will each stretch?",
@@ -2594,7 +2594,7 @@
        2.18
       ],
       "truth": 2.9987833537491686,
-      "ultron": 2.9288666980572797
+      "ultron": 2.928866695591778
      },
      {
       "question": [
@@ -2602,7 +2602,7 @@
        1.75
       ],
       "truth": 4.173893631657897,
-      "ultron": 4.106340522435956
+      "ultron": 4.106340538711724
      },
      {
       "question": [
@@ -2610,7 +2610,7 @@
        1.2
       ],
       "truth": 5.311687439678743,
-      "ultron": 5.24103497586756
+      "ultron": 5.241035006711218
      }
     ],
     "name": "new balls in the valley: after watching a moment, the speed at every later height",
@@ -3283,7 +3283,7 @@
        1
       ],
       "truth": 8.0,
-      "ultron": 8.001819387107586
+      "ultron": 8.0018193825214
      },
      {
       "question": [
@@ -3291,7 +3291,7 @@
        4
       ],
       "truth": 0.75,
-      "ultron": 0.7501705675413362
+      "ultron": 0.7501705671113813
      },
      {
       "question": [
@@ -3299,7 +3299,7 @@
        4
       ],
       "truth": 3.25,
-      "ultron": 3.2507391260124567
+      "ultron": 3.250739124149319
      }
     ],
     "name": "predicts a push's acceleration BEFORE watching, counting the load by eye",

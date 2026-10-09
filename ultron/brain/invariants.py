@@ -352,6 +352,23 @@ def power_vectors(n, complexity):
     return out
 
 
+def _robust_constant(values, sigma):
+    """Do these values stay the same, given readings with relative noise sigma (bell-
+    curve, with tails) and a few readings that are simply wrong? Returns (the constant,
+    the typical relative scatter) or None."""
+    med = statistics.median(values)
+    if med == 0 or len(values) < 5:
+        return None
+    dev = [abs(v - med) / abs(med) for v in values]
+    scatter = 1.4826 * statistics.median(dev)
+    if scatter > 1.5 * sigma:
+        return None
+    inliers = [v for v, d in zip(values, dev) if d <= 4 * max(sigma, scatter)]
+    if len(inliers) < 0.75 * len(values):
+        return None             # too many readings far off: not one constant
+    return sum(inliers) / len(inliers), scatter
+
+
 def _spread(values):
     mean = sum(values) / len(values)
     if mean == 0:
@@ -406,11 +423,17 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
         powers = {n: p for n, p in zip(names, combo) if p}
         c = sum(abs(p) for p in combo)
         spread = _spread(vals)
-        if spread <= allowed(c):
+        robust = None
+        if spread > allowed(c) and precision > 0:
+            # real noise has tails, and some readings are simply wrong: judge the typical
+            # scatter against the noise expected, and set the far-off readings aside
+            robust = _robust_constant(vals, precision * math.sqrt(sum(p * p for p in combo)))
+        if spread <= allowed(c) or robust is not None:
             score = c + 1
             if best is None or (score, ordering) < best[0]:
-                law = QuantityLaw(etype, powers, "global", constant=sum(vals) / len(vals),
-                                  spread=spread)
+                const = sum(vals) / len(vals) if robust is None else robust[0]
+                law = QuantityLaw(etype, powers, "global", constant=const,
+                                  spread=spread if robust is None else robust[1])
                 best = ((score, ordering), c, law)
             return
         if group_by is None:
@@ -422,10 +445,20 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
         if len(multi) < needed_groups:
             return
         worst = max(_spread(g) for g in multi)
-        if worst <= allowed(c):
+        fits = {}
+        if worst > allowed(c) and precision > 0:
+            sigma = precision * math.sqrt(sum(p * p for p in combo))
+            fits = {k: _robust_constant(g, sigma) for k, g in groups.items() if len(g) >= 2}
+            if not fits or any(f is None for f in fits.values()):
+                return
+            worst = max(f[1] for f in fits.values())
+        elif worst > allowed(c):
+            return
+        if True:
             score = c + len(groups)
             if best is None or (score, ordering) < best[0]:
-                props = {k: sum(g) / len(g) for k, g in sorted(groups.items())}
+                props = {k: (fits[k][0] if k in fits else sum(g) / len(g))
+                         for k, g in sorted(groups.items())}
                 law = QuantityLaw(etype, powers, "grouped", group_by=group_by,
                                   properties=props, spread=worst)
                 best = ((score, ordering), c, law)

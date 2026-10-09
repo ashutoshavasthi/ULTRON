@@ -16,11 +16,12 @@ from .dsl import BOOL, INT, Overflow, apply_step
 
 
 class SearchResult:
-    def __init__(self, expr, steps, exhausted, rivals=()):
+    def __init__(self, expr, steps, exhausted, rivals=(), exceptions=()):
         self.expr = expr            # the law, or None
         self.steps = steps          # how many candidate programs were considered
         self.exhausted = exhausted  # True if the search hit its size/effort limit
         self.rivals = list(rivals)  # other explanations of the same experiences
+        self.exceptions = list(exceptions)  # experiences the law does NOT fit (indices)
 
 
 class _Done(Exception):
@@ -28,6 +29,8 @@ class _Done(Exception):
 
 
 MAX_SAME_SIZE = 40
+EXCEPTION_COST = 3      # describing one exception (which experience, what it was) costs
+                        # about as much as three steps of program
 
 
 def borrowed(expr):
@@ -84,29 +87,39 @@ def _vec_call(name, avec, bvec, library):
 
 
 def synthesize(inputs, targets, var_types, out_type, library, consts=(0, 1),
-               max_size=7, max_bank=60000, rivals=0, extra=()):
+               max_size=7, max_bank=60000, rivals=0, extra=(), exceptions=0):
     """Search for the smallest program mapping each inputs[i] to targets[i].
 
     extra: invented primitives the brain may use (e.g. "down": one step lower,
     with no floor at zero).
+    exceptions: how many experiences may disagree with the law. A law with exceptions
+    is described by the program plus a list of the exceptions (EXCEPTION_COST each);
+    the shortest whole description wins, so an exact law is preferred unless it is
+    much longer. This is how a few wrongly recorded experiences stop being fatal.
     """
     with dsl.limits(20000, 10 ** 7):
         return _synthesize(inputs, targets, var_types, out_type, library, consts,
-                           max_size, max_bank, rivals, tuple(extra))
+                           max_size, max_bank, rivals, tuple(extra), exceptions)
 
 
 def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size, max_bank,
-                n_rivals, extra):
+                n_rivals, extra, n_exceptions=0):
     target = tuple(targets)
     names = sorted(var_types)
     bank = {INT: {}, BOOL: {}}          # type -> size -> [(expr, vec)]
     seen = {INT: set(), BOOL: set()}
-    state = {"steps": 0, "total": 0, "matches": [], "first_size": None}
+    state = {"steps": 0, "total": 0, "matches": [], "first_size": None, "near": None}
 
     def consider(expr, typ, vec, s):
         state["steps"] += 1
         if vec is None:
             return
+        if n_exceptions and typ == out_type and vec != target:
+            wrong = [i for i, (x, y) in enumerate(zip(vec, target)) if x != y]
+            if len(wrong) <= n_exceptions:
+                dl = s + EXCEPTION_COST * len(wrong)
+                if state["near"] is None or dl < state["near"][0]:
+                    state["near"] = (dl, expr, wrong)
         if typ == out_type and vec == target:
             state["matches"].append((s, expr))
             if state["first_size"] is None:
@@ -139,6 +152,9 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
 
     def result(exhausted):
         m = state["matches"]
+        near = state["near"]
+        if near is not None and (not m or near[0] < state["first_size"]):
+            return SearchResult(near[1], state["steps"], False, [], near[2])
         if not m:
             return SearchResult(None, state["steps"], exhausted)
         shortest = [e for sz, e in m if sz == state["first_size"]]
@@ -160,6 +176,8 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
                 consider(("const", c), BOOL, tuple(c for _ in inputs), 1)
 
         for s in range(2, max_size + 1):
+            if state["near"] is not None and s >= state["near"][0]:
+                break       # nothing this long can beat the law-with-exceptions found
             if state["first_size"] is not None and (
                     s > state["first_size"] + 1 or len(state["matches"]) > n_rivals):
                 return result(False)
