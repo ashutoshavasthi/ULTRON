@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **31.8%** (127.0) | 350.6 | 40000 |
+| ARC-AGI-1 | training | 400 | **33.6%** (134.5) | 358.1 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-127 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 260 with no program within budget.
+135 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 252 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -37,6 +37,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 23b5c85d | `crop_thing(('smallest', False))` |
 | 253bf280 | `lines between things: what fills a gap depends on whether the ends match (1 kinds of gap)` |
 | 25ff71a9 | `things move by (): 1 kinds (steps)` |
+| 27a28665 | `a colour for each kind of picture, by its things (4 kinds)` |
 | 29ec7d0e | `complete_pattern(0)` |
 | 2dc579da | `pick_part(odd_one)` |
 | 2dee498d | `continue_pattern(((1, 1), (1, 3)))` |
@@ -51,6 +52,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 42a50994 | `remove_specks(1)` |
 | 4347f46a | `hollow_things` |
 | 445eab21 | `gravity(right) ▸ continue_pattern(((1, 5), (1, 5))) ▸ recolour 6→7, 7→8` |
+| 44f52bb0 | `a colour for each kind of picture, by its symmetry (2 kinds)` |
 | 484b58aa | `complete_pattern(0)` |
 | 48d8fb45 | `crop_thing(('most_colours', True)) ▸ the box where the most common colour is` |
 | 496994bd | `symmetrize(v)` |
@@ -74,6 +76,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 6fa7a44f | `mirror_tile(v)` |
 | 72ca375d | `the thing with symmetric=True` |
 | 7468f01a | `flip_h ▸ the thing with ` |
+| 746b3537 | `one cell per uniform block` |
 | 74dd1130 | `transpose` |
 | 7b6016b9 | `fill_enclosed(2) ▸ recolour 0→3` |
 | 810b9b61 | `thing law on (holes): 3 except 1 kind` |
@@ -82,6 +85,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 88a62173 | `the thing with shape_count=1` |
 | 8be77c9e | `mirror_tile(v)` |
 | 8f2ea7aa | `crop_content ▸ fractal` |
+| 90c28cc7 | `one cell per uniform block of what is drawn` |
 | 913fb3ed | `marks around things by (colour): 3 kinds leave marks` |
 | 9172f3a0 | `upscale(3)` |
 | 94f9d214 | `combine(('halves_tb', 'nor', 2))` |
@@ -105,6 +109,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | b2862040 | `thing law on (holes): 8 except 1 kind` |
 | b6afb2da | `local law on (colour, count8): 3 situations change colour` |
 | b8825c91 | `symmetry (rot180) about its own centre fills what colour 4 hides` |
+| b9b7f026 | `the colour of the thing with filled=False` |
 | bb43febb | `local law on (colour, count8): 1 situations change colour` |
 | bdad9b1f | `lines_through((2, 'h')) ▸ local law on (colour, col): 2 situations change colour` |
 | be94b721 | `crop_thing(('largest', False))` |
@@ -115,10 +120,12 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | c9e6f938 | `mirror_tile(h)` |
 | ce22a75a | `frame_things(1) ▸ recolour 5→1` |
 | ce4f8723 | `combine(('lines', 'or', 3))` |
+| d0f5fe59 | `a diagonal as long as the number of things(False, False), in their colour` |
 | d2abd087 | `thing law on (size): 1 except 1 kind` |
 | d364b489 | `marks around things by (): 1 kinds leave marks` |
 | d511f180 | `recolour 5→8, 8→5` |
 | d5d6de2d | `fill_enclosed(3) ▸ recolour 2→0` |
+| d631b094 | `a row as long as the number of cells, in their colour` |
 | d90796e8 | `local law on (colour, orth_set): 2 situations change colour` |
 | d9fac9be | `crop_thing(('largest', True)) ▸ the thing with border=False` |
 | dae9d2b5 | `combine(('halves_lr', 'or', 6))` |
@@ -132,6 +139,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | e98196ab | `overlay_parts` |
 | ea32f347 | `thing law on (size_rank): 3 kinds of thing` |
 | ea786f4a | `marks around things by (): 1 kinds leave marks` |
+| eb5a1d5d | `one cell per uniform block` |
 | ed36ccf7 | `rot90` |
 | f25fbde4 | `upscale(2) ▸ the thing with ` |
 | f25ffba3 | `symmetrize(v)` |

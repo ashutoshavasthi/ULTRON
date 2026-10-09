@@ -108,6 +108,10 @@ description that agrees with every example.
 | copies (`objects.py`) | Copies of one thing (the template, chosen by a value of its quantities) replace every other thing (the markers), centred on them or matching colours with them, optionally in the marker's colour | Exactly one thing may be the template; no markers, or an ambiguous anchor, gives no answer |
 | lines between things (`objects.py`) | What fills a gap between two coloured cells on a row or column (a colour, the ends' own colour, or nothing) is a law of the two ends | The smallest key that explains every gap wins; a kind of gap never seen gives no answer |
 
+| summary (`summary.py`) | The answer is about the picture: a colour (that of the thing a law singles out, or a class of the picture by one trait: symmetry, how many things, colours, its one shape), a row, column, diagonal or square as long as a count (things, coloured cells, cells of a colour), or one cell per uniform block | A class table must be shorter than its examples; an unseen kind of picture gives no answer |
+
+Perception added for summaries (counted): a picture's symmetry, number of things and colours, its one shape; uniform blocks (runs of identical rows and columns).
+
 Traits of a colour (perception, counted): drawn as an outline, drawn as a solid block, how common it is compared with the others.
 
 In every case, a kind of thing never seen in the examples gets **no answer**, not a guess.

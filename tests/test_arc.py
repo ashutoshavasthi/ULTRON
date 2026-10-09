@@ -219,3 +219,28 @@ def test_copies_of_a_template_and_lines_between_things():
     rule = objects.learn_gaps([i for i, _ in train], [o for _, o in train])
     x, want = joined(7)                                  # a colour it never saw
     assert rule is not None and np.array_equal(objects.apply_gaps(rule, x), want)
+
+
+def test_summary_laws_count_and_blocks():
+    from ultron.arc import grid, summary
+    grid.TASK_BACKGROUND[0] = 0
+    rng = np.random.default_rng(5)
+
+    def scattered(n):
+        x = np.zeros((10, 10), dtype=np.int8)
+        cells = rng.choice(100, size=n, replace=False)
+        for k in cells:
+            r, c = divmod(int(k), 10)
+            if all(x[r + dr, c + dc] == 0 for dr in (-1, 0, 1) for dc in (-1, 0, 1)
+                   if 0 <= r + dr < 10 and 0 <= c + dc < 10):
+                x[r, c] = 4
+        y = np.zeros((int((x == 4).sum()),) * 2, dtype=np.int8)
+        np.fill_diagonal(y, 4)
+        return x, y
+    train = [scattered(n) for n in (3, 5, 2)]
+    rule = summary.learn([i for i, _ in train], [o for _, o in train])
+    x, want = scattered(4)
+    assert rule is not None and np.array_equal(summary.apply(rule, x), want)
+    # stripes of uniform colour: one cell per block
+    pic = np.repeat(np.repeat(np.array([[1, 2], [3, 4]], dtype=np.int8), 3, 0), [2, 4], 1)
+    assert np.array_equal(summary.blocks(pic, False), [[1, 2], [3, 4]])

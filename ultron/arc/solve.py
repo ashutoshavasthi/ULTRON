@@ -10,7 +10,7 @@ the same answer on any machine.
 
 import numpy as np
 
-from . import cells, objects, symmetry
+from . import cells, objects, summary, symmetry
 from . import ops as O
 from .grid import colours, key
 
@@ -85,6 +85,9 @@ def run(program, g):
         if name == "gaps":
             g = objects.apply_gaps(p, g)
             continue
+        if name == "summary":
+            g = summary.apply(p, g)
+            continue
         if name == "colourmap":
             g = np.vectorize(lambda v: p.get(int(v), int(v)), otypes=[np.int8])(g)
             continue
@@ -122,6 +125,8 @@ def show(program):
             out.append(objects.describe_copies(p))
         elif name == "gaps":
             out.append(objects.describe_gaps(p))
+        elif name == "summary":
+            out.append(summary.describe(p))
         elif name.startswith("block") and LIBRARY[0]:
             from . import library
             out.append(library.show_use(LIBRARY[0][int(name[5:]) - 1], p))
@@ -154,6 +159,8 @@ def length(program):
             total += objects.copies_length(p)
         elif name == "gaps":
             total += objects.gaps_length(p)
+        elif name == "summary":
+            total += summary.length(p)
         else:
             total += 1
     return total
@@ -219,6 +226,9 @@ def _search(train, budget, max_depth, want):
     gaps = objects.learn_gaps(ins, targets)
     if gaps is not None:
         found.append((("gaps", gaps),))
+    summ = summary.learn(ins, targets)
+    if summ is not None:
+        found.append((("summary", summ),))
     frontier = [((), ins)]
     seen = {tuple(key(g) for g in ins)}
     cache = {}
