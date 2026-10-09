@@ -53,6 +53,28 @@ A0–A3 are below):
 | C3 | Symmetry laws (about the picture's own centre, repairing what is missing); the box where a colour is (chosen by a trait); search speedups | 30.8% | **11.75%** (right 47 of 59 answered) | **0.83%** (1 of 120: the first ARC-AGI-2 task solved) |
 | C4 | Copies of a template; lines between things; summaries (a colour, a count, one cell per block) | 33.6% | **12.75%** (right 51 of 63 answered) | 0.83% |
 
+**The ARC push: what it found (measured on training, then the stop rule).**
+- **Adopted laws** (each measured right or wrong on the unsolved training tasks first):
+  - copies of a template (+2);
+  - lines between things (+2);
+  - summaries: a colour, a count, one cell per block (+8);
+  - arrangements of copies (+4).
+
+  Training went 30.8% → 34.6% with nothing lost, and evaluation 11.75% → 12.75% (C4).
+- **Tried and reverted, or not adopted:**
+
+  | Idea | Result |
+  |---|---|
+  | moves after a depth-1 operation | +1 task at 3× the run time |
+  | pick then recolour | +0 |
+  | "its twin's colour" as a thing-law outcome | +0 |
+  | periodic completion | +0 |
+  | choosing a panel by a law | no candidate task |
+  | 3× search budget | +2 tasks at 2.9× the time |
+  | a per-puzzle network (numpy, trained only on the puzzle, must predict each held-out example exactly before it may answer) | 0 right, 1 wrong, 184 silent of 185 |
+- **The stop rule triggered:** three families in a row each added fewer than 2 tasks. Hand-picked law families have reached diminishing returns.
+- **Training gains reach evaluation at about one third** (+2.8 training points gave +1.0 evaluation). A2 (≥ 25%) and A3 (≥ 40%) are therefore not reachable by more families of this kind. What they need is a mechanism that *generates* hypotheses rather than enumerating them: a far more accurate learned intuition (S2), or per-puzzle networks at CompressARC scale, which need GPU-length training this environment does not have.
+
 C2 meets criterion **A1** (≥ 10%).
 
 **Library learning: an honest null result so far.** Ultron's solved programs are almost
