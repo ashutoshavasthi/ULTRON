@@ -102,4 +102,9 @@ description that agrees with every example.
 | pick | Which thing is the answer, as a value of its quantities | Every thing with that value must give the same answer |
 | moves | How each kind of thing moves: toward what stays put, slide, by its own size, or a step | Ranked by what each takes to say; a kind seen moving once gives no evidence |
 
+| symmetry (`symmetry.py`) | The picture's own symmetry (a mirror, two mirrors, quarter turns, a diagonal) about its own centre, found where the cells it can see agree with their images, fills what is missing: blank, or hidden under a colour; optionally the answer is the repaired patch | The centre must be backed by at least half the visible cells; images that disagree, or a hidden cell with no visible image, give no answer; rival laws are the two attempts |
+| where a colour is (`objects.py`) | The answer is the box around a colour (or what it holds inside), the colour named outright or chosen by a trait: drawn as a rectangle outline, a solid block, the most or least common | Exactly one colour may have the trait, else no answer |
+
+Traits of a colour (perception, counted): drawn as an outline, drawn as a solid block, how common it is compared with the others.
+
 In every case, a kind of thing never seen in the examples gets **no answer**, not a guess.

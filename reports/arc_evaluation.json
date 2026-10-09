@@ -3,9 +3,9 @@
 "set": "ARC-AGI-1",
 "split": "evaluation",
 "tasks": 400,
-"score": 40.0,
-"percent": 10.0,
-"seconds": 593.7,
+"score": 47.0,
+"percent": 11.75,
+"seconds": 650.0,
 "budget": 40000,
 "library": 0,
 "rows": [
@@ -17,7 +17,7 @@
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.47
+"seconds": 0.43
 },
 {
 "task": "009d5c81",
@@ -34,7 +34,7 @@ null
 ],
 "found": true,
 "operations": 40005,
-"seconds": 3.37
+"seconds": 3.28
 },
 {
 "task": "00dbd492",
@@ -56,7 +56,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 3.87
+"seconds": 3.79
 },
 {
 "task": "03560426",
@@ -66,7 +66,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.48
+"seconds": 2.66
 },
 {
 "task": "05a7bcf2",
@@ -76,7 +76,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 17.62
+"seconds": 19.61
 },
 {
 "task": "0607ce86",
@@ -86,7 +86,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.23
+"seconds": 5.77
 },
 {
 "task": "0692e18c",
@@ -96,7 +96,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.21
+"seconds": 0.22
 },
 {
 "task": "070dd51e",
@@ -106,7 +106,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 9.86
+"seconds": 11.86
 },
 {
 "task": "08573cc6",
@@ -116,7 +116,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.09
+"seconds": 2.04
 },
 {
 "task": "0934a4d8",
@@ -126,7 +126,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 7.69
+"seconds": 14.16
 },
 {
 "task": "09c534e7",
@@ -136,7 +136,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 12.05
+"seconds": 14.94
 },
 {
 "task": "0a1d4ef5",
@@ -146,7 +146,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.09
+"seconds": 14.93
 },
 {
 "task": "0a2355a6",
@@ -156,7 +156,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.99
+"seconds": 1.75
 },
 {
 "task": "0b17323b",
@@ -173,7 +173,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.6
+"seconds": 1.93
 },
 {
 "task": "0bb8deee",
@@ -183,7 +183,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.18
+"seconds": 2.59
 },
 {
 "task": "0becf7df",
@@ -193,7 +193,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.17
+"seconds": 2.49
 },
 {
 "task": "0c786b71",
@@ -215,7 +215,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.56
+"seconds": 0.49
 },
 {
 "task": "0c9aba6e",
@@ -236,7 +236,7 @@ null
 ],
 "found": true,
 "operations": 656,
-"seconds": 0.29
+"seconds": 0.47
 },
 {
 "task": "0d87d2a6",
@@ -246,7 +246,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.64
+"seconds": 5.87
 },
 {
 "task": "0e671a1a",
@@ -256,7 +256,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 4.18
+"seconds": 4.39
 },
 {
 "task": "0f63c0b9",
@@ -266,7 +266,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 17.37
+"seconds": 19.5
 },
 {
 "task": "103eff5b",
@@ -276,7 +276,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.28
+"seconds": 6.68
 },
 {
 "task": "11e1fe23",
@@ -286,7 +286,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.5
+"seconds": 1.76
 },
 {
 "task": "12422b43",
@@ -296,7 +296,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 2.8
+"seconds": 2.64
 },
 {
 "task": "12997ef3",
@@ -306,7 +306,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.27
+"seconds": 1.81
 },
 {
 "task": "12eac192",
@@ -323,7 +323,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.49
+"seconds": 1.17
 },
 {
 "task": "136b0064",
@@ -333,7 +333,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.74
+"seconds": 3.14
 },
 {
 "task": "13713586",
@@ -343,7 +343,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 10.05
+"seconds": 11.16
 },
 {
 "task": "137f0df0",
@@ -353,7 +353,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.71
+"seconds": 3.93
 },
 {
 "task": "140c817e",
@@ -375,7 +375,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 18.99
+"seconds": 19.26
 },
 {
 "task": "14754a24",
@@ -385,7 +385,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 11.86
+"seconds": 12.33
 },
 {
 "task": "15113be4",
@@ -395,7 +395,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.91
+"seconds": 10.26
 },
 {
 "task": "15663ba9",
@@ -405,7 +405,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.58
+"seconds": 1.92
 },
 {
 "task": "15696249",
@@ -415,7 +415,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.46
+"seconds": 0.52
 },
 {
 "task": "16b78196",
@@ -425,7 +425,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 15.58
+"seconds": 18.73
 },
 {
 "task": "17b80ad2",
@@ -435,7 +435,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 12.94
+"seconds": 13.35
 },
 {
 "task": "17cae0c1",
@@ -445,7 +445,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.61
+"seconds": 0.65
 },
 {
 "task": "18419cfa",
@@ -455,7 +455,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.13
+"seconds": 5.02
 },
 {
 "task": "184a9768",
@@ -465,7 +465,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.19
+"seconds": 9.57
 },
 {
 "task": "195ba7dc",
@@ -486,7 +486,7 @@ null
 ],
 "found": true,
 "operations": 608,
-"seconds": 1.3
+"seconds": 1.47
 },
 {
 "task": "1990f7a8",
@@ -496,7 +496,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.48
+"seconds": 2.65
 },
 {
 "task": "19bb5feb",
@@ -506,7 +506,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.71
+"seconds": 2.22
 },
 {
 "task": "1a2e2828",
@@ -516,7 +516,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.89
+"seconds": 1.03
 },
 {
 "task": "1a6449f1",
@@ -526,7 +526,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.29
+"seconds": 4.88
 },
 {
 "task": "1acc24af",
@@ -543,7 +543,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 2.44
+"seconds": 2.68
 },
 {
 "task": "1c02dbbe",
@@ -553,7 +553,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.65
+"seconds": 4.1
 },
 {
 "task": "1c0d0a4b",
@@ -563,7 +563,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.34
+"seconds": 1.23
 },
 {
 "task": "1c56ad9f",
@@ -573,7 +573,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.74
+"seconds": 1.69
 },
 {
 "task": "1d0a4b61",
@@ -590,7 +590,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 10.08
+"seconds": 11.59
 },
 {
 "task": "1d398264",
@@ -600,7 +600,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.84
+"seconds": 4.54
 },
 {
 "task": "1da012fc",
@@ -610,7 +610,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.82
+"seconds": 7.33
 },
 {
 "task": "1e81d6f9",
@@ -620,7 +620,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.11
+"seconds": 7.24
 },
 {
 "task": "1e97544e",
@@ -630,7 +630,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 42.2
+"seconds": 44.3
 },
 {
 "task": "2037f2c7",
@@ -640,7 +640,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.87
+"seconds": 7.45
 },
 {
 "task": "2072aba6",
@@ -662,7 +662,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.33
+"seconds": 0.28
 },
 {
 "task": "20818e16",
@@ -672,7 +672,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.31
+"seconds": 1.63
 },
 {
 "task": "20981f0e",
@@ -682,7 +682,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.74
+"seconds": 5.22
 },
 {
 "task": "212895b5",
@@ -692,7 +692,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 20.38
+"seconds": 19.71
 },
 {
 "task": "21f83797",
@@ -717,7 +717,7 @@ null
 ],
 "found": true,
 "operations": 12084,
-"seconds": 7.45
+"seconds": 7.23
 },
 {
 "task": "22a4bbc2",
@@ -727,7 +727,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 4.87
+"seconds": 4.26
 },
 {
 "task": "25094a63",
@@ -737,7 +737,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 11.03
+"seconds": 14.32
 },
 {
 "task": "2546ccf6",
@@ -747,7 +747,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.97
+"seconds": 5.09
 },
 {
 "task": "256b0a75",
@@ -757,7 +757,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 17.42
+"seconds": 18.87
 },
 {
 "task": "2685904e",
@@ -767,7 +767,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 11.46
+"seconds": 11.49
 },
 {
 "task": "2697da3f",
@@ -777,7 +777,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.71
+"seconds": 0.95
 },
 {
 "task": "2753e76c",
@@ -787,7 +787,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.24
+"seconds": 2.73
 },
 {
 "task": "27a77e38",
@@ -797,7 +797,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.14
+"seconds": 2.97
 },
 {
 "task": "27f8ce4f",
@@ -807,7 +807,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.52
+"seconds": 0.45
 },
 {
 "task": "281123b4",
@@ -817,7 +817,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.36
+"seconds": 1.94
 },
 {
 "task": "292dd178",
@@ -827,7 +827,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.47
+"seconds": 1.82
 },
 {
 "task": "29700607",
@@ -837,7 +837,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.56
+"seconds": 4.14
 },
 {
 "task": "2a5f8217",
@@ -847,7 +847,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.45
+"seconds": 1.34
 },
 {
 "task": "2b01abd0",
@@ -857,7 +857,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.33
+"seconds": 1.7
 },
 {
 "task": "2c0b0aff",
@@ -867,7 +867,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 5.6
+"seconds": 6.37
 },
 {
 "task": "2c737e39",
@@ -877,7 +877,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.87
+"seconds": 3.24
 },
 {
 "task": "2f0c5170",
@@ -887,7 +887,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.44
+"seconds": 4.53
 },
 {
 "task": "310f3251",
@@ -897,7 +897,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.86
+"seconds": 1.88
 },
 {
 "task": "3194b014",
@@ -907,7 +907,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.95
+"seconds": 4.39
 },
 {
 "task": "319f2597",
@@ -917,7 +917,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 27.45
+"seconds": 26.08
 },
 {
 "task": "31adaf00",
@@ -927,7 +927,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.66
+"seconds": 4.55
 },
 {
 "task": "31d5ba1a",
@@ -948,7 +948,7 @@ null
 ],
 "found": true,
 "operations": 40005,
-"seconds": 0.83
+"seconds": 0.85
 },
 {
 "task": "32e9702f",
@@ -958,7 +958,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.65
+"seconds": 0.5
 },
 {
 "task": "332efdb3",
@@ -975,7 +975,7 @@ null
 ],
 "found": true,
 "operations": 8763,
-"seconds": 0.23
+"seconds": 0.24
 },
 {
 "task": "3391f8c0",
@@ -985,7 +985,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.72
+"seconds": 2.06
 },
 {
 "task": "33b52de3",
@@ -995,7 +995,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 12.96
+"seconds": 14.07
 },
 {
 "task": "3490cc26",
@@ -1005,7 +1005,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 11.06
+"seconds": 11.8
 },
 {
 "task": "34b99a2b",
@@ -1026,7 +1026,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.36
+"seconds": 1.18
 },
 {
 "task": "351d6448",
@@ -1036,7 +1036,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.84
+"seconds": 2.95
 },
 {
 "task": "358ba94e",
@@ -1046,7 +1046,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.61
+"seconds": 2.08
 },
 {
 "task": "37d3e8b2",
@@ -1056,7 +1056,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.01
+"seconds": 3.89
 },
 {
 "task": "3979b1a8",
@@ -1066,7 +1066,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.09
+"seconds": 1.01
 },
 {
 "task": "3a301edc",
@@ -1076,7 +1076,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 3.02
+"seconds": 3.09
 },
 {
 "task": "3b4c2228",
@@ -1086,7 +1086,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.92
+"seconds": 0.85
 },
 {
 "task": "3d31c5b3",
@@ -1096,7 +1096,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.09
+"seconds": 2.3
 },
 {
 "task": "3ed85e70",
@@ -1106,7 +1106,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 30.52
+"seconds": 35.23
 },
 {
 "task": "3ee1011a",
@@ -1116,7 +1116,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.35
+"seconds": 6.97
 },
 {
 "task": "3f23242b",
@@ -1126,7 +1126,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.49
+"seconds": 2.27
 },
 {
 "task": "40f6cd08",
@@ -1136,7 +1136,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 12.61
+"seconds": 14.23
 },
 {
 "task": "414297c0",
@@ -1146,7 +1146,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.07
+"seconds": 5.03
 },
 {
 "task": "423a55dc",
@@ -1156,7 +1156,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.94
+"seconds": 1.01
 },
 {
 "task": "42918530",
@@ -1166,7 +1166,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 17.06
+"seconds": 18.6
 },
 {
 "task": "42a15761",
@@ -1176,7 +1176,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.16
+"seconds": 2.07
 },
 {
 "task": "4364c1c4",
@@ -1186,7 +1186,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.74
+"seconds": 2.17
 },
 {
 "task": "456873bc",
@@ -1196,7 +1196,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.09
+"seconds": 4.81
 },
 {
 "task": "45737921",
@@ -1206,7 +1206,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.97
+"seconds": 2.4
 },
 {
 "task": "45bbe264",
@@ -1216,7 +1216,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.05
+"seconds": 9.8
 },
 {
 "task": "477d2879",
@@ -1226,17 +1226,24 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.52
+"seconds": 8.35
 },
 {
 "task": "47996f11",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
+"score": 1.0,
+"program": "symmetry (quarter turns) about its own centre fills what colour 6 hides",
+"ops": [
+"symmetry"
+],
+"steps": [
+[
+"symmetry",
+null
+]
+],
+"found": true,
 "operations": 40004,
-"seconds": 41.22
+"seconds": 48.71
 },
 {
 "task": "48131b3c",
@@ -1246,7 +1253,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.28
+"seconds": 0.34
 },
 {
 "task": "4852f2fa",
@@ -1256,7 +1263,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.12
+"seconds": 1.31
 },
 {
 "task": "48f8583b",
@@ -1266,7 +1273,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.3
+"seconds": 0.33
 },
 {
 "task": "4aab4007",
@@ -1276,7 +1283,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 47.31
+"seconds": 53.76
 },
 {
 "task": "4acc7107",
@@ -1286,7 +1293,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.69
+"seconds": 1.82
 },
 {
 "task": "4b6b68e5",
@@ -1296,7 +1303,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.74
+"seconds": 7.72
 },
 {
 "task": "4c177718",
@@ -1306,7 +1313,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.08
+"seconds": 3.07
 },
 {
 "task": "4cd1b7b2",
@@ -1316,7 +1323,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.99
+"seconds": 1.94
 },
 {
 "task": "4e45f183",
@@ -1326,7 +1333,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.54
+"seconds": 4.22
 },
 {
 "task": "4e469f39",
@@ -1336,7 +1343,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.31
+"seconds": 1.43
 },
 {
 "task": "4f537728",
@@ -1346,7 +1353,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.37
+"seconds": 5.23
 },
 {
 "task": "4ff4c9da",
@@ -1356,7 +1363,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.28
+"seconds": 7.5
 },
 {
 "task": "505fff84",
@@ -1366,7 +1373,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.44
+"seconds": 1.76
 },
 {
 "task": "506d28a5",
@@ -1387,7 +1394,7 @@ null
 ],
 "found": true,
 "operations": 656,
-"seconds": 0.91
+"seconds": 0.83
 },
 {
 "task": "50a16a69",
@@ -1397,7 +1404,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.72
+"seconds": 1.42
 },
 {
 "task": "50aad11f",
@@ -1407,7 +1414,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.34
+"seconds": 1.25
 },
 {
 "task": "50f325b5",
@@ -1417,7 +1424,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 31.73
+"seconds": 33.77
 },
 {
 "task": "516b51b7",
@@ -1427,7 +1434,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.78
+"seconds": 2.19
 },
 {
 "task": "5207a7b5",
@@ -1437,7 +1444,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.13
+"seconds": 1.57
 },
 {
 "task": "5289ad53",
@@ -1447,7 +1454,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.51
+"seconds": 2.0
 },
 {
 "task": "52fd389e",
@@ -1457,7 +1464,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 25.59
+"seconds": 27.62
 },
 {
 "task": "54db823b",
@@ -1477,7 +1484,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.99
+"seconds": 2.28
 },
 {
 "task": "551d5bf1",
@@ -1487,7 +1494,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.77
+"seconds": 9.79
 },
 {
 "task": "55783887",
@@ -1497,7 +1504,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 3.08
+"seconds": 3.37
 },
 {
 "task": "575b1a71",
@@ -1507,7 +1514,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.34
+"seconds": 1.51
 },
 {
 "task": "5783df64",
@@ -1517,7 +1524,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.06
+"seconds": 1.24
 },
 {
 "task": "5833af48",
@@ -1527,7 +1534,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.54
+"seconds": 3.3
 },
 {
 "task": "58743b76",
@@ -1537,7 +1544,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.31
+"seconds": 2.37
 },
 {
 "task": "58e15b12",
@@ -1547,7 +1554,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.11
+"seconds": 9.01
 },
 {
 "task": "59341089",
@@ -1557,7 +1564,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.41
+"seconds": 0.36
 },
 {
 "task": "5a5a2103",
@@ -1567,7 +1574,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.07
+"seconds": 3.92
 },
 {
 "task": "5af49b42",
@@ -1577,7 +1584,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 10.83
+"seconds": 11.37
 },
 {
 "task": "5b526a93",
@@ -1587,7 +1594,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.3
+"seconds": 3.68
 },
 {
 "task": "5b692c0f",
@@ -1597,7 +1604,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.29
+"seconds": 4.79
 },
 {
 "task": "5b6cbef5",
@@ -1614,7 +1621,7 @@ null
 ],
 "found": true,
 "operations": 40005,
-"seconds": 0.59
+"seconds": 0.44
 },
 {
 "task": "5d2a5c43",
@@ -1635,7 +1642,7 @@ null
 ],
 "found": true,
 "operations": 760,
-"seconds": 1.05
+"seconds": 1.44
 },
 {
 "task": "5ffb2104",
@@ -1645,7 +1652,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.86
+"seconds": 2.22
 },
 {
 "task": "604001fa",
@@ -1670,7 +1677,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 2.77
+"seconds": 3.05
 },
 {
 "task": "60a26a3e",
@@ -1680,7 +1687,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.21
+"seconds": 2.11
 },
 {
 "task": "60c09cac",
@@ -1697,7 +1704,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.44
+"seconds": 0.43
 },
 {
 "task": "626c0bcc",
@@ -1707,7 +1714,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.77
+"seconds": 0.85
 },
 {
 "task": "62ab2642",
@@ -1717,7 +1724,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.34
+"seconds": 1.43
 },
 {
 "task": "62b74c02",
@@ -1727,7 +1734,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.97
+"seconds": 2.67
 },
 {
 "task": "639f5a19",
@@ -1737,7 +1744,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.3
+"seconds": 5.16
 },
 {
 "task": "642248e4",
@@ -1747,7 +1754,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.01
+"seconds": 5.24
 },
 {
 "task": "642d658d",
@@ -1757,7 +1764,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.26
+"seconds": 7.11
 },
 {
 "task": "64a7c07e",
@@ -1774,7 +1781,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.12
+"seconds": 1.16
 },
 {
 "task": "66e6c45b",
@@ -1784,7 +1791,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.91
+"seconds": 0.77
 },
 {
 "task": "66f2d22f",
@@ -1805,7 +1812,7 @@ null
 ],
 "found": true,
 "operations": 608,
-"seconds": 0.27
+"seconds": 0.36
 },
 {
 "task": "67636eac",
@@ -1815,17 +1822,24 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.17
+"seconds": 1.84
 },
 {
 "task": "67b4a34d",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
+"score": 1.0,
+"program": "symmetry (v) about its own centre fills what colour 3 hides, answer is the repaired patch",
+"ops": [
+"symmetry"
+],
+"steps": [
+[
+"symmetry",
+null
+]
+],
+"found": true,
 "operations": 40002,
-"seconds": 2.87
+"seconds": 3.34
 },
 {
 "task": "67c52801",
@@ -1835,7 +1849,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.96
+"seconds": 1.27
 },
 {
 "task": "68b67ca3",
@@ -1845,7 +1859,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.75
+"seconds": 0.92
 },
 {
 "task": "692cd3b6",
@@ -1855,7 +1869,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.38
+"seconds": 9.0
 },
 {
 "task": "695367ec",
@@ -1865,7 +1879,7 @@ null
 "steps": [],
 "found": false,
 "operations": 27048,
-"seconds": 0.24
+"seconds": 0.34
 },
 {
 "task": "696d4842",
@@ -1875,7 +1889,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 12.61
+"seconds": 16.86
 },
 {
 "task": "69889d6e",
@@ -1885,7 +1899,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.99
+"seconds": 2.05
 },
 {
 "task": "6a11f6da",
@@ -1895,7 +1909,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.18
+"seconds": 1.58
 },
 {
 "task": "6ad5bdfd",
@@ -1905,7 +1919,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.1
+"seconds": 1.8
 },
 {
 "task": "6df30ad6",
@@ -1927,7 +1941,7 @@ null
 ],
 "found": true,
 "operations": 40005,
-"seconds": 2.17
+"seconds": 2.21
 },
 {
 "task": "6ea4a07e",
@@ -1937,7 +1951,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.32
+"seconds": 0.31
 },
 {
 "task": "6f473927",
@@ -1947,7 +1961,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.64
+"seconds": 0.71
 },
 {
 "task": "7039b2d7",
@@ -1964,7 +1978,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.59
+"seconds": 3.02
 },
 {
 "task": "705a3229",
@@ -1974,7 +1988,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.36
+"seconds": 2.84
 },
 {
 "task": "712bf12e",
@@ -1984,7 +1998,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 17.06
+"seconds": 15.88
 },
 {
 "task": "72207abc",
@@ -1994,7 +2008,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.33
+"seconds": 1.22
 },
 {
 "task": "72a961c9",
@@ -2011,7 +2025,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 2.66
+"seconds": 3.46
 },
 {
 "task": "73182012",
@@ -2021,7 +2035,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.28
+"seconds": 1.45
 },
 {
 "task": "73c3b0d8",
@@ -2031,7 +2045,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.67
+"seconds": 1.47
 },
 {
 "task": "73ccf9c2",
@@ -2048,7 +2062,7 @@ null
 ],
 "found": true,
 "operations": 33990,
-"seconds": 1.54
+"seconds": 2.49
 },
 {
 "task": "759f3fd3",
@@ -2058,7 +2072,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.84
+"seconds": 3.21
 },
 {
 "task": "762cd429",
@@ -2068,7 +2082,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.91
+"seconds": 7.27
 },
 {
 "task": "770cc55f",
@@ -2078,7 +2092,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.64
+"seconds": 2.68
 },
 {
 "task": "782b5218",
@@ -2088,7 +2102,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.71
+"seconds": 2.42
 },
 {
 "task": "79369cc6",
@@ -2098,7 +2112,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 15.16
+"seconds": 14.32
 },
 {
 "task": "7953d61e",
@@ -2108,7 +2122,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.67
+"seconds": 0.46
 },
 {
 "task": "79fb03f4",
@@ -2118,7 +2132,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.56
+"seconds": 3.84
 },
 {
 "task": "7bb29440",
@@ -2128,7 +2142,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 3.29
+"seconds": 4.05
 },
 {
 "task": "7c8af763",
@@ -2138,7 +2152,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.46
+"seconds": 6.43
 },
 {
 "task": "7c9b52a0",
@@ -2148,7 +2162,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.95
+"seconds": 2.53
 },
 {
 "task": "7d18a6fb",
@@ -2158,7 +2172,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.81
+"seconds": 2.51
 },
 {
 "task": "7d1f7ee8",
@@ -2168,7 +2182,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 9.31
+"seconds": 11.3
 },
 {
 "task": "7d419a02",
@@ -2178,7 +2192,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.53
+"seconds": 4.49
 },
 {
 "task": "7e02026e",
@@ -2188,7 +2202,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.05
+"seconds": 1.93
 },
 {
 "task": "7ee1c6ea",
@@ -2198,7 +2212,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.8
+"seconds": 5.79
 },
 {
 "task": "817e6c09",
@@ -2208,7 +2222,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.82
+"seconds": 1.57
 },
 {
 "task": "81c0276b",
@@ -2218,7 +2232,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.12
+"seconds": 2.97
 },
 {
 "task": "833dafe3",
@@ -2240,7 +2254,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.52
+"seconds": 0.48
 },
 {
 "task": "845d6e51",
@@ -2250,7 +2264,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.1
+"seconds": 4.85
 },
 {
 "task": "84db8fc4",
@@ -2267,7 +2281,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 8.53
+"seconds": 8.37
 },
 {
 "task": "84f2aca1",
@@ -2284,7 +2298,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 2.07
+"seconds": 2.51
 },
 {
 "task": "8597cfd7",
@@ -2294,7 +2308,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.1
+"seconds": 1.39
 },
 {
 "task": "85b81ff1",
@@ -2304,7 +2318,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 4.13
+"seconds": 3.61
 },
 {
 "task": "85fa5666",
@@ -2314,7 +2328,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 3.26
+"seconds": 2.75
 },
 {
 "task": "8719f442",
@@ -2324,7 +2338,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.4
+"seconds": 0.36
 },
 {
 "task": "88207623",
@@ -2334,7 +2348,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.38
+"seconds": 7.2
 },
 {
 "task": "891232d6",
@@ -2344,7 +2358,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 7.16
+"seconds": 8.12
 },
 {
 "task": "896d5239",
@@ -2354,7 +2368,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.49
+"seconds": 7.31
 },
 {
 "task": "8a371977",
@@ -2364,7 +2378,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.46
+"seconds": 3.08
 },
 {
 "task": "8b28cd80",
@@ -2374,7 +2388,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.81
+"seconds": 0.61
 },
 {
 "task": "8ba14f53",
@@ -2384,7 +2398,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.67
+"seconds": 0.7
 },
 {
 "task": "8cb8642d",
@@ -2394,7 +2408,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.04
+"seconds": 1.97
 },
 {
 "task": "8dae5dfc",
@@ -2404,7 +2418,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 3.64
+"seconds": 4.55
 },
 {
 "task": "8e2edd66",
@@ -2414,7 +2428,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.3
+"seconds": 0.33
 },
 {
 "task": "8ee62060",
@@ -2424,7 +2438,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.51
+"seconds": 2.18
 },
 {
 "task": "8fbca751",
@@ -2434,7 +2448,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.75
+"seconds": 2.0
 },
 {
 "task": "90347967",
@@ -2444,7 +2458,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.93
+"seconds": 1.76
 },
 {
 "task": "903d1b4a",
@@ -2466,7 +2480,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 17.12
+"seconds": 16.75
 },
 {
 "task": "9110e3c5",
@@ -2476,7 +2490,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.97
+"seconds": 0.88
 },
 {
 "task": "917bccba",
@@ -2486,11 +2500,11 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.12
+"seconds": 2.09
 },
 {
 "task": "929ab4e9",
-"score": 0.0,
+"score": 1.0,
 "program": "remove_colour(2) \u25b8 symmetrize(both)",
 "ops": [
 "remove_colour",
@@ -2508,7 +2522,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 25.13
+"seconds": 26.5
 },
 {
 "task": "92e50de0",
@@ -2518,7 +2532,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.97
+"seconds": 8.55
 },
 {
 "task": "9356391f",
@@ -2528,7 +2542,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.14
+"seconds": 6.18
 },
 {
 "task": "93b4f4b3",
@@ -2538,7 +2552,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.63
+"seconds": 1.94
 },
 {
 "task": "93c31fbe",
@@ -2548,7 +2562,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.16
+"seconds": 8.55
 },
 {
 "task": "94133066",
@@ -2558,7 +2572,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.17
+"seconds": 5.12
 },
 {
 "task": "94414823",
@@ -2568,7 +2582,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.6
+"seconds": 2.57
 },
 {
 "task": "94be5b80",
@@ -2578,7 +2592,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.22
+"seconds": 3.72
 },
 {
 "task": "95a58926",
@@ -2588,7 +2602,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.25
+"seconds": 3.42
 },
 {
 "task": "963f59bc",
@@ -2598,7 +2612,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.7
+"seconds": 2.69
 },
 {
 "task": "96a8c0cd",
@@ -2608,7 +2622,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 12.93
+"seconds": 13.48
 },
 {
 "task": "97239e3d",
@@ -2618,7 +2632,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 15.62
+"seconds": 15.99
 },
 {
 "task": "9772c176",
@@ -2628,17 +2642,24 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.41
+"seconds": 10.35
 },
 {
 "task": "981571dc",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
+"score": 1.0,
+"program": "symmetry (h+v) about its own centre fills what colour 0 hides",
+"ops": [
+"symmetry"
+],
+"steps": [
+[
+"symmetry",
+null
+]
+],
+"found": true,
 "operations": 40004,
-"seconds": 112.86
+"seconds": 122.12
 },
 {
 "task": "992798f6",
@@ -2658,7 +2679,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.78
+"seconds": 5.2
 },
 {
 "task": "9a4bb226",
@@ -2678,7 +2699,7 @@ true
 ],
 "found": true,
 "operations": 996,
-"seconds": 0.7
+"seconds": 1.92
 },
 {
 "task": "9b2a60aa",
@@ -2688,7 +2709,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.78
+"seconds": 7.25
 },
 {
 "task": "9b365c51",
@@ -2698,7 +2719,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.41
+"seconds": 2.21
 },
 {
 "task": "9b4c17c4",
@@ -2708,7 +2729,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 4.54
+"seconds": 4.22
 },
 {
 "task": "9bebae7a",
@@ -2728,7 +2749,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 5.34
+"seconds": 6.18
 },
 {
 "task": "9c56f360",
@@ -2738,7 +2759,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.59
+"seconds": 1.83
 },
 {
 "task": "9caba7c3",
@@ -2748,17 +2769,24 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 20.34
+"seconds": 19.0
 },
 {
 "task": "9ddd00f0",
 "score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
+"program": "symmetry (quarter turns) about its own centre fills blank cells",
+"ops": [
+"symmetry"
+],
+"steps": [
+[
+"symmetry",
+null
+]
+],
+"found": true,
 "operations": 40002,
-"seconds": 4.07
+"seconds": 3.97
 },
 {
 "task": "9def23fe",
@@ -2768,7 +2796,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 16.01
+"seconds": 16.51
 },
 {
 "task": "9f27f097",
@@ -2778,7 +2806,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.07
+"seconds": 2.54
 },
 {
 "task": "a04b2602",
@@ -2788,7 +2816,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.53
+"seconds": 4.72
 },
 {
 "task": "a096bf4d",
@@ -2798,7 +2826,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.9
+"seconds": 6.75
 },
 {
 "task": "a3f84088",
@@ -2808,7 +2836,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.13
+"seconds": 1.26
 },
 {
 "task": "a406ac07",
@@ -2818,7 +2846,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.93
+"seconds": 6.71
 },
 {
 "task": "a57f2f04",
@@ -2828,7 +2856,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.39
+"seconds": 4.78
 },
 {
 "task": "a59b95c0",
@@ -2838,7 +2866,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.52
+"seconds": 0.43
 },
 {
 "task": "a680ac02",
@@ -2848,7 +2876,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.42
+"seconds": 3.37
 },
 {
 "task": "a8610ef7",
@@ -2858,7 +2886,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.72
+"seconds": 0.77
 },
 {
 "task": "a934301b",
@@ -2868,7 +2896,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.33
+"seconds": 3.01
 },
 {
 "task": "aa18de87",
@@ -2878,7 +2906,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.68
+"seconds": 1.52
 },
 {
 "task": "aa300dc3",
@@ -2888,7 +2916,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.94
+"seconds": 1.48
 },
 {
 "task": "aa4ec2a5",
@@ -2898,7 +2926,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.76
+"seconds": 8.68
 },
 {
 "task": "aab50785",
@@ -2908,7 +2936,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 2.45
+"seconds": 3.64
 },
 {
 "task": "ac0c5833",
@@ -2918,7 +2946,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 18.07
+"seconds": 20.98
 },
 {
 "task": "ac2e8ecf",
@@ -2928,7 +2956,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.49
+"seconds": 3.57
 },
 {
 "task": "ac3e2b04",
@@ -2938,7 +2966,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.19
+"seconds": 1.96
 },
 {
 "task": "ac605cbb",
@@ -2948,7 +2976,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.07
+"seconds": 1.89
 },
 {
 "task": "ad7e01d0",
@@ -2958,7 +2986,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.69
+"seconds": 0.4
 },
 {
 "task": "ae58858e",
@@ -2975,7 +3003,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.17
+"seconds": 1.4
 },
 {
 "task": "aee291af",
@@ -2985,17 +3013,24 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.25
+"seconds": 3.06
 },
 {
 "task": "af22c60d",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
+"score": 1.0,
+"program": "symmetry (h+v) about its own centre fills what colour 0 hides",
+"ops": [
+"symmetry"
+],
+"steps": [
+[
+"symmetry",
+null
+]
+],
+"found": true,
 "operations": 40004,
-"seconds": 12.34
+"seconds": 15.71
 },
 {
 "task": "af24b4cc",
@@ -3005,7 +3040,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.03
+"seconds": 2.53
 },
 {
 "task": "b0722778",
@@ -3015,7 +3050,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.61
+"seconds": 2.55
 },
 {
 "task": "b0f4d537",
@@ -3025,7 +3060,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.36
+"seconds": 1.79
 },
 {
 "task": "b15fca0b",
@@ -3035,7 +3070,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 2.84
+"seconds": 3.07
 },
 {
 "task": "b1fc8b8e",
@@ -3045,7 +3080,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.59
+"seconds": 0.77
 },
 {
 "task": "b20f7c8b",
@@ -3055,7 +3090,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 9.04
+"seconds": 10.93
 },
 {
 "task": "b457fec5",
@@ -3065,7 +3100,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.31
+"seconds": 8.02
 },
 {
 "task": "b4a43f3b",
@@ -3075,7 +3110,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.47
+"seconds": 1.28
 },
 {
 "task": "b7999b51",
@@ -3085,7 +3120,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.48
+"seconds": 2.62
 },
 {
 "task": "b7cb93ac",
@@ -3095,7 +3130,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.3
+"seconds": 1.5
 },
 {
 "task": "b7f8a4d8",
@@ -3105,7 +3140,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 55.12
+"seconds": 53.66
 },
 {
 "task": "b7fb29bc",
@@ -3115,7 +3150,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.85
+"seconds": 2.89
 },
 {
 "task": "b942fd60",
@@ -3125,7 +3160,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 12.52
+"seconds": 9.9
 },
 {
 "task": "b9630600",
@@ -3135,7 +3170,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.18
+"seconds": 8.51
 },
 {
 "task": "ba9d41b8",
@@ -3145,7 +3180,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.07
+"seconds": 2.21
 },
 {
 "task": "baf41dbf",
@@ -3155,7 +3190,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.57
+"seconds": 2.84
 },
 {
 "task": "bb52a14b",
@@ -3165,7 +3200,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 26.65
+"seconds": 26.19
 },
 {
 "task": "bbb1b8b6",
@@ -3175,7 +3210,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.72
+"seconds": 1.66
 },
 {
 "task": "bc4146bd",
@@ -3185,7 +3220,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.82
+"seconds": 0.52
 },
 {
 "task": "bcb3040b",
@@ -3195,7 +3230,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.81
+"seconds": 4.21
 },
 {
 "task": "bd14c3bf",
@@ -3217,7 +3252,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.93
+"seconds": 4.06
 },
 {
 "task": "be03b35f",
@@ -3248,7 +3283,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.78
+"seconds": 0.79
 },
 {
 "task": "bf32578f",
@@ -3258,7 +3293,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.03
+"seconds": 1.0
 },
 {
 "task": "bf699163",
@@ -3280,7 +3315,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.47
+"seconds": 4.85
 },
 {
 "task": "bf89d739",
@@ -3290,7 +3325,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.77
+"seconds": 2.6
 },
 {
 "task": "c074846d",
@@ -3300,7 +3335,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.0
+"seconds": 0.82
 },
 {
 "task": "c1990cce",
@@ -3310,7 +3345,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.41
+"seconds": 0.49
 },
 {
 "task": "c3202e5a",
@@ -3320,7 +3355,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.73
+"seconds": 9.64
 },
 {
 "task": "c35c1b4c",
@@ -3330,7 +3365,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.31
+"seconds": 1.83
 },
 {
 "task": "c48954c1",
@@ -3350,7 +3385,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.11
+"seconds": 5.18
 },
 {
 "task": "c64f1187",
@@ -3360,7 +3395,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.37
+"seconds": 4.64
 },
 {
 "task": "c658a4bd",
@@ -3370,7 +3405,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.0
+"seconds": 2.54
 },
 {
 "task": "c663677b",
@@ -3387,7 +3422,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 10.2
+"seconds": 11.58
 },
 {
 "task": "c6e1b8da",
@@ -3397,7 +3432,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.54
+"seconds": 6.1
 },
 {
 "task": "c7d4e6ad",
@@ -3407,7 +3442,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.92
+"seconds": 2.12
 },
 {
 "task": "c87289bb",
@@ -3417,7 +3452,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 5.18
+"seconds": 5.23
 },
 {
 "task": "c8b7cc0f",
@@ -3427,7 +3462,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.24
+"seconds": 0.88
 },
 {
 "task": "c92b942c",
@@ -3437,7 +3472,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 8.85
+"seconds": 8.3
 },
 {
 "task": "c97c0139",
@@ -3447,7 +3482,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.61
+"seconds": 3.14
 },
 {
 "task": "ca8de6ea",
@@ -3457,7 +3492,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.83
+"seconds": 0.73
 },
 {
 "task": "ca8f78db",
@@ -3474,7 +3509,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 14.4
+"seconds": 15.69
 },
 {
 "task": "cad67732",
@@ -3494,7 +3529,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.67
+"seconds": 2.31
 },
 {
 "task": "ccd554ac",
@@ -3504,7 +3539,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.52
+"seconds": 3.91
 },
 {
 "task": "cd3c21df",
@@ -3524,7 +3559,7 @@ true
 ],
 "found": true,
 "operations": 786,
-"seconds": 0.23
+"seconds": 0.54
 },
 {
 "task": "ce039d91",
@@ -3534,7 +3569,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.63
+"seconds": 1.96
 },
 {
 "task": "ce8d95cc",
@@ -3544,7 +3579,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.77
+"seconds": 1.67
 },
 {
 "task": "cf133acc",
@@ -3554,7 +3589,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 9.5
+"seconds": 8.39
 },
 {
 "task": "cfb2ce5a",
@@ -3564,7 +3599,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 13.4
+"seconds": 12.34
 },
 {
 "task": "d017b73f",
@@ -3595,7 +3630,7 @@ true
 ],
 "found": true,
 "operations": 608,
-"seconds": 1.45
+"seconds": 1.29
 },
 {
 "task": "d282b262",
@@ -3612,7 +3647,7 @@ true
 ],
 "found": true,
 "operations": 40002,
-"seconds": 4.18
+"seconds": 4.69
 },
 {
 "task": "d2acf2cb",
@@ -3622,7 +3657,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.76
+"seconds": 2.05
 },
 {
 "task": "d304284e",
@@ -3632,7 +3667,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.84
+"seconds": 4.42
 },
 {
 "task": "d37a1ef5",
@@ -3642,7 +3677,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.11
+"seconds": 3.01
 },
 {
 "task": "d47aa2ff",
@@ -3652,7 +3687,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.61
+"seconds": 2.93
 },
 {
 "task": "d492a647",
@@ -3662,7 +3697,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.24
+"seconds": 7.28
 },
 {
 "task": "d4b1c2b1",
@@ -3672,7 +3707,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.29
+"seconds": 0.22
 },
 {
 "task": "d4c90558",
@@ -3682,7 +3717,7 @@ true
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.31
+"seconds": 4.48
 },
 {
 "task": "d56f2372",
@@ -3699,7 +3734,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.57
+"seconds": 3.72
 },
 {
 "task": "d5c634a2",
@@ -3709,7 +3744,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.74
+"seconds": 1.25
 },
 {
 "task": "d931c21c",
@@ -3719,7 +3754,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 3.19
+"seconds": 3.02
 },
 {
 "task": "d94c3b52",
@@ -3729,7 +3764,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.23
+"seconds": 6.57
 },
 {
 "task": "da2b0fe3",
@@ -3739,7 +3774,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.95
+"seconds": 1.06
 },
 {
 "task": "da515329",
@@ -3749,7 +3784,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.88
+"seconds": 4.75
 },
 {
 "task": "dc2aa30b",
@@ -3759,7 +3794,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.25
+"seconds": 3.02
 },
 {
 "task": "dc2e9a9d",
@@ -3769,7 +3804,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.87
+"seconds": 4.23
 },
 {
 "task": "dd2401ed",
@@ -3779,7 +3814,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 3.3
+"seconds": 2.46
 },
 {
 "task": "de493100",
@@ -3789,7 +3824,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 7.98
+"seconds": 15.48
 },
 {
 "task": "df8cc377",
@@ -3799,7 +3834,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.66
+"seconds": 6.01
 },
 {
 "task": "e0fb7511",
@@ -3816,7 +3851,7 @@ null
 ],
 "found": true,
 "operations": 477,
-"seconds": 1.09
+"seconds": 1.19
 },
 {
 "task": "e133d23d",
@@ -3837,7 +3872,7 @@ null
 ],
 "found": true,
 "operations": 820,
-"seconds": 0.48
+"seconds": 0.42
 },
 {
 "task": "e1baa8a4",
@@ -3847,7 +3882,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.32
+"seconds": 1.8
 },
 {
 "task": "e1d2900e",
@@ -3857,7 +3892,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 13.92
+"seconds": 14.56
 },
 {
 "task": "e2092e0c",
@@ -3867,7 +3902,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 15.92
+"seconds": 16.38
 },
 {
 "task": "e21a174a",
@@ -3877,7 +3912,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.66
+"seconds": 2.77
 },
 {
 "task": "e345f17b",
@@ -3898,7 +3933,7 @@ null
 ],
 "found": true,
 "operations": 608,
-"seconds": 0.15
+"seconds": 0.26
 },
 {
 "task": "e4075551",
@@ -3908,7 +3943,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.89
+"seconds": 6.77
 },
 {
 "task": "e41c6fd3",
@@ -3918,7 +3953,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.3
+"seconds": 4.26
 },
 {
 "task": "e57337a4",
@@ -3928,7 +3963,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.85
+"seconds": 1.27
 },
 {
 "task": "e5790162",
@@ -3938,7 +3973,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.98
+"seconds": 1.62
 },
 {
 "task": "e5c44e8f",
@@ -3948,7 +3983,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.53
+"seconds": 2.51
 },
 {
 "task": "e619ca6e",
@@ -3958,7 +3993,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.2
+"seconds": 6.41
 },
 {
 "task": "e633a9e5",
@@ -3968,17 +4003,24 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.42
+"seconds": 0.41
 },
 {
 "task": "e66aafb8",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
+"score": 1.0,
+"program": "symmetry (v) about its own centre fills what colour 0 hides, answer is the repaired patch",
+"ops": [
+"symmetry"
+],
+"steps": [
+[
+"symmetry",
+null
+]
+],
+"found": true,
 "operations": 40005,
-"seconds": 5.02
+"seconds": 5.39
 },
 {
 "task": "e681b708",
@@ -3988,7 +4030,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 15.02
+"seconds": 17.92
 },
 {
 "task": "e69241bd",
@@ -4005,7 +4047,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.63
+"seconds": 2.31
 },
 {
 "task": "e6de6e8f",
@@ -4015,7 +4057,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.56
+"seconds": 0.54
 },
 {
 "task": "e74e1818",
@@ -4025,7 +4067,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.47
+"seconds": 2.63
 },
 {
 "task": "e760a62e",
@@ -4035,7 +4077,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 42.87
+"seconds": 42.27
 },
 {
 "task": "e7639916",
@@ -4045,7 +4087,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.11
+"seconds": 2.71
 },
 {
 "task": "e78887d1",
@@ -4055,7 +4097,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.73
+"seconds": 2.17
 },
 {
 "task": "e7a25a18",
@@ -4065,7 +4107,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.97
+"seconds": 3.45
 },
 {
 "task": "e7b06bea",
@@ -4075,7 +4117,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.29
+"seconds": 1.1
 },
 {
 "task": "e7dd8335",
@@ -4085,7 +4127,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.0
+"seconds": 1.16
 },
 {
 "task": "e872b94a",
@@ -4095,7 +4137,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.81
+"seconds": 1.19
 },
 {
 "task": "e88171ec",
@@ -4105,7 +4147,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.19
+"seconds": 7.16
 },
 {
 "task": "e95e3d8e",
@@ -4122,7 +4164,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 7.85
+"seconds": 8.39
 },
 {
 "task": "e99362f0",
@@ -4132,7 +4174,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.69
+"seconds": 2.46
 },
 {
 "task": "e9ac8c9e",
@@ -4142,7 +4184,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.27
+"seconds": 2.35
 },
 {
 "task": "e9b4f6fc",
@@ -4152,7 +4194,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.98
+"seconds": 2.42
 },
 {
 "task": "e9bb6954",
@@ -4162,7 +4204,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 6.02
+"seconds": 6.26
 },
 {
 "task": "e9c9d9a1",
@@ -4172,7 +4214,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.78
+"seconds": 3.32
 },
 {
 "task": "ea959feb",
@@ -4182,7 +4224,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 20.14
+"seconds": 21.82
 },
 {
 "task": "ea9794b1",
@@ -4192,7 +4234,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.56
+"seconds": 2.38
 },
 {
 "task": "ecaa0ec1",
@@ -4202,7 +4244,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.54
+"seconds": 2.59
 },
 {
 "task": "ed74f2f2",
@@ -4212,7 +4254,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.8
+"seconds": 0.83
 },
 {
 "task": "ed98d772",
@@ -4222,7 +4264,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.24
+"seconds": 0.32
 },
 {
 "task": "ef26cbf6",
@@ -4232,7 +4274,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.07
+"seconds": 2.9
 },
 {
 "task": "f0afb749",
@@ -4254,7 +4296,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.62
+"seconds": 0.65
 },
 {
 "task": "f0df5ff0",
@@ -4264,7 +4306,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 22.68
+"seconds": 22.62
 },
 {
 "task": "f21745ec",
@@ -4274,7 +4316,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.72
+"seconds": 6.19
 },
 {
 "task": "f3b10344",
@@ -4284,7 +4326,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 13.78
+"seconds": 14.89
 },
 {
 "task": "f3cdc58f",
@@ -4294,7 +4336,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.61
+"seconds": 2.55
 },
 {
 "task": "f3e62deb",
@@ -4304,17 +4346,24 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.41
+"seconds": 1.38
 },
 {
 "task": "f4081712",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
+"score": 1.0,
+"program": "symmetry (v) about its own centre fills what colour 3 hides, answer is the repaired patch",
+"ops": [
+"symmetry"
+],
+"steps": [
+[
+"symmetry",
+null
+]
+],
+"found": true,
 "operations": 40005,
-"seconds": 4.96
+"seconds": 5.34
 },
 {
 "task": "f45f5ca7",
@@ -4331,7 +4380,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.81
+"seconds": 2.03
 },
 {
 "task": "f5aa3634",
@@ -4348,7 +4397,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.67
+"seconds": 1.78
 },
 {
 "task": "f5c89df1",
@@ -4358,7 +4407,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.4
+"seconds": 3.31
 },
 {
 "task": "f823c43c",
@@ -4374,8 +4423,8 @@ null
 ]
 ],
 "found": true,
-"operations": 40002,
-"seconds": 3.62
+"operations": 21780,
+"seconds": 2.37
 },
 {
 "task": "f83cb3f6",
@@ -4385,7 +4434,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.58
+"seconds": 4.26
 },
 {
 "task": "f8be4b64",
@@ -4395,7 +4444,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 18.89
+"seconds": 21.65
 },
 {
 "task": "f9a67cb5",
@@ -4405,7 +4454,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.65
+"seconds": 7.58
 },
 {
 "task": "f9d67f8b",
@@ -4415,7 +4464,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 78.89
+"seconds": 86.44
 },
 {
 "task": "fafd9572",
@@ -4440,7 +4489,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.1
+"seconds": 3.68
 },
 {
 "task": "fb791726",
@@ -4450,7 +4499,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.75
+"seconds": 0.56
 },
 {
 "task": "fc754716",
@@ -4460,7 +4509,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.45
+"seconds": 1.52
 },
 {
 "task": "fd096ab6",
@@ -4470,7 +4519,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 10.69
+"seconds": 12.01
 },
 {
 "task": "fd4b2b02",
@@ -4480,7 +4529,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.83
+"seconds": 5.12
 },
 {
 "task": "fe9372f3",
@@ -4490,7 +4539,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.4
+"seconds": 1.62
 },
 {
 "task": "fea12743",
@@ -4500,7 +4549,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.06
+"seconds": 2.27
 },
 {
 "task": "ff72ca3e",
@@ -4510,7 +4559,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.96
+"seconds": 2.67
 }
 ]
 },
@@ -4518,9 +4567,9 @@ null
 "set": "ARC-AGI-2",
 "split": "evaluation",
 "tasks": 120,
-"score": 0.0,
-"percent": 0.0,
-"seconds": 407.1,
+"score": 1.0,
+"percent": 0.8333333333333334,
+"seconds": 454.6,
 "budget": 40000,
 "library": 0,
 "rows": [
@@ -4532,7 +4581,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 8.38
+"seconds": 14.75
 },
 {
 "task": "135a2760",
@@ -4542,7 +4591,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.03
+"seconds": 2.77
 },
 {
 "task": "136b0064",
@@ -4552,7 +4601,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.01
+"seconds": 3.97
 },
 {
 "task": "13e47133",
@@ -4562,7 +4611,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.3
+"seconds": 7.47
 },
 {
 "task": "142ca369",
@@ -4572,7 +4621,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 10.46
+"seconds": 11.95
 },
 {
 "task": "16b78196",
@@ -4582,7 +4631,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 16.17
+"seconds": 20.75
 },
 {
 "task": "16de56c4",
@@ -4592,7 +4641,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.48
+"seconds": 2.64
 },
 {
 "task": "1818057f",
@@ -4602,7 +4651,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.59
+"seconds": 1.57
 },
 {
 "task": "195c6913",
@@ -4612,7 +4661,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.09
+"seconds": 6.44
 },
 {
 "task": "1ae2feb7",
@@ -4622,7 +4671,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.05
+"seconds": 7.96
 },
 {
 "task": "20270e3b",
@@ -4632,7 +4681,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 0.94
+"seconds": 1.33
 },
 {
 "task": "20a9e565",
@@ -4642,7 +4691,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 20.08
+"seconds": 23.11
 },
 {
 "task": "21897d95",
@@ -4652,7 +4701,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.29
+"seconds": 1.87
 },
 {
 "task": "221dfab4",
@@ -4662,7 +4711,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.84
+"seconds": 10.02
 },
 {
 "task": "247ef758",
@@ -4672,7 +4721,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.92
+"seconds": 3.5
 },
 {
 "task": "269e22fb",
@@ -4682,7 +4731,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 0.78
+"seconds": 0.77
 },
 {
 "task": "271d71e2",
@@ -4692,7 +4741,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.85
+"seconds": 2.25
 },
 {
 "task": "28a6681f",
@@ -4702,7 +4751,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.05
+"seconds": 2.22
 },
 {
 "task": "291dc1e1",
@@ -4712,7 +4761,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.57
+"seconds": 2.4
 },
 {
 "task": "2b83f449",
@@ -4722,7 +4771,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.7
+"seconds": 5.64
 },
 {
 "task": "2ba387bc",
@@ -4732,7 +4781,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 3.61
+"seconds": 6.21
 },
 {
 "task": "2c181942",
@@ -4742,7 +4791,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.53
+"seconds": 8.59
 },
 {
 "task": "2d0172a1",
@@ -4752,7 +4801,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.8
+"seconds": 3.23
 },
 {
 "task": "31f7f899",
@@ -4762,7 +4811,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.79
+"seconds": 3.67
 },
 {
 "task": "332f06d7",
@@ -4772,7 +4821,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.61
+"seconds": 2.22
 },
 {
 "task": "35ab12c3",
@@ -4782,7 +4831,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 19.0
+"seconds": 20.27
 },
 {
 "task": "36a08778",
@@ -4792,7 +4841,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.72
+"seconds": 9.04
 },
 {
 "task": "38007db0",
@@ -4802,7 +4851,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.72
+"seconds": 3.16
 },
 {
 "task": "3a25b0d8",
@@ -4812,7 +4861,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.69
+"seconds": 9.38
 },
 {
 "task": "3dc255db",
@@ -4822,7 +4871,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.41
+"seconds": 2.92
 },
 {
 "task": "3e6067c3",
@@ -4832,7 +4881,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 35.34
+"seconds": 38.99
 },
 {
 "task": "409aa875",
@@ -4842,7 +4891,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.24
+"seconds": 3.63
 },
 {
 "task": "446ef5d2",
@@ -4852,7 +4901,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.81
+"seconds": 3.56
 },
 {
 "task": "45a5af55",
@@ -4862,7 +4911,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.13
+"seconds": 3.97
 },
 {
 "task": "4a21e3da",
@@ -4872,7 +4921,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.21
+"seconds": 4.04
 },
 {
 "task": "4c3d4a41",
@@ -4882,7 +4931,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.89
+"seconds": 2.93
 },
 {
 "task": "4c416de3",
@@ -4892,7 +4941,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 9.89
+"seconds": 10.26
 },
 {
 "task": "4c7dc4dd",
@@ -4902,7 +4951,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 10.82
+"seconds": 15.05
 },
 {
 "task": "4e34c42c",
@@ -4912,7 +4961,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.5
+"seconds": 11.62
 },
 {
 "task": "53fb4810",
@@ -4922,7 +4971,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.25
+"seconds": 9.04
 },
 {
 "task": "5545f144",
@@ -4932,7 +4981,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.94
+"seconds": 2.45
 },
 {
 "task": "581f7754",
@@ -4942,7 +4991,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.81
+"seconds": 2.34
 },
 {
 "task": "58490d8a",
@@ -4952,7 +5001,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.98
+"seconds": 4.79
 },
 {
 "task": "58f5dbd5",
@@ -4962,7 +5011,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.81
+"seconds": 4.45
 },
 {
 "task": "5961cc34",
@@ -4972,7 +5021,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 4.61
+"seconds": 4.91
 },
 {
 "task": "5dbc8537",
@@ -4982,7 +5031,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.31
+"seconds": 3.22
 },
 {
 "task": "62593bfd",
@@ -4992,7 +5041,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.67
+"seconds": 9.79
 },
 {
 "task": "64efde09",
@@ -5002,7 +5051,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 38.71
+"seconds": 42.16
 },
 {
 "task": "65b59efc",
@@ -5012,7 +5061,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.05
+"seconds": 1.28
 },
 {
 "task": "67e490f4",
@@ -5022,7 +5071,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 11.33
+"seconds": 17.0
 },
 {
 "task": "6e453dd6",
@@ -5032,7 +5081,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.49
+"seconds": 3.19
 },
 {
 "task": "6e4f6532",
@@ -5042,7 +5091,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.48
+"seconds": 5.91
 },
 {
 "task": "6ffbe589",
@@ -5052,7 +5101,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.18
+"seconds": 4.25
 },
 {
 "task": "71e489b6",
@@ -5062,7 +5111,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.52
+"seconds": 3.94
 },
 {
 "task": "7491f3cf",
@@ -5072,7 +5121,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.61
+"seconds": 1.93
 },
 {
 "task": "7666fa5d",
@@ -5082,7 +5131,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.69
+"seconds": 7.86
 },
 {
 "task": "78332cb0",
@@ -5092,7 +5141,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.0
+"seconds": 1.04
 },
 {
 "task": "7b0280bc",
@@ -5102,7 +5151,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.58
+"seconds": 3.8
 },
 {
 "task": "7b3084d4",
@@ -5112,7 +5161,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.87
+"seconds": 4.27
 },
 {
 "task": "7b5033c1",
@@ -5122,7 +5171,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.2
+"seconds": 2.74
 },
 {
 "task": "7b80bb43",
@@ -5132,7 +5181,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.17
+"seconds": 8.54
 },
 {
 "task": "7c66cb00",
@@ -5142,7 +5191,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.53
+"seconds": 10.73
 },
 {
 "task": "7ed72f31",
@@ -5152,7 +5201,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.6
+"seconds": 10.33
 },
 {
 "task": "800d221b",
@@ -5162,7 +5211,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.92
+"seconds": 3.44
 },
 {
 "task": "80a900e0",
@@ -5172,7 +5221,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 20.09
+"seconds": 19.29
 },
 {
 "task": "8698868d",
@@ -5182,7 +5231,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.13
+"seconds": 4.37
 },
 {
 "task": "88bcf3b4",
@@ -5202,7 +5251,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 12.37
+"seconds": 12.04
 },
 {
 "task": "89565ca0",
@@ -5212,7 +5261,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.51
+"seconds": 8.26
 },
 {
 "task": "898e7135",
@@ -5222,7 +5271,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.06
+"seconds": 3.5
 },
 {
 "task": "8b7bacbf",
@@ -5232,7 +5281,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 24.87
+"seconds": 25.68
 },
 {
 "task": "8b9c3697",
@@ -5242,7 +5291,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.78
+"seconds": 4.24
 },
 {
 "task": "8e5c0c38",
@@ -5252,7 +5301,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.31
+"seconds": 6.16
 },
 {
 "task": "8f215267",
@@ -5262,7 +5311,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.26
+"seconds": 7.85
 },
 {
 "task": "8f3a5a89",
@@ -5272,7 +5321,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.08
+"seconds": 3.89
 },
 {
 "task": "9385bd28",
@@ -5282,7 +5331,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.59
+"seconds": 1.41
 },
 {
 "task": "97d7923e",
@@ -5299,17 +5348,24 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.93
+"seconds": 2.1
 },
 {
 "task": "981571dc",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
+"score": 1.0,
+"program": "symmetry (h+v) about its own centre fills what colour 0 hides",
+"ops": [
+"symmetry"
+],
+"steps": [
+[
+"symmetry",
+null
+]
+],
+"found": true,
 "operations": 40004,
-"seconds": 111.43
+"seconds": 111.5
 },
 {
 "task": "9aaea919",
@@ -5319,7 +5375,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 25.66
+"seconds": 28.85
 },
 {
 "task": "9bbf930d",
@@ -5329,7 +5385,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 14.71
+"seconds": 15.42
 },
 {
 "task": "a251c730",
@@ -5339,7 +5395,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 10.1
+"seconds": 14.85
 },
 {
 "task": "a25697e4",
@@ -5349,7 +5405,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.05
+"seconds": 5.09
 },
 {
 "task": "a32d8b75",
@@ -5359,7 +5415,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.05
+"seconds": 7.78
 },
 {
 "task": "a395ee82",
@@ -5369,7 +5425,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.16
+"seconds": 5.19
 },
 {
 "task": "a47bf94d",
@@ -5379,7 +5435,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 11.2
+"seconds": 12.56
 },
 {
 "task": "a6f40cea",
@@ -5389,7 +5445,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.98
+"seconds": 5.01
 },
 {
 "task": "aa4ec2a5",
@@ -5399,7 +5455,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.18
+"seconds": 5.3
 },
 {
 "task": "abc82100",
@@ -5409,7 +5465,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.38
+"seconds": 1.24
 },
 {
 "task": "b0039139",
@@ -5419,7 +5475,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 1.35
+"seconds": 1.47
 },
 {
 "task": "b10624e5",
@@ -5429,7 +5485,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 29.98
+"seconds": 29.34
 },
 {
 "task": "b5ca7ac4",
@@ -5439,7 +5495,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 5.32
+"seconds": 7.44
 },
 {
 "task": "b6f77b65",
@@ -5449,7 +5505,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 5.07
+"seconds": 4.59
 },
 {
 "task": "b99e7126",
@@ -5459,7 +5515,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 9.01
+"seconds": 10.52
 },
 {
 "task": "b9e38dc0",
@@ -5469,7 +5525,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 9.28
+"seconds": 8.63
 },
 {
 "task": "bf45cf4b",
@@ -5479,7 +5535,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.01
+"seconds": 1.27
 },
 {
 "task": "c4d067a0",
@@ -5489,7 +5545,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 6.92
+"seconds": 7.23
 },
 {
 "task": "c7f57c3e",
@@ -5499,7 +5555,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 7.31
+"seconds": 6.49
 },
 {
 "task": "cb2d8a2c",
@@ -5509,7 +5565,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 5.61
+"seconds": 5.85
 },
 {
 "task": "cbebaa4b",
@@ -5519,7 +5575,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 8.24
+"seconds": 8.88
 },
 {
 "task": "d35bdbdc",
@@ -5541,7 +5597,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.3
+"seconds": 2.9
 },
 {
 "task": "d59b0160",
@@ -5558,7 +5614,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 6.64
+"seconds": 5.94
 },
 {
 "task": "d8e07eb2",
@@ -5568,7 +5624,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 225.62
+"seconds": 246.11
 },
 {
 "task": "da515329",
@@ -5578,7 +5634,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.19
+"seconds": 4.33
 },
 {
 "task": "db0c5428",
@@ -5588,7 +5644,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.8
+"seconds": 4.56
 },
 {
 "task": "db695cfb",
@@ -5598,7 +5654,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 3.21
+"seconds": 3.13
 },
 {
 "task": "dbff022c",
@@ -5620,7 +5676,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 7.06
+"seconds": 7.47
 },
 {
 "task": "dd6b8c4b",
@@ -5630,7 +5686,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.03
+"seconds": 2.08
 },
 {
 "task": "de809cff",
@@ -5640,7 +5696,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.01
+"seconds": 4.33
 },
 {
 "task": "dfadab01",
@@ -5650,7 +5706,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.62
+"seconds": 4.17
 },
 {
 "task": "e12f9a14",
@@ -5660,7 +5716,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 10.27
+"seconds": 12.62
 },
 {
 "task": "e3721c99",
@@ -5670,7 +5726,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 14.4
+"seconds": 18.07
 },
 {
 "task": "e376de54",
@@ -5680,7 +5736,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 2.54
+"seconds": 2.96
 },
 {
 "task": "e8686506",
@@ -5690,7 +5746,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 1.94
+"seconds": 2.53
 },
 {
 "task": "e87109e9",
@@ -5700,7 +5756,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.56
+"seconds": 7.32
 },
 {
 "task": "edb79dae",
@@ -5710,7 +5766,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.77
+"seconds": 6.55
 },
 {
 "task": "eee78d87",
@@ -5720,7 +5776,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 0.5
+"seconds": 0.58
 },
 {
 "task": "f560132c",
@@ -5730,7 +5786,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 3.98
+"seconds": 5.85
 },
 {
 "task": "f931b4a8",
@@ -5740,7 +5796,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40005,
-"seconds": 1.09
+"seconds": 0.84
 },
 {
 "task": "faa9f03d",
@@ -5750,7 +5806,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40004,
-"seconds": 2.44
+"seconds": 2.05
 },
 {
 "task": "fc7cae8d",
@@ -5760,7 +5816,7 @@ null
 "steps": [],
 "found": false,
 "operations": 40002,
-"seconds": 4.62
+"seconds": 6.75
 }
 ]
 }
