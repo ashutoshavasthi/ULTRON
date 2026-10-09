@@ -55,3 +55,11 @@ identical on any machine.
 | complete_pattern | A picture made of a repeating tile with some cells covered: find the repeat and uncover them |
 | extend_rays | Lines continue until they meet something |
 | local laws (`cells.py`) | A cell's new colour depends on what it sees around it; the smallest set of features that makes one consistent table wins |
+| background is a property of the task (its commonest colour across all examples) | One ground for a whole set of pictures |
+| fractal | A picture made of copies of itself |
+| connect | Same-coloured cells on one line are joined |
+| lines_through | A mark draws a line across the whole picture |
+| complete_diagonal | Repetition along diagonals |
+| continue_pattern | A repeating picture continued to a new size |
+| count_parts, count_things | Counting panels and things |
+| cell features: neighbour colour sets (orthogonal, diagonal), uniform row or column, size order of the thing | What a cell can see around it |

@@ -13,8 +13,15 @@ def key(g):
     return (g.shape, g.tobytes())
 
 
+TASK_BACKGROUND = [None]     # set while working on a task: its commonest colour overall
+
+
 def background(g):
-    """The most common colour."""
+    """The ground of a picture: the task's commonest colour if this picture has it (a
+    task has one ground across its pictures), else this picture's commonest colour."""
+    tb = TASK_BACKGROUND[0]
+    if tb is not None and (g == tb).any():
+        return tb
     vals, counts = np.unique(g, return_counts=True)
     return int(vals[np.argmax(counts)])
 

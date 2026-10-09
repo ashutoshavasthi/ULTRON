@@ -23,9 +23,13 @@ def context(train):
     outs = [o for _, o in train]
     out_colours = sorted({c for o in outs for c in colours(o)})
     in_colours = sorted({c for i in ins for c in colours(i)})
-    ups, downs, tiles = {2, 3}, {2, 3}, set()
+    ups, downs, tiles, ratios = {2, 3}, {2, 3}, set(), set()
+    from fractions import Fraction
     for i, o in train:
         (h, w), (H, W) = i.shape, o.shape
+        fh, fw = Fraction(H, h), Fraction(W, w)
+        if (fh, fw) != (1, 1):
+            ratios.add(((fh.numerator, fh.denominator), (fw.numerator, fw.denominator)))
         if H % h == 0 and W % w == 0:
             a, b = H // h, W // w
             if a == b and a > 1:
@@ -35,7 +39,8 @@ def context(train):
         if h % H == 0 and w % W == 0 and h // H == w // W and h // H > 1:
             downs.add(h // H)
     return {"out_colours": out_colours, "in_colours": in_colours,
-            "scales_up": sorted(ups), "scales_down": sorted(downs), "tiles": sorted(tiles)}
+            "scales_up": sorted(ups), "scales_down": sorted(downs), "tiles": sorted(tiles),
+            "ratios": sorted(ratios)}
 
 
 def _colour_map(grids, targets):
@@ -102,8 +107,17 @@ def length(program):
     return total
 
 
+def task_background(train):
+    vals = np.concatenate([g.ravel() for pair in train for g in pair])
+    counts = np.bincount(vals.astype(np.int64), minlength=10)
+    return int(np.argmax(counts))
+
+
 def solve(train, budget=BUDGET, max_depth=MAX_DEPTH, want=2):
     """Programs that explain every training pair, shortest description first."""
+    from . import grid
+    grid.TASK_BACKGROUND[0] = task_background(train)
+    grid._SEEN.clear()
     found, spent = _search(train, budget, max_depth, want)
     order = sorted(range(len(found)), key=lambda i: (length(found[i]), i))
     return [found[i] for i in order], spent
@@ -177,7 +191,7 @@ def _search(train, budget, max_depth, want):
 
 def predict(train, tests, **kw):
     """Up to two different answers for each test input, from the shortest programs."""
-    programs, spent = solve(train, **kw)
+    programs, spent = solve(train, **kw)      # (sets the task's background for run())
     attempts = [[] for _ in tests]
     used = []
     for prog in programs:

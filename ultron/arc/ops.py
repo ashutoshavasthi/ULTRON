@@ -295,6 +295,130 @@ def extend_rays(g, p):
     return None if (out == g).all() else out
 
 
+def fractal(g, p=None):
+    """A picture made of copies of itself: each coloured cell becomes a copy of the whole,
+    each background cell an empty block."""
+    h, w = g.shape
+    if h * h > 30 or w * w > 30:
+        return None
+    bg = background(g)
+    mask = (g != bg).astype(g.dtype)
+    out = np.kron(mask, g)
+    out[np.kron(mask, np.ones_like(g)) == 0] = bg
+    return out
+
+
+def connect(g, p):
+    """Join cells of the same colour that lie on one straight line (p: 'rows', 'cols',
+    'diagonals', 'all') by painting the cells between them."""
+    bg = background(g)
+    out = g.copy()
+    h, w = g.shape
+    dirs = {"rows": [(0, 1)], "cols": [(1, 0)], "diagonals": [(1, 1), (1, -1)],
+            "all": [(0, 1), (1, 0), (1, 1), (1, -1)]}[p]
+    for c in set(np.unique(g).tolist()) - {bg}:
+        cells = list(zip(*np.nonzero(g == c)))
+        cellset = set(cells)
+        for r, x in cells:
+            for dr, dc in dirs:
+                y, z = r + dr, x + dc
+                path = []
+                while 0 <= y < h and 0 <= z < w and (y, z) not in cellset:
+                    path.append((y, z))
+                    y, z = y + dr, z + dc
+                if 0 <= y < h and 0 <= z < w and path:
+                    for a, b in path:
+                        if out[a, b] == bg:
+                            out[a, b] = c
+    return None if (out == g).all() else out
+
+
+def lines_through(g, p):
+    """Every cell of colour c draws a full line through the picture (p = (c, axis);
+    axis: 'h', 'v' or 'both')."""
+    c, axis = p
+    bg = background(g)
+    if c == bg or not (g == c).any():
+        return None
+    out = g.copy()
+    for r, x in zip(*np.nonzero(g == c)):
+        if axis in ("h", "both"):
+            row = out[r]
+            row[row == bg] = c
+        if axis in ("v", "both"):
+            col = out[:, x]
+            col[col == bg] = c
+    return None if (out == g).all() else out
+
+
+def complete_diagonal(g, hole):
+    """Stripes along diagonals: a colour for each value of (row + col) or (row - col)
+    modulo some k, seen where not covered; fill the covered cells."""
+    h, w = g.shape
+    known = g != hole
+    if known.all() or not known.any():
+        return None
+    for sign in (1, -1):
+        for k in range(2, max(h, w) + 1):
+            tab, ok = {}, True
+            for r, c in zip(*np.nonzero(known)):
+                key_ = (r + sign * c) % k
+                if tab.setdefault(key_, g[r, c]) != g[r, c]:
+                    ok = False
+                    break
+            if ok and len(tab) == k:
+                out = g.copy()
+                for r, c in zip(*np.nonzero(~known)):
+                    out[r, c] = tab[(r + sign * c) % k]
+                return out
+    return None
+
+
+def continue_pattern(g, p):
+    """Continue a picture that repeats (rows, or columns) to a new size (p = (H, W)
+    ratio as a fraction (a, b) of the old height and width)."""
+    (ha, hb), (wa, wb) = p
+    h, w = g.shape
+    if (h * ha) % hb or (w * wa) % wb:
+        return None
+    H, W = h * ha // hb, w * wa // wb
+    def period(n, same):
+        for q in range(1, n + 1):
+            if all(same(i, i % q) for i in range(n)):
+                return q
+        return n
+    pr = period(h, lambda i, j: (g[i] == g[j]).all())
+    pc = period(w, lambda i, j: (g[:, i] == g[:, j]).all())
+    out = np.empty((H, W), dtype=g.dtype)
+    for r in range(H):
+        for c in range(W):
+            out[r, c] = g[r % pr, c % pc]
+    return None if out.shape == g.shape else out
+
+
+def count_parts(g, p=None):
+    """A grid with one cell per panel (panels laid out as in the picture), each the
+    panel's background."""
+    from .grid import separator_lines, _spans
+    rows, cols = separator_lines(g)
+    if not rows and not cols:
+        return None
+    h, w = g.shape
+    nr, nc = len(_spans(rows, h)), len(_spans(cols, w))
+    ps = parts(g)
+    if ps is None:
+        return None
+    return np.full((nr, nc), background(ps[0]), dtype=g.dtype)
+
+
+def count_things(g, c):
+    """A row with one cell of colour c for each thing of colour c."""
+    n = sum(1 for t in things(g) if t.colour == c)
+    if n == 0 or n > 30:
+        return None
+    return np.full((1, n), c, dtype=g.dtype)
+
+
 # --------------------------------------------------------------- parts and logic
 def _pair(g, how):
     """Two equal parts of the grid: split by separator lines, or as halves."""
@@ -390,6 +514,14 @@ def registry(ctx):
            ("pick_part", pick_part, ["first", "last", "odd_one", "most_colour", "least_colour"]),
            ("overlay_parts", overlay_parts, [None]),
            ("complete_pattern", complete_pattern, ctx["in_colours"]),
+           ("complete_diagonal", complete_diagonal, ctx["in_colours"]),
+           ("fractal", fractal, [None]),
+           ("connect", connect, ["rows", "cols", "diagonals", "all"]),
+           ("lines_through", lines_through, [(c, a) for c in ctx["in_colours"]
+                                             for a in ("h", "v", "both")]),
+           ("continue_pattern", continue_pattern, ctx["ratios"]),
+           ("count_parts", count_parts, [None]),
+           ("count_things", count_things, cols),
            ("extend_rays", extend_rays, [(c, d) for c in ctx["in_colours"]
                                          for d in ("up", "down", "left", "right", "all")])]
     return [(n, f, p) for n, f, ps in ops for p in ps]

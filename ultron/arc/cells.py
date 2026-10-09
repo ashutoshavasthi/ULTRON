@@ -39,7 +39,21 @@ def features(g):
             for r, c in t.cells:
                 size[r, c] = t.size
                 rank[r, c] = 1 if t.size == sizes[-1] else (-1 if t.size == sizes[0] else 0)
+    order = np.zeros(g.shape, dtype=int)
+    if ts:
+        ranks = {v: i for i, v in enumerate(sorted({t.size for t in ts}, reverse=True))}
+        for t in ts:
+            for r, c in t.cells:
+                order[r, c] = ranks[t.size] + 1
+    D = ((-1, -1), (-1, 1), (1, -1), (1, 1))
     f = {"colour": [[int(g[r, c]) for c in range(w)] for r in range(h)],
+         "orth_set": [[tuple(sorted(set(_neigh(g, r, c, N4)) - {bg, -1})) for c in range(w)]
+                      for r in range(h)],
+         "diag_set": [[tuple(sorted(set(_neigh(g, r, c, D)) - {bg, -1})) for c in range(w)]
+                      for r in range(h)],
+         "order": order.tolist(),
+         "row_uniform": [[bool((g[r] == g[r, 0]).all()) for c in range(w)] for r in range(h)],
+         "col_uniform": [[bool((g[:, c] == g[0, c]).all()) for c in range(w)] for r in range(h)],
          "n4": [[_neigh(g, r, c, N4) for c in range(w)] for r in range(h)],
          "n8": [[_neigh(g, r, c, N8) for c in range(w)] for r in range(h)],
          "count8": [[sum(v not in (bg, -1) for v in _neigh(g, r, c, N8)) for c in range(w)]
@@ -58,9 +72,10 @@ def features(g):
 
 # the sets of features tried, smallest description first (always with the cell's colour)
 FEATURE_SETS = [("colour",)] + [("colour", x) for x in
-                                ("count8", "size", "rank", "parity", "line", "row", "col", "n4")] \
-               + [("colour", "n8")] + [("colour",) + p for p in
-                                       itertools.combinations(("count8", "rank", "line", "parity"), 2)]
+                                ("row_uniform", "col_uniform", "count8", "size", "rank", "order",
+                                 "orth_set", "diag_set", "parity", "line", "row", "col", "n4")] \
+               + [("colour", "n8")] + [("colour",) + p for p in itertools.combinations(
+                   ("count8", "rank", "line", "parity", "orth_set", "diag_set"), 2)]
 
 
 def learn(grids, targets):
