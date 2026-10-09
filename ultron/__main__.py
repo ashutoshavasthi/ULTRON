@@ -73,6 +73,23 @@ def cmd_stress(args):
     print("written to reports/failure_lab.md")
 
 
+def cmd_arc(args):
+    """Score Ultron on ARC-AGI (official rule). Evaluation runs are logged."""
+    from .arc import harness
+    results = []
+    for name in args.sets:
+        r = harness.score_set(name, args.split, limit=args.limit, budget=args.budget,
+                              scoring=args.split == "evaluation")
+        results.append(r)
+        print(f"{r['set']} {r['split']}: {r['percent']:.1f}% of {r['tasks']} tasks "
+              f"({r['seconds']} s)")
+    os.makedirs("reports", exist_ok=True)
+    out = os.path.join("reports", f"arc_{args.split}.md")
+    with open(out, "w") as f:
+        f.write(harness.report(results))
+    print(f"written to {out}")
+
+
 def cmd_look(args):
     """Show Ultron a picture (a .npy array of brightness 0-1, or a plain PGM file)."""
     import numpy as np
@@ -244,12 +261,18 @@ def main(argv=None):
     bl.add_argument("file")
     sub.add_parser("experiment")
     sub.add_parser("stress")
+    ar = sub.add_parser("arc")
+    ar.add_argument("--split", default="training", choices=["training", "evaluation"])
+    ar.add_argument("--sets", nargs="+", default=["arc1"], choices=["arc1", "arc2"])
+    ar.add_argument("--limit", type=int, default=None)
+    from .arc.solve import BUDGET as _B
+    ar.add_argument("--budget", type=int, default=_B)
     lk = sub.add_parser("look")
     lk.add_argument("file")
     args = p.parse_args(argv)
     {"train": cmd_train, "exam": cmd_exam, "ask": cmd_ask, "why": cmd_why,
      "show": cmd_show, "blind": cmd_blind, "experiment": cmd_experiment,
-     "look": cmd_look, "stress": cmd_stress}[args.cmd](args)
+     "look": cmd_look, "stress": cmd_stress, "arc": cmd_arc}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -341,14 +341,36 @@ def power_vectors(n, complexity):
     """All power vectors over n quantities with sum |p| == complexity, touching
     at least two quantities, first nonzero power positive (p and -p are the
     same law). Deterministic order."""
+    key = (n, complexity)
+    if key not in _POWER_CACHE:
+        out = []
+        # build only the valid vectors (choose which quantities appear, split the
+        # complexity among them, choose signs), instead of filtering all 9^n of them
+        for k in range(2, min(n, complexity) + 1):
+            for where in itertools.combinations(range(n), k):
+                for sizes in _compositions(complexity, k):
+                    for signs in itertools.product((1, -1), repeat=k - 1):
+                        combo = [0] * n
+                        combo[where[0]] = sizes[0]
+                        for pos, size, sign in zip(where[1:], sizes[1:], signs):
+                            combo[pos] = size * sign
+                        out.append(tuple(combo))
+        out.sort(key=lambda c: tuple(x + MAX_POWER for x in c))  # the old product order
+        _POWER_CACHE[key] = out
+    return list(_POWER_CACHE[key])
+
+
+_POWER_CACHE = {}
+
+
+def _compositions(total, parts):
+    """Ways to write total as `parts` numbers from 1 to MAX_POWER, in order."""
+    if parts == 1:
+        return [(total,)] if 1 <= total <= MAX_POWER else []
     out = []
-    for combo in itertools.product(range(-MAX_POWER, MAX_POWER + 1), repeat=n):
-        if sum(abs(c) for c in combo) != complexity:
-            continue
-        nonzero = [c for c in combo if c]
-        if len(nonzero) < 2 or nonzero[0] < 0:
-            continue
-        out.append(combo)
+    for first in range(1, min(MAX_POWER, total - parts + 1) + 1):
+        for rest in _compositions(total - first, parts - 1):
+            out.append((first,) + rest)
     return out
 
 
@@ -391,13 +413,14 @@ def _values(episodes, names, combo):
 
 
 class InvariantResult:
-    def __init__(self, law, steps):
+    def __init__(self, law, steps, rivals=()):
         self.law = law
         self.steps = steps
+        self.rivals = list(rivals)  # equally short laws: the data can't decide between them
 
 
 def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=6,
-                     prior_powers=(), min_group_members=2, precision=0.0):
+                     prior_powers=(), min_group_members=2, precision=0.0, require=None):
     """Find the law with the smallest description length.
 
     prior_powers: power dicts of laws already known. They are tried first (this
@@ -407,12 +430,19 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
     names = sorted(names)
     steps = 0
     best = None  # (score, complexity, law)
+    ties = []    # other laws exactly as short: the data can't tell them apart
 
     def allowed(c):
         # error propagation: each reading is off by up to ±precision, and a
         # product of powers multiplies that by sum |power|; the spread
         # (max - min) can be twice that
         return tol + 2 * c * precision
+
+    def _tie(score, powers):
+        if best is not None and score == best[0][0] and powers != best[2].powers:
+            ties.append(dict(powers))
+        elif best is None or score < best[0][0]:
+            ties.clear()
 
     def evaluate(combo, ordering, needed_groups):
         nonlocal steps, best
@@ -421,6 +451,8 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
         if vals is None or len(vals) < 2:
             return
         powers = {n: p for n, p in zip(names, combo) if p}
+        if require is not None and require not in powers:
+            return      # a law about these experiences must say something about the outcome
         c = sum(abs(p) for p in combo)
         spread = _spread(vals)
         robust = None
@@ -430,6 +462,7 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
             robust = _robust_constant(vals, precision * math.sqrt(sum(p * p for p in combo)))
         if spread <= allowed(c) or robust is not None:
             score = c + 1
+            _tie(score, powers)
             if best is None or (score, ordering) < best[0]:
                 const = sum(vals) / len(vals) if robust is None else robust[0]
                 law = QuantityLaw(etype, powers, "global", constant=const,
@@ -456,6 +489,7 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
             return
         if True:
             score = c + len(groups)
+            _tie(score, powers)
             if best is None or (score, ordering) < best[0]:
                 props = {k: (fits[k][0] if k in fits else sum(g) / len(g))
                          for k, g in sorted(groups.items())}
@@ -480,7 +514,9 @@ def search_invariant(etype, episodes, names, tol, group_by=None, max_complexity=
                 continue
             tried.add(combo)
             evaluate(combo, 1, min_group_members)
-    return InvariantResult(best[2] if best else None, steps)
+    law = best[2] if best else None
+    rivals = [t for t in ties if law is None or t != law.powers]
+    return InvariantResult(law, steps, rivals)
 
 
 def search_conservation(etype, episodes, max_complexity=4, tol=1e-6):

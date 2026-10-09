@@ -80,7 +80,10 @@ def program_size(brain):
 
 
 def wrong_labels(brain):
-    """A few experiences recorded wrongly: does exact program search survive?"""
+    """Some experiences recorded wrongly: does it still find the law (with Ultron's own
+    policy: a law plus a list of exceptions, if that is the shorter description)?"""
+    from ..brain.brain import allowed_exceptions, worth_listing
+    from ..brain.dsl import size
     rng = random.Random(2)
     lib = copy.deepcopy(brain.library)
     rows = []
@@ -89,7 +92,11 @@ def wrong_labels(brain):
         ys = [x["a"] * x["b"] for x in xs]
         for i in rng.sample(range(len(ys)), int(frac * len(ys))):
             ys[i] += rng.choice((-1, 1))
-        res = synthesize(xs, ys, {"a": INT, "b": INT}, INT, lib)
+        res = synthesize(xs, ys, {"a": INT, "b": INT}, INT, lib,
+                         exceptions=allowed_exceptions(len(xs)))
+        if res.expr is not None and not worth_listing(size(res.expr), len(res.exceptions),
+                                                      len(xs)):
+            res.expr = None
         ok = _check(res.expr, lambda a, b: a * b, lib, rng)
         rows.append(_row(f"{frac:.0%} wrong", show(res.expr) if res.expr else "nothing found",
                          ok))
@@ -195,14 +202,14 @@ def outliers(brain):
 def distractors(brain):
     rng = random.Random(8)
     rows = []
-    for k in (0, 1, 2, 4, 6):
+    for k in (0, 2, 4, 6, 10):
         eps = _push_rows(rng, 40, 0.0, extra=k)
         names = ["F", "m", "a"] + [f"d{i}" for i in range(k)]
         t = time.time()
-        res = search_invariant("push", eps, names, 1e-9)
+        res = search_invariant("push", eps, names, 1e-9, require="a")
         sec = time.time() - t
         rows.append(_row(f"{k} irrelevant", res.law.formula() if res.law else "nothing",
-                         _is_fma(res.law), steps=res.steps, seconds=round(sec, 2)))
+                         _is_fma(res.law) and sec < 10, steps=res.steps, seconds=round(sec, 2)))
     return experiment("irrelevant measurements", "If it also measures things that don't "
                       "matter (colour, time of day...), does it still find F = m·a?",
                       "irrelevant quantities", rows)
@@ -215,11 +222,12 @@ def confounder(brain):
     eps = _push_rows(rng, 40)
     for e in eps:
         e["c"] = e["m"]                 # a 'label' that happens to equal the mass
-    res = search_invariant("push", eps, ["F", "m", "a", "c"], 1e-9)
+    res = search_invariant("push", eps, ["F", "m", "a", "c"], 1e-9, require="a")
     picked = res.law.formula() if res.law else "nothing"
-    noticed = False                     # nothing in the engine reports ties
+    noticed = bool(res.rivals)
+    about = res.law is not None and "a" in res.law.powers
     rows = [_row("mass and a label always equal", f"picked {picked}; ambiguity noticed: "
-                 f"{noticed}", noticed)]
+                 f"{noticed}", noticed and about)]
     return experiment("confounders", "When two things always move together, does it notice "
                       "it can't tell which one matters (and design an experiment)?", "case", rows)
 
@@ -247,7 +255,9 @@ def changing_world(brain):
             x = rng.uniform(0.1, 1)
             b.experience("stretch", {"x": x, "spring": "S"}, k * x)
     law = b.qlaws.get("stretch")
-    now = law.properties.get("S") if law else None
+    now = None
+    if law is not None:
+        now = law.constant if law.kind == "global" else law.properties.get("S")
     noticed = any(e["kind"] == "doubt" for e in b.log)
     rows = [_row("stiffness 50 → 80", f"believes {now:.4g}" if now else "no law",
                  now is not None and abs(now - 80) < 1, noticed_change=noticed)]
@@ -291,32 +301,66 @@ def eyes_stress(brain):
     if brain.eyes is None:
         return experiment("eyes", "", "", [_row("no eyes", "untrained", False)])
     rows = []
-    cases = [("normal (8% noise)", dict(noise=0.08), {}),
-             ("16% noise", dict(noise=0.16), {}),
-             ("32% noise", dict(noise=0.32), {}),
-             ("big things (r 4-6)", dict(noise=0.08), dict(gap=12.0, radius=(4, 6))),
-             ("faint things", dict(noise=0.08), dict(dim=True)),
-             ("crowded (gap 3 px)", dict(noise=0.08), dict(gap=3.0))]
-    for label, cam, place in cases:
+    # (label, camera noise, gap, radius, brightness factor, how many things, gates?)
+    cases = [("normal (8% noise)", 0.08, 5.0, (1.4, 2.6), 1.0, (1, 25), True),
+             ("16% noise", 0.16, 5.0, (1.4, 2.6), 1.0, (1, 25), True),
+             ("32% noise", 0.32, 5.0, (1.4, 2.6), 1.0, (1, 25), True),
+             ("big things (r 4-6)", 0.08, 13.0, (4, 6), 1.0, (1, 7), True),
+             ("faint things (30% brightness)", 0.08, 5.0, (1.4, 2.6), 0.3, (1, 25), True),
+             ("touching (gap = diameter)", 0.08, 3.0, (1.2, 1.5), 1.0, (1, 25), True),
+             ("overlapping (gap < diameter)", 0.08, 3.0, (1.4, 2.6), 1.0, (1, 25), False)]
+    for label, noise, gap, radius, dim, (lo, hi), gates in cases:
         rng = np.random.default_rng(13)
-        right = 0
-        for _ in range(25):
-            n = int(rng.integers(1, 25))
+        right = tried = 0
+        while tried < 25:
+            n = int(rng.integers(lo, hi))
             try:
-                blobs = scatter(n, rng, gap=place.get("gap", 5.0),
-                                radius=place.get("radius", (1.4, 2.6)))
+                blobs = scatter(n, rng, gap=gap, radius=radius)
             except ValueError:
-                continue
-            if place.get("dim"):
-                blobs = [(x, y, r, b * 0.3) for x, y, r, b in blobs]
-            right += brain.eyes.count(lambda: shoot(blobs, rng, noise=cam["noise"])[0])[0] == n
-        rows.append(_row(label, f"{right}/25 trays counted right", right >= 23))
+                continue                # a tray that can't be built isn't a test
+            tried += 1
+            blobs = [(x, y, r, b * dim) for x, y, r, b in blobs]
+            right += brain.eyes.count(lambda: shoot(blobs, rng, noise=noise)[0])[0] == n
+        rows.append(_row(label, f"{right}/25 trays counted right"
+                         + ("" if gates else " (merged blobs: a physical limit, reported only)"),
+                         right >= 23 or not gates))
     return experiment("eyes", "How robust is its learned vision?", "condition", rows)
+
+
+def false_laws(brain):
+    """The audit: 100 datasets with nothing to find (pure noise, or a hidden cause). How
+    many times does it claim a law anyway? It should be zero."""
+    from ..brain.brain import allowed_exceptions, worth_listing
+    from ..brain.dsl import size
+    rng = random.Random(14)
+    lib = copy.deepcopy(brain.library)
+    false_programs = 0
+    for i in range(50):
+        xs = _pairs(rng, 24)
+        ys = ([rng.randint(0, 20) for _ in xs] if i % 2 else
+              [x["a"] + x["b"] + rng.randint(0, 5) for x in xs])
+        res = synthesize(xs, ys, {"a": INT, "b": INT}, INT, lib, max_size=5,
+                         exceptions=allowed_exceptions(len(xs)))
+        if res.expr is not None and worth_listing(size(res.expr), len(res.exceptions), len(xs)):
+            false_programs += 1
+    false_quantities = 0
+    for i in range(50):
+        eps = [{"x": rng.uniform(1, 10), "y": rng.uniform(1, 10), "z": rng.uniform(1, 10)}
+               for _ in range(30)]
+        res = search_invariant("noise", eps, ["x", "y", "z"], 1e-9, precision=0.02,
+                               require="z")
+        false_quantities += res.law is not None
+    rows = [_row("50 program datasets with nothing to find", f"{false_programs} false laws",
+                 false_programs == 0),
+            _row("50 measurement datasets with nothing to find",
+                 f"{false_quantities} false laws", false_quantities == 0)]
+    return experiment("false laws", "On data with nothing to find, does it ever claim a law?",
+                      "audit", rows)
 
 
 EXPERIMENTS = [program_size, wrong_labels, hidden_cause, few_examples, program_compute,
                noise_ramp, outliers, distractors, confounder, magnitudes, changing_world,
-               law_forms, eyes_stress]
+               law_forms, eyes_stress, false_laws]
 
 
 def run_all(brain):

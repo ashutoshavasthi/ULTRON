@@ -24,12 +24,14 @@ measurable
 | Few examples | ✅ 2 examples enough for a·b+a |
 | Measurement laws, bell-curve noise | Broke at ±0.5% → **fixed**: robust acceptance; F = m·a found at ±20% |
 | Measurement laws, outliers | Broke at 0% → **fixed**: F = m·a found with 20% badly wrong readings |
-| Irrelevant measurements | Right law, but 6 irrelevant quantities take 312 s |
-| Confounders | ❌ a meaningless law chosen, ambiguity not noticed |
+| Irrelevant measurements | Was 312 s → **fixed**: 10 irrelevant quantities in 0.04 s |
+| Confounders | **Fixed**: the law must involve the outcome; ties are reported |
 | Tiny and huge numbers | ✅ |
-| A changing world | ❌ notices, but ends with no law |
+| A changing world | **Fixed**: re-measures after a lasting change; keeps history |
 | Law shapes | ✅ settling, lines, quadratic (a new kind invented on the spot); ❌ oscillation, logistic, fractional powers |
-| Eyes | ❌ over-specialised: 1/25 at double noise, 0/25 bigger things, 2/25 faint, 14/25 crowded |
+| Eyes | ❌ over-specialised (double noise, faint, touching). Wider dilated networks fixed big things (25/25) but cost accuracy elsewhere; not yet adopted |
+| Wrong records, up to 20% | ✅ |
+| False laws on 100 datasets with nothing to find | ✅ 0 |
 
 Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 

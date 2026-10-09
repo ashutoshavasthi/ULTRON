@@ -19,12 +19,28 @@ stands on this core. If the core is fragile or can't scale, the rest falls.
 | Search time vs data | ✅ 20 → 400 examples: 6 s → 18 s |
 | Measurement laws under bell-curve noise | Lost at ±0.5% → ✅ **fixed** (robust acceptance): found at ±20% |
 | Measurement laws with outliers | Lost at any level → ✅ **fixed**: found with 20% bad readings |
-| Irrelevant measurements | Right law, but time explodes: 4 irrelevant 3 s, **6 irrelevant 312 s** |
-| Confounders | ❌ picked a meaningless law (a label ÷ mass = 1) and didn't notice the ambiguity |
+| Irrelevant measurements | Was 312 s for 6 irrelevant → ✅ **fixed**: 10 irrelevant in 0.04 s (valid candidates built directly, same order) |
+| Confounders | ✅ **fixed**: a law must involve its outcome; equally short rivals are reported ("what I've seen can't tell them apart") |
 | Tiny and huge numbers | ✅ 10⁻¹² to 10¹² |
-| A changing world | ❌ noticed the change (doubt), but ended with no law instead of updating |
+| A changing world | ✅ **fixed**: after 3 failures that agree with each other, it re-measures (believes 80) and keeps the old value as history |
 | Shapes of law | ✅ settling, straight lines, and **quadratic (invented a new kind on its own)**; ❌ oscillation, damped oscillation, logistic growth, power law t^1.5 |
-| Eyes | ✅ 25/25 at the noise it grew up with; ❌ 1/25 at double noise, 0/25 for bigger things, 2/25 for faint things, 14/25 crowded |
+| Eyes | ✅ 25/25 at the noise it grew up with; ❌ double noise, faint and touching things. Two redesigns tried (dilated 8- and 16-channel networks with contrast adaptation): big things 25/25 and faint 16/25, but the original trays dropped to 37/40, so they weren't adopted. **Open** |
+
+**Also measured:** with laws with exceptions, wrong records are survived up to **20%**, and the
+false-law audit found **0 false laws in 100** datasets with nothing to find.
+
+**A0, the first ARC-AGI numbers** (official scoring; evaluation runs logged in
+`reports/arc_runs.log`):
+
+| Set | Split | Score |
+|---|---|---|
+| ARC-AGI-1 | training (400) | **11.0%** |
+| ARC-AGI-1 | evaluation (400) | **3.75%** |
+| ARC-AGI-2 | evaluation (120) | **0%** |
+
+Step 1e has begun on training failures: local laws (`cells.py`), pattern completion, rays,
+and description-length ranking (which fixed an overfit) take the first 100 training tasks
+from 11% to 17%.
 
 ## Exit criteria (fixed before work starts)
 

@@ -58,6 +58,9 @@ class Brain:
         self.inventing = True               # may it invent new kinds? (off: ablation)
         self.eyes = None                    # learned in Phase 3 (senses/eyes.py)
         self.exceptions = {}                # spec -> experiences its law doesn't fit
+        self.ambiguous = {}                 # spec -> equally simple rival laws
+        self.group_fails = {}               # (spec, object) -> failures in a row
+        self.since = {}                     # spec -> first experience after the world changed
         self.active = True                  # design experiments when ideas disagree
         self.found_at = {}                  # spec -> experiences when current idea was found
         self.compress = True                # look for patterns among its own laws
@@ -494,15 +497,19 @@ class Brain:
 
     def _learn_quantity(self, spec, surprised):
         name = spec.name
-        eps = self.memory.of(name)
+        eps = self.memory.of(name)[self.since.get(name, 0):]   # since the world last changed
         law = self.qlaws.get(name)
+        group = eps[-1].get(spec.group_by) if spec.group_by else None
         if not surprised:
+            self.group_fails.pop((name, group), None)
             if law is not None:
                 self._refine(law, eps)
                 law.provenance["support"] = law.provenance.get("support", 0) + 1
                 if law.provenance["support"] == ESTABLISHED:
                     self.note("establish", f"{name}: {law.formula()} has now predicted "
                                            f"{ESTABLISHED} new experiences; no longer tentative")
+            return None
+        if self._changed(spec, law, group, eps):
             return None
         new_object = (law is not None and law.kind == "grouped"
                       and eps[-1].get(spec.group_by) not in law.properties)
@@ -512,8 +519,19 @@ class Brain:
                                f"back to being unsure")
         names = list(spec.inputs) + [spec.target]
         result = search_invariant(name, eps, names, spec.tol, group_by=spec.group_by,
-                                  prior_powers=self.known_forms(), precision=spec.precision)
+                                  prior_powers=self.known_forms(), precision=spec.precision,
+                                  require=spec.target)
         self.search_steps[name] = self.search_steps.get(name, 0) + result.steps
+        if result.law is not None and result.rivals:
+            rivals = [QuantityLaw(name, r, "global").formula() for r in result.rivals[:3]]
+            if self.ambiguous.get(name) != rivals:
+                self.ambiguous[name] = rivals
+                self.note("doubt", f"{name}: {result.law.formula()} fits, but so does "
+                                   f"{' and '.join(rivals)}, just as simply: what I've seen "
+                                   f"can't tell them apart (some things always moved together). "
+                                   f"I need an experiment that changes one without the other")
+        else:
+            self.ambiguous.pop(name, None)
         if result.law is None and spec.group_by:
             # no single product stays constant: is something *shared* between two forms?
             result = search_sum_invariant(name, eps, names, spec.tol + 4 * spec.precision,
@@ -543,6 +561,47 @@ class Brain:
         self.note("revise", f"{name}: {what} ({result.steps} candidates searched; tentative "
                             f"until it predicts {ESTABLISHED} new experiences)")
         return new.formula()
+
+    def _changed(self, spec, law, group, eps):
+        """An established law keeps failing for one object, and its recent readings agree
+        with each other: the object itself changed (a spring replaced by a stiffer one
+        with the same name). The old object becomes history; the new one is measured."""
+        if (law is None or not isinstance(law, QuantityLaw)
+                or (law.kind == "grouped" and group not in law.properties)
+                or law.provenance.get("support", 0) < ESTABLISHED):
+            return False
+        key = (spec.name, group)
+        self.group_fails[key] = self.group_fails.get(key, 0) + 1
+        if self.group_fails[key] < 3:
+            return False
+        mine = [e for e in eps if law.kind == "global" or e.get(spec.group_by) == group]
+        recent = mine[-3:]
+        vals = [self._monomial(e, law.powers) for e in recent]
+        c = sum(abs(p) for p in law.powers.values())
+        mean = sum(vals) / len(vals)
+        if mean == 0 or (max(vals) - min(vals)) / abs(mean) > max(spec.tol, 1e-9) + 2 * c * spec.precision + 1e-9:
+            return False
+        if law.kind == "global":
+            old = law.constant
+            # everything before the last three readings is history now
+            self.since[spec.name] = len(self.memory.of(spec.name)) - len(recent)
+            law.provenance.setdefault("history", []).append(old)
+            law.constant = mean
+            before = "the old world"
+        else:
+            old = law.properties[group]
+            n = sum(1 for k in law.properties if k.startswith(f"{group}@before"))
+            before = f"{group}@before{n + 1}"
+            for e in mine[:-3]:
+                e[spec.group_by] = before
+            law.properties[before] = old
+            law.properties[group] = mean
+        self.group_fails.pop(key, None)
+        self.note("revise", f"{spec.name}: {group or 'the world'} has changed. My law {law.formula()} kept "
+                            f"failing for it alone, and its last {len(recent)} readings agree: "
+                            f"{law.formula()} was {old:.6g}, now {mean:.6g}. I keep the old one "
+                            f"as history ({before}) and carry on with the new")
+        return True
 
     def _adopt_sum_law(self, spec, old, new, eps):
         name = spec.name
@@ -704,6 +763,7 @@ class Brain:
             "kind_steps": dict(sorted(self.kind_steps.items())),
             "eyes": self.eyes.to_json() if self.eyes is not None else None,
             "exceptions": dict(sorted(self.exceptions.items())),
+            "since": dict(sorted(self.since.items())),
             "quantities": dict(sorted(self.quantities.items())),
             "inverses": dict(sorted(self.library.inverses.items())),
             "cycles": dict(sorted(self.library.cycles.items())),
@@ -740,6 +800,7 @@ class Brain:
         b.slaws = {k: SequenceLaw.from_json(v) for k, v in d.get("sequence_laws", {}).items()}
         b.kind_steps = dict(d.get("kind_steps", {}))
         b.exceptions = dict(d.get("exceptions", {}))
+        b.since = dict(d.get("since", {}))
         if d.get("eyes"):
             from ..senses.eyes import Eyes
             b.eyes = Eyes.from_json(d["eyes"])
