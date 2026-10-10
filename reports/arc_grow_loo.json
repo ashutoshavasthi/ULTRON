@@ -26,5 +26,39 @@
    "a79310a0"
   ],
   "lost": []
+ },
+ {
+  "round": 1,
+  "practice_half": 1,
+  "practised": 316,
+  "explained_in_practice": 33,
+  "steps": 5,
+  "step_list": [
+   "own1(C) = paint(x, recolour(holes(x), _a))",
+   "own2() = things(x)",
+   "own3() = flip(x)",
+   "own4() = flip_v(x)",
+   "own5() = upscale(x, 2)"
+  ],
+  "unseen": 317,
+  "without": {
+   "right": 24,
+   "wrong": 0
+  },
+  "with": {
+   "right": 29,
+   "wrong": 0
+  },
+  "gained": [
+   "2013d3e2",
+   "543a7ed5",
+   "6d75e8bb",
+   "c0f76784",
+   "c9e6f938",
+   "d5d6de2d"
+  ],
+  "lost": [
+   "810b9b61"
+  ]
  }
 ]
