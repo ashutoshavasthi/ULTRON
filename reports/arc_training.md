@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **35.4%** (141.5) | 642.7 | 40000 |
+| ARC-AGI-1 | training | 400 | **35.4%** (141.5) | 604.5 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-142 tasks solved; 14 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 244 with no program within budget.
+142 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 245 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
