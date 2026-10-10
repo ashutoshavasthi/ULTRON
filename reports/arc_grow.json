@@ -22,33 +22,5 @@
   },
   "gained": [],
   "lost": []
- },
- {
-  "round": 1,
-  "practice_half": 1,
-  "practised": 316,
-  "explained_in_practice": 21,
-  "steps": 5,
-  "step_list": [
-   "own1() = things(x)",
-   "own2(T) = crop(x, most(_a, size))",
-   "own3(C) = pieces(swap(x, 0, _a))",
-   "own4() = flip_v(x)",
-   "own5() = upscale(x, 2)"
-  ],
-  "unseen": 317,
-  "without": {
-   "right": 17,
-   "wrong": 2
-  },
-  "with": {
-   "right": 19,
-   "wrong": 1
-  },
-  "gained": [
-   "28bf18c6",
-   "ff805c23"
-  ],
-  "lost": []
  }
 ]
