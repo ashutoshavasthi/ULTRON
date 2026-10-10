@@ -63,12 +63,14 @@ def _init(library):
 
 
 MAX_SIZE = [12]
+LOO = [False]           # answer, and learn, only from explanations that earn it (leave one out)
 
 
 def _one(job):
     tid, t, budget = job
     attempts, used, spent = compose.predict(t["train"], [i for i, _ in t["test"]],
-                                            budget=budget, max_size=MAX_SIZE[0])
+                                            budget=budget, max_size=MAX_SIZE[0],
+                                            loo=LOO[0])
     if not used:
         return tid, None
     right = all(any(np.array_equal(p, o) for p in att)
@@ -107,6 +109,8 @@ def main(argv=None):
     ap.add_argument("--budget", type=int, default=BUDGET)
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--max-size", type=int, default=12)
+    ap.add_argument("--loo", action="store_true",
+                    help="answer and learn only from explanations that pass leave one out")
     ap.add_argument("--out", default="arc_grow.json")
     ap.add_argument("--state", default=None,
                     help="save progress here after each half, and continue from it")
@@ -114,6 +118,7 @@ def main(argv=None):
                     help="stop after this many practice halves (0: run to the end)")
     a = ap.parse_args(argv)
     MAX_SIZE[0] = a.max_size
+    LOO[0] = a.loo
     tasks = data.experience()
     ids = sorted(tasks)
     halves = [ids[0::2], ids[1::2]]

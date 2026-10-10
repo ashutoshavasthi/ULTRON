@@ -783,11 +783,7 @@ def _args(bank, types, total):
                 yield (e,) + tail
 
 
-def predict(train, tests, max_size=12, **kw):
-    """Up to two different answers for each test input."""
-    from . import grid
-    from .solve import task_background
-    grid.TASK_BACKGROUND[0] = task_background(train)
+def _answers(train, tests, max_size, **kw):
     found, spent = search(train, max_size=max_size, **kw)
     found = sorted(found, key=lambda e: (size(e), show(e)))
     attempts = [[] for _ in tests]
@@ -803,6 +799,46 @@ def predict(train, tests, max_size=12, **kw):
                 new = True
         if new:
             used.append(expr)
+    return attempts, used, spent
+
+
+def earns(train, max_size=12, **kw):
+    """Leave one out: learning from every example but one, does Ultron predict the one
+    left out, for each example in turn? A true rule survives this; a program that fits
+    every example by coincidence usually doesn't. (The same rule its per-puzzle network
+    had to meet.) Returns (passed, steps spent)."""
+    from . import grid
+    from .solve import task_background
+    if len(train) < 2:
+        return False, 0
+    spent = 0
+    saved = grid.TASK_BACKGROUND[0]
+    try:
+        for k in range(len(train)):
+            rest = train[:k] + train[k + 1:]
+            grid.TASK_BACKGROUND[0] = task_background(rest)
+            attempts, _, sp = _answers(rest, [train[k][0]], max_size, **kw)
+            spent += sp
+            if not any(np.array_equal(p, train[k][1]) for p in attempts[0]):
+                return False, spent
+    finally:
+        grid.TASK_BACKGROUND[0] = saved
+    return True, spent
+
+
+def predict(train, tests, max_size=12, loo=False, **kw):
+    """Up to two different answers for each test input. With loo, only when the task
+    earns them (earns): otherwise no answer, never a guess."""
+    from . import grid
+    from .solve import task_background
+    grid.TASK_BACKGROUND[0] = task_background(train)
+    attempts, used, spent = _answers(train, tests, max_size, **kw)
+    if loo and used:
+        ok, extra = earns(train, max_size=max_size, **kw)
+        grid.TASK_BACKGROUND[0] = task_background(train)
+        spent += extra
+        if not ok:
+            return [[] for _ in tests], [], spent
     return attempts, used, spent
 
 

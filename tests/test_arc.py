@@ -443,3 +443,22 @@ def test_steps_that_repeat_and_work_cell_by_cell():
     assert np.array_equal(Cm.run(found[0], q), touch(q))
     # a situation never seen in the examples (a 3 beside a cell that turns 8): no guess
     assert Cm.run(found[0], g([[0, 0, 0], [0, 2, 0], [3, 0, 0]])) is None
+
+
+def test_an_explanation_must_predict_the_example_it_was_not_fitted_to():
+    from ultron.arc import compose as Cm
+    # a true rule: learned from any two examples, it predicts the third
+    pics = [g([[1, 0, 0], [0, 2, 0]]), g([[0, 3, 3], [4, 0, 0]]), g([[5, 0, 1], [0, 0, 2]])]
+    train = [(p, p[:, ::-1].copy()) for p in pics]
+    ok, _ = Cm.earns(train)
+    assert ok
+    attempts, used, _ = Cm.predict(train, [g([[7, 0, 0], [0, 0, 8]])], loo=True)
+    assert used and np.array_equal(attempts[0][0], g([[0, 0, 7], [8, 0, 0]]))
+    # a recolouring that fits every example only because each one teaches a new pair of
+    # colours: nothing learned from two examples predicts the third, so no answer
+    train = [(g([[1, 1], [1, 0]]), g([[2, 2], [2, 0]])), (g([[3, 3], [0, 3]]), g([[4, 4], [0, 4]])),
+             (g([[5, 0], [5, 5]]), g([[6, 0], [6, 6]]))]
+    attempts, used, _ = Cm.predict(train, [g([[1, 3], [5, 0]])])
+    assert used                                   # it fits every example...
+    attempts, used, _ = Cm.predict(train, [g([[1, 3], [5, 0]])], loo=True)
+    assert not used and attempts == [[]]          # ...but doesn't earn an answer
