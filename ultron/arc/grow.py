@@ -114,7 +114,8 @@ def main(argv=None):
         for f in (0, 1):
             practice, unseen = halves[f], halves[1 - f]
             wake = run(tasks, practice, a.wake, grown[f], a.workers)
-            explained = {t: _tuple(r["expr"]) for t, r in wake.items() if r["right"]}
+            explained = {t: compose.inline(_tuple(r["expr"]), grown[f])
+                         for t, r in wake.items() if r["right"]}
             # what it grew is relearned from everything explained so far (a step that
             # stops paying is dropped)
             grown[f] = compose.learn_library(explained)

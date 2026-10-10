@@ -379,7 +379,10 @@ def test_small_steps_compose_and_ultron_builds_its_own_from_them():
     try:
         y = g([[1, 0, 0], [0, 2, 0], [0, 0, 0]])
         own = [e for e in lib if Cm.show(e["pattern"]) == "paint(x, things(_a))"][0]
-        assert np.array_equal(Cm.run((own["name"], ("transpose", ("x",))), y),
+        used = (own["name"], ("transpose", ("x",)))
+        assert np.array_equal(Cm.run(used, y),
                               Cm.run(Cm.parse("paint(x, things(transpose(x)))"), y))
+        # spelled back out, it is the program of small steps it stands for
+        assert Cm.show(Cm.inline(used, lib)) == "paint(x, things(transpose(x)))"
     finally:
         Cm.LIBRARY[0] = None

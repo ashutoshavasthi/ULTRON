@@ -679,5 +679,24 @@ def learn_library(programs, library=()):
     return library
 
 
+def inline(expr, library):
+    """A program with its own steps spelled out as the small steps they stand for."""
+    if expr[0] in ("x", "k", "hole"):
+        return expr
+    args = tuple(inline(a, library) for a in expr[1:])
+    lib = {e["name"]: e for e in library}
+    if expr[0] in lib:
+        return inline(_fill(lib[expr[0]]["pattern"], args), library)
+    return (expr[0],) + args
+
+
+def _fill(pattern, args):
+    if pattern[0] == "hole":
+        return args[pattern[1]]
+    if pattern[0] in ("x", "k"):
+        return pattern
+    return (pattern[0],) + tuple(_fill(a, args) for a in pattern[1:])
+
+
 def describe_step(e):
     return f"{e['name']}({', '.join(e['args'])}) = {show(e['pattern'])}"
