@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **34.6%** (138.5) | 352.3 | 40000 |
+| ARC-AGI-1 | training | 400 | **35.4%** (141.5) | 642.7 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-139 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 248 with no program within budget.
+142 tasks solved; 14 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 244 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -61,6 +61,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 50cb2852 | `hollow_things ▸ fill_enclosed(8)` |
 | 543a7ed5 | `fill_enclosed(4) ▸ frame_things(3)` |
 | 5521c0d9 | `things move by (): 1 kinds (moves by its own size)` |
+| 5582e5ca | `blank(alone(fill_box(pieces(x)))) ▸ recolour 3→4` |
 | 6150a2bd | `rot180` |
 | 62c24649 | `mirror_tile(both)` |
 | 6430c8c4 | `combine(('lines', 'nor', 3))` |
@@ -103,7 +104,9 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | a65b410d | `marks around things by (): 1 kinds leave marks` |
 | a699fb00 | `local law on (colour, line): 2 situations change colour` |
 | a740d043 | `crop_content ▸ recolour 1→0` |
+| a79310a0 | `paint(blank(x), shift(things(x), down)) ▸ recolour 8→2` |
 | a87f7484 | `the box where the most common colour is` |
+| ac0a08a4 | `upscale(x, count(things(x)))` |
 | ae3edfdc | `things move by (colour): 2 kinds (goes toward what stays put)` |
 | ae4f1146 | `keep_colour(1) ▸ crop_thing(('largest', True)) ▸ recolour 0→8` |
 | aedd82e4 | `thing law on (size): keep except 1 kind` |

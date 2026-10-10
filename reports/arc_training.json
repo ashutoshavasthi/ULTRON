@@ -3,9 +3,9 @@
 "set": "ARC-AGI-1",
 "split": "training",
 "tasks": 400,
-"score": 138.5,
-"percent": 34.625,
-"seconds": 352.3,
+"score": 141.5,
+"percent": 35.375,
+"seconds": 642.7,
 "budget": 40000,
 "library": 0,
 "rows": [
@@ -24,7 +24,7 @@ null
 ],
 "found": true,
 "operations": 1185,
-"seconds": 0.06
+"seconds": 0.09
 },
 {
 "task": "00d62c1b",
@@ -41,7 +41,7 @@ null
 ],
 "found": true,
 "operations": 40005,
-"seconds": 3.42
+"seconds": 5.73
 },
 {
 "task": "017c7c7b",
@@ -72,7 +72,7 @@ null
 ],
 "found": true,
 "operations": 17220,
-"seconds": 0.2
+"seconds": 0.41
 },
 {
 "task": "025d127b",
@@ -81,8 +81,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.64
+"operations": 80004,
+"seconds": 6.08
 },
 {
 "task": "045e512c",
@@ -91,8 +91,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.96
+"operations": 80004,
+"seconds": 11.54
 },
 {
 "task": "0520fde7",
@@ -113,7 +113,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.58
+"seconds": 1.02
 },
 {
 "task": "05269061",
@@ -130,7 +130,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.67
+"seconds": 4.45
 },
 {
 "task": "05f2a901",
@@ -147,7 +147,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.17
+"seconds": 3.65
 },
 {
 "task": "06df4c85",
@@ -156,8 +156,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 11.6
+"operations": 80007,
+"seconds": 22.45
 },
 {
 "task": "08ed6ac7",
@@ -174,7 +174,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.32
+"seconds": 1.81
 },
 {
 "task": "09629e4f",
@@ -183,8 +183,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 3.23
+"operations": 80016,
+"seconds": 11.29
 },
 {
 "task": "0962bcdd",
@@ -193,8 +193,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.07
+"operations": 80006,
+"seconds": 6.54
 },
 {
 "task": "0a938d79",
@@ -203,8 +203,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 3.47
+"operations": 80008,
+"seconds": 5.39
 },
 {
 "task": "0b148d64",
@@ -221,7 +221,7 @@ null
 ],
 "found": true,
 "operations": 35190,
-"seconds": 3.82
+"seconds": 6.42
 },
 {
 "task": "0ca9ddb6",
@@ -238,7 +238,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.62
+"seconds": 4.42
 },
 {
 "task": "0d3d703e",
@@ -255,7 +255,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.41
+"seconds": 0.66
 },
 {
 "task": "0dfd9992",
@@ -272,7 +272,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 7.58
+"seconds": 13.46
 },
 {
 "task": "0e206a2e",
@@ -281,8 +281,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.44
+"operations": 80004,
+"seconds": 6.89
 },
 {
 "task": "10fcaaa3",
@@ -307,7 +307,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.22
+"seconds": 1.78
 },
 {
 "task": "11852cab",
@@ -324,7 +324,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.97
+"seconds": 3.27
 },
 {
 "task": "1190e5a7",
@@ -341,7 +341,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.65
+"seconds": 2.76
 },
 {
 "task": "137eaa0f",
@@ -350,8 +350,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.37
+"operations": 80004,
+"seconds": 4.05
 },
 {
 "task": "150deff5",
@@ -360,8 +360,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.08
+"operations": 80007,
+"seconds": 3.24
 },
 {
 "task": "178fcbfb",
@@ -386,7 +386,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 6.42
+"seconds": 12.6
 },
 {
 "task": "1a07d186",
@@ -395,8 +395,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.7
+"operations": 80016,
+"seconds": 10.29
 },
 {
 "task": "1b2d62fb",
@@ -417,7 +417,7 @@ null
 ],
 "found": true,
 "operations": 760,
-"seconds": 0.27
+"seconds": 0.62
 },
 {
 "task": "1b60fb0c",
@@ -426,8 +426,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.32
+"operations": 80013,
+"seconds": 5.08
 },
 {
 "task": "1bfc4729",
@@ -436,8 +436,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.57
+"operations": 80004,
+"seconds": 7.38
 },
 {
 "task": "1c786137",
@@ -454,7 +454,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 4.7
+"seconds": 7.15
 },
 {
 "task": "1caeab9d",
@@ -463,8 +463,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.29
+"operations": 80007,
+"seconds": 3.34
 },
 {
 "task": "1cf80156",
@@ -481,7 +481,7 @@ null
 ],
 "found": true,
 "operations": 618,
-"seconds": 0.34
+"seconds": 0.53
 },
 {
 "task": "1e0a9b12",
@@ -498,7 +498,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.78
+"seconds": 1.13
 },
 {
 "task": "1e32b0e9",
@@ -507,8 +507,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 7.92
+"operations": 80004,
+"seconds": 15.08
 },
 {
 "task": "1f0c79e5",
@@ -517,8 +517,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.69
+"operations": 80008,
+"seconds": 3.5
 },
 {
 "task": "1f642eb9",
@@ -527,8 +527,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.67
+"operations": 80004,
+"seconds": 6.47
 },
 {
 "task": "1f85a75f",
@@ -548,7 +548,7 @@ false
 ],
 "found": true,
 "operations": 420,
-"seconds": 3.38
+"seconds": 5.45
 },
 {
 "task": "1f876c06",
@@ -565,7 +565,7 @@ false
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.37
+"seconds": 4.08
 },
 {
 "task": "1fad071e",
@@ -574,8 +574,8 @@ false
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.42
+"operations": 80004,
+"seconds": 5.06
 },
 {
 "task": "2013d3e2",
@@ -606,7 +606,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.96
+"seconds": 3.58
 },
 {
 "task": "2204b7a8",
@@ -615,8 +615,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.28
+"operations": 80016,
+"seconds": 5.55
 },
 {
 "task": "22168020",
@@ -633,7 +633,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.67
+"seconds": 4.81
 },
 {
 "task": "22233c11",
@@ -642,8 +642,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.53
+"operations": 80010,
+"seconds": 3.25
 },
 {
 "task": "2281f1f4",
@@ -652,8 +652,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.59
+"operations": 80010,
+"seconds": 4.65
 },
 {
 "task": "228f6490",
@@ -675,7 +675,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.67
+"seconds": 4.57
 },
 {
 "task": "22eb0ac0",
@@ -692,7 +692,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.44
+"seconds": 6.43
 },
 {
 "task": "234bbc79",
@@ -701,8 +701,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.53
+"operations": 80008,
+"seconds": 2.22
 },
 {
 "task": "23581191",
@@ -711,8 +711,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.03
+"operations": 80004,
+"seconds": 7.66
 },
 {
 "task": "239be575",
@@ -721,8 +721,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.57
+"operations": 80004,
+"seconds": 2.88
 },
 {
 "task": "23b5c85d",
@@ -742,7 +742,7 @@ false
 ],
 "found": true,
 "operations": 1455,
-"seconds": 0.38
+"seconds": 0.82
 },
 {
 "task": "253bf280",
@@ -759,7 +759,7 @@ null
 ],
 "found": true,
 "operations": 40008,
-"seconds": 1.15
+"seconds": 1.94
 },
 {
 "task": "25d487eb",
@@ -768,8 +768,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.15
+"operations": 80004,
+"seconds": 4.49
 },
 {
 "task": "25d8a9c8",
@@ -791,7 +791,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.54
+"seconds": 0.86
 },
 {
 "task": "25ff71a9",
@@ -808,7 +808,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.39
+"seconds": 0.51
 },
 {
 "task": "264363fd",
@@ -817,8 +817,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 11.23
+"operations": 80004,
+"seconds": 20.0
 },
 {
 "task": "272f95fa",
@@ -827,8 +827,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 5.58
+"operations": 80008,
+"seconds": 8.95
 },
 {
 "task": "27a28665",
@@ -845,7 +845,7 @@ null
 ],
 "found": true,
 "operations": 40005,
-"seconds": 0.27
+"seconds": 0.35
 },
 {
 "task": "28bf18c6",
@@ -854,8 +854,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.75
+"operations": 80013,
+"seconds": 1.76
 },
 {
 "task": "28e73c20",
@@ -864,8 +864,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 12700,
-"seconds": 0.31
+"operations": 24735,
+"seconds": 0.52
 },
 {
 "task": "29623171",
@@ -874,8 +874,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.61
+"operations": 80004,
+"seconds": 6.01
 },
 {
 "task": "29c11459",
@@ -884,8 +884,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.61
+"operations": 80004,
+"seconds": 2.62
 },
 {
 "task": "29ec7d0e",
@@ -902,7 +902,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 10.01
+"seconds": 16.52
 },
 {
 "task": "2bcee788",
@@ -911,8 +911,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.99
+"operations": 80008,
+"seconds": 3.97
 },
 {
 "task": "2bee17df",
@@ -921,8 +921,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 5.51
+"operations": 80016,
+"seconds": 10.03
 },
 {
 "task": "2c608aff",
@@ -931,8 +931,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.12
+"operations": 80008,
+"seconds": 3.09
 },
 {
 "task": "2dc579da",
@@ -949,7 +949,7 @@ null
 ],
 "found": true,
 "operations": 27261,
-"seconds": 0.38
+"seconds": 0.73
 },
 {
 "task": "2dd70a9a",
@@ -958,8 +958,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 15.06
+"operations": 80004,
+"seconds": 26.28
 },
 {
 "task": "2dee498d",
@@ -985,7 +985,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.61
+"seconds": 0.89
 },
 {
 "task": "31aa019c",
@@ -994,8 +994,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.28
+"operations": 80007,
+"seconds": 6.67
 },
 {
 "task": "321b1fc6",
@@ -1004,8 +1004,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.32
+"operations": 80004,
+"seconds": 5.23
 },
 {
 "task": "32597951",
@@ -1014,8 +1014,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.07
+"operations": 80013,
+"seconds": 16.6
 },
 {
 "task": "3345333e",
@@ -1024,8 +1024,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.3
+"operations": 80004,
+"seconds": 6.0
 },
 {
 "task": "3428a4f5",
@@ -1046,7 +1046,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.59
+"seconds": 2.45
 },
 {
 "task": "3618c87e",
@@ -1071,7 +1071,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.07
+"seconds": 1.62
 },
 {
 "task": "3631a71a",
@@ -1088,7 +1088,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 95.92
+"seconds": 144.08
 },
 {
 "task": "363442ee",
@@ -1097,8 +1097,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.81
+"operations": 80004,
+"seconds": 7.75
 },
 {
 "task": "36d67576",
@@ -1107,8 +1107,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 7.12
+"operations": 80004,
+"seconds": 13.01
 },
 {
 "task": "36fdfd69",
@@ -1117,8 +1117,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.4
+"operations": 80004,
+"seconds": 13.23
 },
 {
 "task": "3906de3d",
@@ -1135,7 +1135,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.3
+"seconds": 3.61
 },
 {
 "task": "39a8645d",
@@ -1152,7 +1152,7 @@ null
 ],
 "found": true,
 "operations": 39936,
-"seconds": 2.17
+"seconds": 3.76
 },
 {
 "task": "39e1d7f9",
@@ -1161,8 +1161,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 12.16
+"operations": 80004,
+"seconds": 22.63
 },
 {
 "task": "3aa6fb7a",
@@ -1171,8 +1171,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.05
+"operations": 80008,
+"seconds": 2.87
 },
 {
 "task": "3ac3eb23",
@@ -1181,8 +1181,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.89
+"operations": 80004,
+"seconds": 3.8
 },
 {
 "task": "3af2c5a8",
@@ -1199,7 +1199,7 @@ null
 ],
 "found": true,
 "operations": 519,
-"seconds": 0.04
+"seconds": 0.07
 },
 {
 "task": "3bd67248",
@@ -1208,8 +1208,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.51
+"operations": 80016,
+"seconds": 3.3
 },
 {
 "task": "3bdb4ada",
@@ -1218,8 +1218,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.91
+"operations": 80004,
+"seconds": 6.29
 },
 {
 "task": "3befdf3e",
@@ -1228,8 +1228,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.65
+"operations": 80004,
+"seconds": 3.79
 },
 {
 "task": "3c9b0459",
@@ -1246,7 +1246,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.94
+"seconds": 1.25
 },
 {
 "task": "3de23699",
@@ -1255,8 +1255,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.88
+"operations": 80008,
+"seconds": 2.65
 },
 {
 "task": "3e980e27",
@@ -1265,8 +1265,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 3.06
+"operations": 80008,
+"seconds": 6.46
 },
 {
 "task": "3eda0437",
@@ -1275,8 +1275,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 2.77
+"operations": 80008,
+"seconds": 5.71
 },
 {
 "task": "3f7978a0",
@@ -1285,8 +1285,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.45
+"operations": 80004,
+"seconds": 5.17
 },
 {
 "task": "40853293",
@@ -1295,8 +1295,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 12.52
+"operations": 80004,
+"seconds": 19.55
 },
 {
 "task": "4093f84a",
@@ -1305,8 +1305,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.77
+"operations": 80004,
+"seconds": 7.91
 },
 {
 "task": "41e4d17e",
@@ -1315,8 +1315,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.77
+"operations": 80004,
+"seconds": 5.29
 },
 {
 "task": "4258a5f9",
@@ -1333,7 +1333,7 @@ null
 ],
 "found": true,
 "operations": 318,
-"seconds": 0.74
+"seconds": 1.1
 },
 {
 "task": "4290ef0e",
@@ -1342,8 +1342,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.33
+"operations": 80004,
+"seconds": 5.21
 },
 {
 "task": "42a50994",
@@ -1360,7 +1360,7 @@ null
 ],
 "found": true,
 "operations": 940,
-"seconds": 1.95
+"seconds": 2.89
 },
 {
 "task": "4347f46a",
@@ -1377,7 +1377,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.84
+"seconds": 4.17
 },
 {
 "task": "444801d8",
@@ -1386,8 +1386,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.39
+"operations": 80004,
+"seconds": 6.29
 },
 {
 "task": "445eab21",
@@ -1423,7 +1423,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.14
+"seconds": 2.14
 },
 {
 "task": "447fd412",
@@ -1432,8 +1432,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.41
+"operations": 80004,
+"seconds": 5.79
 },
 {
 "task": "44d8ac46",
@@ -1455,7 +1455,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 2.84
+"seconds": 4.17
 },
 {
 "task": "44f52bb0",
@@ -1472,7 +1472,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.29
+"seconds": 0.34
 },
 {
 "task": "4522001f",
@@ -1481,8 +1481,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.67
+"operations": 80004,
+"seconds": 1.41
 },
 {
 "task": "4612dd53",
@@ -1491,8 +1491,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.22
+"operations": 80004,
+"seconds": 5.23
 },
 {
 "task": "46442a0e",
@@ -1509,7 +1509,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.26
+"seconds": 0.44
 },
 {
 "task": "469497ad",
@@ -1518,8 +1518,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.63
+"operations": 80004,
+"seconds": 1.94
 },
 {
 "task": "46f33fce",
@@ -1528,8 +1528,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.27
+"operations": 80013,
+"seconds": 6.25
 },
 {
 "task": "47c1f68c",
@@ -1556,7 +1556,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.17
+"seconds": 2.32
 },
 {
 "task": "484b58aa",
@@ -1573,7 +1573,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 21.41
+"seconds": 32.78
 },
 {
 "task": "48d8fb45",
@@ -1598,7 +1598,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.31
+"seconds": 2.29
 },
 {
 "task": "4938f0c2",
@@ -1607,8 +1607,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.72
+"operations": 80007,
+"seconds": 12.58
 },
 {
 "task": "496994bd",
@@ -1625,7 +1625,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.41
+"seconds": 2.55
 },
 {
 "task": "49d1d64f",
@@ -1634,8 +1634,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.31
+"operations": 80004,
+"seconds": 1.53
 },
 {
 "task": "4be741c5",
@@ -1644,8 +1644,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.41
+"operations": 80004,
+"seconds": 4.01
 },
 {
 "task": "4c4377d9",
@@ -1662,7 +1662,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.32
+"seconds": 0.59
 },
 {
 "task": "4c5c2cf0",
@@ -1671,8 +1671,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.56
+"operations": 80004,
+"seconds": 5.86
 },
 {
 "task": "50846271",
@@ -1681,8 +1681,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 11.73
+"operations": 80008,
+"seconds": 21.36
 },
 {
 "task": "508bd3b6",
@@ -1691,8 +1691,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.31
+"operations": 80004,
+"seconds": 7.36
 },
 {
 "task": "50cb2852",
@@ -1714,7 +1714,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.92
+"seconds": 4.34
 },
 {
 "task": "5117e062",
@@ -1723,8 +1723,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.08
+"operations": 80004,
+"seconds": 5.2
 },
 {
 "task": "5168d44c",
@@ -1733,8 +1733,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.72
+"operations": 80010,
+"seconds": 4.36
 },
 {
 "task": "539a4f51",
@@ -1743,8 +1743,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.64
+"operations": 80004,
+"seconds": 2.28
 },
 {
 "task": "53b68214",
@@ -1753,8 +1753,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.62
+"operations": 80004,
+"seconds": 1.81
 },
 {
 "task": "543a7ed5",
@@ -1776,7 +1776,7 @@ null
 ],
 "found": true,
 "operations": 23668,
-"seconds": 3.65
+"seconds": 5.68
 },
 {
 "task": "54d82841",
@@ -1785,8 +1785,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.01
+"operations": 80016,
+"seconds": 2.52
 },
 {
 "task": "54d9e175",
@@ -1795,8 +1795,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.07
+"operations": 80008,
+"seconds": 2.88
 },
 {
 "task": "5521c0d9",
@@ -1813,17 +1813,58 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 6.06
+"seconds": 10.37
 },
 {
 "task": "5582e5ca",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
-"operations": 40002,
-"seconds": 0.38
+"score": 1.0,
+"program": "blank(alone(fill_box(pieces(x)))) \u25b8 recolour 3\u21924",
+"ops": [
+"compose"
+],
+"steps": [
+[
+"compose",
+[
+"map",
+[
+"blank",
+[
+"alone",
+[
+"fill_box",
+[
+"pieces",
+[
+"x"
+]
+]
+]
+]
+],
+[
+"k",
+[
+[
+3,
+4
+],
+[
+6,
+6
+],
+[
+9,
+9
+]
+]
+]
+]
+]
+],
+"found": true,
+"operations": 50184,
+"seconds": 0.81
 },
 {
 "task": "5614dbcf",
@@ -1848,7 +1889,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.55
+"seconds": 2.27
 },
 {
 "task": "56dc2b01",
@@ -1857,8 +1898,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.41
+"operations": 80004,
+"seconds": 2.62
 },
 {
 "task": "56ff96f3",
@@ -1867,8 +1908,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.73
+"operations": 80008,
+"seconds": 4.06
 },
 {
 "task": "57aa92db",
@@ -1877,8 +1918,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 3.93
+"operations": 80008,
+"seconds": 7.18
 },
 {
 "task": "5ad4f10b",
@@ -1887,8 +1928,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.19
+"operations": 80004,
+"seconds": 9.79
 },
 {
 "task": "5bd6f4ac",
@@ -1897,8 +1938,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 2.44
+"operations": 80020,
+"seconds": 6.47
 },
 {
 "task": "5c0a986e",
@@ -1907,8 +1948,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.15
+"operations": 80004,
+"seconds": 6.05
 },
 {
 "task": "5c2c9af4",
@@ -1917,8 +1958,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 9.08
+"operations": 80010,
+"seconds": 14.55
 },
 {
 "task": "5daaa586",
@@ -1927,8 +1968,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.4
+"operations": 80004,
+"seconds": 9.56
 },
 {
 "task": "60b61512",
@@ -1950,7 +1991,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.54
+"seconds": 2.28
 },
 {
 "task": "6150a2bd",
@@ -1967,7 +2008,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.46
+"seconds": 0.82
 },
 {
 "task": "623ea044",
@@ -1976,8 +2017,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.92
+"operations": 80004,
+"seconds": 3.48
 },
 {
 "task": "62c24649",
@@ -1994,7 +2035,7 @@ null
 ],
 "found": true,
 "operations": 615,
-"seconds": 0.04
+"seconds": 0.08
 },
 {
 "task": "63613498",
@@ -2011,7 +2052,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.19
+"seconds": 3.74
 },
 {
 "task": "6430c8c4",
@@ -2032,7 +2073,7 @@ null
 ],
 "found": true,
 "operations": 656,
-"seconds": 0.29
+"seconds": 0.47
 },
 {
 "task": "6455b5f5",
@@ -2041,8 +2082,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 2.64
+"operations": 80016,
+"seconds": 5.15
 },
 {
 "task": "662c240a",
@@ -2051,8 +2092,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.6
+"operations": 80024,
+"seconds": 2.12
 },
 {
 "task": "67385a82",
@@ -2069,7 +2110,7 @@ null
 ],
 "found": true,
 "operations": 636,
-"seconds": 0.15
+"seconds": 0.21
 },
 {
 "task": "673ef223",
@@ -2078,8 +2119,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.12
+"operations": 80004,
+"seconds": 9.52
 },
 {
 "task": "6773b310",
@@ -2088,8 +2129,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 2.49
+"operations": 80008,
+"seconds": 6.7
 },
 {
 "task": "67a3c6ac",
@@ -2106,7 +2147,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.9
+"seconds": 1.32
 },
 {
 "task": "67a423a3",
@@ -2115,8 +2156,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.71
+"operations": 80004,
+"seconds": 1.75
 },
 {
 "task": "67e8384a",
@@ -2133,7 +2174,7 @@ null
 ],
 "found": true,
 "operations": 1392,
-"seconds": 0.05
+"seconds": 0.07
 },
 {
 "task": "681b3aeb",
@@ -2142,8 +2183,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.48
+"operations": 80004,
+"seconds": 3.28
 },
 {
 "task": "6855a6e4",
@@ -2152,8 +2193,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.63
+"operations": 80004,
+"seconds": 8.39
 },
 {
 "task": "68b16354",
@@ -2170,7 +2211,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.99
+"seconds": 1.53
 },
 {
 "task": "694f12f3",
@@ -2187,7 +2228,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.59
+"seconds": 2.38
 },
 {
 "task": "6a1e5592",
@@ -2196,8 +2237,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.9
+"operations": 80006,
+"seconds": 6.45
 },
 {
 "task": "6aa20dc0",
@@ -2206,8 +2247,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.41
+"operations": 80004,
+"seconds": 10.25
 },
 {
 "task": "6b9890af",
@@ -2216,8 +2257,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.75
+"operations": 80016,
+"seconds": 6.13
 },
 {
 "task": "6c434453",
@@ -2234,7 +2275,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.51
+"seconds": 2.43
 },
 {
 "task": "6cdd2623",
@@ -2243,8 +2284,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.93
+"operations": 80004,
+"seconds": 8.36
 },
 {
 "task": "6cf79266",
@@ -2253,8 +2294,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 10.02
+"operations": 80004,
+"seconds": 16.9
 },
 {
 "task": "6d0160f0",
@@ -2263,8 +2304,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 3.98
+"operations": 80008,
+"seconds": 11.03
 },
 {
 "task": "6d0aefbc",
@@ -2281,7 +2322,7 @@ null
 ],
 "found": true,
 "operations": 752,
-"seconds": 0.03
+"seconds": 0.06
 },
 {
 "task": "6d58a25d",
@@ -2290,8 +2331,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.24
+"operations": 80010,
+"seconds": 12.4
 },
 {
 "task": "6d75e8bb",
@@ -2313,7 +2354,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.21
+"seconds": 2.11
 },
 {
 "task": "6e02f1e3",
@@ -2322,8 +2363,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 0.36
+"operations": 80010,
+"seconds": 1.15
 },
 {
 "task": "6e19193c",
@@ -2332,8 +2373,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.26
+"operations": 80004,
+"seconds": 2.92
 },
 {
 "task": "6e82a1ae",
@@ -2350,7 +2391,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.54
+"seconds": 2.26
 },
 {
 "task": "6ecd11f4",
@@ -2359,8 +2400,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 8.88
+"operations": 80016,
+"seconds": 17.26
 },
 {
 "task": "6f8cd79b",
@@ -2377,7 +2418,7 @@ null
 ],
 "found": true,
 "operations": 17780,
-"seconds": 0.24
+"seconds": 0.21
 },
 {
 "task": "6fa7a44f",
@@ -2394,7 +2435,7 @@ null
 ],
 "found": true,
 "operations": 1392,
-"seconds": 0.09
+"seconds": 0.06
 },
 {
 "task": "72322fa7",
@@ -2403,8 +2444,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.1
+"operations": 80004,
+"seconds": 10.15
 },
 {
 "task": "72ca375d",
@@ -2421,7 +2462,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.24
+"seconds": 2.03
 },
 {
 "task": "73251a56",
@@ -2430,8 +2471,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 34.89
+"operations": 80010,
+"seconds": 57.32
 },
 {
 "task": "7447852a",
@@ -2440,8 +2481,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.62
+"operations": 80004,
+"seconds": 3.54
 },
 {
 "task": "7468f01a",
@@ -2463,7 +2504,7 @@ null
 ],
 "found": true,
 "operations": 891,
-"seconds": 0.34
+"seconds": 0.78
 },
 {
 "task": "746b3537",
@@ -2480,7 +2521,7 @@ null
 ],
 "found": true,
 "operations": 40005,
-"seconds": 0.19
+"seconds": 0.31
 },
 {
 "task": "74dd1130",
@@ -2497,7 +2538,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.29
+"seconds": 0.53
 },
 {
 "task": "75b8110e",
@@ -2506,8 +2547,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 1.55
+"operations": 80030,
+"seconds": 4.41
 },
 {
 "task": "760b3cac",
@@ -2516,8 +2557,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.55
+"operations": 80007,
+"seconds": 3.52
 },
 {
 "task": "776ffc46",
@@ -2526,8 +2567,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 7.11
+"operations": 80016,
+"seconds": 12.78
 },
 {
 "task": "77fdfe62",
@@ -2536,8 +2577,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.58
+"operations": 80013,
+"seconds": 5.01
 },
 {
 "task": "780d0b14",
@@ -2546,8 +2587,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.26
+"operations": 80004,
+"seconds": 10.12
 },
 {
 "task": "7837ac64",
@@ -2556,8 +2597,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 8.82
+"operations": 80024,
+"seconds": 18.15
 },
 {
 "task": "794b24be",
@@ -2566,8 +2607,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40010,
-"seconds": 0.37
+"operations": 80040,
+"seconds": 0.91
 },
 {
 "task": "7b6016b9",
@@ -2589,7 +2630,7 @@ null
 ],
 "found": true,
 "operations": 714,
-"seconds": 23.79
+"seconds": 32.91
 },
 {
 "task": "7b7f7511",
@@ -2598,8 +2639,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.68
+"operations": 80004,
+"seconds": 1.58
 },
 {
 "task": "7c008303",
@@ -2608,8 +2649,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.58
+"operations": 80010,
+"seconds": 4.22
 },
 {
 "task": "7ddcd7ec",
@@ -2618,8 +2659,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.09
+"operations": 80013,
+"seconds": 2.91
 },
 {
 "task": "7df24a62",
@@ -2628,8 +2669,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 10.04
+"operations": 80008,
+"seconds": 18.16
 },
 {
 "task": "7e0986d6",
@@ -2638,8 +2679,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.63
+"operations": 80004,
+"seconds": 6.83
 },
 {
 "task": "7f4411dc",
@@ -2648,8 +2689,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.14
+"operations": 80007,
+"seconds": 4.48
 },
 {
 "task": "7fe24cdd",
@@ -2666,7 +2707,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.5
+"seconds": 0.71
 },
 {
 "task": "80af3007",
@@ -2675,8 +2716,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.15
+"operations": 80010,
+"seconds": 3.59
 },
 {
 "task": "810b9b61",
@@ -2693,7 +2734,7 @@ null
 ],
 "found": true,
 "operations": 477,
-"seconds": 1.32
+"seconds": 2.07
 },
 {
 "task": "82819916",
@@ -2702,8 +2743,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 7.14
+"operations": 80008,
+"seconds": 11.45
 },
 {
 "task": "83302e8f",
@@ -2712,8 +2753,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 24.07
+"operations": 80007,
+"seconds": 33.34
 },
 {
 "task": "834ec97d",
@@ -2722,8 +2763,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.67
+"operations": 80004,
+"seconds": 1.47
 },
 {
 "task": "8403a5d5",
@@ -2732,8 +2773,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.96
+"operations": 80004,
+"seconds": 2.99
 },
 {
 "task": "846bdb03",
@@ -2742,8 +2783,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 2.06
+"operations": 80008,
+"seconds": 4.54
 },
 {
 "task": "855e0971",
@@ -2752,8 +2793,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 6.4
+"operations": 80008,
+"seconds": 8.88
 },
 {
 "task": "85c4e7cd",
@@ -2762,8 +2803,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 2.5
+"operations": 80008,
+"seconds": 4.18
 },
 {
 "task": "868de0fa",
@@ -2785,7 +2826,7 @@ null
 ],
 "found": true,
 "operations": 40005,
-"seconds": 8.08
+"seconds": 8.83
 },
 {
 "task": "8731374e",
@@ -2794,8 +2835,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 10.15
+"operations": 80010,
+"seconds": 35.18
 },
 {
 "task": "88a10436",
@@ -2812,7 +2853,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.77
+"seconds": 2.87
 },
 {
 "task": "88a62173",
@@ -2829,7 +2870,7 @@ null
 ],
 "found": true,
 "operations": 26316,
-"seconds": 0.62
+"seconds": 0.64
 },
 {
 "task": "890034e9",
@@ -2838,8 +2879,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.83
+"operations": 80007,
+"seconds": 17.08
 },
 {
 "task": "8a004b2b",
@@ -2848,8 +2889,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.65
+"operations": 80004,
+"seconds": 6.01
 },
 {
 "task": "8be77c9e",
@@ -2866,7 +2907,7 @@ null
 ],
 "found": true,
 "operations": 423,
-"seconds": 0.04
+"seconds": 0.05
 },
 {
 "task": "8d5021e8",
@@ -2883,7 +2924,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.2
+"seconds": 0.44
 },
 {
 "task": "8d510a79",
@@ -2892,8 +2933,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.71
+"operations": 80010,
+"seconds": 12.85
 },
 {
 "task": "8e1813be",
@@ -2902,8 +2943,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.72
+"operations": 80004,
+"seconds": 8.9
 },
 {
 "task": "8e5a5113",
@@ -2912,8 +2953,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.62
+"operations": 80004,
+"seconds": 7.48
 },
 {
 "task": "8eb1be9a",
@@ -2922,8 +2963,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.45
+"operations": 80008,
+"seconds": 4.78
 },
 {
 "task": "8efcae92",
@@ -2932,8 +2973,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 5.35
+"operations": 80004,
+"seconds": 11.92
 },
 {
 "task": "8f2ea7aa",
@@ -2955,7 +2996,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.5
+"seconds": 2.1
 },
 {
 "task": "90c28cc7",
@@ -2972,7 +3013,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 6.09
+"seconds": 9.34
 },
 {
 "task": "90f3ed37",
@@ -2981,8 +3022,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.7
+"operations": 80016,
+"seconds": 6.66
 },
 {
 "task": "913fb3ed",
@@ -2999,7 +3040,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 2.23
+"seconds": 3.71
 },
 {
 "task": "91413438",
@@ -3008,8 +3049,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.4
+"operations": 80008,
+"seconds": 0.99
 },
 {
 "task": "91714a58",
@@ -3018,8 +3059,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 6.6
+"operations": 80016,
+"seconds": 19.0
 },
 {
 "task": "9172f3a0",
@@ -3036,7 +3077,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.52
+"seconds": 0.64
 },
 {
 "task": "928ad970",
@@ -3045,8 +3086,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.92
+"operations": 80007,
+"seconds": 9.49
 },
 {
 "task": "93b581b8",
@@ -3055,8 +3096,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.18
+"operations": 80004,
+"seconds": 2.32
 },
 {
 "task": "941d9a10",
@@ -3065,8 +3106,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.08
+"operations": 80016,
+"seconds": 5.77
 },
 {
 "task": "94f9d214",
@@ -3087,7 +3128,7 @@ null
 ],
 "found": true,
 "operations": 608,
-"seconds": 0.26
+"seconds": 0.36
 },
 {
 "task": "952a094c",
@@ -3096,8 +3137,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.84
+"operations": 80010,
+"seconds": 6.41
 },
 {
 "task": "9565186b",
@@ -3106,8 +3147,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.4
+"operations": 80008,
+"seconds": 1.31
 },
 {
 "task": "95990924",
@@ -3124,7 +3165,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.85
+"seconds": 2.59
 },
 {
 "task": "963e52fc",
@@ -3150,7 +3191,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.67
+"seconds": 1.1
 },
 {
 "task": "97999447",
@@ -3159,8 +3200,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.63
+"operations": 80004,
+"seconds": 3.22
 },
 {
 "task": "97a05b5b",
@@ -3169,8 +3210,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 5.48
+"operations": 80007,
+"seconds": 9.88
 },
 {
 "task": "98cf29f8",
@@ -3179,8 +3220,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.62
+"operations": 80004,
+"seconds": 4.89
 },
 {
 "task": "995c5fa3",
@@ -3189,8 +3230,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.88
+"operations": 80008,
+"seconds": 1.95
 },
 {
 "task": "99b1bc43",
@@ -3211,7 +3252,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.11
+"seconds": 1.66
 },
 {
 "task": "99fa7670",
@@ -3220,8 +3261,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.38
+"operations": 80008,
+"seconds": 2.48
 },
 {
 "task": "9aec4887",
@@ -3230,8 +3271,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.08
+"operations": 80004,
+"seconds": 5.6
 },
 {
 "task": "9af7a82c",
@@ -3240,8 +3281,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.4
+"operations": 80008,
+"seconds": 1.32
 },
 {
 "task": "9d9215db",
@@ -3250,8 +3291,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 12.67
+"operations": 80004,
+"seconds": 21.46
 },
 {
 "task": "9dfd6313",
@@ -3268,7 +3309,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.82
+"seconds": 1.17
 },
 {
 "task": "9ecd008a",
@@ -3285,7 +3326,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.39
+"seconds": 4.54
 },
 {
 "task": "9edfc990",
@@ -3294,8 +3335,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 100.72
+"operations": 80010,
+"seconds": 157.64
 },
 {
 "task": "9f236235",
@@ -3304,8 +3345,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.63
+"operations": 80004,
+"seconds": 5.85
 },
 {
 "task": "a1570a43",
@@ -3314,8 +3355,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.84
+"operations": 80008,
+"seconds": 4.1
 },
 {
 "task": "a2fd1cf0",
@@ -3324,8 +3365,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.27
+"operations": 80004,
+"seconds": 6.17
 },
 {
 "task": "a3325580",
@@ -3334,8 +3375,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.56
+"operations": 80016,
+"seconds": 3.65
 },
 {
 "task": "a3df8b1e",
@@ -3344,8 +3385,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.49
+"operations": 80013,
+"seconds": 1.32
 },
 {
 "task": "a416b8f3",
@@ -3362,7 +3403,7 @@ null
 ],
 "found": true,
 "operations": 903,
-"seconds": 0.03
+"seconds": 0.06
 },
 {
 "task": "a48eeaf7",
@@ -3371,8 +3412,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.41
+"operations": 80004,
+"seconds": 6.6
 },
 {
 "task": "a5313dff",
@@ -3389,7 +3430,7 @@ null
 ],
 "found": true,
 "operations": 32436,
-"seconds": 1.17
+"seconds": 2.31
 },
 {
 "task": "a5f85a15",
@@ -3398,8 +3439,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.54
+"operations": 80016,
+"seconds": 2.43
 },
 {
 "task": "a61ba2ce",
@@ -3408,8 +3449,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.64
+"operations": 80004,
+"seconds": 5.96
 },
 {
 "task": "a61f2674",
@@ -3426,7 +3467,7 @@ null
 ],
 "found": true,
 "operations": 14946,
-"seconds": 0.56
+"seconds": 1.1
 },
 {
 "task": "a64e4611",
@@ -3435,8 +3476,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 44.48
+"operations": 80004,
+"seconds": 70.54
 },
 {
 "task": "a65b410d",
@@ -3453,7 +3494,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.06
+"seconds": 1.67
 },
 {
 "task": "a68b268e",
@@ -3462,8 +3503,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.43
+"operations": 80010,
+"seconds": 6.32
 },
 {
 "task": "a699fb00",
@@ -3480,7 +3521,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.35
+"seconds": 2.12
 },
 {
 "task": "a740d043",
@@ -3502,7 +3543,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.76
+"seconds": 1.07
 },
 {
 "task": "a78176bb",
@@ -3511,18 +3552,62 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.87
+"operations": 80004,
+"seconds": 4.32
 },
 {
 "task": "a79310a0",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
-"operations": 40002,
-"seconds": 0.53
+"score": 1.0,
+"program": "paint(blank(x), shift(things(x), down)) \u25b8 recolour 8\u21922",
+"ops": [
+"compose"
+],
+"steps": [
+[
+"compose",
+[
+"map",
+[
+"paint",
+[
+"blank",
+[
+"x"
+]
+],
+[
+"shift",
+[
+"things",
+[
+"x"
+]
+],
+[
+"k",
+"down"
+]
+]
+],
+[
+"k",
+[
+[
+0,
+0
+],
+[
+8,
+2
+]
+]
+]
+]
+]
+],
+"found": true,
+"operations": 80004,
+"seconds": 1.21
 },
 {
 "task": "a85d4709",
@@ -3531,8 +3616,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.36
+"operations": 80008,
+"seconds": 0.86
 },
 {
 "task": "a87f7484",
@@ -3549,7 +3634,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.51
+"seconds": 0.98
 },
 {
 "task": "a8c38be5",
@@ -3558,8 +3643,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.21
+"operations": 80004,
+"seconds": 9.3
 },
 {
 "task": "a8d7556c",
@@ -3568,8 +3653,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.85
+"operations": 80004,
+"seconds": 9.34
 },
 {
 "task": "a9f96cdd",
@@ -3578,8 +3663,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.48
+"operations": 80008,
+"seconds": 1.02
 },
 {
 "task": "aabf363d",
@@ -3596,7 +3681,7 @@ null
 ],
 "found": true,
 "operations": 390,
-"seconds": 0.24
+"seconds": 0.41
 },
 {
 "task": "aba27056",
@@ -3605,18 +3690,39 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.14
+"operations": 80004,
+"seconds": 2.51
 },
 {
 "task": "ac0a08a4",
-"score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
-"operations": 40002,
-"seconds": 0.3
+"score": 1.0,
+"program": "upscale(x, count(things(x)))",
+"ops": [
+"compose"
+],
+"steps": [
+[
+"compose",
+[
+"upscale",
+[
+"x"
+],
+[
+"count",
+[
+"things",
+[
+"x"
+]
+]
+]
+]
+]
+],
+"found": true,
+"operations": 80004,
+"seconds": 1.05
 },
 {
 "task": "ae3edfdc",
@@ -3633,7 +3739,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 4.11
+"seconds": 7.21
 },
 {
 "task": "ae4f1146",
@@ -3663,7 +3769,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.46
+"seconds": 2.11
 },
 {
 "task": "aedd82e4",
@@ -3680,7 +3786,7 @@ null
 ],
 "found": true,
 "operations": 636,
-"seconds": 0.27
+"seconds": 0.32
 },
 {
 "task": "af902bf9",
@@ -3689,8 +3795,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.3
+"operations": 80013,
+"seconds": 3.52
 },
 {
 "task": "b0c4d837",
@@ -3699,8 +3805,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.13
+"operations": 80004,
+"seconds": 2.19
 },
 {
 "task": "b190f7f5",
@@ -3709,8 +3815,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.51
+"operations": 80004,
+"seconds": 1.89
 },
 {
 "task": "b1948b0a",
@@ -3727,7 +3833,7 @@ null
 ],
 "found": true,
 "operations": 0,
-"seconds": 0.06
+"seconds": 0.08
 },
 {
 "task": "b230c067",
@@ -3744,7 +3850,7 @@ null
 ],
 "found": true,
 "operations": 477,
-"seconds": 0.61
+"seconds": 0.98
 },
 {
 "task": "b27ca6d3",
@@ -3753,8 +3859,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.01
+"operations": 80004,
+"seconds": 6.08
 },
 {
 "task": "b2862040",
@@ -3771,7 +3877,7 @@ null
 ],
 "found": true,
 "operations": 696,
-"seconds": 1.11
+"seconds": 1.65
 },
 {
 "task": "b527c5c6",
@@ -3780,8 +3886,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 14.8
+"operations": 80012,
+"seconds": 24.08
 },
 {
 "task": "b548a754",
@@ -3790,8 +3896,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.28
+"operations": 80013,
+"seconds": 3.62
 },
 {
 "task": "b60334d2",
@@ -3800,8 +3906,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.73
+"operations": 80004,
+"seconds": 5.95
 },
 {
 "task": "b6afb2da",
@@ -3818,7 +3924,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.54
+"seconds": 2.52
 },
 {
 "task": "b7249182",
@@ -3827,8 +3933,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.7
+"operations": 80004,
+"seconds": 3.15
 },
 {
 "task": "b775ac94",
@@ -3837,8 +3943,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 24.42
+"operations": 80004,
+"seconds": 40.28
 },
 {
 "task": "b782dc8a",
@@ -3847,8 +3953,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 5.16
+"operations": 80010,
+"seconds": 10.55
 },
 {
 "task": "b8825c91",
@@ -3865,7 +3971,7 @@ null
 ],
 "found": true,
 "operations": 1432,
-"seconds": 45.56
+"seconds": 65.67
 },
 {
 "task": "b8cdaf2b",
@@ -3874,8 +3980,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.16
+"operations": 80012,
+"seconds": 2.3
 },
 {
 "task": "b91ae062",
@@ -3884,8 +3990,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 0.31
+"operations": 80030,
+"seconds": 1.19
 },
 {
 "task": "b94a9452",
@@ -3894,8 +4000,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.42
+"operations": 80004,
+"seconds": 2.96
 },
 {
 "task": "b9b7f026",
@@ -3912,7 +4018,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.54
+"seconds": 3.94
 },
 {
 "task": "ba26e723",
@@ -3921,8 +4027,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 3.26
+"operations": 80020,
+"seconds": 5.09
 },
 {
 "task": "ba97ae07",
@@ -3931,8 +4037,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.57
+"operations": 80008,
+"seconds": 3.46
 },
 {
 "task": "bb43febb",
@@ -3949,7 +4055,7 @@ null
 ],
 "found": true,
 "operations": 21624,
-"seconds": 1.29
+"seconds": 1.59
 },
 {
 "task": "bbc9ae5d",
@@ -3958,8 +4064,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 0.24
+"operations": 80010,
+"seconds": 0.73
 },
 {
 "task": "bc1d5164",
@@ -3968,8 +4074,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 0.59
+"operations": 80010,
+"seconds": 1.69
 },
 {
 "task": "bd4472b8",
@@ -3978,8 +4084,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.54
+"operations": 80016,
+"seconds": 3.19
 },
 {
 "task": "bda2d7a6",
@@ -3988,8 +4094,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.66
+"operations": 80004,
+"seconds": 1.78
 },
 {
 "task": "bdad9b1f",
@@ -4014,7 +4120,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.29
+"seconds": 1.76
 },
 {
 "task": "be94b721",
@@ -4034,7 +4140,7 @@ false
 ],
 "found": true,
 "operations": 1020,
-"seconds": 0.31
+"seconds": 0.48
 },
 {
 "task": "beb8660c",
@@ -4043,8 +4149,8 @@ false
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.54
+"operations": 80004,
+"seconds": 3.54
 },
 {
 "task": "c0f76784",
@@ -4066,7 +4172,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.68
+"seconds": 4.1
 },
 {
 "task": "c1d99e64",
@@ -4075,8 +4181,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 7.05
+"operations": 80010,
+"seconds": 12.16
 },
 {
 "task": "c3e719e8",
@@ -4085,8 +4191,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.41
+"operations": 80004,
+"seconds": 1.4
 },
 {
 "task": "c3f564a4",
@@ -4103,7 +4209,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 14.26
+"seconds": 21.91
 },
 {
 "task": "c444b776",
@@ -4112,8 +4218,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 13.36
+"operations": 80004,
+"seconds": 21.82
 },
 {
 "task": "c59eb873",
@@ -4130,7 +4236,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.43
+"seconds": 0.68
 },
 {
 "task": "c8cbb738",
@@ -4139,8 +4245,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.48
+"operations": 80004,
+"seconds": 3.63
 },
 {
 "task": "c8f0f002",
@@ -4157,7 +4263,7 @@ null
 ],
 "found": true,
 "operations": 558,
-"seconds": 0.36
+"seconds": 0.42
 },
 {
 "task": "c909285e",
@@ -4179,7 +4285,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 7.07
+"seconds": 9.93
 },
 {
 "task": "c9e6f938",
@@ -4196,7 +4302,7 @@ null
 ],
 "found": true,
 "operations": 423,
-"seconds": 0.03
+"seconds": 0.04
 },
 {
 "task": "c9f8e694",
@@ -4205,8 +4311,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.45
+"operations": 80010,
+"seconds": 5.53
 },
 {
 "task": "caa06a1f",
@@ -4215,8 +4321,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.3
+"operations": 80016,
+"seconds": 5.6
 },
 {
 "task": "cbded52d",
@@ -4225,8 +4331,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.16
+"operations": 80004,
+"seconds": 6.42
 },
 {
 "task": "cce03e0d",
@@ -4243,7 +4349,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.55
+"seconds": 0.62
 },
 {
 "task": "cdecee7f",
@@ -4252,8 +4358,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.09
+"operations": 80004,
+"seconds": 4.47
 },
 {
 "task": "ce22a75a",
@@ -4275,7 +4381,7 @@ null
 ],
 "found": true,
 "operations": 10564,
-"seconds": 0.93
+"seconds": 1.14
 },
 {
 "task": "ce4f8723",
@@ -4296,7 +4402,7 @@ null
 ],
 "found": true,
 "operations": 656,
-"seconds": 0.55
+"seconds": 1.01
 },
 {
 "task": "ce602527",
@@ -4305,8 +4411,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.86
+"operations": 80008,
+"seconds": 4.21
 },
 {
 "task": "ce9e57f2",
@@ -4315,8 +4421,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.96
+"operations": 80013,
+"seconds": 2.6
 },
 {
 "task": "cf98881b",
@@ -4325,8 +4431,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 1.41
+"operations": 80010,
+"seconds": 3.79
 },
 {
 "task": "d037b0a7",
@@ -4348,7 +4454,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.8
+"seconds": 1.41
 },
 {
 "task": "d06dbe63",
@@ -4357,8 +4463,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.41
+"operations": 80004,
+"seconds": 3.34
 },
 {
 "task": "d07ae81c",
@@ -4367,8 +4473,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.44
+"operations": 80004,
+"seconds": 5.67
 },
 {
 "task": "d0f5fe59",
@@ -4385,7 +4491,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.12
+"seconds": 1.97
 },
 {
 "task": "d10ecb37",
@@ -4394,8 +4500,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.93
+"operations": 80004,
+"seconds": 3.8
 },
 {
 "task": "d13f3404",
@@ -4404,8 +4510,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.35
+"operations": 80004,
+"seconds": 1.32
 },
 {
 "task": "d22278a0",
@@ -4414,8 +4520,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.82
+"operations": 80016,
+"seconds": 4.13
 },
 {
 "task": "d23f8c26",
@@ -4424,8 +4530,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.63
+"operations": 80004,
+"seconds": 1.83
 },
 {
 "task": "d2abd087",
@@ -4442,7 +4548,7 @@ null
 ],
 "found": true,
 "operations": 33867,
-"seconds": 1.2
+"seconds": 1.79
 },
 {
 "task": "d364b489",
@@ -4459,7 +4565,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.96
+"seconds": 3.01
 },
 {
 "task": "d406998b",
@@ -4468,8 +4574,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 0.93
+"operations": 80008,
+"seconds": 2.37
 },
 {
 "task": "d43fd935",
@@ -4478,8 +4584,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.19
+"operations": 80004,
+"seconds": 6.51
 },
 {
 "task": "d4469b4b",
@@ -4488,8 +4594,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 0.55
+"operations": 80017,
+"seconds": 1.95
 },
 {
 "task": "d4a91cb9",
@@ -4498,8 +4604,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.28
+"operations": 80004,
+"seconds": 4.6
 },
 {
 "task": "d4f3cd78",
@@ -4508,8 +4614,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.14
+"operations": 80004,
+"seconds": 2.74
 },
 {
 "task": "d511f180",
@@ -4526,7 +4632,7 @@ null
 ],
 "found": true,
 "operations": 1134,
-"seconds": 0.83
+"seconds": 1.32
 },
 {
 "task": "d5d6de2d",
@@ -4548,7 +4654,7 @@ null
 ],
 "found": true,
 "operations": 20016,
-"seconds": 1.1
+"seconds": 1.79
 },
 {
 "task": "d631b094",
@@ -4565,7 +4671,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.21
+"seconds": 0.45
 },
 {
 "task": "d687bc17",
@@ -4574,8 +4680,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.77
+"operations": 80004,
+"seconds": 9.09
 },
 {
 "task": "d6ad076f",
@@ -4584,8 +4690,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.34
+"operations": 80016,
+"seconds": 5.94
 },
 {
 "task": "d89b689b",
@@ -4594,8 +4700,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.01
+"operations": 80004,
+"seconds": 4.59
 },
 {
 "task": "d8c310e9",
@@ -4604,8 +4710,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.09
+"operations": 80010,
+"seconds": 5.24
 },
 {
 "task": "d90796e8",
@@ -4622,7 +4728,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.63
+"seconds": 1.06
 },
 {
 "task": "d9f24cd1",
@@ -4639,7 +4745,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.41
+"seconds": 5.64
 },
 {
 "task": "d9fac9be",
@@ -4664,7 +4770,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.28
+"seconds": 1.98
 },
 {
 "task": "dae9d2b5",
@@ -4685,7 +4791,7 @@ null
 ],
 "found": true,
 "operations": 760,
-"seconds": 0.24
+"seconds": 0.32
 },
 {
 "task": "db3e9e38",
@@ -4694,8 +4800,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.59
+"operations": 80004,
+"seconds": 1.49
 },
 {
 "task": "db93a21d",
@@ -4704,8 +4810,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 8.06
+"operations": 80008,
+"seconds": 13.64
 },
 {
 "task": "dbc1a6ce",
@@ -4722,7 +4828,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 2.34
+"seconds": 3.89
 },
 {
 "task": "dc0a314f",
@@ -4739,7 +4845,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.6
+"seconds": 5.17
 },
 {
 "task": "dc1df850",
@@ -4748,8 +4854,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.52
+"operations": 80004,
+"seconds": 2.91
 },
 {
 "task": "dc433765",
@@ -4758,8 +4864,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 0.63
+"operations": 80010,
+"seconds": 1.45
 },
 {
 "task": "ddf7fa4f",
@@ -4768,18 +4874,64 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.18
+"operations": 80004,
+"seconds": 5.35
 },
 {
 "task": "de1cd16c",
 "score": 0.0,
-"program": null,
-"ops": [],
-"steps": [],
-"found": false,
-"operations": 40004,
-"seconds": 2.19
+"program": "alone(most(things(x), top)) \u25b8 recolour 1\u21922, 2\u21924, 4\u21926, 6\u21928",
+"ops": [
+"compose"
+],
+"steps": [
+[
+"compose",
+[
+"map",
+[
+"alone",
+[
+"most",
+[
+"things",
+[
+"x"
+]
+],
+[
+"k",
+"top"
+]
+]
+],
+[
+"k",
+[
+[
+1,
+2
+],
+[
+2,
+4
+],
+[
+4,
+6
+],
+[
+6,
+8
+]
+]
+]
+]
+]
+],
+"found": true,
+"operations": 80008,
+"seconds": 5.12
 },
 {
 "task": "ded97339",
@@ -4796,7 +4948,7 @@ null
 ],
 "found": true,
 "operations": 20850,
-"seconds": 1.7
+"seconds": 2.26
 },
 {
 "task": "e179c5f4",
@@ -4805,8 +4957,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.69
+"operations": 80004,
+"seconds": 1.58
 },
 {
 "task": "e21d9049",
@@ -4815,8 +4967,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.05
+"operations": 80006,
+"seconds": 6.81
 },
 {
 "task": "e26a3af2",
@@ -4825,8 +4977,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.61
+"operations": 80013,
+"seconds": 11.94
 },
 {
 "task": "e3497940",
@@ -4848,7 +5000,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.81
+"seconds": 3.15
 },
 {
 "task": "e40b9e2f",
@@ -4865,7 +5017,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.0
+"seconds": 2.87
 },
 {
 "task": "e48d4e1a",
@@ -4874,8 +5026,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.97
+"operations": 80008,
+"seconds": 3.85
 },
 {
 "task": "e5062a87",
@@ -4884,8 +5036,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.51
+"operations": 80004,
+"seconds": 5.69
 },
 {
 "task": "e509e548",
@@ -4894,8 +5046,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.04
+"operations": 80013,
+"seconds": 5.83
 },
 {
 "task": "e50d258f",
@@ -4904,8 +5056,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.85
+"operations": 80004,
+"seconds": 5.44
 },
 {
 "task": "e6721834",
@@ -4914,8 +5066,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.56
+"operations": 80004,
+"seconds": 9.11
 },
 {
 "task": "e73095fd",
@@ -4924,8 +5076,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.69
+"operations": 80016,
+"seconds": 5.27
 },
 {
 "task": "e76a88a6",
@@ -4942,7 +5094,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.13
+"seconds": 3.01
 },
 {
 "task": "e8593010",
@@ -4959,7 +5111,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 1.75
+"seconds": 2.46
 },
 {
 "task": "e8dc4411",
@@ -4968,8 +5120,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.57
+"operations": 80007,
+"seconds": 5.32
 },
 {
 "task": "e9614598",
@@ -4978,8 +5130,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.5
+"operations": 80004,
+"seconds": 2.32
 },
 {
 "task": "e98196ab",
@@ -4996,7 +5148,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 3.22
+"seconds": 4.1
 },
 {
 "task": "e9afcf9a",
@@ -5005,8 +5157,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.6
+"operations": 80004,
+"seconds": 1.29
 },
 {
 "task": "ea32f347",
@@ -5023,7 +5175,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 1.17
+"seconds": 1.93
 },
 {
 "task": "ea786f4a",
@@ -5040,7 +5192,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.87
+"seconds": 1.23
 },
 {
 "task": "eb281b96",
@@ -5049,8 +5201,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.92
+"operations": 80004,
+"seconds": 3.15
 },
 {
 "task": "eb5a1d5d",
@@ -5067,7 +5219,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 4.77
+"seconds": 7.85
 },
 {
 "task": "ec883f72",
@@ -5076,8 +5228,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 1.34
+"operations": 80008,
+"seconds": 2.87
 },
 {
 "task": "ecdecbb3",
@@ -5086,8 +5238,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.83
+"operations": 80004,
+"seconds": 7.52
 },
 {
 "task": "ed36ccf7",
@@ -5104,7 +5256,7 @@ null
 ],
 "found": true,
 "operations": 40004,
-"seconds": 0.27
+"seconds": 0.38
 },
 {
 "task": "ef135b50",
@@ -5113,8 +5265,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.49
+"operations": 80007,
+"seconds": 5.74
 },
 {
 "task": "f15e1fac",
@@ -5123,8 +5275,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 3.24
+"operations": 80004,
+"seconds": 6.55
 },
 {
 "task": "f1cefba8",
@@ -5133,8 +5285,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.9
+"operations": 80004,
+"seconds": 5.65
 },
 {
 "task": "f25fbde4",
@@ -5156,7 +5308,7 @@ null
 ],
 "found": true,
 "operations": 19170,
-"seconds": 0.46
+"seconds": 0.91
 },
 {
 "task": "f25ffba3",
@@ -5173,7 +5325,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 2.16
+"seconds": 3.51
 },
 {
 "task": "f2829549",
@@ -5194,7 +5346,7 @@ null
 ],
 "found": true,
 "operations": 820,
-"seconds": 0.24
+"seconds": 0.57
 },
 {
 "task": "f35d900a",
@@ -5203,8 +5355,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 2.38
+"operations": 80008,
+"seconds": 4.52
 },
 {
 "task": "f5b8619d",
@@ -5213,8 +5365,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.98
+"operations": 80004,
+"seconds": 3.21
 },
 {
 "task": "f76d97a5",
@@ -5223,8 +5375,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 0.6
+"operations": 80004,
+"seconds": 1.59
 },
 {
 "task": "f8a8fe49",
@@ -5233,8 +5385,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.87
+"operations": 80004,
+"seconds": 8.33
 },
 {
 "task": "f8b3ba0a",
@@ -5243,8 +5395,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40004,
-"seconds": 2.07
+"operations": 80020,
+"seconds": 7.79
 },
 {
 "task": "f8c80d96",
@@ -5253,8 +5405,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 2.64
+"operations": 80004,
+"seconds": 5.55
 },
 {
 "task": "f8ff0b80",
@@ -5263,8 +5415,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.53
+"operations": 80004,
+"seconds": 3.68
 },
 {
 "task": "f9012d9b",
@@ -5281,7 +5433,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 0.78
+"seconds": 0.97
 },
 {
 "task": "fafffa47",
@@ -5302,7 +5454,7 @@ null
 ],
 "found": true,
 "operations": 760,
-"seconds": 0.18
+"seconds": 0.22
 },
 {
 "task": "fcb5c309",
@@ -5311,8 +5463,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 1.55
+"operations": 80004,
+"seconds": 4.74
 },
 {
 "task": "fcc82909",
@@ -5321,8 +5473,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40002,
-"seconds": 4.14
+"operations": 80010,
+"seconds": 8.21
 },
 {
 "task": "feca6190",
@@ -5331,8 +5483,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40005,
-"seconds": 0.26
+"operations": 80010,
+"seconds": 0.91
 },
 {
 "task": "ff28f65a",
@@ -5341,8 +5493,8 @@ null
 "ops": [],
 "steps": [],
 "found": false,
-"operations": 40008,
-"seconds": 0.29
+"operations": 80016,
+"seconds": 1.58
 },
 {
 "task": "ff805c23",
@@ -5359,7 +5511,7 @@ null
 ],
 "found": true,
 "operations": 40002,
-"seconds": 4.31
+"seconds": 7.0
 }
 ]
 }
