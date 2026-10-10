@@ -62,10 +62,13 @@ def _init(library):
     compose.LIBRARY[0] = library or None
 
 
+MAX_SIZE = [12]
+
+
 def _one(job):
     tid, t, budget = job
     attempts, used, spent = compose.predict(t["train"], [i for i, _ in t["test"]],
-                                            budget=budget, max_size=12)
+                                            budget=budget, max_size=MAX_SIZE[0])
     if not used:
         return tid, None
     right = all(any(np.array_equal(p, o) for p in att)
@@ -103,7 +106,10 @@ def main(argv=None):
     ap.add_argument("--wake", type=int, default=200_000)
     ap.add_argument("--budget", type=int, default=BUDGET)
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--max-size", type=int, default=12)
+    ap.add_argument("--out", default="arc_grow.json")
     a = ap.parse_args(argv)
+    MAX_SIZE[0] = a.max_size
     tasks = data.experience()
     ids = sorted(tasks)
     halves = [ids[0::2], ids[1::2]]
@@ -136,7 +142,7 @@ def main(argv=None):
                   f"({row['with']['wrong']} wrong) with; gained {row['gained']}, lost "
                   f"{row['lost']}", flush=True)
             os.makedirs("reports", exist_ok=True)
-            with open(os.path.join("reports", "arc_grow.json"), "w") as fh:
+            with open(os.path.join("reports", a.out), "w") as fh:
                 json.dump(rows, fh, indent=1)
                 fh.write("\n")
 

@@ -386,3 +386,20 @@ def test_small_steps_compose_and_ultron_builds_its_own_from_them():
         assert Cm.show(Cm.inline(used, lib)) == "paint(x, things(transpose(x)))"
     finally:
         Cm.LIBRARY[0] = None
+
+
+def test_fast_labelling_finds_the_same_things_in_the_same_order():
+    from ultron.arc import compose as Cm
+    from ultron.arc import grid
+    rng = np.random.default_rng(4)
+    for _ in range(60):
+        x = rng.choice([0, 0, 0, 1, 2, 3], size=tuple(rng.integers(1, 12, size=2))).astype(np.int8)
+        grid.TASK_BACKGROUND[0] = 0
+        for diag, multi in ((False, False), (True, True)):
+            ours = Cm._components(x, diag, multi) or ()
+            theirs = grid._things(x, grid.background(x), diag, multi)
+            assert len(ours) == len(theirs)
+            for p, t in zip(ours, theirs):
+                assert (p.r0, p.c0) == (t.r0, t.c0) and p.size() == t.size
+                assert sorted(zip(*np.nonzero(p.mask))) == sorted(
+                    (r - t.r0, c - t.c0) for r, c in t.cells)

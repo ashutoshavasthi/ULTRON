@@ -25,7 +25,7 @@ smaller and more generic, so what Ultron builds from them can be its own.
 
 import numpy as np
 
-from .grid import background, key, things as _things
+from .grid import background, key
 
 G, T, N, C, K, D = "G", "T", "N", "C", "K", "D"
 MAX_SIDE = 30
@@ -35,11 +35,11 @@ BUDGET = 40_000         # steps per task when the solver falls back on these
 # ------------------------------------------------------------------ things as values
 class P:
     """One thing: where its box starts and what it looks like (-1 where it is empty)."""
-    __slots__ = ("r0", "c0", "patch", "_k")
+    __slots__ = ("r0", "c0", "patch", "_k", "_m", "_size", "_colour", "_colours")
 
     def __init__(self, r0, c0, patch):
         self.r0, self.c0, self.patch = int(r0), int(c0), patch
-        self._k = None
+        self._k = self._m = self._size = self._colour = self._colours = None
 
     def key(self):
         if self._k is None:
@@ -48,24 +48,90 @@ class P:
 
     @property
     def mask(self):
-        return self.patch >= 0
+        if self._m is None:
+            self._m = self.patch >= 0
+        return self._m
 
     def size(self):
-        return int(self.mask.sum())
+        if self._size is None:
+            self._size = int(self.mask.sum())
+        return self._size
 
     def colours(self):
-        return np.unique(self.patch[self.mask])
+        if self._colours is None:
+            self._colours = np.unique(self.patch[self.mask])
+        return self._colours
 
     def colour(self):
-        vals, ns = np.unique(self.patch[self.mask], return_counts=True)
-        return int(vals[np.argmax(ns)]) if len(vals) else -1
+        if self._colour is None:
+            vals, ns = np.unique(self.patch[self.mask], return_counts=True)
+            self._colour = int(vals[np.argmax(ns)]) if len(vals) else -1
+        return self._colour
 
 
-def _from_thing(t):
-    patch = np.full(t.patch.shape, -1, dtype=np.int8)
-    for r, c in t.cells:
-        patch[r - t.r0, c - t.c0] = t.patch[r - t.r0, c - t.c0]
-    return P(t.r0, t.c0, patch)
+_PIECES = {}
+
+
+def _components(g, diagonal, multicolour):
+    """Connected pieces of non-background cells, in reading order of their first cell
+    (the same pieces, in the same order, as grid.things). Each cell takes the smallest
+    label among its connected neighbours until nothing changes."""
+    bg = background(g)
+    k = (key(g), bg, diagonal, multicolour)
+    if k in _PIECES:
+        return _PIECES[k]
+    if len(_PIECES) > 50000:
+        _PIECES.clear()
+    h, w = g.shape
+    on = g != bg
+    if not on.any():
+        _PIECES[k] = None
+        return None
+    big = h * w
+    lab = np.where(on, np.arange(big).reshape(h, w), big)
+    pad = np.full((h + 2, w + 2), big)
+    gp = np.full((h + 2, w + 2), -1, dtype=np.int16)
+    gp[1:-1, 1:-1] = np.where(on, g, -1)
+    shifts = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    if diagonal:
+        shifts += [(1, 1), (1, -1), (-1, 1), (-1, -1)]
+    joins = []
+    for dy, dx in shifts:
+        nb = gp[1 + dy:h + 1 + dy, 1 + dx:w + 1 + dx]
+        ok = on & (nb >= 0) & (True if multicolour else nb == g)
+        joins.append((dy, dx, ok))
+    while True:
+        pad[1:-1, 1:-1] = lab
+        new = lab
+        for dy, dx, ok in joins:
+            nb = pad[1 + dy:h + 1 + dy, 1 + dx:w + 1 + dx]
+            new = np.where(ok & (nb < new), nb, new)
+        # pointer jumping: a cell also takes its label's own label (labels are cells of
+        # the same piece, so this only ever shortens the way to the piece's first cell)
+        flat = np.append(new.ravel(), big)
+        while True:
+            jumped = flat[flat]
+            if (jumped == flat).all():
+                break
+            flat = jumped
+        new = flat[:-1].reshape(h, w)
+        if (new == lab).all():
+            break
+        lab = new
+    cells = np.flatnonzero(on.ravel())
+    labs = lab.ravel()[cells]
+    order = np.argsort(labs, kind="stable")
+    cells, labs = cells[order], labs[order]
+    starts = np.flatnonzero(np.r_[True, labs[1:] != labs[:-1]])
+    rs, cs = cells // w, cells % w
+    r0s, r1s = np.minimum.reduceat(rs, starts), np.maximum.reduceat(rs, starts) + 1
+    c0s, c1s = np.minimum.reduceat(cs, starts), np.maximum.reduceat(cs, starts) + 1
+    out = []
+    for v, r0, r1, c0, c1 in zip(labs[starts], r0s, r1s, c0s, c1s):
+        m = lab[r0:r1, c0:c1] == v
+        out.append(P(r0, c0, np.where(m, g[r0:r1, c0:c1], -1).astype(np.int8)))
+    _PIECES[k] = tuple(out) or None
+    return _PIECES[k]
 
 
 def _tkey(ts):
@@ -74,13 +140,12 @@ def _tkey(ts):
 
 # ------------------------------------------------------------------ the steps
 def s_things(g):
-    return tuple(_from_thing(t) for t in _things(g, background(g))) or None
+    return _components(g, False, False)
 
 
 def s_pieces(g):
     """Things whose cells may have several colours and touch at corners."""
-    return tuple(_from_thing(t) for t in _things(g, background(g), diagonal=True,
-                                                 multicolour=True)) or None
+    return _components(g, True, True)
 
 
 MEASURES = {
@@ -153,29 +218,37 @@ def s_flip_each(ts, d):
     return tuple(P(p.r0, p.c0, f(p.patch).copy()) for p in ts)
 
 
+def _clip(g, p):
+    """The part of the picture under a thing, and the part of the thing on the picture."""
+    h, w = g.shape
+    ph, pw = p.patch.shape
+    y0, x0 = max(p.r0, 0), max(p.c0, 0)
+    y1, x1 = min(p.r0 + ph, h), min(p.c0 + pw, w)
+    if y0 >= y1 or x0 >= x1:
+        return None, None
+    return (slice(y0, y1), slice(x0, x1)), \
+        (slice(y0 - p.r0, y1 - p.r0), slice(x0 - p.c0, x1 - p.c0))
+
+
 def s_paint(g, ts):
     out = g.copy()
-    h, w = g.shape
     for p in ts:
-        ph, pw = p.patch.shape
-        for r in range(ph):
-            for c in range(pw):
-                v = p.patch[r, c]
-                y, x = p.r0 + r, p.c0 + c
-                if v >= 0 and 0 <= y < h and 0 <= x < w:
-                    out[y, x] = v
+        at, part = _clip(g, p)
+        if at is not None:
+            pm = p.patch[part]
+            sub = out[at]
+            m = pm >= 0
+            sub[m] = pm[m]
     return out
 
 
 def s_erase(g, ts):
     out = g.copy()
     bg = background(g)
-    h, w = g.shape
     for p in ts:
-        rs, cs = np.nonzero(p.mask)
-        rs, cs = rs + p.r0, cs + p.c0
-        ok = (rs >= 0) & (rs < h) & (cs >= 0) & (cs < w)
-        out[rs[ok], cs[ok]] = bg
+        at, part = _clip(g, p)
+        if at is not None:
+            out[at][p.mask[part]] = bg
     return out
 
 
