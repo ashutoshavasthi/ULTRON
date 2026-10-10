@@ -1,0 +1,27 @@
+[
+ {
+  "round": 1,
+  "practice_half": 0,
+  "practised": 317,
+  "explained_in_practice": 26,
+  "steps": 5,
+  "step_list": [
+   "own1() = things(x)",
+   "own2() = crop(rot90(x), least(own1(), colour))",
+   "own3(T) = paint(x, _a)",
+   "own4() = rot180(x)",
+   "own5(T) = alone(least(_a, colour))"
+  ],
+  "unseen": 316,
+  "without": {
+   "right": 18,
+   "wrong": 2
+  },
+  "with": {
+   "right": 18,
+   "wrong": 2
+  },
+  "gained": [],
+  "lost": []
+ }
+]
