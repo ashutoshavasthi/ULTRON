@@ -196,6 +196,27 @@ FIRST = [None]          # operations spent when the first searched program was f
 LEARNED = {"colourmap", "cells", "things", "marks", "pick", "moves", "symmetry", "copies",
            "gaps", "summary", "tiles"}
 LIBRARY = [None]        # building blocks Ultron learned itself (library.py), when switched on
+BEST_FIRST = [True]     # with intuition on: grow the most promising program of any length
+DEPTH_PENALTY = 2.0     # what one more step costs against the intuition's score (log-odds)
+DESCRIBE = [None]       # when a list: the shortest description with exceptions is put in it
+
+
+def _learn_laws(kind, grids, targets, ctx):
+    """Laws of one kind that turn these pictures into the targets (each learned from
+    the task's own examples)."""
+    if kind == "cells":
+        r = [cells.learn(grids, targets)]
+    elif kind == "things":
+        r = objects.rivals(grids, targets)
+    elif kind == "symmetry":
+        r = symmetry.rivals(grids, targets, ctx["in_colours"])
+    elif kind == "summary":
+        r = [summary.learn(grids, targets)]
+    elif kind == "tiles":
+        r = [tiles.learn(grids, targets)]
+    else:
+        r = [getattr(objects, "learn_" + kind)(grids, targets)]
+    return [x for x in r if x is not None]
 
 
 def _search(train, budget, max_depth, want):
@@ -204,15 +225,22 @@ def _search(train, budget, max_depth, want):
     if GUIDE[0] is not None:
         from . import guide
         reg = guide.order(GUIDE[0], train, reg)
+    tails = {}
     if LIBRARY[0]:
         from . import library
         reg = library.operations(LIBRARY[0], ctx) + reg     # its own blocks first
+        tails = {f"block{i + 1}": library.law_tail(b) for i, b in enumerate(LIBRARY[0])}
     for name, f, _ in reg:
         _OPS[name] = f
     ins = [i for i, _ in train]
     targets = [o for _, o in train]
     goal = tuple(key(o) for o in targets)
-    found, spent = [], 0
+    found = []
+    desc = None
+    if DESCRIBE[0] is not None:
+        from .descriptions import Best
+        desc = Best(ins, targets, len(reg))
+        DESCRIBE[0].append(desc)
     m = _colour_map(ins, targets)
     if m is not None:
         found.append((("colourmap", m),))
@@ -244,6 +272,9 @@ def _search(train, budget, max_depth, want):
     arrangement = tiles.learn(ins, targets)
     if arrangement is not None:
         found.append((("tiles", arrangement),))
+    if desc is not None:
+        for q in found:
+            desc.offer_exact(q, length(q))
     frontier = [((), ins)]
     seen = {tuple(key(g) for g in ins)}
     cache = {}
@@ -251,75 +282,118 @@ def _search(train, budget, max_depth, want):
     if INTUITION[0] is not None or RECORD[0] is not None:
         from . import intuition as I
         looks[()] = I._look(ins, targets)
+    state = {"spent": 0}
+
+    def expand(prog, grids, depth):
+        """Every program one step longer than prog: checks each against the targets and
+        returns the ones worth growing further, with how promising each looks (None once
+        the budget is spent)."""
+        children = []
+        for name, f, p in reg:
+            state["spent"] += len(grids)
+            if state["spent"] > budget:
+                return None
+            outs = []
+            for g in grids:
+                ck = (name, repr(p), key(g))
+                if ck in cache:
+                    r = cache[ck]
+                else:
+                    try:
+                        r = f(g, p)
+                    except (ValueError, IndexError):
+                        r = None
+                    cache[ck] = r
+                if r is None or r.size == 0 or r.shape[0] > 30 or r.shape[1] > 30:
+                    outs = None
+                    break
+                outs.append(r)
+            if outs is None:
+                continue
+            k = tuple(key(g) for g in outs)
+            if k in seen:
+                continue
+            seen.add(k)
+            p2 = prog + ((name, p),)
+            n_found = len(found)
+            if k == goal:
+                found.append(p2)
+                if FIRST[0] is None:
+                    FIRST[0] = state["spent"]
+            else:
+                if desc is not None:
+                    desc.offer(p2, length(p2), outs, targets)
+                cm = _colour_map(outs, targets)
+                if cm is not None:
+                    found.append(p2 + (("colourmap", cm),))
+                elif tails.get(name):
+                    # a block of its own that ends "then learn a law of this kind"
+                    for law in _learn_laws(tails[name], outs, targets, ctx):
+                        found.append(p2 + ((tails[name], law),))
+                elif depth == 1:
+                    rule = cells.learn(outs, targets)
+                    if rule is not None:
+                        found.append(p2 + (("cells", rule),))
+                    for law in objects.rivals(outs, targets):
+                        found.append(p2 + (("things", law),))
+                    marks = objects.learn_marks(outs, targets)
+                    if marks is not None:
+                        found.append(p2 + (("marks", marks),))
+                    pick = objects.learn_pick(outs, targets)
+                    if pick is not None:
+                        found.append(p2 + (("pick", pick),))
+            if desc is not None:
+                for q in found[n_found:]:
+                    desc.offer_exact(q, length(q))
+            if depth < max_depth or RECORD[0] is not None:
+                if looks[()] is not None:
+                    fs, now = I.features(outs, targets, looks[prog], depth, name)
+                    looks[p2] = now
+                    if RECORD[0] is not None and depth == 1:
+                        RECORD[0].append((p2, fs))
+                    score = I.Model.score(INTUITION[0], fs) if INTUITION[0] else 0.0
+                else:
+                    score = 0.0
+                if depth < max_depth:
+                    children.append((p2, outs, score))
+        return children
+
+    def enough(depth):
+        best = sorted(length(q) for q in found)
+        return len(best) >= want and best[want - 1] <= depth
+
+    if INTUITION[0] is not None and BEST_FIRST[0]:
+        # best first across depths: always grow the most promising half-built program,
+        # whatever its length (a longer one pays DEPTH_PENALTY per step)
+        import heapq
+        heap, n = [(0.0, 0, (), ins)], 1
+        while heap:
+            _, _, prog, grids = heapq.heappop(heap)
+            depth = len(prog) + 1
+            if enough(depth):
+                continue    # nothing grown from here can be shorter than what's found
+            children = expand(prog, grids, depth)
+            if children is None:
+                break
+            for p2, outs, score in children:
+                heapq.heappush(heap, (DEPTH_PENALTY * len(p2) - score, n, p2, outs))
+                n += 1
+        return found, state["spent"]
     for depth in range(1, max_depth + 1):
-        best = sorted(length(f) for f in found)
-        if len(best) >= want and best[want - 1] <= depth:
-            return found, spent     # nothing this long can be shorter than what's found
+        if enough(depth):
+            return found, state["spent"]   # nothing this long can be shorter than found
         nxt = []
         for prog, grids in frontier:
-            for name, f, p in reg:
-                spent += len(grids)
-                if spent > budget:
-                    return found, spent
-                outs = []
-                for g in grids:
-                    ck = (name, repr(p), key(g))
-                    if ck in cache:
-                        r = cache[ck]
-                    else:
-                        try:
-                            r = f(g, p)
-                        except (ValueError, IndexError):
-                            r = None
-                        cache[ck] = r
-                    if r is None or r.size == 0 or r.shape[0] > 30 or r.shape[1] > 30:
-                        outs = None
-                        break
-                    outs.append(r)
-                if outs is None:
-                    continue
-                k = tuple(key(g) for g in outs)
-                if k in seen:
-                    continue
-                seen.add(k)
-                p2 = prog + ((name, p),)
-                if k == goal:
-                    found.append(p2)
-                    if FIRST[0] is None:
-                        FIRST[0] = spent
-                else:
-                    cm = _colour_map(outs, targets)
-                    if cm is not None:
-                        found.append(p2 + (("colourmap", cm),))
-                    elif depth == 1:
-                        rule = cells.learn(outs, targets)
-                        if rule is not None:
-                            found.append(p2 + (("cells", rule),))
-                        for law in objects.rivals(outs, targets):
-                            found.append(p2 + (("things", law),))
-                        marks = objects.learn_marks(outs, targets)
-                        if marks is not None:
-                            found.append(p2 + (("marks", marks),))
-                        pick = objects.learn_pick(outs, targets)
-                        if pick is not None:
-                            found.append(p2 + (("pick", pick),))
-                if depth < max_depth or RECORD[0] is not None:
-                    if looks[()] is not None:
-                        f, now = I.features(outs, targets, looks[prog], depth, name)
-                        looks[p2] = now
-                        if RECORD[0] is not None and depth == 1:
-                            RECORD[0].append((p2, f))
-                        score = I.Model.score(INTUITION[0], f) if INTUITION[0] else 0.0
-                    else:
-                        score = 0.0
-                    if depth < max_depth:
-                        nxt.append((p2, outs, score))
+            children = expand(prog, grids, depth)
+            if children is None:
+                return found, state["spent"]
+            nxt += children
         # intuition: the most promising half-built programs are expanded first (a stable
         # sort, so without intuition the order is unchanged)
         if INTUITION[0] is not None:
             nxt.sort(key=lambda n: -n[2])
         frontier = [(p, o) for p, o, _ in nxt]
-    return found, spent
+    return found, state["spent"]
 
 
 def predict(train, tests, **kw):

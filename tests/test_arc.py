@@ -267,3 +267,76 @@ def test_intuition_learns_to_rank_the_step_that_leads_somewhere():
     assert model.score(on.copy()) > model.score(off.copy())
     again = I.Model().train(X, y)                       # deterministic
     assert np.allclose(again.w, model.w)
+
+
+def _flipped_with_holes(seed, n=3):
+    rng = np.random.default_rng(seed)
+    train = []
+    for _ in range(n):
+        x = np.zeros((7, 7), dtype=np.int8)
+        r, c = rng.integers(0, 4, size=2)
+        x[r:r + 3, c:c + 3] = 2
+        x[r + 1, c + 1] = 0
+        x[0, 6] = 1
+        train.append((x, ops.fill_enclosed(x[:, ::-1], 4)))
+    return train
+
+
+def test_a_description_with_exceptions_counts_only_when_it_is_shorter():
+    from ultron.arc import descriptions, grid
+    grid.TASK_BACKGROUND[0] = 0
+    train = _flipped_with_holes(3)
+    ins, outs = [i for i, _ in train], [o for _, o in train]
+    best = descriptions.Best(ins, outs, 237)
+    # "flip" alone gets all but the hole right: a few exceptions, far shorter than
+    # listing every cell that changes
+    flipped = [i[:, ::-1] for i in ins]
+    best.offer((("flip_h", None),), 1, flipped, outs)
+    assert best.program == (("flip_h", None),) and best.wrong == 3 and best.saving() > 0
+    # a program that leaves everything wrong is no description at all
+    worse = descriptions.Best(ins, outs, 237)
+    worse.offer((("rot90", None),), 1, [np.full_like(o, 7) for o in outs], outs)
+    assert worse.program == ()
+    # an exact explanation is the shortest description
+    best.offer_exact((("flip_h", None), ("fill_enclosed", 4)), 2)
+    assert best.wrong == 0
+
+
+def test_blocks_with_an_open_parameter_or_a_law_tail_and_best_first_search():
+    from ultron.arc import grid, library
+    from ultron.arc import intuition as I
+    # four tasks share "flip, then fill holes, then a thing law" -- the colour differs
+    programs = {t: [["flip_h", None], ["fill_enclosed", c], ["things", None]]
+                for t, c in zip("abcd", (4, 3, 6, 1))}
+    programs["e"] = [["rot180", None]]
+    blocks = library.learn(programs)
+    top = blocks[0]
+    assert top["steps"] == [["flip_h", None], ["fill_enclosed", "C"], ["things", None]]
+    assert library.law_tail(top) == "things" and top["uses"] == 4
+    # a two-step piece shared by two tasks doesn't pay for its own description (2 x 1 - 2)
+    assert library.learn({"a": programs["a"][1:], "b": programs["b"][1:]}) == []
+    # any parameter may be left open, not only a colour
+    gravity = {t: [["gravity", d], ["crop_content", None]] for t, d in
+               zip("abc", ("down", "up", "left"))}
+    assert library.learn(gravity)[0]["steps"] == [["gravity", "*"], ["crop_content", None]]
+    # the block runs as one step: flip, fill, and the law is learned on the result
+    grid.TASK_BACKGROUND[0] = 0
+    train = []
+    for i, o in _flipped_with_holes(1):
+        i, o = i.copy(), o.copy()
+        i[6, 0] = 2                     # a lone speck of the same colour stays as it is
+        o = np.where(o == 2, 5, o).astype(np.int8)
+        o[6, 6] = 2
+        train.append((i, o))
+    solve.LIBRARY[0] = [top]
+    try:
+        found, _ = solve.solve(train, max_depth=2)
+        assert found and found[0][0][0] == "block1" and found[0][1][0] == "things"
+        # best first across depths (with intuition on) finds it too
+        solve.INTUITION[0] = I.Model(np.zeros(2 * I.N_LOOK + 3), np.zeros(2 * I.N_LOOK + 3),
+                                     np.ones(2 * I.N_LOOK + 3))
+        again, _ = solve.solve(train, max_depth=2)
+        assert again and again[0][0][0] == "block1"
+    finally:
+        solve.LIBRARY[0] = None
+        solve.INTUITION[0] = None

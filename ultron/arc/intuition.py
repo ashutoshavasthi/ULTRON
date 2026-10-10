@@ -139,12 +139,17 @@ def experience_from_search(train, budget=40000):
 
 def dream(train, rng, budget=4000):
     """A made-up task from real pictures: a chain of two of its own operations applied
-    to them. Returns (pictures, made-up targets, the chain) or None."""
+    to them (its own building blocks among them, when it has learned some). Returns
+    (pictures, made-up targets, the chain) or None."""
     from . import ops as O
     from . import solve
     from .grid import key
     ins = [i for i, _ in train]
-    reg = O.registry(solve.context(train))
+    ctx = solve.context(train)
+    reg = O.registry(ctx)
+    if solve.LIBRARY[0]:
+        from . import library
+        reg = library.operations(solve.LIBRARY[0], ctx) + reg
     for _ in range(20):
         chain = [rng.choice(reg), rng.choice(reg)]
         outs = []
@@ -167,14 +172,27 @@ def dream(train, rng, budget=4000):
     return None
 
 
-def learn(tasks, n_dreams=300, seed=0):
+def _experience(train):
+    return experience_from_search(train)
+
+
+def learn(tasks, n_dreams=300, seed=0, workers=1):
     """Learn from its own searches on these tasks and from dreams made of their
-    pictures."""
+    pictures (its own searches run in parallel when workers > 1: each is on its own,
+    so the result is the same)."""
     rng = random.Random(seed)
     X, y = [], []
     ids = sorted(tasks)
-    for tid in ids:
-        a, b = experience_from_search(tasks[tid]["train"])
+    trains = [tasks[tid]["train"] for tid in ids]
+    if workers > 1:
+        import multiprocessing as mp
+        from . import harness, solve
+        with mp.get_context("fork").Pool(workers, harness._init,
+                                         (solve.LIBRARY[0], solve.GUIDE[0], None)) as pool:
+            got = pool.map(_experience, trains, chunksize=1)
+    else:
+        got = [_experience(t) for t in trains]
+    for a, b in got:
         X += a
         y += b
     for k in range(n_dreams):
