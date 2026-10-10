@@ -27,7 +27,7 @@ import numpy as np
 
 from .grid import background, key
 
-G, T, N, C, K, D = "G", "T", "N", "C", "K", "D"
+G, T, N, C, K, D, L = "G", "T", "N", "C", "K", "D", "L"
 MAX_SIDE = 30
 BUDGET = 40_000         # steps per task when the solver falls back on these
 
@@ -72,23 +72,23 @@ class P:
 _PIECES = {}
 
 
-def _components(g, diagonal, multicolour):
+def _components(g, diagonal, multicolour, ground=False):
     """Connected pieces of non-background cells, in reading order of their first cell
     (the same pieces, in the same order, as grid.things). Each cell takes the smallest
     label among its connected neighbours until nothing changes."""
     bg = background(g)
-    k = (key(g), bg, diagonal, multicolour)
+    k = (key(g), bg, diagonal, multicolour, ground)
     if k in _PIECES:
         return _PIECES[k]
     if len(_PIECES) > 50000:
         _PIECES.clear()
     h, w = g.shape
-    on = g != bg
+    on = (g == bg) if ground else (g != bg)
     if not on.any():
         _PIECES[k] = None
         return None
     big = h * w
-    lab = np.where(on, np.arange(big).reshape(h, w), big)
+    lab = np.where(on, np.arange(big).reshape(h, w), big).astype(np.int64)
     pad = np.full((h + 2, w + 2), big)
     gp = np.full((h + 2, w + 2), -1, dtype=np.int16)
     gp[1:-1, 1:-1] = np.where(on, g, -1)
@@ -334,6 +334,145 @@ def s_colour(ts):
     return int(v[np.argmax(n)])
 
 
+# --- repetition: a step repeated until something stops it
+def s_slide(g, ts, d):
+    """Each thing moves toward d, one cell at a time, until the next cell is taken or
+    off the picture (the things nearest that side move first)."""
+    dr, dc = STEP[d]
+    bg = background(g)
+    h, w = g.shape
+    canvas = s_erase(g, ts)
+
+    def lead(p):
+        ph, pw = p.patch.shape
+        return (p.r0 + (ph - 1 if dr > 0 else 0)) * dr + (p.c0 + (pw - 1 if dc > 0 else 0)) * dc
+    for p in sorted(ts, key=lambda p: -lead(p)):
+        rs, cs = np.nonzero(p.mask)
+        rs, cs = rs + p.r0, cs + p.c0
+        if rs.min() < 0 or cs.min() < 0 or rs.max() >= h or cs.max() >= w:
+            return None
+        step = 0
+        while True:
+            ny, nx = rs + (step + 1) * dr, cs + (step + 1) * dc
+            if ny.min() < 0 or nx.min() < 0 or ny.max() >= h or nx.max() >= w or \
+                    (canvas[ny, nx] != bg).any():
+                break
+            step += 1
+        canvas = s_paint(canvas, (P(p.r0 + step * dr, p.c0 + step * dc, p.patch),))
+    return canvas
+
+
+def s_ray(g, ts, d):
+    """From every cell of these things, a line of its colour toward d, until it meets
+    something or the edge."""
+    dr, dc = STEP[d]
+    bg = background(g)
+    h, w = g.shape
+    out = g.copy()
+    for p in ts:
+        for r, c in zip(*np.nonzero(p.mask)):
+            v = p.patch[r, c]
+            y, x = p.r0 + r + dr, p.c0 + c + dc
+            while 0 <= y < h and 0 <= x < w and g[y, x] == bg:
+                out[y, x] = v
+                y, x = y + dr, x + dc
+    return out
+
+
+def s_dots(g):
+    """Every coloured cell as a thing of its own."""
+    bg = background(g)
+    rs, cs = np.nonzero(g != bg)
+    return tuple(P(r, c, g[r:r + 1, c:c + 1].copy()) for r, c in zip(rs, cs)) or None
+
+
+# --- regions and cells of things
+def s_holes(g):
+    """Pieces of background that don't reach the edge (enclosed), as things."""
+    h, w = g.shape
+    ps = _components(g, False, False, ground=True) or ()
+    out = tuple(p for p in ps if p.r0 > 0 and p.c0 > 0 and p.r0 + p.patch.shape[0] < h
+                and p.c0 + p.patch.shape[1] < w)
+    return out or None
+
+
+def s_inside(ts):
+    """Each thing's inner cells: those whose four neighbours are the thing too."""
+    out = []
+    for p in ts:
+        m = np.pad(p.mask, 1)
+        inner = m[1:-1, 1:-1] & m[:-2, 1:-1] & m[2:, 1:-1] & m[1:-1, :-2] & m[1:-1, 2:]
+        if inner.any():
+            out.append(P(p.r0, p.c0, np.where(inner, p.patch, -1).astype(np.int8)))
+    return tuple(out) or None
+
+
+def s_ring(ts):
+    """The cells just around each thing's box, in the thing's colour."""
+    out = []
+    for p in ts:
+        ph, pw = p.patch.shape
+        q = np.full((ph + 2, pw + 2), p.colour(), dtype=np.int8)
+        q[1:-1, 1:-1] = -1
+        out.append(P(p.r0 - 1, p.c0 - 1, q))
+    return tuple(out)
+
+
+# --- two pictures, cell by cell
+def s_overlay(a, b):
+    """b's coloured cells fill a's background (same size)."""
+    if a.shape != b.shape:
+        return None
+    bg = background(a)
+    out = a.copy()
+    m = (a == bg) & (b != background(b))
+    out[m] = b[m]
+    return out
+
+
+LOGIC = {"both": lambda x, y: x & y, "either": lambda x, y: x | y,
+         "one": lambda x, y: x ^ y, "first": lambda x, y: x & ~y,
+         "neither": lambda x, y: ~x & ~y}
+
+
+def s_logic(a, b, rule, c):
+    """Lay two pictures over each other; colour c where the rule holds of their
+    coloured cells, background elsewhere."""
+    if a.shape != b.shape:
+        return None
+    m = LOGIC[rule](a != background(a), b != background(b))
+    out = np.full_like(a, background(a))
+    out[m] = c
+    return out
+
+
+def s_left(g):
+    w = g.shape[1]
+    return g[:, :w // 2] if w >= 2 else None
+
+
+def s_right(g):
+    w = g.shape[1]
+    return g[:, w - w // 2:] if w >= 2 else None
+
+
+def s_top(g):
+    h = g.shape[0]
+    return g[:h // 2] if h >= 2 else None
+
+
+def s_bottom(g):
+    h = g.shape[0]
+    return g[h - h // 2:] if h >= 2 else None
+
+
+def s_part(g, n):
+    """The n-th part between the picture's separator lines."""
+    from .grid import parts
+    ps = parts(g)
+    return ps[n - 1] if ps is not None and 1 <= n <= len(ps) else None
+
+
 # (name, argument types, result type, function) -- the counted, frozen steps
 STEPS = [
     ("rot90", (G,), G, lambda g: np.rot90(g, -1)),
@@ -363,6 +502,20 @@ STEPS = [
     ("count", (T,), N, s_count),
     ("size", (T,), N, s_size),
     ("colour", (T,), C, s_colour),
+    # repetition and cells (lever 1)
+    ("slide", (G, T, D), G, s_slide),
+    ("ray", (G, T, D), G, s_ray),
+    ("holes", (G,), T, s_holes),
+    ("dots", (G,), T, s_dots),
+    ("inside", (T,), T, s_inside),
+    ("ring", (T,), T, s_ring),
+    ("overlay", (G, G), G, s_overlay),
+    ("logic", (G, G, L, C), G, s_logic),
+    ("left", (G,), G, s_left),
+    ("right", (G,), G, s_right),
+    ("top", (G,), G, s_top),
+    ("bottom", (G,), G, s_bottom),
+    ("part", (G, N), G, s_part),
 ]
 FUNCS = {name: f for name, _, _, f in STEPS}
 
@@ -370,6 +523,7 @@ FUNCS = {name: f for name, _, _, f in STEPS}
 # ------------------------------------------------------------------ running a program
 LIBRARY = [None]        # steps Ultron built itself from these (learn_library), when on
 FINISH = [True]         # check each new set of things / picture as a finished answer
+CELLS_UP_TO = 4         # a local law per cell is tried on pictures made in this many steps
 
 
 def run(expr, x, holes=()):
@@ -404,6 +558,10 @@ def s_map(g, m):
 def _apply(tag, args, x):
     if tag == "map":
         return s_map(*args)
+    if tag == "cells":
+        from . import cells
+        g, (fs, items) = args
+        return cells.apply((tuple(fs), {_tup(k): v for k, v in items}), g)
     lib = _lib()
     if tag in lib:
         return run(lib[tag]["pattern"], x, args)
@@ -415,6 +573,10 @@ def _apply(tag, args, x):
 
 def _lib():
     return {e["name"]: e for e in (LIBRARY[0] or [])}
+
+
+def _tup(v):
+    return tuple(_tup(x) for x in v) if isinstance(v, (list, tuple)) else v
 
 
 def _check(v):
@@ -439,6 +601,9 @@ def size(expr):
         return 1
     if expr[0] == "map":
         return size(expr[1]) + 0.5 * sum(1 for a, b in expr[2][1] if a != b)
+    if expr[0] == "cells":
+        fs, items = expr[2][1]
+        return size(expr[1]) + 1 + 0.5 * len(fs) * sum(1 for k, v in items if k[0] != v)
     return 1 + sum(size(a) for a in expr[1:])
 
 
@@ -450,6 +615,10 @@ def show(expr):
         return str(expr[1])
     if tag == "hole":
         return "_" + "abc"[expr[1]]
+    if tag == "cells":
+        fs, items = expr[2][1]
+        changes = sum(1 for k, v in items if k[0] != v)
+        return show(expr[1]) + f" ▸ local law on ({', '.join(fs)}): {changes} situations"
     if tag == "map":
         return show(expr[1]) + " ▸ recolour " + ", ".join(
             f"{a}→{b}" for a, b in expr[2][1] if a != b)
@@ -490,7 +659,7 @@ def constants(train):
     ins = [i for i, _ in train]
     outs = [o for _, o in train]
     cols = sorted({int(c) for g in ins + outs for c in np.unique(g)})
-    return {K: list(MEASURES), D: list(STEP), N: [1, 2, 3], C: cols}
+    return {K: list(MEASURES), D: list(STEP), N: [1, 2, 3], C: cols, L: list(LOGIC)}
 
 
 def search(train, budget=40_000, max_size=9, want=2, stats=None):
@@ -500,7 +669,7 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None):
     goal = tuple(key(o) for o in targets)
     consts = constants(train)
     # bank[type][size] = [(expr, values)]; seen[type] = value keys already had
-    bank = {t: {} for t in (G, T, N, C, K, D)}
+    bank = {t: {} for t in (G, T, N, C, K, D, L)}
     seen = {t: set() for t in bank}
     found = []
     spent = [0]
@@ -518,6 +687,14 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None):
                 m = _colour_map(vals, targets)
                 if m is not None:
                     found.append(("map", expr, ("k", tuple(sorted(m.items())))))
+                elif s <= CELLS_UP_TO and all(v.shape == o.shape for v, o in zip(vals, targets)):
+                    # a law for each cell, from what is around it (cells.py)
+                    from . import cells
+                    spent[0] += len(ins)
+                    rule = cells.learn(list(vals), targets)
+                    if rule is not None:
+                        found.append(("cells", expr, ("k", (rule[0], tuple(sorted(
+                            rule[1].items(), key=repr))))))
         elif t == T and FINISH[0]:
             # the ways a set of things can finish a program, checked against the goal
             # (not kept: only a match matters)
@@ -539,7 +716,7 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None):
                         found.append((name,) + args)
 
     add(G, 1, ("x",), tuple(ins))
-    for t in (K, D, N, C):
+    for t in (K, D, N, C, L):
         for v in consts[t]:
             add(t, 1, ("k", v), tuple(v for _ in ins))
     # its own steps first: a step built from others is tried before the others
@@ -639,7 +816,7 @@ def _typed_subtrees(expr, want, lib, out):
     """(subtree, its type) for every subtree that is a step (not x, not a constant)."""
     if expr[0] in ("x", "k", "hole"):
         return
-    if expr[0] == "map":       # a recolouring learned per task is not a piece to share
+    if expr[0] in ("map", "cells"):    # a law learned per task is not a piece to share
         _typed_subtrees(expr[1], G, lib, out)
         return
     argt, outt = _sig(expr[0], lib)
@@ -652,7 +829,7 @@ def anti_unify(a, b, t, lib, holes):
     """What a and b (both of type t) share; a typed hole where they differ."""
     if a == b:
         return a
-    if a[0] == b[0] and a[0] not in ("x", "k", "hole", "map") and len(a) == len(b):
+    if a[0] == b[0] and a[0] not in ("x", "k", "hole", "map", "cells") and len(a) == len(b):
         argt, _ = _sig(a[0], lib)
         return (a[0],) + tuple(anti_unify(x, y, tt, lib, holes)
                                for x, y, tt in zip(a[1:], b[1:], argt))

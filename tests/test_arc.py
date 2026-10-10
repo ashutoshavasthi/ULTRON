@@ -403,3 +403,43 @@ def test_fast_labelling_finds_the_same_things_in_the_same_order():
                 assert (p.r0, p.c0) == (t.r0, t.c0) and p.size() == t.size
                 assert sorted(zip(*np.nonzero(p.mask))) == sorted(
                     (r - t.r0, c - t.c0) for r, c in t.cells)
+
+
+def test_steps_that_repeat_and_work_cell_by_cell():
+    from ultron.arc import compose as Cm
+    from ultron.arc import grid, ops as O
+    grid.TASK_BACKGROUND[0] = 0
+    run = lambda text, x: Cm.run(Cm.parse(text), x)
+    x = g([[0, 0, 0, 0, 0], [0, 2, 2, 2, 0], [0, 2, 0, 2, 0], [0, 2, 2, 2, 0], [3, 0, 0, 0, 0]])
+    # repetition: things slide until they touch; rays run until they meet something
+    assert np.array_equal(run("slide(x, pieces(x), up)", x), O.slide_things(x, "up"))
+    assert np.array_equal(run("slide(x, dots(x), down)", x), O.gravity(x, "down"))
+    assert np.array_equal(run("ray(x, with(things(x), colour, 3), right)", x),
+                          O.extend_rays(x, (3, "right")))
+    # regions and cells: enclosed background, a thing's inside, the ring around it
+    assert np.array_equal(run("paint(x, recolour(holes(x), 4))", x), O.fill_enclosed(x, 4))
+    y = np.zeros((5, 5), dtype=np.int8)
+    y[1:4, 1:4] = 6
+    assert np.array_equal(run("erase(x, inside(things(x)))", y), O.hollow_things(y))
+    framed = run("paint(x, recolour(ring(things(x)), 1))", y)
+    assert (framed[0] == 1).all() and framed[2, 2] == 6
+    # two pictures cell by cell: symmetry completion, and the halves laid over each other
+    z = g([[1, 0, 0, 0], [1, 1, 0, 0]])
+    assert np.array_equal(run("overlay(x, flip(x))", z), O.symmetrize(z, "h"))
+    assert np.array_equal(run("logic(left(x), right(x), one, 5)", z),
+                          O.combine(z, ("halves_lr", "xor", 5)))
+    # a law for each cell as the last step, learned from the task's own examples
+    def touch(p):          # background next to a 2 turns 8
+        q = p.copy()
+        m = np.pad(p == 2, 1)
+        near = m[:-2, 1:-1] | m[2:, 1:-1] | m[1:-1, :-2] | m[1:-1, 2:]
+        q[(p == 0) & near] = 8
+        return q
+    pics = [g([[0, 0, 0, 0], [0, 2, 0, 0], [0, 0, 0, 3]]), g([[2, 0, 0], [0, 0, 0], [0, 3, 2]]),
+            g([[0, 0, 0, 0, 0], [0, 0, 2, 0, 0], [3, 0, 0, 0, 0]])]
+    found, _ = Cm.search([(p, touch(p)) for p in pics], budget=40_000)
+    assert found and found[0][0] == "cells"
+    q = g([[0, 0, 0], [0, 2, 0], [0, 0, 0]])
+    assert np.array_equal(Cm.run(found[0], q), touch(q))
+    # a situation never seen in the examples (a 3 beside a cell that turns 8): no guess
+    assert Cm.run(found[0], g([[0, 0, 0], [0, 2, 0], [3, 0, 0]])) is None
