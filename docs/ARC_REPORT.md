@@ -135,6 +135,12 @@ from 17 to 19 tasks right, with none lost and no more wrong answers. That is bel
 bar we set (≥ 3 per half), so they are off by default; it is the first time Ultron's
 own building blocks transferred to puzzles it had not seen.
 
+Adding repetition and per-cell steps (40 small steps in all) lets the language express
+28 of the 38 operations and solve 67 training tasks on its own (5 wrong). Grown from
+this richer language, Ultron's own steps gain 3–4 unseen tasks per half but also add
+wrong answers (4 → 11 in round 2) and lose 1–2: short programs that fit and do not
+generalise. They stay off; the fallback keeps the 27 basic steps.
+
 ### 2.8 Intuition (`guide.py`), a null result
 
 Ultron counted which operations helped under which task features (output smaller,

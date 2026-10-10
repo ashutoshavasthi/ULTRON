@@ -120,7 +120,7 @@ Traits of a colour (perception, counted): drawn as an outline, drawn as a solid 
 
 In every case, a kind of thing never seen in the examples gets **no answer**, not a guess.
 
-## Small composable steps (`compose.py`): 27
+## Small composable steps (`compose.py`): 40
 
 Added after the freeze, on request, as a finer-grained base for Ultron to build on
 (the 38 operations are too coarse for library learning to find shared pieces). Frozen
@@ -136,6 +136,13 @@ like the 38, and counted here: `compose.STEPS`.
   flip_each(T, D).
 - Back to a picture: paint(G, T), erase(G, T), crop(G, T), alone(T).
 - Numbers and colours: count(T), size(T), colour(T).
+- Added for repetition and cells (lever 1, 13): slide(G, T, D) and ray(G, T, D) (repeat
+  until something stops them), holes(G) (enclosed background), dots(G) (each coloured
+  cell), inside(T), ring(T), overlay(G, G), logic(G, G, L, C) with L one of both,
+  either, one, first, neither; left, right, top, bottom (halves); part(G, N). A local
+  law per cell (cells.py) may finish a program made in at most 4 steps.
+- The solver's fallback uses the first 27 (`compose.BASIC`); all 40 are used for
+  practice and growing its own steps.
 
 Steps Ultron grows from these (`grow.py`, `brain/arc_steps.json` when adopted) are its
 own and not counted here. **None is switched on yet** (cross-validated gain +1 and +2

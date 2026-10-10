@@ -150,6 +150,39 @@ language cannot express (they need iteration and per-cell rules), and more searc
 task for the wake. The fallback is adopted (more right than wrong added); its own
 steps are not, by the rule.
 
+**Lever 2 (a longer wake) and lever 1 (repetition and per-cell steps), measured.**
+- *Lever 2.* Search made 1.45× faster with identical results (labelling in numpy with
+  pointer jumping). A 5× longer wake (1M steps) explained 26 practice tasks instead of
+  22 in round 1, with the unseen half unchanged (18 → 18). A full 1M run needs about
+  6 hours; it was stopped after one half.
+- *Lever 1.* 13 new small steps (40 in all): slide and ray (repeat until something
+  stops them), holes, dots, inside, ring, overlay, logic, halves, part, and a local law
+  per cell as a finishing step. Gate 1: **28 of the 38** frozen operations now have
+  small-step programs (was 18); 7 of the 20 that had none match exactly on every
+  training picture (fill_enclosed, hollow_things, symmetrize, gravity, slide_things,
+  extend_rays, pick_part), 3 approximately.
+- Gate 2: on its own the full language solves **67** training tasks (basic: 34), 5
+  wrong. As the solver's fallback it adds 3 right and 3 wrong (basic: 3 and 1), so the
+  fallback keeps the basic 27 steps.
+- A search bug found on the way: it stopped at any two explanations, so a long
+  memorised per-cell table could end it early. It now stops only when two explanations
+  are as short as the size searched (MDL).
+- Gate 3 (its own steps grown from the full language, cross-validated):
+
+| Round, practice half | Explained in practice | Unseen right (without → with) | Gained / lost | Unseen wrong (without → with) |
+|---|---|---|---|---|
+| 1, half 0 | 35 | 37 → 39 | +3 / −1 | 4 → 6 |
+| 1, half 1 | 40 | 31 → 33 | +4 / −2 | 1 → 3 |
+| 2, half 0 | 44 | 37 → 40 | +4 / −1 | 4 → **11** |
+
+**The finding.** Practice compounds (35 → 44 explained), and its own steps do reach new
+unseen tasks (+3 to +4 per half), but they also make short programs that fit the
+examples and generalise wrongly: wrong answers rise faster than right ones, and some
+tasks are lost to the budget its steps take. By the stop rule, nothing more is switched
+on. What the next step must add is a check on generalisation, not more search: an
+explanation should also predict each example it was not fitted to (leave one out), the
+same rule Ultron's per-puzzle network had to meet.
+
 **Leak found and closed.** ARC-AGI-2's training set contains 376 of ARC-AGI-1's
 evaluation tasks. Ultron's experience (`data.experience()`) excludes them by name.
 
