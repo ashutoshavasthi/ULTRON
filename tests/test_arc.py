@@ -340,3 +340,46 @@ def test_blocks_with_an_open_parameter_or_a_law_tail_and_best_first_search():
     finally:
         solve.LIBRARY[0] = None
         solve.INTUITION[0] = None
+
+
+def test_small_steps_compose_and_ultron_builds_its_own_from_them():
+    from ultron.arc import compose as Cm
+    from ultron.arc import grid
+    grid.TASK_BACKGROUND[0] = 0
+    # "small things turn green": a law about things, written in small steps
+    x = g([[1, 0, 0, 2, 2], [0, 0, 0, 2, 2], [4, 0, 0, 0, 0], [0, 0, 5, 5, 5]])
+    prog = Cm.parse("paint(x, recolour(with(things(x), size, 1), 3))")
+    want = x.copy()
+    want[0, 0] = want[2, 0] = 3
+    assert np.array_equal(Cm.run(prog, x), want)
+    assert Cm.show(prog) == "paint(x, recolour(with(things(x), size, 1), 3))"
+    # the search finds a composition no single frozen operation is: blow the picture up
+    # by the number of things in it
+    train = []
+    for dots in ([(0, 0, 1), (2, 2, 2)], [(0, 0, 3), (0, 2, 1), (2, 1, 4)],
+                 [(0, 2, 2), (2, 0, 2)]):
+        p = np.zeros((3, 3), dtype=np.int8)
+        for r, c, v in dots:
+            p[r, c] = v
+        k = len(dots)
+        train.append((p, np.kron(p, np.ones((k, k), dtype=np.int8))))
+    found, _ = Cm.search(train, budget=40_000)
+    assert found and Cm.show(found[0]) == "upscale(x, count(things(x)))"
+    # library learning: a piece several explanations share becomes a step of its own,
+    # with a typed hole where they differ, only when it shortens the description
+    progs = {t: Cm.parse(s) for t, s in {
+        "a": "paint(x, things(flip(x)))", "b": "paint(x, things(flip_v(x)))",
+        "c": "paint(x, things(rot180(x)))", "d": "upscale(x, 2)"}.items()}
+    lib = Cm.learn_library(progs)
+    assert any(Cm.show(e["pattern"]) == "paint(x, things(_a))" and e["args"] == ["G"]
+               for e in lib)
+    assert Cm.learn_library({"d": progs["d"]}) == []
+    # and the search uses it as one step
+    Cm.LIBRARY[0] = lib
+    try:
+        y = g([[1, 0, 0], [0, 2, 0], [0, 0, 0]])
+        own = [e for e in lib if Cm.show(e["pattern"]) == "paint(x, things(_a))"][0]
+        assert np.array_equal(Cm.run((own["name"], ("transpose", ("x",))), y),
+                              Cm.run(Cm.parse("paint(x, things(transpose(x)))"), y))
+    finally:
+        Cm.LIBRARY[0] = None
