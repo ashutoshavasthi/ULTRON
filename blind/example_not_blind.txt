@@ -1,0 +1,15 @@
+# Written by Ultron's trainer: NOT a blind test, just an example of the format.
+what is 23 plus 19 | 42
+what times 6 equals 54 | 9
+5 minus 8 | -3
+12 times 11 | 132
+what is 7 divided 2 | 7/2
+what times 0 equals 5 | refuse
+find a given F=30 m=6 | 5
+find m given F=30 a=6 | 5
+find T given r=227956000000 system=Sun | 59355072
+find T given r=1221870000 system=Saturn | refuse
+100 after 3 | 1
+what power 2 equals 81 | 9
+2 power what equals 1024 | 10
+what power 2 equals 2 | ~1.41421

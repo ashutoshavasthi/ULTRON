@@ -1,0 +1,12 @@
+[project]
+name = "ultron"
+version = "0.1.0"
+description = "Baby Ultron: a grounded, curiosity-driven learner that discovers laws instead of memorising"
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.24"]   # Phase 3 senses; lessons 0-18 run without it
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
