@@ -43,7 +43,7 @@ earned only when its test is passed.
 | 2+. Closing the gaps | Column arithmetic, fractional repeats, laws about its own laws | [`phase3_verdict.md`](../reports/phase3_verdict.md) |
 | 3. Senses, new kinds of explanation, a body | Eyes it learns itself; F = m·a, stiffness and energy from video; **two new kinds of explanation invented and reused**; goals reached on floors it never touched | [`phase3_senses_verdict.md`](../reports/phase3_senses_verdict.md) |
 | 3+. The real world (begun) | A real microscope film from the internet: Einstein's law of diffusion measured from raw pixels, matching the scientists' own tool (1.63 vs 1.65 µm²/s) | Scripts work; lesson 26 is Stage 2's first move |
-| Stage 1 (in progress) | Survives 20% wrong records, ±20% noise and 20% outliers; notices confounders; updates when the world changes; 0 false laws in 100; ARC-AGI-1 evaluation **10.0%** | [`STAGE_1_PLAN.md`](STAGE_1_PLAN.md), [`ARC_REPORT.md`](ARC_REPORT.md) |
+| Stage 1 (in progress) | Survives 20% wrong records, ±20% noise and 20% outliers; notices confounders; updates when the world changes; 0 false laws in 100; ARC-AGI-1 evaluation **12.75%** (51 of 63 answers right) | [`STAGE_1_PLAN.md`](STAGE_1_PLAN.md), [`ARC_REPORT.md`](ARC_REPORT.md) |
 
 Blind tests by examiners who never saw the code scored 55/60, 54/60 and 45/50 on first
 sight. The examiners were the same underlying model as the trainer, so a human's blind
@@ -83,14 +83,22 @@ Safety pieces are built **before** the stage that needs them:
 - **Library learning needs material.** On ARC, Ultron's solutions are one or two steps of
   big hand-written operations, so no piece recurred and MDL rightly learned no blocks (a
   null result, recorded). Library learning now starts on the brain's own laws, where
-  structure does recur, and returns to ARC once learned laws compose.
+  structure does recur, and returns to ARC once learned laws compose. Measured again
+  with a wake–sleep loop that also learns from near-misses (descriptions with
+  exceptions): 2 blocks per half, 0 tasks gained on unseen tasks. **On ARC, growing its
+  own operations needs a finer-grained base language**, where solutions are long and
+  share pieces.
+- **Search order is not ARC's bottleneck; expressiveness is.** A learned intuition ranks
+  the right step first (median rank 1 of ~200) and cuts search 3.9×, yet the score does
+  not move: most unsolved tasks have no explanation in two or three of the 38 operations.
 - **Intuition v1 (operation order from four task features) changed nothing**, measured
   by cross-validation. v2 predicts law families and program pieces, trained on solved
   searches plus "dreams".
 - **What worked was Ultron's own law-finding, applied to the things it sees.** Hand-written
   ARC operations are frozen at 38. New ARC ability came from laws learned per task (thing
-  laws, marks, which thing, how things move), which took ARC-AGI-1 evaluation from 7.75%
-  to 10.0%.
+  laws, marks, which thing, how things move, symmetry, copies, lines, summaries,
+  arrangements), which took ARC-AGI-1 evaluation from 7.75% to 12.75%; training gains
+  reached evaluation at about one third, and the families hit diminishing returns.
 - **Benchmarks hide leaks.** ARC-AGI-2's training set contains 376 of ARC-AGI-1's
   evaluation tasks. Ultron's experience excludes every evaluation task by name.
 - **Precision matters as much as score.** Ultron answers only when a law fits, and every

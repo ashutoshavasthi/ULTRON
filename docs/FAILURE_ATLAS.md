@@ -70,7 +70,7 @@ Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 | **Laws outside its grammar** (oscillations, logistic growth, power laws with fractional exponents, differential equations) | Lab: *kinds of law* | 🟢 for these shapes (E1); differential equations with several states still open | Grow the grammar: the state of a thing (position *and* speed) as a vector, laws about change (Δ of a state = f(state)), so oscillation is "the change of speed opposes the position". Non-integer exponents through its fractional repeats | A |
 | Probabilistic laws (diffusion, radioactive decay, genetics) | Real microscope film: it found Einstein's law, but I chose the statistic (spread) | 🟡 | Distributions as things: it should invent "spread" and "average" as summaries of many unpredictable things | B |
 | Structured objects (lists, trees, graphs, recursion) | ⬜ | 🔴 | Types and recursion in the program language (needed for ARC and for code) | A, F |
-| Its building blocks are designed by people | — | 🔴 | Library learning first. Then self-proposed primitives, accepted only if they shrink the description of everything it knows | G |
+| Its building blocks are designed by people | ARC wake–sleep (`arc/curve.py`): 2 blocks per half, 0 tasks gained on the unseen half; the 38 operations are too coarse to share pieces | 🔴 | Library learning first; on ARC it needs a finer-grained base language. Then self-proposed primitives, accepted only if they shrink the description of everything it knows | G |
 
 ## 5. Senses
 

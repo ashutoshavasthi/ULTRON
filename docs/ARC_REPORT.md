@@ -110,7 +110,9 @@ From the programs Ultron found for tasks in its experience, it collects every pi
 - one colour left open (chosen per task);
 - one inner step left open ("turn, *do something*, turn back").
 
-A piece becomes a block only if
+Pieces also come from *descriptions with exceptions* (§4), any parameter may be left
+open, and a block may end with "then learn a law of this kind on the result". A piece
+becomes a block only if
 
     uses × (steps saved per use) > cost of writing the block down
 
@@ -176,6 +178,17 @@ learning can compound).*
 contain no piece that recurs often enough to pay for itself. Almost all are single
 operations with a learned recolouring or local law. MDL therefore learns **no** blocks.
 We report this rather than lower the bar.
+
+**Wake–sleep with descriptions (measured, not adopted).** Ultron now also learns from
+*descriptions with exceptions*: a program plus the cells it gets wrong, kept when shorter
+in bits than describing the answers outright (it never answers with one). Blocks may
+leave any parameter open and end with "then learn a law". Over all 633 experience tasks
+it describes 412 (212 exactly) and 8 blocks pay; on one half, 2 do. On the unseen half
+the blocks gained 0 tasks in either fold and lost 1 (with intuition, best first across
+depths: +1 −2 and +0 −1). The 38 operations are too coarse for library learning: each
+task is one or two big operations, so few pieces are shared. Growing its own operations
+needs a finer-grained base language. Reproduce: `python -m ultron.arc.curve --rounds 1`;
+results in `reports/arc_learning_curve.json`.
 
 ## 5. Limits, stated plainly
 

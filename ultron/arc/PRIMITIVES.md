@@ -11,7 +11,9 @@ This list is counted, so a solver made of special cases would show here.
 > abilities come only from Ultron itself: library learning (`library.py`) turns pieces
 > that recur in its own solved programs into new building blocks, kept only when they
 > shorten the total description of what it has solved. Learned blocks live in
-> `brain/arc_library.json`, each with the tasks it came from.
+> `brain/arc_library.json`, each with the tasks it came from. Blocks are Ultron's own and
+> are not counted here. **None is kept yet:** the cross-validated wake–sleep run grew 2
+> blocks per half and gained no task on the unseen half (`docs/STAGE_1_PLAN.md`).
 
 ## Perception (`grid.py`): 5
 

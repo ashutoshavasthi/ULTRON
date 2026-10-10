@@ -93,6 +93,36 @@ under MDL, even at 10× search budget and with blocks that leave a colour or a w
 open. So **no blocks are learned**, and the cross-validated learning curve is flat
 (15.19% → 15.19% on the unseen half). We do not lower the bar to manufacture blocks.
 
+**Letting Ultron grow its own operations (wake–sleep, measured; not adopted).** Three
+changes gave library learning more to learn from, each true to the core:
+- **descriptions with exceptions** (`arc/descriptions.py`): a program plus the cells it
+  gets wrong counts as a description of a task when it is shorter, in bits, than
+  describing the answers outright. Ultron learns from these, never answers with them;
+- **richer blocks** (`arc/library.py`): any parameter may be left open, and a block may
+  end "then learn a law of this kind on the result";
+- **deeper search** (`arc/solve.py`): such law tails are learned at any depth, and with
+  intuition on the search grows the most promising program of any length (best first
+  across depths). The default search is unchanged.
+
+| Measure (training experience, 633 tasks) | Result |
+|---|---|
+| Tasks with a description shorter than the answer | 412: 212 exact, 200 with exceptions |
+| Length of those descriptions | 1 step: 249; 2 steps: 157; 3 steps: 1 |
+| Blocks that pay (all 633 tasks) | from exact solutions only: 6; adding descriptions with exceptions: **8** |
+| Blocks that pay (one half, 316 tasks) | **2** in each half |
+| Unseen half, with blocks (cross-validated) | half 0: 23.26% → 22.94% (+0, −1 task, +1 wrong); half 1: 22.4% → 22.4% (+0, −0) |
+| Unseen half, blocks and intuition, best first | half 0: 22.94% (+1, −2); half 1: 22.08% (+0, −1, +1 wrong) |
+
+Gate B (≥ 3 more tasks on each unseen half, none lost) failed in both halves, so by the
+stop rule round 2 was not run and nothing is switched on. **The finding:** the 38 frozen
+operations are too coarse for library learning. Each task is described by one or two
+big operations, so few pieces are shared, and most shared pieces ("an operation, then a
+cells law") repeat what the search already does after one step. Extra blocks also cost
+budget: the one task lost (e3497940) was crowded out. For Ultron to grow its own
+operations on ARC, its base language must be **finer-grained**: small, composable steps
+whose solutions are long and share structure, as in the brain, where the same rule
+gave S1. That is the next move, not more hand-written families.
+
 **Leak found and closed.** ARC-AGI-2's training set contains 376 of ARC-AGI-1's
 evaluation tasks. Ultron's experience (`data.experience()`) excludes them by name.
 

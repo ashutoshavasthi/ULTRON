@@ -5,7 +5,19 @@
   "practised": 317,
   "described": 206,
   "exact": 101,
-  "blocks": {
+  "block_list": [
+   "frame_things(C) \u25b8 (learn a cells law)",
+   "symmetrize(any) \u25b8 connect(cols)"
+  ],
+  "unseen": 316,
+  "blocks": 2,
+  "without": {
+   "percent": 23.26,
+   "wrong": 10,
+   "gained": [],
+   "lost": []
+  },
+  "with blocks": {
    "percent": 22.94,
    "wrong": 11,
    "gained": [],
@@ -13,18 +25,7 @@
     "e3497940"
    ]
   },
-  "block_list": [
-   "frame_things(C) \u25b8 (learn a cells law)",
-   "symmetrize(any) \u25b8 connect(cols)"
-  ],
-  "unseen": 316,
-  "without": {
-   "percent": 23.26,
-   "wrong": 10,
-   "gained": [],
-   "lost": []
-  },
-  "blocks+intuition": {
+  "with blocks and intuition": {
    "percent": 22.94,
    "wrong": 10,
    "gained": [
@@ -33,6 +34,39 @@
    "lost": [
     "ae4f1146",
     "e3497940"
+   ]
+  }
+ },
+ {
+  "round": 1,
+  "practice_half": 1,
+  "practised": 316,
+  "described": 206,
+  "exact": 111,
+  "block_list": [
+   "keep_thing(('largest', False)) \u25b8 (learn a cells law)",
+   "outline(3) \u25b8 fill_enclosed(C)"
+  ],
+  "unseen": 317,
+  "blocks": 2,
+  "without": {
+   "percent": 22.4,
+   "wrong": 6,
+   "gained": [],
+   "lost": []
+  },
+  "with blocks": {
+   "percent": 22.4,
+   "wrong": 6,
+   "gained": [],
+   "lost": []
+  },
+  "with blocks and intuition": {
+   "percent": 22.08,
+   "wrong": 7,
+   "gained": [],
+   "lost": [
+    "8f2ea7aa"
    ]
   }
  }
