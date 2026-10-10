@@ -29,6 +29,7 @@ from .grid import background, key, things as _things
 
 G, T, N, C, K, D = "G", "T", "N", "C", "K", "D"
 MAX_SIDE = 30
+BUDGET = 40_000         # steps per task when the solver falls back on these
 
 
 # ------------------------------------------------------------------ things as values
@@ -521,12 +522,12 @@ def _args(bank, types, total):
                 yield (e,) + tail
 
 
-def predict(train, tests, **kw):
+def predict(train, tests, max_size=12, **kw):
     """Up to two different answers for each test input."""
     from . import grid
     from .solve import task_background
     grid.TASK_BACKGROUND[0] = task_background(train)
-    found, spent = search(train, **kw)
+    found, spent = search(train, max_size=max_size, **kw)
     found = sorted(found, key=lambda e: (size(e), show(e)))
     attempts = [[] for _ in tests]
     used = []

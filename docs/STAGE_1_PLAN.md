@@ -123,6 +123,33 @@ operations on ARC, its base language must be **finer-grained**: small, composabl
 whose solutions are long and share structure, as in the brain, where the same rule
 gave S1. That is the next move, not more hand-written families.
 
+**Small composable steps (`arc/compose.py`, `arc/grow.py`; measured).** A typed language
+of 27 small steps over pictures, things, numbers and colours. A step on things acts on
+each one ("for each"), keeping some is a filter ("where"), so "small things turn green"
+is `paint(x, recolour(with(things(x), size, 1), 3))`. Search is bottom up, smallest
+first, one program per behaviour, within the same 40k budget; a new set of things is
+also checked as a finished answer, and a new picture with one learned recolouring.
+
+| Gate | Result |
+|---|---|
+| 1. Expressiveness | **18 of the 38** frozen operations are short programs of small steps, identical on every training picture. The other 20 (filling enclosed areas, gravity, symmetry, rays, lines, pattern continuation, ...) need loops or per-cell reasoning the language doesn't have |
+| 2. Search (training, 40k) | 34 right, 4 wrong on its own; as a fallback when the big operations explain nothing: **+3 right, +1 wrong** (138 → 141). On the 233 held-out ARC-AGI-2 training tasks: +0, −0 |
+| 3. Growing its own steps (cross-validated, 3 rounds) | unseen half **18 → 19** and **17 → 19** right in rounds 2 and 3, none lost, wrong answers 2 → 2 and 2 → 1. While practising it explains more each round (22 → 26 → 27; 21 → 23 → 23). Below the bar (≥ 3 per half), so its own steps stay off |
+
+Its own steps are readable and built on each other, for example
+`own4 = crop(own2, least(own3, colour))` from `own2 = rot180(x)` and `own3 = things(x)`, and
+`own1(C) = paint(paint(x, recolour(fill_box(things(x)), C)), things(x))` ("fill each
+thing's box with C, keep the thing on top").
+
+**The finding.** With small steps, library learning has material for the first time:
+pieces recur, steps are built from steps, practice compounds, and what it grows
+transfers to unseen puzzles without loss (old operations: 0 gained, 1 lost). The
+transfer is still small because the language explains few tasks at 40k (about 5–8%
+of the experience), so few pieces are shared. Two levers remain: the 20 operations the
+language cannot express (they need iteration and per-cell rules), and more search per
+task for the wake. The fallback is adopted (more right than wrong added); its own
+steps are not, by the rule.
+
 **Leak found and closed.** ARC-AGI-2's training set contains 376 of ARC-AGI-1's
 evaluation tasks. Ultron's experience (`data.experience()`) excludes them by name.
 

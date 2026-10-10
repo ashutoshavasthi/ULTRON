@@ -119,3 +119,24 @@ Perception added for summaries (counted): a picture's symmetry, number of things
 Traits of a colour (perception, counted): drawn as an outline, drawn as a solid block, how common it is compared with the others.
 
 In every case, a kind of thing never seen in the examples gets **no answer**, not a guess.
+
+## Small composable steps (`compose.py`): 27
+
+Added after the freeze, on request, as a finer-grained base for Ultron to build on
+(the 38 operations are too coarse for library learning to find shared pieces). Frozen
+like the 38, and counted here: `compose.STEPS`.
+
+- Pictures (G → G): rot90, rot180, flip, flip_v, transpose, blank; upscale(G, N);
+  beside(G, G), above(G, G); swap(G, C, C).
+- Seeing things (G → T): things (one colour, side by side), pieces (any colours,
+  touching at corners).
+- Choosing things (T → T): most(T, K), least(T, K), with(T, K, N), without(T, K, N),
+  where K is one of 7 measures (size, height, width, top, left, colour, colours).
+- Changing each thing (T → T): recolour(T, C), shift(T, D), fill_box(T),
+  flip_each(T, D).
+- Back to a picture: paint(G, T), erase(G, T), crop(G, T), alone(T).
+- Numbers and colours: count(T), size(T), colour(T).
+
+Steps Ultron grows from these (`grow.py`, `brain/arc_steps.json` when adopted) are its
+own and not counted here. **None is switched on yet** (cross-validated gain +1 and +2
+tasks per half, below the bar of 3).

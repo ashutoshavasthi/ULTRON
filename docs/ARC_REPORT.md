@@ -119,7 +119,23 @@ becomes a block only if
 that is, only if it shortens the total description of everything solved. The search
 then tries each block as a single step, so programs too long to reach become short.
 
-### 2.7 Intuition (`guide.py`), a null result
+### 2.7 Small composable steps (`compose.py`) and steps Ultron grows from them (`grow.py`)
+
+A typed language of 27 small steps over pictures (G), things (T), numbers (N) and
+colours (C). Steps on things act on each one, and keeping some is a filter, so laws
+about things are short programs: `paint(x, recolour(with(things(x), size, 1), 3))`.
+18 of the 38 operations are short programs in it, checked on every training picture.
+The solver falls back on it when no program of big operations explains a task:
++3 right and +1 wrong on ARC-AGI-1 training, nothing on the held-out ARC-AGI-2 tasks.
+
+Library learning on these trees (anti-unification with typed holes, kept only when it
+shortens the description of every explained task) grows steps of its own, built from
+each other. Cross-validated over 3 rounds, they took the unseen half from 18 to 19 and
+from 17 to 19 tasks right, with none lost and no more wrong answers. That is below the
+bar we set (≥ 3 per half), so they are off by default; it is the first time Ultron's
+own building blocks transferred to puzzles it had not seen.
+
+### 2.8 Intuition (`guide.py`), a null result
 
 Ultron counted which operations helped under which task features (output smaller,
 colours added, panels, ...) and tried promising operations first. Cross-validated on

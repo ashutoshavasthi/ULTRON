@@ -91,6 +91,12 @@ def run(program, g):
         if name == "tiles":
             g = tiles.apply(p, g)
             continue
+        if name == "compose":
+            from . import compose
+            g = compose.run(p, g)
+            if not isinstance(g, np.ndarray):
+                return None
+            continue
         if name == "colourmap":
             g = np.vectorize(lambda v: p.get(int(v), int(v)), otypes=[np.int8])(g)
             continue
@@ -110,7 +116,10 @@ _OPS = {}
 def show(program):
     out = []
     for name, p in program:
-        if name == "colourmap":
+        if name == "compose":
+            from . import compose
+            out.append(compose.show(p))
+        elif name == "colourmap":
             out.append("recolour " + ", ".join(f"{a}→{b}" for a, b in sorted(p.items()) if a != b))
         elif name == "cells":
             out.append(cells.describe(p))
@@ -196,6 +205,7 @@ FIRST = [None]          # operations spent when the first searched program was f
 LEARNED = {"colourmap", "cells", "things", "marks", "pick", "moves", "symmetry", "copies",
            "gaps", "summary", "tiles"}
 LIBRARY = [None]        # building blocks Ultron learned itself (library.py), when switched on
+COMPOSE = [True]        # when no program of big operations explains a task: small steps
 BEST_FIRST = [True]     # with intuition on: grow the most promising program of any length
 DEPTH_PENALTY = 2.0     # what one more step costs against the intuition's score (log-odds)
 DESCRIBE = [None]       # when a list: the shortest description with exceptions is put in it
@@ -414,4 +424,12 @@ def predict(train, tests, **kw):
                 new = True
         if new:
             used.append(prog)
+    if not used and COMPOSE[0]:
+        # nothing built from the big operations explains every example: try programs of
+        # small composable steps (compose.py), with their own budget
+        from . import compose
+        ca, cused, cspent = compose.predict(train, tests, budget=compose.BUDGET)
+        if cused:
+            attempts, used = ca, [(("compose", e),) for e in cused]
+        spent += cspent
     return attempts, used, spent
