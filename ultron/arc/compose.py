@@ -518,6 +518,11 @@ STEPS = [
     ("part", (G, N), G, s_part),
 ]
 FUNCS = {name: f for name, _, _, f in STEPS}
+# the first 27 steps, without repetition, cell-by-cell steps or per-cell laws: what the
+# solver falls back on (measured: the full language finds more on its own, 57 vs 34
+# training tasks, but within the same budget as a fallback it loses two and adds wrong
+# answers, so the fallback keeps the smaller set)
+BASIC = STEPS[:27]
 
 
 # ------------------------------------------------------------------ running a program
@@ -662,8 +667,9 @@ def constants(train):
     return {K: list(MEASURES), D: list(STEP), N: [1, 2, 3], C: cols, L: list(LOGIC)}
 
 
-def search(train, budget=40_000, max_size=9, want=2, stats=None):
+def search(train, budget=40_000, max_size=9, want=2, stats=None, steps=None, cells_up_to=None):
     """Programs (smallest first) that turn every training input into its output."""
+    cells_up_to = CELLS_UP_TO if cells_up_to is None else cells_up_to
     ins = [i for i, _ in train]
     targets = [o for _, o in train]
     goal = tuple(key(o) for o in targets)
@@ -687,7 +693,7 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None):
                 m = _colour_map(vals, targets)
                 if m is not None:
                     found.append(("map", expr, ("k", tuple(sorted(m.items())))))
-                elif s <= CELLS_UP_TO and all(v.shape == o.shape for v, o in zip(vals, targets)):
+                elif s <= cells_up_to and all(v.shape == o.shape for v, o in zip(vals, targets)):
                     # a law for each cell, from what is around it (cells.py)
                     from . import cells
                     spent[0] += len(ins)
@@ -720,8 +726,8 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None):
         for v in consts[t]:
             add(t, 1, ("k", v), tuple(v for _ in ins))
     # its own steps first: a step built from others is tried before the others
-    steps = [(e["name"], tuple(e["args"]), e["type"], None) for e in (LIBRARY[0] or [])]
-    steps += STEPS
+    own = [(e["name"], tuple(e["args"]), e["type"], None) for e in (LIBRARY[0] or [])]
+    steps = own + (STEPS if steps is None else steps)
     try:
         for s in range(1, max_size + 1):
             for name, argt, outt, f in steps:

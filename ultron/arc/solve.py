@@ -428,7 +428,8 @@ def predict(train, tests, **kw):
         # nothing built from the big operations explains every example: try programs of
         # small composable steps (compose.py), with their own budget
         from . import compose
-        ca, cused, cspent = compose.predict(train, tests, budget=compose.BUDGET)
+        ca, cused, cspent = compose.predict(train, tests, budget=compose.BUDGET,
+                                            steps=compose.BASIC, cells_up_to=0)
         if cused:
             attempts, used = ca, [(("compose", e),) for e in cused]
         spent += cspent
