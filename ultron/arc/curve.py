@@ -112,9 +112,9 @@ def main(argv=None):
             grown[f] = (blocks, intu)
             b0 = base[1 - f]
             with_blocks = _score(tasks, unseen, a.budget, blocks, None, a.workers)
-            tests = {"without": b0, "blocks": with_blocks}
+            tests = {"without": b0, "with blocks": with_blocks}
             if intu is not None:
-                tests["blocks+intuition"] = _score(tasks, unseen, a.budget, blocks, intu,
+                tests["with blocks and intuition"] = _score(tasks, unseen, a.budget, blocks, intu,
                                                    a.workers)
             row = {"round": k, "practice_half": f, "practised": len(practice),
                    "described": len(described),
