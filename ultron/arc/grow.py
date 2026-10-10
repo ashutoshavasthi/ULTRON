@@ -108,16 +108,34 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--max-size", type=int, default=12)
     ap.add_argument("--out", default="arc_grow.json")
+    ap.add_argument("--state", default=None,
+                    help="save progress here after each half, and continue from it")
+    ap.add_argument("--halves", type=int, default=0,
+                    help="stop after this many practice halves (0: run to the end)")
     a = ap.parse_args(argv)
     MAX_SIZE[0] = a.max_size
     tasks = data.experience()
     ids = sorted(tasks)
     halves = [ids[0::2], ids[1::2]]
-    base = [run(tasks, h, a.budget, None, a.workers) for h in halves]
-    grown = [[], []]
-    rows = []
+    state = None
+    if a.state and os.path.exists(a.state):
+        with open(a.state) as fh:
+            state = json.load(fh)
+    if state:
+        base, rows = state["base"], state["rows"]
+        grown = [from_json(g) for g in state["grown"]]
+        done = {(r["round"], r["practice_half"]) for r in rows}
+    else:
+        base = [run(tasks, h, a.budget, None, a.workers) for h in halves]
+        grown, rows, done = [[], []], [], set()
+    ran = 0
     for k in range(1, a.rounds + 1):
         for f in (0, 1):
+            if (k, f) in done:
+                continue
+            if a.halves and ran >= a.halves:
+                return
+            ran += 1
             practice, unseen = halves[f], halves[1 - f]
             wake = run(tasks, practice, a.wake, grown[f], a.workers)
             explained = {t: compose.inline(_tuple(r["expr"]), grown[f])
@@ -145,6 +163,10 @@ def main(argv=None):
             with open(os.path.join("reports", a.out), "w") as fh:
                 json.dump(rows, fh, indent=1)
                 fh.write("\n")
+            if a.state:
+                with open(a.state, "w") as fh:
+                    json.dump({"base": base, "rows": rows,
+                               "grown": [to_json(g) for g in grown]}, fh)
 
 
 if __name__ == "__main__":
