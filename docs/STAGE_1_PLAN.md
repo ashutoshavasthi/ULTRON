@@ -183,6 +183,28 @@ on. What the next step must add is a check on generalisation, not more search: a
 explanation should also predict each example it was not fitted to (leave one out), the
 same rule Ultron's per-puzzle network had to meet.
 
+**Leave one out (measured).** An answer now counts only if Ultron, learning from every
+training example but one, predicts the one left out, for each in turn
+(`compose.earns`). On training it removes almost every wrong answer at a cost in right
+ones: 27 basic steps 34 right / 4 wrong → **32 / 0**; all 40 steps 67 / 5 → 53 / 1. The
+solver's fallback now uses it (basic steps: 3 right, 1 wrong → 3 right, 0 wrong).
+
+Its own steps grown from all 40 steps, now learned only from explanations that earn it
+and tested the same way (cross-validated, 3 rounds, `reports/arc_grow_loo.json`):
+
+| Round | Half 0: unseen right (without → with), wrong | Half 1: unseen right, wrong | Explained in practice |
+|---|---|---|---|
+| 1 | 30 → 32 (+2, −0), 1 → 0 | 24 → 29 (+6, −1), 0 → 0 | 27 / 33 |
+| 2 | 30 → **33 (+3, −0)**, 1 → 0 | 24 → 28 (+5, −1), 0 → 0 | 36 / 33 |
+| 3 | 30 → 32 (+2, −0), 1 → 0 | 24 → 28 (+5, −1), 0 → 0 | 36 / 32 |
+
+**Wrong answers no longer rise: they fall** (1 → 0 on half 0, 0 on half 1, every
+round), and its own steps reach 2 to 6 new unseen tasks per half. The bar is not met:
+half 0 gains 2–3, and half 1 loses one task every round (810b9b61, a six-step program
+the budget no longer reaches once its own steps are tried). So its own steps stay off.
+The remaining gap is budget, not generalisation: trying its own steps only after the
+given language finds nothing would keep every task the given language solves.
+
 **Leak found and closed.** ARC-AGI-2's training set contains 376 of ARC-AGI-1's
 evaluation tasks. Ultron's experience (`data.experience()`) excludes them by name.
 

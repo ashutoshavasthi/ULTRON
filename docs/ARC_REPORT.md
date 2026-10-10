@@ -141,6 +141,13 @@ this richer language, Ultron's own steps gain 3–4 unseen tasks per half but al
 wrong answers (4 → 11 in round 2) and lose 1–2: short programs that fit and do not
 generalise. They stay off; the fallback keeps the 27 basic steps.
 
+With a leave-one-out check (an answer only if, learned without each example in turn,
+it predicts that example), wrong answers fall instead: the 27 basic steps go from 34
+right / 4 wrong to 32 / 0 on training, and the fallback now uses the check. Grown under
+the same check, its own steps gain 2–6 unseen tasks per half with **no wrong answers**,
+but half 1 loses one task to the budget every round, so the bar (≥ 3 per half, none
+lost) is not met and they stay off.
+
 ### 2.8 Intuition (`guide.py`), a null result
 
 Ultron counted which operations helped under which task features (output smaller,
