@@ -528,6 +528,7 @@ BASIC = STEPS[:27]
 # ------------------------------------------------------------------ running a program
 LIBRARY = [None]        # steps Ultron built itself from these (learn_library), when on
 FINISH = [True]         # check each new set of things / picture as a finished answer
+OWN_LAST = [False]      # try its own steps after the given ones at each size
 CELLS_UP_TO = 4         # a local law per cell is tried on pictures made in this many steps
 
 
@@ -727,7 +728,8 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None, steps=None, cel
             add(t, 1, ("k", v), tuple(v for _ in ins))
     # its own steps first: a step built from others is tried before the others
     own = [(e["name"], tuple(e["args"]), e["type"], None) for e in (LIBRARY[0] or [])]
-    steps = own + (STEPS if steps is None else steps)
+    base_steps = STEPS if steps is None else steps
+    steps = base_steps + own if OWN_LAST[0] else own + base_steps
     try:
         for s in range(1, max_size + 1):
             for name, argt, outt, f in steps:
@@ -756,7 +758,10 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None, steps=None, cel
                 continue
             if stats is not None:
                 stats.append((s, spent[0], {t: len(bank[t].get(s, [])) for t in bank}))
-            if len(found) >= want:
+            # stop only when nothing longer could be shorter than what's found: a law
+            # that spells out a long table is a long description, however soon it appears
+            best = sorted(size(e) for e in found)
+            if len(best) >= want and best[want - 1] <= s:
                 break
     except _Budget:
         pass
