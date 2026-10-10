@@ -1,0 +1,32 @@
+[
+ {
+  "round": 1,
+  "practice_half": 0,
+  "practised": 317,
+  "explained_in_practice": 28,
+  "steps": 3,
+  "step_list": [
+   "own1() = things(x)",
+   "own2(G) = paint(x, dots(_a))",
+   "own3() = rot180(x)"
+  ],
+  "unseen": 316,
+  "without": {
+   "right": 32,
+   "wrong": 4
+  },
+  "with": {
+   "right": 31,
+   "wrong": 4
+  },
+  "gained": [
+   "913fb3ed",
+   "e3497940"
+  ],
+  "lost": [
+   "4c4377d9",
+   "6d0aefbc",
+   "8be77c9e"
+  ]
+ }
+]
