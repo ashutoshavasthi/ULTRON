@@ -126,5 +126,35 @@
   "lost": [
    "810b9b61"
   ]
+ },
+ {
+  "round": 3,
+  "practice_half": 0,
+  "practised": 317,
+  "explained_in_practice": 36,
+  "steps": 7,
+  "step_list": [
+   "own1(T) = paint(x, recolour(_a, 3))",
+   "own2() = things(x)",
+   "own3() = overlay(bottom(x), top(x))",
+   "own4() = rot180(x)",
+   "own5() = own1(ring(own2()))",
+   "own6() = holes(x)",
+   "own7(T) = paint(x, _a)"
+  ],
+  "unseen": 316,
+  "without": {
+   "right": 30,
+   "wrong": 1
+  },
+  "with": {
+   "right": 32,
+   "wrong": 0
+  },
+  "gained": [
+   "7b6016b9",
+   "a79310a0"
+  ],
+  "lost": []
  }
 ]
