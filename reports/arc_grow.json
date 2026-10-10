@@ -77,5 +77,34 @@
    "c909285e"
   ],
   "lost": []
+ },
+ {
+  "round": 2,
+  "practice_half": 1,
+  "practised": 316,
+  "explained_in_practice": 23,
+  "steps": 6,
+  "step_list": [
+   "own1(T) = crop(x, most(_a, size))",
+   "own2() = flip_v(x)",
+   "own3() = things(x)",
+   "own4(C) = own1(pieces(swap(x, 0, _a)))",
+   "own5() = upscale(x, 2)",
+   "own6(G) = alone(fill_box(pieces(_a)))"
+  ],
+  "unseen": 317,
+  "without": {
+   "right": 17,
+   "wrong": 2
+  },
+  "with": {
+   "right": 19,
+   "wrong": 1
+  },
+  "gained": [
+   "28bf18c6",
+   "ff805c23"
+  ],
+  "lost": []
  }
 ]
