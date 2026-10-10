@@ -106,5 +106,32 @@
    "ff805c23"
   ],
   "lost": []
+ },
+ {
+  "round": 3,
+  "practice_half": 0,
+  "practised": 317,
+  "explained_in_practice": 27,
+  "steps": 5,
+  "step_list": [
+   "own1(C) = paint(paint(x, recolour(fill_box(things(x)), _a)), things(x))",
+   "own2() = rot180(x)",
+   "own3() = things(x)",
+   "own4() = crop(own2(), least(own3(), colour))",
+   "own5(T) = paint(x, _a)"
+  ],
+  "unseen": 316,
+  "without": {
+   "right": 18,
+   "wrong": 2
+  },
+  "with": {
+   "right": 19,
+   "wrong": 2
+  },
+  "gained": [
+   "c909285e"
+  ],
+  "lost": []
  }
 ]
