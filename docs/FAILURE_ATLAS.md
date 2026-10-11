@@ -33,6 +33,9 @@ measurable
 | Eyes | ✅ every eyes row ≥ 24/25 (Stage 2): look longer at a still scene, adapt to the light, step back, handle things in varied conditions. Overlapping things stay a physical limit (16/25, reported only) |
 | Wrong records, up to 20% | ✅ |
 | False laws on 100 datasets with nothing to find | ✅ 0 |
+| Words for what happens (stage 3, L2) | First run: with 20% of sentences saying the wrong word it learned "rolls" as "small" and "bounces" as "falls" and answered wrongly (16/42); through a camera 3× as noisy it named a still thing → **fixed** (it says it can't tell when it didn't see the thing move, has a word whose meaning it hasn't found, or two words seem to mean the same). Now never a wrong answer in any row; it stops answering at 20% wrong words (0/60), 12 sentences heard (33/60) and twice the camera noise (50/60) |
+| How words combine (stage 3, L3) | First run: with "left" also said for "above" it answered wrongly 8 times, and with 40% of sentences about another table 21 times → **fixed** (it doubts a word whose sentences go unexplained unusually often, or that the two halves of what it heard disagree on). Now never a wrong answer in any row; it stops answering at 20% misheard (34/60) and 75 sentences heard (25/60): that doubt is cautious |
+| Words by pointing (stage 3, L1) | First run: a word only ever said as an extra was never learned (53/60), and with 60 sentences or fewer it answered wrongly → **fixed** (coincidences a meaning explains, a cooperative speaker, a wider search, rivals). Now never a wrong answer in any row; it stops answering (rather than guessing) at 20% misnamed sentences (37/60) and at 60 sentences heard (40/60) |
 
 Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 
@@ -102,7 +105,7 @@ Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 
 | Failure | How we provoke it | Status | Fix | Stage |
 |---|---|---|---|---|
-| ~40 grounded words; no grammar | ⬜ | 🔴 | Words by pointing, then composition (a word's meaning is a program), then reading | D |
+| ~40 grounded words; no grammar | Lab: *words by pointing*, *words for what happens*, *how words combine* | 🟡 words by pointing, words for its own laws, and a grammar it finds itself for its tables' language (L1–L3); public grammar tests (L4) paused | Words by pointing, then composition (a word's meaning is a program), then reading | D |
 | Ambiguity, metaphor, things it can't experience | ⬜ | 🔴 | Meaning grounded where possible, borrowed by analogy where not, and marked as borrowed | D |
 
 ## 9. Self-improvement and safety

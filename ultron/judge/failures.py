@@ -575,9 +575,259 @@ def false_laws(brain):
                       "audit", rows)
 
 
+def words_stress(brain):
+    """Words by pointing (stage 3, L1) under a Trainer who sometimes says the wrong word,
+    and with fewer sentences heard. Each row relearns the words from scratch (Ultron's
+    own kinds of thing kept) and is scored on 60 sentences about new tables, in word
+    combinations never heard."""
+    from ..brain.categories import kinds_of
+    from ..brain.language import fits, learn_lexicon
+    from ..senses.tabletop import COLOURS, SHAPES, SIZES
+    from ..senses.things import look_at_table
+    from ..trainer.language_lessons import WordsByPointing
+    from .exams import _meant
+    if brain.eyes is None or not brain.categories:
+        return experiment("words by pointing", "", "", [_row("no words", "untrained", False)])
+    cats = brain.categories
+    kinds = lambda seen: [kinds_of(cats, t) for t in seen]
+    teach = WordsByPointing(7029)
+    heard = [(said.split(), kinds(look_at_table(brain.eyes, look)))
+             for said, look, _, _ in teach.talks(120)]
+    test = []
+    for said, look, things, target in WordsByPointing(8029).talks(60, held_out=True):
+        seen = look_at_table(brain.eyes, look)
+        test.append((said.split(), kinds(seen), _meant(seen, things, target)))
+    families = [sorted(COLOURS), sorted(SIZES), sorted(SHAPES)]
+
+    def score(learned):
+        lexicon, rivals = learned
+        right = gave = 0
+        for words, ks, truth in test:
+            if any(w not in lexicon for w in words):
+                continue
+            pick = lambda lex: [i for i, k in enumerate(ks)
+                                if all(fits(lex[w], k) for w in words)]
+            hits = pick(lexicon)
+            if any(pick(r) != hits for r in rivals):
+                continue                        # not sure yet what a word means
+            if len(hits) == 1:
+                gave += 1
+                right += hits[0] == truth
+        return right, gave
+
+    rows = []
+    rng = random.Random(29)
+    for frac in (0.0, 0.05, 0.1, 0.2, 0.3):
+        spoilt = []
+        for words, ks in heard:
+            words = list(words)
+            if rng.random() < frac:
+                i = rng.randrange(1, len(words))
+                fam = next(f for f in families if words[i] in f)
+                words[i] = rng.choice([w for w in fam if w != words[i]])
+            spoilt.append((words, ks))
+        right, gave = score(learn_lexicon(spoilt, cats, rivals=True))
+        rows.append(_row(f"{frac:.0%} of sentences name the wrong thing",
+                         f"{right}/60 right ({right}/{gave} of its answers)", right >= 57,
+                         right=right, gave=gave))
+    for n in (120, 60, 40, 20, 10):
+        right, gave = score(learn_lexicon(heard[:n], cats, rivals=True))
+        rows.append(_row(f"{n} sentences heard", f"{right}/60 right ({right}/{gave} of its "
+                         f"answers)", right >= 57, right=right, gave=gave))
+    return experiment("words by pointing", "Does it still learn what words mean when the "
+                      "Trainer sometimes says the wrong word, or says less?",
+                      "wrong words; sentences heard", rows,
+                      note="A row passes at 57/60 (95%). The two dials are separate: "
+                           "the first breakpoint is the first row that fails.")
+
+
+def events_stress(brain):
+    """Words for what happens (stage 3, L2) under a Trainer who sometimes says the wrong
+    word, with fewer sentences heard, and through a noisier camera. Each row relearns the
+    event words (or the comparing words) from scratch, with the words for looks it already
+    has, and is scored on 60 new films about things never seen doing that."""
+    from ..brain import events
+    from ..brain.language import (comparing, learn_lexicon, learn_relations, name_with,
+                                  picked, relate_with, runs)
+    from ..senses.tabletop import NOISE
+    from ..trainer.language_lessons import VERBS, WordsForWhatHappens, truth
+    from .exams import _film_thing
+    if brain.eyes is None or not brain.event_words:
+        return experiment("words for what happens", "", "", [_row("no words", "untrained",
+                                                                  False)])
+    found = dict(brain.categories)
+    found.update(events.categories(brain))
+    known = {w: m[1] for w, m in brain.vocab.items()
+             if m[0] == "look" and w not in brain.event_words}
+    kinds = lambda film: [events.kinds_of_thing(brain, t) for t in film["things"]]
+
+    def films(noise):
+        teach = WordsForWhatHappens(7030, noise=noise)
+        heard = []
+        for said, watch, _, _ in teach.event_talks():
+            f = events.watch(brain, watch())
+            heard.append((said.split(), kinds(f)))
+        test = []
+        for said, watch, things, target in WordsForWhatHappens(8030, noise=noise) \
+                .event_talks(60, held_out=True):
+            f = events.watch(brain, watch())
+            test.append((said.split(), f, _film_thing(f, things, target)))
+        return heard, test
+
+    def score(heard, test):
+        lexicon, rivals = learn_lexicon(heard, found, rivals=True, known=known)
+        words = {w: m for w, m in lexicon.items() if w not in known}
+        seen = [k for _, ks in heard for k in ks]
+        right = gave = 0
+        for said, f, meant in test:
+            mine = picked(brain, f, said[:-1])
+            if len(mine) != 1:
+                continue
+            got, _ = name_with(words, rivals, kinds(f)[mine[0]], seen)
+            gave += got is not None
+            right += got == said[-1]
+        return right, gave
+
+    rows = []
+    heard, test = films(None)
+    rng = random.Random(30)
+    for frac in (0.0, 0.1, 0.2, 0.3):
+        spoilt = []
+        for words, ks in heard:
+            words = list(words)
+            if rng.random() < frac:
+                words[-1] = rng.choice([v for v in VERBS if v != words[-1]])
+            spoilt.append((words, ks))
+        right, gave = score(spoilt, test)
+        rows.append(_row(f"{frac:.0%} of event sentences say the wrong word",
+                         f"{right}/60 right ({right}/{gave} of its answers)", right >= 54,
+                         right=right, gave=gave))
+    for n in (50, 25, 12):
+        right, gave = score(heard[:n], test)
+        rows.append(_row(f"{n} event sentences heard", f"{right}/60 right ({right}/{gave} "
+                         f"of its answers)", right >= 54, right=right, gave=gave))
+    for times in (2, 3):
+        right, gave = score(*films(NOISE * times))
+        rows.append(_row(f"camera {times} times as noisy", f"{right}/60 right ({right}/{gave} "
+                         f"of its answers)", right >= 54, right=right, gave=gave))
+    # comparing words
+    teach = WordsForWhatHappens(7130)
+    compared = []
+    for said, watch, _, word, _, _ in teach.relation_talks():
+        f = events.watch(brain, watch())
+        got = comparing(brain, said, f)
+        if got is not None:
+            compared.append((got[0], f, got[1], got[2], word))
+    test = []
+    for said, watch, things, word, first, second in WordsForWhatHappens(8130) \
+            .relation_talks(60, held_out=True):
+        f = events.watch(brain, watch())
+        rs, _ = runs(brain, ["___" if w == word else w for w in said.split()])
+        if len(rs) == 2:
+            test.append((f, picked(brain, f, rs[0]), picked(brain, f, rs[1]), word, first,
+                         second))
+    for frac in (0.0, 0.1, 0.2):
+        spoilt = []
+        for others, f, a, b, word in compared:
+            if rng.random() < frac:
+                wrong = rng.choice([w for w in ("faster", "heavier", "before", "after",
+                                                "more", "fewer") if w != word])
+                others = [wrong if w == word else w for w in others]
+            spoilt.append((others, f, a, b))
+        best, rivals = learn_relations(spoilt, rivals=True)
+        right = gave = 0
+        for f, a, b, word, first, second in test:
+            says = relate_with(best, rivals, f, a, b)
+            gave += bool(says)
+            right += word in says and all(truth(w, first, second) for w in says)
+        rows.append(_row(f"{frac:.0%} of comparing sentences say the wrong word",
+                         f"{right}/{len(test)} right ({right}/{gave} of its answers)",
+                         right >= 54, right=right, gave=gave))
+    return experiment("words for what happens", "Does it still learn words for events and "
+                      "for comparing when the Trainer sometimes says the wrong word, says "
+                      "less, or the camera is noisier?",
+                      "wrong words; sentences heard; camera noise", rows,
+                      note="A row passes at 54/60 (90%). Event words were taught with 100 "
+                           "sentences and comparing words with 120 in the first rows.")
+
+
+def grammar_stress(brain):
+    """How words combine (stage 3, L3) when it mishears words, when the Trainer sometimes
+    talks about another table, when one word has two meanings, and with fewer sentences
+    heard. Each row finds the grammar again from scratch (the words for kinds of thing
+    kept) and is scored on 60 sentences about new tables: 20 nested deeper, 20 with more
+    phrases joined, 20 with words in new places."""
+    from ..brain import grammar
+    from ..trainer.grammar_lessons import EXAM, HowWordsCombine
+    from .exams import _table_things
+    if brain.eyes is None or not brain.grammar:
+        return experiment("how words combine", "", "", [_row("no grammar", "untrained", False)])
+    heard = []
+    for said, look, things, meant, kind in HowWordsCombine(7031).talks():
+        heard.append(grammar.heard_as(brain, said, grammar.see_table(brain, look)))
+    test = []
+    for said, look, things, meant, kind in HowWordsCombine(8031).talks(
+            kinds=[(k, 20) for k, _ in EXAM]):
+        seen = grammar.see_table(brain, look)
+        test.append((grammar.heard_as(brain, said, seen), _table_things(seen, things),
+                     sorted(meant)))
+    known = grammar.known_kinds(brain)
+    vocabulary = sorted({w for ws, _, _ in heard for w in ws})
+
+    def score(said):
+        lexicon, rivals = grammar.learn_grammar(said, brain.categories, known=known,
+                                                rivals=True)
+        doubts = set(grammar.doubtful_words(said, lexicon)) | set(
+            grammar.unsteady_words(said, brain.categories, known=known))
+        right = gave = 0
+        for (ws, table, kinds), which, truth in test:
+            got, _ = grammar.understand(lexicon, rivals, ws, table, kinds, doubts)
+            if got is not None:
+                gave += 1
+                right += sorted(which[i] for i in got) == truth
+        return right, gave
+
+    def row(level, said):
+        right, gave = score(said)
+        return _row(level, f"{right}/60 right ({right}/{gave} of its answers)", right >= 57,
+                    right=right, gave=gave)
+
+    rows = []
+    rng = random.Random(31)
+    for frac in (0.0, 0.2, 0.4):
+        spoilt = []
+        for ws, table, kinds in heard:
+            ws = list(ws)
+            if rng.random() < frac:
+                i = rng.randrange(len(ws))
+                ws[i] = rng.choice([w for w in vocabulary if w != ws[i]])
+            spoilt.append((ws, table, kinds))
+        rows.append(row(f"{frac:.0%} of sentences have a word misheard", spoilt))
+    for frac in (0.2, 0.4):
+        spoilt = []
+        for k, (ws, table, kinds) in enumerate(heard):
+            if rng.random() < frac:
+                _, table, kinds = heard[(k + 1) % len(heard)]
+            spoilt.append((ws, table, kinds))
+        rows.append(row(f"{frac:.0%} of sentences are about another table", spoilt))
+    # 'left' also said for 'above' in half the sentences that say 'above'
+    twice = [([("left" if w == "above" and rng.random() < 0.5 else w) for w in ws], t, k)
+             for ws, t, k in heard]
+    rows.append(row("'left' has two meanings (also 'above', half the time)", twice))
+    for n in (75, 30):
+        rows.append(row(f"{n} sentences heard", heard[:n]))
+    return experiment("how words combine", "Does it still find how words combine when it "
+                      "mishears words, when the Trainer talks about another table, when a "
+                      "word has two meanings, or when it hears less?",
+                      "misheard words; wrong tables; two meanings; sentences heard", rows,
+                      note="A row passes at 57/60 (95%). The grammar was found from 300 "
+                           "sentences in the first rows.")
+
+
 EXPERIMENTS = [program_size, library_learning, intuition_prior, wrong_labels, hidden_cause, few_examples, program_compute,
                noise_ramp, noise_unknown, outliers, distractors, confounder, magnitudes, changing_world,
-               law_forms, eyes_stress, false_laws]
+               law_forms, eyes_stress, false_laws, words_stress, events_stress,
+               grammar_stress]
 
 
 def run_all(brain):

@@ -93,8 +93,13 @@ def exams_section(results):
         r = results[n]
         for item in r["items"]:
             s = item["scores"]
+            named = item.get("baselines")
+            if named:       # baselines of their own (named in the cell)
+                cells = [f"{b}: {_pct(s[b])}" for b in named] + ["n/a"] * (2 - len(named))
+            else:
+                cells = [_pct(s["lookup"]), _pct(s["nearest"])]
             lines.append(f"| {n} | {item['name']} | **{_pct(s['ultron'])}** | "
-                         f"{_pct(s['lookup'])} | {_pct(s['nearest'])} |")
+                         f"{cells[0]} | {cells[1]} |")
     return lines
 
 
@@ -214,6 +219,33 @@ def special_section(results, brain):
         lines.append(f"- **Acting** (lesson 24): random kicks hit a mark "
                      f"{r24.get('random_kicks_hit')} of the time. On the never-touched carpet: "
                      f"_{' / '.join(r24.get('traces', [[]])[-1])}_")
+    r29 = results.get("29") or results.get(29)
+    if r29 and r29.get("precision"):
+        right, gave = r29["precision"]
+        lines.append(f"- **Words by pointing** (lesson 29, stage 3 L1): {right} right of "
+                     f"{gave} answers given on sentences with word pairs it never heard; "
+                     f"{round(100 * r29['margin_over_baselines'])} points above the better "
+                     f"baseline; it heard {r29['sentences_heard']} sentences, and each word "
+                     f"was settled after at most {max(r29['sentences_to_learn'].values())} "
+                     f"sentences that used it.")
+    r30 = results.get("30") or results.get(30)
+    if r30 and r30.get("precision"):
+        right, gave = r30["precision"]
+        rr, rg = r30["relation_precision"]
+        lines.append(f"- **Words for what happens** (lesson 30, stage 3 L2): named what "
+                     f"happens {right} times right of {gave} answers, in new films about "
+                     f"things never seen doing it; the comparing word filled in with {rr} "
+                     f"of {rg} answers wholly true; each event word settled after at most "
+                     f"{max(r30['sentences_to_learn'].values())} sentences that used it; "
+                     f"{r30['sentences_heard']} sentences heard in all.")
+    r31 = results.get("31") or results.get(31)
+    if r31 and r31.get("precision"):
+        right, gave = r31["precision"]
+        lines.append(f"- **How words combine** (lesson 31, stage 3 L3): on new tables, the "
+                     f"things meant {right} times right of {gave} answers, in sentences nested "
+                     f"deeper, with more phrases joined, and with words in places it never "
+                     f"heard them; it found its grammar from {r31['sentences_heard']} "
+                     f"sentences.")
     r10 = results.get("10") or results.get(10)
     if r10:
         lines.append("- **Tough final exam** (lesson 10): no teaching; kinds of question never "

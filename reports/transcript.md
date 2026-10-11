@@ -553,3 +553,74 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _confirm_: tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 28, attempt 1: passed
+
+## Lesson 29
+
+- **Trainer**: Lesson 29: Words by pointing
+- **Trainer**: Here is a table with things on it. Just look, as long as you like.
+- Ultron _invent_: I looked at 182 things on 60 tables and measured each one. Their elongation falls into 2 separate groups (1837 bits to describe all of them as one spread, 1480 as groups); their fill falls into 2 separate groups (1837 bits to describe all of them as one spread, 1795 as groups); their hue falls into 4 separate groups (1837 bits to describe all of them as one spread, 1133 as groups); their size falls into 2 separate groups (1837 bits to describe all of them as one spread, 1645 as groups). Where they are (x, y) doesn't group: a boundary there would not pay for itself. So things come in kinds.
+- **Trainer**: Now I'll talk about the things on the table, one at a time.
+- Ultron _word_: 'ball' means things whose fill is in my group 1 (0.764 to 0.827)
+- Ultron _word_: 'bar' means things whose elongation is in my group 2 (2.7 to 4.23)
+- Ultron _word_: 'big' means things whose size is in my group 2 (107 to 154)
+- Ultron _word_: 'blue' means things whose hue is in my group 4 (231 to 234)
+- Ultron _word_: 'box' means things whose elongation is in my group 1 (1 to 1.17) and fill is in my group 2 (0.864 to 0.957)
+- Ultron _word_: 'green' means things whose hue is in my group 3 (119 to 122)
+- Ultron _word_: 'red' means things whose hue is in my group 1 (1.4 to 4.44)
+- Ultron _word_: 'small' means things whose size is in my group 1 (33 to 49)
+- Ultron _word_: 'the' means nothing: it fits every thing
+- Ultron _word_: 'yellow' means things whose hue is in my group 2 (55.6 to 57.4)
+- Ultron _reflect_: the shortest account of the 120 sentences I heard takes -209 bits: what each word means, and nothing more is needed to tell which thing was meant
+- **Trainer**: Exam for lesson 29, attempt 1: passed
+- **Trainer**: What you found in 'kinds of thing' is what people call categories: colours, sizes and shapes.
+
+## Lesson 30
+
+- **Trainer**: Lesson 30: Words for what happens
+- **Trainer**: Now films of the same things. Watch; I'll say what happens.
+- Ultron _word_: 'bounces' means things where it comes back the way it went
+- Ultron _word_: 'falls' means things where its move up and down follows 'kind 7' (the steps between readings change by the same amount each time)
+- Ultron _word_: 'rolls' means things where its move across follows 'equal steps' (each reading goes up by the same step)
+- Ultron _word_: 'stops' means things where its move across follows 'kind 1' (the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
+- Ultron _invent_: Each word for what happens is the kind of motion present every time it was said about a thing: 'bounces': things where it comes back the way it went; 'falls': things where its move up and down follows 'kind 7' (the steps between readings change by the same amount each time); 'rolls': things where its move across follows 'equal steps' (each reading goes up by the same step); 'stops': things where its move across follows 'kind 1' (the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
+- **Trainer**: Now I'll compare things in the films.
+- Ultron _word_: 'after' says the first has more start than the second
+- Ultron _word_: 'are' says nothing I can check
+- Ultron _word_: 'before' says the first has less start than the second
+- Ultron _word_: 'faster' says the first has more speed than the second
+- Ultron _word_: 'fewer' says the first has less count than the second
+- Ultron _word_: 'heavier' says the first has more mass than the second
+- Ultron _word_: 'is' says nothing I can check
+- Ultron _word_: 'more' says the first has more count than the second
+- Ultron _word_: 'than' says nothing I can check
+- Ultron _word_: 'there' says nothing I can check
+- Ultron _invent_: Each comparing word is the quantity I measure, and which way round, that holds every time it is said: 'after': the first has more start; 'before': the first has less start; 'faster': the first has more speed; 'fewer': the first has less count; 'heavier': the first has more mass; 'more': the first has more count. I weigh things by my law that m·v adds up to the same before and after a knock.
+- **Trainer**: Exam for lesson 30, attempt 1: passed
+- **Trainer**: What you found in 'words for events' is what people call verbs, bound to kinds of motion.
+- **Trainer**: What you found in 'words for comparing' is what people call comparatives and before/after, bound to measured quantities (mass through conservation of momentum).
+
+## Lesson 31
+
+- **Trainer**: Lesson 31: How words combine
+- **Trainer**: Back to the tables. I'll say longer things now.
+- Ultron _word_: 'above' takes the phrase after it and keeps the things of the phrase before it that are higher than one of them
+- Ultron _word_: 'and' puts the things of the phrase after it together with those of the phrase before it (not sure yet: it could also be that it puts the things of the phrase before it together with those of the phrase after it)
+- Ultron _word_: 'ball' names things (ball)
+- Ultron _word_: 'bar' names things (bar)
+- Ultron _word_: 'below' takes the phrase after it and keeps the things of the phrase before it that are lower than one of them
+- Ultron _word_: 'big' keeps the things of the phrase after it that are big
+- Ultron _word_: 'blue' keeps the things of the phrase after it that are blue
+- Ultron _word_: 'box' names things (box)
+- Ultron _word_: 'green' keeps the things of the phrase after it that are green
+- Ultron _word_: 'is' means nothing by itself
+- Ultron _word_: 'left' takes the phrase after it and keeps the things of the phrase before it that are further left than one of them
+- Ultron _word_: 'of' means nothing by itself (not sure yet: it could also be that it picks out the one thing the phrase after it names (or nothing, if it names several))
+- Ultron _word_: 'red' keeps the things of the phrase after it that are red
+- Ultron _word_: 'right' takes the phrase after it and keeps the things of the phrase before it that are further right than one of them
+- Ultron _word_: 'small' keeps the things of the phrase after it that are small
+- Ultron _word_: 'that' means nothing by itself
+- Ultron _word_: 'the' picks out the one thing the phrase after it names (or nothing, if it names several)
+- Ultron _word_: 'yellow' keeps the things of the phrase after it that are yellow
+- Ultron _invent_: Each word does one of a few things to the phrase next to it, and the words that do the same thing combine the same way: 'above' takes the phrase after it and keeps the things of the phrase before it that are higher than one of them; 'and' puts the things of the phrase after it together with those of the phrase before it; 'ball' names things (ball); 'bar' names things (bar); 'below' takes the phrase after it and keeps the things of the phrase before it that are lower than one of them; 'big' keeps the things of the phrase after it that are big; 'blue' keeps the things of the phrase after it that are blue; 'box' names things (box); 'green' keeps the things of the phrase after it that are green; 'left' takes the phrase after it and keeps the things of the phrase before it that are further left than one of them; 'red' keeps the things of the phrase after it that are red; 'right' takes the phrase after it and keeps the things of the phrase before it that are further right than one of them; 'small' keeps the things of the phrase after it that are small; 'the' picks out the one thing the phrase after it names (or nothing, if it names several); 'yellow' keeps the things of the phrase after it that are yellow. 'is', 'of', 'that' mean nothing by themselves. A phrase can sit inside another of the same kind, as deep as you like, and phrases can be joined (4 kinds of word in all).
+- **Trainer**: Exam for lesson 31, attempt 1: passed
+- **Trainer**: What you found in 'how words combine' is what people call a categorial grammar: word classes, word order, recursion (nesting) and coordination.

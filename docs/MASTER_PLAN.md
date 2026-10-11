@@ -71,7 +71,7 @@ unlimited. The claims follow the evidence.
 | **⑦ Metacognition** | Knows what it knows; studies and improves itself | Confidence, doubt, the failure lab (run by us) | Runs its own failure lab; proposes changes to itself in a sandbox |
 | **Senses** | Pixels → objects → measurements with uncertainty | Retina, learned CNN eyes, tracking, self-teaching; one real film | Real video at scale, 3D, categories |
 | **Reader** | The internet as claims with sources, checked before believed | None | Tables, then text; trust per source; detects falsehoods and manipulation |
-| **Language** | Words as grounded programs | About 40 grounded words | Grammar, reading, conversation |
+| **Language** | Words as grounded programs | 37 grounded words, all about numbers (lesson 4 and later) | A grammar it finds itself; understanding, speaking, asking; being told things as claims (stage 3) |
 | **Governance** | Oversight that Ultron cannot modify | Exams, blind tests | Sandbox, human approval, audit, rollback, kill switch |
 
 ### Design laws (these never change)
@@ -99,9 +99,9 @@ the stage before it has passed every exit test on held-out problems, with no reg
 |---|---|---|
 | **1. The scalable, unbreakable core** *(now)* | ①②③ made robust, expressive and fast; ARC-AGI as the battlefield | R1–R6, S1–S2, E1–E2, A2–A3 in [STAGE_1_PLAN.md](STAGE_1_PLAN.md) |
 | **2. The real world through its eyes** | Eyes that generalise first; then real videos at scale: falling, swinging, bouncing, colliding, diffusing | Eyes: every failure-lab row ≥ 23/25 with no regressions. Then g, pendulum periods, restitution and diffusion from real footage within measured error; detection on par with lab tools |
-| **3. Interactive worlds** *(new)* | ⑤ agency and ⑥ curiosity with a learned ④ world model: grid games with unknown rules and goals (like ARC-AGI-3) | Wins held-out games in close to the fewest actions; laws learned in one game cut the actions needed in later ones |
-| **4. The reader** | Learning from the internet as checked evidence | Learns laws from open data it was never taught; catches ≥ 90% of planted false claims; reaches a target accuracy with ≥ 100× fewer bytes read than a fixed, named small language-model baseline on the same questions |
-| **5. Language** | Words → sentences → conversation, all grounded | Understands and produces new sentences about its worlds; detects false statements; asks informative questions; human blind evaluation |
+| **3. Language** *(restored)* | Words → their own laws → a grammar found by MDL → understanding, answering, speaking, asking, being told; all grounded, no pretrained language | L1–L10 in [STAGE_3_PLAN.md](STAGE_3_PLAN.md): held-out scenes and sentences against fixed baselines; SCAN ≥ 95% (jump, length) and COGS ≥ 90%; planted false statements caught ≥ 95%; human blind evaluation |
+| **4. Interactive worlds** | ⑤ agency and ⑥ curiosity with a learned ④ world model: grid games with unknown rules and goals (like ARC-AGI-3) | Wins held-out games in close to the fewest actions; laws learned in one game cut the actions needed in later ones |
+| **5. The reader** | Learning from the internet as checked evidence | Learns laws from open data it was never taught; catches ≥ 90% of planted false claims; reaches a target accuracy with ≥ 100× fewer bytes read than a fixed, named small language-model baseline on the same questions |
 | **6. The body in 3D** | 3D simulated bodies, then tools | Solves new manipulation tasks by planning (a tower taller than any it has seen; using an object as a tool) |
 | **7. Code, self and Engc** | General programs; its own source as a world; Engc and its twin | Correct programs on unseen specs; predicts its own modules; the Engc twin passes every exam identically |
 | **8. Self-improvement** | Proposes changes to its own code and grammar, in a sandbox | Learning efficiency measurably up, zero regressions, every change human-approved; invents a primitive no one gave it |
@@ -111,7 +111,7 @@ the stage before it has passed every exit test on held-out problems, with no reg
 
 **The safety track runs alongside the stages.** Governance is built *before* the stage
 that needs it:
-- **Before stage 4** (the first text written to deceive): exams and sandbox Ultron cannot
+- **Before stage 5** (the first text written to deceive): exams and sandbox Ultron cannot
   modify, an audit log of belief changes, and the rule that untrusted text is only ever a
   claim, never an instruction.
 - **Before stage 8**: human approval of self-changes, rollback and a kill switch.
@@ -123,7 +123,10 @@ that needs it:
 - A per-puzzle MDL network is allowed as a second ARC engine. It is trained only on the
   puzzle and verified, and answers only when no symbolic program fits.
 - Eyes moved to stage 2.
-- Interactive worlds added as stage 3.
+- Interactive worlds added as stage 3 (now stage 4).
+- Language restored as stage 3 (2026-10-11), ahead of interactive worlds and the reader. It
+  had been pushed back each time a stage was inserted, and the reader, which needs it, had
+  been put in front of it.
 - A measurable reader baseline.
 - The safety track moved earlier.
 
@@ -136,7 +139,7 @@ that needs it:
 | **Failure lab** (`python -m ultron stress`) | Breakpoints of every mechanism | After every change; breakpoints only move outward |
 | **Held-out exams** | Understanding vs memorising | Every lesson |
 | **Blind tests** | Written by examiners who never saw the code (humans wanted) | Every stage |
-| **Public benchmarks** | ARC-AGI-1 and -2 first, ARC-AGI-3 in stage 3; others per stage. Score **and precision** (how many answers were right), on held-out sets, every evaluation run logged | Checkpoints only |
+| **Public benchmarks** | ARC-AGI-1 and -2 first, ARC-AGI-3 in stage 4; SCAN and COGS in stage 3; others per stage. Score **and precision** (how many answers were right), on held-out sets, every evaluation run logged | Checkpoints only |
 | **Competitions** | Entered only when our logged held-out score beats the best published score for that track (ARC Prize 2026: checked, not entered) | When the rule is met |
 | **Efficiency** | Data and search per law, against baselines | Every stage |
 | **Determinism** | A retrain is identical byte for byte | Every commit |
