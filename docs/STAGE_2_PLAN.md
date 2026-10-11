@@ -222,6 +222,19 @@ and before Ultron or the Judge measured anything on them).
   √length law is judged too. Ultron must find it itself: across the films, the period
   grows as the square root of the length (power 0.5 ± 2 errors), and its constant must
   agree with 2π/√g within 2 errors.
+- **How the law is judged** (written 2026-10-11, while Ultron's first measurement of the
+  0.5 m film was running and before its result was seen):
+  - Ultron is given each film's period as it measured it, with the length, in a lesson of
+    its own (lesson 30), and must find the law by itself: the period squared over the
+    length stays the same (or the same law upside down). Its law must be that one.
+  - The power: the Judge fits log T against log L over the films, each weighted by
+    Ultron's own error. The power's error is the fit's error from Ultron's errors, or from
+    the scatter about the line if that is larger. Pass: 0.5 within 2 errors.
+  - The constant: each film gives T/√L, with Ultron's error over √L. The constant is
+    their weighted mean, with the error from Ultron's errors or from the scatter between
+    films if that is larger. Pass: within 2 errors of 2π/√9.80 = 2.007 s/√m, and that error
+    at most 3%. No allowance for the swing's angle is made here: the per-film rule
+    already has one.
 
 ### WP3: more real footage (V3–V6)
 
