@@ -254,6 +254,4 @@ def senses_lessons(seed=0):
 
 
 def later_lessons(seed=0):
-    # RealMicroscope (lesson 26) is work in progress and not yet run end to end; it is
-    # left out of the curriculum until it has been tested.
-    return [UsingWhatItKnows(seed + 24), Phase3SensesExam(seed + 25)]
+    return [UsingWhatItKnows(seed + 24), Phase3SensesExam(seed + 25), RealMicroscope(seed + 26)]

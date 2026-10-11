@@ -36,6 +36,16 @@ def test_eyes_generalise_to_hard_conditions(trained):
     assert noise_of(clean) <= 1.25 * eyes.noise_ref
 
 
+def test_diffusion_from_a_real_microscope_film(trained):
+    """Lesson 26: Einstein's law and the diffusion constant from real pixels, matching the
+    scientists' own tool; no law claimed for a single sphere's path."""
+    brain, results = trained
+    r = results[26]
+    assert r["passed"]
+    assert abs(r["D"] - r["trackpy_D"]) / r["trackpy_D"] < 0.10
+    assert "one_sphere" not in brain.slaws
+
+
 def test_laws_rediscovered_from_video(trained):
     brain, results = trained
     assert results[21]["passed"]

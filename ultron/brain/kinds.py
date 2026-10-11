@@ -215,6 +215,9 @@ def _solve(a, b):
     return [m[i][n] / m[i][i] for i in range(n)]
 
 
+EXPLAINS_CHANGE = 0.1
+
+
 def _rows(template, ys):
     k, bias = template["rec"], template.get("bias")
     a = [list(ys[i:i + k][::-1]) + ([1.0] if bias else []) for i in range(len(ys) - k)]
@@ -236,8 +239,14 @@ def _fit(template, ys_list, tol):
     if c is None:
         return None
     scale = max(max(abs(y) for y in ys) for ys in ys_list) or 1.0
-    worst = max(abs(sum(x * w for x, w in zip(r, c)) - v) for r, v in zip(a, b))
+    res = [sum(x * w for x, w in zip(r, c)) - v for r, v in zip(a, b)]
+    worst = max(abs(e) for e in res)
     if worst > tol * scale:
+        return None
+    # it must explain how the readings CHANGE, not only that each is near the last: what
+    # it leaves unexplained must be under a tenth of the change (as for measurement laws)
+    change = sum((r[0] - v) ** 2 for r, v in zip(a, b))
+    if change > 0 and sum(e * e for e in res) > EXPLAINS_CHANGE * change:
         return None
     return [round(x, 12) for x in c], worst / scale
 

@@ -83,6 +83,21 @@ def test_oscillation_its_period_and_damping():
     assert abs(law.shrink((xs, ys), "new") - keep) < 1e-6
 
 
+def test_a_random_walk_has_no_law_of_change():
+    """'Each reading is near the last' explains nothing about how a jiggling particle
+    moves: a recurrence must explain the changes, not only stay near the values."""
+    from ultron.brain.kinds import grammar, search, sequences
+    rng = random.Random(9)
+    eps = []
+    for o in range(4):
+        x = rng.uniform(20, 40)
+        for t in range(40):
+            eps.append({"t": t, "obj": o, "x": round(x, 6)})
+            x += rng.gauss(0, 0.1)
+    found, _ = search(sequences(eps, "x", "t", "obj"), 0.01, grammar())
+    assert found is None or not found.template.get("rec")
+
+
 def test_logistic_capacity_and_draining_never_measured():
     import math
     law = _explain(lambda t, p: 900 * p[0] / (1 + 9 * math.exp(-p[1] * t)))

@@ -177,10 +177,8 @@ class Eyes:
         self.trained_on += len(images)
         self._calibrate(images, touches)
         self.noise_ref = float(np.median([noise_of(im) for im in images]))
-        # how far things stand out in its clear views (it handled things in dim light too,
-        # but "usual" is how they look when it sees them well)
-        self.contrast_ref = float(np.percentile([contrast_of(im) for im, t in
-                                                 zip(images, touches) if len(t)], 90))
+        self.contrast_ref = float(np.median([contrast_of(im) for im, t in zip(images, touches)
+                                             if len(t)]))
         return losses
 
     def _calibrate(self, images, touches):
