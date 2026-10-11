@@ -169,6 +169,15 @@ Words are attached only to things Ultron already has:
   when they knock. It says a comparing word only when the difference is clear of its
   uncertainty, and names nothing when it didn't see the thing move, has a word whose
   meaning it hasn't found, or has two words that seem to mean the same.
+- **How words combine** (stage 3, lesson 33, `brain/grammar.py`). Each word does one of a
+  few things to the phrase next to it (nothing, one of its kinds, "the one", an ordering
+  on a quantity it measures, together, shared) and has a category saying which phrase it
+  takes, before or after it; phrases are put together by the categories (a small
+  categorial grammar, read with a chart parser over sets of things). The grammar is the
+  shortest account of everything heard: what each word does and how it combines
+  (categories counted per kind of word), plus the bits still needed to say which things
+  each sentence meant. Rivals nearly as short, words whose sentences go unexplained too
+  often, and words the two halves of what it heard disagree on make it say it isn't sure.
 
 Answers carry the chain of laws used. `why` produces Peano proofs whose rules
 are derived from Ultron's own programs and checked independently
@@ -213,7 +222,8 @@ ultron/trainer/   lessons: Phase 1 = 0-10 (7 noisy lab, 8 owing, 9 sharing cakes
                   Phase 3 = 19-21 senses, 22-23 new kinds, 24 acting, 25 exam (senses_lessons.py);
                   stage 1 = 27 swinging and growing (E1), 28 rows (E2); stage 2 = 26 microscope film,
                   29 real films of falling, 30 real pendulums (senses_lessons.py);
-                  stage 3 = 31 words by pointing, 32 words for what happens (language_lessons.py)
+                  stage 3 = 31 words by pointing, 32 words for what happens (language_lessons.py),
+                  33 how words combine (grammar_lessons.py)
 ultron/senses/    camera, eyes (learned CNN), world (visual worlds), measure, tabletop (colour
                   camera over things to talk about), floor (films of things falling, bouncing,
                   rolling, knocking), things (what each thing looks like; following it in a film)

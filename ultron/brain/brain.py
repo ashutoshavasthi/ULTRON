@@ -75,6 +75,10 @@ class Brain:
         self.event_words = []               # words it learned for what happens in films
         self.senses = {}                    # a second meaning for a word it already had
         self.rival_relations = []           # other accounts of the comparing words
+        self.tables = []                    # tables talked about in longer sentences (L3)
+        self.grammar = {}                   # what each word does and how it combines (L3)
+        self.rival_grammars = []            # other grammars nearly as short
+        self.grammar_doubts = []            # words the grammar fits badly (it says so)
         self.lesson = None
 
     # ------------------------------------------------------------------ utils
@@ -858,6 +862,10 @@ class Brain:
             "event_words": self.event_words,
             "senses": dict(sorted(self.senses.items())),
             "rival_relations": self.rival_relations,
+            "tables": self.tables,
+            "grammar": {w: list(o) for w, o in sorted(self.grammar.items())},
+            "rival_grammars": self.rival_grammars,
+            "grammar_doubts": self.grammar_doubts,
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
@@ -895,6 +903,10 @@ class Brain:
         b.event_words = list(d.get("event_words", []))
         b.senses = dict(d.get("senses", {}))
         b.rival_relations = list(d.get("rival_relations", []))
+        b.tables = list(d.get("tables", []))
+        b.grammar = dict(d.get("grammar", {}))
+        b.rival_grammars = list(d.get("rival_grammars", []))
+        b.grammar_doubts = list(d.get("grammar_doubts", []))
         b.exceptions = dict(d.get("exceptions", {}))
         b.since = dict(d.get("since", {}))
         if d.get("eyes"):

@@ -63,7 +63,7 @@ scale, nothing else matters.
 |---|---|---|---|
 | **1. The scalable core** *(verdict written: A2–A3 not met, see below)* | Search is exponential: Ultron finds small laws, not big programs | Robustness to bad data; laws of change; lists; speed; library learning on its own laws; an intuition trained on its own searches; ARC-AGI as the battlefield | The criteria in [STAGE_1_PLAN.md](STAGE_1_PLAN.md): R1–R6 (bad data), S1–S2 (laws of size 12, 10× less search), E1–E2 (oscillation, logistic, lists), A2–A3 (≥ 25%, then ≥ 40% on ARC-AGI-1 evaluation) |
 | **2. The real world through its eyes** *(V1–V2 met; V3–V6 in progress alongside stage 3)* | It has seen one real film, and its eyes don't generalise | First, **eyes that generalise** (double noise, faint and touching things). Then lesson 26 (the microscope film), then many real videos: falling, swinging, bouncing, colliding | Rediscovers g, pendulum periods, restitution and diffusion from **real footage**, within measured error |
-| **3. Language** *(now: started 2026-10-11, L1–L2 met)* | It knows 37 grounded words, all about numbers; it cannot understand, say or ask a sentence | Words by pointing, then words for its own laws, then a grammar it finds by MDL, then understanding, answering, speaking, asking and being told. All grounded in concepts it already has; no pretrained language | The criteria in [STAGE_3_PLAN.md](STAGE_3_PLAN.md): L1–L10 on held-out scenes and sentences, against fixed baselines, including SCAN (≥ 95% on the jump and length splits) and COGS (≥ 90%), with ≤ 10,000 sentences heard |
+| **3. Language** *(now: L1–L3 met; paused at L4 on 2026-10-11 by the owner's decision, until the coding work passes)* | It knows 37 grounded words, all about numbers; it cannot understand, say or ask a sentence | Words by pointing, then words for its own laws, then a grammar it finds by MDL, then understanding, answering, speaking, asking and being told. All grounded in concepts it already has; no pretrained language | The criteria in [STAGE_3_PLAN.md](STAGE_3_PLAN.md): L1–L10 on held-out scenes and sentences, against fixed baselines, including SCAN (≥ 95% on the jump and length splits) and COGS (≥ 90%), with ≤ 10,000 sentences heard |
 | **4. Interactive worlds** | It has acted only with one kick in a world whose rules it was told | Grid games with unknown rules (like ARC-AGI-3). Ultron explores, runs experiments, learns the rules **and the goal** as laws, and plans in its own learned model. Laws that recur across games become priors | Wins held-out games it has never seen, in close to the fewest actions; later games need fewer actions than earlier ones (learning compounds) |
 | **5. The reader** | It knows only what it experienced | Open data, then text (which needs stage 3), read as **claims with sources**, checked against its laws, other sources and experiment; reading driven by curiosity | Learns laws from open data it was never taught and predicts held-out data. Catches ≥ 90% of planted false claims. Reaches a target accuracy with ≥ 100× fewer bytes read than a fixed, named small language-model baseline |
 | **6. A body in 3D** | Its actions are 2D and few | A 3D physics simulator (MuJoCo or PyBullet), goals, planning with its own world model, tools | Solves new manipulation tasks by planning: a taller tower than it has ever seen, using an object as a tool |
@@ -200,8 +200,14 @@ Stage 3 plan and exit test: [STAGE_3_PLAN.md](STAGE_3_PLAN.md).
    faster, heavier (by its momentum law), before, after, more, fewer. Naming what things
    never seen doing it do: 200/200 (a word counter given its kinds also 200/200);
    filling in the comparing word: 113/120 (counter 100/120), never a false word in the
-   exam or the failure lab (33 lessons).
-3. **L3–L4, grammar by MDL**, then SCAN and COGS.
+   exam or the failure lab (32 lessons).
+3. ✅ **L3, a grammar found by MDL** (lesson 33): from 300 sentences about tables, with
+   nobody saying which thing is meant or what a word does, it finds what each word does
+   and how it combines (a small categorial grammar). On held-out sentences: 69/70 nested
+   deeper than any it heard, 59/60 with more phrases joined, 70/70 with words in new
+   places; never a wrong answer in the exam or the failure lab (34 lessons).
+4. ⏸ **L4, SCAN and COGS**: paused on 2026-10-11 (the owner's decision) until the coding
+   work passes. Published baselines confirmed and recorded in the plan.
 
 Network note (updated 2026-10-11): this environment reaches GitHub, the Python Package
 Index, Wikimedia (which rate-limits original files), YouTube and archive.org; earlier the

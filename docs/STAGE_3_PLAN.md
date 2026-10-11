@@ -115,6 +115,48 @@ that explains every sentence heard, with the meanings checked in the world, wins
 same learner, with no dataset-specific rules, runs on SCAN and COGS (both on GitHub,
 reachable from this environment, checked 2026-10-11).
 
+**L3's exam, fixed before the work (2026-10-11, `judge/exams.py`, `exam_grammar`, seed
+1031, never used during the work).** Tables of coloured things like L1's, with up to 10
+things. The Trainer speaks its own small grammar, which Ultron never reads: a noun
+phrase is "the [size] [colour] shape", maybe followed by "left of", "right of", "above"
+or "below" (sometimes "that is left of" ...) and another noun phrase; noun phrases are
+joined by "and". It says a sentence only when, of every way its own grammar could put
+the words together, exactly one picks out something on the table (it speaks to be
+understood). Ultron says which thing or things are meant. 200 new tables, in three
+held-out splits:
+- *Deeper nesting* (70): 3 or 4 noun phrases inside one another ("the ball left of the
+  box above the bar right of the ball"). Teaching has at most 2.
+- *More joined phrases* (60): 3 or 4 noun phrases joined by "and". Teaching has at
+  most 2.
+- *Words in new places* (70): "bar", heard in teaching only alone ("the bar"), and
+  "below", heard only between two bare shapes ("the box below the ball"), now inside
+  longer sentences, with sizes, colours, nesting and "and".
+- Right means exactly the things meant; saying it can't tell counts as wrong. It must
+  reach **95% on each split**, and precision is reported.
+- Baselines, fixed before measuring: *bag of words* (the things that fit every word it
+  knows, relations ignored) and *first phrase* (the one thing that fits the first noun
+  phrase, the rest of the sentence ignored).
+
+**L4's published baselines, confirmed from the papers (2026-10-11), before any L4 work:**
+- SCAN (Lake and Baroni 2018, arXiv:1711.00350v3). "Add jump": the best model got
+  **1.2%** (an LSTM with attention, one layer of 100 units, dropout 0.1); the model best
+  overall got 0.08%. Length: the best got **20.8%** (a GRU with attention, one 50-unit
+  layer, dropout 0.5, mean of 5 runs); the model best overall got 13.8%.
+- COGS (Kim and Linzen 2020, arXiv:2010.05465v1, Table 2). Generalisation set:
+  Transformer **35%** (± 6), one-way LSTM 32% (± 6), two-way LSTM 16% (± 8); the
+  in-distribution test set 96–99%.
+- The exam files are the published ones, as fetched on 2026-10-11 (SHA-256):
+  - SCAN `add_prim_split/tasks_test_addprim_jump.txt` (7,706):
+    `8147ae2651422c701162e174d9d66158daa57858a26b30317ac61797118ac7a5`
+  - SCAN `length_split/tasks_test_length.txt` (3,920):
+    `0760752ed34a75116ae11dcc1ee17526b7500060da1366540730fa24894d7db3`
+  - COGS `data/gen.tsv` (21,000):
+    `d013d9eee0bafc153f8decc85f42814ac97260f84964d980e1e2b84577b82361`
+
+  Of them only the format was looked at (a few lines, COGS's list of generalisation
+  cases with two examples of each, and how its facts are ordered); no score has been
+  measured on them.
+
 ### WP5: understanding and answering (L5, L6)
 
 Turn a sentence's meaning into a check (a statement) or a search (a question) over its
@@ -150,7 +192,9 @@ WP1, then WP2 and WP3, then WP4 (the heart of the stage), then WP5 to WP8, then 
 |---|---|
 | L1 | ✅ **met** (2026-10-11), lesson 29 (lesson 31 in the combined curriculum). On 200 sentences about new tables, each with a word pair never heard together: **200/200**, and 200 right of 200 answers given. Baselines: co-occurrence counter 78/200 (39%), memoriser 41/200 (20%): 61 points above the better one. Words never taught: 30/30 refused (baselines 0/30 and 3/30). Every word settled after at most 20 sentences that used it (most 2–11). 120 sentences heard in all |
 | L2 | ✅ **met** (2026-10-11), lesson 30 (lesson 32 in the combined curriculum). Naming what happens in 200 new films, each about a thing whose colour, size or shape never did that in teaching: **200/200**, 200 right of 200 answers. Filling in the comparing word in 120 new films, each pairing a word with a kind of thing never heard together: **113/120** (94%), and every one of its 113 answers wholly true; it said it couldn't tell 7 times. Baselines: co-occurrence counter 200/200 and 100/120, memoriser 6/200 and 16/120. Each word for what happens settled after at most 10 sentences that used it. 220 sentences heard |
-| L3–L10 | not started |
+| L3 | ✅ **met** (2026-10-11), lesson 31 (lesson 33 in the combined curriculum). On 200 new tables of up to 10 things, the things meant: **69/70** with noun phrases nested 3–4 deep (teaching: at most 2), **59/60** with 3–4 phrases joined by "and" (teaching: at most 2), **70/70** with "bar" and "below" in places it never heard them; 198 right of 198 answers, and it said it couldn't tell twice. Baselines: a bag of words 0/70, 0/60, 16/70; the first noun phrase alone 0/70, 0/60, 16/70. Grammar found from 300 sentences |
+| L4 | ⏸ **paused** (2026-10-11, the owner's decision: language waits until the coding work passes). The published baselines were confirmed from the papers and are recorded under WP4. Nothing for L4 is in the repository yet |
+| L5–L10 | not started |
 
 How L1 was met (`senses/tabletop.py`, `senses/things.py`, `brain/categories.py`,
 `brain/language.py`, `trainer/language_lessons.py`):
@@ -285,3 +329,83 @@ two things that knocked into each other; otherwise it says it can't tell. The ex
 films were watched twice: once at the real run, and again after the failure-lab fixes
 (the same scores both times). Speech is a few fixed sentence shapes; grammar is L3.
 
+How L3 was met (`brain/grammar.py`, `trainer/grammar_lessons.py`, lesson 31):
+- **Longer sentences about the same tables.** The Trainer now says things like "the red
+  ball left of the big box", "the ball that is above the box right of the ball" and "the
+  green box and the small ball". Its grammar lives in the Trainer, which Ultron never
+  reads: a noun phrase is "the [size] [colour] shape", maybe followed by a relation and
+  another noun phrase, and noun phrases are joined by "and". It says a sentence only when,
+  of all the ways its grammar could read it, exactly one picks out something on the
+  table, and each relation it says is needed to tell the thing apart. Ultron gets the
+  words and the picture; nobody says which thing is meant or what any word does.
+- **What a word can do.** Each word does one of a few things to the phrase next to it:
+  nothing; keep the things of one of its own kinds (from L1); pick out the one thing
+  ("the": if the phrase names several, the phrase fails); keep the things that are
+  further one way, on a quantity it measures (place across, height, size), than one of
+  the things of another phrase; put two phrases' things together; or keep what two
+  phrases share. How it combines is a category, as in a categorial grammar: it takes the
+  phrase before or after it, or one on each side. Phrases are put together by the
+  categories alone, so a phrase can sit inside another of the same kind as deep as you
+  like.
+- **The shortest account.** The grammar is what makes everything heard shortest: the
+  bits to say what each word does and how it combines, plus, for each sentence, the bits
+  still needed to say which things it meant (no reading at all costs most; several
+  readings cost more than one). Categories are counted per kind of word, so words that do
+  the same thing share a way of combining unless what was heard pays for a difference.
+  The search changes one word at a time, and also holds each word at its next best
+  meanings and at "nothing" while the others settle, because words can be tied together
+  ("that" and "is" only make sense as a pair). Grammars nearly as short are kept as
+  rivals; where they read a sentence differently it says it isn't sure.
+- **What it found**, from 300 sentences: "the" picks out the one thing the phrase after
+  it names; sizes and colours keep things of the phrase after them; shapes name things;
+  left, right, above and below take the phrase after them and keep the things of the
+  phrase before them that are further left, further right, higher or lower than one of
+  them; "and" puts the two phrases' things together; "of", "that" and "is" mean nothing by
+  themselves (4 kinds of word in all).
+- **Saying it isn't sure.** It doubts a word when the sentences with that word go
+  unexplained far more often than sentences do in general (chance below 1 in 1,000), and
+  when the grammar it finds from every other sentence and from the rest disagree on that
+  word. It doesn't answer a sentence with a doubted word.
+
+Baselines, fixed in code before the first measurement (`judge/exams.py`): a bag of words
+(the things that fit every word it knows a kind for, whatever the order) and the first
+noun phrase alone (the one thing that fits the words before the first word that names no
+kind). Both get none of the nested or joined sentences right, and 16/70 where a held-out
+word is in a new place.
+
+**Found on practice tables before the real exam** (other seeds than the exam's): "below"
+took the reverse way of combining from "above" (fixed by counting categories per kind of
+word); "that" and "is" stuck as a pair meaning something (fixed by holding words at
+"nothing" during the search); learning took 453 s (now about 70 s, by first screening
+each word's meanings on a few sentences). On practice tables it got 70/70, 59/60 and
+68/70; the misses were its eyes (a thin bar missed, small balls seen as boxes).
+
+**The failure lab found wrong answers, now fixed** (`python -m ultron stress`, "how
+words combine", taught and tested on other tables than lesson 31). With "left" also said
+for "above" half the time, it answered wrongly 8 times; with 40% of sentences about
+another table, 21 times. Fixed by the two doubts above. Lesson 31's exam was first
+run after the fixes.
+
+| Failure lab (60 new tables each) | Right | Answers given |
+|---|---|---|
+| no word misheard | 60 | 60 |
+| 20% of sentences with a word misheard | 34 | 34 |
+| 40% with a word misheard | 19 | 19 |
+| 20% of sentences about another table | 60 | 60 |
+| 40% about another table | 0 | 0 (it doubts every relation word) |
+| "left" also said for "above", half the time | 35 | 35 (it doubts "left") |
+| 75 sentences heard | 25 | 25 |
+| 30 sentences heard | 0 | 0 |
+
+It gives **no wrong answer in any row**. It breaks (fewer than 57/60 right) at 20% of
+sentences with a word misheard and at 75 sentences heard.
+
+**Limits, said plainly.** The second doubt is cautious: on less or noisier teaching, the
+grammars found from the two halves often differ, so it refuses sentences it would have
+got right (without that doubt it got 60/60 with 20% misheard and with 75 sentences, but
+answered wrongly 21 times with 40% about another table). That is not a search failure:
+with 40% about another table, the wrong grammar it found is genuinely shorter than the
+right one (1,228 bits against 1,254), so the shortest account alone can't tell; and on
+half of 75 sentences a wrong grammar is shorter too. The language is the Trainer's small
+grammar about tables. Relations are about where things lie in one picture; agreement,
+verbs and clauses come with the public tests (L4).

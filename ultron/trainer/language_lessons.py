@@ -169,9 +169,9 @@ class WordsByPointing(Lesson):
 # ---------------------------------------------------------------- lesson 32
 VERBS = fl.EVENTS                                   # falls, bounces, rolls, stops
 RELATIONS = ("faster", "heavier", "before", "after", "more", "fewer")
-# Word pairs the Trainer never says together while teaching lesson 32 (numbered 30 then; fixed 2026-10-11,
-# before any measurement). Things of these kinds never do these things while it
-# teaches; the exam's films are all about them.
+# Word pairs the Trainer never says together while teaching lesson 32 (numbered 30 then;
+# fixed 2026-10-11, before any measurement). Things of these kinds never do these things
+# while it teaches; the exam's films are all about them.
 EVENT_HELD_OUT = (("box", "bounces"), ("bar", "rolls"), ("ball", "stops"),
                   ("green", "falls"), ("yellow", "bounces"), ("big", "rolls"))
 RELATION_HELD_OUT = (("bar", "faster"), ("box", "heavier"), ("yellow", "before"),
@@ -483,7 +483,9 @@ class WordsForWhatHappens(Lesson):
 
 
 def language_lessons(seed=0):
-    # Numbered 29 and 30 when their exams were fixed; renumbered 31 and 32 when Stage 2's
-    # lessons took 29 (falling) and 30 (swinging). The seeds keep their first offsets, so teaching and exams see
-    # exactly the worlds fixed in advance.
-    return [WordsByPointing(seed + 29), WordsForWhatHappens(seed + 30)]
+    # Numbered 29, 30 and 31 when their exams were fixed; renumbered 31, 32 and 33 when
+    # Stage 2's lessons took 29 (falling) and 30 (swinging). The seeds keep their first
+    # offsets, so teaching and exams see exactly the worlds fixed in advance.
+    from .grammar_lessons import HowWordsCombine
+    return [WordsByPointing(seed + 29), WordsForWhatHappens(seed + 30),
+            HowWordsCombine(seed + 31)]

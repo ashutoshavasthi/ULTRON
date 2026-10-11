@@ -26927,6 +26927,228 @@
    ]
   }
  ],
+ "grammar": {
+  "above": [
+   "order",
+   [
+    "height",
+    ">"
+   ],
+   [
+    "/",
+    [
+     "\\",
+     "N",
+     "N"
+    ],
+    "N"
+   ]
+  ],
+  "and": [
+   "together",
+   null,
+   [
+    "/",
+    [
+     "\\",
+     "N",
+     "N"
+    ],
+    "N"
+   ]
+  ],
+  "ball": [
+   "kind",
+   [
+    [
+     "fill",
+     0
+    ]
+   ],
+   "N"
+  ],
+  "bar": [
+   "kind",
+   [
+    [
+     "elongation",
+     1
+    ]
+   ],
+   "N"
+  ],
+  "below": [
+   "order",
+   [
+    "height",
+    "<"
+   ],
+   [
+    "/",
+    [
+     "\\",
+     "N",
+     "N"
+    ],
+    "N"
+   ]
+  ],
+  "big": [
+   "kind",
+   [
+    [
+     "size",
+     1
+    ]
+   ],
+   [
+    "/",
+    "N",
+    "N"
+   ]
+  ],
+  "blue": [
+   "kind",
+   [
+    [
+     "hue",
+     3
+    ]
+   ],
+   [
+    "/",
+    "N",
+    "N"
+   ]
+  ],
+  "box": [
+   "kind",
+   [
+    [
+     "elongation",
+     0
+    ],
+    [
+     "fill",
+     1
+    ]
+   ],
+   "N"
+  ],
+  "green": [
+   "kind",
+   [
+    [
+     "hue",
+     2
+    ]
+   ],
+   [
+    "/",
+    "N",
+    "N"
+   ]
+  ],
+  "is": [
+   "nothing",
+   null,
+   null
+  ],
+  "left": [
+   "order",
+   [
+    "place",
+    "<"
+   ],
+   [
+    "/",
+    [
+     "\\",
+     "N",
+     "N"
+    ],
+    "N"
+   ]
+  ],
+  "of": [
+   "nothing",
+   null,
+   null
+  ],
+  "red": [
+   "kind",
+   [
+    [
+     "hue",
+     0
+    ]
+   ],
+   [
+    "/",
+    "N",
+    "N"
+   ]
+  ],
+  "right": [
+   "order",
+   [
+    "place",
+    ">"
+   ],
+   [
+    "/",
+    [
+     "\\",
+     "N",
+     "N"
+    ],
+    "N"
+   ]
+  ],
+  "small": [
+   "kind",
+   [
+    [
+     "size",
+     0
+    ]
+   ],
+   [
+    "/",
+    "N",
+    "N"
+   ]
+  ],
+  "that": [
+   "nothing",
+   null,
+   null
+  ],
+  "the": [
+   "the one",
+   null,
+   [
+    "/",
+    "N",
+    "N"
+   ]
+  ],
+  "yellow": [
+   "kind",
+   [
+    [
+     "hue",
+     1
+    ]
+   ],
+   [
+    "/",
+    "N",
+    "N"
+   ]
+  ]
+ },
+ "grammar_doubts": [],
  "heard": [
   {
    "said": "the ball",
@@ -30432,6 +30654,233 @@
     "y",
     "v^2"
    ]
+  },
+  "how words combine": {
+   "grammar": {
+    "above": [
+     "order",
+     [
+      "height",
+      ">"
+     ],
+     [
+      "/",
+      [
+       "\\",
+       "N",
+       "N"
+      ],
+      "N"
+     ]
+    ],
+    "and": [
+     "together",
+     null,
+     [
+      "/",
+      [
+       "\\",
+       "N",
+       "N"
+      ],
+      "N"
+     ]
+    ],
+    "ball": [
+     "kind",
+     [
+      [
+       "fill",
+       0
+      ]
+     ],
+     "N"
+    ],
+    "bar": [
+     "kind",
+     [
+      [
+       "elongation",
+       1
+      ]
+     ],
+     "N"
+    ],
+    "below": [
+     "order",
+     [
+      "height",
+      "<"
+     ],
+     [
+      "/",
+      [
+       "\\",
+       "N",
+       "N"
+      ],
+      "N"
+     ]
+    ],
+    "big": [
+     "kind",
+     [
+      [
+       "size",
+       1
+      ]
+     ],
+     [
+      "/",
+      "N",
+      "N"
+     ]
+    ],
+    "blue": [
+     "kind",
+     [
+      [
+       "hue",
+       3
+      ]
+     ],
+     [
+      "/",
+      "N",
+      "N"
+     ]
+    ],
+    "box": [
+     "kind",
+     [
+      [
+       "elongation",
+       0
+      ],
+      [
+       "fill",
+       1
+      ]
+     ],
+     "N"
+    ],
+    "green": [
+     "kind",
+     [
+      [
+       "hue",
+       2
+      ]
+     ],
+     [
+      "/",
+      "N",
+      "N"
+     ]
+    ],
+    "is": [
+     "nothing",
+     null,
+     null
+    ],
+    "left": [
+     "order",
+     [
+      "place",
+      "<"
+     ],
+     [
+      "/",
+      [
+       "\\",
+       "N",
+       "N"
+      ],
+      "N"
+     ]
+    ],
+    "of": [
+     "nothing",
+     null,
+     null
+    ],
+    "red": [
+     "kind",
+     [
+      [
+       "hue",
+       0
+      ]
+     ],
+     [
+      "/",
+      "N",
+      "N"
+     ]
+    ],
+    "right": [
+     "order",
+     [
+      "place",
+      ">"
+     ],
+     [
+      "/",
+      [
+       "\\",
+       "N",
+       "N"
+      ],
+      "N"
+     ]
+    ],
+    "small": [
+     "kind",
+     [
+      [
+       "size",
+       0
+      ]
+     ],
+     [
+      "/",
+      "N",
+      "N"
+     ]
+    ],
+    "that": [
+     "nothing",
+     null,
+     null
+    ],
+    "the": [
+     "the one",
+     null,
+     [
+      "/",
+      "N",
+      "N"
+     ]
+    ],
+    "yellow": [
+     "kind",
+     [
+      [
+       "hue",
+       1
+      ]
+     ],
+     [
+      "/",
+      "N",
+      "N"
+     ]
+    ]
+   },
+   "lesson": 31,
+   "primitives": [],
+   "shape": "grammar",
+   "story": "Each word does one of a few things to the phrase next to it, and the words that do the same thing combine the same way: 'above' takes the phrase after it and keeps the things of the phrase before it that are higher than one of them; 'and' puts the things of the phrase after it together with those of the phrase before it; 'ball' names things (ball); 'bar' names things (bar); 'below' takes the phrase after it and keeps the things of the phrase before it that are lower than one of them; 'big' keeps the things of the phrase after it that are big; 'blue' keeps the things of the phrase after it that are blue; 'box' names things (box); 'green' keeps the things of the phrase after it that are green; 'left' takes the phrase after it and keeps the things of the phrase before it that are further left than one of them; 'red' keeps the things of the phrase after it that are red; 'right' takes the phrase after it and keeps the things of the phrase before it that are further right than one of them; 'small' keeps the things of the phrase after it that are small; 'the' picks out the one thing the phrase after it names (or nothing, if it names several); 'yellow' keeps the things of the phrase after it that are yellow. 'is', 'of', 'that' mean nothing by themselves. A phrase can sit inside another of the same kind, as deep as you like, and phrases can be joined (4 kinds of word in all)."
   },
   "kind:cool": {
    "kind": "kind 1",
@@ -40062,6 +40511,121 @@
    "kind": "trainer",
    "lesson": 30,
    "text": "What you found in 'words for comparing' is what people call comparatives and before/after, bound to measured quantities (mass through conservation of momentum)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 31,
+   "text": "Lesson 31: How words combine"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 31,
+   "text": "Back to the tables. I'll say longer things now."
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'above' takes the phrase after it and keeps the things of the phrase before it that are higher than one of them"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'and' puts the things of the phrase after it together with those of the phrase before it (not sure yet: it could also be that it puts the things of the phrase before it together with those of the phrase after it)"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'ball' names things (ball)"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'bar' names things (bar)"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'below' takes the phrase after it and keeps the things of the phrase before it that are lower than one of them"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'big' keeps the things of the phrase after it that are big"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'blue' keeps the things of the phrase after it that are blue"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'box' names things (box)"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'green' keeps the things of the phrase after it that are green"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'is' means nothing by itself"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'left' takes the phrase after it and keeps the things of the phrase before it that are further left than one of them"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'of' means nothing by itself (not sure yet: it could also be that it picks out the one thing the phrase after it names (or nothing, if it names several))"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'red' keeps the things of the phrase after it that are red"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'right' takes the phrase after it and keeps the things of the phrase before it that are further right than one of them"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'small' keeps the things of the phrase after it that are small"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'that' means nothing by itself"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'the' picks out the one thing the phrase after it names (or nothing, if it names several)"
+  },
+  {
+   "kind": "word",
+   "lesson": 31,
+   "text": "'yellow' keeps the things of the phrase after it that are yellow"
+  },
+  {
+   "kind": "invent",
+   "lesson": 31,
+   "text": "Each word does one of a few things to the phrase next to it, and the words that do the same thing combine the same way: 'above' takes the phrase after it and keeps the things of the phrase before it that are higher than one of them; 'and' puts the things of the phrase after it together with those of the phrase before it; 'ball' names things (ball); 'bar' names things (bar); 'below' takes the phrase after it and keeps the things of the phrase before it that are lower than one of them; 'big' keeps the things of the phrase after it that are big; 'blue' keeps the things of the phrase after it that are blue; 'box' names things (box); 'green' keeps the things of the phrase after it that are green; 'left' takes the phrase after it and keeps the things of the phrase before it that are further left than one of them; 'red' keeps the things of the phrase after it that are red; 'right' takes the phrase after it and keeps the things of the phrase before it that are further right than one of them; 'small' keeps the things of the phrase after it that are small; 'the' picks out the one thing the phrase after it names (or nothing, if it names several); 'yellow' keeps the things of the phrase after it that are yellow. 'is', 'of', 'that' mean nothing by themselves. A phrase can sit inside another of the same kind, as deep as you like, and phrases can be joined (4 kinds of word in all)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 31,
+   "text": "Exam for lesson 31, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 31,
+   "text": "What you found in 'how words combine' is what people call a categorial grammar: word classes, word order, recursion (nesting) and coordination."
   }
  ],
  "memory": {
@@ -54997,6 +55561,7 @@
   "hang": "Hooke's law with an unstretched length",
   "hidden:bounce": "energy: gravitational + kinetic + elastic (spring)",
   "hidden:roll": "energy (height + speed\u00b2/2g, per unit of weight)",
+  "how words combine": "a categorial grammar: word classes, word order, recursion (nesting) and coordination",
   "jiggle": "Brownian motion: Einstein's law (mean squared displacement = 4\u00b7D\u00b7t)",
   "kind:cool": "exponential decay toward equilibrium (Newton's law of cooling)",
   "kind:hang": "a linear relationship (a constant rate of change)",
@@ -55386,6 +55951,34 @@
    "spread": 2.571107591844849e-12
   }
  },
+ "rival_grammars": [
+  {
+   "of": [
+    "the one",
+    null,
+    [
+     "/",
+     "N",
+     "N"
+    ]
+   ]
+  },
+  {
+   "and": [
+    "together",
+    null,
+    [
+     "\\",
+     [
+      "/",
+      "N",
+      "N"
+     ],
+     "N"
+    ]
+   ]
+  }
+ ],
  "rival_lexicons": [],
  "rival_relations": [],
  "search_steps": {
@@ -55718,6 +56311,9788 @@
   "recut",
   "see_merge"
  ],
+ "tables": [
+  {
+   "said": "the yellow ball and the small box above the blue box",
+   "things": [
+    {
+     "elongation": 1.164,
+     "fill": 0.922,
+     "hue": 57.909,
+     "size": 40.0,
+     "x": 67.85,
+     "y": 24.5
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.78,
+     "hue": 57.441,
+     "size": 143.0,
+     "x": 43.385,
+     "y": 41.357
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.931,
+     "hue": 230.583,
+     "size": 40.0,
+     "x": 25.5,
+     "y": 46.85
+    },
+    {
+     "elongation": 1.143,
+     "fill": 0.93,
+     "hue": 3.553,
+     "size": 39.0,
+     "x": 53.769,
+     "y": 65.538
+    }
+   ]
+  },
+  {
+   "said": "the small yellow box",
+   "things": [
+    {
+     "elongation": 1.1,
+     "fill": 0.942,
+     "hue": 57.298,
+     "size": 50.0,
+     "x": 66.36,
+     "y": 49.96
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.081,
+     "fill": 0.91,
+     "hue": 120.152,
+     "size": 128.0,
+     "x": 31.047,
+     "y": 19.328
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.794,
+     "hue": 231.097,
+     "size": 41.0,
+     "x": 58.0,
+     "y": 24.756
+    },
+    {
+     "elongation": 1.03,
+     "fill": 0.917,
+     "hue": 120.436,
+     "size": 136.0,
+     "x": 17.529,
+     "y": 38.338
+    }
+   ]
+  },
+  {
+   "said": "the box above the ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.941,
+     "hue": 230.871,
+     "size": 144.0,
+     "x": 23.5,
+     "y": 19.5
+    },
+    {
+     "elongation": 1.045,
+     "fill": 0.776,
+     "hue": 2.932,
+     "size": 129.0,
+     "x": 65.047,
+     "y": 31.481
+    },
+    {
+     "elongation": 1.141,
+     "fill": 0.919,
+     "hue": 120.51,
+     "size": 38.0,
+     "x": 34.842,
+     "y": 42.395
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.938,
+     "hue": 232.087,
+     "size": 142.0,
+     "x": 18.211,
+     "y": 45.845
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.024,
+     "fill": 0.77,
+     "hue": 231.967,
+     "size": 137.0,
+     "x": 39.058,
+     "y": 21.869
+    },
+    {
+     "elongation": 1.143,
+     "fill": 0.924,
+     "hue": 55.898,
+     "size": 39.0,
+     "x": 21.538,
+     "y": 36.231
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.787,
+     "hue": 56.928,
+     "size": 118.0,
+     "x": 67.5,
+     "y": 50.407
+    }
+   ]
+  },
+  {
+   "said": "the big yellow box",
+   "things": [
+    {
+     "elongation": 1.01,
+     "fill": 0.939,
+     "hue": 56.709,
+     "size": 138.0,
+     "x": 21.406,
+     "y": 65.652
+    }
+   ]
+  },
+  {
+   "said": "the big ball",
+   "things": [
+    {
+     "elongation": 1.018,
+     "fill": 0.779,
+     "hue": 2.861,
+     "size": 148.0,
+     "x": 58.169,
+     "y": 48.628
+    }
+   ]
+  },
+  {
+   "said": "the bar",
+   "things": [
+    {
+     "elongation": 2.606,
+     "fill": 0.823,
+     "hue": 3.847,
+     "size": 40.0,
+     "x": 34.725,
+     "y": 20.975
+    }
+   ]
+  },
+  {
+   "said": "the ball that is left of the box and the red ball",
+   "things": [
+    {
+     "elongation": 1.011,
+     "fill": 0.783,
+     "hue": 3.191,
+     "size": 129.0,
+     "x": 58.814,
+     "y": 12.55
+    },
+    {
+     "elongation": 3.134,
+     "fill": 0.895,
+     "hue": 119.869,
+     "size": 47.0,
+     "x": 22.489,
+     "y": 19.128
+    },
+    {
+     "elongation": 1.071,
+     "fill": 0.805,
+     "hue": 232.135,
+     "size": 39.0,
+     "x": 45.821,
+     "y": 32.59
+    },
+    {
+     "elongation": 1.117,
+     "fill": 0.809,
+     "hue": 231.326,
+     "size": 45.0,
+     "x": 15.067,
+     "y": 42.556
+    },
+    {
+     "elongation": 1.069,
+     "fill": 0.937,
+     "hue": 3.659,
+     "size": 111.0,
+     "x": 39.216,
+     "y": 61.324
+    }
+   ]
+  },
+  {
+   "said": "the small red box that is left of the small yellow box",
+   "things": [
+    {
+     "elongation": 1.082,
+     "fill": 0.882,
+     "hue": 3.605,
+     "size": 43.0,
+     "x": 23.047,
+     "y": 29.558
+    },
+    {
+     "elongation": 1.116,
+     "fill": 0.905,
+     "hue": 3.522,
+     "size": 41.0,
+     "x": 50.293,
+     "y": 36.0
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.806,
+     "hue": 231.983,
+     "size": 36.0,
+     "x": 13.778,
+     "y": 41.667
+    },
+    {
+     "elongation": 1.144,
+     "fill": 0.92,
+     "hue": 56.773,
+     "size": 37.0,
+     "x": 30.459,
+     "y": 62.081
+    }
+   ]
+  },
+  {
+   "said": "the small ball right of the big box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.814,
+     "hue": 3.497,
+     "size": 37.0,
+     "x": 68.0,
+     "y": 17.0
+    },
+    {
+     "elongation": 1.115,
+     "fill": 0.94,
+     "hue": 119.832,
+     "size": 40.0,
+     "x": 53.65,
+     "y": 25.95
+    },
+    {
+     "elongation": 1.107,
+     "fill": 0.826,
+     "hue": 57.481,
+     "size": 34.0,
+     "x": 42.412,
+     "y": 41.324
+    },
+    {
+     "elongation": 1.02,
+     "fill": 0.786,
+     "hue": 57.444,
+     "size": 113.0,
+     "x": 18.743,
+     "y": 46.947
+    },
+    {
+     "elongation": 1.051,
+     "fill": 0.922,
+     "hue": 119.447,
+     "size": 108.0,
+     "x": 60.148,
+     "y": 62.574
+    }
+   ]
+  },
+  {
+   "said": "the big ball and the box left of the big red box",
+   "things": [
+    {
+     "elongation": 1.009,
+     "fill": 0.943,
+     "hue": 2.805,
+     "size": 115.0,
+     "x": 34.165,
+     "y": 16.904
+    },
+    {
+     "elongation": 2.785,
+     "fill": 0.928,
+     "hue": 56.771,
+     "size": 42.0,
+     "x": 11.571,
+     "y": 29.0
+    },
+    {
+     "elongation": 1.016,
+     "fill": 0.78,
+     "hue": 231.938,
+     "size": 120.0,
+     "x": 52.95,
+     "y": 33.992
+    },
+    {
+     "elongation": 1.068,
+     "fill": 0.93,
+     "hue": 56.524,
+     "size": 44.0,
+     "x": 70.932,
+     "y": 39.205
+    },
+    {
+     "elongation": 1.066,
+     "fill": 0.938,
+     "hue": 56.462,
+     "size": 130.0,
+     "x": 63.362,
+     "y": 55.946
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.942,
+     "hue": 231.564,
+     "size": 119.0,
+     "x": 25.0,
+     "y": 63.916
+    }
+   ]
+  },
+  {
+   "said": "the big blue ball and the big blue box above the small ball",
+   "things": [
+    {
+     "elongation": 1.056,
+     "fill": 0.951,
+     "hue": 231.498,
+     "size": 133.0,
+     "x": 30.09,
+     "y": 16.594
+    },
+    {
+     "elongation": 1.108,
+     "fill": 0.795,
+     "hue": 2.09,
+     "size": 44.0,
+     "x": 50.932,
+     "y": 25.659
+    },
+    {
+     "elongation": 1.013,
+     "fill": 0.934,
+     "hue": 230.947,
+     "size": 162.0,
+     "x": 56.895,
+     "y": 41.981
+    },
+    {
+     "elongation": 1.062,
+     "fill": 0.764,
+     "hue": 231.422,
+     "size": 151.0,
+     "x": 12.477,
+     "y": 59.96
+    },
+    {
+     "elongation": 1.035,
+     "fill": 0.937,
+     "hue": 56.841,
+     "size": 113.0,
+     "x": 62.982,
+     "y": 63.823
+    }
+   ]
+  },
+  {
+   "said": "the blue box left of the big green ball",
+   "things": [
+    {
+     "elongation": 1.032,
+     "fill": 0.792,
+     "hue": 4.406,
+     "size": 47.0,
+     "x": 49.149,
+     "y": 19.234
+    },
+    {
+     "elongation": 1.015,
+     "fill": 0.933,
+     "hue": 232.026,
+     "size": 120.0,
+     "x": 16.992,
+     "y": 33.133
+    },
+    {
+     "elongation": 1.024,
+     "fill": 0.79,
+     "hue": 119.271,
+     "size": 136.0,
+     "x": 45.89,
+     "y": 47.265
+    },
+    {
+     "elongation": 1.111,
+     "fill": 0.906,
+     "hue": 231.196,
+     "size": 41.0,
+     "x": 62.829,
+     "y": 51.585
+    },
+    {
+     "elongation": 1.102,
+     "fill": 0.802,
+     "hue": 3.328,
+     "size": 36.0,
+     "x": 53.833,
+     "y": 69.5
+    }
+   ]
+  },
+  {
+   "said": "the box right of the ball",
+   "things": [
+    {
+     "elongation": 1.124,
+     "fill": 0.803,
+     "hue": 119.369,
+     "size": 47.0,
+     "x": 53.83,
+     "y": 9.574
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.946,
+     "hue": 56.69,
+     "size": 38.0,
+     "x": 48.5,
+     "y": 24.0
+    },
+    {
+     "elongation": 3.376,
+     "fill": 0.926,
+     "hue": 56.82,
+     "size": 120.0,
+     "x": 39.5,
+     "y": 42.5
+    },
+    {
+     "elongation": 1.065,
+     "fill": 0.956,
+     "hue": 56.181,
+     "size": 114.0,
+     "x": 15.781,
+     "y": 60.991
+    },
+    {
+     "elongation": 1.047,
+     "fill": 0.923,
+     "hue": 3.208,
+     "size": 44.0,
+     "x": 68.205,
+     "y": 66.136
+    }
+   ]
+  },
+  {
+   "said": "the big red ball",
+   "things": [
+    {
+     "elongation": 1.004,
+     "fill": 0.9,
+     "hue": 230.85,
+     "size": 34.0,
+     "x": 56.353,
+     "y": 12.5
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.944,
+     "hue": 231.245,
+     "size": 143.0,
+     "x": 42.462,
+     "y": 50.538
+    },
+    {
+     "elongation": 1.056,
+     "fill": 0.778,
+     "hue": 2.642,
+     "size": 112.0,
+     "x": 16.732,
+     "y": 53.732
+    }
+   ]
+  },
+  {
+   "said": "the red box right of the big red box",
+   "things": [
+    {
+     "elongation": 1.053,
+     "fill": 0.937,
+     "hue": 3.022,
+     "size": 131.0,
+     "x": 50.603,
+     "y": 22.794
+    },
+    {
+     "elongation": 3.574,
+     "fill": 0.898,
+     "hue": 231.752,
+     "size": 138.0,
+     "x": 19.529,
+     "y": 33.007
+    },
+    {
+     "elongation": 1.089,
+     "fill": 0.904,
+     "hue": 3.633,
+     "size": 35.0,
+     "x": 26.457,
+     "y": 53.086
+    },
+    {
+     "elongation": 1.044,
+     "fill": 0.891,
+     "hue": 4.134,
+     "size": 44.0,
+     "x": 57.068,
+     "y": 56.045
+    }
+   ]
+  },
+  {
+   "said": "the big ball left of the box",
+   "things": [
+    {
+     "elongation": 1.013,
+     "fill": 0.767,
+     "hue": 57.029,
+     "size": 128.0,
+     "x": 15.203,
+     "y": 33.133
+    },
+    {
+     "elongation": 1.035,
+     "fill": 0.776,
+     "hue": 231.413,
+     "size": 139.0,
+     "x": 50.194,
+     "y": 42.518
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.933,
+     "hue": 57.591,
+     "size": 40.0,
+     "x": 39.85,
+     "y": 64.5
+    }
+   ]
+  },
+  {
+   "said": "the box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.956,
+     "hue": 56.69,
+     "size": 142.0,
+     "x": 59.5,
+     "y": 50.577
+    }
+   ]
+  },
+  {
+   "said": "the blue box and the small ball right of the small box",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.93,
+     "hue": 232.097,
+     "size": 120.0,
+     "x": 47.042,
+     "y": 15.958
+    },
+    {
+     "elongation": 1.051,
+     "fill": 0.812,
+     "hue": 231.649,
+     "size": 36.0,
+     "x": 68.972,
+     "y": 28.917
+    },
+    {
+     "elongation": 1.05,
+     "fill": 0.817,
+     "hue": 57.683,
+     "size": 34.0,
+     "x": 9.765,
+     "y": 49.735
+    },
+    {
+     "elongation": 1.062,
+     "fill": 0.921,
+     "hue": 119.468,
+     "size": 45.0,
+     "x": 42.067,
+     "y": 52.133
+    }
+   ]
+  },
+  {
+   "said": "the green box right of the green ball and the small box",
+   "things": [
+    {
+     "elongation": 1.041,
+     "fill": 0.925,
+     "hue": 120.378,
+     "size": 146.0,
+     "x": 15.459,
+     "y": 22.082
+    },
+    {
+     "elongation": 3.376,
+     "fill": 0.929,
+     "hue": 231.75,
+     "size": 120.0,
+     "x": 30.5,
+     "y": 39.5
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.927,
+     "hue": 120.366,
+     "size": 145.0,
+     "x": 63.372,
+     "y": 57.441
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.779,
+     "hue": 120.209,
+     "size": 120.0,
+     "x": 34.5,
+     "y": 60.5
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.906,
+     "hue": 120.407,
+     "size": 47.0,
+     "x": 11.0,
+     "y": 67.872
+    }
+   ]
+  },
+  {
+   "said": "the big red ball that is right of the small red ball",
+   "things": [
+    {
+     "elongation": 1.029,
+     "fill": 0.802,
+     "hue": 3.596,
+     "size": 37.0,
+     "x": 15.162,
+     "y": 8.919
+    },
+    {
+     "elongation": 1.058,
+     "fill": 0.785,
+     "hue": 2.885,
+     "size": 114.0,
+     "x": 34.904,
+     "y": 21.474
+    },
+    {
+     "elongation": 1.042,
+     "fill": 0.776,
+     "hue": 57.393,
+     "size": 143.0,
+     "x": 53.098,
+     "y": 24.371
+    },
+    {
+     "elongation": 1.033,
+     "fill": 0.782,
+     "hue": 2.719,
+     "size": 126.0,
+     "x": 12.698,
+     "y": 30.127
+    },
+    {
+     "elongation": 3.376,
+     "fill": 0.913,
+     "hue": 120.285,
+     "size": 120.0,
+     "x": 40.5,
+     "y": 51.5
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.033,
+     "fill": 0.8,
+     "hue": 3.92,
+     "size": 45.0,
+     "x": 12.578,
+     "y": 16.2
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.777,
+     "hue": 231.579,
+     "size": 119.0,
+     "x": 53.958,
+     "y": 35.059
+    },
+    {
+     "elongation": 1.13,
+     "fill": 0.944,
+     "hue": 56.971,
+     "size": 42.0,
+     "x": 26.643,
+     "y": 41.071
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.763,
+     "hue": 3.084,
+     "size": 128.0,
+     "x": 16.688,
+     "y": 64.992
+    }
+   ]
+  },
+  {
+   "said": "the green ball above the small ball",
+   "things": [
+    {
+     "elongation": 1.04,
+     "fill": 0.789,
+     "hue": 120.31,
+     "size": 111.0,
+     "x": 40.667,
+     "y": 25.117
+    },
+    {
+     "elongation": 1.036,
+     "fill": 0.81,
+     "hue": 2.462,
+     "size": 37.0,
+     "x": 65.757,
+     "y": 30.243
+    },
+    {
+     "elongation": 1.06,
+     "fill": 0.779,
+     "hue": 120.075,
+     "size": 108.0,
+     "x": 12.574,
+     "y": 47.88
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.018,
+     "fill": 0.931,
+     "hue": 2.742,
+     "size": 143.0,
+     "x": 57.462,
+     "y": 23.462
+    },
+    {
+     "elongation": 1.111,
+     "fill": 0.942,
+     "hue": 56.84,
+     "size": 41.0,
+     "x": 19.171,
+     "y": 34.415
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.775,
+     "hue": 119.672,
+     "size": 122.0,
+     "x": 35.5,
+     "y": 39.574
+    },
+    {
+     "elongation": 1.122,
+     "fill": 0.937,
+     "hue": 57.986,
+     "size": 40.0,
+     "x": 11.925,
+     "y": 56.65
+    },
+    {
+     "elongation": 3.373,
+     "fill": 0.904,
+     "hue": 2.132,
+     "size": 35.0,
+     "x": 50.914,
+     "y": 61.114
+    }
+   ]
+  },
+  {
+   "said": "the big ball and the big blue box above the big yellow box",
+   "things": [
+    {
+     "elongation": 1.004,
+     "fill": 0.944,
+     "hue": 231.791,
+     "size": 140.0,
+     "x": 46.429,
+     "y": 21.579
+    },
+    {
+     "elongation": 1.011,
+     "fill": 0.78,
+     "hue": 56.39,
+     "size": 135.0,
+     "x": 16.956,
+     "y": 29.615
+    },
+    {
+     "elongation": 1.078,
+     "fill": 0.947,
+     "hue": 57.029,
+     "size": 112.0,
+     "x": 36.955,
+     "y": 50.598
+    },
+    {
+     "elongation": 1.094,
+     "fill": 0.932,
+     "hue": 231.304,
+     "size": 131.0,
+     "x": 61.962,
+     "y": 64.458
+    }
+   ]
+  },
+  {
+   "said": "the big blue box that is right of the big red box",
+   "things": [
+    {
+     "elongation": 1.087,
+     "fill": 0.824,
+     "hue": 229.844,
+     "size": 43.0,
+     "x": 44.023,
+     "y": 19.419
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.932,
+     "hue": 231.908,
+     "size": 144.0,
+     "x": 23.5,
+     "y": 23.5
+    },
+    {
+     "elongation": 1.03,
+     "fill": 0.936,
+     "hue": 231.544,
+     "size": 136.0,
+     "x": 63.338,
+     "y": 44.478
+    },
+    {
+     "elongation": 1.171,
+     "fill": 0.935,
+     "hue": 120.172,
+     "size": 42.0,
+     "x": 19.0,
+     "y": 49.5
+    },
+    {
+     "elongation": 1.072,
+     "fill": 0.929,
+     "hue": 3.189,
+     "size": 112.0,
+     "x": 49.982,
+     "y": 63.598
+    }
+   ]
+  },
+  {
+   "said": "the small blue box",
+   "things": [
+    {
+     "elongation": 1.054,
+     "fill": 0.941,
+     "hue": 231.936,
+     "size": 46.0,
+     "x": 31.065,
+     "y": 38.935
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.003,
+     "fill": 0.787,
+     "hue": 56.445,
+     "size": 141.0,
+     "x": 26.149,
+     "y": 18.156
+    },
+    {
+     "elongation": 1.039,
+     "fill": 0.938,
+     "hue": 119.977,
+     "size": 141.0,
+     "x": 59.511,
+     "y": 26.128
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.784,
+     "hue": 119.811,
+     "size": 42.0,
+     "x": 63.667,
+     "y": 53.0
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.002,
+     "fill": 0.955,
+     "hue": 56.893,
+     "size": 47.0,
+     "x": 60.0,
+     "y": 16.128
+    },
+    {
+     "elongation": 1.016,
+     "fill": 0.937,
+     "hue": 3.444,
+     "size": 141.0,
+     "x": 35.539,
+     "y": 34.61
+    },
+    {
+     "elongation": 1.008,
+     "fill": 0.771,
+     "hue": 56.846,
+     "size": 133.0,
+     "x": 63.684,
+     "y": 54.0
+    },
+    {
+     "elongation": 1.077,
+     "fill": 0.924,
+     "hue": 2.548,
+     "size": 42.0,
+     "x": 24.667,
+     "y": 62.357
+    }
+   ]
+  },
+  {
+   "said": "the box and the small ball",
+   "things": [
+    {
+     "elongation": 1.026,
+     "fill": 0.916,
+     "hue": 3.254,
+     "size": 137.0,
+     "x": 54.474,
+     "y": 58.38
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.814,
+     "hue": 56.689,
+     "size": 43.0,
+     "x": 42.581,
+     "y": 68.977
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.93,
+     "hue": 231.543,
+     "size": 118.0,
+     "x": 61.958,
+     "y": 23.042
+    },
+    {
+     "elongation": 1.051,
+     "fill": 0.814,
+     "hue": 232.207,
+     "size": 36.0,
+     "x": 24.917,
+     "y": 42.028
+    },
+    {
+     "elongation": 1.097,
+     "fill": 0.933,
+     "hue": 119.564,
+     "size": 44.0,
+     "x": 58.909,
+     "y": 57.864
+    }
+   ]
+  },
+  {
+   "said": "the big ball that is left of the box",
+   "things": [
+    {
+     "elongation": 1.043,
+     "fill": 0.777,
+     "hue": 120.107,
+     "size": 145.0,
+     "x": 62.034,
+     "y": 26.303
+    },
+    {
+     "elongation": 1.033,
+     "fill": 0.785,
+     "hue": 3.536,
+     "size": 147.0,
+     "x": 16.959,
+     "y": 31.687
+    },
+    {
+     "elongation": 1.036,
+     "fill": 0.904,
+     "hue": 229.975,
+     "size": 37.0,
+     "x": 40.676,
+     "y": 61.676
+    }
+   ]
+  },
+  {
+   "said": "the big blue ball",
+   "things": [
+    {
+     "elongation": 1.056,
+     "fill": 0.782,
+     "hue": 231.648,
+     "size": 141.0,
+     "x": 38.78,
+     "y": 47.27
+    }
+   ]
+  },
+  {
+   "said": "the yellow ball left of the big blue ball",
+   "things": [
+    {
+     "elongation": 1.01,
+     "fill": 0.772,
+     "hue": 231.105,
+     "size": 127.0,
+     "x": 49.055,
+     "y": 15.11
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.814,
+     "hue": 56.297,
+     "size": 41.0,
+     "x": 69.244,
+     "y": 30.0
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.773,
+     "hue": 56.951,
+     "size": 143.0,
+     "x": 21.629,
+     "y": 65.385
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.068,
+     "fill": 0.809,
+     "hue": 2.944,
+     "size": 39.0,
+     "x": 55.923,
+     "y": 8.744
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.915,
+     "hue": 3.553,
+     "size": 47.0,
+     "x": 28.0,
+     "y": 12.872
+    },
+    {
+     "elongation": 1.119,
+     "fill": 0.808,
+     "hue": 3.142,
+     "size": 49.0,
+     "x": 37.388,
+     "y": 60.918
+    }
+   ]
+  },
+  {
+   "said": "the yellow box and the yellow ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.951,
+     "hue": 56.998,
+     "size": 142.0,
+     "x": 49.5,
+     "y": 26.423
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.798,
+     "hue": 56.756,
+     "size": 44.0,
+     "x": 24.5,
+     "y": 50.5
+    },
+    {
+     "elongation": 1.061,
+     "fill": 0.929,
+     "hue": 119.56,
+     "size": 131.0,
+     "x": 66.351,
+     "y": 53.916
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.101,
+     "fill": 0.899,
+     "hue": 231.711,
+     "size": 36.0,
+     "x": 37.444,
+     "y": 15.667
+    },
+    {
+     "elongation": 1.123,
+     "fill": 0.897,
+     "hue": 120.415,
+     "size": 42.0,
+     "x": 25.643,
+     "y": 27.905
+    },
+    {
+     "elongation": 1.098,
+     "fill": 0.888,
+     "hue": 121.115,
+     "size": 45.0,
+     "x": 45.022,
+     "y": 36.133
+    },
+    {
+     "elongation": 1.044,
+     "fill": 0.816,
+     "hue": 55.986,
+     "size": 49.0,
+     "x": 17.327,
+     "y": 42.571
+    },
+    {
+     "elongation": 1.181,
+     "fill": 0.914,
+     "hue": 2.986,
+     "size": 41.0,
+     "x": 52.561,
+     "y": 65.927
+    }
+   ]
+  },
+  {
+   "said": "the box that is right of the yellow ball",
+   "things": [
+    {
+     "elongation": 1.05,
+     "fill": 0.915,
+     "hue": 2.623,
+     "size": 113.0,
+     "x": 24.965,
+     "y": 37.743
+    },
+    {
+     "elongation": 1.048,
+     "fill": 0.812,
+     "hue": 57.051,
+     "size": 47.0,
+     "x": 40.787,
+     "y": 61.511
+    },
+    {
+     "elongation": 1.079,
+     "fill": 0.947,
+     "hue": 3.004,
+     "size": 126.0,
+     "x": 67.413,
+     "y": 66.992
+    },
+    {
+     "elongation": 1.112,
+     "fill": 0.803,
+     "hue": 232.531,
+     "size": 45.0,
+     "x": 9.133,
+     "y": 69.711
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.001,
+     "fill": 0.793,
+     "hue": 57.055,
+     "size": 116.0,
+     "x": 32.405,
+     "y": 44.405
+    },
+    {
+     "elongation": 1.08,
+     "fill": 0.947,
+     "hue": 56.23,
+     "size": 129.0,
+     "x": 64.008,
+     "y": 55.628
+    },
+    {
+     "elongation": 1.046,
+     "fill": 0.787,
+     "hue": 56.799,
+     "size": 109.0,
+     "x": 23.321,
+     "y": 68.138
+    }
+   ]
+  },
+  {
+   "said": "the ball that is left of the small blue ball",
+   "things": [
+    {
+     "elongation": 1.014,
+     "fill": 0.775,
+     "hue": 231.171,
+     "size": 146.0,
+     "x": 47.0,
+     "y": 11.952
+    },
+    {
+     "elongation": 1.074,
+     "fill": 0.792,
+     "hue": 119.88,
+     "size": 46.0,
+     "x": 10.239,
+     "y": 44.065
+    },
+    {
+     "elongation": 1.086,
+     "fill": 0.928,
+     "hue": 119.46,
+     "size": 127.0,
+     "x": 32.992,
+     "y": 53.37
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.804,
+     "hue": 230.188,
+     "size": 36.0,
+     "x": 17.667,
+     "y": 67.778
+    }
+   ]
+  },
+  {
+   "said": "the green box that is right of the big box",
+   "things": [
+    {
+     "elongation": 1.144,
+     "fill": 0.928,
+     "hue": 119.481,
+     "size": 37.0,
+     "x": 68.459,
+     "y": 33.081
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.913,
+     "hue": 119.985,
+     "size": 45.0,
+     "x": 21.133,
+     "y": 41.889
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.927,
+     "hue": 3.248,
+     "size": 119.0,
+     "x": 45.0,
+     "y": 45.916
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.81,
+     "hue": 56.435,
+     "size": 36.0,
+     "x": 10.667,
+     "y": 69.222
+    }
+   ]
+  },
+  {
+   "said": "the small blue ball right of the big yellow ball",
+   "things": [
+    {
+     "elongation": 1.009,
+     "fill": 0.807,
+     "hue": 232.005,
+     "size": 41.0,
+     "x": 66.0,
+     "y": 12.756
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.785,
+     "hue": 57.174,
+     "size": 117.0,
+     "x": 61.675,
+     "y": 30.538
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.803,
+     "hue": 232.284,
+     "size": 41.0,
+     "x": 31.244,
+     "y": 33.0
+    },
+    {
+     "elongation": 3.52,
+     "fill": 0.917,
+     "hue": 120.301,
+     "size": 123.0,
+     "x": 40.48,
+     "y": 54.081
+    }
+   ]
+  },
+  {
+   "said": "the small ball",
+   "things": [
+    {
+     "elongation": 1.121,
+     "fill": 0.832,
+     "hue": 232.406,
+     "size": 44.0,
+     "x": 71.5,
+     "y": 27.0
+    }
+   ]
+  },
+  {
+   "said": "the small green ball and the green box",
+   "things": [
+    {
+     "elongation": 1.141,
+     "fill": 0.876,
+     "hue": 120.374,
+     "size": 40.0,
+     "x": 26.1,
+     "y": 17.35
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.787,
+     "hue": 119.956,
+     "size": 47.0,
+     "x": 63.553,
+     "y": 43.234
+    }
+   ]
+  },
+  {
+   "said": "the big box",
+   "things": [
+    {
+     "elongation": 1.023,
+     "fill": 0.938,
+     "hue": 231.875,
+     "size": 144.0,
+     "x": 53.333,
+     "y": 16.528
+    },
+    {
+     "elongation": 2.785,
+     "fill": 0.886,
+     "hue": 56.212,
+     "size": 42.0,
+     "x": 17.0,
+     "y": 49.429
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.917,
+     "hue": 57.847,
+     "size": 36.0,
+     "x": 46.5,
+     "y": 60.5
+    }
+   ]
+  },
+  {
+   "said": "the big box right of the yellow box and the ball",
+   "things": [
+    {
+     "elongation": 1.016,
+     "fill": 0.926,
+     "hue": 120.529,
+     "size": 141.0,
+     "x": 25.617,
+     "y": 27.468
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.922,
+     "hue": 2.333,
+     "size": 137.0,
+     "x": 56.445,
+     "y": 41.701
+    },
+    {
+     "elongation": 1.008,
+     "fill": 0.791,
+     "hue": 57.184,
+     "size": 114.0,
+     "x": 18.421,
+     "y": 55.342
+    },
+    {
+     "elongation": 1.083,
+     "fill": 0.948,
+     "hue": 56.697,
+     "size": 152.0,
+     "x": 42.0,
+     "y": 58.5
+    }
+   ]
+  },
+  {
+   "said": "the small box and the ball",
+   "things": [
+    {
+     "elongation": 1.067,
+     "fill": 0.936,
+     "hue": 56.107,
+     "size": 41.0,
+     "x": 52.951,
+     "y": 64.732
+    },
+    {
+     "elongation": 1.134,
+     "fill": 0.827,
+     "hue": 56.406,
+     "size": 35.0,
+     "x": 15.771,
+     "y": 67.571
+    }
+   ]
+  },
+  {
+   "said": "the ball above the box",
+   "things": [
+    {
+     "elongation": 1.057,
+     "fill": 0.784,
+     "hue": 2.803,
+     "size": 146.0,
+     "x": 21.021,
+     "y": 16.438
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.927,
+     "hue": 3.069,
+     "size": 146.0,
+     "x": 42.589,
+     "y": 25.507
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.782,
+     "hue": 56.694,
+     "size": 114.0,
+     "x": 36.667,
+     "y": 46.535
+    },
+    {
+     "elongation": 1.044,
+     "fill": 0.812,
+     "hue": 119.565,
+     "size": 49.0,
+     "x": 12.571,
+     "y": 68.673
+    }
+   ]
+  },
+  {
+   "said": "the big box right of the small blue ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.938,
+     "hue": 3.159,
+     "size": 142.0,
+     "x": 25.5,
+     "y": 14.423
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.936,
+     "hue": 120.038,
+     "size": 142.0,
+     "x": 58.5,
+     "y": 61.577
+    },
+    {
+     "elongation": 1.089,
+     "fill": 0.823,
+     "hue": 232.483,
+     "size": 35.0,
+     "x": 30.086,
+     "y": 70.457
+    }
+   ]
+  },
+  {
+   "said": "the small red ball above the big green box",
+   "things": [
+    {
+     "elongation": 1.009,
+     "fill": 0.815,
+     "hue": 3.484,
+     "size": 41.0,
+     "x": 68.756,
+     "y": 21.0
+    },
+    {
+     "elongation": 1.086,
+     "fill": 0.929,
+     "hue": 120.513,
+     "size": 131.0,
+     "x": 39.466,
+     "y": 27.122
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.788,
+     "hue": 3.704,
+     "size": 42.0,
+     "x": 20.333,
+     "y": 45.0
+    },
+    {
+     "elongation": 2.897,
+     "fill": 0.903,
+     "hue": 120.963,
+     "size": 137.0,
+     "x": 31.358,
+     "y": 62.022
+    },
+    {
+     "elongation": 1.034,
+     "fill": 0.777,
+     "hue": 57.484,
+     "size": 140.0,
+     "x": 54.936,
+     "y": 66.571
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.056,
+     "fill": 0.815,
+     "hue": 231.736,
+     "size": 45.0,
+     "x": 14.267,
+     "y": 8.822
+    },
+    {
+     "elongation": 1.03,
+     "fill": 0.92,
+     "hue": 231.711,
+     "size": 119.0,
+     "x": 44.176,
+     "y": 23.092
+    },
+    {
+     "elongation": 1.066,
+     "fill": 0.781,
+     "hue": 231.575,
+     "size": 147.0,
+     "x": 61.088,
+     "y": 53.531
+    }
+   ]
+  },
+  {
+   "said": "the small box",
+   "things": [
+    {
+     "elongation": 1.104,
+     "fill": 0.915,
+     "hue": 2.297,
+     "size": 41.0,
+     "x": 25.951,
+     "y": 25.61
+    }
+   ]
+  },
+  {
+   "said": "the red box left of the green ball",
+   "things": [
+    {
+     "elongation": 1.066,
+     "fill": 0.935,
+     "hue": 3.408,
+     "size": 149.0,
+     "x": 28.893,
+     "y": 16.282
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.788,
+     "hue": 118.823,
+     "size": 43.0,
+     "x": 45.907,
+     "y": 27.674
+    },
+    {
+     "elongation": 1.008,
+     "fill": 0.772,
+     "hue": 2.192,
+     "size": 119.0,
+     "x": 33.395,
+     "y": 46.605
+    },
+    {
+     "elongation": 1.049,
+     "fill": 0.925,
+     "hue": 3.952,
+     "size": 42.0,
+     "x": 66.048,
+     "y": 54.167
+    }
+   ]
+  },
+  {
+   "said": "the blue ball and the box that is left of the big box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.8,
+     "hue": 230.168,
+     "size": 37.0,
+     "x": 35.0,
+     "y": 27.0
+    },
+    {
+     "elongation": 1.049,
+     "fill": 0.913,
+     "hue": 232.953,
+     "size": 42.0,
+     "x": 10.714,
+     "y": 29.81
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.93,
+     "hue": 3.285,
+     "size": 46.0,
+     "x": 64.196,
+     "y": 38.957
+    },
+    {
+     "elongation": 1.053,
+     "fill": 0.933,
+     "hue": 120.052,
+     "size": 130.0,
+     "x": 39.108,
+     "y": 53.654
+    }
+   ]
+  },
+  {
+   "said": "the big green ball that is right of the small box",
+   "things": [
+    {
+     "elongation": 1.094,
+     "fill": 0.929,
+     "hue": 119.787,
+     "size": 131.0,
+     "x": 39.962,
+     "y": 22.542
+    },
+    {
+     "elongation": 1.031,
+     "fill": 0.779,
+     "hue": 119.964,
+     "size": 125.0,
+     "x": 42.696,
+     "y": 44.568
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.783,
+     "hue": 118.943,
+     "size": 119.0,
+     "x": 14.454,
+     "y": 57.479
+    },
+    {
+     "elongation": 1.13,
+     "fill": 0.93,
+     "hue": 232.089,
+     "size": 42.0,
+     "x": 33.071,
+     "y": 63.357
+    },
+    {
+     "elongation": 1.046,
+     "fill": 0.81,
+     "hue": 3.074,
+     "size": 40.0,
+     "x": 48.925,
+     "y": 70.8
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.017,
+     "fill": 0.935,
+     "hue": 3.076,
+     "size": 139.0,
+     "x": 27.871,
+     "y": 15.518
+    },
+    {
+     "elongation": 1.048,
+     "fill": 0.944,
+     "hue": 56.983,
+     "size": 104.0,
+     "x": 14.673,
+     "y": 37.394
+    },
+    {
+     "elongation": 3.162,
+     "fill": 0.909,
+     "hue": 230.833,
+     "size": 152.0,
+     "x": 38.5,
+     "y": 40.961
+    },
+    {
+     "elongation": 1.03,
+     "fill": 0.768,
+     "hue": 3.62,
+     "size": 141.0,
+     "x": 11.879,
+     "y": 55.78
+    },
+    {
+     "elongation": 1.053,
+     "fill": 0.932,
+     "hue": 231.503,
+     "size": 143.0,
+     "x": 59.874,
+     "y": 64.538
+    }
+   ]
+  },
+  {
+   "said": "the small ball left of the yellow ball",
+   "things": [
+    {
+     "elongation": 1.077,
+     "fill": 0.806,
+     "hue": 231.158,
+     "size": 39.0,
+     "x": 17.718,
+     "y": 11.949
+    },
+    {
+     "elongation": 3.35,
+     "fill": 0.931,
+     "hue": 2.854,
+     "size": 116.0,
+     "x": 49.345,
+     "y": 19.543
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.812,
+     "hue": 57.553,
+     "size": 42.0,
+     "x": 25.19,
+     "y": 28.929
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.772,
+     "hue": 3.36,
+     "size": 130.0,
+     "x": 42.5,
+     "y": 65.092
+    },
+    {
+     "elongation": 1.007,
+     "fill": 0.794,
+     "hue": 3.008,
+     "size": 41.0,
+     "x": 62.854,
+     "y": 68.146
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.017,
+     "fill": 0.787,
+     "hue": 3.207,
+     "size": 117.0,
+     "x": 21.632,
+     "y": 16.368
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.931,
+     "hue": 120.185,
+     "size": 36.0,
+     "x": 59.5,
+     "y": 27.5
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.774,
+     "hue": 56.273,
+     "size": 136.0,
+     "x": 25.963,
+     "y": 51.029
+    },
+    {
+     "elongation": 3.459,
+     "fill": 0.923,
+     "hue": 119.869,
+     "size": 136.0,
+     "x": 52.669,
+     "y": 64.346
+    }
+   ]
+  },
+  {
+   "said": "the blue ball and the small box",
+   "things": [
+    {
+     "elongation": 1.046,
+     "fill": 0.811,
+     "hue": 230.87,
+     "size": 40.0,
+     "x": 42.075,
+     "y": 10.2
+    },
+    {
+     "elongation": 1.05,
+     "fill": 0.904,
+     "hue": 232.518,
+     "size": 48.0,
+     "x": 66.938,
+     "y": 34.062
+    },
+    {
+     "elongation": 1.03,
+     "fill": 0.933,
+     "hue": 56.507,
+     "size": 139.0,
+     "x": 48.468,
+     "y": 64.784
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.018,
+     "fill": 0.78,
+     "hue": 232.017,
+     "size": 135.0,
+     "x": 52.563,
+     "y": 12.126
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.936,
+     "hue": 232.209,
+     "size": 119.0,
+     "x": 64.916,
+     "y": 41.0
+    },
+    {
+     "elongation": 1.055,
+     "fill": 0.812,
+     "hue": 56.722,
+     "size": 43.0,
+     "x": 37.93,
+     "y": 47.721
+    }
+   ]
+  },
+  {
+   "said": "the box left of the big green box and the big ball right of the small yellow ball",
+   "things": [
+    {
+     "elongation": 1.033,
+     "fill": 0.915,
+     "hue": 119.692,
+     "size": 102.0,
+     "x": 43.461,
+     "y": 17.48
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.946,
+     "hue": 57.351,
+     "size": 164.0,
+     "x": 13.97,
+     "y": 26.037
+    },
+    {
+     "elongation": 1.031,
+     "fill": 0.771,
+     "hue": 120.009,
+     "size": 121.0,
+     "x": 58.43,
+     "y": 31.835
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.943,
+     "hue": 3.594,
+     "size": 36.0,
+     "x": 70.5,
+     "y": 42.5
+    },
+    {
+     "elongation": 1.099,
+     "fill": 0.811,
+     "hue": 56.679,
+     "size": 39.0,
+     "x": 53.128,
+     "y": 53.872
+    },
+    {
+     "elongation": 1.032,
+     "fill": 0.773,
+     "hue": 56.324,
+     "size": 146.0,
+     "x": 30.925,
+     "y": 65.281
+    }
+   ]
+  },
+  {
+   "said": "the ball and the big box",
+   "things": [
+    {
+     "elongation": 1.041,
+     "fill": 0.924,
+     "hue": 4.046,
+     "size": 135.0,
+     "x": 20.956,
+     "y": 26.422
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.793,
+     "hue": 2.57,
+     "size": 47.0,
+     "x": 12.894,
+     "y": 67.915
+    }
+   ]
+  },
+  {
+   "said": "the big yellow ball above the small blue box",
+   "things": [
+    {
+     "elongation": 1.025,
+     "fill": 0.77,
+     "hue": 56.442,
+     "size": 146.0,
+     "x": 28.0,
+     "y": 36.774
+    },
+    {
+     "elongation": 1.181,
+     "fill": 0.928,
+     "hue": 231.184,
+     "size": 41.0,
+     "x": 62.927,
+     "y": 53.561
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.781,
+     "hue": 56.628,
+     "size": 115.0,
+     "x": 35.313,
+     "y": 60.487
+    }
+   ]
+  },
+  {
+   "said": "the small ball above the big ball",
+   "things": [
+    {
+     "elongation": 1.009,
+     "fill": 0.801,
+     "hue": 231.429,
+     "size": 41.0,
+     "x": 16.0,
+     "y": 9.244
+    },
+    {
+     "elongation": 1.066,
+     "fill": 0.782,
+     "hue": 3.021,
+     "size": 111.0,
+     "x": 13.135,
+     "y": 27.423
+    },
+    {
+     "elongation": 1.066,
+     "fill": 0.812,
+     "hue": 56.754,
+     "size": 46.0,
+     "x": 62.304,
+     "y": 33.348
+    },
+    {
+     "elongation": 1.036,
+     "fill": 0.811,
+     "hue": 3.778,
+     "size": 37.0,
+     "x": 9.757,
+     "y": 60.757
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 3.369,
+     "fill": 0.938,
+     "hue": 231.069,
+     "size": 119.0,
+     "x": 26.42,
+     "y": 17.521
+    },
+    {
+     "elongation": 1.023,
+     "fill": 0.779,
+     "hue": 3.123,
+     "size": 143.0,
+     "x": 62.063,
+     "y": 45.937
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.95,
+     "hue": 56.835,
+     "size": 119.0,
+     "x": 22.0,
+     "y": 49.084
+    },
+    {
+     "elongation": 2.755,
+     "fill": 0.923,
+     "hue": 57.167,
+     "size": 41.0,
+     "x": 42.122,
+     "y": 60.463
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.795,
+     "hue": 231.579,
+     "size": 46.0,
+     "x": 15.413,
+     "y": 67.761
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.049,
+     "fill": 0.923,
+     "hue": 232.424,
+     "size": 36.0,
+     "x": 61.611,
+     "y": 40.333
+    },
+    {
+     "elongation": 1.016,
+     "fill": 0.803,
+     "hue": 121.682,
+     "size": 43.0,
+     "x": 70.86,
+     "y": 51.512
+    },
+    {
+     "elongation": 1.126,
+     "fill": 0.942,
+     "hue": 55.799,
+     "size": 39.0,
+     "x": 52.769,
+     "y": 64.513
+    }
+   ]
+  },
+  {
+   "said": "the big yellow ball right of the small red ball",
+   "things": [
+    {
+     "elongation": 1.051,
+     "fill": 0.783,
+     "hue": 57.317,
+     "size": 128.0,
+     "x": 65.836,
+     "y": 33.531
+    },
+    {
+     "elongation": 1.077,
+     "fill": 0.939,
+     "hue": 3.585,
+     "size": 155.0,
+     "x": 37.613,
+     "y": 47.974
+    },
+    {
+     "elongation": 1.001,
+     "fill": 0.784,
+     "hue": 3.14,
+     "size": 50.0,
+     "x": 54.6,
+     "y": 56.46
+    },
+    {
+     "elongation": 1.023,
+     "fill": 0.779,
+     "hue": 57.219,
+     "size": 138.0,
+     "x": 20.051,
+     "y": 62.674
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.179,
+     "fill": 0.933,
+     "hue": 2.318,
+     "size": 39.0,
+     "x": 45.923,
+     "y": 20.436
+    },
+    {
+     "elongation": 1.039,
+     "fill": 0.822,
+     "hue": 119.161,
+     "size": 41.0,
+     "x": 23.878,
+     "y": 30.878
+    },
+    {
+     "elongation": 1.07,
+     "fill": 0.935,
+     "hue": 3.112,
+     "size": 149.0,
+     "x": 38.96,
+     "y": 56.423
+    }
+   ]
+  },
+  {
+   "said": "the big ball that is left of the box",
+   "things": [
+    {
+     "elongation": 1.01,
+     "fill": 0.78,
+     "hue": 232.092,
+     "size": 137.0,
+     "x": 16.058,
+     "y": 27.226
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.783,
+     "hue": 56.861,
+     "size": 128.0,
+     "x": 45.781,
+     "y": 48.406
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.94,
+     "hue": 230.856,
+     "size": 38.0,
+     "x": 20.684,
+     "y": 56.5
+    }
+   ]
+  },
+  {
+   "said": "the red ball and the box above the green ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.909,
+     "hue": 2.789,
+     "size": 36.0,
+     "x": 12.5,
+     "y": 9.5
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.801,
+     "hue": 119.569,
+     "size": 42.0,
+     "x": 51.071,
+     "y": 18.81
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.789,
+     "hue": 2.912,
+     "size": 42.0,
+     "x": 31.81,
+     "y": 22.071
+    },
+    {
+     "elongation": 1.004,
+     "fill": 0.946,
+     "hue": 56.806,
+     "size": 34.0,
+     "x": 61.5,
+     "y": 62.353
+    }
+   ]
+  },
+  {
+   "said": "the red box left of the big green ball",
+   "things": [
+    {
+     "elongation": 1.215,
+     "fill": 0.901,
+     "hue": 3.421,
+     "size": 40.0,
+     "x": 70.0,
+     "y": 25.5
+    },
+    {
+     "elongation": 1.026,
+     "fill": 0.777,
+     "hue": 119.472,
+     "size": 131.0,
+     "x": 31.053,
+     "y": 44.183
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.919,
+     "hue": 56.038,
+     "size": 45.0,
+     "x": 11.0,
+     "y": 50.0
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.907,
+     "hue": 3.456,
+     "size": 40.0,
+     "x": 25.85,
+     "y": 64.5
+    }
+   ]
+  },
+  {
+   "said": "the box left of the big red box",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.922,
+     "hue": 3.078,
+     "size": 118.0,
+     "x": 33.958,
+     "y": 19.958
+    },
+    {
+     "elongation": 1.001,
+     "fill": 0.922,
+     "hue": 3.39,
+     "size": 46.0,
+     "x": 14.0,
+     "y": 27.348
+    },
+    {
+     "elongation": 3.527,
+     "fill": 0.92,
+     "hue": 2.918,
+     "size": 124.0,
+     "x": 21.161,
+     "y": 46.5
+    },
+    {
+     "elongation": 1.037,
+     "fill": 0.948,
+     "hue": 56.811,
+     "size": 137.0,
+     "x": 63.613,
+     "y": 60.423
+    }
+   ]
+  },
+  {
+   "said": "the red box and the red ball left of the big box",
+   "things": [
+    {
+     "elongation": 1.049,
+     "fill": 0.769,
+     "hue": 3.298,
+     "size": 111.0,
+     "x": 19.126,
+     "y": 28.234
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.925,
+     "hue": 3.153,
+     "size": 46.0,
+     "x": 47.065,
+     "y": 43.935
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.774,
+     "hue": 3.35,
+     "size": 139.0,
+     "x": 53.626,
+     "y": 62.906
+    },
+    {
+     "elongation": 1.078,
+     "fill": 0.939,
+     "hue": 119.172,
+     "size": 130.0,
+     "x": 34.538,
+     "y": 67.085
+    }
+   ]
+  },
+  {
+   "said": "the ball right of the box",
+   "things": [
+    {
+     "elongation": 1.099,
+     "fill": 0.803,
+     "hue": 118.971,
+     "size": 39.0,
+     "x": 38.872,
+     "y": 10.872
+    },
+    {
+     "elongation": 1.097,
+     "fill": 0.818,
+     "hue": 55.374,
+     "size": 36.0,
+     "x": 12.75,
+     "y": 35.528
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.944,
+     "hue": 56.722,
+     "size": 118.0,
+     "x": 19.958,
+     "y": 50.042
+    }
+   ]
+  },
+  {
+   "said": "the big ball above the small yellow ball",
+   "things": [
+    {
+     "elongation": 1.038,
+     "fill": 0.778,
+     "hue": 231.647,
+     "size": 131.0,
+     "x": 66.916,
+     "y": 11.45
+    },
+    {
+     "elongation": 1.051,
+     "fill": 0.818,
+     "hue": 54.834,
+     "size": 36.0,
+     "x": 71.083,
+     "y": 32.028
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.79,
+     "hue": 3.487,
+     "size": 118.0,
+     "x": 57.5,
+     "y": 48.407
+    }
+   ]
+  },
+  {
+   "said": "the red box that is right of the ball",
+   "things": [
+    {
+     "elongation": 1.056,
+     "fill": 0.936,
+     "hue": 56.403,
+     "size": 37.0,
+     "x": 9.514,
+     "y": 11.405
+    },
+    {
+     "elongation": 1.016,
+     "fill": 0.929,
+     "hue": 3.042,
+     "size": 139.0,
+     "x": 55.54,
+     "y": 24.532
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.92,
+     "hue": 2.957,
+     "size": 35.0,
+     "x": 22.429,
+     "y": 48.429
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.78,
+     "hue": 231.785,
+     "size": 141.0,
+     "x": 39.305,
+     "y": 53.965
+    },
+    {
+     "elongation": 1.026,
+     "fill": 0.927,
+     "hue": 231.735,
+     "size": 123.0,
+     "x": 61.813,
+     "y": 57.935
+    }
+   ]
+  },
+  {
+   "said": "the big ball and the box",
+   "things": [
+    {
+     "elongation": 3.328,
+     "fill": 0.916,
+     "hue": 3.683,
+     "size": 117.0,
+     "x": 53.744,
+     "y": 37.513
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.779,
+     "hue": 56.535,
+     "size": 119.0,
+     "x": 29.63,
+     "y": 49.319
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.948,
+     "hue": 57.075,
+     "size": 118.0,
+     "x": 61.042,
+     "y": 61.042
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.082,
+     "fill": 0.948,
+     "hue": 231.188,
+     "size": 128.0,
+     "x": 24.586,
+     "y": 22.039
+    },
+    {
+     "elongation": 1.144,
+     "fill": 0.892,
+     "hue": 119.418,
+     "size": 37.0,
+     "x": 57.919,
+     "y": 25.541
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.919,
+     "hue": 232.281,
+     "size": 46.0,
+     "x": 33.935,
+     "y": 37.065
+    },
+    {
+     "elongation": 1.032,
+     "fill": 0.785,
+     "hue": 231.613,
+     "size": 138.0,
+     "x": 50.783,
+     "y": 48.413
+    },
+    {
+     "elongation": 1.055,
+     "fill": 0.907,
+     "hue": 119.959,
+     "size": 35.0,
+     "x": 67.743,
+     "y": 60.514
+    }
+   ]
+  },
+  {
+   "said": "the box above the blue ball",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.952,
+     "hue": 57.452,
+     "size": 118.0,
+     "x": 61.042,
+     "y": 28.042
+    },
+    {
+     "elongation": 1.033,
+     "fill": 0.807,
+     "hue": 230.851,
+     "size": 34.0,
+     "x": 29.382,
+     "y": 34.618
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.939,
+     "hue": 56.524,
+     "size": 40.0,
+     "x": 17.85,
+     "y": 63.5
+    }
+   ]
+  },
+  {
+   "said": "the box right of the ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.952,
+     "hue": 57.573,
+     "size": 45.0,
+     "x": 58.0,
+     "y": 23.0
+    },
+    {
+     "elongation": 1.12,
+     "fill": 0.793,
+     "hue": 231.82,
+     "size": 47.0,
+     "x": 61.362,
+     "y": 38.809
+    },
+    {
+     "elongation": 1.076,
+     "fill": 0.939,
+     "hue": 231.453,
+     "size": 128.0,
+     "x": 65.0,
+     "y": 65.672
+    }
+   ]
+  },
+  {
+   "said": "the red ball that is right of the green ball",
+   "things": [
+    {
+     "elongation": 1.102,
+     "fill": 0.917,
+     "hue": 230.711,
+     "size": 38.0,
+     "x": 24.5,
+     "y": 24.316
+    },
+    {
+     "elongation": 1.02,
+     "fill": 0.779,
+     "hue": 2.605,
+     "size": 115.0,
+     "x": 40.278,
+     "y": 42.322
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.779,
+     "hue": 3.58,
+     "size": 120.0,
+     "x": 18.5,
+     "y": 46.5
+    },
+    {
+     "elongation": 1.031,
+     "fill": 0.768,
+     "hue": 119.347,
+     "size": 114.0,
+     "x": 33.737,
+     "y": 68.5
+    }
+   ]
+  },
+  {
+   "said": "the red ball and the small box",
+   "things": [
+    {
+     "elongation": 1.013,
+     "fill": 0.772,
+     "hue": 119.287,
+     "size": 112.0,
+     "x": 67.741,
+     "y": 31.393
+    },
+    {
+     "elongation": 1.045,
+     "fill": 0.808,
+     "hue": 231.469,
+     "size": 45.0,
+     "x": 53.578,
+     "y": 41.533
+    },
+    {
+     "elongation": 1.099,
+     "fill": 0.806,
+     "hue": 3.025,
+     "size": 39.0,
+     "x": 35.128,
+     "y": 50.872
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.906,
+     "hue": 3.091,
+     "size": 45.0,
+     "x": 23.0,
+     "y": 64.0
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.066,
+     "fill": 0.935,
+     "hue": 231.528,
+     "size": 43.0,
+     "x": 61.744,
+     "y": 14.791
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.904,
+     "hue": 120.177,
+     "size": 35.0,
+     "x": 11.571,
+     "y": 31.429
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.777,
+     "hue": 3.141,
+     "size": 142.0,
+     "x": 34.0,
+     "y": 39.824
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.937,
+     "hue": 231.364,
+     "size": 141.0,
+     "x": 26.539,
+     "y": 62.539
+    }
+   ]
+  },
+  {
+   "said": "the red ball",
+   "things": [
+    {
+     "elongation": 1.018,
+     "fill": 0.785,
+     "hue": 3.444,
+     "size": 116.0,
+     "x": 44.155,
+     "y": 51.897
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.945,
+     "hue": 120.16,
+     "size": 36.0,
+     "x": 32.5,
+     "y": 19.5
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.779,
+     "hue": 56.748,
+     "size": 139.0,
+     "x": 64.935,
+     "y": 49.022
+    },
+    {
+     "elongation": 1.066,
+     "fill": 0.927,
+     "hue": 3.592,
+     "size": 43.0,
+     "x": 40.256,
+     "y": 53.209
+    }
+   ]
+  },
+  {
+   "said": "the ball and the box",
+   "things": [
+    {
+     "elongation": 1.017,
+     "fill": 0.935,
+     "hue": 231.706,
+     "size": 121.0,
+     "x": 15.909,
+     "y": 42.058
+    },
+    {
+     "elongation": 1.023,
+     "fill": 0.792,
+     "hue": 231.957,
+     "size": 115.0,
+     "x": 65.209,
+     "y": 49.339
+    }
+   ]
+  },
+  {
+   "said": "the small green box left of the small blue ball",
+   "things": [
+    {
+     "elongation": 1.067,
+     "fill": 0.901,
+     "hue": 120.358,
+     "size": 45.0,
+     "x": 58.267,
+     "y": 12.044
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.803,
+     "hue": 230.369,
+     "size": 43.0,
+     "x": 35.419,
+     "y": 30.023
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.921,
+     "hue": 119.961,
+     "size": 47.0,
+     "x": 19.0,
+     "y": 66.872
+    }
+   ]
+  },
+  {
+   "said": "the big blue box and the ball",
+   "things": [
+    {
+     "elongation": 1.017,
+     "fill": 0.789,
+     "hue": 231.913,
+     "size": 133.0,
+     "x": 46.15,
+     "y": 20.722
+    },
+    {
+     "elongation": 1.083,
+     "fill": 0.927,
+     "hue": 231.207,
+     "size": 152.0,
+     "x": 55.5,
+     "y": 60.0
+    }
+   ]
+  },
+  {
+   "said": "the small box that is right of the ball and the yellow box",
+   "things": [
+    {
+     "elongation": 3.191,
+     "fill": 0.895,
+     "hue": 3.33,
+     "size": 49.0,
+     "x": 19.51,
+     "y": 20.367
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.915,
+     "hue": 232.81,
+     "size": 47.0,
+     "x": 53.0,
+     "y": 29.128
+    },
+    {
+     "elongation": 1.038,
+     "fill": 0.936,
+     "hue": 57.048,
+     "size": 43.0,
+     "x": 13.14,
+     "y": 41.0
+    },
+    {
+     "elongation": 1.117,
+     "fill": 0.812,
+     "hue": 231.701,
+     "size": 47.0,
+     "x": 47.957,
+     "y": 48.319
+    },
+    {
+     "elongation": 1.141,
+     "fill": 0.913,
+     "hue": 231.406,
+     "size": 38.0,
+     "x": 40.395,
+     "y": 62.842
+    }
+   ]
+  },
+  {
+   "said": "the box above the small box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.922,
+     "hue": 2.868,
+     "size": 140.0,
+     "x": 46.5,
+     "y": 16.5
+    },
+    {
+     "elongation": 1.004,
+     "fill": 0.925,
+     "hue": 56.112,
+     "size": 34.0,
+     "x": 65.647,
+     "y": 20.5
+    },
+    {
+     "elongation": 1.073,
+     "fill": 0.912,
+     "hue": 3.57,
+     "size": 125.0,
+     "x": 18.952,
+     "y": 44.632
+    }
+   ]
+  },
+  {
+   "said": "the blue ball left of the small yellow box",
+   "things": [
+    {
+     "elongation": 1.02,
+     "fill": 0.936,
+     "hue": 57.015,
+     "size": 106.0,
+     "x": 60.717,
+     "y": 17.425
+    },
+    {
+     "elongation": 1.111,
+     "fill": 0.94,
+     "hue": 57.004,
+     "size": 38.0,
+     "x": 41.447,
+     "y": 27.684
+    },
+    {
+     "elongation": 1.063,
+     "fill": 0.764,
+     "hue": 232.009,
+     "size": 125.0,
+     "x": 11.544,
+     "y": 36.976
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.788,
+     "hue": 232.433,
+     "size": 43.0,
+     "x": 58.116,
+     "y": 41.023
+    },
+    {
+     "elongation": 3.26,
+     "fill": 0.927,
+     "hue": 231.505,
+     "size": 152.0,
+     "x": 33.664,
+     "y": 56.079
+    }
+   ]
+  },
+  {
+   "said": "the box left of the blue box",
+   "things": [
+    {
+     "elongation": 1.016,
+     "fill": 0.928,
+     "hue": 231.488,
+     "size": 139.0,
+     "x": 25.468,
+     "y": 13.46
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.929,
+     "hue": 3.27,
+     "size": 141.0,
+     "x": 51.461,
+     "y": 16.539
+    },
+    {
+     "elongation": 1.046,
+     "fill": 0.906,
+     "hue": 2.639,
+     "size": 40.0,
+     "x": 11.2,
+     "y": 42.075
+    }
+   ]
+  },
+  {
+   "said": "the small box above the ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.917,
+     "hue": 120.73,
+     "size": 45.0,
+     "x": 37.0,
+     "y": 34.0
+    },
+    {
+     "elongation": 1.023,
+     "fill": 0.765,
+     "hue": 119.271,
+     "size": 132.0,
+     "x": 15.083,
+     "y": 45.598
+    },
+    {
+     "elongation": 1.097,
+     "fill": 0.924,
+     "hue": 231.555,
+     "size": 38.0,
+     "x": 70.684,
+     "y": 57.474
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.054,
+     "fill": 0.949,
+     "hue": 232.751,
+     "size": 46.0,
+     "x": 39.935,
+     "y": 9.935
+    },
+    {
+     "elongation": 1.13,
+     "fill": 0.926,
+     "hue": 120.528,
+     "size": 42.0,
+     "x": 63.929,
+     "y": 15.643
+    },
+    {
+     "elongation": 1.023,
+     "fill": 0.779,
+     "hue": 3.803,
+     "size": 122.0,
+     "x": 12.41,
+     "y": 40.467
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.933,
+     "hue": 231.329,
+     "size": 115.0,
+     "x": 48.087,
+     "y": 50.0
+    }
+   ]
+  },
+  {
+   "said": "the small blue box and the small ball left of the red ball",
+   "things": [
+    {
+     "elongation": 1.04,
+     "fill": 0.901,
+     "hue": 232.907,
+     "size": 40.0,
+     "x": 59.225,
+     "y": 15.875
+    },
+    {
+     "elongation": 3.142,
+     "fill": 0.922,
+     "hue": 3.561,
+     "size": 151.0,
+     "x": 21.987,
+     "y": 25.291
+    },
+    {
+     "elongation": 1.121,
+     "fill": 0.789,
+     "hue": 230.975,
+     "size": 44.0,
+     "x": 65.5,
+     "y": 35.0
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.931,
+     "hue": 3.019,
+     "size": 140.0,
+     "x": 39.521,
+     "y": 43.657
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.808,
+     "hue": 232.127,
+     "size": 43.0,
+     "x": 12.977,
+     "y": 49.581
+    },
+    {
+     "elongation": 1.031,
+     "fill": 0.77,
+     "hue": 2.614,
+     "size": 111.0,
+     "x": 35.378,
+     "y": 63.793
+    }
+   ]
+  },
+  {
+   "said": "the yellow box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.952,
+     "hue": 57.41,
+     "size": 142.0,
+     "x": 56.5,
+     "y": 13.423
+    }
+   ]
+  },
+  {
+   "said": "the big green box and the ball",
+   "things": [
+    {
+     "elongation": 1.05,
+     "fill": 0.923,
+     "hue": 118.954,
+     "size": 147.0,
+     "x": 30.714,
+     "y": 38.476
+    },
+    {
+     "elongation": 1.035,
+     "fill": 0.771,
+     "hue": 120.291,
+     "size": 113.0,
+     "x": 60.044,
+     "y": 66.611
+    }
+   ]
+  },
+  {
+   "said": "the box",
+   "things": [
+    {
+     "elongation": 1.164,
+     "fill": 0.931,
+     "hue": 2.567,
+     "size": 40.0,
+     "x": 44.5,
+     "y": 16.15
+    },
+    {
+     "elongation": 1.011,
+     "fill": 0.773,
+     "hue": 119.596,
+     "size": 121.0,
+     "x": 20.355,
+     "y": 30.686
+    },
+    {
+     "elongation": 3.041,
+     "fill": 0.874,
+     "hue": 119.223,
+     "size": 46.0,
+     "x": 60.5,
+     "y": 55.565
+    }
+   ]
+  },
+  {
+   "said": "the small blue ball and the blue box",
+   "things": [
+    {
+     "elongation": 1.118,
+     "fill": 0.817,
+     "hue": 232.229,
+     "size": 38.0,
+     "x": 71.263,
+     "y": 12.395
+    },
+    {
+     "elongation": 1.048,
+     "fill": 0.907,
+     "hue": 232.092,
+     "size": 44.0,
+     "x": 65.955,
+     "y": 34.341
+    }
+   ]
+  },
+  {
+   "said": "the big red box above the ball",
+   "things": [
+    {
+     "elongation": 3.2,
+     "fill": 0.935,
+     "hue": 56.335,
+     "size": 113.0,
+     "x": 16.08,
+     "y": 22.478
+    },
+    {
+     "elongation": 1.024,
+     "fill": 0.927,
+     "hue": 3.199,
+     "size": 127.0,
+     "x": 66.811,
+     "y": 32.921
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.771,
+     "hue": 120.09,
+     "size": 121.0,
+     "x": 32.587,
+     "y": 52.388
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.936,
+     "hue": 2.977,
+     "size": 144.0,
+     "x": 52.5,
+     "y": 63.5
+    }
+   ]
+  },
+  {
+   "said": "the ball",
+   "things": [
+    {
+     "elongation": 1.041,
+     "fill": 0.814,
+     "hue": 56.238,
+     "size": 42.0,
+     "x": 39.0,
+     "y": 50.667
+    }
+   ]
+  },
+  {
+   "said": "the ball",
+   "things": [
+    {
+     "elongation": 2.991,
+     "fill": 0.85,
+     "hue": 120.374,
+     "size": 47.0,
+     "x": 35.702,
+     "y": 45.0
+    },
+    {
+     "elongation": 1.047,
+     "fill": 0.79,
+     "hue": 231.877,
+     "size": 107.0,
+     "x": 25.047,
+     "y": 65.636
+    }
+   ]
+  },
+  {
+   "said": "the green box",
+   "things": [
+    {
+     "elongation": 1.075,
+     "fill": 0.865,
+     "hue": 3.766,
+     "size": 36.0,
+     "x": 52.417,
+     "y": 26.667
+    },
+    {
+     "elongation": 1.098,
+     "fill": 0.889,
+     "hue": 120.169,
+     "size": 39.0,
+     "x": 30.0,
+     "y": 66.59
+    }
+   ]
+  },
+  {
+   "said": "the big ball",
+   "things": [
+    {
+     "elongation": 1.046,
+     "fill": 0.922,
+     "hue": 2.861,
+     "size": 144.0,
+     "x": 27.681,
+     "y": 39.472
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.78,
+     "hue": 3.318,
+     "size": 146.0,
+     "x": 55.616,
+     "y": 52.651
+    }
+   ]
+  },
+  {
+   "said": "the box that is left of the red box and the ball",
+   "things": [
+    {
+     "elongation": 1.004,
+     "fill": 0.943,
+     "hue": 119.018,
+     "size": 34.0,
+     "x": 59.5,
+     "y": 40.647
+    },
+    {
+     "elongation": 1.01,
+     "fill": 0.937,
+     "hue": 3.324,
+     "size": 141.0,
+     "x": 39.511,
+     "y": 54.702
+    },
+    {
+     "elongation": 1.144,
+     "fill": 0.923,
+     "hue": 232.154,
+     "size": 37.0,
+     "x": 22.459,
+     "y": 64.919
+    },
+    {
+     "elongation": 1.099,
+     "fill": 0.81,
+     "hue": 3.737,
+     "size": 39.0,
+     "x": 48.872,
+     "y": 69.872
+    }
+   ]
+  },
+  {
+   "said": "the big red box above the green ball",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.919,
+     "hue": 3.345,
+     "size": 118.0,
+     "x": 18.958,
+     "y": 25.958
+    },
+    {
+     "elongation": 1.052,
+     "fill": 0.807,
+     "hue": 120.484,
+     "size": 40.0,
+     "x": 61.175,
+     "y": 32.05
+    },
+    {
+     "elongation": 3.054,
+     "fill": 0.892,
+     "hue": 121.38,
+     "size": 42.0,
+     "x": 10.381,
+     "y": 41.429
+    },
+    {
+     "elongation": 1.094,
+     "fill": 0.938,
+     "hue": 2.906,
+     "size": 129.0,
+     "x": 64.961,
+     "y": 56.543
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.924,
+     "hue": 233.703,
+     "size": 36.0,
+     "x": 15.5,
+     "y": 67.5
+    }
+   ]
+  },
+  {
+   "said": "the big yellow ball right of the box",
+   "things": [
+    {
+     "elongation": 1.034,
+     "fill": 0.78,
+     "hue": 56.699,
+     "size": 133.0,
+     "x": 53.045,
+     "y": 14.481
+    },
+    {
+     "elongation": 1.013,
+     "fill": 0.774,
+     "hue": 57.055,
+     "size": 136.0,
+     "x": 17.0,
+     "y": 37.404
+    },
+    {
+     "elongation": 1.068,
+     "fill": 0.928,
+     "hue": 118.451,
+     "size": 44.0,
+     "x": 44.795,
+     "y": 45.932
+    },
+    {
+     "elongation": 1.056,
+     "fill": 0.784,
+     "hue": 57.132,
+     "size": 112.0,
+     "x": 19.732,
+     "y": 59.732
+    },
+    {
+     "elongation": 3.282,
+     "fill": 0.947,
+     "hue": 56.961,
+     "size": 132.0,
+     "x": 60.659,
+     "y": 63.098
+    }
+   ]
+  },
+  {
+   "said": "the big green ball",
+   "things": [
+    {
+     "elongation": 1.027,
+     "fill": 0.934,
+     "hue": 231.969,
+     "size": 145.0,
+     "x": 41.524,
+     "y": 27.29
+    },
+    {
+     "elongation": 2.974,
+     "fill": 0.874,
+     "hue": 118.751,
+     "size": 44.0,
+     "x": 23.5,
+     "y": 41.5
+    },
+    {
+     "elongation": 1.034,
+     "fill": 0.773,
+     "hue": 119.758,
+     "size": 122.0,
+     "x": 49.566,
+     "y": 48.418
+    }
+   ]
+  },
+  {
+   "said": "the green ball left of the small ball",
+   "things": [
+    {
+     "elongation": 1.008,
+     "fill": 0.769,
+     "hue": 119.811,
+     "size": 136.0,
+     "x": 20.846,
+     "y": 22.162
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.776,
+     "hue": 120.516,
+     "size": 145.0,
+     "x": 45.214,
+     "y": 30.172
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.807,
+     "hue": 231.681,
+     "size": 41.0,
+     "x": 38.0,
+     "y": 43.756
+    },
+    {
+     "elongation": 3.358,
+     "fill": 0.917,
+     "hue": 2.845,
+     "size": 118.0,
+     "x": 59.661,
+     "y": 52.5
+    },
+    {
+     "elongation": 3.041,
+     "fill": 0.924,
+     "hue": 120.687,
+     "size": 142.0,
+     "x": 31.063,
+     "y": 62.986
+    }
+   ]
+  },
+  {
+   "said": "the box right of the big green ball",
+   "things": [
+    {
+     "elongation": 1.045,
+     "fill": 0.934,
+     "hue": 120.278,
+     "size": 121.0,
+     "x": 42.983,
+     "y": 13.636
+    },
+    {
+     "elongation": 1.042,
+     "fill": 0.938,
+     "hue": 57.103,
+     "size": 136.0,
+     "x": 61.397,
+     "y": 30.743
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.943,
+     "hue": 232.146,
+     "size": 143.0,
+     "x": 22.538,
+     "y": 41.462
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.781,
+     "hue": 120.048,
+     "size": 121.0,
+     "x": 53.463,
+     "y": 55.463
+    }
+   ]
+  },
+  {
+   "said": "the bar",
+   "things": [
+    {
+     "elongation": 2.758,
+     "fill": 0.862,
+     "hue": 4.059,
+     "size": 40.0,
+     "x": 30.15,
+     "y": 35.3
+    }
+   ]
+  },
+  {
+   "said": "the ball that is left of the blue box",
+   "things": [
+    {
+     "elongation": 1.02,
+     "fill": 0.763,
+     "hue": 120.678,
+     "size": 140.0,
+     "x": 24.336,
+     "y": 29.0
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.767,
+     "hue": 119.911,
+     "size": 150.0,
+     "x": 56.353,
+     "y": 44.533
+    },
+    {
+     "elongation": 1.148,
+     "fill": 0.92,
+     "hue": 230.371,
+     "size": 42.0,
+     "x": 34.643,
+     "y": 50.048
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.956,
+     "hue": 57.149,
+     "size": 40.0,
+     "x": 16.85,
+     "y": 63.5
+    },
+    {
+     "elongation": 1.09,
+     "fill": 0.818,
+     "hue": 231.609,
+     "size": 43.0,
+     "x": 64.884,
+     "y": 69.116
+    }
+   ]
+  },
+  {
+   "said": "the big ball and the blue box",
+   "things": [
+    {
+     "elongation": 1.057,
+     "fill": 0.929,
+     "hue": 231.618,
+     "size": 124.0,
+     "x": 47.589,
+     "y": 15.048
+    },
+    {
+     "elongation": 1.091,
+     "fill": 0.809,
+     "hue": 56.654,
+     "size": 47.0,
+     "x": 30.17,
+     "y": 24.979
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.937,
+     "hue": 3.421,
+     "size": 137.0,
+     "x": 16.234,
+     "y": 33.642
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.766,
+     "hue": 120.087,
+     "size": 130.0,
+     "x": 61.123,
+     "y": 48.185
+    }
+   ]
+  },
+  {
+   "said": "the small blue ball",
+   "things": [
+    {
+     "elongation": 3.404,
+     "fill": 0.879,
+     "hue": 229.926,
+     "size": 37.0,
+     "x": 27.973,
+     "y": 11.162
+    },
+    {
+     "elongation": 3.229,
+     "fill": 0.916,
+     "hue": 55.597,
+     "size": 48.0,
+     "x": 11.0,
+     "y": 33.5
+    },
+    {
+     "elongation": 1.055,
+     "fill": 0.798,
+     "hue": 231.069,
+     "size": 43.0,
+     "x": 41.721,
+     "y": 49.07
+    }
+   ]
+  },
+  {
+   "said": "the small green box and the ball",
+   "things": [
+    {
+     "elongation": 1.037,
+     "fill": 0.79,
+     "hue": 119.155,
+     "size": 47.0,
+     "x": 11.574,
+     "y": 11.319
+    },
+    {
+     "elongation": 1.071,
+     "fill": 0.912,
+     "hue": 119.454,
+     "size": 43.0,
+     "x": 42.419,
+     "y": 34.791
+    },
+    {
+     "elongation": 3.392,
+     "fill": 0.921,
+     "hue": 3.512,
+     "size": 126.0,
+     "x": 61.603,
+     "y": 56.944
+    }
+   ]
+  },
+  {
+   "said": "the big box and the ball",
+   "things": [
+    {
+     "elongation": 1.092,
+     "fill": 0.955,
+     "hue": 56.891,
+     "size": 132.0,
+     "x": 26.0,
+     "y": 14.5
+    },
+    {
+     "elongation": 3.229,
+     "fill": 0.925,
+     "hue": 232.374,
+     "size": 48.0,
+     "x": 69.0,
+     "y": 23.5
+    },
+    {
+     "elongation": 1.042,
+     "fill": 0.773,
+     "hue": 56.368,
+     "size": 129.0,
+     "x": 39.512,
+     "y": 31.14
+    }
+   ]
+  },
+  {
+   "said": "the green box and the small ball right of the yellow ball",
+   "things": [
+    {
+     "elongation": 1.055,
+     "fill": 0.779,
+     "hue": 57.136,
+     "size": 128.0,
+     "x": 52.836,
+     "y": 26.445
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.931,
+     "hue": 120.396,
+     "size": 45.0,
+     "x": 66.889,
+     "y": 40.867
+    },
+    {
+     "elongation": 1.046,
+     "fill": 0.786,
+     "hue": 119.634,
+     "size": 42.0,
+     "x": 27.976,
+     "y": 44.333
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.805,
+     "hue": 120.607,
+     "size": 45.0,
+     "x": 63.0,
+     "y": 60.0
+    }
+   ]
+  },
+  {
+   "said": "the box",
+   "things": [
+    {
+     "elongation": 1.054,
+     "fill": 0.94,
+     "hue": 3.75,
+     "size": 104.0,
+     "x": 35.712,
+     "y": 15.49
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.782,
+     "hue": 119.888,
+     "size": 39.0,
+     "x": 58.282,
+     "y": 28.103
+    }
+   ]
+  },
+  {
+   "said": "the yellow ball and the yellow box",
+   "things": [
+    {
+     "elongation": 1.179,
+     "fill": 0.962,
+     "hue": 57.627,
+     "size": 39.0,
+     "x": 41.923,
+     "y": 31.436
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.792,
+     "hue": 57.661,
+     "size": 139.0,
+     "x": 16.043,
+     "y": 64.0
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.025,
+     "fill": 0.78,
+     "hue": 56.663,
+     "size": 130.0,
+     "x": 58.862,
+     "y": 27.462
+    },
+    {
+     "elongation": 1.1,
+     "fill": 0.927,
+     "hue": 120.113,
+     "size": 108.0,
+     "x": 23.907,
+     "y": 39.5
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.77,
+     "hue": 121.149,
+     "size": 124.0,
+     "x": 45.242,
+     "y": 62.371
+    }
+   ]
+  },
+  {
+   "said": "the ball",
+   "things": [
+    {
+     "elongation": 1.121,
+     "fill": 0.798,
+     "hue": 3.596,
+     "size": 44.0,
+     "x": 37.5,
+     "y": 11.0
+    },
+    {
+     "elongation": 1.053,
+     "fill": 0.937,
+     "hue": 231.078,
+     "size": 133.0,
+     "x": 16.511,
+     "y": 65.211
+    }
+   ]
+  },
+  {
+   "said": "the big green box",
+   "things": [
+    {
+     "elongation": 1.018,
+     "fill": 0.769,
+     "hue": 3.566,
+     "size": 136.0,
+     "x": 56.588,
+     "y": 32.801
+    },
+    {
+     "elongation": 1.024,
+     "fill": 0.911,
+     "hue": 119.763,
+     "size": 154.0,
+     "x": 30.273,
+     "y": 46.195
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.778,
+     "hue": 3.126,
+     "size": 130.0,
+     "x": 24.946,
+     "y": 66.146
+    }
+   ]
+  },
+  {
+   "said": "the small box right of the blue box",
+   "things": [
+    {
+     "elongation": 1.044,
+     "fill": 0.932,
+     "hue": 230.979,
+     "size": 44.0,
+     "x": 52.955,
+     "y": 14.932
+    },
+    {
+     "elongation": 1.124,
+     "fill": 0.918,
+     "hue": 120.331,
+     "size": 43.0,
+     "x": 20.419,
+     "y": 18.977
+    },
+    {
+     "elongation": 3.464,
+     "fill": 0.929,
+     "hue": 118.269,
+     "size": 122.0,
+     "x": 56.5,
+     "y": 36.328
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.909,
+     "hue": 118.994,
+     "size": 46.0,
+     "x": 42.065,
+     "y": 57.935
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.951,
+     "hue": 56.968,
+     "size": 46.0,
+     "x": 59.87,
+     "y": 62.217
+    }
+   ]
+  },
+  {
+   "said": "the ball left of the big box",
+   "things": [
+    {
+     "elongation": 3.041,
+     "fill": 0.932,
+     "hue": 118.629,
+     "size": 46.0,
+     "x": 23.435,
+     "y": 12.5
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.925,
+     "hue": 119.506,
+     "size": 116.0,
+     "x": 44.216,
+     "y": 19.06
+    },
+    {
+     "elongation": 1.042,
+     "fill": 0.774,
+     "hue": 56.718,
+     "size": 125.0,
+     "x": 69.472,
+     "y": 34.72
+    },
+    {
+     "elongation": 1.035,
+     "fill": 0.773,
+     "hue": 120.091,
+     "size": 145.0,
+     "x": 56.752,
+     "y": 46.959
+    },
+    {
+     "elongation": 1.012,
+     "fill": 0.768,
+     "hue": 120.437,
+     "size": 146.0,
+     "x": 40.445,
+     "y": 65.445
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.035,
+     "fill": 0.777,
+     "hue": 3.377,
+     "size": 120.0,
+     "x": 41.183,
+     "y": 38.542
+    },
+    {
+     "elongation": 1.181,
+     "fill": 0.929,
+     "hue": 119.657,
+     "size": 41.0,
+     "x": 53.927,
+     "y": 52.561
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.816,
+     "hue": 120.923,
+     "size": 37.0,
+     "x": 34.919,
+     "y": 55.162
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.034,
+     "fill": 0.772,
+     "hue": 3.388,
+     "size": 146.0,
+     "x": 42.13,
+     "y": 12.356
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.776,
+     "hue": 56.629,
+     "size": 149.0,
+     "x": 21.644,
+     "y": 27.886
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.956,
+     "hue": 57.074,
+     "size": 40.0,
+     "x": 34.5,
+     "y": 51.15
+    },
+    {
+     "elongation": 1.026,
+     "fill": 0.773,
+     "hue": 231.306,
+     "size": 137.0,
+     "x": 53.124,
+     "y": 65.219
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.915,
+     "hue": 120.107,
+     "size": 121.0,
+     "x": 22.0,
+     "y": 40.0
+    },
+    {
+     "elongation": 1.06,
+     "fill": 0.792,
+     "hue": 118.956,
+     "size": 47.0,
+     "x": 51.17,
+     "y": 59.213
+    },
+    {
+     "elongation": 1.144,
+     "fill": 0.902,
+     "hue": 232.748,
+     "size": 37.0,
+     "x": 18.081,
+     "y": 66.541
+    }
+   ]
+  },
+  {
+   "said": "the big ball right of the small ball",
+   "things": [
+    {
+     "elongation": 1.057,
+     "fill": 0.802,
+     "hue": 57.415,
+     "size": 38.0,
+     "x": 34.079,
+     "y": 8.947
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.776,
+     "hue": 56.884,
+     "size": 149.0,
+     "x": 13.188,
+     "y": 26.758
+    },
+    {
+     "elongation": 1.004,
+     "fill": 0.771,
+     "hue": 2.734,
+     "size": 148.0,
+     "x": 44.568,
+     "y": 38.264
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.934,
+     "hue": 57.362,
+     "size": 36.0,
+     "x": 52.5,
+     "y": 64.5
+    }
+   ]
+  },
+  {
+   "said": "the blue ball and the big box",
+   "things": [
+    {
+     "elongation": 1.025,
+     "fill": 0.931,
+     "hue": 231.674,
+     "size": 119.0,
+     "x": 58.983,
+     "y": 22.639
+    },
+    {
+     "elongation": 1.038,
+     "fill": 0.78,
+     "hue": 231.889,
+     "size": 126.0,
+     "x": 30.992,
+     "y": 32.381
+    }
+   ]
+  },
+  {
+   "said": "the ball and the box left of the red box",
+   "things": [
+    {
+     "elongation": 1.077,
+     "fill": 0.906,
+     "hue": 120.46,
+     "size": 108.0,
+     "x": 64.148,
+     "y": 15.583
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.907,
+     "hue": 2.752,
+     "size": 130.0,
+     "x": 52.508,
+     "y": 36.908
+    },
+    {
+     "elongation": 1.072,
+     "fill": 0.82,
+     "hue": 231.002,
+     "size": 40.0,
+     "x": 37.9,
+     "y": 50.55
+    },
+    {
+     "elongation": 1.012,
+     "fill": 0.928,
+     "hue": 231.384,
+     "size": 141.0,
+     "x": 35.383,
+     "y": 66.518
+    }
+   ]
+  },
+  {
+   "said": "the small red box right of the big box",
+   "things": [
+    {
+     "elongation": 1.049,
+     "fill": 0.88,
+     "hue": 3.03,
+     "size": 42.0,
+     "x": 70.833,
+     "y": 17.048
+    },
+    {
+     "elongation": 1.03,
+     "fill": 0.919,
+     "hue": 232.169,
+     "size": 118.0,
+     "x": 26.144,
+     "y": 44.042
+    },
+    {
+     "elongation": 1.085,
+     "fill": 0.904,
+     "hue": 3.824,
+     "size": 47.0,
+     "x": 11.149,
+     "y": 55.085
+    }
+   ]
+  },
+  {
+   "said": "the ball and the big box",
+   "things": [
+    {
+     "elongation": 1.045,
+     "fill": 0.77,
+     "hue": 120.127,
+     "size": 129.0,
+     "x": 47.953,
+     "y": 21.519
+    },
+    {
+     "elongation": 1.072,
+     "fill": 0.941,
+     "hue": 56.518,
+     "size": 127.0,
+     "x": 30.37,
+     "y": 48.937
+    }
+   ]
+  },
+  {
+   "said": "the yellow box and the ball",
+   "things": [
+    {
+     "elongation": 1.171,
+     "fill": 0.938,
+     "hue": 230.777,
+     "size": 40.0,
+     "x": 38.0,
+     "y": 31.625
+    },
+    {
+     "elongation": 1.04,
+     "fill": 0.784,
+     "hue": 56.637,
+     "size": 122.0,
+     "x": 12.656,
+     "y": 39.172
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.943,
+     "hue": 56.299,
+     "size": 35.0,
+     "x": 9.571,
+     "y": 56.571
+    },
+    {
+     "elongation": 1.048,
+     "fill": 0.921,
+     "hue": 4.03,
+     "size": 47.0,
+     "x": 64.0,
+     "y": 65.426
+    }
+   ]
+  },
+  {
+   "said": "the big blue box that is above the small ball",
+   "things": [
+    {
+     "elongation": 1.065,
+     "fill": 0.933,
+     "hue": 231.585,
+     "size": 113.0,
+     "x": 27.354,
+     "y": 13.956
+    },
+    {
+     "elongation": 1.013,
+     "fill": 0.777,
+     "hue": 57.1,
+     "size": 131.0,
+     "x": 51.359,
+     "y": 42.29
+    },
+    {
+     "elongation": 1.107,
+     "fill": 0.816,
+     "hue": 120.989,
+     "size": 34.0,
+     "x": 68.324,
+     "y": 47.412
+    },
+    {
+     "elongation": 1.049,
+     "fill": 0.929,
+     "hue": 230.973,
+     "size": 127.0,
+     "x": 18.748,
+     "y": 54.984
+    }
+   ]
+  },
+  {
+   "said": "the small box and the ball that is right of the yellow box",
+   "things": [
+    {
+     "elongation": 3.376,
+     "fill": 0.914,
+     "hue": 120.408,
+     "size": 120.0,
+     "x": 61.5,
+     "y": 16.5
+    },
+    {
+     "elongation": 1.052,
+     "fill": 0.94,
+     "hue": 56.86,
+     "size": 124.0,
+     "x": 19.0,
+     "y": 28.677
+    },
+    {
+     "elongation": 1.131,
+     "fill": 0.797,
+     "hue": 119.897,
+     "size": 34.0,
+     "x": 51.5,
+     "y": 33.706
+    },
+    {
+     "elongation": 1.083,
+     "fill": 0.932,
+     "hue": 3.662,
+     "size": 43.0,
+     "x": 65.279,
+     "y": 47.884
+    },
+    {
+     "elongation": 1.005,
+     "fill": 0.773,
+     "hue": 120.492,
+     "size": 121.0,
+     "x": 15.198,
+     "y": 69.0
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.921,
+     "hue": 3.669,
+     "size": 140.0,
+     "x": 66.5,
+     "y": 18.5
+    },
+    {
+     "elongation": 1.092,
+     "fill": 0.811,
+     "hue": 119.903,
+     "size": 37.0,
+     "x": 59.703,
+     "y": 33.973
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.901,
+     "hue": 231.772,
+     "size": 41.0,
+     "x": 34.707,
+     "y": 42.244
+    }
+   ]
+  },
+  {
+   "said": "the green box left of the big box",
+   "things": [
+    {
+     "elongation": 1.003,
+     "fill": 0.773,
+     "hue": 2.726,
+     "size": 129.0,
+     "x": 11.264,
+     "y": 17.0
+    },
+    {
+     "elongation": 1.181,
+     "fill": 0.931,
+     "hue": 119.506,
+     "size": 41.0,
+     "x": 39.561,
+     "y": 20.073
+    },
+    {
+     "elongation": 1.17,
+     "fill": 0.784,
+     "hue": 118.892,
+     "size": 35.0,
+     "x": 68.4,
+     "y": 25.486
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.897,
+     "hue": 119.78,
+     "size": 45.0,
+     "x": 49.0,
+     "y": 48.0
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.929,
+     "hue": 231.687,
+     "size": 140.0,
+     "x": 46.5,
+     "y": 65.5
+    }
+   ]
+  },
+  {
+   "said": "the small red box left of the big ball",
+   "things": [
+    {
+     "elongation": 1.028,
+     "fill": 0.767,
+     "hue": 120.051,
+     "size": 135.0,
+     "x": 40.844,
+     "y": 26.719
+    },
+    {
+     "elongation": 1.058,
+     "fill": 0.931,
+     "hue": 2.933,
+     "size": 49.0,
+     "x": 49.776,
+     "y": 48.878
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.905,
+     "hue": 2.865,
+     "size": 42.0,
+     "x": 31.929,
+     "y": 65.81
+    }
+   ]
+  },
+  {
+   "said": "the small yellow box",
+   "things": [
+    {
+     "elongation": 1.03,
+     "fill": 0.925,
+     "hue": 57.083,
+     "size": 44.0,
+     "x": 11.0,
+     "y": 16.932
+    },
+    {
+     "elongation": 1.005,
+     "fill": 0.771,
+     "hue": 3.683,
+     "size": 139.0,
+     "x": 32.007,
+     "y": 22.388
+    },
+    {
+     "elongation": 1.046,
+     "fill": 0.81,
+     "hue": 3.207,
+     "size": 40.0,
+     "x": 67.2,
+     "y": 53.075
+    }
+   ]
+  },
+  {
+   "said": "the blue box and the ball right of the small box",
+   "things": [
+    {
+     "elongation": 1.055,
+     "fill": 0.814,
+     "hue": 56.2,
+     "size": 43.0,
+     "x": 11.721,
+     "y": 8.07
+    },
+    {
+     "elongation": 1.055,
+     "fill": 0.792,
+     "hue": 119.396,
+     "size": 43.0,
+     "x": 24.07,
+     "y": 15.721
+    },
+    {
+     "elongation": 1.008,
+     "fill": 0.783,
+     "hue": 231.088,
+     "size": 146.0,
+     "x": 29.616,
+     "y": 32.205
+    },
+    {
+     "elongation": 1.032,
+     "fill": 0.775,
+     "hue": 231.062,
+     "size": 137.0,
+     "x": 68.153,
+     "y": 42.19
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.944,
+     "hue": 3.358,
+     "size": 47.0,
+     "x": 48.0,
+     "y": 56.872
+    },
+    {
+     "elongation": 1.034,
+     "fill": 0.945,
+     "hue": 231.662,
+     "size": 114.0,
+     "x": 21.219,
+     "y": 63.079
+    }
+   ]
+  },
+  {
+   "said": "the ball and the box",
+   "things": [
+    {
+     "elongation": 1.029,
+     "fill": 0.93,
+     "hue": 232.196,
+     "size": 142.0,
+     "x": 36.655,
+     "y": 38.521
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.784,
+     "hue": 231.072,
+     "size": 131.0,
+     "x": 12.992,
+     "y": 47.397
+    }
+   ]
+  },
+  {
+   "said": "the big yellow ball left of the box",
+   "things": [
+    {
+     "elongation": 1.018,
+     "fill": 0.927,
+     "hue": 2.79,
+     "size": 143.0,
+     "x": 59.538,
+     "y": 23.538
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.778,
+     "hue": 56.448,
+     "size": 133.0,
+     "x": 37.88,
+     "y": 34.789
+    },
+    {
+     "elongation": 1.038,
+     "fill": 0.785,
+     "hue": 57.499,
+     "size": 152.0,
+     "x": 67.461,
+     "y": 62.151
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.036,
+     "fill": 0.949,
+     "hue": 57.344,
+     "size": 144.0,
+     "x": 47.507,
+     "y": 17.417
+    },
+    {
+     "elongation": 1.007,
+     "fill": 0.762,
+     "hue": 120.075,
+     "size": 128.0,
+     "x": 22.547,
+     "y": 33.242
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.909,
+     "hue": 119.852,
+     "size": 121.0,
+     "x": 61.0,
+     "y": 47.0
+    },
+    {
+     "elongation": 3.47,
+     "fill": 0.923,
+     "hue": 232.016,
+     "size": 127.0,
+     "x": 39.929,
+     "y": 56.575
+    }
+   ]
+  },
+  {
+   "said": "the ball right of the big green box and the big ball left of the small ball",
+   "things": [
+    {
+     "elongation": 1.084,
+     "fill": 0.934,
+     "hue": 119.4,
+     "size": 129.0,
+     "x": 61.023,
+     "y": 17.628
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.769,
+     "hue": 3.121,
+     "size": 147.0,
+     "x": 37.721,
+     "y": 30.871
+    },
+    {
+     "elongation": 1.061,
+     "fill": 0.768,
+     "hue": 3.01,
+     "size": 140.0,
+     "x": 53.807,
+     "y": 40.579
+    },
+    {
+     "elongation": 1.045,
+     "fill": 0.778,
+     "hue": 3.135,
+     "size": 45.0,
+     "x": 34.422,
+     "y": 50.467
+    },
+    {
+     "elongation": 1.036,
+     "fill": 0.78,
+     "hue": 231.533,
+     "size": 134.0,
+     "x": 65.194,
+     "y": 56.59
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.777,
+     "hue": 120.292,
+     "size": 117.0,
+     "x": 13.966,
+     "y": 67.521
+    }
+   ]
+  },
+  {
+   "said": "the box",
+   "things": [
+    {
+     "elongation": 1.01,
+     "fill": 0.946,
+     "hue": 56.584,
+     "size": 116.0,
+     "x": 27.991,
+     "y": 50.302
+    }
+   ]
+  },
+  {
+   "said": "the blue box left of the big red ball",
+   "things": [
+    {
+     "elongation": 1.063,
+     "fill": 0.943,
+     "hue": 232.028,
+     "size": 150.0,
+     "x": 52.427,
+     "y": 23.16
+    },
+    {
+     "elongation": 1.099,
+     "fill": 0.928,
+     "hue": 231.791,
+     "size": 40.0,
+     "x": 30.25,
+     "y": 32.9
+    },
+    {
+     "elongation": 1.034,
+     "fill": 0.763,
+     "hue": 3.898,
+     "size": 133.0,
+     "x": 43.759,
+     "y": 47.985
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.796,
+     "hue": 120.411,
+     "size": 42.0,
+     "x": 23.333,
+     "y": 52.0
+    }
+   ]
+  },
+  {
+   "said": "the ball",
+   "things": [
+    {
+     "elongation": 3.166,
+     "fill": 0.933,
+     "hue": 57.106,
+     "size": 138.0,
+     "x": 55.804,
+     "y": 29.841
+    },
+    {
+     "elongation": 1.053,
+     "fill": 0.774,
+     "hue": 231.798,
+     "size": 128.0,
+     "x": 26.562,
+     "y": 49.93
+    },
+    {
+     "elongation": 3.456,
+     "fill": 0.943,
+     "hue": 57.016,
+     "size": 126.0,
+     "x": 62.556,
+     "y": 57.952
+    }
+   ]
+  },
+  {
+   "said": "the red box and the red ball",
+   "things": [
+    {
+     "elongation": 1.117,
+     "fill": 0.804,
+     "hue": 2.841,
+     "size": 45.0,
+     "x": 29.067,
+     "y": 16.556
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.924,
+     "hue": 3.362,
+     "size": 143.0,
+     "x": 17.517,
+     "y": 39.622
+    },
+    {
+     "elongation": 1.004,
+     "fill": 0.906,
+     "hue": 232.314,
+     "size": 34.0,
+     "x": 69.5,
+     "y": 49.353
+    }
+   ]
+  },
+  {
+   "said": "the small box right of the small ball",
+   "things": [
+    {
+     "elongation": 3.215,
+     "fill": 0.84,
+     "hue": 1.206,
+     "size": 40.0,
+     "x": 46.025,
+     "y": 16.425
+    },
+    {
+     "elongation": 1.134,
+     "fill": 0.815,
+     "hue": 120.111,
+     "size": 35.0,
+     "x": 41.229,
+     "y": 35.571
+    },
+    {
+     "elongation": 1.102,
+     "fill": 0.893,
+     "hue": 120.405,
+     "size": 38.0,
+     "x": 30.5,
+     "y": 41.684
+    },
+    {
+     "elongation": 3.131,
+     "fill": 0.885,
+     "hue": 231.749,
+     "size": 46.0,
+     "x": 57.174,
+     "y": 51.217
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.901,
+     "hue": 1.997,
+     "size": 36.0,
+     "x": 60.5,
+     "y": 69.5
+    }
+   ]
+  },
+  {
+   "said": "the small ball above the big box",
+   "things": [
+    {
+     "elongation": 1.057,
+     "fill": 0.799,
+     "hue": 120.399,
+     "size": 50.0,
+     "x": 20.6,
+     "y": 14.4
+    },
+    {
+     "elongation": 1.02,
+     "fill": 0.912,
+     "hue": 119.703,
+     "size": 144.0,
+     "x": 55.667,
+     "y": 37.5
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.777,
+     "hue": 55.952,
+     "size": 134.0,
+     "x": 40.306,
+     "y": 54.269
+    },
+    {
+     "elongation": 1.181,
+     "fill": 0.826,
+     "hue": 57.635,
+     "size": 36.0,
+     "x": 34.5,
+     "y": 69.472
+    }
+   ]
+  },
+  {
+   "said": "the big ball and the yellow box right of the small ball",
+   "things": [
+    {
+     "elongation": 1.04,
+     "fill": 0.776,
+     "hue": 56.636,
+     "size": 141.0,
+     "x": 46.106,
+     "y": 13.22
+    },
+    {
+     "elongation": 1.103,
+     "fill": 0.796,
+     "hue": 2.399,
+     "size": 44.0,
+     "x": 24.886,
+     "y": 43.795
+    },
+    {
+     "elongation": 1.015,
+     "fill": 0.953,
+     "hue": 56.928,
+     "size": 116.0,
+     "x": 60.121,
+     "y": 50.879
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.947,
+     "hue": 57.337,
+     "size": 47.0,
+     "x": 14.872,
+     "y": 68.0
+    }
+   ]
+  },
+  {
+   "said": "the big red ball above the big green ball",
+   "things": [
+    {
+     "elongation": 1.063,
+     "fill": 0.773,
+     "hue": 2.541,
+     "size": 119.0,
+     "x": 18.933,
+     "y": 16.303
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.783,
+     "hue": 120.024,
+     "size": 129.0,
+     "x": 44.434,
+     "y": 32.178
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.918,
+     "hue": 119.43,
+     "size": 47.0,
+     "x": 25.0,
+     "y": 40.872
+    },
+    {
+     "elongation": 2.809,
+     "fill": 0.942,
+     "hue": 56.635,
+     "size": 43.0,
+     "x": 41.884,
+     "y": 49.465
+    },
+    {
+     "elongation": 1.028,
+     "fill": 0.765,
+     "hue": 3.229,
+     "size": 141.0,
+     "x": 52.929,
+     "y": 65.142
+    }
+   ]
+  },
+  {
+   "said": "the box left of the red ball",
+   "things": [
+    {
+     "elongation": 1.068,
+     "fill": 0.93,
+     "hue": 120.452,
+     "size": 134.0,
+     "x": 36.53,
+     "y": 19.09
+    },
+    {
+     "elongation": 1.011,
+     "fill": 0.769,
+     "hue": 3.71,
+     "size": 116.0,
+     "x": 47.017,
+     "y": 37.741
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.926,
+     "hue": 118.593,
+     "size": 46.0,
+     "x": 60.957,
+     "y": 62.196
+    }
+   ]
+  },
+  {
+   "said": "the green ball and the box that is left of the blue ball",
+   "things": [
+    {
+     "elongation": 1.009,
+     "fill": 0.8,
+     "hue": 231.316,
+     "size": 41.0,
+     "x": 37.0,
+     "y": 8.244
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.929,
+     "hue": 119.384,
+     "size": 39.0,
+     "x": 24.308,
+     "y": 11.846
+    },
+    {
+     "elongation": 1.134,
+     "fill": 0.917,
+     "hue": 121.612,
+     "size": 37.0,
+     "x": 69.649,
+     "y": 28.622
+    },
+    {
+     "elongation": 3.007,
+     "fill": 0.924,
+     "hue": 2.846,
+     "size": 143.0,
+     "x": 44.0,
+     "y": 34.0
+    },
+    {
+     "elongation": 3.324,
+     "fill": 0.929,
+     "hue": 56.797,
+     "size": 51.0,
+     "x": 19.529,
+     "y": 36.882
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.801,
+     "hue": 121.051,
+     "size": 39.0,
+     "x": 62.897,
+     "y": 54.282
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.009,
+     "fill": 0.799,
+     "hue": 231.995,
+     "size": 41.0,
+     "x": 23.0,
+     "y": 11.756
+    },
+    {
+     "elongation": 1.053,
+     "fill": 0.933,
+     "hue": 231.805,
+     "size": 130.0,
+     "x": 44.962,
+     "y": 45.362
+    },
+    {
+     "elongation": 1.046,
+     "fill": 0.784,
+     "hue": 120.164,
+     "size": 42.0,
+     "x": 31.667,
+     "y": 60.024
+    }
+   ]
+  },
+  {
+   "said": "the box that is left of the big box",
+   "things": [
+    {
+     "elongation": 1.082,
+     "fill": 0.955,
+     "hue": 56.532,
+     "size": 131.0,
+     "x": 45.389,
+     "y": 17.954
+    },
+    {
+     "elongation": 4.073,
+     "fill": 0.908,
+     "hue": 233.246,
+     "size": 34.0,
+     "x": 29.0,
+     "y": 26.176
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.938,
+     "hue": 57.742,
+     "size": 46.0,
+     "x": 10.935,
+     "y": 32.935
+    },
+    {
+     "elongation": 1.121,
+     "fill": 0.805,
+     "hue": 231.05,
+     "size": 44.0,
+     "x": 24.0,
+     "y": 42.5
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.935,
+     "hue": 55.876,
+     "size": 36.0,
+     "x": 67.5,
+     "y": 57.5
+    }
+   ]
+  },
+  {
+   "said": "the big green box right of the small red ball",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.929,
+     "hue": 119.906,
+     "size": 120.0,
+     "x": 22.958,
+     "y": 13.958
+    },
+    {
+     "elongation": 1.08,
+     "fill": 0.941,
+     "hue": 120.177,
+     "size": 133.0,
+     "x": 58.045,
+     "y": 16.481
+    },
+    {
+     "elongation": 1.061,
+     "fill": 0.925,
+     "hue": 231.657,
+     "size": 150.0,
+     "x": 50.013,
+     "y": 45.467
+    },
+    {
+     "elongation": 1.071,
+     "fill": 0.784,
+     "hue": 2.359,
+     "size": 39.0,
+     "x": 38.179,
+     "y": 64.41
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.961,
+     "hue": 57.198,
+     "size": 144.0,
+     "x": 19.5,
+     "y": 14.5
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.943,
+     "hue": 56.629,
+     "size": 121.0,
+     "x": 45.0,
+     "y": 18.0
+    },
+    {
+     "elongation": 1.006,
+     "fill": 0.765,
+     "hue": 120.428,
+     "size": 131.0,
+     "x": 61.71,
+     "y": 30.069
+    },
+    {
+     "elongation": 3.041,
+     "fill": 0.918,
+     "hue": 231.371,
+     "size": 46.0,
+     "x": 16.565,
+     "y": 48.5
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.919,
+     "hue": 2.702,
+     "size": 46.0,
+     "x": 53.804,
+     "y": 54.957
+    }
+   ]
+  },
+  {
+   "said": "the small ball that is left of the blue box",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.817,
+     "hue": 4.938,
+     "size": 38.0,
+     "x": 45.184,
+     "y": 12.684
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.798,
+     "hue": 2.967,
+     "size": 42.0,
+     "x": 15.0,
+     "y": 23.667
+    },
+    {
+     "elongation": 1.056,
+     "fill": 0.905,
+     "hue": 232.506,
+     "size": 37.0,
+     "x": 29.405,
+     "y": 48.514
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.802,
+     "hue": 118.349,
+     "size": 41.0,
+     "x": 34.756,
+     "y": 66.0
+    }
+   ]
+  },
+  {
+   "said": "the box right of the small ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.936,
+     "hue": 232.639,
+     "size": 142.0,
+     "x": 62.423,
+     "y": 16.5
+    },
+    {
+     "elongation": 1.04,
+     "fill": 0.768,
+     "hue": 119.721,
+     "size": 46.0,
+     "x": 26.565,
+     "y": 19.761
+    },
+    {
+     "elongation": 2.687,
+     "fill": 0.907,
+     "hue": 118.837,
+     "size": 38.0,
+     "x": 44.447,
+     "y": 25.368
+    },
+    {
+     "elongation": 1.055,
+     "fill": 0.906,
+     "hue": 119.197,
+     "size": 35.0,
+     "x": 16.514,
+     "y": 60.743
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.043,
+     "fill": 0.931,
+     "hue": 3.281,
+     "size": 46.0,
+     "x": 51.87,
+     "y": 14.783
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.767,
+     "hue": 2.971,
+     "size": 154.0,
+     "x": 21.24,
+     "y": 43.474
+    },
+    {
+     "elongation": 1.121,
+     "fill": 0.943,
+     "hue": 56.692,
+     "size": 44.0,
+     "x": 41.136,
+     "y": 50.682
+    }
+   ]
+  },
+  {
+   "said": "the big box above the big red ball",
+   "things": [
+    {
+     "elongation": 1.034,
+     "fill": 0.916,
+     "hue": 119.687,
+     "size": 129.0,
+     "x": 60.194,
+     "y": 13.76
+    },
+    {
+     "elongation": 3.023,
+     "fill": 0.947,
+     "hue": 56.796,
+     "size": 146.0,
+     "x": 21.068,
+     "y": 28.021
+    },
+    {
+     "elongation": 1.001,
+     "fill": 0.77,
+     "hue": 2.926,
+     "size": 116.0,
+     "x": 48.405,
+     "y": 37.405
+    },
+    {
+     "elongation": 1.028,
+     "fill": 0.933,
+     "hue": 231.466,
+     "size": 147.0,
+     "x": 24.633,
+     "y": 62.531
+    }
+   ]
+  },
+  {
+   "said": "the big ball and the big blue box that is right of the small ball",
+   "things": [
+    {
+     "elongation": 1.057,
+     "fill": 0.806,
+     "hue": 119.269,
+     "size": 38.0,
+     "x": 28.921,
+     "y": 25.947
+    },
+    {
+     "elongation": 1.015,
+     "fill": 0.782,
+     "hue": 57.416,
+     "size": 114.0,
+     "x": 68.351,
+     "y": 37.588
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.939,
+     "hue": 231.653,
+     "size": 144.0,
+     "x": 54.5,
+     "y": 50.5
+    },
+    {
+     "elongation": 1.012,
+     "fill": 0.945,
+     "hue": 232.288,
+     "size": 125.0,
+     "x": 17.888,
+     "y": 64.76
+    }
+   ]
+  },
+  {
+   "said": "the big box and the blue ball that is left of the small green box",
+   "things": [
+    {
+     "elongation": 1.054,
+     "fill": 0.785,
+     "hue": 231.652,
+     "size": 130.0,
+     "x": 61.908,
+     "y": 14.5
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.931,
+     "hue": 232.039,
+     "size": 123.0,
+     "x": 15.959,
+     "y": 21.187
+    },
+    {
+     "elongation": 1.179,
+     "fill": 0.884,
+     "hue": 119.274,
+     "size": 39.0,
+     "x": 49.077,
+     "y": 32.436
+    },
+    {
+     "elongation": 1.101,
+     "fill": 0.943,
+     "hue": 232.519,
+     "size": 37.0,
+     "x": 33.243,
+     "y": 41.595
+    },
+    {
+     "elongation": 1.016,
+     "fill": 0.778,
+     "hue": 231.381,
+     "size": 132.0,
+     "x": 20.818,
+     "y": 66.985
+    }
+   ]
+  },
+  {
+   "said": "the big box and the big ball",
+   "things": [
+    {
+     "elongation": 1.02,
+     "fill": 0.947,
+     "hue": 2.793,
+     "size": 134.0,
+     "x": 50.687,
+     "y": 25.537
+    },
+    {
+     "elongation": 3.636,
+     "fill": 0.903,
+     "hue": 2.734,
+     "size": 36.0,
+     "x": 19.556,
+     "y": 31.833
+    },
+    {
+     "elongation": 3.527,
+     "fill": 0.921,
+     "hue": 3.716,
+     "size": 124.0,
+     "x": 60.5,
+     "y": 57.839
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.772,
+     "hue": 231.598,
+     "size": 144.0,
+     "x": 29.806,
+     "y": 65.701
+    }
+   ]
+  },
+  {
+   "said": "the ball",
+   "things": [
+    {
+     "elongation": 1.112,
+     "fill": 0.794,
+     "hue": 3.191,
+     "size": 45.0,
+     "x": 42.711,
+     "y": 24.867
+    }
+   ]
+  },
+  {
+   "said": "the small box and the small red ball",
+   "things": [
+    {
+     "elongation": 1.143,
+     "fill": 0.923,
+     "hue": 57.322,
+     "size": 44.0,
+     "x": 67.091,
+     "y": 53.091
+    },
+    {
+     "elongation": 1.08,
+     "fill": 0.811,
+     "hue": 3.406,
+     "size": 45.0,
+     "x": 30.644,
+     "y": 59.133
+    }
+   ]
+  },
+  {
+   "said": "the small box above the big ball",
+   "things": [
+    {
+     "elongation": 3.169,
+     "fill": 0.89,
+     "hue": 119.842,
+     "size": 48.0,
+     "x": 62.25,
+     "y": 11.542
+    },
+    {
+     "elongation": 1.068,
+     "fill": 0.917,
+     "hue": 56.482,
+     "size": 44.0,
+     "x": 41.795,
+     "y": 39.932
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.781,
+     "hue": 56.717,
+     "size": 141.0,
+     "x": 15.603,
+     "y": 46.156
+    },
+    {
+     "elongation": 1.085,
+     "fill": 0.93,
+     "hue": 231.023,
+     "size": 47.0,
+     "x": 30.085,
+     "y": 66.149
+    }
+   ]
+  },
+  {
+   "said": "the yellow box right of the big green box",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.939,
+     "hue": 119.892,
+     "size": 139.0,
+     "x": 39.381,
+     "y": 16.46
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.942,
+     "hue": 57.647,
+     "size": 36.0,
+     "x": 61.5,
+     "y": 20.5
+    },
+    {
+     "elongation": 1.004,
+     "fill": 0.956,
+     "hue": 57.181,
+     "size": 34.0,
+     "x": 17.353,
+     "y": 27.5
+    },
+    {
+     "elongation": 1.179,
+     "fill": 0.955,
+     "hue": 55.299,
+     "size": 39.0,
+     "x": 13.564,
+     "y": 48.923
+    }
+   ]
+  },
+  {
+   "said": "the big box",
+   "things": [
+    {
+     "elongation": 1.012,
+     "fill": 0.778,
+     "hue": 57.445,
+     "size": 150.0,
+     "x": 31.367,
+     "y": 25.687
+    },
+    {
+     "elongation": 1.03,
+     "fill": 0.934,
+     "hue": 231.979,
+     "size": 147.0,
+     "x": 25.367,
+     "y": 64.401
+    }
+   ]
+  },
+  {
+   "said": "the box right of the ball and the big box",
+   "things": [
+    {
+     "elongation": 1.016,
+     "fill": 0.775,
+     "hue": 3.29,
+     "size": 145.0,
+     "x": 56.09,
+     "y": 14.986
+    },
+    {
+     "elongation": 3.487,
+     "fill": 0.936,
+     "hue": 56.754,
+     "size": 123.0,
+     "x": 31.756,
+     "y": 20.504
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.914,
+     "hue": 121.93,
+     "size": 35.0,
+     "x": 52.571,
+     "y": 30.429
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.931,
+     "hue": 231.1,
+     "size": 144.0,
+     "x": 17.5,
+     "y": 39.5
+    },
+    {
+     "elongation": 3.542,
+     "fill": 0.9,
+     "hue": 232.028,
+     "size": 106.0,
+     "x": 40.113,
+     "y": 49.377
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.964,
+     "hue": 56.065,
+     "size": 45.0,
+     "x": 65.111,
+     "y": 56.867
+    }
+   ]
+  },
+  {
+   "said": "the small box and the ball",
+   "things": [
+    {
+     "elongation": 1.036,
+     "fill": 0.824,
+     "hue": 56.306,
+     "size": 37.0,
+     "x": 31.243,
+     "y": 20.757
+    },
+    {
+     "elongation": 1.107,
+     "fill": 0.907,
+     "hue": 2.496,
+     "size": 47.0,
+     "x": 55.0,
+     "y": 32.0
+    }
+   ]
+  },
+  {
+   "said": "the green box and the ball right of the yellow box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.929,
+     "hue": 119.723,
+     "size": 119.0,
+     "x": 17.0,
+     "y": 20.916
+    },
+    {
+     "elongation": 1.004,
+     "fill": 0.931,
+     "hue": 56.775,
+     "size": 34.0,
+     "x": 56.353,
+     "y": 31.5
+    },
+    {
+     "elongation": 1.031,
+     "fill": 0.778,
+     "hue": 57.133,
+     "size": 129.0,
+     "x": 32.372,
+     "y": 48.434
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.824,
+     "hue": 118.704,
+     "size": 41.0,
+     "x": 60.244,
+     "y": 65.0
+    }
+   ]
+  },
+  {
+   "said": "the red box",
+   "things": [
+    {
+     "elongation": 1.084,
+     "fill": 0.902,
+     "hue": 2.838,
+     "size": 47.0,
+     "x": 32.106,
+     "y": 44.787
+    },
+    {
+     "elongation": 1.057,
+     "fill": 0.798,
+     "hue": 119.628,
+     "size": 38.0,
+     "x": 24.079,
+     "y": 59.947
+    }
+   ]
+  },
+  {
+   "said": "the ball right of the red box",
+   "things": [
+    {
+     "elongation": 1.087,
+     "fill": 0.8,
+     "hue": 2.742,
+     "size": 43.0,
+     "x": 68.977,
+     "y": 38.419
+    },
+    {
+     "elongation": 1.117,
+     "fill": 0.81,
+     "hue": 57.238,
+     "size": 45.0,
+     "x": 50.556,
+     "y": 58.933
+    },
+    {
+     "elongation": 1.107,
+     "fill": 0.899,
+     "hue": 3.21,
+     "size": 47.0,
+     "x": 64.0,
+     "y": 63.0
+    }
+   ]
+  },
+  {
+   "said": "the yellow ball that is above the red ball",
+   "things": [
+    {
+     "elongation": 3.219,
+     "fill": 0.926,
+     "hue": 56.004,
+     "size": 152.0,
+     "x": 62.783,
+     "y": 19.961
+    },
+    {
+     "elongation": 2.974,
+     "fill": 0.935,
+     "hue": 3.562,
+     "size": 44.0,
+     "x": 31.5,
+     "y": 33.5
+    },
+    {
+     "elongation": 1.138,
+     "fill": 0.799,
+     "hue": 57.445,
+     "size": 37.0,
+     "x": 72.135,
+     "y": 37.297
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.777,
+     "hue": 2.865,
+     "size": 140.0,
+     "x": 12.293,
+     "y": 41.7
+    },
+    {
+     "elongation": 1.027,
+     "fill": 0.776,
+     "hue": 56.457,
+     "size": 124.0,
+     "x": 43.782,
+     "y": 65.274
+    }
+   ]
+  },
+  {
+   "said": "the ball that is left of the green ball",
+   "things": [
+    {
+     "elongation": 1.021,
+     "fill": 0.764,
+     "hue": 120.148,
+     "size": 144.0,
+     "x": 29.201,
+     "y": 14.951
+    },
+    {
+     "elongation": 1.02,
+     "fill": 0.776,
+     "hue": 231.798,
+     "size": 120.0,
+     "x": 63.375,
+     "y": 17.85
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.76,
+     "hue": 2.92,
+     "size": 118.0,
+     "x": 24.669,
+     "y": 35.458
+    },
+    {
+     "elongation": 1.031,
+     "fill": 0.815,
+     "hue": 3.127,
+     "size": 35.0,
+     "x": 58.857,
+     "y": 47.286
+    },
+    {
+     "elongation": 1.053,
+     "fill": 0.939,
+     "hue": 3.165,
+     "size": 148.0,
+     "x": 33.838,
+     "y": 66.527
+    }
+   ]
+  },
+  {
+   "said": "the blue ball and the box",
+   "things": [
+    {
+     "elongation": 1.063,
+     "fill": 0.918,
+     "hue": 231.905,
+     "size": 114.0,
+     "x": 40.237,
+     "y": 23.807
+    },
+    {
+     "elongation": 1.058,
+     "fill": 0.814,
+     "hue": 230.636,
+     "size": 42.0,
+     "x": 49.167,
+     "y": 69.31
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.926,
+     "hue": 120.469,
+     "size": 144.0,
+     "x": 48.5,
+     "y": 31.5
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.784,
+     "hue": 2.31,
+     "size": 42.0,
+     "x": 20.333,
+     "y": 46.0
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.941,
+     "hue": 231.854,
+     "size": 117.0,
+     "x": 42.0,
+     "y": 56.0
+    }
+   ]
+  },
+  {
+   "said": "the ball and the small yellow box",
+   "things": [
+    {
+     "elongation": 1.054,
+     "fill": 0.94,
+     "hue": 56.64,
+     "size": 46.0,
+     "x": 26.935,
+     "y": 66.065
+    },
+    {
+     "elongation": 1.044,
+     "fill": 0.813,
+     "hue": 231.327,
+     "size": 44.0,
+     "x": 57.955,
+     "y": 68.932
+    }
+   ]
+  },
+  {
+   "said": "the ball",
+   "things": [
+    {
+     "elongation": 1.013,
+     "fill": 0.777,
+     "hue": 3.087,
+     "size": 147.0,
+     "x": 67.544,
+     "y": 21.51
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.936,
+     "hue": 55.589,
+     "size": 45.0,
+     "x": 62.0,
+     "y": 56.0
+    }
+   ]
+  },
+  {
+   "said": "the yellow ball right of the box",
+   "things": [
+    {
+     "elongation": 1.043,
+     "fill": 0.792,
+     "hue": 57.144,
+     "size": 122.0,
+     "x": 48.344,
+     "y": 18.615
+    },
+    {
+     "elongation": 1.088,
+     "fill": 0.934,
+     "hue": 231.354,
+     "size": 109.0,
+     "x": 26.55,
+     "y": 40.936
+    },
+    {
+     "elongation": 1.025,
+     "fill": 0.768,
+     "hue": 120.363,
+     "size": 120.0,
+     "x": 55.433,
+     "y": 43.358
+    },
+    {
+     "elongation": 1.024,
+     "fill": 0.773,
+     "hue": 56.894,
+     "size": 124.0,
+     "x": 17.903,
+     "y": 63.589
+    }
+   ]
+  },
+  {
+   "said": "the small red ball",
+   "things": [
+    {
+     "elongation": 1.048,
+     "fill": 0.793,
+     "hue": 3.4,
+     "size": 47.0,
+     "x": 8.298,
+     "y": 14.298
+    },
+    {
+     "elongation": 1.016,
+     "fill": 0.937,
+     "hue": 56.382,
+     "size": 139.0,
+     "x": 22.46,
+     "y": 23.532
+    }
+   ]
+  },
+  {
+   "said": "the box above the green box and the big ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.935,
+     "hue": 3.027,
+     "size": 142.0,
+     "x": 28.577,
+     "y": 16.5
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.913,
+     "hue": 119.177,
+     "size": 44.0,
+     "x": 55.182,
+     "y": 23.182
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.92,
+     "hue": 2.901,
+     "size": 36.0,
+     "x": 68.5,
+     "y": 34.5
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.935,
+     "hue": 2.914,
+     "size": 144.0,
+     "x": 16.5,
+     "y": 39.5
+    },
+    {
+     "elongation": 1.004,
+     "fill": 0.779,
+     "hue": 119.56,
+     "size": 116.0,
+     "x": 33.672,
+     "y": 57.336
+    },
+    {
+     "elongation": 2.981,
+     "fill": 0.893,
+     "hue": 122.191,
+     "size": 39.0,
+     "x": 49.0,
+     "y": 65.692
+    }
+   ]
+  },
+  {
+   "said": "the blue box and the ball",
+   "things": [
+    {
+     "elongation": 3.028,
+     "fill": 0.915,
+     "hue": 57.978,
+     "size": 46.0,
+     "x": 32.5,
+     "y": 15.261
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.928,
+     "hue": 231.92,
+     "size": 36.0,
+     "x": 58.5,
+     "y": 26.5
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.803,
+     "hue": 233.112,
+     "size": 41.0,
+     "x": 29.0,
+     "y": 40.244
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.011,
+     "fill": 0.768,
+     "hue": 120.15,
+     "size": 135.0,
+     "x": 39.133,
+     "y": 12.37
+    },
+    {
+     "elongation": 1.039,
+     "fill": 0.802,
+     "hue": 2.91,
+     "size": 38.0,
+     "x": 10.658,
+     "y": 24.158
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.776,
+     "hue": 120.53,
+     "size": 111.0,
+     "x": 43.622,
+     "y": 34.099
+    },
+    {
+     "elongation": 1.179,
+     "fill": 0.923,
+     "hue": 2.863,
+     "size": 38.0,
+     "x": 24.842,
+     "y": 49.526
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.789,
+     "hue": 4.016,
+     "size": 45.0,
+     "x": 34.0,
+     "y": 59.0
+    }
+   ]
+  },
+  {
+   "said": "the bar",
+   "things": [
+    {
+     "elongation": 3.192,
+     "fill": 0.91,
+     "hue": 231.431,
+     "size": 112.0,
+     "x": 53.455,
+     "y": 18.0
+    },
+    {
+     "elongation": 1.068,
+     "fill": 0.928,
+     "hue": 119.944,
+     "size": 133.0,
+     "x": 49.128,
+     "y": 41.459
+    }
+   ]
+  },
+  {
+   "said": "the green box and the big ball",
+   "things": [
+    {
+     "elongation": 1.015,
+     "fill": 0.906,
+     "hue": 120.35,
+     "size": 122.0,
+     "x": 60.049,
+     "y": 18.992
+    },
+    {
+     "elongation": 1.039,
+     "fill": 0.77,
+     "hue": 119.869,
+     "size": 145.0,
+     "x": 19.159,
+     "y": 31.945
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.054,
+     "fill": 0.809,
+     "hue": 231.406,
+     "size": 42.0,
+     "x": 32.071,
+     "y": 34.19
+    },
+    {
+     "elongation": 1.07,
+     "fill": 0.93,
+     "hue": 3.284,
+     "size": 135.0,
+     "x": 42.63,
+     "y": 46.696
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.791,
+     "hue": 232.046,
+     "size": 114.0,
+     "x": 17.754,
+     "y": 53.281
+    }
+   ]
+  },
+  {
+   "said": "the small ball and the box",
+   "things": [
+    {
+     "elongation": 3.818,
+     "fill": 0.92,
+     "hue": 231.859,
+     "size": 32.0,
+     "x": 23.844,
+     "y": 26.031
+    },
+    {
+     "elongation": 1.055,
+     "fill": 0.821,
+     "hue": 56.098,
+     "size": 43.0,
+     "x": 31.279,
+     "y": 53.07
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.92,
+     "hue": 232.519,
+     "size": 46.0,
+     "x": 21.065,
+     "y": 66.065
+    }
+   ]
+  },
+  {
+   "said": "the big blue ball left of the box",
+   "things": [
+    {
+     "elongation": 1.015,
+     "fill": 0.795,
+     "hue": 231.523,
+     "size": 138.0,
+     "x": 31.275,
+     "y": 32.522
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.775,
+     "hue": 232.067,
+     "size": 148.0,
+     "x": 65.912,
+     "y": 39.689
+    },
+    {
+     "elongation": 1.077,
+     "fill": 0.912,
+     "hue": 119.561,
+     "size": 42.0,
+     "x": 53.976,
+     "y": 69.214
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.164,
+     "fill": 0.913,
+     "hue": 120.322,
+     "size": 40.0,
+     "x": 52.5,
+     "y": 39.15
+    },
+    {
+     "elongation": 1.01,
+     "fill": 0.783,
+     "hue": 57.374,
+     "size": 123.0,
+     "x": 21.854,
+     "y": 57.407
+    },
+    {
+     "elongation": 1.101,
+     "fill": 0.94,
+     "hue": 56.445,
+     "size": 36.0,
+     "x": 67.333,
+     "y": 70.556
+    }
+   ]
+  },
+  {
+   "said": "the big ball that is left of the blue box and the blue ball",
+   "things": [
+    {
+     "elongation": 1.044,
+     "fill": 0.773,
+     "hue": 230.929,
+     "size": 146.0,
+     "x": 58.534,
+     "y": 24.185
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.781,
+     "hue": 57.136,
+     "size": 127.0,
+     "x": 19.701,
+     "y": 27.039
+    },
+    {
+     "elongation": 1.03,
+     "fill": 0.773,
+     "hue": 120.093,
+     "size": 122.0,
+     "x": 36.27,
+     "y": 33.32
+    },
+    {
+     "elongation": 1.045,
+     "fill": 0.913,
+     "hue": 231.451,
+     "size": 136.0,
+     "x": 30.088,
+     "y": 51.449
+    },
+    {
+     "elongation": 3.52,
+     "fill": 0.926,
+     "hue": 231.613,
+     "size": 123.0,
+     "x": 63.919,
+     "y": 62.48
+    }
+   ]
+  },
+  {
+   "said": "the ball and the blue box right of the small box",
+   "things": [
+    {
+     "elongation": 1.021,
+     "fill": 0.928,
+     "hue": 232.15,
+     "size": 138.0,
+     "x": 64.659,
+     "y": 16.551
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.937,
+     "hue": 231.836,
+     "size": 119.0,
+     "x": 14.084,
+     "y": 27.0
+    },
+    {
+     "elongation": 1.099,
+     "fill": 0.839,
+     "hue": 231.796,
+     "size": 39.0,
+     "x": 28.128,
+     "y": 58.128
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.936,
+     "hue": 120.018,
+     "size": 47.0,
+     "x": 40.0,
+     "y": 65.128
+    }
+   ]
+  },
+  {
+   "said": "the box and the ball right of the red ball",
+   "things": [
+    {
+     "elongation": 1.033,
+     "fill": 0.922,
+     "hue": 231.402,
+     "size": 109.0,
+     "x": 66.156,
+     "y": 16.633
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.769,
+     "hue": 119.155,
+     "size": 136.0,
+     "x": 28.824,
+     "y": 21.147
+    },
+    {
+     "elongation": 1.025,
+     "fill": 0.763,
+     "hue": 3.507,
+     "size": 146.0,
+     "x": 36.863,
+     "y": 43.986
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.775,
+     "hue": 120.148,
+     "size": 115.0,
+     "x": 54.374,
+     "y": 48.635
+    }
+   ]
+  },
+  {
+   "said": "the small yellow ball",
+   "things": [
+    {
+     "elongation": 1.044,
+     "fill": 0.924,
+     "hue": 231.333,
+     "size": 44.0,
+     "x": 23.045,
+     "y": 25.932
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.823,
+     "hue": 57.633,
+     "size": 36.0,
+     "x": 26.667,
+     "y": 54.778
+    },
+    {
+     "elongation": 2.952,
+     "fill": 0.906,
+     "hue": 3.587,
+     "size": 132.0,
+     "x": 52.864,
+     "y": 60.295
+    }
+   ]
+  },
+  {
+   "said": "the ball left of the box and the small green ball",
+   "things": [
+    {
+     "elongation": 1.084,
+     "fill": 0.928,
+     "hue": 120.705,
+     "size": 41.0,
+     "x": 32.268,
+     "y": 41.927
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.805,
+     "hue": 119.867,
+     "size": 39.0,
+     "x": 70.923,
+     "y": 45.538
+    },
+    {
+     "elongation": 1.147,
+     "fill": 0.81,
+     "hue": 231.685,
+     "size": 45.0,
+     "x": 20.089,
+     "y": 60.711
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.772,
+     "hue": 119.886,
+     "size": 115.0,
+     "x": 42.617,
+     "y": 69.452
+    }
+   ]
+  },
+  {
+   "said": "the bar",
+   "things": [
+    {
+     "elongation": 1.038,
+     "fill": 0.901,
+     "hue": 231.179,
+     "size": 43.0,
+     "x": 51.14,
+     "y": 27.0
+    },
+    {
+     "elongation": 3.505,
+     "fill": 0.912,
+     "hue": 120.377,
+     "size": 134.0,
+     "x": 33.604,
+     "y": 39.41
+    },
+    {
+     "elongation": 1.057,
+     "fill": 0.928,
+     "hue": 231.309,
+     "size": 139.0,
+     "x": 65.504,
+     "y": 58.791
+    }
+   ]
+  },
+  {
+   "said": "the small green ball right of the big box",
+   "things": [
+    {
+     "elongation": 1.017,
+     "fill": 0.772,
+     "hue": 3.03,
+     "size": 115.0,
+     "x": 49.452,
+     "y": 14.383
+    },
+    {
+     "elongation": 3.087,
+     "fill": 0.936,
+     "hue": 2.676,
+     "size": 148.0,
+     "x": 33.784,
+     "y": 36.027
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.952,
+     "hue": 56.354,
+     "size": 121.0,
+     "x": 61.0,
+     "y": 47.0
+    },
+    {
+     "elongation": 1.057,
+     "fill": 0.805,
+     "hue": 119.593,
+     "size": 38.0,
+     "x": 69.053,
+     "y": 62.921
+    },
+    {
+     "elongation": 1.044,
+     "fill": 0.802,
+     "hue": 119.905,
+     "size": 49.0,
+     "x": 27.673,
+     "y": 67.429
+    }
+   ]
+  },
+  {
+   "said": "the small green box above the small red ball",
+   "things": [
+    {
+     "elongation": 1.136,
+     "fill": 0.882,
+     "hue": 120.784,
+     "size": 39.0,
+     "x": 11.308,
+     "y": 12.0
+    },
+    {
+     "elongation": 3.375,
+     "fill": 0.905,
+     "hue": 3.123,
+     "size": 126.0,
+     "x": 55.397,
+     "y": 36.016
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.814,
+     "hue": 3.541,
+     "size": 45.0,
+     "x": 21.0,
+     "y": 46.0
+    },
+    {
+     "elongation": 1.102,
+     "fill": 0.876,
+     "hue": 121.28,
+     "size": 36.0,
+     "x": 35.5,
+     "y": 51.833
+    }
+   ]
+  },
+  {
+   "said": "the yellow ball and the box above the big blue ball",
+   "things": [
+    {
+     "elongation": 1.075,
+     "fill": 0.946,
+     "hue": 57.193,
+     "size": 111.0,
+     "x": 44.946,
+     "y": 13.64
+    },
+    {
+     "elongation": 1.02,
+     "fill": 0.784,
+     "hue": 231.572,
+     "size": 115.0,
+     "x": 13.722,
+     "y": 17.322
+    },
+    {
+     "elongation": 3.365,
+     "fill": 0.918,
+     "hue": 232.495,
+     "size": 129.0,
+     "x": 34.039,
+     "y": 33.372
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.807,
+     "hue": 57.762,
+     "size": 43.0,
+     "x": 71.023,
+     "y": 37.581
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.922,
+     "hue": 120.94,
+     "size": 144.0,
+     "x": 23.5,
+     "y": 54.5
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.936,
+     "hue": 3.035,
+     "size": 119.0,
+     "x": 47.916,
+     "y": 60.0
+    }
+   ]
+  },
+  {
+   "said": "the green ball and the box",
+   "things": [
+    {
+     "elongation": 1.009,
+     "fill": 0.81,
+     "hue": 119.463,
+     "size": 41.0,
+     "x": 55.0,
+     "y": 33.756
+    },
+    {
+     "elongation": 3.127,
+     "fill": 0.905,
+     "hue": 118.967,
+     "size": 44.0,
+     "x": 47.636,
+     "y": 53.636
+    },
+    {
+     "elongation": 1.02,
+     "fill": 0.923,
+     "hue": 119.591,
+     "size": 120.0,
+     "x": 18.408,
+     "y": 60.967
+    }
+   ]
+  },
+  {
+   "said": "the big box that is right of the big ball",
+   "things": [
+    {
+     "elongation": 1.014,
+     "fill": 0.937,
+     "hue": 230.951,
+     "size": 144.0,
+     "x": 61.583,
+     "y": 18.444
+    },
+    {
+     "elongation": 1.015,
+     "fill": 0.763,
+     "hue": 119.586,
+     "size": 140.0,
+     "x": 58.064,
+     "y": 44.043
+    },
+    {
+     "elongation": 1.006,
+     "fill": 0.948,
+     "hue": 57.668,
+     "size": 117.0,
+     "x": 33.085,
+     "y": 46.923
+    }
+   ]
+  },
+  {
+   "said": "the blue box and the big ball left of the small red box",
+   "things": [
+    {
+     "elongation": 3.324,
+     "fill": 0.971,
+     "hue": 56.736,
+     "size": 51.0,
+     "x": 26.882,
+     "y": 19.471
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.785,
+     "hue": 230.875,
+     "size": 116.0,
+     "x": 11.845,
+     "y": 29.103
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.926,
+     "hue": 231.361,
+     "size": 47.0,
+     "x": 34.872,
+     "y": 43.0
+    },
+    {
+     "elongation": 1.015,
+     "fill": 0.78,
+     "hue": 56.845,
+     "size": 142.0,
+     "x": 59.042,
+     "y": 53.894
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.929,
+     "hue": 3.112,
+     "size": 36.0,
+     "x": 40.5,
+     "y": 57.5
+    }
+   ]
+  },
+  {
+   "said": "the blue ball that is above the small ball",
+   "things": [
+    {
+     "elongation": 1.003,
+     "fill": 0.785,
+     "hue": 231.731,
+     "size": 129.0,
+     "x": 39.093,
+     "y": 31.233
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.893,
+     "hue": 3.394,
+     "size": 46.0,
+     "x": 62.043,
+     "y": 43.196
+    },
+    {
+     "elongation": 1.044,
+     "fill": 0.816,
+     "hue": 120.031,
+     "size": 44.0,
+     "x": 11.955,
+     "y": 53.068
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.774,
+     "hue": 231.145,
+     "size": 150.0,
+     "x": 27.527,
+     "y": 56.56
+    },
+    {
+     "elongation": 1.053,
+     "fill": 0.925,
+     "hue": 231.906,
+     "size": 124.0,
+     "x": 51.411,
+     "y": 64.008
+    }
+   ]
+  },
+  {
+   "said": "the small red ball",
+   "things": [
+    {
+     "elongation": 1.081,
+     "fill": 0.828,
+     "hue": 2.799,
+     "size": 38.0,
+     "x": 26.158,
+     "y": 19.211
+    },
+    {
+     "elongation": 1.059,
+     "fill": 0.921,
+     "hue": 3.594,
+     "size": 115.0,
+     "x": 46.348,
+     "y": 24.93
+    }
+   ]
+  },
+  {
+   "said": "the small green ball and the box left of the small yellow box",
+   "things": [
+    {
+     "elongation": 1.056,
+     "fill": 0.932,
+     "hue": 57.787,
+     "size": 37.0,
+     "x": 49.595,
+     "y": 12.514
+    },
+    {
+     "elongation": 3.15,
+     "fill": 0.92,
+     "hue": 3.698,
+     "size": 124.0,
+     "x": 23.71,
+     "y": 15.605
+    },
+    {
+     "elongation": 1.103,
+     "fill": 0.796,
+     "hue": 120.763,
+     "size": 44.0,
+     "x": 34.205,
+     "y": 34.886
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.926,
+     "hue": 119.269,
+     "size": 40.0,
+     "x": 15.325,
+     "y": 42.7
+    },
+    {
+     "elongation": 1.179,
+     "fill": 0.921,
+     "hue": 119.72,
+     "size": 39.0,
+     "x": 67.564,
+     "y": 48.077
+    },
+    {
+     "elongation": 3.241,
+     "fill": 0.899,
+     "hue": 3.079,
+     "size": 112.0,
+     "x": 28.179,
+     "y": 57.661
+    }
+   ]
+  },
+  {
+   "said": "the ball left of the small box",
+   "things": [
+    {
+     "elongation": 3.924,
+     "fill": 0.886,
+     "hue": 231.63,
+     "size": 32.0,
+     "x": 41.5,
+     "y": 15.0
+    },
+    {
+     "elongation": 1.035,
+     "fill": 0.778,
+     "hue": 56.85,
+     "size": 147.0,
+     "x": 64.98,
+     "y": 39.184
+    },
+    {
+     "elongation": 1.033,
+     "fill": 0.784,
+     "hue": 57.403,
+     "size": 145.0,
+     "x": 35.338,
+     "y": 41.89
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.92,
+     "hue": 119.225,
+     "size": 38.0,
+     "x": 57.5,
+     "y": 64.0
+    }
+   ]
+  },
+  {
+   "said": "the big ball above the big blue ball",
+   "things": [
+    {
+     "elongation": 1.026,
+     "fill": 0.756,
+     "hue": 119.516,
+     "size": 141.0,
+     "x": 55.043,
+     "y": 39.156
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.781,
+     "hue": 232.025,
+     "size": 140.0,
+     "x": 13.043,
+     "y": 52.893
+    },
+    {
+     "elongation": 1.01,
+     "fill": 0.767,
+     "hue": 3.016,
+     "size": 120.0,
+     "x": 42.083,
+     "y": 60.7
+    }
+   ]
+  },
+  {
+   "said": "the small ball",
+   "things": [
+    {
+     "elongation": 1.082,
+     "fill": 0.821,
+     "hue": 55.699,
+     "size": 36.0,
+     "x": 18.667,
+     "y": 12.222
+    },
+    {
+     "elongation": 1.026,
+     "fill": 0.912,
+     "hue": 119.261,
+     "size": 145.0,
+     "x": 31.497,
+     "y": 45.29
+    }
+   ]
+  },
+  {
+   "said": "the green ball left of the blue box",
+   "things": [
+    {
+     "elongation": 1.082,
+     "fill": 0.794,
+     "hue": 121.256,
+     "size": 36.0,
+     "x": 15.778,
+     "y": 29.667
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.941,
+     "hue": 231.327,
+     "size": 45.0,
+     "x": 41.111,
+     "y": 32.133
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.764,
+     "hue": 120.205,
+     "size": 117.0,
+     "x": 64.615,
+     "y": 39.453
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.948,
+     "hue": 56.859,
+     "size": 40.0,
+     "x": 30.85,
+     "y": 69.5
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.016,
+     "fill": 0.929,
+     "hue": 2.933,
+     "size": 138.0,
+     "x": 54.348,
+     "y": 24.391
+    },
+    {
+     "elongation": 1.085,
+     "fill": 0.92,
+     "hue": 3.247,
+     "size": 45.0,
+     "x": 66.244,
+     "y": 39.889
+    },
+    {
+     "elongation": 1.01,
+     "fill": 0.769,
+     "hue": 3.067,
+     "size": 137.0,
+     "x": 59.314,
+     "y": 59.46
+    },
+    {
+     "elongation": 1.084,
+     "fill": 0.911,
+     "hue": 120.91,
+     "size": 46.0,
+     "x": 32.652,
+     "y": 68.043
+    }
+   ]
+  },
+  {
+   "said": "the big box and the ball",
+   "things": [
+    {
+     "elongation": 1.021,
+     "fill": 0.778,
+     "hue": 56.357,
+     "size": 120.0,
+     "x": 58.717,
+     "y": 26.408
+    },
+    {
+     "elongation": 1.052,
+     "fill": 0.936,
+     "hue": 119.941,
+     "size": 125.0,
+     "x": 43.032,
+     "y": 44.808
+    }
+   ]
+  },
+  {
+   "said": "the ball and the small yellow box above the small blue box",
+   "things": [
+    {
+     "elongation": 1.054,
+     "fill": 0.937,
+     "hue": 56.176,
+     "size": 46.0,
+     "x": 64.065,
+     "y": 22.935
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.945,
+     "hue": 230.649,
+     "size": 47.0,
+     "x": 32.128,
+     "y": 33.0
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.939,
+     "hue": 56.833,
+     "size": 36.0,
+     "x": 51.5,
+     "y": 35.5
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.803,
+     "hue": 232.007,
+     "size": 36.0,
+     "x": 44.222,
+     "y": 57.333
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.834,
+     "hue": 2.927,
+     "size": 37.0,
+     "x": 49.0,
+     "y": 24.0
+    },
+    {
+     "elongation": 1.063,
+     "fill": 0.928,
+     "hue": 231.514,
+     "size": 129.0,
+     "x": 62.062,
+     "y": 38.667
+    },
+    {
+     "elongation": 1.034,
+     "fill": 0.783,
+     "hue": 56.543,
+     "size": 127.0,
+     "x": 30.331,
+     "y": 57.898
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.028,
+     "fill": 0.81,
+     "hue": 2.624,
+     "size": 42.0,
+     "x": 13.405,
+     "y": 19.405
+    },
+    {
+     "elongation": 1.042,
+     "fill": 0.772,
+     "hue": 3.983,
+     "size": 144.0,
+     "x": 17.0,
+     "y": 41.729
+    },
+    {
+     "elongation": 1.05,
+     "fill": 0.959,
+     "hue": 57.308,
+     "size": 48.0,
+     "x": 53.938,
+     "y": 48.938
+    },
+    {
+     "elongation": 1.015,
+     "fill": 0.777,
+     "hue": 3.527,
+     "size": 114.0,
+     "x": 21.474,
+     "y": 68.281
+    }
+   ]
+  },
+  {
+   "said": "the bar",
+   "things": [
+    {
+     "elongation": 1.099,
+     "fill": 0.922,
+     "hue": 232.464,
+     "size": 106.0,
+     "x": 44.481,
+     "y": 13.094
+    },
+    {
+     "elongation": 2.65,
+     "fill": 0.899,
+     "hue": 56.212,
+     "size": 39.0,
+     "x": 57.359,
+     "y": 35.41
+    }
+   ]
+  },
+  {
+   "said": "the box and the ball",
+   "things": [
+    {
+     "elongation": 1.007,
+     "fill": 0.783,
+     "hue": 120.216,
+     "size": 115.0,
+     "x": 41.948,
+     "y": 12.148
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.922,
+     "hue": 3.171,
+     "size": 45.0,
+     "x": 36.0,
+     "y": 59.0
+    }
+   ]
+  },
+  {
+   "said": "the ball right of the big ball",
+   "things": [
+    {
+     "elongation": 1.081,
+     "fill": 0.822,
+     "hue": 4.639,
+     "size": 38.0,
+     "x": 37.158,
+     "y": 22.789
+    },
+    {
+     "elongation": 2.476,
+     "fill": 0.863,
+     "hue": 3.243,
+     "size": 44.0,
+     "x": 49.773,
+     "y": 34.886
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.767,
+     "hue": 232.358,
+     "size": 148.0,
+     "x": 16.784,
+     "y": 47.014
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.805,
+     "hue": 3.799,
+     "size": 47.0,
+     "x": 13.234,
+     "y": 63.553
+    }
+   ]
+  },
+  {
+   "said": "the big ball left of the blue ball",
+   "things": [
+    {
+     "elongation": 1.013,
+     "fill": 0.768,
+     "hue": 3.042,
+     "size": 153.0,
+     "x": 14.536,
+     "y": 26.353
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.83,
+     "hue": 233.454,
+     "size": 45.0,
+     "x": 45.0,
+     "y": 54.0
+    },
+    {
+     "elongation": 1.026,
+     "fill": 0.773,
+     "hue": 119.722,
+     "size": 138.0,
+     "x": 64.406,
+     "y": 57.188
+    }
+   ]
+  },
+  {
+   "said": "the big ball and the box",
+   "things": [
+    {
+     "elongation": 1.028,
+     "fill": 0.772,
+     "hue": 3.049,
+     "size": 137.0,
+     "x": 29.131,
+     "y": 15.088
+    },
+    {
+     "elongation": 1.084,
+     "fill": 0.939,
+     "hue": 56.958,
+     "size": 111.0,
+     "x": 24.55,
+     "y": 33.991
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 1.057,
+     "fill": 0.804,
+     "hue": 57.299,
+     "size": 50.0,
+     "x": 14.6,
+     "y": 30.6
+    },
+    {
+     "elongation": 1.091,
+     "fill": 0.918,
+     "hue": 2.65,
+     "size": 128.0,
+     "x": 19.5,
+     "y": 52.0
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.791,
+     "hue": 3.084,
+     "size": 117.0,
+     "x": 60.675,
+     "y": 68.538
+    }
+   ]
+  },
+  {
+   "said": "the blue ball that is left of the green box",
+   "things": [
+    {
+     "elongation": 1.181,
+     "fill": 0.808,
+     "hue": 230.199,
+     "size": 35.0,
+     "x": 40.8,
+     "y": 22.543
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.82,
+     "hue": 231.787,
+     "size": 41.0,
+     "x": 21.0,
+     "y": 41.756
+    },
+    {
+     "elongation": 3.376,
+     "fill": 0.899,
+     "hue": 119.543,
+     "size": 120.0,
+     "x": 51.5,
+     "y": 51.5
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.926,
+     "hue": 122.019,
+     "size": 47.0,
+     "x": 30.128,
+     "y": 60.0
+    }
+   ]
+  },
+  {
+   "said": "the big box and the ball right of the small ball",
+   "things": [
+    {
+     "elongation": 1.002,
+     "fill": 0.917,
+     "hue": 232.334,
+     "size": 47.0,
+     "x": 65.128,
+     "y": 14.0
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.778,
+     "hue": 3.134,
+     "size": 143.0,
+     "x": 48.972,
+     "y": 17.692
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.938,
+     "hue": 231.581,
+     "size": 135.0,
+     "x": 61.385,
+     "y": 33.563
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.77,
+     "hue": 3.505,
+     "size": 145.0,
+     "x": 13.0,
+     "y": 58.0
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.814,
+     "hue": 232.364,
+     "size": 41.0,
+     "x": 26.756,
+     "y": 65.0
+    }
+   ]
+  },
+  {
+   "said": "the big yellow ball above the big red ball",
+   "things": [
+    {
+     "elongation": 1.005,
+     "fill": 0.783,
+     "hue": 56.495,
+     "size": 137.0,
+     "x": 25.007,
+     "y": 15.547
+    },
+    {
+     "elongation": 1.028,
+     "fill": 0.779,
+     "hue": 3.389,
+     "size": 117.0,
+     "x": 35.154,
+     "y": 30.256
+    },
+    {
+     "elongation": 1.032,
+     "fill": 0.778,
+     "hue": 56.108,
+     "size": 140.0,
+     "x": 57.0,
+     "y": 33.5
+    },
+    {
+     "elongation": 3.933,
+     "fill": 0.922,
+     "hue": 57.529,
+     "size": 37.0,
+     "x": 21.946,
+     "y": 65.541
+    }
+   ]
+  },
+  {
+   "said": "the big green box and the big ball",
+   "things": [
+    {
+     "elongation": 1.033,
+     "fill": 0.767,
+     "hue": 120.286,
+     "size": 124.0,
+     "x": 27.266,
+     "y": 16.968
+    },
+    {
+     "elongation": 1.035,
+     "fill": 0.916,
+     "hue": 119.39,
+     "size": 135.0,
+     "x": 63.267,
+     "y": 35.667
+    },
+    {
+     "elongation": 1.121,
+     "fill": 0.818,
+     "hue": 57.043,
+     "size": 44.0,
+     "x": 70.0,
+     "y": 50.5
+    },
+    {
+     "elongation": 2.956,
+     "fill": 0.931,
+     "hue": 57.373,
+     "size": 45.0,
+     "x": 56.778,
+     "y": 66.378
+    }
+   ]
+  },
+  {
+   "said": "the box above the blue ball",
+   "things": [
+    {
+     "elongation": 1.002,
+     "fill": 0.931,
+     "hue": 230.475,
+     "size": 47.0,
+     "x": 69.128,
+     "y": 11.0
+    },
+    {
+     "elongation": 1.046,
+     "fill": 0.813,
+     "hue": 232.442,
+     "size": 40.0,
+     "x": 51.925,
+     "y": 22.2
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.901,
+     "hue": 119.655,
+     "size": 36.0,
+     "x": 64.5,
+     "y": 25.5
+    },
+    {
+     "elongation": 3.358,
+     "fill": 0.933,
+     "hue": 3.344,
+     "size": 118.0,
+     "x": 41.5,
+     "y": 42.661
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.94,
+     "hue": 231.446,
+     "size": 109.0,
+     "x": 22.45,
+     "y": 61.101
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 2.67,
+     "fill": 0.892,
+     "hue": 231.364,
+     "size": 44.0,
+     "x": 22.591,
+     "y": 10.909
+    },
+    {
+     "elongation": 1.041,
+     "fill": 0.945,
+     "hue": 56.697,
+     "size": 117.0,
+     "x": 43.009,
+     "y": 25.085
+    },
+    {
+     "elongation": 1.037,
+     "fill": 0.786,
+     "hue": 3.546,
+     "size": 145.0,
+     "x": 66.69,
+     "y": 47.11
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.941,
+     "hue": 56.604,
+     "size": 137.0,
+     "x": 16.62,
+     "y": 57.504
+    },
+    {
+     "elongation": 2.858,
+     "fill": 0.886,
+     "hue": 3.336,
+     "size": 43.0,
+     "x": 69.14,
+     "y": 69.605
+    }
+   ]
+  },
+  {
+   "said": "the small blue box above the small green ball",
+   "things": [
+    {
+     "elongation": 1.016,
+     "fill": 0.78,
+     "hue": 231.342,
+     "size": 128.0,
+     "x": 65.664,
+     "y": 27.719
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.914,
+     "hue": 232.013,
+     "size": 46.0,
+     "x": 11.196,
+     "y": 31.957
+    },
+    {
+     "elongation": 1.134,
+     "fill": 0.844,
+     "hue": 120.482,
+     "size": 35.0,
+     "x": 62.429,
+     "y": 45.771
+    },
+    {
+     "elongation": 1.117,
+     "fill": 0.915,
+     "hue": 231.819,
+     "size": 43.0,
+     "x": 30.256,
+     "y": 61.256
+    }
+   ]
+  },
+  {
+   "said": "the small red ball",
+   "things": [
+    {
+     "elongation": 1.098,
+     "fill": 0.816,
+     "hue": 2.659,
+     "size": 39.0,
+     "x": 59.0,
+     "y": 17.41
+    },
+    {
+     "elongation": 1.008,
+     "fill": 0.782,
+     "hue": 3.293,
+     "size": 140.0,
+     "x": 30.286,
+     "y": 31.557
+    }
+   ]
+  },
+  {
+   "said": "the small box",
+   "things": [
+    {
+     "elongation": 3.591,
+     "fill": 0.9,
+     "hue": 55.108,
+     "size": 36.0,
+     "x": 32.111,
+     "y": 53.722
+    },
+    {
+     "elongation": 1.179,
+     "fill": 0.937,
+     "hue": 56.767,
+     "size": 39.0,
+     "x": 18.077,
+     "y": 60.564
+    }
+   ]
+  },
+  {
+   "said": "the ball above the small box",
+   "things": [
+    {
+     "elongation": 1.103,
+     "fill": 0.813,
+     "hue": 119.09,
+     "size": 44.0,
+     "x": 42.795,
+     "y": 21.114
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.957,
+     "hue": 57.472,
+     "size": 36.0,
+     "x": 65.5,
+     "y": 27.5
+    },
+    {
+     "elongation": 3.984,
+     "fill": 0.91,
+     "hue": 57.393,
+     "size": 37.0,
+     "x": 10.946,
+     "y": 31.595
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.8,
+     "hue": 3.162,
+     "size": 43.0,
+     "x": 53.581,
+     "y": 71.023
+    }
+   ]
+  },
+  {
+   "said": "the ball that is right of the red ball and the box",
+   "things": [
+    {
+     "elongation": 1.164,
+     "fill": 0.92,
+     "hue": 2.671,
+     "size": 40.0,
+     "x": 19.5,
+     "y": 9.85
+    },
+    {
+     "elongation": 1.031,
+     "fill": 0.757,
+     "hue": 3.536,
+     "size": 119.0,
+     "x": 55.345,
+     "y": 14.361
+    },
+    {
+     "elongation": 1.026,
+     "fill": 0.798,
+     "hue": 118.854,
+     "size": 41.0,
+     "x": 67.415,
+     "y": 24.976
+    },
+    {
+     "elongation": 1.034,
+     "fill": 0.771,
+     "hue": 231.987,
+     "size": 114.0,
+     "x": 36.333,
+     "y": 41.333
+    },
+    {
+     "elongation": 1.007,
+     "fill": 0.786,
+     "hue": 119.798,
+     "size": 121.0,
+     "x": 43.446,
+     "y": 60.636
+    }
+   ]
+  },
+  {
+   "said": "the big box that is right of the blue box",
+   "things": [
+    {
+     "elongation": 1.101,
+     "fill": 0.944,
+     "hue": 56.816,
+     "size": 110.0,
+     "x": 35.5,
+     "y": 35.0
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.938,
+     "hue": 3.299,
+     "size": 137.0,
+     "x": 63.693,
+     "y": 47.599
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.922,
+     "hue": 232.353,
+     "size": 120.0,
+     "x": 53.042,
+     "y": 67.042
+    }
+   ]
+  },
+  {
+   "said": "the yellow box and the ball",
+   "things": [
+    {
+     "elongation": 1.07,
+     "fill": 0.931,
+     "hue": 56.741,
+     "size": 111.0,
+     "x": 35.045,
+     "y": 43.559
+    },
+    {
+     "elongation": 1.139,
+     "fill": 0.817,
+     "hue": 56.187,
+     "size": 38.0,
+     "x": 68.211,
+     "y": 55.105
+    }
+   ]
+  },
+  {
+   "said": "the green ball left of the small yellow ball",
+   "things": [
+    {
+     "elongation": 1.001,
+     "fill": 0.769,
+     "hue": 119.696,
+     "size": 116.0,
+     "x": 14.638,
+     "y": 17.5
+    },
+    {
+     "elongation": 1.048,
+     "fill": 0.779,
+     "hue": 119.784,
+     "size": 110.0,
+     "x": 53.364,
+     "y": 35.927
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.799,
+     "hue": 56.0,
+     "size": 45.0,
+     "x": 25.0,
+     "y": 66.0
+    }
+   ]
+  },
+  {
+   "said": "the small ball and the yellow box",
+   "things": [
+    {
+     "elongation": 1.037,
+     "fill": 0.78,
+     "hue": 120.602,
+     "size": 47.0,
+     "x": 58.319,
+     "y": 34.574
+    },
+    {
+     "elongation": 1.001,
+     "fill": 0.769,
+     "hue": 120.282,
+     "size": 141.0,
+     "x": 14.0,
+     "y": 46.128
+    },
+    {
+     "elongation": 1.065,
+     "fill": 0.949,
+     "hue": 56.189,
+     "size": 37.0,
+     "x": 28.595,
+     "y": 70.541
+    }
+   ]
+  },
+  {
+   "said": "the small box and the small green ball",
+   "things": [
+    {
+     "elongation": 1.074,
+     "fill": 0.792,
+     "hue": 119.449,
+     "size": 48.0,
+     "x": 27.875,
+     "y": 21.688
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.937,
+     "hue": 56.775,
+     "size": 35.0,
+     "x": 11.571,
+     "y": 36.571
+    }
+   ]
+  },
+  {
+   "said": "the box and the small ball above the big green ball",
+   "things": [
+    {
+     "elongation": 1.069,
+     "fill": 0.948,
+     "hue": 56.889,
+     "size": 125.0,
+     "x": 34.72,
+     "y": 13.04
+    },
+    {
+     "elongation": 3.376,
+     "fill": 0.92,
+     "hue": 2.889,
+     "size": 120.0,
+     "x": 23.5,
+     "y": 32.5
+    },
+    {
+     "elongation": 2.997,
+     "fill": 0.928,
+     "hue": 3.092,
+     "size": 137.0,
+     "x": 49.197,
+     "y": 35.956
+    },
+    {
+     "elongation": 1.117,
+     "fill": 0.806,
+     "hue": 2.241,
+     "size": 45.0,
+     "x": 64.067,
+     "y": 49.444
+    },
+    {
+     "elongation": 1.015,
+     "fill": 0.753,
+     "hue": 119.961,
+     "size": 134.0,
+     "x": 13.179,
+     "y": 54.022
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.824,
+     "hue": 233.359,
+     "size": 37.0,
+     "x": 40.838,
+     "y": 64.081
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.044,
+     "fill": 0.923,
+     "hue": 119.461,
+     "size": 44.0,
+     "x": 9.068,
+     "y": 11.955
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.825,
+     "hue": 2.574,
+     "size": 41.0,
+     "x": 48.0,
+     "y": 50.244
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.916,
+     "hue": 3.242,
+     "size": 46.0,
+     "x": 44.935,
+     "y": 68.065
+    }
+   ]
+  },
+  {
+   "said": "the small box right of the small yellow ball",
+   "things": [
+    {
+     "elongation": 1.055,
+     "fill": 0.898,
+     "hue": 120.639,
+     "size": 35.0,
+     "x": 20.257,
+     "y": 12.486
+    },
+    {
+     "elongation": 1.134,
+     "fill": 0.83,
+     "hue": 57.665,
+     "size": 35.0,
+     "x": 45.229,
+     "y": 27.571
+    },
+    {
+     "elongation": 1.091,
+     "fill": 0.928,
+     "hue": 120.223,
+     "size": 130.0,
+     "x": 28.585,
+     "y": 40.0
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.94,
+     "hue": 2.56,
+     "size": 44.0,
+     "x": 54.182,
+     "y": 52.841
+    },
+    {
+     "elongation": 1.065,
+     "fill": 0.898,
+     "hue": 2.526,
+     "size": 37.0,
+     "x": 25.405,
+     "y": 58.459
+    }
+   ]
+  },
+  {
+   "said": "the ball that is right of the big green box",
+   "things": [
+    {
+     "elongation": 1.046,
+     "fill": 0.768,
+     "hue": 3.114,
+     "size": 122.0,
+     "x": 15.918,
+     "y": 15.377
+    },
+    {
+     "elongation": 1.001,
+     "fill": 0.771,
+     "hue": 120.662,
+     "size": 141.0,
+     "x": 67.872,
+     "y": 20.0
+    },
+    {
+     "elongation": 1.044,
+     "fill": 0.927,
+     "hue": 120.308,
+     "size": 115.0,
+     "x": 46.043,
+     "y": 30.261
+    }
+   ]
+  },
+  {
+   "said": "the red box left of the small ball",
+   "things": [
+    {
+     "elongation": 1.078,
+     "fill": 0.918,
+     "hue": 3.079,
+     "size": 126.0,
+     "x": 61.063,
+     "y": 14.484
+    },
+    {
+     "elongation": 1.043,
+     "fill": 0.811,
+     "hue": 56.804,
+     "size": 39.0,
+     "x": 49.487,
+     "y": 29.744
+    },
+    {
+     "elongation": 1.065,
+     "fill": 0.916,
+     "hue": 3.065,
+     "size": 127.0,
+     "x": 44.016,
+     "y": 60.402
+    }
+   ]
+  },
+  {
+   "said": "the ball left of the red ball and the big box",
+   "things": [
+    {
+     "elongation": 1.03,
+     "fill": 0.767,
+     "hue": 120.614,
+     "size": 134.0,
+     "x": 62.104,
+     "y": 21.261
+    },
+    {
+     "elongation": 1.035,
+     "fill": 0.935,
+     "hue": 3.201,
+     "size": 117.0,
+     "x": 41.171,
+     "y": 33.94
+    },
+    {
+     "elongation": 1.028,
+     "fill": 0.774,
+     "hue": 231.621,
+     "size": 150.0,
+     "x": 53.653,
+     "y": 49.767
+    },
+    {
+     "elongation": 1.073,
+     "fill": 0.791,
+     "hue": 4.035,
+     "size": 44.0,
+     "x": 37.909,
+     "y": 53.636
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.767,
+     "hue": 119.856,
+     "size": 118.0,
+     "x": 21.051,
+     "y": 66.11
+    }
+   ]
+  },
+  {
+   "said": "the yellow ball and the yellow box",
+   "things": [
+    {
+     "elongation": 1.006,
+     "fill": 0.781,
+     "hue": 56.56,
+     "size": 146.0,
+     "x": 64.74,
+     "y": 23.637
+    },
+    {
+     "elongation": 1.118,
+     "fill": 0.944,
+     "hue": 56.498,
+     "size": 43.0,
+     "x": 68.0,
+     "y": 40.581
+    }
+   ]
+  },
+  {
+   "said": "the ball and the box",
+   "things": [
+    {
+     "elongation": 1.041,
+     "fill": 0.931,
+     "hue": 119.805,
+     "size": 156.0,
+     "x": 18.321,
+     "y": 33.051
+    },
+    {
+     "elongation": 1.034,
+     "fill": 0.777,
+     "hue": 57.049,
+     "size": 112.0,
+     "x": 53.821,
+     "y": 55.241
+    }
+   ]
+  },
+  {
+   "said": "the small green ball left of the big box",
+   "things": [
+    {
+     "elongation": 1.041,
+     "fill": 0.925,
+     "hue": 2.782,
+     "size": 130.0,
+     "x": 47.2,
+     "y": 35.362
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.81,
+     "hue": 119.879,
+     "size": 47.0,
+     "x": 42.085,
+     "y": 57.894
+    },
+    {
+     "elongation": 1.062,
+     "fill": 0.792,
+     "hue": 119.691,
+     "size": 46.0,
+     "x": 58.152,
+     "y": 67.543
+    }
+   ]
+  },
+  {
+   "said": "the green ball",
+   "things": [
+    {
+     "elongation": 3.873,
+     "fill": 0.912,
+     "hue": 118.231,
+     "size": 33.0,
+     "x": 12.0,
+     "y": 18.0
+    },
+    {
+     "elongation": 1.015,
+     "fill": 0.777,
+     "hue": 3.242,
+     "size": 152.0,
+     "x": 37.632,
+     "y": 30.658
+    },
+    {
+     "elongation": 1.081,
+     "fill": 0.795,
+     "hue": 120.844,
+     "size": 38.0,
+     "x": 59.789,
+     "y": 34.158
+    }
+   ]
+  },
+  {
+   "said": "the red box above the green ball",
+   "things": [
+    {
+     "elongation": 1.054,
+     "fill": 0.908,
+     "hue": 3.018,
+     "size": 46.0,
+     "x": 11.065,
+     "y": 9.935
+    },
+    {
+     "elongation": 1.134,
+     "fill": 0.819,
+     "hue": 120.397,
+     "size": 35.0,
+     "x": 44.229,
+     "y": 14.429
+    },
+    {
+     "elongation": 1.128,
+     "fill": 0.907,
+     "hue": 2.337,
+     "size": 41.0,
+     "x": 29.122,
+     "y": 48.268
+    }
+   ]
+  },
+  {
+   "said": "the small blue box above the big blue ball",
+   "things": [
+    {
+     "elongation": 1.111,
+     "fill": 0.91,
+     "hue": 230.206,
+     "size": 43.0,
+     "x": 44.0,
+     "y": 14.256
+    },
+    {
+     "elongation": 1.102,
+     "fill": 0.81,
+     "hue": 233.111,
+     "size": 36.0,
+     "x": 8.5,
+     "y": 22.167
+    },
+    {
+     "elongation": 1.028,
+     "fill": 0.775,
+     "hue": 231.555,
+     "size": 130.0,
+     "x": 19.054,
+     "y": 36.469
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.924,
+     "hue": 231.773,
+     "size": 45.0,
+     "x": 35.867,
+     "y": 40.889
+    },
+    {
+     "elongation": 1.037,
+     "fill": 0.923,
+     "hue": 2.881,
+     "size": 152.0,
+     "x": 56.875,
+     "y": 44.671
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.036,
+     "fill": 0.942,
+     "hue": 57.13,
+     "size": 33.0,
+     "x": 23.515,
+     "y": 10.091
+    },
+    {
+     "elongation": 1.138,
+     "fill": 0.801,
+     "hue": 56.298,
+     "size": 37.0,
+     "x": 10.297,
+     "y": 42.135
+    },
+    {
+     "elongation": 1.057,
+     "fill": 0.929,
+     "hue": 3.216,
+     "size": 38.0,
+     "x": 62.079,
+     "y": 65.947
+    }
+   ]
+  },
+  {
+   "said": "the big box",
+   "things": [
+    {
+     "elongation": 1.091,
+     "fill": 0.933,
+     "hue": 119.878,
+     "size": 128.0,
+     "x": 33.5,
+     "y": 41.0
+    }
+   ]
+  },
+  {
+   "said": "the red ball that is above the small ball",
+   "things": [
+    {
+     "elongation": 1.012,
+     "fill": 0.772,
+     "hue": 2.993,
+     "size": 137.0,
+     "x": 50.073,
+     "y": 12.942
+    },
+    {
+     "elongation": 1.038,
+     "fill": 0.809,
+     "hue": 3.217,
+     "size": 37.0,
+     "x": 38.838,
+     "y": 54.405
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.766,
+     "hue": 3.098,
+     "size": 140.0,
+     "x": 54.586,
+     "y": 59.721
+    },
+    {
+     "elongation": 3.258,
+     "fill": 0.885,
+     "hue": 231.528,
+     "size": 48.0,
+     "x": 16.771,
+     "y": 65.562
+    }
+   ]
+  },
+  {
+   "said": "the small green box and the ball that is above the big green box",
+   "things": [
+    {
+     "elongation": 1.051,
+     "fill": 0.828,
+     "hue": 119.034,
+     "size": 36.0,
+     "x": 16.083,
+     "y": 14.028
+    },
+    {
+     "elongation": 1.011,
+     "fill": 0.929,
+     "hue": 120.029,
+     "size": 137.0,
+     "x": 66.409,
+     "y": 35.336
+    },
+    {
+     "elongation": 1.102,
+     "fill": 0.802,
+     "hue": 119.264,
+     "size": 36.0,
+     "x": 49.5,
+     "y": 55.833
+    },
+    {
+     "elongation": 1.125,
+     "fill": 0.905,
+     "hue": 120.234,
+     "size": 40.0,
+     "x": 63.0,
+     "y": 69.2
+    }
+   ]
+  },
+  {
+   "said": "the blue box that is right of the ball",
+   "things": [
+    {
+     "elongation": 1.164,
+     "fill": 0.933,
+     "hue": 232.272,
+     "size": 38.0,
+     "x": 59.0,
+     "y": 12.5
+    },
+    {
+     "elongation": 1.011,
+     "fill": 0.768,
+     "hue": 2.467,
+     "size": 132.0,
+     "x": 46.045,
+     "y": 23.333
+    },
+    {
+     "elongation": 1.081,
+     "fill": 0.929,
+     "hue": 232.144,
+     "size": 129.0,
+     "x": 17.527,
+     "y": 38.953
+    },
+    {
+     "elongation": 3.229,
+     "fill": 0.878,
+     "hue": 3.226,
+     "size": 48.0,
+     "x": 20.5,
+     "y": 62.0
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.11,
+     "fill": 0.931,
+     "hue": 232.465,
+     "size": 40.0,
+     "x": 59.7,
+     "y": 16.55
+    },
+    {
+     "elongation": 1.029,
+     "fill": 0.781,
+     "hue": 56.238,
+     "size": 127.0,
+     "x": 21.165,
+     "y": 40.165
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.931,
+     "hue": 231.942,
+     "size": 140.0,
+     "x": 42.743,
+     "y": 57.486
+    }
+   ]
+  },
+  {
+   "said": "the yellow box above the small box",
+   "things": [
+    {
+     "elongation": 3.057,
+     "fill": 0.9,
+     "hue": 3.434,
+     "size": 125.0,
+     "x": 61.52,
+     "y": 18.928
+    },
+    {
+     "elongation": 1.065,
+     "fill": 0.932,
+     "hue": 56.674,
+     "size": 132.0,
+     "x": 19.485,
+     "y": 29.167
+    },
+    {
+     "elongation": 1.002,
+     "fill": 0.954,
+     "hue": 56.039,
+     "size": 47.0,
+     "x": 48.128,
+     "y": 41.0
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.949,
+     "hue": 56.374,
+     "size": 120.0,
+     "x": 14.958,
+     "y": 55.958
+    },
+    {
+     "elongation": 3.192,
+     "fill": 0.935,
+     "hue": 56.382,
+     "size": 112.0,
+     "x": 44.455,
+     "y": 60.0
+    }
+   ]
+  },
+  {
+   "said": "the box that is right of the big blue ball",
+   "things": [
+    {
+     "elongation": 1.039,
+     "fill": 0.946,
+     "hue": 57.35,
+     "size": 125.0,
+     "x": 18.0,
+     "y": 25.136
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.935,
+     "hue": 120.049,
+     "size": 152.0,
+     "x": 60.921,
+     "y": 52.493
+    },
+    {
+     "elongation": 1.027,
+     "fill": 0.769,
+     "hue": 231.579,
+     "size": 142.0,
+     "x": 22.923,
+     "y": 62.817
+    }
+   ]
+  },
+  {
+   "said": "the blue box and the small ball",
+   "things": [
+    {
+     "elongation": 1.046,
+     "fill": 0.805,
+     "hue": 231.743,
+     "size": 40.0,
+     "x": 39.075,
+     "y": 13.2
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.94,
+     "hue": 231.034,
+     "size": 120.0,
+     "x": 58.042,
+     "y": 35.042
+    }
+   ]
+  },
+  {
+   "said": "the big blue box and the blue ball",
+   "things": [
+    {
+     "elongation": 1.018,
+     "fill": 0.777,
+     "hue": 231.307,
+     "size": 117.0,
+     "x": 62.453,
+     "y": 18.615
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.927,
+     "hue": 231.457,
+     "size": 38.0,
+     "x": 11.0,
+     "y": 23.5
+    },
+    {
+     "elongation": 3.041,
+     "fill": 0.892,
+     "hue": 230.493,
+     "size": 46.0,
+     "x": 48.565,
+     "y": 31.5
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.939,
+     "hue": 231.522,
+     "size": 141.0,
+     "x": 16.461,
+     "y": 47.539
+    }
+   ]
+  },
+  {
+   "said": "the small ball and the small box that is right of the big ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.937,
+     "hue": 56.153,
+     "size": 36.0,
+     "x": 50.5,
+     "y": 9.5
+    },
+    {
+     "elongation": 1.048,
+     "fill": 0.772,
+     "hue": 56.837,
+     "size": 130.0,
+     "x": 46.885,
+     "y": 45.408
+    },
+    {
+     "elongation": 1.144,
+     "fill": 0.827,
+     "hue": 57.106,
+     "size": 37.0,
+     "x": 21.919,
+     "y": 58.541
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.915,
+     "hue": 119.53,
+     "size": 45.0,
+     "x": 10.0,
+     "y": 64.0
+    }
+   ]
+  },
+  {
+   "said": "the box that is left of the ball",
+   "things": [
+    {
+     "elongation": 1.069,
+     "fill": 0.925,
+     "hue": 120.384,
+     "size": 129.0,
+     "x": 21.953,
+     "y": 18.69
+    },
+    {
+     "elongation": 2.77,
+     "fill": 0.899,
+     "hue": 2.664,
+     "size": 42.0,
+     "x": 43.238,
+     "y": 37.5
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.823,
+     "hue": 56.465,
+     "size": 38.0,
+     "x": 26.816,
+     "y": 56.684
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.929,
+     "hue": 2.901,
+     "size": 40.0,
+     "x": 47.5,
+     "y": 66.85
+    }
+   ]
+  },
+  {
+   "said": "the blue box and the ball",
+   "things": [
+    {
+     "elongation": 1.027,
+     "fill": 0.932,
+     "hue": 232.055,
+     "size": 135.0,
+     "x": 25.378,
+     "y": 37.378
+    },
+    {
+     "elongation": 2.931,
+     "fill": 0.921,
+     "hue": 2.935,
+     "size": 138.0,
+     "x": 46.652,
+     "y": 54.007
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.823,
+     "hue": 231.438,
+     "size": 45.0,
+     "x": 28.0,
+     "y": 61.0
+    }
+   ]
+  },
+  {
+   "said": "the box left of the big ball",
+   "things": [
+    {
+     "elongation": 1.022,
+     "fill": 0.949,
+     "hue": 56.827,
+     "size": 120.0,
+     "x": 17.958,
+     "y": 20.042
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.766,
+     "hue": 231.696,
+     "size": 149.0,
+     "x": 40.517,
+     "y": 29.544
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.947,
+     "hue": 55.848,
+     "size": 119.0,
+     "x": 67.0,
+     "y": 54.084
+    }
+   ]
+  },
+  {
+   "said": "the bar",
+   "things": [
+    {
+     "elongation": 3.028,
+     "fill": 0.876,
+     "hue": 2.786,
+     "size": 46.0,
+     "x": 29.5,
+     "y": 47.261
+    }
+   ]
+  },
+  {
+   "said": "the box and the small ball",
+   "things": [
+    {
+     "elongation": 1.041,
+     "fill": 0.895,
+     "hue": 119.943,
+     "size": 45.0,
+     "x": 21.0,
+     "y": 19.733
+    },
+    {
+     "elongation": 1.022,
+     "fill": 0.819,
+     "hue": 119.905,
+     "size": 38.0,
+     "x": 8.184,
+     "y": 60.684
+    }
+   ]
+  },
+  {
+   "said": "the big green box right of the small box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.926,
+     "hue": 120.505,
+     "size": 119.0,
+     "x": 58.0,
+     "y": 35.916
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.927,
+     "hue": 120.015,
+     "size": 119.0,
+     "x": 28.0,
+     "y": 59.916
+    },
+    {
+     "elongation": 1.102,
+     "fill": 0.887,
+     "hue": 231.147,
+     "size": 35.0,
+     "x": 45.914,
+     "y": 68.486
+    }
+   ]
+  },
+  {
+   "said": "the ball that is right of the box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.952,
+     "hue": 57.47,
+     "size": 36.0,
+     "x": 26.5,
+     "y": 19.5
+    },
+    {
+     "elongation": 1.025,
+     "fill": 0.773,
+     "hue": 3.203,
+     "size": 121.0,
+     "x": 15.455,
+     "y": 62.207
+    },
+    {
+     "elongation": 1.079,
+     "fill": 0.822,
+     "hue": 55.935,
+     "size": 41.0,
+     "x": 37.634,
+     "y": 69.073
+    }
+   ]
+  },
+  {
+   "said": "the ball and the big green box left of the small box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.922,
+     "hue": 120.261,
+     "size": 121.0,
+     "x": 18.0,
+     "y": 19.0
+    },
+    {
+     "elongation": 1.06,
+     "fill": 0.914,
+     "hue": 119.681,
+     "size": 122.0,
+     "x": 52.648,
+     "y": 33.893
+    },
+    {
+     "elongation": 1.075,
+     "fill": 0.927,
+     "hue": 56.989,
+     "size": 44.0,
+     "x": 31.818,
+     "y": 40.773
+    },
+    {
+     "elongation": 1.035,
+     "fill": 0.777,
+     "hue": 56.712,
+     "size": 145.0,
+     "x": 38.752,
+     "y": 60.959
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 3.2,
+     "fill": 0.936,
+     "hue": 55.885,
+     "size": 113.0,
+     "x": 15.522,
+     "y": 14.92
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.932,
+     "hue": 119.575,
+     "size": 121.0,
+     "x": 65.0,
+     "y": 26.0
+    },
+    {
+     "elongation": 1.063,
+     "fill": 0.934,
+     "hue": 232.209,
+     "size": 105.0,
+     "x": 25.476,
+     "y": 39.238
+    },
+    {
+     "elongation": 1.005,
+     "fill": 0.779,
+     "hue": 3.646,
+     "size": 147.0,
+     "x": 46.293,
+     "y": 54.286
+    },
+    {
+     "elongation": 1.215,
+     "fill": 0.933,
+     "hue": 119.496,
+     "size": 40.0,
+     "x": 19.5,
+     "y": 57.0
+    }
+   ]
+  },
+  {
+   "said": "the ball and the box",
+   "things": [
+    {
+     "elongation": 1.055,
+     "fill": 0.808,
+     "hue": 56.64,
+     "size": 43.0,
+     "x": 23.07,
+     "y": 35.279
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.948,
+     "hue": 57.058,
+     "size": 142.0,
+     "x": 31.5,
+     "y": 56.423
+    }
+   ]
+  },
+  {
+   "said": "the ball and the big blue box left of the red box",
+   "things": [
+    {
+     "elongation": 1.023,
+     "fill": 0.949,
+     "hue": 57.173,
+     "size": 113.0,
+     "x": 46.239,
+     "y": 20.858
+    },
+    {
+     "elongation": 1.079,
+     "fill": 0.948,
+     "hue": 231.816,
+     "size": 131.0,
+     "x": 43.603,
+     "y": 42.046
+    },
+    {
+     "elongation": 1.023,
+     "fill": 0.946,
+     "hue": 231.892,
+     "size": 144.0,
+     "x": 65.5,
+     "y": 44.667
+    },
+    {
+     "elongation": 1.034,
+     "fill": 0.782,
+     "hue": 231.516,
+     "size": 127.0,
+     "x": 16.638,
+     "y": 53.0
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.938,
+     "hue": 1.747,
+     "size": 46.0,
+     "x": 56.065,
+     "y": 69.935
+    }
+   ]
+  },
+  {
+   "said": "the yellow ball above the big red ball",
+   "things": [
+    {
+     "elongation": 1.055,
+     "fill": 0.804,
+     "hue": 56.418,
+     "size": 43.0,
+     "x": 13.279,
+     "y": 27.07
+    },
+    {
+     "elongation": 1.019,
+     "fill": 0.788,
+     "hue": 3.437,
+     "size": 112.0,
+     "x": 33.143,
+     "y": 48.143
+    },
+    {
+     "elongation": 1.024,
+     "fill": 0.779,
+     "hue": 56.744,
+     "size": 143.0,
+     "x": 50.294,
+     "y": 65.93
+    }
+   ]
+  },
+  {
+   "said": "the small red ball left of the big red box",
+   "things": [
+    {
+     "elongation": 1.003,
+     "fill": 0.801,
+     "hue": 2.495,
+     "size": 39.0,
+     "x": 71.026,
+     "y": 16.128
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.938,
+     "hue": 3.244,
+     "size": 119.0,
+     "x": 44.0,
+     "y": 20.084
+    },
+    {
+     "elongation": 1.044,
+     "fill": 0.811,
+     "hue": 3.006,
+     "size": 44.0,
+     "x": 16.045,
+     "y": 57.068
+    }
+   ]
+  },
+  {
+   "said": "the ball below the box",
+   "things": [
+    {
+     "elongation": 3.088,
+     "fill": 0.897,
+     "hue": 120.554,
+     "size": 48.0,
+     "x": 50.5,
+     "y": 15.5
+    },
+    {
+     "elongation": 1.048,
+     "fill": 0.792,
+     "hue": 56.068,
+     "size": 46.0,
+     "x": 30.0,
+     "y": 49.087
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.935,
+     "hue": 56.686,
+     "size": 39.0,
+     "x": 66.692,
+     "y": 54.128
+    },
+    {
+     "elongation": 1.001,
+     "fill": 0.782,
+     "hue": 56.729,
+     "size": 141.0,
+     "x": 43.872,
+     "y": 64.0
+    }
+   ]
+  },
+  {
+   "said": "the box and the green ball",
+   "things": [
+    {
+     "elongation": 3.229,
+     "fill": 0.902,
+     "hue": 119.562,
+     "size": 48.0,
+     "x": 23.5,
+     "y": 22.0
+    },
+    {
+     "elongation": 1.036,
+     "fill": 0.912,
+     "hue": 231.626,
+     "size": 37.0,
+     "x": 38.351,
+     "y": 26.297
+    },
+    {
+     "elongation": 1.051,
+     "fill": 0.81,
+     "hue": 118.581,
+     "size": 45.0,
+     "x": 48.156,
+     "y": 61.044
+    }
+   ]
+  },
+  {
+   "said": "the yellow box right of the ball",
+   "things": [
+    {
+     "elongation": 1.017,
+     "fill": 0.775,
+     "hue": 120.094,
+     "size": 119.0,
+     "x": 62.546,
+     "y": 34.521
+    },
+    {
+     "elongation": 3.233,
+     "fill": 0.923,
+     "hue": 120.135,
+     "size": 122.0,
+     "x": 39.508,
+     "y": 54.607
+    },
+    {
+     "elongation": 1.084,
+     "fill": 0.955,
+     "hue": 57.257,
+     "size": 154.0,
+     "x": 15.0,
+     "y": 63.429
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.951,
+     "hue": 56.582,
+     "size": 46.0,
+     "x": 66.935,
+     "y": 69.065
+    }
+   ]
+  },
+  {
+   "said": "the box above the small yellow box",
+   "things": [
+    {
+     "elongation": 1.127,
+     "fill": 0.91,
+     "hue": 3.816,
+     "size": 36.0,
+     "x": 24.528,
+     "y": 22.333
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.916,
+     "hue": 56.873,
+     "size": 46.0,
+     "x": 43.065,
+     "y": 26.065
+    },
+    {
+     "elongation": 1.004,
+     "fill": 0.944,
+     "hue": 231.045,
+     "size": 140.0,
+     "x": 17.429,
+     "y": 40.579
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.939,
+     "hue": 3.573,
+     "size": 145.0,
+     "x": 50.531,
+     "y": 49.455
+    }
+   ]
+  },
+  {
+   "said": "the big red box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.932,
+     "hue": 3.513,
+     "size": 142.0,
+     "x": 28.5,
+     "y": 30.423
+    }
+   ]
+  },
+  {
+   "said": "the bar",
+   "things": [
+    {
+     "elongation": 3.004,
+     "fill": 0.916,
+     "hue": 231.628,
+     "size": 113.0,
+     "x": 29.841,
+     "y": 40.991
+    }
+   ]
+  },
+  {
+   "said": "the green box",
+   "things": [
+    {
+     "elongation": 1.062,
+     "fill": 0.921,
+     "hue": 120.007,
+     "size": 125.0,
+     "x": 59.28,
+     "y": 43.936
+    }
+   ]
+  },
+  {
+   "said": "the big box that is right of the ball",
+   "things": [
+    {
+     "elongation": 3.324,
+     "fill": 0.902,
+     "hue": 231.468,
+     "size": 51.0,
+     "x": 46.471,
+     "y": 26.118
+    },
+    {
+     "elongation": 1.082,
+     "fill": 0.948,
+     "hue": 57.182,
+     "size": 109.0,
+     "x": 18.45,
+     "y": 40.083
+    },
+    {
+     "elongation": 1.033,
+     "fill": 0.947,
+     "hue": 56.92,
+     "size": 41.0,
+     "x": 58.805,
+     "y": 43.366
+    },
+    {
+     "elongation": 1.102,
+     "fill": 0.812,
+     "hue": 57.445,
+     "size": 36.0,
+     "x": 27.5,
+     "y": 56.833
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.924,
+     "hue": 232.229,
+     "size": 123.0,
+     "x": 51.049,
+     "y": 60.455
+    }
+   ]
+  },
+  {
+   "said": "the small box right of the ball",
+   "things": [
+    {
+     "elongation": 1.05,
+     "fill": 0.959,
+     "hue": 56.734,
+     "size": 48.0,
+     "x": 36.938,
+     "y": 30.938
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.944,
+     "hue": 121.528,
+     "size": 35.0,
+     "x": 12.429,
+     "y": 40.429
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.901,
+     "hue": 121.157,
+     "size": 35.0,
+     "x": 65.571,
+     "y": 44.571
+    },
+    {
+     "elongation": 1.009,
+     "fill": 0.784,
+     "hue": 3.269,
+     "size": 133.0,
+     "x": 50.782,
+     "y": 50.955
+    }
+   ]
+  },
+  {
+   "said": "the blue box and the ball",
+   "things": [
+    {
+     "elongation": 1.085,
+     "fill": 0.83,
+     "hue": 231.724,
+     "size": 38.0,
+     "x": 39.921,
+     "y": 12.368
+    },
+    {
+     "elongation": 1.067,
+     "fill": 0.907,
+     "hue": 231.663,
+     "size": 47.0,
+     "x": 67.851,
+     "y": 62.064
+    }
+   ]
+  },
+  {
+   "said": "the ball right of the blue ball",
+   "things": [
+    {
+     "elongation": 1.006,
+     "fill": 0.777,
+     "hue": 231.42,
+     "size": 133.0,
+     "x": 28.895,
+     "y": 24.549
+    },
+    {
+     "elongation": 1.056,
+     "fill": 0.766,
+     "hue": 3.171,
+     "size": 148.0,
+     "x": 61.068,
+     "y": 46.439
+    },
+    {
+     "elongation": 1.016,
+     "fill": 0.766,
+     "hue": 3.414,
+     "size": 132.0,
+     "x": 11.356,
+     "y": 68.182
+    }
+   ]
+  },
+  {
+   "said": "the big box",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.791,
+     "hue": 118.799,
+     "size": 32.0,
+     "x": 28.5,
+     "y": 18.5
+    },
+    {
+     "elongation": 1.014,
+     "fill": 0.942,
+     "hue": 56.279,
+     "size": 162.0,
+     "x": 42.988,
+     "y": 36.111
+    },
+    {
+     "elongation": 3.414,
+     "fill": 0.916,
+     "hue": 3.216,
+     "size": 120.0,
+     "x": 36.517,
+     "y": 62.333
+    }
+   ]
+  },
+  {
+   "said": "the small yellow ball",
+   "things": [
+    {
+     "elongation": 1.087,
+     "fill": 0.828,
+     "hue": 57.081,
+     "size": 43.0,
+     "x": 70.023,
+     "y": 10.581
+    }
+   ]
+  },
+  {
+   "said": "the ball and the box",
+   "things": [
+    {
+     "elongation": 1.046,
+     "fill": 0.918,
+     "hue": 120.525,
+     "size": 147.0,
+     "x": 62.537,
+     "y": 32.796
+    },
+    {
+     "elongation": 1.026,
+     "fill": 0.779,
+     "hue": 2.97,
+     "size": 128.0,
+     "x": 13.734,
+     "y": 55.906
+    }
+   ]
+  },
+  {
+   "said": "the big blue ball above the small yellow ball",
+   "things": [
+    {
+     "elongation": 1.021,
+     "fill": 0.783,
+     "hue": 231.819,
+     "size": 114.0,
+     "x": 32.535,
+     "y": 25.333
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.818,
+     "hue": 56.839,
+     "size": 43.0,
+     "x": 19.977,
+     "y": 54.581
+    },
+    {
+     "elongation": 1.016,
+     "fill": 0.788,
+     "hue": 230.566,
+     "size": 111.0,
+     "x": 59.252,
+     "y": 58.946
+    }
+   ]
+  },
+  {
+   "said": "the yellow ball and the big box above the small ball",
+   "things": [
+    {
+     "elongation": 1.041,
+     "fill": 0.944,
+     "hue": 55.742,
+     "size": 117.0,
+     "x": 65.991,
+     "y": 12.915
+    },
+    {
+     "elongation": 3.369,
+     "fill": 0.917,
+     "hue": 120.081,
+     "size": 119.0,
+     "x": 39.42,
+     "y": 21.521
+    },
+    {
+     "elongation": 1.073,
+     "fill": 0.796,
+     "hue": 3.292,
+     "size": 33.0,
+     "x": 56.485,
+     "y": 27.606
+    },
+    {
+     "elongation": 1.026,
+     "fill": 0.947,
+     "hue": 56.801,
+     "size": 140.0,
+     "x": 51.471,
+     "y": 47.421
+    },
+    {
+     "elongation": 4.228,
+     "fill": 0.904,
+     "hue": 2.611,
+     "size": 36.0,
+     "x": 30.5,
+     "y": 53.0
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.797,
+     "hue": 56.862,
+     "size": 117.0,
+     "x": 18.385,
+     "y": 64.453
+    }
+   ]
+  },
+  {
+   "said": "the big ball right of the box",
+   "things": [
+    {
+     "elongation": 1.108,
+     "fill": 0.885,
+     "hue": 232.855,
+     "size": 39.0,
+     "x": 44.718,
+     "y": 11.026
+    },
+    {
+     "elongation": 1.018,
+     "fill": 0.778,
+     "hue": 119.915,
+     "size": 124.0,
+     "x": 29.097,
+     "y": 25.274
+    },
+    {
+     "elongation": 1.021,
+     "fill": 0.777,
+     "hue": 2.784,
+     "size": 128.0,
+     "x": 68.805,
+     "y": 37.688
+    }
+   ]
+  },
+  {
+   "said": "the box above the small red ball",
+   "things": [
+    {
+     "elongation": 1.179,
+     "fill": 0.895,
+     "hue": 229.537,
+     "size": 39.0,
+     "x": 15.077,
+     "y": 18.436
+    },
+    {
+     "elongation": 3.266,
+     "fill": 0.898,
+     "hue": 232.613,
+     "size": 49.0,
+     "x": 64.878,
+     "y": 22.469
+    },
+    {
+     "elongation": 1.071,
+     "fill": 0.779,
+     "hue": 2.501,
+     "size": 45.0,
+     "x": 39.844,
+     "y": 53.022
+    },
+    {
+     "elongation": 1.054,
+     "fill": 0.92,
+     "hue": 3.124,
+     "size": 46.0,
+     "x": 56.935,
+     "y": 65.935
+    },
+    {
+     "elongation": 1.12,
+     "fill": 0.812,
+     "hue": 56.44,
+     "size": 47.0,
+     "x": 21.638,
+     "y": 69.191
+    }
+   ]
+  },
+  {
+   "said": "the box and the big ball",
+   "things": [
+    {
+     "elongation": 1.007,
+     "fill": 0.76,
+     "hue": 120.078,
+     "size": 147.0,
+     "x": 54.306,
+     "y": 14.599
+    },
+    {
+     "elongation": 1.028,
+     "fill": 0.906,
+     "hue": 118.478,
+     "size": 44.0,
+     "x": 26.341,
+     "y": 53.5
+    }
+   ]
+  },
+  {
+   "said": "the big green ball above the small green box",
+   "things": [
+    {
+     "elongation": 1.015,
+     "fill": 0.93,
+     "hue": 3.334,
+     "size": 160.0,
+     "x": 48.025,
+     "y": 15.144
+    },
+    {
+     "elongation": 1.037,
+     "fill": 0.763,
+     "hue": 119.53,
+     "size": 119.0,
+     "x": 31.202,
+     "y": 36.017
+    },
+    {
+     "elongation": 1.055,
+     "fill": 0.813,
+     "hue": 56.986,
+     "size": 43.0,
+     "x": 59.721,
+     "y": 47.07
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.933,
+     "hue": 119.899,
+     "size": 40.0,
+     "x": 20.5,
+     "y": 52.85
+    },
+    {
+     "elongation": 1.001,
+     "fill": 0.78,
+     "hue": 120.879,
+     "size": 141.0,
+     "x": 41.128,
+     "y": 68.0
+    }
+   ]
+  },
+  {
+   "said": "the small box and the ball above the yellow box",
+   "things": [
+    {
+     "elongation": 1.107,
+     "fill": 0.823,
+     "hue": 119.204,
+     "size": 34.0,
+     "x": 34.588,
+     "y": 9.324
+    },
+    {
+     "elongation": 1.156,
+     "fill": 0.942,
+     "hue": 2.845,
+     "size": 39.0,
+     "x": 65.923,
+     "y": 22.333
+    },
+    {
+     "elongation": 1.104,
+     "fill": 0.962,
+     "hue": 57.587,
+     "size": 109.0,
+     "x": 45.459,
+     "y": 27.954
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.812,
+     "hue": 119.318,
+     "size": 37.0,
+     "x": 17.0,
+     "y": 40.0
+    },
+    {
+     "elongation": 1.087,
+     "fill": 0.829,
+     "hue": 56.855,
+     "size": 43.0,
+     "x": 23.581,
+     "y": 60.977
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.031,
+     "fill": 0.911,
+     "hue": 119.724,
+     "size": 125.0,
+     "x": 32.88,
+     "y": 15.248
+    },
+    {
+     "elongation": 1.081,
+     "fill": 0.82,
+     "hue": 232.979,
+     "size": 41.0,
+     "x": 65.22,
+     "y": 38.146
+    },
+    {
+     "elongation": 1.164,
+     "fill": 0.927,
+     "hue": 231.787,
+     "size": 40.0,
+     "x": 20.85,
+     "y": 46.5
+    }
+   ]
+  },
+  {
+   "said": "the small ball",
+   "things": [
+    {
+     "elongation": 1.144,
+     "fill": 0.827,
+     "hue": 233.35,
+     "size": 37.0,
+     "x": 33.081,
+     "y": 31.459
+    },
+    {
+     "elongation": 1.053,
+     "fill": 0.919,
+     "hue": 119.827,
+     "size": 138.0,
+     "x": 57.42,
+     "y": 35.913
+    }
+   ]
+  },
+  {
+   "said": "the box below the ball",
+   "things": [
+    {
+     "elongation": 1.101,
+     "fill": 0.936,
+     "hue": 231.939,
+     "size": 110.0,
+     "x": 35.5,
+     "y": 15.0
+    },
+    {
+     "elongation": 1.055,
+     "fill": 0.945,
+     "hue": 3.99,
+     "size": 35.0,
+     "x": 58.486,
+     "y": 29.257
+    },
+    {
+     "elongation": 3.013,
+     "fill": 0.904,
+     "hue": 232.275,
+     "size": 144.0,
+     "x": 21.021,
+     "y": 39.931
+    },
+    {
+     "elongation": 1.031,
+     "fill": 0.779,
+     "hue": 57.115,
+     "size": 110.0,
+     "x": 48.282,
+     "y": 46.1
+    },
+    {
+     "elongation": 1.104,
+     "fill": 0.952,
+     "hue": 57.526,
+     "size": 109.0,
+     "x": 63.541,
+     "y": 56.046
+    }
+   ]
+  },
+  {
+   "said": "the small blue box right of the big ball",
+   "things": [
+    {
+     "elongation": 1.0,
+     "fill": 0.823,
+     "hue": 230.972,
+     "size": 32.0,
+     "x": 35.5,
+     "y": 18.5
+    },
+    {
+     "elongation": 1.0,
+     "fill": 0.929,
+     "hue": 230.911,
+     "size": 45.0,
+     "x": 58.0,
+     "y": 29.0
+    },
+    {
+     "elongation": 1.017,
+     "fill": 0.773,
+     "hue": 120.467,
+     "size": 115.0,
+     "x": 30.635,
+     "y": 33.626
+    },
+    {
+     "elongation": 3.369,
+     "fill": 0.921,
+     "hue": 57.044,
+     "size": 119.0,
+     "x": 39.58,
+     "y": 60.521
+    },
+    {
+     "elongation": 1.144,
+     "fill": 0.909,
+     "hue": 232.737,
+     "size": 37.0,
+     "x": 10.081,
+     "y": 69.541
+    }
+   ]
+  }
+ ],
  "vocabulary": {
   "*": [
    "op",
@@ -55778,10 +66153,45 @@
    "relation",
    "same"
   ],
+  "above": [
+   "grammar",
+   [
+    "order",
+    [
+     "height",
+     ">"
+    ],
+    [
+     "/",
+     [
+      "\\",
+      "N",
+      "N"
+     ],
+     "N"
+    ]
+   ]
+  ],
   "after": [
    "op",
    "spin",
    "yx"
+  ],
+  "and": [
+   "grammar",
+   [
+    "together",
+    null,
+    [
+     "/",
+     [
+      "\\",
+      "N",
+      "N"
+     ],
+     "N"
+    ]
+   ]
   ],
   "are": [
    "order",
@@ -55810,6 +66220,25 @@
    [
     "start",
     "<"
+   ]
+  ],
+  "below": [
+   "grammar",
+   [
+    "order",
+    [
+     "height",
+     "<"
+    ],
+    [
+     "/",
+     [
+      "\\",
+      "N",
+      "N"
+     ],
+     "N"
+    ]
    ]
   ],
   "big": [
@@ -55920,6 +66349,25 @@
    "order",
    null
   ],
+  "left": [
+   "grammar",
+   [
+    "order",
+    [
+     "place",
+     "<"
+    ],
+    [
+     "/",
+     [
+      "\\",
+      "N",
+      "N"
+     ],
+     "N"
+    ]
+   ]
+  ],
   "minus": [
    "op",
    "pay",
@@ -55935,6 +66383,14 @@
   "nine": [
    "number",
    9
+  ],
+  "of": [
+   "grammar",
+   [
+    "nothing",
+    null,
+    null
+   ]
   ],
   "one": [
    "number",
@@ -55964,6 +66420,25 @@
     [
      "hue",
      0
+    ]
+   ]
+  ],
+  "right": [
+   "grammar",
+   [
+    "order",
+    [
+     "place",
+     ">"
+    ],
+    [
+     "/",
+     [
+      "\\",
+      "N",
+      "N"
+     ],
+     "N"
     ]
    ]
   ],
@@ -56009,6 +66484,14 @@
   "than": [
    "order",
    null
+  ],
+  "that": [
+   "grammar",
+   [
+    "nothing",
+    null,
+    null
+   ]
   ],
   "the": [
    "look",

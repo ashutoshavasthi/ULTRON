@@ -598,3 +598,29 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Exam for lesson 30, attempt 1: passed
 - **Trainer**: What you found in 'words for events' is what people call verbs, bound to kinds of motion.
 - **Trainer**: What you found in 'words for comparing' is what people call comparatives and before/after, bound to measured quantities (mass through conservation of momentum).
+
+## Lesson 31
+
+- **Trainer**: Lesson 31: How words combine
+- **Trainer**: Back to the tables. I'll say longer things now.
+- Ultron _word_: 'above' takes the phrase after it and keeps the things of the phrase before it that are higher than one of them
+- Ultron _word_: 'and' puts the things of the phrase after it together with those of the phrase before it (not sure yet: it could also be that it puts the things of the phrase before it together with those of the phrase after it)
+- Ultron _word_: 'ball' names things (ball)
+- Ultron _word_: 'bar' names things (bar)
+- Ultron _word_: 'below' takes the phrase after it and keeps the things of the phrase before it that are lower than one of them
+- Ultron _word_: 'big' keeps the things of the phrase after it that are big
+- Ultron _word_: 'blue' keeps the things of the phrase after it that are blue
+- Ultron _word_: 'box' names things (box)
+- Ultron _word_: 'green' keeps the things of the phrase after it that are green
+- Ultron _word_: 'is' means nothing by itself
+- Ultron _word_: 'left' takes the phrase after it and keeps the things of the phrase before it that are further left than one of them
+- Ultron _word_: 'of' means nothing by itself (not sure yet: it could also be that it picks out the one thing the phrase after it names (or nothing, if it names several))
+- Ultron _word_: 'red' keeps the things of the phrase after it that are red
+- Ultron _word_: 'right' takes the phrase after it and keeps the things of the phrase before it that are further right than one of them
+- Ultron _word_: 'small' keeps the things of the phrase after it that are small
+- Ultron _word_: 'that' means nothing by itself
+- Ultron _word_: 'the' picks out the one thing the phrase after it names (or nothing, if it names several)
+- Ultron _word_: 'yellow' keeps the things of the phrase after it that are yellow
+- Ultron _invent_: Each word does one of a few things to the phrase next to it, and the words that do the same thing combine the same way: 'above' takes the phrase after it and keeps the things of the phrase before it that are higher than one of them; 'and' puts the things of the phrase after it together with those of the phrase before it; 'ball' names things (ball); 'bar' names things (bar); 'below' takes the phrase after it and keeps the things of the phrase before it that are lower than one of them; 'big' keeps the things of the phrase after it that are big; 'blue' keeps the things of the phrase after it that are blue; 'box' names things (box); 'green' keeps the things of the phrase after it that are green; 'left' takes the phrase after it and keeps the things of the phrase before it that are further left than one of them; 'red' keeps the things of the phrase after it that are red; 'right' takes the phrase after it and keeps the things of the phrase before it that are further right than one of them; 'small' keeps the things of the phrase after it that are small; 'the' picks out the one thing the phrase after it names (or nothing, if it names several); 'yellow' keeps the things of the phrase after it that are yellow. 'is', 'of', 'that' mean nothing by themselves. A phrase can sit inside another of the same kind, as deep as you like, and phrases can be joined (4 kinds of word in all).
+- **Trainer**: Exam for lesson 31, attempt 1: passed
+- **Trainer**: What you found in 'how words combine' is what people call a categorial grammar: word classes, word order, recursion (nesting) and coordination.

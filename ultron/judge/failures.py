@@ -753,9 +753,83 @@ def events_stress(brain):
                            "sentences and comparing words with 120 in the first rows.")
 
 
+def grammar_stress(brain):
+    """How words combine (stage 3, L3) when it mishears words, when the Trainer sometimes
+    talks about another table, when one word has two meanings, and with fewer sentences
+    heard. Each row finds the grammar again from scratch (the words for kinds of thing
+    kept) and is scored on 60 sentences about new tables: 20 nested deeper, 20 with more
+    phrases joined, 20 with words in new places."""
+    from ..brain import grammar
+    from ..trainer.grammar_lessons import EXAM, HowWordsCombine
+    from .exams import _table_things
+    if brain.eyes is None or not brain.grammar:
+        return experiment("how words combine", "", "", [_row("no grammar", "untrained", False)])
+    heard = []
+    for said, look, things, meant, kind in HowWordsCombine(7031).talks():
+        heard.append(grammar.heard_as(brain, said, grammar.see_table(brain, look)))
+    test = []
+    for said, look, things, meant, kind in HowWordsCombine(8031).talks(
+            kinds=[(k, 20) for k, _ in EXAM]):
+        seen = grammar.see_table(brain, look)
+        test.append((grammar.heard_as(brain, said, seen), _table_things(seen, things),
+                     sorted(meant)))
+    known = grammar.known_kinds(brain)
+    vocabulary = sorted({w for ws, _, _ in heard for w in ws})
+
+    def score(said):
+        lexicon, rivals = grammar.learn_grammar(said, brain.categories, known=known,
+                                                rivals=True)
+        doubts = set(grammar.doubtful_words(said, lexicon)) | set(
+            grammar.unsteady_words(said, brain.categories, known=known))
+        right = gave = 0
+        for (ws, table, kinds), which, truth in test:
+            got, _ = grammar.understand(lexicon, rivals, ws, table, kinds, doubts)
+            if got is not None:
+                gave += 1
+                right += sorted(which[i] for i in got) == truth
+        return right, gave
+
+    def row(level, said):
+        right, gave = score(said)
+        return _row(level, f"{right}/60 right ({right}/{gave} of its answers)", right >= 57,
+                    right=right, gave=gave)
+
+    rows = []
+    rng = random.Random(31)
+    for frac in (0.0, 0.2, 0.4):
+        spoilt = []
+        for ws, table, kinds in heard:
+            ws = list(ws)
+            if rng.random() < frac:
+                i = rng.randrange(len(ws))
+                ws[i] = rng.choice([w for w in vocabulary if w != ws[i]])
+            spoilt.append((ws, table, kinds))
+        rows.append(row(f"{frac:.0%} of sentences have a word misheard", spoilt))
+    for frac in (0.2, 0.4):
+        spoilt = []
+        for k, (ws, table, kinds) in enumerate(heard):
+            if rng.random() < frac:
+                _, table, kinds = heard[(k + 1) % len(heard)]
+            spoilt.append((ws, table, kinds))
+        rows.append(row(f"{frac:.0%} of sentences are about another table", spoilt))
+    # 'left' also said for 'above' in half the sentences that say 'above'
+    twice = [([("left" if w == "above" and rng.random() < 0.5 else w) for w in ws], t, k)
+             for ws, t, k in heard]
+    rows.append(row("'left' has two meanings (also 'above', half the time)", twice))
+    for n in (75, 30):
+        rows.append(row(f"{n} sentences heard", heard[:n]))
+    return experiment("how words combine", "Does it still find how words combine when it "
+                      "mishears words, when the Trainer talks about another table, when a "
+                      "word has two meanings, or when it hears less?",
+                      "misheard words; wrong tables; two meanings; sentences heard", rows,
+                      note="A row passes at 57/60 (95%). The grammar was found from 300 "
+                           "sentences in the first rows.")
+
+
 EXPERIMENTS = [program_size, library_learning, intuition_prior, wrong_labels, hidden_cause, few_examples, program_compute,
                noise_ramp, noise_unknown, outliers, distractors, confounder, magnitudes, changing_world,
-               law_forms, eyes_stress, false_laws, words_stress, events_stress]
+               law_forms, eyes_stress, false_laws, words_stress, events_stress,
+               grammar_stress]
 
 
 def run_all(brain):
