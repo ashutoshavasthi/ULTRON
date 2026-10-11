@@ -4679,6 +4679,163 @@
   "passed": true,
   "threshold": 0.99
  },
+ "30": {
+  "attempt": 1,
+  "comparing_words": {
+   "after": [
+    "start",
+    ">"
+   ],
+   "are": null,
+   "before": [
+    "start",
+    "<"
+   ],
+   "faster": [
+    "speed",
+    ">"
+   ],
+   "fewer": [
+    "count",
+    "<"
+   ],
+   "heavier": [
+    "mass",
+    ">"
+   ],
+   "is": null,
+   "more": [
+    "count",
+    ">"
+   ],
+   "than": null,
+   "there": null
+  },
+  "event_words": {
+   "bounces": [
+    [
+     "turns back",
+     1
+    ]
+   ],
+   "falls": [
+    [
+     "updown",
+     4
+    ]
+   ],
+   "rolls": [
+    [
+     "across",
+     1
+    ]
+   ],
+   "stops": [
+    [
+     "across",
+     2
+    ]
+   ]
+  },
+  "items": [
+   {
+    "baselines": [
+     "co-occurrence",
+     "memoriser"
+    ],
+    "examples": [
+     {
+      "question": "the blue ball ...?",
+      "truth": "stops",
+      "ultron": "stops"
+     },
+     {
+      "question": "the ball ...?",
+      "truth": "stops",
+      "ultron": "stops"
+     },
+     {
+      "question": "the green box ...?",
+      "truth": "bounces",
+      "ultron": "bounces"
+     }
+    ],
+    "name": "what happens, in new films, to things never seen doing it",
+    "scores": {
+     "co-occurrence": [
+      200,
+      200
+     ],
+     "memoriser": [
+      6,
+      200
+     ],
+     "ultron": [
+      200,
+      200
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "baselines": [
+     "co-occurrence",
+     "memoriser"
+    ],
+    "examples": [
+     {
+      "question": "the yellow ball stops ___ the red ball",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "there are ___ green than yellow",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "the box is ___ than the ball",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "the comparing word, filled in, in new films",
+    "scores": {
+     "co-occurrence": [
+      100,
+      120
+     ],
+     "memoriser": [
+      16,
+      120
+     ],
+     "ultron": [
+      113,
+      120
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 30,
+  "passed": true,
+  "precision": [
+   200,
+   200
+  ],
+  "relation_precision": [
+   113,
+   113
+  ],
+  "sentences_heard": 220,
+  "sentences_to_learn": {
+   "bounces": 4,
+   "falls": 6,
+   "rolls": 3,
+   "stops": 10
+  },
+  "threshold": 0.9
+ },
  "4": {
   "attempt": 1,
   "items": [

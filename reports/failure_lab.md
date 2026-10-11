@@ -87,9 +87,9 @@ _How does search time grow with more examples?_ Breaks at: **did not break**
 
 | examples | what it did | |
 |---|---|---|
-| 20 examples | `1.8 s` | ✅ |
-| 100 examples | `0.7 s` | ✅ |
-| 400 examples | `0.4 s` | ✅ |
+| 20 examples | `2.1 s` | ✅ |
+| 100 examples | `0.9 s` | ✅ |
+| 400 examples | `0.5 s` | ✅ |
 
 ## noise
 
@@ -233,4 +233,25 @@ _Does it still learn what words mean when the Trainer sometimes says the wrong w
 | 10 sentences heard | `0/60 right (0/0 of its answers)` | ❌ |
 
 A row passes at 57/60 (95%). The two dials are separate: the first breakpoint is the first row that fails.
+
+## words for what happens
+
+_Does it still learn words for events and for comparing when the Trainer sometimes says the wrong word, says less, or the camera is noisier?_ Breaks at: **20% of event sentences say the wrong word**
+
+| wrong words; sentences heard; camera noise | what it did | |
+|---|---|---|
+| 0% of event sentences say the wrong word | `60/60 right (60/60 of its answers)` | ✅ |
+| 10% of event sentences say the wrong word | `60/60 right (60/60 of its answers)` | ✅ |
+| 20% of event sentences say the wrong word | `0/60 right (0/0 of its answers)` | ❌ |
+| 30% of event sentences say the wrong word | `0/60 right (0/0 of its answers)` | ❌ |
+| 50 event sentences heard | `60/60 right (60/60 of its answers)` | ✅ |
+| 25 event sentences heard | `60/60 right (60/60 of its answers)` | ✅ |
+| 12 event sentences heard | `33/60 right (33/33 of its answers)` | ❌ |
+| camera 2 times as noisy | `50/60 right (50/50 of its answers)` | ❌ |
+| camera 3 times as noisy | `33/60 right (33/33 of its answers)` | ❌ |
+| 0% of comparing sentences say the wrong word | `60/60 right (60/60 of its answers)` | ✅ |
+| 10% of comparing sentences say the wrong word | `60/60 right (60/60 of its answers)` | ✅ |
+| 20% of comparing sentences say the wrong word | `15/60 right (15/15 of its answers)` | ❌ |
+
+A row passes at 54/60 (90%). Event words were taught with 100 sentences and comparing words with 120 in the first rows.
 

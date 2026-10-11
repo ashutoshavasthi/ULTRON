@@ -158,6 +158,17 @@ Words are attached only to things Ultron already has:
   sentence was about, minus the coincidences a meaning explains. Accounts nearly as short
   are kept as rivals; when they disagree it says it isn't sure. Words combine by
   "fits every word".
+- **Its own kinds of motion, and quantities it measures** (stage 3, lesson 30). In films
+  of things falling, bouncing, rolling and knocking (`senses/floor.py`), it follows each
+  thing (`senses/things.py`: `watch_film`) and describes its path across and up-down as
+  the shortest run of pieces, each a kind of law it already had (`brain/events.py`). Event
+  words (falls, bounces, rolls, stops) are learned by the same shortest-account learner,
+  keeping the words it already has. Comparing words (faster, heavier, before, after,
+  more, fewer) mean the measured quantity, and which way round, that holds every time
+  they are said; how heavy one thing is against another comes from its momentum law
+  when they knock. It says a comparing word only when the difference is clear of its
+  uncertainty, and names nothing when it didn't see the thing move, has a word whose
+  meaning it hasn't found, or has two words that seem to mean the same.
 
 Answers carry the chain of laws used. `why` produces Peano proofs whose rules
 are derived from Ultron's own programs and checked independently
@@ -173,11 +184,12 @@ are derived from Ultron's own programs and checked independently
 | line discovery (the *ability* to notice a line of states) | negative numbers, the `down` step, paying and being paid below zero |
 | noticing amounts that balance no whole number | fractions, their sameness and arithmetic, 'divided' |
 | measuring a thing's hue, size, elongation, fill and place; MDL grouping; words combine by "fits every word"; a word is about one measure unless picking things out needs two; the Trainer speaks to be understood | which measures group and where (4 colours, 2 sizes, shapes), what every table word means |
+| following a thing from picture to picture; pieces of path described by kinds of law it already has (MDL); the quantities it can compare (count, speed, start, end, mass, size, height, place); a comparing word means one quantity one way round; a word for what happens is said of a thing that moved | which kind of motion each event word means, which quantity and direction each comparing word means, how heavy things are (from its momentum law) |
 
 ## Running it
 
 ```bash
-python -m ultron train            # train from scratch (a few minutes; numpy needed from lesson 19), save brain/ultron_brain.json, write reports/
+python -m ultron train            # train from scratch (about 15 minutes; numpy needed from lesson 19), save brain/ultron_brain.json, write reports/
 python -m ultron show             # what Ultron knows
 python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
@@ -192,7 +204,7 @@ python -m pytest                  # tests
 ## File map
 
 ```
-ultron/brain/     dsl, synth, invariants, invention, amounts, gaps, compression, columns, metalaws, kinds, body, curiosity, memory, perception, units, categories, language, reasoner, brain
+ultron/brain/     dsl, synth, invariants, invention, amounts, gaps, compression, columns, metalaws, kinds, body, curiosity, memory, perception, units, categories, events, language, reasoner, brain
 ultron/env/       toyworld, physics, dataworld, data/*.csv (real measurements, sources in headers)
 ultron/trainer/   lessons: Phase 1 = 0-10 (7 noisy lab, 8 owing, 9 sharing cakes, 10 final exam);
                   Phase 2 = 11 wheel, 12 hills and valleys, 13 growing, 14 hills and a spring,
@@ -200,9 +212,10 @@ ultron/trainer/   lessons: Phase 1 = 0-10 (7 noisy lab, 8 owing, 9 sharing cakes
                   closing the gaps = 17 coiled springs, 18 exam (columns, fractional repeats);
                   Phase 3 = 19-21 senses, 22-23 new kinds, 24 acting, 25 exam (senses_lessons.py);
                   stage 1 = 27 swinging and growing (E1), 28 rows (E2); stage 2 = 26 microscope film;
-                  stage 3 = 29 words by pointing (language_lessons.py)
+                  stage 3 = 29 words by pointing, 30 words for what happens (language_lessons.py)
 ultron/senses/    camera, eyes (learned CNN), world (visual worlds), measure, tabletop (colour
-                  camera over things to talk about), things (what each thing looks like)
+                  camera over things to talk about), floor (films of things falling, bouncing,
+                  rolling, knocking), things (what each thing looks like; following it in a film)
 blind/            SYLLABUS.md (public), independent examiners' tests; write your own; `python -m ultron blind FILE` (mastery gate, naming after understanding)
 ultron/judge/     exams (held-out + memoriser baselines), report
 ultron/logic/     peano (rules from learned laws + proof checker)

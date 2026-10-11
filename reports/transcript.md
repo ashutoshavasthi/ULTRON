@@ -573,3 +573,28 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _reflect_: the shortest account of the 120 sentences I heard takes -209 bits: what each word means, and nothing more is needed to tell which thing was meant
 - **Trainer**: Exam for lesson 29, attempt 1: passed
 - **Trainer**: What you found in 'kinds of thing' is what people call categories: colours, sizes and shapes.
+
+## Lesson 30
+
+- **Trainer**: Lesson 30: Words for what happens
+- **Trainer**: Now films of the same things. Watch; I'll say what happens.
+- Ultron _word_: 'bounces' means things where it comes back the way it went
+- Ultron _word_: 'falls' means things where its move up and down follows 'kind 7' (the steps between readings change by the same amount each time)
+- Ultron _word_: 'rolls' means things where its move across follows 'equal steps' (each reading goes up by the same step)
+- Ultron _word_: 'stops' means things where its move across follows 'kind 1' (the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
+- Ultron _invent_: Each word for what happens is the kind of motion present every time it was said about a thing: 'bounces': things where it comes back the way it went; 'falls': things where its move up and down follows 'kind 7' (the steps between readings change by the same amount each time); 'rolls': things where its move across follows 'equal steps' (each reading goes up by the same step); 'stops': things where its move across follows 'kind 1' (the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
+- **Trainer**: Now I'll compare things in the films.
+- Ultron _word_: 'after' says the first has more start than the second
+- Ultron _word_: 'are' says nothing I can check
+- Ultron _word_: 'before' says the first has less start than the second
+- Ultron _word_: 'faster' says the first has more speed than the second
+- Ultron _word_: 'fewer' says the first has less count than the second
+- Ultron _word_: 'heavier' says the first has more mass than the second
+- Ultron _word_: 'is' says nothing I can check
+- Ultron _word_: 'more' says the first has more count than the second
+- Ultron _word_: 'than' says nothing I can check
+- Ultron _word_: 'there' says nothing I can check
+- Ultron _invent_: Each comparing word is the quantity I measure, and which way round, that holds every time it is said: 'after': the first has more start; 'before': the first has less start; 'faster': the first has more speed; 'fewer': the first has less count; 'heavier': the first has more mass; 'more': the first has more count. I weigh things by my law that m·v adds up to the same before and after a knock.
+- **Trainer**: Exam for lesson 30, attempt 1: passed
+- **Trainer**: What you found in 'words for events' is what people call verbs, bound to kinds of motion.
+- **Trainer**: What you found in 'words for comparing' is what people call comparatives and before/after, bound to measured quantities (mass through conservation of momentum).

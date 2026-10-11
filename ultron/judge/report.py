@@ -228,6 +228,16 @@ def special_section(results, brain):
                      f"baseline; it heard {r29['sentences_heard']} sentences, and each word "
                      f"was settled after at most {max(r29['sentences_to_learn'].values())} "
                      f"sentences that used it.")
+    r30 = results.get("30") or results.get(30)
+    if r30 and r30.get("precision"):
+        right, gave = r30["precision"]
+        rr, rg = r30["relation_precision"]
+        lines.append(f"- **Words for what happens** (lesson 30, stage 3 L2): named what "
+                     f"happens {right} times right of {gave} answers, in new films about "
+                     f"things never seen doing it; the comparing word filled in with {rr} "
+                     f"of {rg} answers wholly true; each event word settled after at most "
+                     f"{max(r30['sentences_to_learn'].values())} sentences that used it; "
+                     f"{r30['sentences_heard']} sentences heard in all.")
     r10 = results.get("10") or results.get(10)
     if r10:
         lines.append("- **Tough final exam** (lesson 10): no teaching; kinds of question never "

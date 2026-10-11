@@ -89,6 +89,25 @@ otherwise. Unknown words stay unknown.
 As `bind_operation` binds `plus` to the addition law, bind event words to laws and kinds
 of change, and comparison words to orderings it can measure.
 
+**L2's exam, fixed in code before the real run (2026-10-11, `judge/exams.py`,
+`exam_events`, seed 1030, never used during the work).** Films of 30 pictures of things
+on a floor, seen from the side (`senses/floor.py`). Two parts, both must reach 90%:
+- *Naming what happens.* 200 new films. The Trainer says "the yellow box ..." and
+  Ultron says what that thing does: falls, bounces, rolls or stops. Every film is about
+  a thing whose colour, size or shape was never seen doing that in teaching (box
+  bounces, bar rolls, ball stops, green falls, yellow bounces, big rolls). Right means
+  the word the Trainer would have said; saying nothing is wrong.
+- *Comparing.* 120 new films. The Trainer's sentence has its comparing word left out
+  ("the red ball rolls ___ the box"); Ultron fills it in. Every sentence pairs a word
+  with a kind of thing never heard together in teaching (bar faster, box heavier,
+  yellow before, red after, green more, blue fewer). Right means it says the Trainer's
+  word, and every word it says is true of the film (the Trainer's truth, from the
+  simulator: "heavier" by the hidden masses, "before" by when each thing really starts).
+- Baselines, fixed before measuring: a memoriser (the word of the remembered sentence
+  sharing most words) and a co-occurrence counter (the word most often heard with the
+  kind of thing, or the ordering, in the film), both given Ultron's own kinds and
+  measurements.
+
 ### WP4: grammar by MDL (L3, L4)
 
 A grammar is a program that maps a word sequence to a meaning. The shortest grammar
@@ -130,7 +149,8 @@ WP1, then WP2 and WP3, then WP4 (the heart of the stage), then WP5 to WP8, then 
 | # | Status |
 |---|---|
 | L1 | ✅ **met** (2026-10-11), lesson 29. On 200 sentences about new tables, each with a word pair never heard together: **200/200**, and 200 right of 200 answers given. Baselines: co-occurrence counter 78/200 (39%), memoriser 41/200 (20%): 61 points above the better one. Words never taught: 30/30 refused (baselines 0/30 and 3/30). Every word settled after at most 20 sentences that used it (most 2–11). 120 sentences heard in all |
-| L2–L10 | not started |
+| L2 | ✅ **met** (2026-10-11), lesson 30. Naming what happens in 200 new films, each about a thing whose colour, size or shape never did that in teaching: **200/200**, 200 right of 200 answers. Filling in the comparing word in 120 new films, each pairing a word with a kind of thing never heard together: **113/120** (94%), and every one of its 113 answers wholly true; it said it couldn't tell 7 times. Baselines: co-occurrence counter 200/200 and 100/120, memoriser 6/200 and 16/120. Each word for what happens settled after at most 10 sentences that used it. 220 sentences heard |
+| L3–L10 | not started |
 
 How L1 was met (`senses/tabletop.py`, `senses/things.py`, `brain/categories.py`,
 `brain/language.py`, `trainer/language_lessons.py`):
@@ -184,3 +204,84 @@ sizes, three shapes, things never touching. The exam's tables were looked at sev
 times during the work (Ultron scored 200/200 on them each time); the changes were made
 for the failure lab's tables, not for the exam's. Speech is one fixed sentence shape
 ("the [size] [colour] [shape]"); grammar is L3.
+
+How L2 was met (`senses/floor.py`, `senses/things.py`, `brain/events.py`,
+`brain/language.py`, `trainer/language_lessons.py`, lesson 30):
+- **Films to talk about.** The same coloured things, now filmed from the side for 30
+  pictures: they fall, bounce, roll, slide to a stop, knock into each other, or stay
+  still on shelves. The simulator keeps the true gravity, springiness, masses and start
+  times; Ultron gets only the pictures.
+- **Following things.** Its eyes find the things in the first picture; then it follows
+  each to the nearby region of the same colour and size, where it expected it from how
+  it was moving. While two things touch it can't tell them apart and skips those
+  pictures. What each thing looks like is measured as on the table: from 8 pictures cut
+  out around it, lined up and averaged, using pictures where nothing else is near it.
+- **Motion in its own kinds of law.** Each thing's path across and up-down is described
+  as the shortest run of pieces (MDL, at the camera's own noise), each piece a kind of law
+  it already had: nothing changes, equal steps, and the kinds it found itself in Phase 3
+  (steps changing by the same amount, steps shrinking by the same fraction). From the
+  pieces it reads which kind of law each move followed, whether it came back the way it
+  went, when it started, and how fast it went (and how sure it is of each).
+- **Weighing by its momentum law.** When two things knock and both change speed, its
+  lesson-5 law (Σ m·v stays the same) says how heavy one is compared with the other.
+- **Words for what happens.** Overheard sentences ("the red ball bounces") are learned
+  with the same shortest-account learner as L1, keeping the words it already has:
+  bounces = it comes back the way it went, falls = its move up and down follows "steps
+  changing by the same amount", rolls = its move across follows "equal steps", stops =
+  its move across follows "steps shrinking by the same fraction". To name what a thing
+  did it says the word that fits and is rarest among what it has watched.
+- **Comparing words.** Each comparing word means the measured quantity, and which way
+  round, that holds in every sentence it was heard in (MDL over the options; "is",
+  "than", "there", "are" mean nothing it can check): faster = more speed, heavier = more
+  mass, before / after = earlier / later start, more / fewer = more / fewer things. It
+  says a comparing word only when the measured difference is more than twice its
+  uncertainty, and only when no rival account would disagree.
+- **Saying it can't tell.** It doesn't name what a thing did when it didn't see it move,
+  when it heard a word for what happens whose meaning it hasn't found, or when two of its
+  words seem to mean the same.
+
+Baselines, fixed in code before the first measurement (`judge/exams.py`): a memoriser
+(the word of the remembered sentence sharing most words) and a co-occurrence counter
+(the word most often heard with the kinds of thing, or the orderings, in the film). Both
+were given Ultron's own kinds of thing and of motion and its own measurements. **The
+counter matches Ultron on naming what happens (200/200):** once motion is seen as its own
+kinds of law, counting which kind goes with which word is enough. The hard part of L2
+was in the seeing. On comparing it is 13 points behind (100/120).
+
+**Found on practice films before the real exam** (other seeds than the exam's): a thing
+nudged too slowly to see seemed to start late, so "after" was said falsely; a thing
+named in a sentence but not found was compared as "none"; how fast a bouncing thing went
+was reported surer than it was; things 3 pixels apart merged in its eyes. Fixed: the
+Trainer's knocks start at a speed anyone would notice, comparing needs both things
+found and distinct, the uncertainty of a speed includes not knowing to the picture when
+moving began and ended, things stand a pixel further apart than the closest on the
+table, and a thing's look is taken from pictures where nothing else is near it.
+
+**The failure lab found wrong answers, now fixed** (`python -m ultron stress`, "words
+for what happens", taught and tested on other films than lesson 30). With 20% of event
+sentences saying the wrong word, it learned "rolls" as "small" (in teaching, big things
+never roll) and "bounces" as the same as "falls", and answered wrong 26 times; through a
+camera 3 times as noisy it learned "falls" as "doesn't move across" and named a still
+thing. Fixed by the three ways of saying it can't tell, above. Lesson 30's exam was the
+same before and after (200/200 and 113/120); no old row of the lab moved.
+
+| Failure lab (60 new films each) | Right | Answers given |
+|---|---|---|
+| 0% or 10% of event sentences say the wrong word | 60 | 60 |
+| 20% or 30% say the wrong word | 0 | 0 (it can't find what some words mean, and says so) |
+| 50 or 25 event sentences heard | 60 | 60 |
+| 12 event sentences heard | 33 | 33 |
+| camera 2 times as noisy | 50 | 50 (its eyes misjudge some shapes and sizes, so it can't find the thing named) |
+| camera 3 times as noisy | 33 | 33 |
+| 0% or 10% of comparing sentences say the wrong word | 60 | 60 |
+| 20% of comparing sentences say the wrong word | 15 | 15 |
+
+It gives **no wrong answer in any row**. It breaks (fewer than 54/60 right) at 20% of
+sentences saying the wrong word, at 12 sentences heard and at twice the camera noise.
+
+**Limits, said plainly.** The films are clean: one camera that never moves, things that
+never hide one another and touch only when they knock. "Heavier" can be decided only for
+two things that knocked into each other; otherwise it says it can't tell. The exam's
+films were watched twice: once at the real run, and again after the failure-lab fixes
+(the same scores both times). Speech is a few fixed sentence shapes; grammar is L3.
+

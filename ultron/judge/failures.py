@@ -641,9 +641,119 @@ def words_stress(brain):
                            "the first breakpoint is the first row that fails.")
 
 
+def events_stress(brain):
+    """Words for what happens (stage 3, L2) under a Trainer who sometimes says the wrong
+    word, with fewer sentences heard, and through a noisier camera. Each row relearns the
+    event words (or the comparing words) from scratch, with the words for looks it already
+    has, and is scored on 60 new films about things never seen doing that."""
+    from ..brain import events
+    from ..brain.language import (comparing, learn_lexicon, learn_relations, name_with,
+                                  picked, relate_with, runs)
+    from ..senses.tabletop import NOISE
+    from ..trainer.language_lessons import VERBS, WordsForWhatHappens, truth
+    from .exams import _film_thing
+    if brain.eyes is None or not brain.event_words:
+        return experiment("words for what happens", "", "", [_row("no words", "untrained",
+                                                                  False)])
+    found = dict(brain.categories)
+    found.update(events.categories(brain))
+    known = {w: m[1] for w, m in brain.vocab.items()
+             if m[0] == "look" and w not in brain.event_words}
+    kinds = lambda film: [events.kinds_of_thing(brain, t) for t in film["things"]]
+
+    def films(noise):
+        teach = WordsForWhatHappens(7030, noise=noise)
+        heard = []
+        for said, watch, _, _ in teach.event_talks():
+            f = events.watch(brain, watch())
+            heard.append((said.split(), kinds(f)))
+        test = []
+        for said, watch, things, target in WordsForWhatHappens(8030, noise=noise) \
+                .event_talks(60, held_out=True):
+            f = events.watch(brain, watch())
+            test.append((said.split(), f, _film_thing(f, things, target)))
+        return heard, test
+
+    def score(heard, test):
+        lexicon, rivals = learn_lexicon(heard, found, rivals=True, known=known)
+        words = {w: m for w, m in lexicon.items() if w not in known}
+        seen = [k for _, ks in heard for k in ks]
+        right = gave = 0
+        for said, f, meant in test:
+            mine = picked(brain, f, said[:-1])
+            if len(mine) != 1:
+                continue
+            got, _ = name_with(words, rivals, kinds(f)[mine[0]], seen)
+            gave += got is not None
+            right += got == said[-1]
+        return right, gave
+
+    rows = []
+    heard, test = films(None)
+    rng = random.Random(30)
+    for frac in (0.0, 0.1, 0.2, 0.3):
+        spoilt = []
+        for words, ks in heard:
+            words = list(words)
+            if rng.random() < frac:
+                words[-1] = rng.choice([v for v in VERBS if v != words[-1]])
+            spoilt.append((words, ks))
+        right, gave = score(spoilt, test)
+        rows.append(_row(f"{frac:.0%} of event sentences say the wrong word",
+                         f"{right}/60 right ({right}/{gave} of its answers)", right >= 54,
+                         right=right, gave=gave))
+    for n in (50, 25, 12):
+        right, gave = score(heard[:n], test)
+        rows.append(_row(f"{n} event sentences heard", f"{right}/60 right ({right}/{gave} "
+                         f"of its answers)", right >= 54, right=right, gave=gave))
+    for times in (2, 3):
+        right, gave = score(*films(NOISE * times))
+        rows.append(_row(f"camera {times} times as noisy", f"{right}/60 right ({right}/{gave} "
+                         f"of its answers)", right >= 54, right=right, gave=gave))
+    # comparing words
+    teach = WordsForWhatHappens(7130)
+    compared = []
+    for said, watch, _, word, _, _ in teach.relation_talks():
+        f = events.watch(brain, watch())
+        got = comparing(brain, said, f)
+        if got is not None:
+            compared.append((got[0], f, got[1], got[2], word))
+    test = []
+    for said, watch, things, word, first, second in WordsForWhatHappens(8130) \
+            .relation_talks(60, held_out=True):
+        f = events.watch(brain, watch())
+        rs, _ = runs(brain, ["___" if w == word else w for w in said.split()])
+        if len(rs) == 2:
+            test.append((f, picked(brain, f, rs[0]), picked(brain, f, rs[1]), word, first,
+                         second))
+    for frac in (0.0, 0.1, 0.2):
+        spoilt = []
+        for others, f, a, b, word in compared:
+            if rng.random() < frac:
+                wrong = rng.choice([w for w in ("faster", "heavier", "before", "after",
+                                                "more", "fewer") if w != word])
+                others = [wrong if w == word else w for w in others]
+            spoilt.append((others, f, a, b))
+        best, rivals = learn_relations(spoilt, rivals=True)
+        right = gave = 0
+        for f, a, b, word, first, second in test:
+            says = relate_with(best, rivals, f, a, b)
+            gave += bool(says)
+            right += word in says and all(truth(w, first, second) for w in says)
+        rows.append(_row(f"{frac:.0%} of comparing sentences say the wrong word",
+                         f"{right}/{len(test)} right ({right}/{gave} of its answers)",
+                         right >= 54, right=right, gave=gave))
+    return experiment("words for what happens", "Does it still learn words for events and "
+                      "for comparing when the Trainer sometimes says the wrong word, says "
+                      "less, or the camera is noisier?",
+                      "wrong words; sentences heard; camera noise", rows,
+                      note="A row passes at 54/60 (90%). Event words were taught with 100 "
+                           "sentences and comparing words with 120 in the first rows.")
+
+
 EXPERIMENTS = [program_size, library_learning, intuition_prior, wrong_labels, hidden_cause, few_examples, program_compute,
                noise_ramp, noise_unknown, outliers, distractors, confounder, magnitudes, changing_world,
-               law_forms, eyes_stress, false_laws, words_stress]
+               law_forms, eyes_stress, false_laws, words_stress, events_stress]
 
 
 def run_all(brain):

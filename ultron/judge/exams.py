@@ -1534,6 +1534,174 @@ def exam_words(brain, seed=1029):
     return r
 
 
+# ---------------------------------------------------------------- lesson 30 (stage 3, L2)
+def event_memoriser(heard, words):
+    """Baseline (fixed 2026-10-11, before measuring): a memoriser of what was said. For a
+    description of a thing it takes the remembered event sentences sharing the most words
+    with it and answers with the event word said most often in them (a tie: no answer)."""
+    ws = set(words)
+    shared = [len(ws & set(h[:-1])) for h in heard]
+    top = max(shared)
+    count = {}
+    for h, n in zip(heard, shared):
+        if n == top:
+            count[h[-1]] = count.get(h[-1], 0) + 1
+    best = max(count.values())
+    tops = [w for w, c in count.items() if c == best]
+    return tops[0] if len(tops) == 1 else None
+
+
+def event_counter(heard_films, kinds):
+    """Baseline (fixed 2026-10-11, before measuring): a word-kind co-occurrence counter.
+    For each event word and each kind (in Ultron's own kinds, motion included), how much
+    more often are things of that kind in the film when the word is said than overall?
+    The thing asked about scores each word by the sum over its kinds; the best word is the
+    answer (a tie: no answer). It never knows which thing a sentence was about."""
+    total, with_c, per_word = 0, {}, {}
+    for word, things in heard_films:
+        n, cs = per_word.setdefault(word, [0, {}])
+        for k in things:
+            total += 1
+            per_word[word][0] += 1
+            for c in k.items():
+                with_c[c] = with_c.get(c, 0) + 1
+                cs[c] = cs.get(c, 0) + 1
+    scores = {w: sum(cs.get(c, 0) / n - with_c.get(c, 0) / total for c in kinds.items())
+              for w, (n, cs) in per_word.items()}
+    best = max(scores.values())
+    tops = sorted(w for w, v in scores.items() if v == best)
+    return tops[0] if len(tops) == 1 else None
+
+
+def relation_memoriser(heard, words):
+    """Baseline (fixed 2026-10-11, before measuring): the comparing word said most often
+    in the remembered comparing sentences sharing the most words with this one."""
+    return event_memoriser(heard, words)
+
+
+def relation_counter(heard, holding):
+    """Baseline (fixed 2026-10-11, before measuring): an ordering co-occurrence counter.
+    For each comparing word and each ordering Ultron can check (a quantity and which way
+    round), how much more often does it hold when the word is said than overall? The pair
+    asked about scores each word by the sum over the orderings that hold for it; the best
+    word is the answer (a tie: no answer)."""
+    total, with_o, per_word = 0, {}, {}
+    for word, holds in heard:
+        total += 1
+        n, os_ = per_word.setdefault(word, [0, {}])
+        per_word[word][0] += 1
+        for o in holds:
+            with_o[o] = with_o.get(o, 0) + 1
+            os_[o] = os_.get(o, 0) + 1
+    scores = {w: sum(os_.get(o, 0) / n - with_o.get(o, 0) / total for o in holding)
+              for w, (n, os_) in per_word.items()}
+    best = max(scores.values())
+    tops = sorted(w for w, v in scores.items() if v == best)
+    return tops[0] if len(tops) == 1 else None
+
+
+def _film_thing(film, things, target):
+    """The Judge's own check: which thing Ultron followed is the one the Trainer meant
+    (matched by where it really was in the first picture). -1 if its eyes missed it."""
+    t = things[target]
+    seen = film["things"]
+    if not seen:
+        return -1
+    d = [(s["x"] - t["xs"][0]) ** 2 + (s["y"] - t["ys"][0]) ** 2 for s in seen]
+    i = min(range(len(seen)), key=lambda j: d[j])
+    return i if d[i] < 16 else -1
+
+
+def exam_events(brain, seed=1030):
+    """Lesson 30 (stage 3, L2): naming what happens in new films, about things of kinds it
+    never saw doing that; and the comparing words, in new films, with the word left out
+    for it to fill in."""
+    from ..brain import events
+    from ..brain.language import (_holds, name_event, picked, relate, relation_options,
+                                  runs, settled_after)
+    from ..trainer.language_lessons import (RELATIONS, VERBS, WordsForWhatHappens,
+                                            truth)
+    b = copy.deepcopy(brain)
+    names = Tally("what happens, in new films, to things never seen doing it",
+                  baselines=("co-occurrence", "memoriser"))
+    relations = Tally("the comparing word, filled in, in new films",
+                      baselines=("co-occurrence", "memoriser"))
+    if b.eyes is None or not b.event_words:
+        return _result(30, [names, relations], 0.90)
+    lesson = WordsForWhatHappens(seed)
+    said_films = [f for f in b.films if f["said"].split()[-1] in VERBS]
+    heard_words = [f["said"].split() for f in said_films]
+    heard_kinds = [(f["said"].split()[-1], [events.kinds_of_thing(b, t) for t in f["things"]])
+                   for f in said_films]
+    gave = right = 0
+    for said, watch, things, target in lesson.event_talks(200, held_out=True):
+        film = events.watch(b, watch())
+        words = said.split()[:-1]
+        verb = said.split()[-1]
+        mine = picked(b, film, words)
+        got = None
+        if len(mine) == 1:
+            got, _ = name_event(b, film, mine[0])
+        names.item(" ".join(words) + " ...?", verb, got)
+        gave += got is not None
+        right += got == verb
+        names.add("memoriser", event_memoriser(heard_words, words), verb)
+        meant = _film_thing(film, things, target)
+        names.add("co-occurrence", None if meant < 0 else
+                  event_counter(heard_kinds, events.kinds_of_thing(b, film["things"][meant])),
+                  verb)
+    # what it heard of comparing, for the baselines
+    options = [o for o in relation_options() if o is not None]
+    rel_heard, rel_words = [], []
+    for f in b.films:
+        ws = f["said"].split()
+        word = next((w for w in ws if w in RELATIONS), None)
+        if word is None:
+            continue
+        rs, _ = runs(b, ws)
+        if len(rs) != 2:
+            continue
+        a, c = picked(b, f, rs[0]), picked(b, f, rs[1])
+        rel_heard.append((word, [o for o in options if _holds(f, a, c, o) is True]))
+        rel_words.append([w for w in ws if w != word] + [word])
+    r_gave = r_right = 0
+    for said, watch, things, word, first, second in lesson.relation_talks(120, held_out=True):
+        film = events.watch(b, watch())
+        blank = ["___" if w == word else w for w in said.split()]
+        rs, _ = runs(b, blank)
+        says = []
+        if len(rs) == 2:
+            a, c = picked(b, film, rs[0]), picked(b, film, rs[1])
+            says = relate(b, film, a, c)
+        ok = word in says and all(truth(w, first, second) for w in says)
+        relations.item(" ".join(blank), True, ok)
+        r_gave += bool(says)
+        r_right += bool(says) and all(truth(w, first, second) for w in says)
+        context = [w for w in said.split() if w != word]
+        m = relation_memoriser(rel_words, context)
+        relations.add("memoriser", m == word and truth(m, first, second), True)
+        holding = []
+        if len(rs) == 2:
+            holding = [o for o in options if _holds(film, a, c, o) is True]
+        cnt = relation_counter(rel_heard, holding)
+        relations.add("co-occurrence", cnt == word and truth(cnt, first, second), True)
+    found = dict(b.categories)
+    found.update(events.categories(b))
+    known = {w: m[1] for w, m in b.vocab.items() if m[0] == "look" and w not in b.event_words}
+    settle = settled_after([(ws, k) for ws, (_, k) in zip(heard_words, heard_kinds)],
+                           found, known=known)
+    r = _result(30, [names, relations], 0.90,
+                {"precision": [right, gave], "relation_precision": [r_right, r_gave],
+                 "sentences_to_learn": settle,
+                 "sentences_heard": len(b.films),
+                 "event_words": {w: b.vocab[w][1] for w in b.event_words},
+                 "comparing_words": {w: (b.vocab[w][1] if w in b.vocab and
+                                         b.vocab[w][0] == "order" else b.senses[w][1])
+                                     for w in sorted({w for w, m in b.vocab.items()
+                                                      if m[0] == "order"} | set(b.senses))}})
+    return r
+
+
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
@@ -1541,4 +1709,4 @@ EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          17: exam_coils, 18: exam_phase3, 19: exam_eyes, 20: exam_seeing_numbers,
          21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
          25: exam_phase3_senses, 26: exam_microscope,
-         27: exam_change, 28: exam_rows, 29: exam_words}
+         27: exam_change, 28: exam_rows, 29: exam_words, 30: exam_events}
