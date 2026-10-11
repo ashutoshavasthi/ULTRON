@@ -62,7 +62,7 @@ scale, nothing else matters.
 | Stage | The gap it closes | What gets built | Exit test (could fail) |
 |---|---|---|---|
 | **1. The scalable core** *(verdict written: A2–A3 not met, see below)* | Search is exponential: Ultron finds small laws, not big programs | Robustness to bad data; laws of change; lists; speed; library learning on its own laws; an intuition trained on its own searches; ARC-AGI as the battlefield | The criteria in [STAGE_1_PLAN.md](STAGE_1_PLAN.md): R1–R6 (bad data), S1–S2 (laws of size 12, 10× less search), E1–E2 (oscillation, logistic, lists), A2–A3 (≥ 25%, then ≥ 40% on ARC-AGI-1 evaluation) |
-| **2. The real world through its eyes** *(V1–V2 met; V3–V6 wait on real footage)* | It has seen one real film, and its eyes don't generalise | First, **eyes that generalise** (double noise, faint and touching things). Then lesson 26 (the microscope film), then many real videos: falling, swinging, bouncing, colliding | Rediscovers g, pendulum periods, restitution and diffusion from **real footage**, within measured error |
+| **2. The real world through its eyes** *(V1–V2 met; V3–V6 in progress alongside stage 3)* | It has seen one real film, and its eyes don't generalise | First, **eyes that generalise** (double noise, faint and touching things). Then lesson 26 (the microscope film), then many real videos: falling, swinging, bouncing, colliding | Rediscovers g, pendulum periods, restitution and diffusion from **real footage**, within measured error |
 | **3. Language** *(now: started 2026-10-11, L1 met)* | It knows 37 grounded words, all about numbers; it cannot understand, say or ask a sentence | Words by pointing, then words for its own laws, then a grammar it finds by MDL, then understanding, answering, speaking, asking and being told. All grounded in concepts it already has; no pretrained language | The criteria in [STAGE_3_PLAN.md](STAGE_3_PLAN.md): L1–L10 on held-out scenes and sentences, against fixed baselines, including SCAN (≥ 95% on the jump and length splits) and COGS (≥ 90%), with ≤ 10,000 sentences heard |
 | **4. Interactive worlds** | It has acted only with one kick in a world whose rules it was told | Grid games with unknown rules (like ARC-AGI-3). Ultron explores, runs experiments, learns the rules **and the goal** as laws, and plans in its own learned model. Laws that recur across games become priors | Wins held-out games it has never seen, in close to the fewest actions; later games need fewer actions than earlier ones (learning compounds) |
 | **5. The reader** | It knows only what it experienced | Open data, then text (which needs stage 3), read as **claims with sources**, checked against its laws, other sources and experiment; reading driven by curiosity | Learns laws from open data it was never taught and predicts held-out data. Catches ≥ 90% of planted false claims. Reaches a target accuracy with ≥ 100× fewer bytes read than a fixed, named small language-model baseline |
@@ -150,7 +150,7 @@ not move.
   combined well.
 - **Stages 8–9** are unsolved in general. Nobody, including us, can promise them.
 
-## Next steps (Stage 3 now; Stage 2 waits on footage)
+## Next steps (Stages 2 and 3, in parallel)
 
 **Stage 1 verdict** ([`reports/stage1_verdict.md`](../reports/stage1_verdict.md)):
 R1–R6, S1, E1–E2, A0–A1 met; S2 met only combined with library learning; A2–A3
@@ -165,11 +165,13 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
 2. ✅ **Lesson 26:** diffusion from the real microscope film: D within 4% of the
    scientists' tool, Einstein's law found, in the curriculum (29 lessons).
 3. **Real footage:** g, pendulum periods, restitution; detection on par with a lab tool.
-   Blocked on footage (see the network note).
+   In progress: real lab films with reference analyses (OpenSourcePhysics/resources on
+   GitHub).
 
-**Correction (2026-10-11):** Stage 2's V3–V6 wait on real footage the network can't
-reach, so the owner started **Stage 3, language**, before Stage 2's verdict. Stage 2 stays
-open; its exit test is unchanged.
+**Correction (2026-10-11):** the owner started **Stage 3, language**, before Stage 2's
+verdict, when Stage 2's V3–V6 seemed blocked on footage. Real footage has since been
+found, so the two stages now run in parallel. Stage 2 stays open; its exit test is
+unchanged.
 
 Stage 3 plan and exit test: [STAGE_3_PLAN.md](STAGE_3_PLAN.md).
 1. ✅ **L1, words by pointing** (lesson 29): from sentences it overhears about tables,
