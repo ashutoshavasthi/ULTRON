@@ -150,10 +150,18 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
    handling).
 2. ✅ **Lesson 26:** diffusion from the real microscope film: D within 4% of the
    scientists' tool, Einstein's law found, in the curriculum (29 lessons).
-3. **Real footage:** g, pendulum periods, restitution; detection on par with a lab tool.
+3. ✅ **g from real footage** (lesson 29): the law of falling found from three real lab
+   films; g = 9.65 ± 0.15 m/s² against 9.80
+   ([`stage2_v3_falling.md`](../reports/stage2_v3_falling.md)).
+4. ✅ **Detection on par with a lab tool** (V6): Ultron's positions match the lab's own
+   hand marks on both marked films ([`stage2_v4_v6.md`](../reports/stage2_v4_v6.md)).
+5. **Pendulum periods and the √length law, restitution** (V4, V5): not met. The real
+   pendulum films available fail the fixed rule (one is 2% fast, the other too short to
+   be precise), and there are only two lengths. No usable bouncing-ball film. Both need
+   new footage: a pendulum at three or more lengths and a ball bouncing, each beside a
+   ruler.
 
-Network note: this environment can reach GitHub and the Python Package Index. Wikimedia,
-YouTube, archive.org and arcprize.org are blocked. They can be allowed under the cloud
-environment's **Network access** settings. Stage 2 needs the first three and stage 3
-needs arcprize.org; otherwise those stages fall back to data hosted on GitHub or PyPI and
-to games we write ourselves.
+Network note (updated 2026-10-11): this environment now also reaches Wikimedia (which
+rate-limits original files), YouTube and archive.org; earlier they were blocked. Stage 3
+(interactive worlds) needs arcprize.org; otherwise it falls back to games we write
+ourselves.

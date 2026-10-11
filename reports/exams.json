@@ -2181,11 +2181,11 @@
    }
   ],
   "lesson": 19,
-  "mean_glances": 2.05,
+  "mean_glances": 2.0166666666666666,
   "passed": true,
-  "story": "I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 75.4 to 3.2). A spot must be at least 0.17 strong to be a thing: that threshold matched my hands best. From now on I see without touching.",
+  "story": "I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 52.1 to 2.4). A spot must be at least 0.17 strong to be a thing: that threshold matched my hands best. From now on I see without touching.",
   "threshold": 0.95,
-  "untrained_network_right": "4/60"
+  "untrained_network_right": "5/60"
  },
  "2": {
   "attempt": 1,
@@ -2352,11 +2352,11 @@
     "name": "PICTURES of trays of 5-25 things: how many together? (played with up to 12)",
     "scores": {
      "lookup": [
-      0,
+      1,
       25
      ],
      "nearest": [
-      0,
+      1,
       25
      ],
      "ultron": [
@@ -2426,7 +2426,7 @@
    "see_roll",
    "see_stretch"
   ],
-  "energy_law": "y + 0.0512441\u00b7v^2",
+  "energy_law": "y + 0.0504673\u00b7v^2",
   "items": [
    {
     "examples": [
@@ -2506,7 +2506,7 @@
        "m": 9.0
       },
       "truth": 1.8888888888888888,
-      "ultron": 1.8892043771001086
+      "ultron": 1.8901546320027818
      },
      {
       "question": {
@@ -2514,7 +2514,7 @@
        "m": 4.0
       },
       "truth": 1.5,
-      "ultron": 1.5002505347559687
+      "ultron": 1.5010051489433855
      },
      {
       "question": {
@@ -2522,7 +2522,7 @@
        "m": 9.0
       },
       "truth": 1.0,
-      "ultron": 1.0001670231706457
+      "ultron": 1.0006700992955904
      }
     ],
     "name": "new pushes: acceleration predicted BEFORE watching, vs the true one",
@@ -2550,7 +2550,7 @@
        4
       ],
       "truth": 3.011554406442542,
-      "ultron": 3.0089476986683517
+      "ultron": 3.0019971799227387
      },
      {
       "question": [
@@ -2558,7 +2558,7 @@
        5
       ],
       "truth": 3.7644430080531777,
-      "ultron": 3.76118462333544
+      "ultron": 3.7524964749034235
      },
      {
       "question": [
@@ -2566,7 +2566,7 @@
        4
       ],
       "truth": 3.5059977126153066,
-      "ultron": 3.493365201436394
+      "ultron": 3.494347325634974
      }
     ],
     "name": "NEVER HUNG: 4-5 blocks on its springs; how far will each stretch?",
@@ -2594,7 +2594,7 @@
        2.18
       ],
       "truth": 2.9987833537491686,
-      "ultron": 3.012309035041246
+      "ultron": 2.9749234172304395
      },
      {
       "question": [
@@ -2602,7 +2602,7 @@
        1.75
       ],
       "truth": 4.173893631657897,
-      "ultron": 4.1782800949156265
+      "ultron": 4.166921069653585
      },
      {
       "question": [
@@ -2610,7 +2610,7 @@
        1.2
       ],
       "truth": 5.311687439678743,
-      "ultron": 5.309688666676722
+      "ultron": 5.31631687429688
      }
     ],
     "name": "new balls in the valley: after watching a moment, the speed at every later height",
@@ -3212,14 +3212,14 @@
   "threshold": 0.9,
   "traces": [
    [
-    "my law: d / u^2 = 0.1712",
-    "try 1: u = 4.15, so d should be 2.95; it was 2.94"
+    "my law: d / u^2 = 0.1718",
+    "try 1: u = 4.16, so d should be 2.98; it was 2.96"
    ],
    [
-    "I've never done this on carpet: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1712), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
-    "try 1: u = 2.82, so d should be 1.36; it was 0.916",
-    "so here d / u^2 = 0.1151; now for the mark itself",
-    "try 2: u = 4.86, so d should be 2.72; it was 2.69"
+    "I've never done this on carpet: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1718), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
+    "try 1: u = 2.83, so d should be 1.38; it was 0.922",
+    "so here d / u^2 = 0.1149; now for the mark itself",
+    "try 2: u = 4.9, so d should be 2.76; it was 2.72"
    ]
   ]
  },
@@ -3233,10 +3233,10 @@
   "drain_scratch": 940,
   "ice_trace": [
    [
-    "I've never done this on ice: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1712), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
-    "try 1: u = 1.79, so d should be 0.547; it was 1.36",
-    "so here d / u^2 = 0.425; now for the mark itself",
-    "try 2: u = 1.6, so d should be 1.09; it was 1.1"
+    "I've never done this on ice: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1718), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
+    "try 1: u = 1.81, so d should be 0.56; it was 1.38",
+    "so here d / u^2 = 0.4247; now for the mark itself",
+    "try 2: u = 1.62, so d should be 1.12; it was 1.13"
    ]
   ],
   "items": [
@@ -3283,7 +3283,7 @@
        1
       ],
       "truth": 8.0,
-      "ultron": 8.001336185365165
+      "ultron": 8.005360794364723
      },
      {
       "question": [
@@ -3291,7 +3291,7 @@
        4
       ],
       "truth": 0.75,
-      "ultron": 0.7501252673779844
+      "ultron": 0.7505025744716928
      },
      {
       "question": [
@@ -3299,7 +3299,7 @@
        4
       ],
       "truth": 3.25,
-      "ultron": 3.2505428253045983
+      "ultron": 3.252177822710669
      }
     ],
     "name": "predicts a push's acceleration BEFORE watching, counting the load by eye",
@@ -3473,7 +3473,7 @@
   "threshold": 0.9
  },
  "26": {
-  "D": 0.3963732649319548,
+  "D": 0.39588273961263265,
   "attempt": 1,
   "items": [
    {
@@ -3489,7 +3489,7 @@
       0
      ],
      "ultron": [
-      "2480",
+      "2477",
       2854
      ]
     },
@@ -3525,7 +3525,7 @@
      {
       "question": "D",
       "truth": 0.41165443428163934,
-      "ultron": 0.3963732649319548
+      "ultron": 0.39588273961263265
      }
     ],
     "name": "its diffusion constant D agrees with the scientists' tool on the same film",
@@ -3550,7 +3550,7 @@
      {
       "question": "D",
       "truth": 0.4548943743322124,
-      "ultron": 0.3963732649319548
+      "ultron": 0.39588273961263265
      }
     ],
     "name": "and with the textbook: D = kT/(6\u03c0\u03b7r) for 1-micron spheres in water at 22\u00b0C",
@@ -3575,17 +3575,17 @@
      {
       "question": 20,
       "truth": 1.3922722740738842,
-      "ultron": 1.3212442164398495
+      "ultron": 1.3196091320421088
      },
      {
       "question": 21,
       "truth": 1.4637575444774638,
-      "ultron": 1.387306427261842
+      "ultron": 1.3855895886442144
      },
      {
       "question": 22,
       "truth": 1.5347830230638717,
-      "ultron": 1.453368638083834
+      "ultron": 1.4515700452463194
      }
     ],
     "name": "on the 150 pictures it never learned from: spread at 1-2 seconds (trained up to 1.25 s), predicted vs measured by trackpy",
@@ -3609,18 +3609,18 @@
     "examples": [
      {
       "question": 20,
-      "truth": 1.4009780477376645,
-      "ultron": 1.3212442164398492
+      "truth": 1.395058266309216,
+      "ultron": 1.3196091320421088
      },
      {
       "question": 30,
-      "truth": 2.1439890887240507,
-      "ultron": 1.9818663246597739
+      "truth": 2.141051260139607,
+      "ultron": 1.9794136980631631
      },
      {
       "question": 40,
-      "truth": 2.884967489008401,
-      "ultron": 2.6424884328796985
+      "truth": 2.882907821130724,
+      "ultron": 2.6392182640842177
      }
     ],
     "name": "the same, against what its own eyes measure on those pictures",
@@ -3668,12 +3668,12 @@
   ],
   "lesson": 26,
   "passed": true,
-  "share_of_its_detections_that_last": 0.8463880932741685,
-  "story": "From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.585: the spread squared grows in proportion to the time.",
+  "share_of_its_detections_that_last": 0.8623523038273961,
+  "story": "From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.584: the spread squared grows in proportion to the time.",
   "textbook_D": 0.4548943743322124,
   "threshold": 0.75,
   "trackpy_D": 0.41165443428163934,
-  "tracks_followed": 1528
+  "tracks_followed": 1326
  },
  "27": {
   "attempt": 1,
@@ -4418,6 +4418,168 @@
   "lesson": 28,
   "passed": true,
   "threshold": 0.99
+ },
+ "29": {
+  "attempt": 1,
+  "each_film_within_own_error": {
+   "examples": [
+    {
+     "question": "BallTossOut",
+     "truth": true,
+     "ultron": false
+    },
+    {
+     "question": "BallDrop",
+     "truth": true,
+     "ultron": true
+    },
+    {
+     "question": "BallTossUp",
+     "truth": true,
+     "ultron": false
+    }
+   ],
+   "name": "each film on its own: within 2 of its own errors of 9.80 (reported only: a film can't show its own perspective error)",
+   "scores": {
+    "lookup": [
+     0,
+     0
+    ],
+    "nearest": [
+     0,
+     0
+    ],
+    "ultron": [
+     1,
+     3
+    ]
+   },
+   "tolerance": null
+  },
+  "g": 9.753810430417117,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "BallTossOut",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "BallDrop",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "BallTossUp",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "the real films were watched and the ball followed (at least 2 of 3)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "fall",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "found the law of falling from the films: the change of speed grows in proportion to the time",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "V3",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "V3: its g agrees with g at the lab (9.80 m/s\u00b2) within twice its measured error, and that error is at most 3%",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "law_constant": 9.671507762182276,
+  "lesson": 29,
+  "measured_error": 0.1582580423990748,
+  "passed": true,
+  "per_film": {
+   "BallDrop": {
+    "fit_error": 0.09803461434653989,
+    "g": 9.670723296792161,
+    "pictures": 21,
+    "rate": 60
+   },
+   "BallTossOut": {
+    "fit_error": 0.03386493396975264,
+    "g": 10.059852050382077,
+    "pictures": 19,
+    "rate": 30
+   },
+   "BallTossUp": {
+    "fit_error": 0.030575291731326223,
+    "g": 9.53085594407711,
+    "pictures": 50,
+    "rate": 60
+   }
+  },
+  "story": "From real films of a falling ball: dv / tau stays the same, 9.672 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
+  "threshold": 0.6666666666666666,
+  "v3": {
+   "combined_error": 0.041371967540187564,
+   "error": 0.1582580423990748,
+   "films": 3,
+   "g": 9.753810430417117,
+   "passed": true,
+   "precise": true,
+   "spread_error": 0.1582580423990748,
+   "within": true
+  }
  },
  "3": {
   "attempt": 1,
