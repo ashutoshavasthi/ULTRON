@@ -192,9 +192,16 @@ unchanged.
 
 **Lesson numbers (2026-10-11).** Stage 2 and Stage 3 were built side by side and both
 took lessons 29 and 30. In the combined curriculum, Stage 2 keeps 29 (g from real
-footage) and 30 (real pendulums), and the language lessons become 31 and 32. Their
-seeds, and so their teaching and exam worlds, are the ones fixed when they were 29 and
-30; only the number changed.
+footage) and 30 (real pendulums), and the language lessons become 31, 32 and 33. Their
+seeds, and so their teaching and exam worlds, are the ones fixed when they were 29, 30
+and 31; only the number changed.
+
+**The combined candidate (2026-10-11)**
+([`reports/integration.md`](../reports/integration.md)). All open PRs on one branch:
+retrain byte-identical, 32 of 34 lessons on the first attempt. Two lessons that pass in
+their own PRs fail there, both because of PR #6's eyes: lesson 30 (the 0.5 m pendulum is
+timed 8.5% loose, so the shortest law becomes L/T) and lesson 31 (L1's "≤ 20 sentences"
+rested on a 0.1-bit tie, which the better eyes tip). Marks below are each PR's own.
 
 Stage 3 plan and exit test: [STAGE_3_PLAN.md](STAGE_3_PLAN.md).
 1. ✅ **L1, words by pointing** (lesson 31): from sentences it overhears about tables,
@@ -207,12 +214,12 @@ Stage 3 plan and exit test: [STAGE_3_PLAN.md](STAGE_3_PLAN.md).
    faster, heavier (by its momentum law), before, after, more, fewer. Naming what things
    never seen doing it do: 200/200 (a word counter given its kinds also 200/200);
    filling in the comparing word: 113/120 (counter 100/120), never a false word in the
-   exam or the failure lab (32 lessons).
+   exam or the failure lab.
 3. ✅ **L3, a grammar found by MDL** (lesson 33): from 300 sentences about tables, with
    nobody saying which thing is meant or what a word does, it finds what each word does
    and how it combines (a small categorial grammar). On held-out sentences: 69/70 nested
    deeper than any it heard, 59/60 with more phrases joined, 70/70 with words in new
-   places; never a wrong answer in the exam or the failure lab (34 lessons).
+   places; never a wrong answer in the exam or the failure lab.
 4. ⏸ **L4, SCAN and COGS**: paused on 2026-10-11 (the owner's decision) until the coding
    work passes. Published baselines confirmed and recorded in the plan.
 
