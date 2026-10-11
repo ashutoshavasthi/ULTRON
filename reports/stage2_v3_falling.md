@@ -30,6 +30,15 @@ measured error, and the spread is what decides the verdict.
 The law's constant over all 46 of Ultron's experiences is 9.58 m/s² (a robust fit across
 every lag of every film). The mean of the three films is 9.65.
 
+## Rechecked after V6 (2026-10-11)
+
+How Ultron looks was changed while it was being built for V6: each thing is now seen at its own
+scale, its exact place is read at full sharpness, and one thing seen twice counts once (see
+[`stage2_v4_v6.md`](stage2_v4_v6.md)). Lesson 29 still passes on the first attempt, by the
+same rule: **g = 9.75 ± 0.16 m/s²** (0.3 errors from 9.80; error 1.6%). The films now give
+10.06, 9.67 and 9.53, each about 1% higher than before. BallTossOut now matches the lab's
+own hand marks fitted the same way (10.06). The tables below are the original measurement.
+
 ## The footage
 
 The films come from the Tracker project (Douglas Brown and colleagues, Open Source Physics,

@@ -37,7 +37,10 @@ and the blind tests. A retrain must stay byte for byte identical.
 | V1 | ✅ **met, and robust** (2026-10-11): every gating eyes row ≥ 23/25 on the failure lab's trays **and on three sets of unseen trays** (normal 25; 16% noise 25; 32% noise 23–24; big 25; faint 25; touching 23–24). Before Stage 2: 25, 1, 0, 0, 2, 19. No regressions elsewhere in the lab; 29 lessons pass on the first attempt; a retrain is byte-identical; 111 tests pass |
 | V2 | ✅ **met** (2026-10-11): lesson 26 is in the curriculum and passes on the first attempt. From the real trackpy microscope film: Einstein's law (spread² ∝ time); D = 0.396 µm²/s against the scientists' tool trackpy's 0.412 (4%) and the textbook's 0.455 (13%); on 150 frames it never learned from it finds 87% of trackpy's spheres and predicts the spread at 1–2 s (21/21); it claims no law for a single sphere |
 | V3 | ✅ **met** (2026-10-11): lesson 29. From three real lab films (Tracker project, on GitHub) Ultron finds the law of falling itself (change of speed ∝ time) and measures **g = 9.65 ± 0.15 m/s²** (9.80 at the lab: 1.0 errors off; error 1.6%). Films: 9.95 ± 0.10, 9.56 ± 0.18, 9.45 ± 0.06; they disagree more than their fits admit, so the spread across films is the error. 30 lessons pass on the first attempt; a retrain is byte-identical; every exam, failure-lab row and blind test unchanged (60/60, 60/60, 50/50); 115 tests pass. Report: [`stage2_v3_falling.md`](../reports/stage2_v3_falling.md) |
-| V4–V6 | open. Real footage found on GitHub: two pendulums (0.785 m over about three swings; 1 m over one swing) and a bouncing cart, with the lab's Tracker files. Two lengths are too few for the √length law, so a third is still needed |
+| V3 recheck | after the V6 changes to how it looks: g = 9.75 ± 0.16 (films 10.06, 9.67, 9.53), still met |
+| V4 | ❌ **not met** (2026-10-11): pendulum_drag 1.785 ± 0.013 s against 1.820 (−2.8 errors; the lab's Tracker file implies 29.4 pictures/s, not the file's 30, noticed after measuring and not used); Pendulum 2.064 ± 0.094 s against 2.058 (agrees, but one swing gives 4.6%, over the 3% limit). Two lengths: the √length law is not judged. Needs a pendulum filmed at three or more lengths beside a ruler |
+| V5 | open: rule fixed; no film of a bouncing ball with a scale and a reference. Needs one |
+| V6 | ✅ **met** (2026-10-11): against the lab's Tracker hand marks, BallTossOut 10/11 found, median 2.9 px (radius 4.4), scatter 0.34 vs the lab's 0.39; Pendulum 21/21, 0.8 px (radius 5.5), 1.12 vs 1.09. Report: [`stage2_v4_v6.md`](../reports/stage2_v4_v6.md) |
 
 How V1 was met (`senses/eyes.py`, `senses/world.py`):
 - **Looking longer:** when a still scene is noisier than usual (its own noise measure, as
@@ -153,10 +156,21 @@ The exit tests are unchanged. These details are fixed now:
 - **Disclosed:** on BallTossOut, Ultron's distances to 6 of the lab's points (1.3–3.6 px)
   were seen while V3 was being built, before this rule was written.
 
-**V5, restitution.** The only real bouncing footage in the source is a cart rolling down a
-slope against a spring bumper, not a bouncing ball. V5 will be fixed here before it is
-measured. A film of a bouncing ball beside a scale is the better test, and it is being
-looked for.
+**V5, restitution** (written 2026-10-11, before anything bouncing was measured).
+- **The films** must show a ball bouncing on a hard floor, with a scale in view and at
+  least two bounces wholly in view. The only bouncing footage found so far (a cart
+  against a spring bumper on a slope, Tracker project) has no reference to judge
+  against: the lab's file holds a model, not marks or a measured restitution. It is not
+  used for V5.
+- **Ultron measures** the coefficient of restitution e as the upward speed just after
+  each bounce over the downward speed just before it, from its own track, with an error
+  from the scatter over bounces (or, with one bounce, from its own fits).
+- **The reference** is the lab's own analysis of the same film where one exists (its
+  hand marks fitted the same way). Where none exists, e from the heights of successive
+  bounces (e² = next height / this height, Ultron's own track) is reported as a check,
+  and V5 is not claimed on that film.
+- **Pass:** on every film with a lab reference, |e − e_lab| ≤ 2 × the combined error,
+  and Ultron's error at most 5% of e.
 
 ### WP3: more real footage (V3–V6)
 

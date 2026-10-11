@@ -319,16 +319,6 @@
    "fall": [
     1.0,
     1.0,
-    0.0682299803776601,
-    0.0,
-    0.05191963281624402,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.04058059086458937,
-    0.06554904779163338,
     0.0,
     0.0,
     0.0,
@@ -338,8 +328,16 @@
     0.0,
     0.0,
     0.0,
-    0.07239383346811028,
-    0.051325448281068844,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
     0.0,
     0.0,
     0.0,
@@ -3525,29 +3523,29 @@
   "falling": {
    "films": {
     "BallDrop": {
-     "fit_error": 0.17947033921777272,
-     "g": 9.557367935495302,
-     "pictures": 22,
+     "fit_error": 0.09803461434653989,
+     "g": 9.670723296792161,
+     "pictures": 21,
      "rate": 60
     },
     "BallTossOut": {
-     "fit_error": 0.10275603543765004,
-     "g": 9.94475768475587,
-     "pictures": 16,
+     "fit_error": 0.03386493396975264,
+     "g": 10.059852050382077,
+     "pictures": 19,
      "rate": 30
     },
     "BallTossUp": {
-     "fit_error": 0.060151108169954295,
-     "g": 9.447809029832179,
-     "pictures": 47,
+     "fit_error": 0.030575291731326223,
+     "g": 9.53085594407711,
+     "pictures": 50,
      "rate": 60
     }
    },
    "lesson": 29,
-   "precision": 0.01,
+   "precision": 0.027,
    "primitives": [],
    "shape": "the real world",
-   "story": "From real films of a falling ball: dv / tau stays the same, 9.577 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
+   "story": "From real films of a falling ball: dv / tau stays the same, 9.672 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
    "watched": [
     "BallDrop",
     "BallTossOut",
@@ -13002,7 +13000,7 @@
   {
    "kind": "reflect",
    "lesson": 29,
-   "text": "BallTossOut: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 20 pictures, 16 of them with nothing touching it and all of it in view"
+   "text": "BallTossOut: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 24 pictures, 19 of them with nothing touching it and all of it in view"
   },
   {
    "kind": "trainer",
@@ -13012,7 +13010,7 @@
   {
    "kind": "reflect",
    "lesson": 29,
-   "text": "BallDrop: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 36 pictures, 22 of them with nothing touching it and all of it in view"
+   "text": "BallDrop: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 36 pictures, 21 of them with nothing touching it and all of it in view"
   },
   {
    "kind": "trainer",
@@ -13022,12 +13020,12 @@
   {
    "kind": "reflect",
    "lesson": 29,
-   "text": "BallTossUp: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 49 pictures, 47 of them with nothing touching it and all of it in view"
+   "text": "BallTossUp: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 51 pictures, 50 of them with nothing touching it and all of it in view"
   },
   {
    "kind": "reflect",
    "lesson": 29,
-   "text": "after 0.167 s the ball goes faster by about the same amount in every film, give or take 1.0%: that's how precise this measuring is"
+   "text": "after 0.167 s the ball goes faster by about the same amount in every film, give or take 2.7%: that's how precise this measuring is"
   },
   {
    "kind": "stuck",
@@ -13037,57 +13035,7 @@
   {
    "kind": "revise",
    "lesson": 29,
-   "text": "fall: dv / tau = 9.82092 [m/s\u00b2] in every experiment (2 candidates searched; tentative until it predicts 3 new experiences)"
-  },
-  {
-   "kind": "stuck",
-   "lesson": 29,
-   "text": "fall: nothing stays constant yet (3 experiences)"
-  },
-  {
-   "kind": "stuck",
-   "lesson": 29,
-   "text": "fall: nothing stays constant yet (5 experiences)"
-  },
-  {
-   "kind": "establish",
-   "lesson": 29,
-   "text": "fall: dv / tau has now predicted 3 new experiences; no longer tentative"
-  },
-  {
-   "kind": "doubt",
-   "lesson": 29,
-   "text": "fall: my established law dv / tau just failed; back to being unsure"
-  },
-  {
-   "kind": "revise",
-   "lesson": 29,
-   "text": "fall: dv / tau = 9.86554 [m/s\u00b2] in every experiment (1 candidates searched; tentative until it predicts 3 new experiences)"
-  },
-  {
-   "kind": "revise",
-   "lesson": 29,
-   "text": "fall: dv / tau = 9.92686 [m/s\u00b2] in every experiment (1 candidates searched; tentative until it predicts 3 new experiences)"
-  },
-  {
-   "kind": "establish",
-   "lesson": 29,
-   "text": "fall: dv / tau has now predicted 3 new experiences; no longer tentative"
-  },
-  {
-   "kind": "doubt",
-   "lesson": 29,
-   "text": "fall: my established law dv / tau just failed; back to being unsure"
-  },
-  {
-   "kind": "revise",
-   "lesson": 29,
-   "text": "fall: dv / tau = 9.67535 [m/s\u00b2] in every experiment (1 candidates searched; tentative until it predicts 3 new experiences)"
-  },
-  {
-   "kind": "revise",
-   "lesson": 29,
-   "text": "fall: dv / tau = 9.65388 [m/s\u00b2] in every experiment (1 candidates searched; tentative until it predicts 3 new experiences)"
+   "text": "fall: dv / tau = 10.0919 [m/s\u00b2] in every experiment (2 candidates searched; tentative until it predicts 3 new experiences)"
   },
   {
    "kind": "establish",
@@ -13097,7 +13045,7 @@
   {
    "kind": "invent",
    "lesson": 29,
-   "text": "From real films of a falling ball: dv / tau stays the same, 9.577 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across."
+   "text": "From real films of a falling ball: dv / tau stays the same, 9.672 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across."
   },
   {
    "kind": "trainer",
@@ -14800,232 +14748,222 @@
    ],
    "fall": [
     {
-     "dv": 0.3210083359610141,
+     "dv": 0.3370161702974852,
      "film": "BallTossOut",
      "tau": 0.03333333333333333
     },
     {
-     "dv": 0.6674396251035806,
+     "dv": 0.6715596716319436,
      "film": "BallTossOut",
      "tau": 0.06666666666666667
     },
     {
-     "dv": 1.0540071069975647,
+     "dv": 1.0065572804897724,
      "film": "BallTossOut",
      "tau": 0.1
     },
     {
-     "dv": 1.3448744588540378,
+     "dv": 1.3424029800122501,
      "film": "BallTossOut",
      "tau": 0.13333333333333333
     },
     {
-     "dv": 1.5950392307599814,
+     "dv": 1.6772825318935465,
      "film": "BallTossOut",
      "tau": 0.16666666666666666
     },
     {
-     "dv": 1.9775722261329376,
+     "dv": 2.0111704390058165,
      "film": "BallTossOut",
      "tau": 0.2
     },
     {
-     "dv": 2.322635349310535,
+     "dv": 2.3450821836070657,
      "film": "BallTossOut",
      "tau": 0.23333333333333334
     },
     {
-     "dv": 2.651381669033896,
+     "dv": 2.679357251597475,
      "film": "BallTossOut",
      "tau": 0.26666666666666666
     },
     {
-     "dv": 3.012572484157259,
+     "dv": 3.0160411836990684,
      "film": "BallTossOut",
      "tau": 0.3
     },
     {
-     "dv": 3.318821294137477,
-     "film": "BallTossOut",
-     "tau": 0.3333333333333333
-    },
-    {
-     "dv": 0.1595612043818659,
+     "dv": 0.15730097941539906,
      "film": "BallDrop",
      "tau": 0.016666666666666666
     },
     {
-     "dv": 0.3086214154047299,
+     "dv": 0.3240540555800095,
      "film": "BallDrop",
      "tau": 0.03333333333333333
     },
     {
-     "dv": 0.4792124734888964,
+     "dv": 0.4817074153857668,
      "film": "BallDrop",
      "tau": 0.05
     },
     {
-     "dv": 0.6392127759381214,
+     "dv": 0.6464473937309447,
      "film": "BallDrop",
      "tau": 0.06666666666666667
     },
     {
-     "dv": 0.7949113531169102,
+     "dv": 0.8042877474686495,
      "film": "BallDrop",
      "tau": 0.08333333333333333
     },
     {
-     "dv": 0.9602353934735021,
+     "dv": 0.9708669347821005,
      "film": "BallDrop",
      "tau": 0.1
     },
     {
-     "dv": 1.1119965366215612,
+     "dv": 1.1255246093499027,
      "film": "BallDrop",
      "tau": 0.11666666666666667
     },
     {
-     "dv": 1.2740475233704365,
+     "dv": 1.2939754234174148,
      "film": "BallDrop",
      "tau": 0.13333333333333333
     },
     {
-     "dv": 1.4383188779323524,
+     "dv": 1.4487797830168223,
      "film": "BallDrop",
      "tau": 0.15
     },
     {
-     "dv": 1.5993552188880713,
+     "dv": 1.6154835974944004,
      "film": "BallDrop",
      "tau": 0.16666666666666666
     },
     {
-     "dv": 1.7592907407768785,
-     "film": "BallDrop",
-     "tau": 0.18333333333333332
-    },
-    {
-     "dv": 0.15144551056642028,
+     "dv": 0.15937726684780032,
      "film": "BallTossUp",
      "tau": 0.016666666666666666
     },
     {
-     "dv": 0.3067666384582346,
+     "dv": 0.31873645658792643,
      "film": "BallTossUp",
      "tau": 0.03333333333333333
     },
     {
-     "dv": 0.4753026893296768,
+     "dv": 0.4780426354862919,
      "film": "BallTossUp",
      "tau": 0.05
     },
     {
-     "dv": 0.6343629171733546,
+     "dv": 0.6373353394935849,
      "film": "BallTossUp",
      "tau": 0.06666666666666667
     },
     {
-     "dv": 0.7866323813487428,
+     "dv": 0.7961820721043307,
      "film": "BallTossUp",
      "tau": 0.08333333333333333
     },
     {
-     "dv": 0.9543677492877205,
+     "dv": 0.9544948700734801,
      "film": "BallTossUp",
      "tau": 0.1
     },
     {
-     "dv": 1.1059401489161396,
+     "dv": 1.1136797758376134,
      "film": "BallTossUp",
      "tau": 0.11666666666666667
     },
     {
-     "dv": 1.2589915643998608,
+     "dv": 1.2727161968606973,
      "film": "BallTossUp",
      "tau": 0.13333333333333333
     },
     {
-     "dv": 1.4311979535550055,
+     "dv": 1.4309502267355563,
      "film": "BallTossUp",
      "tau": 0.15
     },
     {
-     "dv": 1.5701949650082476,
+     "dv": 1.5897689328954039,
      "film": "BallTossUp",
      "tau": 0.16666666666666666
     },
     {
-     "dv": 1.7219742523739103,
+     "dv": 1.7488481764087207,
      "film": "BallTossUp",
      "tau": 0.18333333333333332
     },
     {
-     "dv": 1.891611244247653,
+     "dv": 1.9064584344582127,
      "film": "BallTossUp",
      "tau": 0.2
     },
     {
-     "dv": 2.045669821480122,
+     "dv": 2.065143829169428,
      "film": "BallTossUp",
      "tau": 0.21666666666666667
     },
     {
-     "dv": 2.2116484677537036,
+     "dv": 2.223712375865241,
      "film": "BallTossUp",
      "tau": 0.23333333333333334
     },
     {
-     "dv": 2.366198740971271,
+     "dv": 2.3826256945513697,
      "film": "BallTossUp",
      "tau": 0.25
     },
     {
-     "dv": 2.5205927900048777,
+     "dv": 2.5399406150095203,
      "film": "BallTossUp",
      "tau": 0.26666666666666666
     },
     {
-     "dv": 2.680418770216131,
+     "dv": 2.7002118577288026,
      "film": "BallTossUp",
      "tau": 0.2833333333333333
     },
     {
-     "dv": 2.829362859471006,
+     "dv": 2.8576926327252354,
      "film": "BallTossUp",
      "tau": 0.3
     },
     {
-     "dv": 2.986935829420268,
+     "dv": 3.014990892842914,
      "film": "BallTossUp",
      "tau": 0.31666666666666665
     },
     {
-     "dv": 3.15511829511736,
+     "dv": 3.174156784254773,
      "film": "BallTossUp",
      "tau": 0.3333333333333333
     },
     {
-     "dv": 3.3101878011077672,
+     "dv": 3.3327668844555225,
      "film": "BallTossUp",
      "tau": 0.35
     },
     {
-     "dv": 3.465004362376644,
+     "dv": 3.4912149400613885,
      "film": "BallTossUp",
      "tau": 0.36666666666666664
     },
     {
-     "dv": 3.6271536628555374,
+     "dv": 3.6484927361858848,
      "film": "BallTossUp",
      "tau": 0.38333333333333336
     },
     {
-     "dv": 3.7832221096618466,
+     "dv": 3.8080505928721773,
      "film": "BallTossUp",
      "tau": 0.4
     },
     {
-     "dv": 3.9205606978185403,
+     "dv": 3.966719367575184,
      "film": "BallTossUp",
      "tau": 0.4166666666666667
     }
@@ -26260,7 +26198,7 @@
     "name": "fall",
     "order_by": null,
     "out_type": null,
-    "precision": 0.01,
+    "precision": 0.027,
     "state_var": null,
     "surprise": 1e-06,
     "target": "dv",
@@ -28432,7 +28370,7 @@
    "spread": 3.8861950694508257e-13
   },
   "fall": {
-   "constant": 9.576712457935008,
+   "constant": 9.671507762182276,
    "etype": "fall",
    "form": "product",
    "group_by": null,
@@ -28443,11 +28381,11 @@
    },
    "properties": {},
    "provenance": {
-    "experiences": 23,
+    "experiences": 2,
     "lesson": 29,
-    "support": 23
+    "support": 42
    },
-   "spread": 0.010001144692614736
+   "spread": 0.0036752134979377853
   },
   "gas": {
    "constant": 1409.3076923076924,
@@ -28726,7 +28664,7 @@
   "cool": 240,
   "earn_coins": 39976,
   "earn_notes": 1247,
-  "fall": 84,
+  "fall": 28,
   "funnel_h": 280,
   "gas": 28,
   "get_paid": 86,

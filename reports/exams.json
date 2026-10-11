@@ -4426,7 +4426,7 @@
     {
      "question": "BallTossOut",
      "truth": true,
-     "ultron": true
+     "ultron": false
     },
     {
      "question": "BallDrop",
@@ -4450,13 +4450,13 @@
      0
     ],
     "ultron": [
-     2,
+     1,
      3
     ]
    },
    "tolerance": null
   },
-  "g": 9.64997821669445,
+  "g": 9.753810430417117,
   "items": [
    {
     "examples": [
@@ -4544,40 +4544,40 @@
     "tolerance": null
    }
   ],
-  "law_constant": 9.576712457935008,
+  "law_constant": 9.671507762182276,
   "lesson": 29,
-  "measured_error": 0.15074480593092385,
+  "measured_error": 0.1582580423990748,
   "passed": true,
   "per_film": {
    "BallDrop": {
-    "fit_error": 0.17947033921777272,
-    "g": 9.557367935495302,
-    "pictures": 22,
+    "fit_error": 0.09803461434653989,
+    "g": 9.670723296792161,
+    "pictures": 21,
     "rate": 60
    },
    "BallTossOut": {
-    "fit_error": 0.10275603543765004,
-    "g": 9.94475768475587,
-    "pictures": 16,
+    "fit_error": 0.03386493396975264,
+    "g": 10.059852050382077,
+    "pictures": 19,
     "rate": 30
    },
    "BallTossUp": {
-    "fit_error": 0.060151108169954295,
-    "g": 9.447809029832179,
-    "pictures": 47,
+    "fit_error": 0.030575291731326223,
+    "g": 9.53085594407711,
+    "pictures": 50,
     "rate": 60
    }
   },
-  "story": "From real films of a falling ball: dv / tau stays the same, 9.577 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
+  "story": "From real films of a falling ball: dv / tau stays the same, 9.672 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
   "threshold": 0.6666666666666666,
   "v3": {
-   "combined_error": 0.07455057557519232,
-   "error": 0.15074480593092385,
+   "combined_error": 0.041371967540187564,
+   "error": 0.1582580423990748,
    "films": 3,
-   "g": 9.64997821669445,
+   "g": 9.753810430417117,
    "passed": true,
    "precise": true,
-   "spread_error": 0.15074480593092385,
+   "spread_error": 0.1582580423990748,
    "within": true
   }
  },

@@ -107,7 +107,8 @@ def frames(film_name):
 def label(film_name):
     """What is written on the film: frame rate, interlacing, and the stick's scale."""
     film = manifest()["films"][film_name]
-    return {k: film[k] for k in ("fps", "interlaced", "pixels_per_metre", "scale_from")}
+    keys = ("fps", "interlaced", "pixels_per_metre", "scale_from", "length_m")
+    return {k: film[k] for k in keys if k in film}
 
 
 def tracker_file(film_name):

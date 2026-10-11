@@ -153,9 +153,13 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
 3. ✅ **g from real footage** (lesson 29): the law of falling found from three real lab
    films; g = 9.65 ± 0.15 m/s² against 9.80
    ([`stage2_v3_falling.md`](../reports/stage2_v3_falling.md)).
-4. **Pendulum periods and the √length law, restitution, detection on par with a lab
-   tool** (V4–V6): footage found for one bouncing cart and two pendulum lengths; a third
-   length is still needed.
+4. ✅ **Detection on par with a lab tool** (V6): Ultron's positions match the lab's own
+   hand marks on both marked films ([`stage2_v4_v6.md`](../reports/stage2_v4_v6.md)).
+5. **Pendulum periods and the √length law, restitution** (V4, V5): not met. The real
+   pendulum films available fail the fixed rule (one is 2% fast, the other too short to
+   be precise), and there are only two lengths. No usable bouncing-ball film. Both need
+   new footage: a pendulum at three or more lengths and a ball bouncing, each beside a
+   ruler.
 
 Network note (updated 2026-10-11): this environment now also reaches Wikimedia (which
 rate-limits original files), YouTube and archive.org; earlier they were blocked. Stage 3
