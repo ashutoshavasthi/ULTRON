@@ -172,6 +172,15 @@ The exit tests are unchanged. These details are fixed now:
 - **Pass:** on every film with a lab reference, |e − e_lab| ≤ 2 × the combined error,
   and Ultron's error at most 5% of e.
 
+**Frame rate for new films** (written 2026-10-11, before any new film is measured). Ultron
+uses the rate written in the video file. Before Ultron measures a new film, the Judge reads
+every independent record of its timing: the lab's own analysis (Tracker's time step), a
+clock or stopwatch in view, or the maker's description. If one of them disagrees with the
+file by more than 0.5%, the Judge decides which rate counts and writes it down with the
+reason, still before measuring, and the verdict uses that rate. A rate found only after
+measuring is reported and never used: this is why pendulum_drag's 29.4 pictures/s does not
+count.
+
 ### WP3: more real footage (V3–V6)
 
 **Status (2026-10-11):** the network now reaches Wikimedia, archive.org and YouTube.
