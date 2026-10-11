@@ -1,4 +1,5632 @@
 {
+ "code": {
+  "aside": [],
+  "assoc": {
+   "0": "L",
+   "1": "L",
+   "2": "L",
+   "3": "L",
+   "4": "L",
+   "5": "R"
+  },
+  "cycles": {
+   "step:MODULO/2": "param"
+  },
+  "flipped": false,
+  "frame": [
+   [
+    "PRINT"
+   ],
+   [
+    "."
+   ]
+  ],
+  "laws": {
+   "engc:!=/2": {
+    "expr": [
+     "not",
+     [
+      "eq",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    "name": "engc:!=/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 6,
+     "size": 4
+    }
+   },
+   "engc:%/2": {
+    "expr": [
+     "iter",
+     [
+      "call",
+      "step:MODULO/2",
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "var",
+      "x"
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    "name": "engc:%/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 8,
+     "size": 5
+    }
+   },
+   "engc:**/2": {
+    "expr": [
+     "call",
+     "repeated_groups",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:**/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 6,
+     "size": 3
+    }
+   },
+   "engc:*/2": {
+    "expr": [
+     "call",
+     "groups",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:*/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 6,
+     "size": 3
+    }
+   },
+   "engc:+/2": {
+    "expr": [
+     "call",
+     "merge",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:+/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 6,
+     "size": 3
+    }
+   },
+   "engc:-/1": {
+    "expr": [
+     "call",
+     "pay",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    "name": "engc:-/1",
+    "out_type": "int",
+    "params": [
+     "x"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 6,
+     "size": 3
+    }
+   },
+   "engc:-/2": {
+    "expr": [
+     "call",
+     "pay",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ],
+    "name": "engc:-/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 6,
+     "size": 3
+    }
+   },
+   "engc:</2": {
+    "expr": [
+     "lt",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:</2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 7,
+     "size": 3
+    }
+   },
+   "engc:<=/2": {
+    "expr": [
+     "not",
+     [
+      "lt",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ]
+    ],
+    "name": "engc:<=/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 9,
+     "size": 4
+    }
+   },
+   "engc:==/2": {
+    "expr": [
+     "eq",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:==/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 6,
+     "size": 3
+    }
+   },
+   "engc:>/2": {
+    "expr": [
+     "lt",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ],
+    "name": "engc:>/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 7,
+     "size": 3
+    }
+   },
+   "engc:>=/2": {
+    "expr": [
+     "not",
+     [
+      "lt",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    "name": "engc:>=/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 9,
+     "size": 4
+    }
+   },
+   "engc:AND/2": {
+    "expr": [
+     "and",
+     [
+      "var",
+      "p"
+     ],
+     [
+      "var",
+      "q"
+     ]
+    ],
+    "name": "engc:AND/2",
+    "out_type": "bool",
+    "params": [
+     "p",
+     "q"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 10,
+     "size": 3
+    }
+   },
+   "engc:IS AT LEAST/2": {
+    "expr": [
+     "not",
+     [
+      "lt",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    "name": "engc:IS AT LEAST/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 15,
+     "size": 4
+    }
+   },
+   "engc:IS AT MOST/2": {
+    "expr": [
+     "not",
+     [
+      "lt",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ]
+    ],
+    "name": "engc:IS AT MOST/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 15,
+     "size": 4
+    }
+   },
+   "engc:IS EQUAL TO/2": {
+    "expr": [
+     "eq",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:IS EQUAL TO/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 13,
+     "size": 3
+    }
+   },
+   "engc:IS GREATER THAN/2": {
+    "expr": [
+     "lt",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ],
+    "name": "engc:IS GREATER THAN/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 10,
+     "size": 3
+    }
+   },
+   "engc:IS LESS THAN/2": {
+    "expr": [
+     "lt",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:IS LESS THAN/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 11,
+     "size": 3
+    }
+   },
+   "engc:IS NOT/2": {
+    "expr": [
+     "not",
+     [
+      "eq",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ]
+    ],
+    "name": "engc:IS NOT/2",
+    "out_type": "bool",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 13,
+     "size": 4
+    }
+   },
+   "engc:MINUS/1": {
+    "expr": [
+     "call",
+     "pay",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    "name": "engc:MINUS/1",
+    "out_type": "int",
+    "params": [
+     "x"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 9,
+     "size": 3
+    }
+   },
+   "engc:MINUS/2": {
+    "expr": [
+     "call",
+     "pay",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "var",
+      "x"
+     ]
+    ],
+    "name": "engc:MINUS/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 9,
+     "size": 3
+    }
+   },
+   "engc:MODULO/2": {
+    "expr": [
+     "iter",
+     [
+      "call",
+      "step:MODULO/2",
+      [
+       "var",
+       "y"
+      ]
+     ],
+     [
+      "var",
+      "x"
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    "name": "engc:MODULO/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 39,
+     "size": 5
+    }
+   },
+   "engc:NOT/1": {
+    "expr": [
+     "not",
+     [
+      "var",
+      "p"
+     ]
+    ],
+    "name": "engc:NOT/1",
+    "out_type": "bool",
+    "params": [
+     "p"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 9,
+     "size": 2
+    }
+   },
+   "engc:OR/2": {
+    "expr": [
+     "not",
+     [
+      "and",
+      [
+       "not",
+       [
+        "var",
+        "p"
+       ]
+      ],
+      [
+       "not",
+       [
+        "var",
+        "q"
+       ]
+      ]
+     ]
+    ],
+    "name": "engc:OR/2",
+    "out_type": "bool",
+    "params": [
+     "p",
+     "q"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 10,
+     "size": 6
+    }
+   },
+   "engc:PLUS/2": {
+    "expr": [
+     "call",
+     "merge",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:PLUS/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 9,
+     "size": 3
+    }
+   },
+   "engc:RAISED TO/2": {
+    "expr": [
+     "call",
+     "repeated_groups",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:RAISED TO/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 9,
+     "size": 3
+    }
+   },
+   "engc:TIMES/2": {
+    "expr": [
+     "call",
+     "groups",
+     [
+      "var",
+      "x"
+     ],
+     [
+      "var",
+      "y"
+     ]
+    ],
+    "name": "engc:TIMES/2",
+    "out_type": "int",
+    "params": [
+     "x",
+     "y"
+    ],
+    "provenance": {
+     "found_by": "search",
+     "lesson": 100,
+     "runs": 9,
+     "size": 3
+    }
+   },
+   "step:MODULO/2": {
+    "expr": [
+     "ite",
+     [
+      "eq",
+      [
+       "var",
+       "acc"
+      ],
+      [
+       "pred",
+       [
+        "var",
+        "t"
+       ]
+      ]
+     ],
+     [
+      "const",
+      0
+     ],
+     [
+      "succ",
+      [
+       "var",
+       "acc"
+      ]
+     ]
+    ],
+    "name": "step:MODULO/2",
+    "out_type": "int",
+    "params": [
+     "acc",
+     "t"
+    ],
+    "provenance": {
+     "found_by": "stepping",
+     "how": "rule and exceptions",
+     "size": 8
+    }
+   }
+  },
+  "levels": {
+   "!=/2": 2,
+   "%/2": 4,
+   "**/2": 5,
+   "*/2": 4,
+   "+/2": 3,
+   "-/1": 4,
+   "-/2": 3,
+   "</2": 2,
+   "<=/2": 2,
+   "==/2": 2,
+   ">/2": 2,
+   ">=/2": 2,
+   "AND/2": 1,
+   "NOT/1": 1,
+   "OR/2": 0
+  },
+  "marks": {
+   "(": "open",
+   ")": "close"
+  },
+  "phrases": {
+   "!=/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       18,
+       8
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       13,
+       4
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       6,
+       13
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       11,
+       11
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       8,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       2
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:!=/2",
+    "out": "bool",
+    "runs": 6,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "!="
+    ]
+   },
+   "%/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       20,
+       12
+      ],
+      [
+       "8"
+      ]
+     ],
+     [
+      [
+       10,
+       1
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       3,
+       7
+      ],
+      [
+       "3"
+      ]
+     ],
+     [
+      [
+       0,
+       10
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       3,
+       0
+      ],
+      null
+     ],
+     [
+      [
+       9,
+       9
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      null
+     ],
+     [
+      [
+       10,
+       10
+      ],
+      [
+       "0"
+      ]
+     ]
+    ],
+    "fails": [
+     "eq",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    "law": "engc:%/2",
+    "out": "int",
+    "runs": 8,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "%"
+    ]
+   },
+   "**/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       9,
+       1
+      ],
+      [
+       "9"
+      ]
+     ],
+     [
+      [
+       1,
+       3
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       10,
+       3
+      ],
+      [
+       "1000"
+      ]
+     ],
+     [
+      [
+       0,
+       8
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       1,
+       0
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       4,
+       4
+      ],
+      [
+       "256"
+      ]
+     ]
+    ],
+    "law": "engc:**/2",
+    "out": "int",
+    "runs": 6,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "**"
+    ]
+   },
+   "*/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       19,
+       7
+      ],
+      [
+       "133"
+      ]
+     ],
+     [
+      [
+       9,
+       16
+      ],
+      [
+       "144"
+      ]
+     ],
+     [
+      [
+       19,
+       6
+      ],
+      [
+       "114"
+      ]
+     ],
+     [
+      [
+       6,
+       0
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       0,
+       1
+      ],
+      [
+       "0"
+      ]
+     ]
+    ],
+    "law": "engc:*/2",
+    "out": "int",
+    "runs": 6,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "*"
+    ]
+   },
+   "+/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       15,
+       18
+      ],
+      [
+       "33"
+      ]
+     ],
+     [
+      [
+       8,
+       4
+      ],
+      [
+       "12"
+      ]
+     ],
+     [
+      [
+       1,
+       18
+      ],
+      [
+       "19"
+      ]
+     ],
+     [
+      [
+       12,
+       0
+      ],
+      [
+       "12"
+      ]
+     ],
+     [
+      [
+       4,
+       4
+      ],
+      [
+       "8"
+      ]
+     ],
+     [
+      [
+       0,
+       1
+      ],
+      [
+       "1"
+      ]
+     ]
+    ],
+    "law": "engc:+/2",
+    "out": "int",
+    "runs": 6,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "+"
+    ]
+   },
+   "-/1": {
+    "arity": 1,
+    "demos": [
+     [
+      [
+       12
+      ],
+      [
+       "-12"
+      ]
+     ],
+     [
+      [
+       8
+      ],
+      [
+       "-8"
+      ]
+     ],
+     [
+      [
+       3
+      ],
+      [
+       "-3"
+      ]
+     ],
+     [
+      [
+       0
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       9
+      ],
+      [
+       "-9"
+      ]
+     ],
+     [
+      [
+       8
+      ],
+      [
+       "-8"
+      ]
+     ]
+    ],
+    "law": "engc:-/1",
+    "out": "int",
+    "runs": 6,
+    "types": [
+     "int"
+    ],
+    "words": [
+     "-"
+    ]
+   },
+   "-/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       10,
+       5
+      ],
+      [
+       "5"
+      ]
+     ],
+     [
+      [
+       1,
+       8
+      ],
+      [
+       "-7"
+      ]
+     ],
+     [
+      [
+       3,
+       1
+      ],
+      [
+       "2"
+      ]
+     ],
+     [
+      [
+       8,
+       8
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       0,
+       5
+      ],
+      [
+       "-5"
+      ]
+     ],
+     [
+      [
+       9,
+       0
+      ],
+      [
+       "9"
+      ]
+     ]
+    ],
+    "law": "engc:-/2",
+    "out": "int",
+    "runs": 6,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "-"
+    ]
+   },
+   "</2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       1,
+       6
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       7,
+       5
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       3,
+       1
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       11,
+       11
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       10,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       11
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "False"
+      ]
+     ]
+    ],
+    "law": "engc:</2",
+    "out": "bool",
+    "runs": 7,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "<"
+    ]
+   },
+   "<=/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       14,
+       10
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       14,
+       16
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       6,
+       19
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       9
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       10,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       8,
+       8
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       1,
+       6
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       2
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:<=/2",
+    "out": "bool",
+    "runs": 9,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "<="
+    ]
+   },
+   "==/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       4,
+       6
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       20,
+       2
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       3,
+       8
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       5,
+       5
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       7,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       4
+      ],
+      [
+       "False"
+      ]
+     ]
+    ],
+    "law": "engc:==/2",
+    "out": "bool",
+    "runs": 6,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "=="
+    ]
+   },
+   ">/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       17,
+       1
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       14,
+       5
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       1,
+       15
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       11,
+       11
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       12,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       11
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "False"
+      ]
+     ]
+    ],
+    "law": "engc:>/2",
+    "out": "bool",
+    "runs": 7,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     ">"
+    ]
+   },
+   ">=/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       2,
+       12
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       1,
+       17
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       13,
+       15
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       5,
+       1
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       6,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       5,
+       5
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       5
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       12,
+       8
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:>=/2",
+    "out": "bool",
+    "runs": 9,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     ">="
+    ]
+   },
+   "AND/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       false,
+       false
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       false,
+       true
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       true,
+       true
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true,
+       false
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       true,
+       true
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       false,
+       true
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       false,
+       false
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       false,
+       true
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       false,
+       false
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       false,
+       true
+      ],
+      [
+       "False"
+      ]
+     ]
+    ],
+    "law": "engc:AND/2",
+    "out": "bool",
+    "runs": 10,
+    "types": [
+     "bool",
+     "bool"
+    ],
+    "words": [
+     "AND"
+    ]
+   },
+   "IS AT LEAST/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       9,
+       18
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       10,
+       16
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       10,
+       17
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       1,
+       1
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       10,
+       2
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       1
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       2,
+       2
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       5,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       11
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       1,
+       3
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       1,
+       4
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       2,
+       11
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       8,
+       12
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       2,
+       8
+      ],
+      [
+       "False"
+      ]
+     ]
+    ],
+    "law": "engc:IS AT LEAST/2",
+    "out": "bool",
+    "runs": 15,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "IS",
+     "AT",
+     "LEAST"
+    ]
+   },
+   "IS AT MOST/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       11,
+       15
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       12,
+       1
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       3,
+       9
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       1
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       3,
+       3
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       1,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       2,
+       1
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       3,
+       2
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       6,
+       4
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       12,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       9,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       9,
+       4
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       10,
+       2
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       2,
+       7
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:IS AT MOST/2",
+    "out": "bool",
+    "runs": 15,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "IS",
+     "AT",
+     "MOST"
+    ]
+   },
+   "IS EQUAL TO/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       17,
+       1
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       19,
+       7
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       19,
+       16
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       4,
+       6
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       3,
+       3
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       1
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       5,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       9,
+       4
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       2,
+       7
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       7,
+       5
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       9,
+       5
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       4,
+       3
+      ],
+      [
+       "False"
+      ]
+     ]
+    ],
+    "law": "engc:IS EQUAL TO/2",
+    "out": "bool",
+    "runs": 13,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "IS",
+     "EQUAL",
+     "TO"
+    ]
+   },
+   "IS GREATER THAN/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       4,
+       18
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       5,
+       6
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       5,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       11,
+       3
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       7
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       10,
+       10
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       3,
+       9
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       10,
+       12
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       12,
+       4
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:IS GREATER THAN/2",
+    "out": "bool",
+    "runs": 10,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "IS",
+     "GREATER",
+     "THAN"
+    ]
+   },
+   "IS LESS THAN/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       7,
+       14
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       20,
+       12
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       4,
+       19
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       1
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       10,
+       10
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       11,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       11,
+       5
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       7,
+       5
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       9,
+       12
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:IS LESS THAN/2",
+    "out": "bool",
+    "runs": 11,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "IS",
+     "LESS",
+     "THAN"
+    ]
+   },
+   "IS NOT/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       20,
+       13
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       8,
+       7
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       13,
+       16
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       6,
+       0
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       6
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       4,
+       4
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       1,
+       3
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       10,
+       12
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       10,
+       2
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       9,
+       5
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       0,
+       12
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       9,
+       6
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:IS NOT/2",
+    "out": "bool",
+    "runs": 13,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "IS",
+     "NOT"
+    ]
+   },
+   "MINUS/1": {
+    "arity": 1,
+    "demos": [
+     [
+      [
+       2
+      ],
+      [
+       "-2"
+      ]
+     ],
+     [
+      [
+       19
+      ],
+      [
+       "-19"
+      ]
+     ],
+     [
+      [
+       8
+      ],
+      [
+       "-8"
+      ]
+     ],
+     [
+      [
+       0
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       1
+      ],
+      [
+       "-1"
+      ]
+     ],
+     [
+      [
+       1
+      ],
+      [
+       "-1"
+      ]
+     ],
+     [
+      [
+       6
+      ],
+      [
+       "-6"
+      ]
+     ],
+     [
+      [
+       9
+      ],
+      [
+       "-9"
+      ]
+     ],
+     [
+      [
+       8
+      ],
+      [
+       "-8"
+      ]
+     ]
+    ],
+    "law": "engc:MINUS/1",
+    "out": "int",
+    "runs": 9,
+    "types": [
+     "int"
+    ],
+    "words": [
+     "MINUS"
+    ]
+   },
+   "MINUS/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       13,
+       16
+      ],
+      [
+       "-3"
+      ]
+     ],
+     [
+      [
+       3,
+       17
+      ],
+      [
+       "-14"
+      ]
+     ],
+     [
+      [
+       3,
+       2
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       9,
+       0
+      ],
+      [
+       "9"
+      ]
+     ],
+     [
+      [
+       0,
+       10
+      ],
+      [
+       "-10"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       7,
+       7
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       0,
+       3
+      ],
+      [
+       "-3"
+      ]
+     ],
+     [
+      [
+       0,
+       2
+      ],
+      [
+       "-2"
+      ]
+     ]
+    ],
+    "law": "engc:MINUS/2",
+    "out": "int",
+    "runs": 9,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "MINUS"
+    ]
+   },
+   "MODULO/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       7,
+       7
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       5,
+       7
+      ],
+      [
+       "5"
+      ]
+     ],
+     [
+      [
+       11,
+       14
+      ],
+      [
+       "11"
+      ]
+     ],
+     [
+      [
+       1,
+       0
+      ],
+      null
+     ],
+     [
+      [
+       1,
+       2
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       2,
+       0
+      ],
+      null
+     ],
+     [
+      [
+       2,
+       1
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       0,
+       1
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      null
+     ],
+     [
+      [
+       11,
+       7
+      ],
+      [
+       "4"
+      ]
+     ],
+     [
+      [
+       0,
+       3
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       1,
+       3
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       2,
+       3
+      ],
+      [
+       "2"
+      ]
+     ],
+     [
+      [
+       3,
+       3
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       4,
+       3
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       0,
+       5
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       1,
+       5
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       2,
+       5
+      ],
+      [
+       "2"
+      ]
+     ],
+     [
+      [
+       3,
+       5
+      ],
+      [
+       "3"
+      ]
+     ],
+     [
+      [
+       4,
+       5
+      ],
+      [
+       "4"
+      ]
+     ],
+     [
+      [
+       5,
+       5
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       6,
+       5
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       0,
+       7
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       1,
+       7
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       2,
+       7
+      ],
+      [
+       "2"
+      ]
+     ],
+     [
+      [
+       3,
+       7
+      ],
+      [
+       "3"
+      ]
+     ],
+     [
+      [
+       4,
+       7
+      ],
+      [
+       "4"
+      ]
+     ],
+     [
+      [
+       6,
+       7
+      ],
+      [
+       "6"
+      ]
+     ],
+     [
+      [
+       8,
+       7
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       0,
+       8
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       1,
+       8
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       2,
+       8
+      ],
+      [
+       "2"
+      ]
+     ],
+     [
+      [
+       3,
+       8
+      ],
+      [
+       "3"
+      ]
+     ],
+     [
+      [
+       4,
+       8
+      ],
+      [
+       "4"
+      ]
+     ],
+     [
+      [
+       5,
+       8
+      ],
+      [
+       "5"
+      ]
+     ],
+     [
+      [
+       6,
+       8
+      ],
+      [
+       "6"
+      ]
+     ],
+     [
+      [
+       7,
+       8
+      ],
+      [
+       "7"
+      ]
+     ],
+     [
+      [
+       8,
+       8
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       9,
+       8
+      ],
+      [
+       "1"
+      ]
+     ]
+    ],
+    "fails": [
+     "eq",
+     [
+      "var",
+      "y"
+     ],
+     [
+      "const",
+      0
+     ]
+    ],
+    "law": "engc:MODULO/2",
+    "out": "int",
+    "runs": 39,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "MODULO"
+    ]
+   },
+   "NOT/1": {
+    "arity": 1,
+    "demos": [
+     [
+      [
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       false
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:NOT/1",
+    "out": "bool",
+    "runs": 9,
+    "types": [
+     "bool"
+    ],
+    "words": [
+     "NOT"
+    ]
+   },
+   "OR/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       true,
+       true
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       false,
+       true
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       false,
+       false
+      ],
+      [
+       "False"
+      ]
+     ],
+     [
+      [
+       true,
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true,
+       true
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true,
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true,
+       true
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true,
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true,
+       false
+      ],
+      [
+       "True"
+      ]
+     ],
+     [
+      [
+       true,
+       true
+      ],
+      [
+       "True"
+      ]
+     ]
+    ],
+    "law": "engc:OR/2",
+    "out": "bool",
+    "runs": 10,
+    "types": [
+     "bool",
+     "bool"
+    ],
+    "words": [
+     "OR"
+    ]
+   },
+   "PLUS/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       4,
+       14
+      ],
+      [
+       "18"
+      ]
+     ],
+     [
+      [
+       14,
+       5
+      ],
+      [
+       "19"
+      ]
+     ],
+     [
+      [
+       12,
+       11
+      ],
+      [
+       "23"
+      ]
+     ],
+     [
+      [
+       0,
+       11
+      ],
+      [
+       "11"
+      ]
+     ],
+     [
+      [
+       6,
+       6
+      ],
+      [
+       "12"
+      ]
+     ],
+     [
+      [
+       10,
+       0
+      ],
+      [
+       "10"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       11,
+       6
+      ],
+      [
+       "17"
+      ]
+     ],
+     [
+      [
+       4,
+       8
+      ],
+      [
+       "12"
+      ]
+     ]
+    ],
+    "law": "engc:PLUS/2",
+    "out": "int",
+    "runs": 9,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "PLUS"
+    ]
+   },
+   "RAISED TO/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       7,
+       2
+      ],
+      [
+       "49"
+      ]
+     ],
+     [
+      [
+       10,
+       0
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       9,
+       3
+      ],
+      [
+       "729"
+      ]
+     ],
+     [
+      [
+       3,
+       11
+      ],
+      [
+       "177147"
+      ]
+     ],
+     [
+      [
+       0,
+       7
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       1,
+       1
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "1"
+      ]
+     ],
+     [
+      [
+       12,
+       12
+      ],
+      [
+       "8916100448256"
+      ]
+     ],
+     [
+      [
+       5,
+       8
+      ],
+      [
+       "390625"
+      ]
+     ]
+    ],
+    "law": "engc:RAISED TO/2",
+    "out": "int",
+    "runs": 9,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "RAISED",
+     "TO"
+    ]
+   },
+   "TIMES/2": {
+    "arity": 2,
+    "demos": [
+     [
+      [
+       14,
+       8
+      ],
+      [
+       "112"
+      ]
+     ],
+     [
+      [
+       1,
+       20
+      ],
+      [
+       "20"
+      ]
+     ],
+     [
+      [
+       6,
+       10
+      ],
+      [
+       "60"
+      ]
+     ],
+     [
+      [
+       0,
+       1
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       4,
+       0
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       8,
+       8
+      ],
+      [
+       "64"
+      ]
+     ],
+     [
+      [
+       0,
+       0
+      ],
+      [
+       "0"
+      ]
+     ],
+     [
+      [
+       9,
+       4
+      ],
+      [
+       "36"
+      ]
+     ],
+     [
+      [
+       2,
+       7
+      ],
+      [
+       "14"
+      ]
+     ]
+    ],
+    "law": "engc:TIMES/2",
+    "out": "int",
+    "runs": 9,
+    "types": [
+     "int",
+     "int"
+    ],
+    "words": [
+     "TIMES"
+    ]
+   }
+  },
+  "runs": [
+   [
+    "PRINT 4 PLUS 14 .",
+    [
+     "18"
+    ]
+   ],
+   [
+    "PRINT 14 PLUS 5 .",
+    [
+     "19"
+    ]
+   ],
+   [
+    "PRINT 12 PLUS 11 .",
+    [
+     "23"
+    ]
+   ],
+   [
+    "PRINT 0 PLUS 11 .",
+    [
+     "11"
+    ]
+   ],
+   [
+    "PRINT 6 PLUS 6 .",
+    [
+     "12"
+    ]
+   ],
+   [
+    "PRINT 10 PLUS 0 .",
+    [
+     "10"
+    ]
+   ],
+   [
+    "PRINT 0 PLUS 0 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 11 PLUS 6 .",
+    [
+     "17"
+    ]
+   ],
+   [
+    "PRINT 4 PLUS 8 .",
+    [
+     "12"
+    ]
+   ],
+   [
+    "PRINT 13 MINUS 16 .",
+    [
+     "-3"
+    ]
+   ],
+   [
+    "PRINT 3 MINUS 17 .",
+    [
+     "-14"
+    ]
+   ],
+   [
+    "PRINT 3 MINUS 2 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 9 MINUS 0 .",
+    [
+     "9"
+    ]
+   ],
+   [
+    "PRINT 0 MINUS 10 .",
+    [
+     "-10"
+    ]
+   ],
+   [
+    "PRINT 0 MINUS 0 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 7 MINUS 7 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 0 MINUS 3 .",
+    [
+     "-3"
+    ]
+   ],
+   [
+    "PRINT 0 MINUS 2 .",
+    [
+     "-2"
+    ]
+   ],
+   [
+    "PRINT 14 TIMES 8 .",
+    [
+     "112"
+    ]
+   ],
+   [
+    "PRINT 1 TIMES 20 .",
+    [
+     "20"
+    ]
+   ],
+   [
+    "PRINT 6 TIMES 10 .",
+    [
+     "60"
+    ]
+   ],
+   [
+    "PRINT 0 TIMES 1 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 4 TIMES 0 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 8 TIMES 8 .",
+    [
+     "64"
+    ]
+   ],
+   [
+    "PRINT 0 TIMES 0 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 9 TIMES 4 .",
+    [
+     "36"
+    ]
+   ],
+   [
+    "PRINT 2 TIMES 7 .",
+    [
+     "14"
+    ]
+   ],
+   [
+    "PRINT 7 MODULO 7 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 5 MODULO 7 .",
+    [
+     "5"
+    ]
+   ],
+   [
+    "PRINT 11 MODULO 14 .",
+    [
+     "11"
+    ]
+   ],
+   [
+    "PRINT 1 MODULO 0 .",
+    null
+   ],
+   [
+    "PRINT 1 MODULO 2 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 2 MODULO 0 .",
+    null
+   ],
+   [
+    "PRINT 2 MODULO 1 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 0 MODULO 1 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 0 MODULO 0 .",
+    null
+   ],
+   [
+    "PRINT 11 MODULO 7 .",
+    [
+     "4"
+    ]
+   ],
+   [
+    "PRINT 0 MODULO 3 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 1 MODULO 3 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 2 MODULO 3 .",
+    [
+     "2"
+    ]
+   ],
+   [
+    "PRINT 3 MODULO 3 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 4 MODULO 3 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 0 MODULO 5 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 1 MODULO 5 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 2 MODULO 5 .",
+    [
+     "2"
+    ]
+   ],
+   [
+    "PRINT 3 MODULO 5 .",
+    [
+     "3"
+    ]
+   ],
+   [
+    "PRINT 4 MODULO 5 .",
+    [
+     "4"
+    ]
+   ],
+   [
+    "PRINT 5 MODULO 5 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 6 MODULO 5 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 0 MODULO 7 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 1 MODULO 7 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 2 MODULO 7 .",
+    [
+     "2"
+    ]
+   ],
+   [
+    "PRINT 3 MODULO 7 .",
+    [
+     "3"
+    ]
+   ],
+   [
+    "PRINT 4 MODULO 7 .",
+    [
+     "4"
+    ]
+   ],
+   [
+    "PRINT 6 MODULO 7 .",
+    [
+     "6"
+    ]
+   ],
+   [
+    "PRINT 8 MODULO 7 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 0 MODULO 8 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 1 MODULO 8 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 2 MODULO 8 .",
+    [
+     "2"
+    ]
+   ],
+   [
+    "PRINT 3 MODULO 8 .",
+    [
+     "3"
+    ]
+   ],
+   [
+    "PRINT 4 MODULO 8 .",
+    [
+     "4"
+    ]
+   ],
+   [
+    "PRINT 5 MODULO 8 .",
+    [
+     "5"
+    ]
+   ],
+   [
+    "PRINT 6 MODULO 8 .",
+    [
+     "6"
+    ]
+   ],
+   [
+    "PRINT 7 MODULO 8 .",
+    [
+     "7"
+    ]
+   ],
+   [
+    "PRINT 8 MODULO 8 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 9 MODULO 8 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 7 MODULO 1 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 7 RAISED TO 2 .",
+    [
+     "49"
+    ]
+   ],
+   [
+    "PRINT 10 RAISED TO 0 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 9 RAISED TO 3 .",
+    [
+     "729"
+    ]
+   ],
+   [
+    "PRINT 3 RAISED TO 11 .",
+    [
+     "177147"
+    ]
+   ],
+   [
+    "PRINT 0 RAISED TO 7 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 1 RAISED TO 1 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 0 RAISED TO 0 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 12 RAISED TO 12 .",
+    [
+     "8916100448256"
+    ]
+   ],
+   [
+    "PRINT 5 RAISED TO 8 .",
+    [
+     "390625"
+    ]
+   ],
+   [
+    "PRINT 4 IS GREATER THAN 18 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 5 IS GREATER THAN 6 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 5 IS GREATER THAN 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS GREATER THAN 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 11 IS GREATER THAN 3 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS GREATER THAN 7 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 10 IS GREATER THAN 10 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 3 IS GREATER THAN 9 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 10 IS GREATER THAN 12 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 12 IS GREATER THAN 4 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 7 IS LESS THAN 14 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 20 IS LESS THAN 12 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 4 IS LESS THAN 19 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS LESS THAN 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 IS LESS THAN 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 10 IS LESS THAN 10 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 11 IS LESS THAN 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 11 IS LESS THAN 5 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 7 IS LESS THAN 5 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 IS LESS THAN 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 9 IS LESS THAN 12 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 17 IS EQUAL TO 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 19 IS EQUAL TO 7 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 19 IS EQUAL TO 16 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 4 IS EQUAL TO 6 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 3 IS EQUAL TO 3 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS EQUAL TO 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS EQUAL TO 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 5 IS EQUAL TO 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 9 IS EQUAL TO 4 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 2 IS EQUAL TO 7 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 7 IS EQUAL TO 5 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 9 IS EQUAL TO 5 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 4 IS EQUAL TO 3 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 9 IS AT LEAST 18 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 10 IS AT LEAST 16 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 10 IS AT LEAST 17 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 1 IS AT LEAST 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 10 IS AT LEAST 2 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS AT LEAST 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 IS AT LEAST 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 2 IS AT LEAST 2 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 5 IS AT LEAST 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS AT LEAST 11 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 1 IS AT LEAST 3 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 1 IS AT LEAST 4 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 2 IS AT LEAST 11 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 8 IS AT LEAST 12 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 2 IS AT LEAST 8 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 11 IS AT MOST 15 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 12 IS AT MOST 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 3 IS AT MOST 9 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS AT MOST 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 3 IS AT MOST 3 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS AT MOST 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 1 IS AT MOST 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 2 IS AT MOST 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 3 IS AT MOST 2 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 6 IS AT MOST 4 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 12 IS AT MOST 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 9 IS AT MOST 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 9 IS AT MOST 4 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 10 IS AT MOST 2 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 2 IS AT MOST 7 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 20 IS NOT 13 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 8 IS NOT 7 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 13 IS NOT 16 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 6 IS NOT 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS NOT 6 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 4 IS NOT 4 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 IS NOT 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 1 IS NOT 3 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 10 IS NOT 12 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 10 IS NOT 2 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 9 IS NOT 5 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 IS NOT 12 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 9 IS NOT 6 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 15 + 18 .",
+    [
+     "33"
+    ]
+   ],
+   [
+    "PRINT 8 + 4 .",
+    [
+     "12"
+    ]
+   ],
+   [
+    "PRINT 1 + 18 .",
+    [
+     "19"
+    ]
+   ],
+   [
+    "PRINT 12 + 0 .",
+    [
+     "12"
+    ]
+   ],
+   [
+    "PRINT 4 + 4 .",
+    [
+     "8"
+    ]
+   ],
+   [
+    "PRINT 0 + 1 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 10 - 5 .",
+    [
+     "5"
+    ]
+   ],
+   [
+    "PRINT 1 - 8 .",
+    [
+     "-7"
+    ]
+   ],
+   [
+    "PRINT 3 - 1 .",
+    [
+     "2"
+    ]
+   ],
+   [
+    "PRINT 8 - 8 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 0 - 5 .",
+    [
+     "-5"
+    ]
+   ],
+   [
+    "PRINT 9 - 0 .",
+    [
+     "9"
+    ]
+   ],
+   [
+    "PRINT 19 * 7 .",
+    [
+     "133"
+    ]
+   ],
+   [
+    "PRINT 9 * 16 .",
+    [
+     "144"
+    ]
+   ],
+   [
+    "PRINT 19 * 6 .",
+    [
+     "114"
+    ]
+   ],
+   [
+    "PRINT 6 * 0 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 0 * 0 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 0 * 1 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 20 % 12 .",
+    [
+     "8"
+    ]
+   ],
+   [
+    "PRINT 10 % 1 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 3 % 7 .",
+    [
+     "3"
+    ]
+   ],
+   [
+    "PRINT 0 % 10 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 3 % 0 .",
+    null
+   ],
+   [
+    "PRINT 9 % 9 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 0 % 0 .",
+    null
+   ],
+   [
+    "PRINT 10 % 10 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 9 ** 1 .",
+    [
+     "9"
+    ]
+   ],
+   [
+    "PRINT 1 ** 3 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 10 ** 3 .",
+    [
+     "1000"
+    ]
+   ],
+   [
+    "PRINT 0 ** 8 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 1 ** 0 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT 4 ** 4 .",
+    [
+     "256"
+    ]
+   ],
+   [
+    "PRINT 17 > 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 14 > 5 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 1 > 15 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 11 > 11 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 12 > 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 > 11 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 > 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 1 < 6 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 7 < 5 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 3 < 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 11 < 11 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 10 < 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 < 11 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 < 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 4 == 6 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 20 == 2 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 3 == 8 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 5 == 5 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 7 == 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 == 4 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 2 >= 12 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 1 >= 17 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 13 >= 15 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 5 >= 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 6 >= 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 5 >= 5 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 >= 5 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 >= 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 12 >= 8 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 14 <= 10 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 14 <= 16 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 6 <= 19 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 <= 9 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 10 <= 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 <= 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 8 <= 8 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 1 <= 6 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 <= 2 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 18 != 8 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 13 != 4 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 6 != 13 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 11 != 11 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 8 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 2 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT MINUS 2 .",
+    [
+     "-2"
+    ]
+   ],
+   [
+    "PRINT MINUS 19 .",
+    [
+     "-19"
+    ]
+   ],
+   [
+    "PRINT MINUS 8 .",
+    [
+     "-8"
+    ]
+   ],
+   [
+    "PRINT MINUS 0 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT MINUS 1 .",
+    [
+     "-1"
+    ]
+   ],
+   [
+    "PRINT MINUS 1 .",
+    [
+     "-1"
+    ]
+   ],
+   [
+    "PRINT MINUS 6 .",
+    [
+     "-6"
+    ]
+   ],
+   [
+    "PRINT MINUS 9 .",
+    [
+     "-9"
+    ]
+   ],
+   [
+    "PRINT MINUS 8 .",
+    [
+     "-8"
+    ]
+   ],
+   [
+    "PRINT - 12 .",
+    [
+     "-12"
+    ]
+   ],
+   [
+    "PRINT - 8 .",
+    [
+     "-8"
+    ]
+   ],
+   [
+    "PRINT - 3 .",
+    [
+     "-3"
+    ]
+   ],
+   [
+    "PRINT - 0 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT - 9 .",
+    [
+     "-9"
+    ]
+   ],
+   [
+    "PRINT - 8 .",
+    [
+     "-8"
+    ]
+   ],
+   [
+    "PRINT 6 IS LESS THAN 1 AND 12 IS EQUAL TO 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 8 IS EQUAL TO 1 AND 0 IS AT MOST 9 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 7 IS AT LEAST 0 AND 20 IS GREATER THAN 7 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 AND 0 != 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 AND 0 != 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 0 AND 0 != 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 != 0 AND 0 != 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 != 0 AND 0 != 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 != 0 AND 0 != 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 != 0 AND 0 != 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 9 IS NOT 20 OR 20 IS GREATER THAN 2 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 18 IS EQUAL TO 10 OR 14 IS GREATER THAN 5 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 2 IS GREATER THAN 19 OR 11 IS AT MOST 4 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 OR 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 OR 0 != 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 OR 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 OR 0 != 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 OR 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 OR 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 OR 0 != 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT NOT 0 IS LESS THAN 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT NOT 10 IS NOT 16 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT NOT 5 IS AT LEAST 12 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT NOT 0 != 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT NOT 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT NOT 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT NOT 0 != 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT NOT 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT NOT 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT MINUS ( 18 MINUS 18 ) .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 1 PLUS 13 % 11 .",
+    [
+     "3"
+    ]
+   ],
+   [
+    "PRINT 15 PLUS ( 9 PLUS 20 ) .",
+    [
+     "44"
+    ]
+   ],
+   [
+    "PRINT 18 <= 11 MINUS 18 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 15 != 11 * 7 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT - 1 - 15 .",
+    [
+     "-16"
+    ]
+   ],
+   [
+    "PRINT 16 <= 3 RAISED TO 1 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 11 < 20 * 9 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT ( 2 MINUS 5 ) RAISED TO 2 .",
+    [
+     "9"
+    ]
+   ],
+   [
+    "PRINT 10 + 19 - 6 .",
+    [
+     "23"
+    ]
+   ],
+   [
+    "PRINT 5 IS AT MOST 17 % 14 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 6 % ( 6 MODULO 8 ) .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 8 * 7 % 16 .",
+    [
+     "8"
+    ]
+   ],
+   [
+    "PRINT 16 TIMES 7 - 12 .",
+    [
+     "100"
+    ]
+   ],
+   [
+    "PRINT ( 11 PLUS 1 ) ** 2 .",
+    [
+     "144"
+    ]
+   ],
+   [
+    "PRINT 4 * 5 == 10 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 2 IS LESS THAN 0 - 19 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 15 PLUS 11 IS NOT 10 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 13 MINUS 1 IS EQUAL TO 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 17 MODULO 8 != 20 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 3 % 8 ** 3 .",
+    [
+     "3"
+    ]
+   ],
+   [
+    "PRINT 3 % 3 * 4 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 5 % 6 + 2 .",
+    [
+     "7"
+    ]
+   ],
+   [
+    "PRINT 8 ** 3 ** 2 .",
+    [
+     "134217728"
+    ]
+   ],
+   [
+    "PRINT 5 + 3 % 8 .",
+    [
+     "8"
+    ]
+   ],
+   [
+    "PRINT - 3 % 2 .",
+    [
+     "1"
+    ]
+   ],
+   [
+    "PRINT - 5 ** 6 .",
+    [
+     "-15625"
+    ]
+   ],
+   [
+    "PRINT 4 - 8 % 2 .",
+    [
+     "4"
+    ]
+   ],
+   [
+    "PRINT 5 - 6 + 8 .",
+    [
+     "7"
+    ]
+   ],
+   [
+    "PRINT 8 - 5 - 4 .",
+    [
+     "-1"
+    ]
+   ],
+   [
+    "PRINT 0 != 0 AND 0 != 0 OR 0 != 1 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT NOT 0 != 1 AND 0 != 0 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 0 != 1 OR 0 != 0 AND 0 != 0 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 1 + 8 - 7 RAISED TO 7 .",
+    [
+     "-823534"
+    ]
+   ],
+   [
+    "PRINT 1 PLUS 9 RAISED TO 11 - 5 TIMES 1 MODULO 7 .",
+    [
+     "31381059605"
+    ]
+   ],
+   [
+    "PRINT - 4 PLUS 7 PLUS 1 TIMES 5 RAISED TO 9 .",
+    [
+     "1953128"
+    ]
+   ],
+   [
+    "PRINT 8 TIMES 12 > 0 PLUS 6 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 12 + MINUS 10 - 6 MINUS 0 PLUS 2 .",
+    [
+     "-2"
+    ]
+   ],
+   [
+    "PRINT 3 - 0 IS EQUAL TO 3 * MINUS 2 ** 10 .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT 6 % 9 TIMES 2 != 3 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT 3 % 11 + 10 - 7 MODULO 12 .",
+    [
+     "6"
+    ]
+   ],
+   [
+    "PRINT ( 4 MINUS 12 ) TIMES 16 .",
+    [
+     "-128"
+    ]
+   ],
+   [
+    "PRINT 5 MINUS ( 18 MINUS 13 ) .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 6 TIMES ( 14 MINUS 15 ) .",
+    [
+     "-6"
+    ]
+   ],
+   [
+    "PRINT 15 TIMES ( 4 PLUS 6 ) .",
+    [
+     "150"
+    ]
+   ],
+   [
+    "PRINT 0 MINUS ( 0 MINUS 12 ) .",
+    [
+     "12"
+    ]
+   ],
+   [
+    "PRINT ( 15 PLUS 19 ) TIMES 17 .",
+    [
+     "578"
+    ]
+   ],
+   [
+    "PRINT 0 ** 0 * 0 MINUS 0 % 1 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 7 % 6 - 10 - 7 .",
+    [
+     "-16"
+    ]
+   ],
+   [
+    "PRINT 0 RAISED TO 4 TIMES 9 TIMES 6 * 8 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT ( ( 6 ** 6 ) MODULO 8 ) MINUS 2 .",
+    [
+     "-2"
+    ]
+   ],
+   [
+    "PRINT MINUS 7 MINUS ( 6 RAISED TO 2 ) <= 12 MODULO 6 .",
+    [
+     "True"
+    ]
+   ],
+   [
+    "PRINT MINUS ( - 2 * 12 MINUS 11 ) % 1 .",
+    [
+     "0"
+    ]
+   ],
+   [
+    "PRINT 0 < ( 0 MODULO 8 ) RAISED TO 8 * ( 11 + 4 ) .",
+    [
+     "False"
+    ]
+   ],
+   [
+    "PRINT NOT ( 7 IS AT MOST 12 - MINUS 5 ) .",
+    [
+     "False"
+    ]
+   ]
+  ],
+  "stats": {
+   "own": 221,
+   "trainer": 107
+  },
+  "symbols": [
+   "False",
+   "True"
+  ]
+ },
  "conservation_laws": {
   "collide": [
    {
@@ -12903,6 +18531,316 @@
    "kind": "trainer",
    "lesson": 28,
    "text": "Exam for lesson 28, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 100,
+   "text": "Lesson 100: Reading Engc: what expressions mean"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 100,
+   "text": "These are programs in a language called Engc. I'll run some and you watch what each one prints. Later you can write and run your own."
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "every program starts with 'PRINT' and ends with '.': those words never change what is printed"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'PLUS' means merge(x, y) to me (9 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MINUS' means pay(y, x) to me (9 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'TIMES' means groups(x, y) to me (9 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MODULO' with [1, 0]: I expected 1, it printed None; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MODULO' makes a program fail when eq(x, 1)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MODULO' with [1, 2]: I expected a failure, it printed ['1']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MODULO' makes a program fail when lt(y, x)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MODULO' with [2, 1]: I expected a failure, it printed ['0']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MODULO' makes a program fail when eq(y, 0)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MODULO' with [11, 7]: I expected 0, it printed ['4']; thinking again"
+  },
+  {
+   "kind": "invent",
+   "lesson": 100,
+   "text": "'MODULO': no short law explained 'MODULO/2' directly, so I watched it step: raising the first number by one does if eq(acc, pred(t)) then 0 else succ(acc) (found as rule and exceptions), starting from 0; so 'MODULO/2' is: start there and step x times; and t steps always come back to the start, so only the steps after whole turns matter"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'RAISED TO' means repeated_groups(x, y) to me (9 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS GREATER THAN' means lt(y, x) to me (10 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS LESS THAN' means lt(x, y) to me (11 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS EQUAL TO' with [4, 6]: I expected True, it printed ['False']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS EQUAL TO' with [3, 3]: I expected False, it printed ['True']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS EQUAL TO' means eq(x, y) to me (13 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS AT LEAST' with [10, 2]: I expected False, it printed ['True']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS AT LEAST' with [0, 1]: I expected True, it printed ['False']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS AT LEAST' means not(lt(x, y)) to me (15 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS AT MOST' with [3, 3]: I expected False, it printed ['True']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS AT MOST' means not(lt(y, x)) to me (15 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS NOT' with [4, 4]: I expected True, it printed ['False']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'IS NOT' means not(eq(x, y)) to me (13 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'+' means merge(x, y) to me (6 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'-' means pay(y, x) to me (6 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'*' means groups(x, y) to me (6 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'%' with [3, 0]: I expected 0, it printed None; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'%' makes a program fail when eq(y, 0)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'%' means repeat x times [step:MODULO/2(\u00b7, y)] starting from 0 to me (8 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'**' means repeated_groups(x, y) to me (6 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'>' with [11, 11]: I expected True, it printed ['False']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'>' means lt(y, x) to me (7 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'<' with [11, 11]: I expected True, it printed ['False']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'<' means lt(x, y) to me (7 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'==' means eq(x, y) to me (6 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'>=' with [5, 1]: I expected False, it printed ['True']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'>=' with [5, 5]: I expected False, it printed ['True']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'>=' means not(lt(x, y)) to me (9 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'<=' with [0, 0]: I expected False, it printed ['True']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'<=' means not(lt(y, x)) to me (9 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'!=' means not(eq(x, y)) to me (6 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'MINUS' means pay(x, 0) to me (9 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'-' means pay(x, 0) to me (6 runs; 3 fresh tries predicted; the same as a word I know)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "I read 'True' as 'it holds' and 'False' as 'it doesn't': my truth-words take 42 pieces that way, 42 the other way round; both readings predict the same, so this is only a convention"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 100,
+   "text": "Now words that join whole statements."
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'AND' with [True, False]: I expected True, it printed ['False']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'AND' means and(p, q) to me (10 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'OR' with [True, False]: I expected False, it printed ['True']; thinking again"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'OR' means not(and(not(p), not(q))) to me (10 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "'NOT' means not(p) to me (9 runs; 6 fresh tries predicted)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 100,
+   "text": "Now programs with two operators."
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "my grammar: tightest first: {**}, chaining from the right > {%, *, -(before a value)}, chaining from the left > {+, -}, chaining from the left > {!=, <, <=, ==, >, >=}, chaining from the left > {AND, NOT(before a value)}, chaining from the left > {OR}, chaining from the left (8 longer programs I wrote predicted in a row)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 100,
+   "text": "Now programs with brackets."
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "the mark '(' opens a group: what follows, up to its partner, is worked out first"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "the mark ')' closes a group"
+  },
+  {
+   "kind": "code",
+   "lesson": 100,
+   "text": "my grammar: tightest first: {**}, chaining from the right > {%, *, -(before a value)}, chaining from the left > {+, -}, chaining from the left > {!=, <, <=, ==, >, >=}, chaining from the left > {AND, NOT(before a value)}, chaining from the left > {OR}, chaining from the left (8 longer programs I wrote predicted in a row)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 100,
+   "text": "That's all: 328 programs run (107 by me, 221 by you)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 100,
+   "text": "Exam for lesson 100, attempt 1: passed"
   }
  ],
  "memory": {
@@ -23128,7 +29066,7 @@
    "see_push": [
     {
      "F": 2.0,
-     "a": 0.3334430702513687,
+     "a": 0.3334430702513688,
      "m": 6.0
     },
     {
@@ -23143,12 +29081,12 @@
     },
     {
      "F": 1.0,
-     "a": 0.1671833686854499,
+     "a": 0.1671833686854498,
      "m": 6.0
     },
     {
      "F": 2.0,
-     "a": 0.3333690180511314,
+     "a": 0.33336901805113134,
      "m": 6.0
     },
     {
@@ -23163,7 +29101,7 @@
     },
     {
      "F": 10.0,
-     "a": 1.6665872269870263,
+     "a": 1.666587226987026,
      "m": 6.0
     },
     {
@@ -23173,22 +29111,22 @@
     },
     {
      "F": 5.0,
-     "a": 5.009662331490423,
+     "a": 5.009662331490421,
      "m": 1.0
     },
     {
      "F": 6.0,
-     "a": 1.2010144762359025,
+     "a": 1.2010144762359027,
      "m": 5.0
     },
     {
      "F": 4.0,
-     "a": 0.8017849490320278,
+     "a": 0.8017849490320275,
      "m": 5.0
     },
     {
      "F": 10.0,
-     "a": 2.504790346869806,
+     "a": 2.5047903468698056,
      "m": 4.0
     },
     {
@@ -23198,7 +29136,7 @@
     },
     {
      "F": 8.0,
-     "a": 1.335015801255612,
+     "a": 1.3350158012556121,
      "m": 6.0
     },
     {
@@ -23215,177 +29153,177 @@
    "see_roll": [
     {
      "run": "Hill1",
-     "v": 0.6166303011672634,
-     "y": 1.0573975103217224,
-     "\u00b1v": 0.040968418961885064,
-     "\u00b1y": 0.0024148337645162245
+     "v": 0.6166303011672649,
+     "y": 1.0573975103217221,
+     "\u00b1v": 0.04096841896188139,
+     "\u00b1y": 0.002414833764516236
     },
     {
      "run": "Hill1",
-     "v": 1.5180500129877132,
+     "v": 1.5180500129877044,
      "y": 0.9712914454580215,
-     "\u00b1v": 0.056630042460601965,
+     "\u00b1v": 0.056630042460598905,
      "\u00b1y": 0.004216135321612957
     },
     {
      "run": "Hill1",
-     "v": 2.312294822719414,
+     "v": 2.312294822719422,
      "y": 0.8330017363744165,
-     "\u00b1v": 0.06627493142137221,
-     "\u00b1y": 0.004069464310459885
+     "\u00b1v": 0.06627493142138013,
+     "\u00b1y": 0.004069464310459878
     },
     {
      "run": "Hill1",
-     "v": 2.9072233365540145,
-     "y": 0.6199548366860906,
-     "\u00b1v": 0.049350105464723175,
-     "\u00b1y": 0.004902839488138537
+     "v": 2.907223336554023,
+     "y": 0.6199548366860907,
+     "\u00b1v": 0.04935010546472289,
+     "\u00b1y": 0.004902839488138534
     },
     {
      "run": "Hill1",
-     "v": 3.793723803610671,
+     "v": 3.7937238036106704,
      "y": 0.3838130935697074,
-     "\u00b1v": 0.08901463609148336,
+     "\u00b1v": 0.08901463609149188,
      "\u00b1y": 0.006297480465042096
     },
     {
      "run": "Hill1",
      "v": 4.081025580364369,
      "y": 0.15910006972413934,
-     "\u00b1v": 0.06341280097027613,
+     "\u00b1v": 0.06341280097027731,
      "\u00b1y": 0.0044018335115159415
     },
     {
      "run": "Hill1",
-     "v": 4.65873170803361,
-     "y": 0.010861479389552196,
-     "\u00b1v": 0.07297459299427808,
+     "v": 4.658731708033607,
+     "y": 0.010861479389552203,
+     "\u00b1v": 0.07297459299428599,
      "\u00b1y": 0.005238102907118389
     },
     {
      "run": "Hill1",
-     "v": 4.52354793103769,
+     "v": 4.523547931037703,
      "y": 0.047513119456860105,
-     "\u00b1v": 0.03817579156309475,
+     "\u00b1v": 0.038175791563093316,
      "\u00b1y": 0.004306402902017158
     },
     {
      "run": "Hill1",
      "v": 4.104699879011321,
-     "y": 0.25578651150323584,
-     "\u00b1v": 0.068359637629615,
-     "\u00b1y": 0.005429998242861865
+     "y": 0.2557865115032359,
+     "\u00b1v": 0.0683596376296224,
+     "\u00b1y": 0.005429998242861869
     },
     {
      "run": "Hill2",
-     "v": 0.8754447759604396,
+     "v": 0.8754447759604533,
      "y": 2.3630546583993635,
-     "\u00b1v": 0.06009614230099751,
-     "\u00b1y": 0.003929364582105418
+     "\u00b1v": 0.06009614230098811,
+     "\u00b1y": 0.003929364582105458
     },
     {
      "run": "Hill2",
-     "v": 1.5789257428851382,
+     "v": 1.57892574288513,
      "y": 2.2564964229660034,
-     "\u00b1v": 0.051507535717100816,
+     "\u00b1v": 0.05150753571710427,
      "\u00b1y": 0.004438275100505125
     },
     {
      "run": "Hill2",
-     "v": 2.4565881543866643,
+     "v": 2.4565881543866555,
      "y": 2.0871535258010763,
-     "\u00b1v": 0.1327088616632914,
-     "\u00b1y": 0.002756092136800428
+     "\u00b1v": 0.13270886166328927,
+     "\u00b1y": 0.002756092136800391
     },
     {
      "run": "Hill2",
-     "v": 3.3764178677042413,
-     "y": 1.8170427018204787,
-     "\u00b1v": 0.14089362464608787,
-     "\u00b1y": 0.001878900134047329
+     "v": 3.37641786770423,
+     "y": 1.8170427018204791,
+     "\u00b1v": 0.14089362464607844,
+     "\u00b1y": 0.0018789001340473207
     },
     {
      "run": "Hill2",
-     "v": 4.017761516795381,
+     "v": 4.017761516795376,
      "y": 1.4467802947158737,
-     "\u00b1v": 0.17678530568017994,
+     "\u00b1v": 0.17678530568018383,
      "\u00b1y": 0.010095756427107973
     },
     {
      "run": "Hill2",
-     "v": 5.323939708253378,
+     "v": 5.32393970825338,
      "y": 1.018734184813547,
-     "\u00b1v": 0.051030277131514375,
+     "\u00b1v": 0.05103027713151438,
      "\u00b1y": 0.0031889917552774625
     },
     {
      "run": "Hill2",
-     "v": 5.9991784151276715,
-     "y": 0.5865814482348601,
-     "\u00b1v": 0.02927567719179896,
-     "\u00b1y": 0.002156160982499254
+     "v": 5.999178415127679,
+     "y": 0.5865814482348602,
+     "\u00b1v": 0.02927567719180062,
+     "\u00b1y": 0.0021561609824992567
     },
     {
      "run": "Hill2",
-     "v": 6.503813182582069,
+     "v": 6.5038131825821015,
      "y": 0.182981381403702,
-     "\u00b1v": 0.06383004577158777,
+     "\u00b1v": 0.06383004577158093,
      "\u00b1y": 0.004415039730261709
     },
     {
      "run": "Hill2",
-     "v": 6.88241204919106,
+     "v": 6.882412049191034,
      "y": 0.019914598658874662,
-     "\u00b1v": 0.07283525949979207,
+     "\u00b1v": 0.07283525949979044,
      "\u00b1y": 0.01610799547958766
     },
     {
      "run": "Hill3",
-     "v": 0.6550471327482845,
+     "v": 0.6550471327482683,
      "y": 2.467276424004177,
-     "\u00b1v": 0.0649336846533601,
-     "\u00b1y": 0.005697626793914308
+     "\u00b1v": 0.06493368465335239,
+     "\u00b1y": 0.005697626793914298
     },
     {
      "run": "Hill3",
-     "v": 1.664076951232507,
+     "v": 1.6640769512324975,
      "y": 2.364856021550368,
-     "\u00b1v": 0.10900000374500224,
+     "\u00b1v": 0.10900000374499091,
      "\u00b1y": 0.005136741925012019
     },
     {
      "run": "Hill3",
-     "v": 2.3659804697758147,
-     "y": 2.1903915925248874,
-     "\u00b1v": 0.0833349425216461,
-     "\u00b1y": 0.006020156230335504
+     "v": 2.365980469775821,
+     "y": 2.190391592524887,
+     "\u00b1v": 0.08333494252165163,
+     "\u00b1y": 0.006020156230335437
     },
     {
      "run": "Hill3",
-     "v": 3.499979316430158,
-     "y": 1.9167334450974918,
-     "\u00b1v": 0.2062126345637269,
-     "\u00b1y": 0.006084444348175644
+     "v": 3.4999793164301436,
+     "y": 1.916733445097492,
+     "\u00b1v": 0.20621263456372968,
+     "\u00b1y": 0.006084444348175655
     },
     {
      "run": "Hill3",
-     "v": 4.061890365319909,
+     "v": 4.061890365319919,
      "y": 1.5872464841576783,
-     "\u00b1v": 0.05715669193248748,
+     "\u00b1v": 0.05715669193248635,
      "\u00b1y": 0.000794770297940886
     },
     {
      "run": "Hill3",
-     "v": 5.186892662649472,
+     "v": 5.186892662649473,
      "y": 1.185037892498328,
-     "\u00b1v": 0.1414749021186546,
+     "\u00b1v": 0.141474902118652,
      "\u00b1y": 0.004457851912003237
     },
     {
      "run": "Hill3",
-     "v": 6.0279270102934355,
-     "y": 0.7371778229152015,
-     "\u00b1v": 0.15268214269256342,
+     "v": 6.027927010293424,
+     "y": 0.7371778229152011,
+     "\u00b1v": 0.15268214269256122,
      "\u00b1y": 0.0029070089711262263
     }
    ],
@@ -23393,22 +29331,22 @@
     {
      "W": 1.0,
      "spring": "Hang3",
-     "x": 0.979525720186841
+     "x": 0.9795257201868408
     },
     {
      "W": 1.0,
      "spring": "Hang1",
-     "x": 0.7440121268407052
+     "x": 0.744012126840705
     },
     {
      "W": 1.0,
      "spring": "Hang4",
-     "x": 0.6099725750806848
+     "x": 0.6099725750806841
     },
     {
      "W": 3.0,
      "spring": "Hang5",
-     "x": 2.0980668878590345
+     "x": 2.098066887859035
     },
     {
      "W": 2.0,
@@ -23418,17 +29356,17 @@
     {
      "W": 3.0,
      "spring": "Hang1",
-     "x": 2.260329239232834
+     "x": 2.260329239232833
     },
     {
      "W": 3.0,
      "spring": "Hang1",
-     "x": 2.259855746997385
+     "x": 2.259855746997384
     },
     {
      "W": 2.0,
      "spring": "Hang1",
-     "x": 1.5014504331248884
+     "x": 1.5014504331248877
     },
     {
      "W": 1.0,
@@ -23438,12 +29376,12 @@
     {
      "W": 2.0,
      "spring": "Hang1",
-     "x": 1.5018740824054935
+     "x": 1.5018740824054941
     },
     {
      "W": 3.0,
      "spring": "Hang3",
-     "x": 2.9586149256837486
+     "x": 2.958614925683749
     },
     {
      "W": 1.0,
@@ -23458,42 +29396,42 @@
     {
      "W": 1.0,
      "spring": "Hang5",
-     "x": 0.7081148358754288
+     "x": 0.708114835875429
     },
     {
      "W": 3.0,
      "spring": "Hang4",
-     "x": 1.8243241509831785
+     "x": 1.824324150983178
     },
     {
      "W": 2.0,
      "spring": "Hang2",
-     "x": 1.7437989830327665
+     "x": 1.7437989830327674
     },
     {
      "W": 2.0,
      "spring": "Hang2",
-     "x": 1.7536496561200245
+     "x": 1.753649656120025
     },
     {
      "W": 1.0,
      "spring": "Hang2",
-     "x": 0.8762802440838409
+     "x": 0.8762802440838411
     },
     {
      "W": 2.0,
      "spring": "Hang4",
-     "x": 1.2107991347082399
+     "x": 1.2107991347082392
     },
     {
      "W": 1.0,
      "spring": "Hang4",
-     "x": 0.6073475089018476
+     "x": 0.6073475089018472
     },
     {
      "W": 2.0,
      "spring": "Hang5",
-     "x": 1.4029894959867009
+     "x": 1.4029894959867013
     },
     {
      "W": 2.0,
@@ -23503,12 +29441,12 @@
     {
      "W": 3.0,
      "spring": "Hang4",
-     "x": 1.8298907001679592
+     "x": 1.8298907001679587
     },
     {
      "W": 1.0,
      "spring": "Hang2",
-     "x": 0.8678811025592577
+     "x": 0.8678811025592572
     }
    ],
    "see_take": [
@@ -23634,17 +29572,17 @@
    ],
    "slide": [
     {
-     "d": 0.6294831482372304,
+     "d": 0.6294831482372298,
      "floor": "wood",
      "u": 1.92
     },
     {
-     "d": 0.2967375237209155,
+     "d": 0.2967375237209158,
      "floor": "wood",
      "u": 1.29
     },
     {
-     "d": 2.00876348298404,
+     "d": 2.0087634829840404,
      "floor": "wood",
      "u": 3.44
     },
@@ -23654,52 +29592,52 @@
      "u": 2.59
     },
     {
-     "d": 0.42299685939341536,
+     "d": 0.42299685939341514,
      "floor": "wood",
      "u": 1.57
     },
     {
-     "d": 0.9250490793304176,
+     "d": 0.9250490793304178,
      "floor": "wood",
      "u": 2.32
     },
     {
-     "d": 1.467670309335587,
+     "d": 1.4676703093355867,
      "floor": "wood",
      "u": 2.92
     },
     {
-     "d": 0.1879021615847985,
+     "d": 0.1879021615847981,
      "floor": "wood",
      "u": 1.03
     },
     {
-     "d": 1.7561126264352194,
+     "d": 1.7561126264352191,
      "floor": "wood",
      "u": 3.21
     },
     {
-     "d": 2.2124650854152055,
+     "d": 2.212465085415206,
      "floor": "wood",
      "u": 3.6
     },
     {
-     "d": 1.5890779708181848,
+     "d": 1.5890779708181844,
      "floor": "wood",
      "u": 3.05
     },
     {
-     "d": 0.6188934931532015,
+     "d": 0.6188934931532014,
      "floor": "wood",
      "u": 1.91
     },
     {
-     "d": 1.1887191600787879,
+     "d": 1.1887191600787885,
      "floor": "wood",
      "u": 2.63
     },
     {
-     "d": 1.1017588445556337,
+     "d": 1.1017588445556332,
      "floor": "wood",
      "u": 2.54
     },
@@ -23714,7 +29652,7 @@
      "u": 3.2
     },
     {
-     "d": 0.8329900373332271,
+     "d": 0.8329900373332273,
      "floor": "wood",
      "u": 2.2
     }
@@ -27884,10 +33822,10 @@
    "form": "sum",
    "group_by": "run",
    "properties": {
-    "S1": 1.4269999999993834,
-    "S2": 1.474000000000194,
-    "S3": 2.1010000000006093,
-    "S4": 2.6149999999998985,
+    "S1": 1.4269999999993832,
+    "S2": 1.4740000000001938,
+    "S3": 2.101000000000609,
+    "S4": 2.614999999999899,
     "S5": 3.496
    },
    "provenance": {
@@ -27907,13 +33845,13 @@
      {
       "v": 2
      },
-     0.050968399592278626
+     0.050968399592278606
     ],
     [
      {
       "c": 2
      },
-     10.193679918447769
+     10.193679918447778
     ]
    ]
   },
@@ -27929,7 +33867,7 @@
    },
    "properties": {
     "C1": 60.0,
-    "C2": 75.0,
+    "C2": 75.00000000000001,
     "C4": 85.71428571425241,
     "C5": 99.99999999999999,
     "C6": 150.0,
@@ -27943,7 +33881,7 @@
    "spread": 0.0
   },
   "coil_stretch~why": {
-   "constant": 599.9999999999611,
+   "constant": 599.9999999999612,
    "etype": "coil_stretch~why",
    "form": "product",
    "group_by": null,
@@ -27958,7 +33896,7 @@
     "objects": 6,
     "support": 6
    },
-   "spread": 3.884300288822133e-13
+   "spread": 3.8861950694508257e-13
   },
   "gas": {
    "constant": 1409.3076923076924,
@@ -27979,7 +33917,7 @@
    "spread": 0.005617226160224689
   },
   "jiggle": {
-   "constant": 1.5835309584505308,
+   "constant": 1.5835309584505306,
    "etype": "jiggle",
    "form": "product",
    "group_by": null,
@@ -28030,7 +33968,7 @@
     "L2": 23.36206800904301,
     "L3": 68.32051240351484,
     "L4": 16.498269862755706,
-    "L5": 58.37938820597851
+    "L5": 58.379388205978515
    },
    "provenance": {
     "experiences": 4,
@@ -28081,9 +34019,9 @@
    "form": "sum",
    "group_by": "run",
    "properties": {
-    "R1": 2.8979999999991723,
+    "R1": 2.897999999999172,
     "R2": 4.241000000000818,
-    "R3": 2.760000000000006,
+    "R3": 2.760000000000005,
     "R4": 3.7480000000002165,
     "R5": 1.8929999999996898
    },
@@ -28092,7 +34030,7 @@
     "lesson": 12,
     "support": 11
    },
-   "spread": 1.2472194889476027e-12,
+   "spread": 1.2473727288405807e-12,
    "terms": [
     [
      {
@@ -28104,7 +34042,7 @@
      {
       "v": 2
      },
-     0.05096839959225779
+     0.050968399592257775
     ]
    ]
   },
@@ -28125,23 +34063,23 @@
     "lesson": 21,
     "support": 15
    },
-   "spread": 0.0019885178208968314
+   "spread": 0.0019885178208971645
   },
   "see_roll": {
    "etype": "see_roll",
    "form": "sum",
    "group_by": "run",
    "properties": {
-    "Hill1": 1.0898631103858136,
-    "Hill2": 2.3977637320105374,
-    "Hill3": 2.5059154061349354
+    "Hill1": 1.0898631103858192,
+    "Hill2": 2.3977637320105334,
+    "Hill3": 2.505915406134934
    },
    "provenance": {
     "experiences": 11,
     "lesson": 21,
     "support": 13
    },
-   "spread": 0.020932666330616315,
+   "spread": 0.02093266633061513,
    "terms": [
     [
      {
@@ -28153,7 +34091,7 @@
      {
       "v": 2
      },
-     0.050939558214862186
+     0.05093955821486218
     ]
    ]
   },
@@ -28168,21 +34106,21 @@
     "x": -1
    },
    "properties": {
-    "Hang1": 1.3324462883415984,
+    "Hang1": 1.3324462883415988,
     "Hang2": 1.1447058999131237,
     "Hang3": 1.0157251150579671,
-    "Hang4": 1.6443220447663704,
-    "Hang5": 1.4225384760224606
+    "Hang4": 1.6443220447663713,
+    "Hang5": 1.42253847602246
    },
    "provenance": {
     "experiences": 9,
     "lesson": 21,
     "support": 15
    },
-   "spread": 0.01262371471777985
+   "spread": 0.012623714717779512
   },
   "slide": {
-   "constant": 0.17180149400974493,
+   "constant": 0.1718014940097449,
    "etype": "slide",
    "form": "product",
    "group_by": null,
@@ -28197,7 +34135,7 @@
     "lesson": 24,
     "support": 15
    },
-   "spread": 0.04330807090767551
+   "spread": 0.04330807090767726
   },
   "stretch": {
    "constant": null,
@@ -28331,7 +34269,7 @@
     "support": 0
    },
    "scope": "per group",
-   "spread": 0.00043605890635646104,
+   "spread": 0.00043605890635616,
    "target": "z",
    "template": {
     "bias": false,
@@ -28499,7 +34437,7 @@
     "support": 0
    },
    "scope": "per group",
-   "spread": 0.0001167179966592357,
+   "spread": 0.00011671799665934757,
    "target": "angle",
    "template": {
     "bias": false,

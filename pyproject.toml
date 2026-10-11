@@ -7,6 +7,8 @@ dependencies = ["numpy>=1.24"]   # Phase 3 senses; lessons 0-18 run without it
 
 [project.optional-dependencies]
 dev = ["pytest"]
+# the Code stage: Engc (the owner's language) is the sandbox's world, pinned to one commit
+code = ["engc @ git+https://github.com/ashutoshavasthi/Engc-V1@eec6e27dded90304cfcbd155b2e572fbd21e9482"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

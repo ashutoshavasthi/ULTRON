@@ -69,6 +69,7 @@ class Brain:
         self.quantities = {}                # lengths etc. Ultron holds an idea about
         self.candidates = {}                # spec -> predictions kept in mind, not assumed
         self.lesson = None
+        self.code = None                    # what it learned about programs (code lessons)
 
     # ------------------------------------------------------------------ utils
     def note(self, kind, text, **extra):
@@ -847,6 +848,7 @@ class Brain:
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
+            **({"code": self.code} if self.code is not None else {}),
         }
 
     def save(self, path):
@@ -892,6 +894,7 @@ class Brain:
         b.curiosity = Curiosity.from_json(d.get("curiosity", {}))
         b.memory = Memory.from_json(d["memory"])
         b.log = list(d.get("log", []))
+        b.code = d.get("code")
         return b
 
 

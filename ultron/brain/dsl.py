@@ -276,6 +276,11 @@ def iterate(F, n, x, t, library):
     if F[0] == "call1" and F[1] in library.cycles:
         # on a cycle, k repeats change nothing, and going back = going on round
         n = n % library.cycles[F[1]]
+    elif F[0] == "call" and library.cycles.get(F[1]) == "param" and isinstance(t, int) \
+            and not isinstance(t, bool) and t > 0:
+        # a step Ultron checked comes back to where it started after as many repeats as
+        # its own setting (code lesson 100): only the repeats after whole turns matter
+        n = n % t
     if n < 0:
         # doing something a below-zero number of times = undoing it that many times
         G = library.inverse_of(F)

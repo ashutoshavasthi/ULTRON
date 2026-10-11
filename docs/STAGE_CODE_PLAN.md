@@ -93,8 +93,9 @@ identical.
 
 | # | Status |
 |---|---|
-| C1 | open (in progress) |
-| C2–C9 | open |
+| C1 | **met** (lesson 100, exam seed 7001): **198/200** held-out expressions right, precision **100%** (198 answered, 0 wrong; the 2 it declined have values too big for it to work out), from **328 runs** (107 the Trainer's, 221 its own). Baselines: lookup 0, nearest 37, left to right 29: margin 161 points (≥ 60 needed). Every word's meaning is one of its own laws found by its ordinary search; `MODULO`, which no short program explains, was found by **stepping** (a usual rule, when it fails, what instead) and checked to come round after whole turns. Its grammar, found from ordering constraints and its own experiments where rival grammars disagree: `**` tightest and chaining from the right, then `* % −(before a value)`, then `+ −`, then the comparisons, then `AND NOT`, then `OR`. Dev seeds 7501/7502: 198/200 and 197/200, precision 100%. Retrain byte-identical, every lesson passes on the first attempt, failure lab and all 115 tests pass |
+| C2 | open (in progress: films of running programs, held-out program writer) |
+| C3–C9 | open |
 
 ## Order
 

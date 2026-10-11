@@ -553,3 +553,14 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _confirm_: tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 28, attempt 1: passed
+
+## Lesson 100
+
+- **Trainer**: Lesson 100: Reading Engc: what expressions mean
+- **Trainer**: These are programs in a language called Engc. I'll run some and you watch what each one prints. Later you can write and run your own.
+- Ultron _invent_: 'MODULO': no short law explained 'MODULO/2' directly, so I watched it step: raising the first number by one does if eq(acc, pred(t)) then 0 else succ(acc) (found as rule and exceptions), starting from 0; so 'MODULO/2' is: start there and step x times; and t steps always come back to the start, so only the steps after whole turns matter
+- **Trainer**: Now words that join whole statements.
+- **Trainer**: Now programs with two operators.
+- **Trainer**: Now programs with brackets.
+- **Trainer**: That's all: 328 programs run (107 by me, 221 by you).
+- **Trainer**: Exam for lesson 100, attempt 1: passed
