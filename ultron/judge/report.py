@@ -238,6 +238,14 @@ def special_section(results, brain):
                      f"of {rg} answers wholly true; each event word settled after at most "
                      f"{max(r30['sentences_to_learn'].values())} sentences that used it; "
                      f"{r30['sentences_heard']} sentences heard in all.")
+    r31 = results.get("31") or results.get(31)
+    if r31 and r31.get("precision"):
+        right, gave = r31["precision"]
+        lines.append(f"- **How words combine** (lesson 31, stage 3 L3): on new tables, the "
+                     f"things meant {right} times right of {gave} answers, in sentences nested "
+                     f"deeper, with more phrases joined, and with words in places it never "
+                     f"heard them; it found its grammar from {r31['sentences_heard']} "
+                     f"sentences.")
     r10 = results.get("10") or results.get(10)
     if r10:
         lines.append("- **Tough final exam** (lesson 10): no teaching; kinds of question never "

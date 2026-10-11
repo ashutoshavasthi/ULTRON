@@ -1702,6 +1702,83 @@ def exam_events(brain, seed=1030):
     return r
 
 
+# ---------------------------------------------------------------- lesson 31 (stage 3, L3)
+def words_baseline(known, words, kinds):
+    """Baseline (fixed 2026-10-11, before measuring): bag of words. The things that fit
+    every word it knows a kind for, whatever the order; every other word ignored."""
+    from ..brain.language import fits
+    ms = [known[w] for w in words if known.get(w)]
+    return sorted(i for i, k in enumerate(kinds) if all(fits(m, k) for m in ms))
+
+
+def first_phrase_baseline(known, words, kinds):
+    """Baseline (fixed 2026-10-11, before measuring): first phrase. The one thing that
+    fits the words of the first noun phrase (up to the first word that names no kind);
+    the rest of the sentence ignored."""
+    from ..brain.language import fits
+    ms = []
+    for w in words:
+        if w in known and known[w]:
+            ms.append(known[w])
+        elif w not in known:
+            break
+    hits = [i for i, k in enumerate(kinds) if all(fits(m, k) for m in ms)]
+    return hits if len(hits) == 1 else None
+
+
+def _table_things(seen, things):
+    """The Judge's own check: which true thing each thing Ultron saw is (nearest, within
+    4 pixels; -1 if none)."""
+    out = []
+    for s in seen:
+        d = [(s["x"] - t["x"]) ** 2 + (s["y"] - t["y"]) ** 2 for t in things]
+        j = min(range(len(things)), key=lambda k: d[k])
+        out.append(j if d[j] < 16 else -1)
+    return out
+
+
+def exam_grammar(brain, seed=1031):
+    """Lesson 31 (stage 3, L3): understanding sentences nested deeper, with more phrases
+    joined, and with words in places it never heard them, on new tables."""
+    from ..brain import grammar
+    from ..trainer.grammar_lessons import EXAM, HowWordsCombine
+    b = copy.deepcopy(brain)
+    tallies = {kind: Tally(f"the things meant, {kind} (new tables)",
+                           baselines=("bag of words", "first phrase"))
+               for kind, _ in EXAM}
+    if b.eyes is None or not b.grammar:
+        return _result(31, list(tallies.values()), 0.95)
+    known = grammar.known_kinds(b)
+    known = {w: tuple(tuple(p) for p in m) for w, m in known.items()}
+    lesson = HowWordsCombine(seed)
+    gave = right = 0
+    per = {}
+    for said, look, things, meant, kind in lesson.talks(kinds=EXAM):
+        seen = grammar.see_table(b, look)
+        which = _table_things(seen, things)
+        truth = sorted(meant)
+        got, why = grammar.understand_table(b, said, seen)
+        mine = None if got is None else sorted(which[i] for i in got)
+        t = tallies[kind]
+        t.item(said, truth, mine)
+        gave += mine is not None
+        right += mine == truth
+        g, r = per.get(kind, (0, 0))
+        per[kind] = (g + (mine is not None), r + (mine == truth))
+        words, _, kinds = grammar.heard_as(b, said, seen)
+        for name, base in (("bag of words", words_baseline),
+                           ("first phrase", first_phrase_baseline)):
+            got = base(known, words, kinds)
+            t.add(name, None if got is None else sorted(which[i] for i in got), truth)
+    lexicon, _ = grammar.brain_grammar(b)
+    return _result(31, list(tallies.values()), 0.95,
+                   {"precision": [right, gave],
+                    "precision_by_kind": {k: [r, g] for k, (g, r) in sorted(per.items())},
+                    "sentences_heard": len(b.tables),
+                    "grammar": {w: grammar.describe_option(o, grammar.kind_names(b))
+                                for w, o in sorted(lexicon.items())}})
+
+
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
@@ -1709,4 +1786,5 @@ EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          17: exam_coils, 18: exam_phase3, 19: exam_eyes, 20: exam_seeing_numbers,
          21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
          25: exam_phase3_senses, 26: exam_microscope,
-         27: exam_change, 28: exam_rows, 29: exam_words, 30: exam_events}
+         27: exam_change, 28: exam_rows, 29: exam_words, 30: exam_events,
+         31: exam_grammar}

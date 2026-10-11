@@ -483,4 +483,6 @@ class WordsForWhatHappens(Lesson):
 
 
 def language_lessons(seed=0):
-    return [WordsByPointing(seed + 29), WordsForWhatHappens(seed + 30)]
+    from .grammar_lessons import HowWordsCombine
+    return [WordsByPointing(seed + 29), WordsForWhatHappens(seed + 30),
+            HowWordsCombine(seed + 31)]

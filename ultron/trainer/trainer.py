@@ -79,6 +79,8 @@ class Trainer:
                 self.teach_words(lesson)
             elif lesson.number == 30:
                 self.teach_events(lesson)
+            elif lesson.number == 31:
+                self.teach_grammar(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -439,6 +441,58 @@ class Trainer:
                        "after a knock."}
         brain.note("invent", brain.inventions["words for comparing"]["story"])
 
+    # ----------------------------------------------------------- lesson 31
+    def teach_grammar(self, lesson):
+        from ..brain import grammar
+        brain = self.brain
+        if brain.eyes is None:
+            self.say("You have no eyes yet. The lesson stops here.")
+            return
+        self.say("Back to the tables. I'll say longer things now.")
+        heard = []
+        for said, look, _, _, _ in lesson.talks():
+            seen = grammar.see_table(brain, look)
+            brain.tables.append({"said": said, "things": seen})
+            heard.append(grammar.heard_as(brain, said, seen))
+        known = grammar.known_kinds(brain)
+        lexicon, rivals = grammar.learn_grammar(heard, brain.categories, known=known,
+                                                rivals=True)
+        brain.grammar = {w: grammar.to_json(o) for w, o in lexicon.items()}
+        brain.rival_grammars = [{w: grammar.to_json(o) for w, o in r.items() if o != lexicon[w]}
+                                for r in rivals]
+        badly = grammar.doubtful_words(heard, lexicon)
+        unsteady = grammar.unsteady_words(heard, brain.categories, known=known)
+        brain.grammar_doubts = sorted(set(badly) | set(unsteady))
+        for w in badly:
+            brain.note("word", f"I'm not sure what '{w}' does: the sentences with it often "
+                               f"fit no reading")
+        for w in unsteady:
+            brain.note("word", f"I'm not sure what '{w}' does: I'd find it differently from "
+                               f"each half of what I heard")
+        names = grammar.kind_names(brain)
+        for w, o in sorted(lexicon.items()):
+            if w not in brain.vocab:
+                brain.bind(w, ("grammar", grammar.to_json(o)))
+            others = sorted({r[w] for r in rivals if r[w] != o})
+            brain.note("word", f"'{w}' {grammar.describe_option(o, names)}"
+                       + (" (not sure yet: it could also be that it "
+                          + "; or ".join(grammar.describe_option(r, names) for r in others)
+                          + ")" if others else ""))
+        kinds = sorted({o[0] for o in lexicon.values() if o[0] != "nothing"})
+        brain.inventions["how words combine"] = {
+            "shape": "grammar", "primitives": [], "lesson": brain.lesson,
+            "grammar": dict(sorted(brain.grammar.items())),
+            "story": ("Each word does one of a few things to the phrase next to it, and the "
+                      "words that do the same thing combine the same way: "
+                      + "; ".join(f"'{w}' {grammar.describe_option(o, names)}"
+                                  for w, o in sorted(lexicon.items()) if o[0] != "nothing")
+                      + ". " + ", ".join(f"'{w}'" for w, o in sorted(lexicon.items())
+                                          if o[0] == "nothing")
+                      + " mean nothing by themselves. A phrase can sit inside another of "
+                        "the same kind, as deep as you like, and phrases can be joined "
+                        f"({len(kinds)} kinds of word in all).")}
+        brain.note("invent", brain.inventions["how words combine"]["story"])
+
     @staticmethod
     def _motion_meaning(meaning, kinds):
         if not meaning:
@@ -495,6 +549,8 @@ class Trainer:
         30: {"words for events": "verbs, bound to kinds of motion",
              "words for comparing": "comparatives and before/after, bound to measured "
                                     "quantities (mass through conservation of momentum)"},
+        31: {"how words combine": "a categorial grammar: word classes, word order, "
+                                  "recursion (nesting) and coordination"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }

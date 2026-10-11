@@ -87,8 +87,8 @@ _How does search time grow with more examples?_ Breaks at: **did not break**
 
 | examples | what it did | |
 |---|---|---|
-| 20 examples | `2.1 s` | ✅ |
-| 100 examples | `0.9 s` | ✅ |
+| 20 examples | `3.2 s` | ✅ |
+| 100 examples | `1.0 s` | ✅ |
 | 400 examples | `0.5 s` | ✅ |
 
 ## noise
@@ -254,4 +254,21 @@ _Does it still learn words for events and for comparing when the Trainer sometim
 | 20% of comparing sentences say the wrong word | `15/60 right (15/15 of its answers)` | ❌ |
 
 A row passes at 54/60 (90%). Event words were taught with 100 sentences and comparing words with 120 in the first rows.
+
+## how words combine
+
+_Does it still find how words combine when it mishears words, when the Trainer talks about another table, when a word has two meanings, or when it hears less?_ Breaks at: **20% of sentences have a word misheard**
+
+| misheard words; wrong tables; two meanings; sentences heard | what it did | |
+|---|---|---|
+| 0% of sentences have a word misheard | `60/60 right (60/60 of its answers)` | ✅ |
+| 20% of sentences have a word misheard | `34/60 right (34/34 of its answers)` | ❌ |
+| 40% of sentences have a word misheard | `19/60 right (19/19 of its answers)` | ❌ |
+| 20% of sentences are about another table | `60/60 right (60/60 of its answers)` | ✅ |
+| 40% of sentences are about another table | `0/60 right (0/0 of its answers)` | ❌ |
+| 'left' has two meanings (also 'above', half the time) | `35/60 right (35/35 of its answers)` | ❌ |
+| 75 sentences heard | `25/60 right (25/25 of its answers)` | ❌ |
+| 30 sentences heard | `0/60 right (0/0 of its answers)` | ❌ |
+
+A row passes at 57/60 (95%). The grammar was found from 300 sentences in the first rows.
 

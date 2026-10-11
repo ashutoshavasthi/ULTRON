@@ -75,9 +75,14 @@ comes with its reasons.
   after, more, fewer), weighing things by its momentum law when they knock. It names what
   things it never saw doing that are doing (200/200) and fills in the comparing word
   (113/120, never a false word).
+- From longer sentences about the tables ("the ball that is above the box right of the
+  ball"), it finds **a grammar by itself**: what each word does and how it combines with
+  its neighbours, as the shortest account of what it heard. It understands sentences
+  nested deeper than any it heard (69/70), with more phrases joined (59/60) and with
+  words in places it never heard them (70/70), and says when it isn't sure.
 
 ```bash
-python -m ultron train                          # about 15 minutes; Python 3.10+ and numpy (for the eyes)
+python -m ultron train                          # about 20 minutes; Python 3.10+ and numpy (for the eyes)
 python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
 python -m ultron ask "find rest given T@0=80 T@1=70 T@2=62"   # where a cooling cup settles
