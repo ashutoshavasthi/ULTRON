@@ -1281,7 +1281,7 @@ def exam_microscope(brain, seed=1026):
     fps, ppm = label["fps"], label["pixels_per_micron"]
     ch = info["channel"]
     held = film[150:]
-    dets, tracks, shift = real.follow(b.eyes, held, ch)
+    dets, tracks, shift = real.follow(b.microscope_eyes or b.eyes, held, ch)
     sees = Tally("on 150 pictures it NEVER learned from, it finds the spheres the scientists' "
                  "tool (trackpy) finds, within 1.5 pixels")
     lasting_share = []

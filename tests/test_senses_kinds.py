@@ -7,7 +7,8 @@ from ultron.brain.invariants import SumLaw
 def test_eyes_learned_from_touch(trained):
     brain, results = trained
     assert results[19]["passed"]
-    assert brain.eyes is not None and brain.eyes.trained_on == 400
+    # 400 handled pictures in lesson 19 (lesson 26 later adds real-film pictures)
+    assert brain.eyes is not None and brain.eyes.trained_on >= 400
     items = {i["name"][:20]: i["scores"]["ultron"] for i in results[19]["items"]}
     assert all(c >= 0.95 * n for c, n in items.values())
 

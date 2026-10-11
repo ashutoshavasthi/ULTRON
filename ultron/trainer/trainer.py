@@ -262,9 +262,14 @@ class Trainer:
         before = sum(len(t) for t in tracks) / max(1, sum(len(d) for d in dets))
         if adapt:
             trays = Trays(lesson.seed)
-            replay = [trays.handle(int(trays.rng.integers(0, 20))) for _ in range(240)]
-            brain.eyes = real.self_teach(brain.eyes, learn, ch, tracks, replay, seed=lesson.seed)
-            dets, tracks, shift = real.follow(brain.eyes, learn, ch)
+            # its old experience, as it was: things handled in varied sizes and spacings
+            replay = [trays.handle(int(trays.rng.integers(0, 20)), varied=True)
+                      for _ in range(240)]
+            # eyes adapted to the microscope, kept apart: learning a new instrument must not
+            # spoil how it sees everything else
+            brain.microscope_eyes = real.self_teach(brain.eyes, learn, ch, tracks, replay,
+                                                    seed=lesson.seed)
+            dets, tracks, shift = real.follow(brain.microscope_eyes, learn, ch)
             after = sum(len(t) for t in tracks) / max(1, sum(len(d) for d in dets))
             brain.note("invent", f"I trained my eyes on these real pictures with no one telling "
                                  f"me what is there: what lasted at least 25 pictures I took as "

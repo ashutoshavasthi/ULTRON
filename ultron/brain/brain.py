@@ -57,6 +57,7 @@ class Brain:
         self.kind_steps = {}                # spec -> {"innate", "reuse", "invent"} effort
         self.inventing = True               # may it invent new kinds? (off: ablation)
         self.eyes = None                    # learned in Phase 3 (senses/eyes.py)
+        self.microscope_eyes = None         # its eyes adapted to a real microscope (lesson 26)
         self.exceptions = {}                # spec -> experiences its law doesn't fit
         self.ambiguous = {}                 # spec -> equally simple rival laws
         self.quantity_rivals = {}           # spec -> their powers (to design experiments)
@@ -834,6 +835,8 @@ class Brain:
             "sequence_laws": {k: v.to_json() for k, v in sorted(self.slaws.items())},
             "kind_steps": dict(sorted(self.kind_steps.items())),
             "eyes": self.eyes.to_json() if self.eyes is not None else None,
+            "microscope_eyes": (self.microscope_eyes.to_json()
+                                if self.microscope_eyes is not None else None),
             "exceptions": dict(sorted(self.exceptions.items())),
             "since": dict(sorted(self.since.items())),
             "quantities": dict(sorted(self.quantities.items())),
@@ -876,6 +879,9 @@ class Brain:
         if d.get("eyes"):
             from ..senses.eyes import Eyes
             b.eyes = Eyes.from_json(d["eyes"])
+        if d.get("microscope_eyes"):
+            from ..senses.eyes import Eyes
+            b.microscope_eyes = Eyes.from_json(d["microscope_eyes"])
         b.library.inverses = dict(d.get("inverses", {}))
         b.library.cycles = dict(d.get("cycles", {}))
         b.library.symmetric = set(d.get("symmetric", []))
