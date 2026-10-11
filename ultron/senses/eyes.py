@@ -27,10 +27,12 @@ Counting a still scene uses three things animals do too (Stage 2: eyes that gene
 import numpy as np
 
 LAYERS = ((1, 8), (8, 8), (8, 1))
-SIGMA = 1.0
+SIGMA = 0.7         # how wide a spot it learns to light up where its hands felt a thing
 BACKGROUND = 0.1    # where the background sits in the pictures its eyes grew up with
 DIM = 0.45          # things standing out less than this (of what it's used to): a dim scene
 STEP_BACK = 1.5     # a view from further back must look this much clearer to be preferred
+CROWDED = 5.0       # things this close (median distance to a neighbour, pixels): crowded
+CROWDED_LOOKS = 4   # pictures it averages when a scene is crowded
 
 
 def _box(a, k):
@@ -66,6 +68,16 @@ def _align(ref, img, r=2):
             if best is None or c > best[0]:
                 best = (c, s)
     return best[1]
+
+
+def _crowding(seen):
+    """How close things sit: the median distance from each to its nearest neighbour."""
+    if len(seen) < 2:
+        return float("inf")
+    p = np.array([(x, y) for x, y, _ in seen])
+    d = np.sqrt(((p[:, None] - p[None]) ** 2).sum(-1))
+    np.fill_diagonal(d, np.inf)
+    return float(np.median(d.min(axis=1)))
 
 
 def _shrink(img, s):
@@ -202,11 +214,27 @@ class Eyes:
         helps, and looks again until two glances agree."""
         seen = []
         for _ in range(glances):
-            seen.append(len(self.see_views(self.stare(look))))
+            seen.append(len(self.look_at(look)))
             for n in set(seen):
                 if seen.count(n) >= 2:
                     return n, len(seen)
         return max(set(seen), key=lambda n: (seen.count(n), -n)), len(seen)
+
+    def look_at(self, look):
+        """The things in a still scene. In a crowded scene, where neighbours can blur into
+        one, it looks a little longer (a few pictures lined up and averaged)."""
+        img = self.stare(look)
+        seen = self.see_views(img)
+        if _crowding(seen) <= CROWDED:
+            frames = [img] + [look() for _ in range(CROWDED_LOOKS - 1)]
+            avg = np.mean(frames, axis=0)
+            for _ in range(2):
+                frames = [_align(avg, f) for f in frames]
+                avg = np.mean(frames, axis=0)
+            closer = self.see(self._adapt(avg))
+            if len(closer) >= len(seen):
+                seen = closer
+        return seen
 
     # ---------------------------------------------------------------- still scenes
     def stare(self, look, cap=64):

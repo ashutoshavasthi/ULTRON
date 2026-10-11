@@ -48,7 +48,7 @@ class Trays:
         rng = self.rng
         r0 = rng.uniform(1.1, 2.0)
         radius = (r0, r0 + rng.uniform(0.2, 1.0))
-        gap = max(rng.uniform(2.5, 6.0), 2.1 * radius[1])
+        gap = radius[1] * rng.uniform(2.0, 4.0)     # from touching to well apart
         dim, noise = 1.0, 0.08
         while True:
             try:
