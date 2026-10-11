@@ -364,7 +364,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 
 - **Trainer**: Lesson 19: Handling things
 - **Trainer**: Pick these things up and put them down. Your hands will tell you where they are; watch at the same time.
-- Ultron _invent_: I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 81.1 to 5.9). A spot must be at least 0.50 strong to be a thing: that threshold matched my hands best. From now on I see without touching.
+- Ultron _invent_: I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 75.4 to 3.2). A spot must be at least 0.17 strong to be a thing: that threshold matched my hands best. From now on I see without touching.
 - **Trainer**: Now put your hands behind your back. Only look.
 - **Trainer**: Exam for lesson 19, attempt 1: passed
 - **Trainer**: What you found in 'eyes' is what people call vision (a learned convolutional neural network).
@@ -391,14 +391,14 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 ## Lesson 21
 
 - **Trainer**: Lesson 21: Watching motion
-- Ultron _reflect_: I practised measuring with my eyes: accelerations wobble by about ±0.5%, spring stretches by about ±1.8%; heights and speeds I'll judge picture by picture
+- Ultron _reflect_: I practised measuring with my eyes: accelerations wobble by about ±0.5%, spring stretches by about ±1.1%; heights and speeds I'll judge picture by picture
 - Ultron _meet_: new kind of experience: see_push
 - Ultron _meet_: new kind of experience: see_stretch
 - Ultron _meet_: new kind of experience: see_roll
 - Ultron _stuck_: see_push: nothing stays constant yet (1 experiences)
 - Ultron _stuck_: see_stretch: nothing stays constant yet (1 experiences)
 - Ultron _stuck_: see_roll: nothing stays constant yet (1 experiences)
-- Ultron _revise_: see_push: F / (a·m) = 1.00157 [dimensionless] in every experiment (7 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: see_push: F / (a·m) = 1.00218 [dimensionless] in every experiment (7 candidates searched; tentative until it predicts 3 new experiences)
 - Ultron _stuck_: see_stretch: nothing stays constant yet (2 experiences)
 - Ultron _stuck_: see_roll: nothing stays constant yet (2 experiences)
 - Ultron _stuck_: see_stretch: nothing stays constant yet (3 experiences)
@@ -416,10 +416,9 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _revise_: see_stretch: W / x is constant for each spring but differs between them: a hidden property of each spring [the data's own units] (20 candidates searched; tentative until it predicts 3 new experiences)
 - Ultron _stuck_: see_roll: nothing stays constant yet (9 experiences)
 - Ultron _stuck_: see_roll: nothing stays constant yet (10 experiences)
-- Ultron _revise_: see_roll: Along each run, none of y, v^2 stays the same, but y + 0.049687·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 20.13 m/s²: the same units as 'a' in my 'lab_push' experiences.)
-- Ultron _invent_: Along each run, none of y, v^2 stays the same, but y + 0.049687·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 20.13 m/s²: the same units as 'a' in my 'lab_push' experiences.)
-- Ultron _stuck_: see_roll: nothing stays constant yet (19 experiences)
-- Ultron _measure_: see_roll: new run Hill3; its hidden amount is 2.5193
+- Ultron _revise_: see_roll: Along each run, none of y, v^2 stays the same, but y + 0.0507813·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.69 m/s²: the same units as 'a' in my 'lab_push' experiences.)
+- Ultron _invent_: Along each run, none of y, v^2 stays the same, but y + 0.0507813·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.69 m/s²: the same units as 'a' in my 'lab_push' experiences.)
+- Ultron _measure_: see_roll: new run Hill3; its hidden amount is 2.50778
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 21, attempt 1: passed
 - **Trainer**: What you found in 'see_push' is what people call Newton's second law, seen on video.
@@ -474,7 +473,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Lesson 24: Using what it knows
 - Ultron _meet_: new kind of experience: slide
 - Ultron _stuck_: slide: nothing stays constant yet (1 experiences)
-- Ultron _revise_: slide: d / u^2 = 0.170886 [m^-1·s^2] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: slide: d / u^2 = 0.175193 [m^-1·s^2] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 24, attempt 1: passed
 - **Trainer**: What you found in 'slide' is what people call sliding friction (stopping distance ∝ speed²).
@@ -484,6 +483,28 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Lesson 25: Phase 3 exam: seeing, inventing, acting
 - **Trainer**: No teaching today. Show me what you can do.
 - **Trainer**: Exam for lesson 25, attempt 1: passed
+
+## Lesson 26
+
+- **Trainer**: Lesson 26: The real world: a microscope film
+- Ultron _meet_: new kind of experience: jiggle
+- Ultron _meet_: new kind of experience: one_sphere
+- **Trainer**: This is a real film from a laboratory microscope: spheres in water. The label says 24 pictures a second and 2.85 pixels per micron. Watch the first 150 pictures.
+- Ultron _reflect_: through my retina's OFF channel, 84% of what I see lasts from picture to picture; the other channel shows things that come and go. Real things last, so I'll look with OFF
+- Ultron _invent_: I trained my eyes on these real pictures with no one telling me what is there: what lasted at least 25 pictures I took as a real thing, everything else as nothing (and I kept looking at my old toy scenes so I don't forget them). Before, 82% of what I saw lasted; now 86%.
+- Ultron _reflect_: I followed 1461 spheres for at least 25 pictures each, after taking out how the whole view drifted. Two halves of them disagree by 1.0% about how far spheres get: that's how precise this measuring is
+- Ultron _stuck_: jiggle: nothing stays constant yet (1 experiences)
+- Ultron _revise_: jiggle: s^2 / tau = 1.44854 [m^2·s^-1] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _stuck_: one_sphere: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
+- Ultron _invent_: None of the kinds of explanation I was born with fits 'one_sphere': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(x) stays the same for everything (3 spheres). That is a new KIND of explanation, not just a new law: each reading is the same number of times the one before. I'll keep it and try it first next time.
+- Ultron _revise_: one_sphere: ρ(x) stays the same for everything (kind 3: each reading is the same number of times the one before)
+- Ultron _invent_: None of the kinds of explanation I was born with fits 'one_sphere': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(x^1/2) stays the same for everything (3 spheres). That is a new KIND of explanation, not just a new law: not the reading itself but its power 1/2: each reading is the same number of times the one before. I'll keep it and try it first next time.
+- Ultron _revise_: one_sphere: ρ(x^1/2) stays the same for everything (kind 4: not the reading itself but its power 1/2: each reading is the same number of times the one before)
+- Ultron _stuck_: one_sphere: nothing I can express stays the same (7 spheres, 937 readings)
+- Ultron _stuck_: one_sphere: nothing I can express stays the same (8 spheres, 1051 readings)
+- Ultron _invent_: From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.591: the spread squared grows in proportion to the time.
+- **Trainer**: Exam for lesson 26, attempt 1: passed
+- **Trainer**: What you found in 'jiggle' is what people call Brownian motion: Einstein's law (mean squared displacement = 4·D·t).
 
 ## Lesson 27
 
@@ -495,17 +516,17 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _stuck_: swings: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _stuck_: swings: nothing I can express stays the same (3 pendulums, 20 readings)
 - Ultron _invent_: None of the kinds of explanation I was born with fits 'swings': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. angle[n] = a1·angle[n-1] + a2·angle[n-2] stays the same for each pendulum (3 pendulums). That is a new KIND of explanation, not just a new law: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down). I'll keep it and try it first next time.
-- Ultron _revise_: swings: angle[n] = a1·angle[n-1] + a2·angle[n-2] stays the same for each pendulum (kind 3: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))
+- Ultron _revise_: swings: angle[n] = a1·angle[n-1] + a2·angle[n-2] stays the same for each pendulum (kind 5: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))
 - Ultron _stuck_: bumps: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _stuck_: bumps: nothing I can express stays the same (3 cars, 20 readings)
-- Ultron _reuse_: bumps: nothing I was born with explains it, but a kind of explanation I invented does: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down) (z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car); 138 steps of checking
-- Ultron _revise_: bumps: z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car (kind 3: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))
+- Ultron _reuse_: bumps: nothing I was born with explains it, but a kind of explanation I invented does: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down) (z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car); 200 steps of checking
+- Ultron _revise_: bumps: z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car (kind 5: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))
 - Ultron _stuck_: yeast: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _invent_: None of the kinds of explanation I was born with fits 'yeast': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(Δ(cells^-1)) stays the same for each jar (3 jars). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time.
-- Ultron _revise_: yeast: ρ(Δ(cells^-1)) stays the same for each jar (kind 4: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
+- Ultron _revise_: yeast: ρ(Δ(cells^-1)) stays the same for each jar (kind 6: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
 - Ultron _stuck_: funnel_h: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _invent_: None of the kinds of explanation I was born with fits 'funnel_h': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. Δ(Δ(h)) stays the same for each funnel (3 funnels). That is a new KIND of explanation, not just a new law: the steps between readings change by the same amount each time. I'll keep it and try it first next time.
-- Ultron _revise_: funnel_h: Δ(Δ(h)) stays the same for each funnel (kind 5: the steps between readings change by the same amount each time)
+- Ultron _revise_: funnel_h: Δ(Δ(h)) stays the same for each funnel (kind 7: the steps between readings change by the same amount each time)
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 27, attempt 1: passed
 
