@@ -9,7 +9,7 @@
     "outcome": "merge(a, b)",
     "ok": true,
     "steps": 292,
-    "seconds": 0.02
+    "seconds": 0.01
    },
    {
     "level": "a\u00b7b",
@@ -23,14 +23,14 @@
     "outcome": "groups(a, succ(b))",
     "ok": true,
     "steps": 1605,
-    "seconds": 0.06
+    "seconds": 0.03
    },
    {
     "level": "a\u00b7b+a+b",
     "outcome": "pred(groups(succ(a), succ(b)))",
     "ok": true,
     "steps": 90707,
-    "seconds": 1.28
+    "seconds": 1.06
    },
    {
     "level": "a\u00b2+b",
@@ -51,26 +51,26 @@
     "outcome": "groups(a, succ(square(b)))",
     "ok": true,
     "steps": 12733,
-    "seconds": 0.1
+    "seconds": 0.11
    },
    {
     "level": "a\u00b3+b\u00b2",
     "outcome": "merge(square(b), groups(a, square(a)))",
     "ok": true,
     "steps": 539242,
-    "seconds": 11.75
+    "seconds": 12.15
    },
    {
     "level": "(a+1)(b+2)(a+b)",
     "outcome": "nothing found",
     "ok": false,
     "steps": 578689,
-    "seconds": 11.71
+    "seconds": 11.81
    }
   ],
   "breakpoint": "(a+1)(b+2)(a+b)",
   "note": "Search is size-ordered and exhaustive: cost grows exponentially with the size of the law.",
-  "seconds": 24.9
+  "seconds": 25.2
  },
  {
   "name": "library learning",
@@ -94,7 +94,7 @@
     "level": "S(S(a,b),S(a,a))",
     "outcome": "piece1(square(succ(a)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 15.9,
+    "seconds": 16.1,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -102,7 +102,7 @@
     "level": "S(S(a,b),S(b,b))",
     "outcome": "piece1(square(succ(b)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 9.1,
+    "seconds": 8.8,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -110,7 +110,7 @@
     "level": "S(S(a,b),S(a,b))+a",
     "outcome": "merge(a, square(succ(piece1(a, b)))) \u2014 9 pieces written out",
     "ok": true,
-    "seconds": 10.8,
+    "seconds": 10.1,
     "size_written_out": 9,
     "without_pieces": "nothing found"
    },
@@ -118,7 +118,7 @@
     "level": "S(T(a,b),T(b,a))",
     "outcome": "piece1(piece2(a, b), piece2(b, a)) \u2014 15 pieces written out",
     "ok": true,
-    "seconds": 11.0,
+    "seconds": 11.2,
     "size_written_out": 15,
     "without_pieces": "nothing found"
    },
@@ -126,14 +126,14 @@
     "level": "T(T(a,b),T(b,a))",
     "outcome": "piece2(piece2(a, b), piece2(b, a)) \u2014 16 pieces written out",
     "ok": true,
-    "seconds": 8.7,
+    "seconds": 8.3,
     "size_written_out": 16,
     "without_pieces": "nothing found"
    }
   ],
   "breakpoint": null,
   "note": "Its search alone stops at 7 pieces. The held-out laws are compositions of the family's pieces (S = (x+1)(y+1), T = (x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.",
-  "seconds": 131.3
+  "seconds": 130.7
  },
  {
   "name": "intuition",
@@ -180,7 +180,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 93.9
+  "seconds": 96.0
  },
  {
   "name": "hidden causes and noise",
@@ -200,7 +200,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 20.9
+  "seconds": 21.1
  },
  {
   "name": "few examples",
@@ -249,15 +249,15 @@
   "rows": [
    {
     "level": "20 examples",
-    "outcome": "1.4 s",
+    "outcome": "1.5 s",
     "ok": true,
-    "seconds": 1.43
+    "seconds": 1.54
    },
    {
     "level": "100 examples",
     "outcome": "0.7 s",
     "ok": true,
-    "seconds": 0.66
+    "seconds": 0.67
    },
    {
     "level": "400 examples",
@@ -268,7 +268,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 2.5
+  "seconds": 2.6
  },
  {
   "name": "noise",
@@ -431,14 +431,14 @@
     "outcome": "F / (a\u00b7m)",
     "ok": true,
     "steps": 552,
-    "seconds": 0.01
+    "seconds": 0.02
    },
    {
     "level": "10 irrelevant",
     "outcome": "F / (a\u00b7m)",
     "ok": true,
     "steps": 1612,
-    "seconds": 0.04
+    "seconds": 0.05
    }
   ],
   "breakpoint": null,
@@ -578,7 +578,7 @@
    },
    {
     "level": "32% noise",
-    "outcome": "25/25 trays counted right",
+    "outcome": "24/25 trays counted right",
     "ok": true
    },
    {
@@ -598,13 +598,13 @@
    },
    {
     "level": "overlapping (gap < diameter)",
-    "outcome": "17/25 trays counted right (merged blobs: a physical limit, reported only)",
+    "outcome": "19/25 trays counted right (merged blobs: a physical limit, reported only)",
     "ok": true
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 7.1
+  "seconds": 6.5
  },
  {
   "name": "false laws",
@@ -639,6 +639,6 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 10.2
+  "seconds": 10.4
  }
 ]

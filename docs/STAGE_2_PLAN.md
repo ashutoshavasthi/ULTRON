@@ -34,7 +34,7 @@ and the blind tests. A retrain must stay byte for byte identical.
 
 | # | Status |
 |---|---|
-| V1 | ✅ **met** (2026-10-11): every gating eyes row 24–25/25 in the failure lab (was 25, 1, 0, 0, 2, 19); on a second set of unseen trays 24–25/25. No regressions elsewhere in the lab; all 28 lessons pass on the first attempt; a retrain is byte-identical; 109 tests pass |
+| V1 | ✅ **met, and robust** (2026-10-11): every gating eyes row ≥ 23/25 on the failure lab's trays **and on three sets of unseen trays** (normal 25; 16% noise 25; 32% noise 23–24; big 25; faint 25; touching 23–24). Before Stage 2: 25, 1, 0, 0, 2, 19. No regressions elsewhere in the lab; 29 lessons pass on the first attempt; a retrain is byte-identical; 111 tests pass |
 | V2 | ✅ **met** (2026-10-11): lesson 26 is in the curriculum and passes on the first attempt. From the real trackpy microscope film: Einstein's law (spread² ∝ time); D = 0.396 µm²/s against the scientists' tool trackpy's 0.412 (4%) and the textbook's 0.455 (13%); on 150 frames it never learned from it finds 87% of trackpy's spheres and predicts the spread at 1–2 s (21/21); it claims no law for a single sphere |
 | V3–V6 | open (needs real footage of falling, swinging and bouncing: see WP3) |
 
@@ -48,8 +48,13 @@ How V1 was met (`senses/eyes.py`, `senses/world.py`):
   views. Faint: 2 → 25.
 - **Stepping back:** the picture shrunk 2× and 3×, kept only when its eyes respond
   clearly more strongly there. Big things: 0 → 25.
-- **Broader handling:** lesson 19 handles things in varied spacing, size, light and
-  camera noise. Touching: 19 → 24.
+- **Broader handling:** lesson 19 handles things of varied size, with spacing from
+  touching (2× radius) to well apart (4×), and learns a sharper spot (σ 0.7). Light and
+  noise are left to how it looks: training on varied light made the eyes fire on
+  real-film noise.
+- **Looking longer at a crowded scene:** when the things it sees sit closer than 5 px,
+  it averages 4 pictures before counting, so touching neighbours no longer blur into one.
+  Touching: 19 → 23–24 on every tray set, where it had been 16–24.
 
 Two measured pitfalls, fixed:
 - recentring the background on every picture dimmed small crowded things;
