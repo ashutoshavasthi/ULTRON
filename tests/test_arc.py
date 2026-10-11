@@ -462,3 +462,27 @@ def test_an_explanation_must_predict_the_example_it_was_not_fitted_to():
     assert used                                   # it fits every example...
     attempts, used, _ = Cm.predict(train, [g([[1, 3], [5, 0]])], loo=True)
     assert not used and attempts == [[]]          # ...but doesn't earn an answer
+
+
+def test_its_own_steps_are_tried_only_when_the_given_steps_find_nothing():
+    from ultron.arc import compose as Cm
+    pics = [g([[1, 0, 0], [0, 2, 0]]), g([[0, 3, 3], [4, 0, 0]]), g([[5, 0, 1], [0, 0, 2]])]
+    train = [(p, p[:, ::-1].copy()) for p in pics]
+    test = [g([[7, 0, 0], [0, 0, 8]])]
+    plain = Cm.predict(train, test)
+    # a grown step that also explains the task in one step: with own_after, the answer
+    # and program the given steps find are kept
+    Cm.LIBRARY[0] = [{"name": "own1", "pattern": ("flip", ("x",)), "args": [], "type": "G"}]
+    try:
+        after = Cm.predict(train, test, own_after=True)
+        assert Cm.show(after[1][0]) == Cm.show(plain[1][0]) == "flip(x)"
+        together = Cm.predict(train, test)
+        assert Cm.show(together[1][0]) == "own1()"
+        # where the given steps find nothing, its own steps are tried
+        hard = [(p, p.T[::-1, ::-1].copy()) for p in pics]
+        Cm.LIBRARY[0] = [{"name": "own1", "pattern": ("rot180", ("transpose", ("x",))),
+                          "args": [], "type": "G"}]
+        found = Cm.predict(hard, test, own_after=True, budget=200, max_size=2)
+        assert found[1] and Cm.show(found[1][0]) == "own1()"
+    finally:
+        Cm.LIBRARY[0] = None

@@ -64,13 +64,14 @@ def _init(library):
 
 MAX_SIZE = [12]
 LOO = [False]           # answer, and learn, only from explanations that earn it (leave one out)
+OWN_AFTER = [False]     # its own steps only when the given steps find no answer
 
 
 def _one(job):
     tid, t, budget = job
     attempts, used, spent = compose.predict(t["train"], [i for i, _ in t["test"]],
                                             budget=budget, max_size=MAX_SIZE[0],
-                                            loo=LOO[0])
+                                            loo=LOO[0], own_after=OWN_AFTER[0])
     if not used:
         return tid, None
     right = all(any(np.array_equal(p, o) for p in att)
@@ -109,6 +110,9 @@ def main(argv=None):
     ap.add_argument("--budget", type=int, default=BUDGET)
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--max-size", type=int, default=12)
+    ap.add_argument("--own-after", action="store_true",
+                    help="try its own steps only when the given steps find no answer "
+                         "(also scores a control: no own steps at twice the budget)")
     ap.add_argument("--loo", action="store_true",
                     help="answer and learn only from explanations that pass leave one out")
     ap.add_argument("--out", default="arc_grow.json")
@@ -119,6 +123,7 @@ def main(argv=None):
     a = ap.parse_args(argv)
     MAX_SIZE[0] = a.max_size
     LOO[0] = a.loo
+    OWN_AFTER[0] = a.own_after
     tasks = data.experience()
     ids = sorted(tasks)
     halves = [ids[0::2], ids[1::2]]
@@ -128,10 +133,14 @@ def main(argv=None):
             state = json.load(fh)
     if state:
         base, rows = state["base"], state["rows"]
+        control = state.get("control")
         grown = [from_json(g) for g in state["grown"]]
         done = {(r["round"], r["practice_half"]) for r in rows}
     else:
         base = [run(tasks, h, a.budget, None, a.workers) for h in halves]
+        # the same extra search the second pass may get, without its own steps
+        control = [run(tasks, h, 2 * a.budget, None, a.workers) for h in halves] \
+            if a.own_after else None
         grown, rows, done = [[], []], [], set()
     ran = 0
     for k in range(1, a.rounds + 1):
@@ -156,13 +165,19 @@ def main(argv=None):
                    "unseen": len(unseen),
                    "without": {"right": len(_right(b0)), "wrong": len(_wrong(b0))},
                    "with": {"right": len(_right(test)), "wrong": len(_wrong(test))},
+                   "without at 2x budget": None if not control else {
+                       "right": len(_right(control[1 - f])),
+                       "wrong": len(_wrong(control[1 - f]))},
                    "gained": sorted(_right(test) - _right(b0)),
                    "lost": sorted(_right(b0) - _right(test))}
             rows.append(row)
             print(f"round {k}, practise on half {f}: explained {len(explained)}, grew "
                   f"{len(grown[f])} steps; unseen half: {row['without']['right']} right "
                   f"({row['without']['wrong']} wrong) without, {row['with']['right']} right "
-                  f"({row['with']['wrong']} wrong) with; gained {row['gained']}, lost "
+                  f"({row['with']['wrong']} wrong) with" + (
+                      f", {row['without at 2x budget']['right']} right "
+                      f"({row['without at 2x budget']['wrong']} wrong) without at 2x budget"
+                      if control else "") + f"; gained {row['gained']}, lost "
                   f"{row['lost']}", flush=True)
             os.makedirs("reports", exist_ok=True)
             with open(os.path.join("reports", a.out), "w") as fh:
@@ -170,7 +185,7 @@ def main(argv=None):
                 fh.write("\n")
             if a.state:
                 with open(a.state, "w") as fh:
-                    json.dump({"base": base, "rows": rows,
+                    json.dump({"base": base, "rows": rows, "control": control,
                                "grown": [to_json(g) for g in grown]}, fh)
 
 

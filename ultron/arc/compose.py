@@ -826,9 +826,21 @@ def earns(train, max_size=12, **kw):
     return True, spent
 
 
-def predict(train, tests, max_size=12, loo=False, **kw):
+def predict(train, tests, max_size=12, loo=False, own_after=False, **kw):
     """Up to two different answers for each test input. With loo, only when the task
-    earns them (earns): otherwise no answer, never a guess."""
+    earns them (earns): otherwise no answer, never a guess. With own_after, the steps
+    Ultron grew (LIBRARY) are tried only when the given steps alone find no answer, so
+    every task those already answer is answered exactly as without them."""
+    if own_after and LIBRARY[0]:
+        own, LIBRARY[0] = LIBRARY[0], None
+        try:
+            attempts, used, spent = predict(train, tests, max_size, loo, **kw)
+        finally:
+            LIBRARY[0] = own
+        if used:
+            return attempts, used, spent
+        attempts, used, more = predict(train, tests, max_size, loo, **kw)
+        return attempts, used, spent + more
     from . import grid
     from .solve import task_background
     grid.TASK_BACKGROUND[0] = task_background(train)
