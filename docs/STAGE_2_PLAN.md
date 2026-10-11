@@ -181,6 +181,30 @@ reason, still before measuring, and the verdict uses that rate. A rate found onl
 measuring is reported and never used: this is why pendulum_drag's 29.4 pictures/s does not
 count.
 
+**V5, the films and the details** (written 2026-10-11, after reading the films' records
+and before Ultron or the Judge measured anything on them).
+- **The films:** both real bouncing-ball films with the lab's own hand marks that were
+  found, from the Singapore Ministry of Education's Open Source Physics collection
+  (iwant2study.org, Tracker experiments by Loo Kang Wee and colleagues, CC BY-SA 4.0):
+  - *GB Drop*: a ball dropped beside a metre rule and bouncing four times; 1920×1080
+    at 30 pictures/s; 104 pictures marked by hand.
+  - *ballbouncelookang01*: a ball dropped in a corridor and bouncing four times;
+    720×576 at 25 pictures/s, progressive; 70 pictures marked by hand.
+- **Frame rate check:** the file and the lab's Tracker step agree on both (30/s and
+  33.33 ms; 25/s and 40 ms). In any case e is a ratio of two speeds, so neither the rate
+  nor the scale affects it.
+- **How e is measured, for Ultron and for the lab's marks alike:** a bounce is where the
+  ball is lowest between two flights. Each flight's height is fitted with a parabola in
+  time, leaving out the picture nearest each bounce (the ball is touching the floor).
+  The bounce happens where the two flights' parabolas meet, and e is the upward speed of
+  the later flight there over the downward speed of the earlier one. A bounce counts
+  only if both of its flights keep at least 5 pictures. A film's e is the mean over its
+  bounces, with the standard error of that mean as its error. Bounces the lab marked
+  but Ultron didn't see are reported as missed.
+- **Pass, per film:** Ultron measures at least 2 of the bounces,
+  |e − e_lab| ≤ 2·√(error² + error_lab²) over the same bounces, and Ultron's error is at
+  most 5% of e. V5 is met when both films pass.
+
 ### WP3: more real footage (V3–V6)
 
 **Status (2026-10-11):** the network now reaches Wikimedia, archive.org and YouTube.
