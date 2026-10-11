@@ -553,3 +553,26 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _confirm_: tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 28, attempt 1: passed
+
+## Lesson 29
+
+- **Trainer**: Lesson 29: The real world: falling
+- Ultron _meet_: new kind of experience: fall
+- **Trainer**: A real film from a physics lab: BallTossOut. The label says 30 pictures a second; the stick in view is 398.709 pixels to the metre (the lab's own calibration of the metre stick (Tracker file)).
+- Ultron _reflect_: BallTossOut: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 20 pictures, 16 of them with nothing touching it and all of it in view
+- **Trainer**: A real film from a physics lab: BallDrop. The label says 30 pictures a second, each frame taken as two half-pictures; the stick in view is 400.7 pixels to the metre (the metre stick's marks, 10 cm apart, read by the Trainer).
+- Ultron _reflect_: BallDrop: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 36 pictures, 22 of them with nothing touching it and all of it in view
+- **Trainer**: A real film from a physics lab: BallTossUp. The label says 30 pictures a second, each frame taken as two half-pictures; the stick in view is 400.3 pixels to the metre (the metre stick's marks, 10 cm apart, read by the Trainer).
+- Ultron _reflect_: BallTossUp: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 49 pictures, 47 of them with nothing touching it and all of it in view
+- Ultron _reflect_: after 0.167 s the ball goes faster by about the same amount in every film, give or take 1.0%: that's how precise this measuring is
+- Ultron _stuck_: fall: nothing stays constant yet (1 experiences)
+- Ultron _revise_: fall: dv / tau = 9.82092 [m/s²] in every experiment (2 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _stuck_: fall: nothing stays constant yet (3 experiences)
+- Ultron _stuck_: fall: nothing stays constant yet (5 experiences)
+- Ultron _revise_: fall: dv / tau = 9.86554 [m/s²] in every experiment (1 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: fall: dv / tau = 9.92686 [m/s²] in every experiment (1 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: fall: dv / tau = 9.67535 [m/s²] in every experiment (1 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: fall: dv / tau = 9.65388 [m/s²] in every experiment (1 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _invent_: From real films of a falling ball: dv / tau stays the same, 9.577 m/s²: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.
+- **Trainer**: Exam for lesson 29, attempt 1: passed
+- **Trainer**: What you found in 'fall' is what people call free fall: the acceleration of gravity, g.

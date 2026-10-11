@@ -249,9 +249,33 @@ class RealMicroscope(Lesson):
     precision = 0.02
 
 
+class RealFalling(Lesson):
+    number, title = 29, "The real world: falling"
+    goal = ("Three real films from a college physics lab (the Tracker project's): a ball "
+            "dropped, tossed up and tossed across, beside a metre stick. Ultron is given only "
+            "the pictures, the frame rate and the stick's scale. Can its eyes, which grew up "
+            "on a simulator, find the ball in real video, follow it, and take only the moments "
+            "nothing touches it? Does it find the law of falling (the change of speed grows "
+            "in proportion to the time) and measure g, with an honest error?")
+    kind = "guided"
+    FILMS = ("BallTossOut", "BallDrop", "BallTossUp")
+    COMPARE = 1 / 6         # seconds: the films are compared on how much faster the ball
+                            # goes after this long, before any law is known
+
+    def specs(self):
+        return [Spec("fall", "quantity", {"tau": (0, 0, 1)}, "dv",
+                     units={"tau": (0, 0, 1), "dv": SPEED}, precision=self.precision)]
+
+    precision = 0.02
+
+
 def senses_lessons(seed=0):
     return [Handling(seed + 19), SeeingNumbers(seed + 20), WatchingMotion(seed + 21)]
 
 
 def later_lessons(seed=0):
     return [UsingWhatItKnows(seed + 24), Phase3SensesExam(seed + 25), RealMicroscope(seed + 26)]
+
+
+def real_footage_lessons(seed=0):
+    return [RealFalling(seed + 29)]

@@ -1326,6 +1326,63 @@ def exam_microscope(brain, seed=1026):
                     "story": info["story"]})
 
 
+G_LAB = 9.80        # m/s²: g at Cabrillo College, Aptos, California (9.799)
+SCALE_ERROR = 0.003  # the stick read two ways (Tracker's tape, its 10 cm marks): 0.3% apart
+RATE_ERROR = 0.002   # g ∝ rate²: a 29.97 Hz camera labelled 30 Hz is 0.1% off in rate
+
+
+def v3_verdict(films):
+    """Stage 2's V3 rule (docs/STAGE_2_PLAN.md, fixed before measuring): Ultron's g is the
+    mean of its per-film values; its error the larger of the spread across films and the
+    combined error of each film; pass if within 2 errors of g, the error at most 3% of g,
+    and at least 2 of the 3 films measured."""
+    import math
+    gs = [f["g"] for f in films.values()]
+    if len(gs) < 2:
+        return {"films": len(gs), "passed": False}
+    g = sum(gs) / len(gs)
+    sd = math.sqrt(sum((x - g) ** 2 for x in gs) / (len(gs) - 1))
+    across = sd / math.sqrt(len(gs))
+    each = [math.sqrt(f["fit_error"] ** 2 + (f["g"] * SCALE_ERROR) ** 2
+                      + (f["g"] * RATE_ERROR) ** 2) for f in films.values()]
+    combined = math.sqrt(sum(e * e for e in each)) / len(each)
+    err = max(across, combined)
+    return {"g": g, "error": err, "spread_error": across, "combined_error": combined,
+            "films": len(gs), "within": abs(g - G_LAB) <= 2 * err,
+            "precise": err <= 0.03 * g,
+            "passed": abs(g - G_LAB) <= 2 * err and err <= 0.03 * g and len(gs) >= 2}
+
+
+def exam_falling(brain, seed=1029):
+    """Lesson 29 (Stage 2, V3): g from real footage of falling, within measured error."""
+    b = copy.deepcopy(brain)
+    info = b.inventions.get("falling")
+    watched = Tally("the real films were watched and the ball followed (at least 2 of 3)")
+    for name in ("BallTossOut", "BallDrop", "BallTossUp"):
+        watched.item(name, True, info is not None and name in info["watched"])
+    law = b.qlaws.get("fall")
+    found = Tally("found the law of falling from the films: the change of speed grows in "
+                  "proportion to the time")
+    found.item("fall", True, law is not None and law.powers in ({"dv": 1, "tau": -1},
+                                                                {"dv": -1, "tau": 1}))
+    films = info["films"] if info else {}
+    v3 = v3_verdict(films)
+    verdict = Tally("V3: its g agrees with g at the lab (9.80 m/s²) within twice its measured "
+                    "error, and that error is at most 3%")
+    verdict.item("V3", True, v3["passed"])
+    each = Tally("each film on its own: within 2 of its own errors of 9.80 (reported only: a "
+                 "film can't show its own perspective error)")
+    for name, f in films.items():
+        e = (f["fit_error"] ** 2 + (f["g"] * SCALE_ERROR) ** 2
+             + (f["g"] * RATE_ERROR) ** 2) ** 0.5
+        each.item(name, True, abs(f["g"] - G_LAB) <= 2 * e)
+    return _result(29, [watched, found, verdict], 2 / 3,
+                   {"g": v3.get("g"), "measured_error": v3.get("error"), "v3": v3,
+                    "per_film": films, "each_film_within_own_error": each.to_json(),
+                    "law_constant": law.constant if law else None,
+                    "story": info["story"] if info else None})
+
+
 def exam_change(brain, seed=1027):
     """Lesson 27: laws where how the state changes is a law of the state."""
     from ..env.sequences import Funnels, Pendulums, ShockAbsorbers, YeastJars
@@ -1424,4 +1481,4 @@ EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          17: exam_coils, 18: exam_phase3, 19: exam_eyes, 20: exam_seeing_numbers,
          21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
          25: exam_phase3_senses, 26: exam_microscope,
-         27: exam_change, 28: exam_rows}
+         27: exam_change, 28: exam_rows, 29: exam_falling}

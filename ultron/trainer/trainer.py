@@ -75,6 +75,8 @@ class Trainer:
                 self.teach_handling(lesson)
             elif lesson.number == 26:
                 self.teach_microscope(lesson)
+            elif lesson.number == 29:
+                self.teach_falling(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -306,6 +308,82 @@ class Trainer:
                       )}
         brain.note("invent", brain.inventions["microscope"]["story"])
 
+    # ----------------------------------------------------------- lesson 29
+    def teach_falling(self, lesson):
+        from ..env import footage
+        from ..senses import motion
+        brain = self.brain
+        watched = {}
+        for name in lesson.FILMS:
+            try:
+                pics = footage.frames(name)
+            except footage.Unavailable as e:
+                self.say(f"I couldn't get the film {name} ({e}).")
+                continue
+            lab = footage.label(name)
+            halves = ", each frame taken as two half-pictures" if lab["interlaced"] else ""
+            self.say(f"A real film from a physics lab: {name}. The label says {lab['fps']} "
+                     f"pictures a second{halves}; the stick in view is "
+                     f"{lab['pixels_per_metre']} pixels to the metre ({lab['scale_from']}).")
+            track, per, ch, tracks = motion.watch(brain.eyes, pics, lab["interlaced"])
+            if track is None:
+                brain.note("reflect", f"{name}: I can't follow anything moving in this film")
+                continue
+            free = motion.alone(track, tracks, pics[0].shape)
+            if len(free) < 6:
+                brain.note("reflect", f"{name}: I followed something, but it was never on its "
+                                      f"own for long enough to measure")
+                continue
+            rate = lab["fps"] * per
+            watched[name] = (free, rate, lab["pixels_per_metre"])
+            brain.note("reflect", f"{name}: comparing each picture with how the room usually "
+                                  f"looks, through my {ch} channel, one thing moved further "
+                                  f"than anything else: I followed it through {len(track)} "
+                                  f"pictures, {len(free)} of them with nothing touching it "
+                                  f"and all of it in view")
+        if not watched:
+            self.say("No film could be watched. The lesson stops here.")
+            return
+        # how precise is this measuring? the films compared on how much faster the ball
+        # goes after the same short while (no law needed for that)
+        cmp = []
+        for free, rate, ppm in watched.values():
+            dv, _ = motion.speed_change(free, round(lesson.COMPARE * rate), rate, ppm)
+            if dv is not None:
+                cmp.append(dv)
+        precision = lesson.precision
+        if len(cmp) >= 2:
+            precision = max(0.01, round((max(cmp) - min(cmp)) / (2 * abs(sum(cmp) / len(cmp))),
+                                        3))
+        brain.memory.specs["fall"].precision = precision
+        brain.note("reflect", f"after {lesson.COMPARE:.3g} s the ball goes faster by about the "
+                              f"same amount in every film, give or take {precision:.1%}: that's "
+                              f"how precise this measuring is")
+        for name, (free, rate, ppm) in watched.items():
+            span = max(free) - min(free) + 1
+            for lag in range(1, span // 2 + 1):
+                dv, n = motion.speed_change(free, lag, rate, ppm)
+                if dv is not None:
+                    brain.experience("fall", {"tau": lag / rate, "film": name}, dv)
+        law = brain.qlaws.get("fall")
+        steady = law is not None and law.powers in ({"dv": 1, "tau": -1}, {"dv": -1, "tau": 1})
+        films = {}
+        if steady:
+            # its law says speed changes steadily: so each film's rate of change, and how
+            # sure it is of it, from the line through all its speeds
+            for name, (free, rate, ppm) in watched.items():
+                g, se = motion.steady_change(free, rate, ppm)
+                films[name] = {"g": g, "fit_error": se, "pictures": len(free), "rate": rate}
+        brain.inventions["falling"] = {
+            "shape": "the real world", "primitives": [], "lesson": brain.lesson,
+            "precision": precision, "films": films, "watched": sorted(watched),
+            "story": (f"From real films of a falling ball: " +
+                      (f"{law.formula()} stays the same, {law.constant:.4g} m/s²: the change "
+                       f"of speed grows in proportion to the time, whether the ball was "
+                       f"dropped or thrown up or across." if steady else
+                       f"I found no steady law ({law.formula() if law else 'nothing'})."))}
+        brain.note("invent", brain.inventions["falling"]["story"])
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -341,6 +419,7 @@ class Trainer:
              "unstretched length", "burn": "constant rate"},
         24: {"slide": "sliding friction (stopping distance ∝ speed²)"},
         26: {"jiggle": "Brownian motion: Einstein's law (mean squared displacement = 4·D·t)"},
+        29: {"fall": "free fall: the acceleration of gravity, g"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }

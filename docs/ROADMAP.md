@@ -150,10 +150,14 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
    handling).
 2. ✅ **Lesson 26:** diffusion from the real microscope film: D within 4% of the
    scientists' tool, Einstein's law found, in the curriculum (29 lessons).
-3. **Real footage:** g, pendulum periods, restitution; detection on par with a lab tool.
+3. ✅ **g from real footage** (lesson 29): the law of falling found from three real lab
+   films; g = 9.65 ± 0.15 m/s² against 9.80
+   ([`stage2_v3_falling.md`](../reports/stage2_v3_falling.md)).
+4. **Pendulum periods and the √length law, restitution, detection on par with a lab
+   tool** (V4–V6): footage found for one bouncing cart and two pendulum lengths; a third
+   length is still needed.
 
-Network note: this environment can reach GitHub and the Python Package Index. Wikimedia,
-YouTube, archive.org and arcprize.org are blocked. They can be allowed under the cloud
-environment's **Network access** settings. Stage 2 needs the first three and stage 3
-needs arcprize.org; otherwise those stages fall back to data hosted on GitHub or PyPI and
-to games we write ourselves.
+Network note (updated 2026-10-11): this environment now also reaches Wikimedia (which
+rate-limits original files), YouTube and archive.org; earlier they were blocked. Stage 3
+(interactive worlds) needs arcprize.org; otherwise it falls back to games we write
+ourselves.

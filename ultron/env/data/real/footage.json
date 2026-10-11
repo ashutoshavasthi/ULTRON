@@ -1,0 +1,59 @@
+{
+ "source": "Open Source Physics / Tracker (Douglas Brown and colleagues), GPL-3.0",
+ "archives": {
+  "BallToss.zip": {
+   "repo": "OpenSourcePhysics/resources",
+   "commit": "3b07d46711a6f9669d0b98197066feceecd76fc8",
+   "path": "docs/CAB/experiments/BallToss.zip",
+   "sha256": "c8d0b58ef9b26cb1f6d9bcc5d432c917b64b32d17352db7b249f815955188ce5"
+  },
+  "mechanics_videos.zip": {
+   "repo": "OpenSourcePhysics/tracker-website",
+   "commit": "77737aa1de70d6935ad2c2b83b02e8fba12ca6ec",
+   "path": "docs/download/mechanics_videos.zip",
+   "sha256": "eee41f0dbe340b2f0f3a31dd41fb752eff89a2ddf2078dde716b78a01031e77e"
+  }
+ },
+ "films": {
+  "BallTossOut": {
+   "archive": "BallToss.zip",
+   "video": "videos/BallTossOut.mp4",
+   "tracker": "BallToss.trk",
+   "size": [
+    634,
+    456
+   ],
+   "fps": 30,
+   "interlaced": false,
+   "pixels_per_metre": 398.709,
+   "scale_from": "the lab's own calibration of the metre stick (Tracker file)",
+   "pixels_sha256": "a878609879dbde28c30db948b4fc29e90ff5c2c079c4ec860b88fddae4ef24a0"
+  },
+  "BallDrop": {
+   "archive": "mechanics_videos.zip",
+   "video": "mechanics_videos/BallDrop.mp4",
+   "size": [
+    634,
+    480
+   ],
+   "fps": 30,
+   "interlaced": true,
+   "pixels_per_metre": 400.7,
+   "scale_from": "the metre stick's marks, 10 cm apart, read by the Trainer",
+   "pixels_sha256": "b03560885c8bb3280650d174042b508c9e35570155666ac29ac2fb5a61973751"
+  },
+  "BallTossUp": {
+   "archive": "mechanics_videos.zip",
+   "video": "mechanics_videos/BallTossUp.mp4",
+   "size": [
+    714,
+    480
+   ],
+   "fps": 30,
+   "interlaced": true,
+   "pixels_per_metre": 400.3,
+   "scale_from": "the metre stick's marks, 10 cm apart, read by the Trainer",
+   "pixels_sha256": "452a8edafaa8d646ddd71883b20c5c976f9fd56c5b10f0fff32cfa7d33ce0237"
+  }
+ }
+}

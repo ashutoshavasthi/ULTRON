@@ -36,7 +36,8 @@ and the blind tests. A retrain must stay byte for byte identical.
 |---|---|
 | V1 | ✅ **met, and robust** (2026-10-11): every gating eyes row ≥ 23/25 on the failure lab's trays **and on three sets of unseen trays** (normal 25; 16% noise 25; 32% noise 23–24; big 25; faint 25; touching 23–24). Before Stage 2: 25, 1, 0, 0, 2, 19. No regressions elsewhere in the lab; 29 lessons pass on the first attempt; a retrain is byte-identical; 111 tests pass |
 | V2 | ✅ **met** (2026-10-11): lesson 26 is in the curriculum and passes on the first attempt. From the real trackpy microscope film: Einstein's law (spread² ∝ time); D = 0.396 µm²/s against the scientists' tool trackpy's 0.412 (4%) and the textbook's 0.455 (13%); on 150 frames it never learned from it finds 87% of trackpy's spheres and predicts the spread at 1–2 s (21/21); it claims no law for a single sphere |
-| V3–V6 | open (needs real footage of falling, swinging and bouncing: see WP3) |
+| V3 | ✅ **met** (2026-10-11): lesson 29. From three real lab films (Tracker project, on GitHub) Ultron finds the law of falling itself (change of speed ∝ time) and measures **g = 9.65 ± 0.15 m/s²** (9.80 at the lab: 1.0 errors off; error 1.6%). Films: 9.95 ± 0.10, 9.56 ± 0.18, 9.45 ± 0.06; they disagree more than their fits admit, so the spread across films is the error. 30 lessons pass on the first attempt; a retrain is byte-identical; every exam, failure-lab row and blind test unchanged (60/60, 60/60, 50/50); 115 tests pass. Report: [`stage2_v3_falling.md`](../reports/stage2_v3_falling.md) |
+| V4–V6 | open. Real footage found on GitHub: two pendulums (0.785 m over about three swings; 1 m over one swing) and a bouncing cart, with the lab's Tracker files. Two lengths are too few for the √length law, so a third is still needed |
 
 How V1 was met (`senses/eyes.py`, `senses/world.py`):
 - **Looking longer:** when a still scene is noisier than usual (its own noise measure, as
@@ -124,6 +125,12 @@ changed; these are the details it left open, fixed before measuring:
   answer (a film where it cannot follow the ball is reported, not dropped).
 
 ### WP3: more real footage (V3–V6)
+
+**Status (2026-10-11):** the network now reaches Wikimedia, archive.org and YouTube.
+Wikimedia rate-limits original files from here, but its transcoded copies download. The
+footage used so far is GitHub-hosted (preference 1). The Wikimedia pendulum films checked
+(a pendulum wave outdoors, a 60 cm pendulum in an edited teaching video) are not usable
+footage.
 
 Real videos of falling, swinging and bouncing. The network policy decides the sources:
 Wikimedia, YouTube and archive.org are blocked here. The order of preference:
