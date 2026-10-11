@@ -77,6 +77,10 @@ class Trainer:
                 self.teach_microscope(lesson)
             elif lesson.number == 29:
                 self.teach_falling(lesson)
+            elif lesson.number == 30:
+                self.teach_words(lesson)
+            elif lesson.number == 31:
+                self.teach_events(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -384,6 +388,152 @@ class Trainer:
                        f"I found no steady law ({law.formula() if law else 'nothing'})."))}
         brain.note("invent", brain.inventions["falling"]["story"])
 
+    # ----------------------------------------------------------- lesson 30
+    def teach_words(self, lesson):
+        from ..brain import categories
+        from ..brain.language import (describe_meaning, heard_as_kinds, learn_lexicon,
+                                      lexicon_bits)
+        from ..senses.things import look_at_table
+        brain = self.brain
+        if brain.eyes is None:
+            self.say("You have no eyes yet. The lesson stops here.")
+            return
+        self.say("Here is a table with things on it. Just look, as long as you like.")
+        seen = [t for look in lesson.tables() for t in look_at_table(brain.eyes, look)]
+        found = categories.discover(seen, lesson.MEASURES)
+        brain.categories = found
+        grouped = {m: len(c["groups"]) for m, c in found.items() if len(c["groups"]) > 1}
+        flat = [m for m, c in found.items() if len(c["groups"]) == 1]
+        brain.inventions["kinds of thing"] = {
+            "shape": "categories", "primitives": [], "lesson": brain.lesson,
+            "groups": grouped,
+            "story": (f"I looked at {len(seen)} things on {lesson.LOOKS} tables and measured "
+                      f"each one. " + "; ".join(
+                          f"{'Their' if i == 0 else 'their'} {m} falls into {k} separate "
+                          f"groups ({found[m]['bits'][0]:.0f} bits to describe all of them as "
+                          f"one spread, {found[m]['bits'][1]:.0f} as groups)"
+                          for i, (m, k) in enumerate(sorted(grouped.items())))
+                      + f". Where they are ({', '.join(flat)}) doesn't group: a boundary "
+                        f"there would not pay for itself. So things come in kinds.")}
+        brain.note("invent", brain.inventions["kinds of thing"]["story"])
+        self.say("Now I'll talk about the things on the table, one at a time.")
+        for said, look, _, _ in lesson.talks():
+            brain.heard.append({"said": said, "things": look_at_table(brain.eyes, look)})
+        heard = heard_as_kinds(brain)
+        lexicon, rivals = learn_lexicon(heard, found, rivals=True)
+        for w, meaning in sorted(lexicon.items()):
+            if w in brain.vocab and brain.vocab[w][0] != "look":
+                continue                    # a word it already has another meaning for
+            brain.bind(w, ("look", [list(p) for p in meaning]))
+            others = sorted({r[w] for r in rivals if r[w] != meaning})
+            brain.note("word", f"'{w}' means {describe_meaning(brain, meaning)}"
+                       + (" (not sure yet: it could also mean "
+                          + "; or ".join(describe_meaning(brain, r) for r in others) + ")"
+                          if others else ""))
+        brain.rival_lexicons = [{w: [list(p) for p in m] for w, m in sorted(r.items())
+                                 if m != lexicon[w]} for r in rivals]
+        brain.note("reflect", f"the shortest account of the {len(heard)} sentences I heard "
+                              f"takes {lexicon_bits(heard, found, lexicon):.0f} bits: what each "
+                              f"word means, and nothing more is needed to tell which thing was "
+                              f"meant")
+
+    # ----------------------------------------------------------- lesson 31
+    def teach_events(self, lesson):
+        from ..brain import events
+        from ..brain.language import (comparing, learn_lexicon,
+                                      learn_relations)
+        brain = self.brain
+        if brain.eyes is None:
+            self.say("You have no eyes yet. The lesson stops here.")
+            return
+        self.say("Now films of the same things. Watch; I'll say what happens.")
+        heard = []
+        for said, watch, _, _ in lesson.event_talks():
+            film = events.watch(brain, watch())
+            film["said"] = said
+            brain.films.append(film)
+            heard.append((said.split(), [events.kinds_of_thing(brain, t)
+                                         for t in film["things"]]))
+        found = dict(brain.categories)
+        found.update(events.categories(brain))
+        known = {w: m[1] for w, m in brain.vocab.items() if m[0] == "look"}
+        lexicon, rivals = learn_lexicon(heard, found, rivals=True, known=known)
+        kinds = events.motion_kinds(brain)
+        new = sorted(w for w in lexicon if w not in known)
+        brain.event_words = new             # a word whose meaning it didn't find: it says so
+        for w in new:
+            if w in brain.vocab:
+                continue                    # a word it already has another meaning for
+            brain.bind(w, ("look", [list(p) for p in lexicon[w]]))
+            others = sorted({r[w] for r in rivals if r[w] != lexicon[w]})
+            brain.note("word", f"'{w}' means {self._motion_meaning(lexicon[w], kinds)}"
+                       + (" (not sure yet: it could also mean " + "; or ".join(
+                           self._motion_meaning(r, kinds) for r in others) + ")"
+                          if others else ""))
+        brain.rival_lexicons = brain.rival_lexicons + [
+            {w: [list(p) for p in r[w]] for w in new if r[w] != lexicon[w]}
+            for r in rivals if any(r[w] != lexicon[w] for w in new)]
+        brain.inventions["words for events"] = {
+            "shape": "words", "primitives": [], "lesson": brain.lesson,
+            "words": {w: [list(p) for p in lexicon[w]] for w in brain.event_words if lexicon[w]},
+            "story": "Each word for what happens is the kind of motion present every time "
+                     "it was said about a thing: " + "; ".join(
+                         f"'{w}': {self._motion_meaning(lexicon[w], kinds)}"
+                         for w in brain.event_words if lexicon[w])}
+        brain.note("invent", brain.inventions["words for events"]["story"])
+
+        self.say("Now I'll compare things in the films.")
+        compared = []
+        for said, watch, _, _, _, _ in lesson.relation_talks():
+            film = events.watch(brain, watch())
+            film["said"] = said
+            brain.films.append(film)
+            got = comparing(brain, said, film)
+            if got is not None:
+                compared.append((got[0], film, got[1], got[2]))
+        best, rivals = learn_relations(compared, rivals=True)
+        for w, o in sorted(best.items()):
+            meaning = ("order", list(o) if o else None)
+            if w in brain.vocab and brain.vocab[w][0] != "order":
+                brain.senses[w] = list(meaning)  # lesson 4's 'after' keeps its meaning
+            else:
+                brain.bind(w, meaning)
+            others = sorted({str(r[w]) for r in rivals if r[w] != o})
+            brain.note("word", f"'{w}' " + (f"says the first has {'more' if o[1] == '>' else 'less'}"
+                                             f" {o[0]} than the second" if o else
+                                             "says nothing I can check")
+                       + (f" (not sure yet: it could also be {', '.join(others)})"
+                          if others else ""))
+        brain.rival_relations = [{w: (list(o) if o else None) for w, o in sorted(r.items())
+                                  if o != best[w]} for r in rivals]
+        brain.inventions["words for comparing"] = {
+            "shape": "words", "primitives": [], "lesson": brain.lesson,
+            "words": {w: (list(o) if o else None) for w, o in sorted(best.items())},
+            "story": "Each comparing word is the quantity I measure, and which way round, "
+                     "that holds every time it is said: " + "; ".join(
+                         f"'{w}': the first has {'more' if o[1] == '>' else 'less'} {o[0]}"
+                         for w, o in sorted(best.items()) if o)
+                     + ". I weigh things by my law that m·v adds up to the same before and "
+                       "after a knock."}
+        brain.note("invent", brain.inventions["words for comparing"]["story"])
+
+    @staticmethod
+    def _motion_meaning(meaning, kinds):
+        if not meaning:
+            return "nothing: it fits every thing"
+        parts = []
+        for m, g in meaning:
+            if m in ("across", "updown"):
+                way = "across" if m == "across" else "up and down"
+                name, _, words = kinds[g]
+                parts.append(f"its move {way} follows '{name}' ({words})")
+            elif m == "turns back":
+                parts.append("it comes back the way it went" if g else
+                             "it never comes back the way it went")
+            else:
+                parts.append(f"its {m} is in my group {g + 1}")
+        return "things where " + " and ".join(parts)
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -420,6 +570,10 @@ class Trainer:
         24: {"slide": "sliding friction (stopping distance ∝ speed²)"},
         26: {"jiggle": "Brownian motion: Einstein's law (mean squared displacement = 4·D·t)"},
         29: {"fall": "free fall: the acceleration of gravity, g"},
+        30: {"kinds of thing": "categories: colours, sizes and shapes"},
+        31: {"words for events": "verbs, bound to kinds of motion",
+             "words for comparing": "comparatives and before/after, bound to measured "
+                                    "quantities (mass through conservation of momentum)"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }

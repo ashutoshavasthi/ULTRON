@@ -50,9 +50,8 @@ def cmd_exam(args):
         r = exam(brain)
         for item in r["items"]:
             s = item["scores"]
-            print(f"lesson {n} | {item['name']}: ultron {s['ultron'][0]}/{s['ultron'][1]}  "
-                  f"lookup {s['lookup'][0]}/{s['lookup'][1]}  "
-                  f"nearest {s['nearest'][0]}/{s['nearest'][1]}")
+            print(f"lesson {n} | {item['name']}: " + "  ".join(
+                f"{who} {c}/{t}" for who, (c, t) in s.items()))
 
 
 def cmd_stress(args):

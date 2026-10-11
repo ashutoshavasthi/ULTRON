@@ -88,8 +88,8 @@ _How does search time grow with more examples?_ Breaks at: **did not break**
 | examples | what it did | |
 |---|---|---|
 | 20 examples | `2.1 s` | ✅ |
-| 100 examples | `0.8 s` | ✅ |
-| 400 examples | `0.4 s` | ✅ |
+| 100 examples | `0.9 s` | ✅ |
+| 400 examples | `0.5 s` | ✅ |
 
 ## noise
 
@@ -197,11 +197,11 @@ _How robust is its learned vision?_ Breaks at: **did not break**
 |---|---|---|
 | normal (8% noise) | `25/25 trays counted right` | ✅ |
 | 16% noise | `25/25 trays counted right` | ✅ |
-| 32% noise | `25/25 trays counted right` | ✅ |
+| 32% noise | `24/25 trays counted right` | ✅ |
 | big things (r 4-6) | `25/25 trays counted right` | ✅ |
 | faint things (30% brightness) | `25/25 trays counted right` | ✅ |
 | touching (gap = diameter) | `24/25 trays counted right` | ✅ |
-| overlapping (gap < diameter) | `24/25 trays counted right (merged blobs: a physical limit, reported only)` | ✅ |
+| overlapping (gap < diameter) | `19/25 trays counted right (merged blobs: a physical limit, reported only)` | ✅ |
 
 ## false laws
 
@@ -214,4 +214,44 @@ _On data with nothing to find, does it ever claim a law?_ Breaks at: **did not b
 | 50 measurement datasets with nothing to find | `0 false laws` | ✅ |
 | 25 datasets of pure noise, noise not told | `0 false laws` | ✅ |
 | 25 hidden causes (±5%) with repeated trials, noise not told | `0 false laws` | ✅ |
+
+## words by pointing
+
+_Does it still learn what words mean when the Trainer sometimes says the wrong word, or says less?_ Breaks at: **20% of sentences name the wrong thing**
+
+| wrong words; sentences heard | what it did | |
+|---|---|---|
+| 0% of sentences name the wrong thing | `60/60 right (60/60 of its answers)` | ✅ |
+| 5% of sentences name the wrong thing | `60/60 right (60/60 of its answers)` | ✅ |
+| 10% of sentences name the wrong thing | `60/60 right (60/60 of its answers)` | ✅ |
+| 20% of sentences name the wrong thing | `37/60 right (37/37 of its answers)` | ❌ |
+| 30% of sentences name the wrong thing | `60/60 right (60/60 of its answers)` | ✅ |
+| 120 sentences heard | `60/60 right (60/60 of its answers)` | ✅ |
+| 60 sentences heard | `40/60 right (40/40 of its answers)` | ❌ |
+| 40 sentences heard | `40/60 right (40/40 of its answers)` | ❌ |
+| 20 sentences heard | `0/60 right (0/0 of its answers)` | ❌ |
+| 10 sentences heard | `0/60 right (0/0 of its answers)` | ❌ |
+
+A row passes at 57/60 (95%). The two dials are separate: the first breakpoint is the first row that fails.
+
+## words for what happens
+
+_Does it still learn words for events and for comparing when the Trainer sometimes says the wrong word, says less, or the camera is noisier?_ Breaks at: **20% of event sentences say the wrong word**
+
+| wrong words; sentences heard; camera noise | what it did | |
+|---|---|---|
+| 0% of event sentences say the wrong word | `60/60 right (60/60 of its answers)` | ✅ |
+| 10% of event sentences say the wrong word | `60/60 right (60/60 of its answers)` | ✅ |
+| 20% of event sentences say the wrong word | `0/60 right (0/0 of its answers)` | ❌ |
+| 30% of event sentences say the wrong word | `0/60 right (0/0 of its answers)` | ❌ |
+| 50 event sentences heard | `60/60 right (60/60 of its answers)` | ✅ |
+| 25 event sentences heard | `60/60 right (60/60 of its answers)` | ✅ |
+| 12 event sentences heard | `33/60 right (33/33 of its answers)` | ❌ |
+| camera 2 times as noisy | `50/60 right (50/50 of its answers)` | ❌ |
+| camera 3 times as noisy | `33/60 right (33/33 of its answers)` | ❌ |
+| 0% of comparing sentences say the wrong word | `60/60 right (60/60 of its answers)` | ✅ |
+| 10% of comparing sentences say the wrong word | `60/60 right (60/60 of its answers)` | ✅ |
+| 20% of comparing sentences say the wrong word | `15/60 right (15/15 of its answers)` | ❌ |
+
+A row passes at 54/60 (90%). Event words were taught with 100 sentences and comparing words with 120 in the first rows.
 

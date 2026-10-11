@@ -364,7 +364,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 
 - **Trainer**: Lesson 19: Handling things
 - **Trainer**: Pick these things up and put them down. Your hands will tell you where they are; watch at the same time.
-- Ultron _invent_: I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 75.4 to 3.2). A spot must be at least 0.17 strong to be a thing: that threshold matched my hands best. From now on I see without touching.
+- Ultron _invent_: I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 52.1 to 2.4). A spot must be at least 0.17 strong to be a thing: that threshold matched my hands best. From now on I see without touching.
 - **Trainer**: Now put your hands behind your back. Only look.
 - **Trainer**: Exam for lesson 19, attempt 1: passed
 - **Trainer**: What you found in 'eyes' is what people call vision (a learned convolutional neural network).
@@ -391,14 +391,14 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 ## Lesson 21
 
 - **Trainer**: Lesson 21: Watching motion
-- Ultron _reflect_: I practised measuring with my eyes: accelerations wobble by about ±0.5%, spring stretches by about ±1.1%; heights and speeds I'll judge picture by picture
+- Ultron _reflect_: I practised measuring with my eyes: accelerations wobble by about ±0.6%, spring stretches by about ±1.7%; heights and speeds I'll judge picture by picture
 - Ultron _meet_: new kind of experience: see_push
 - Ultron _meet_: new kind of experience: see_stretch
 - Ultron _meet_: new kind of experience: see_roll
 - Ultron _stuck_: see_push: nothing stays constant yet (1 experiences)
 - Ultron _stuck_: see_stretch: nothing stays constant yet (1 experiences)
 - Ultron _stuck_: see_roll: nothing stays constant yet (1 experiences)
-- Ultron _revise_: see_push: F / (a·m) = 1.00218 [dimensionless] in every experiment (7 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: see_push: F / (a·m) = 1.00067 [dimensionless] in every experiment (7 candidates searched; tentative until it predicts 3 new experiences)
 - Ultron _stuck_: see_stretch: nothing stays constant yet (2 experiences)
 - Ultron _stuck_: see_roll: nothing stays constant yet (2 experiences)
 - Ultron _stuck_: see_stretch: nothing stays constant yet (3 experiences)
@@ -416,9 +416,9 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _revise_: see_stretch: W / x is constant for each spring but differs between them: a hidden property of each spring [the data's own units] (20 candidates searched; tentative until it predicts 3 new experiences)
 - Ultron _stuck_: see_roll: nothing stays constant yet (9 experiences)
 - Ultron _stuck_: see_roll: nothing stays constant yet (10 experiences)
-- Ultron _revise_: see_roll: Along each run, none of y, v^2 stays the same, but y + 0.0507813·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.69 m/s²: the same units as 'a' in my 'lab_push' experiences.)
-- Ultron _invent_: Along each run, none of y, v^2 stays the same, but y + 0.0507813·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.69 m/s²: the same units as 'a' in my 'lab_push' experiences.)
-- Ultron _measure_: see_roll: new run Hill3; its hidden amount is 2.50778
+- Ultron _revise_: see_roll: Along each run, none of y, v^2 stays the same, but y + 0.0502997·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.88 m/s²: the same units as 'a' in my 'lab_push' experiences.)
+- Ultron _invent_: Along each run, none of y, v^2 stays the same, but y + 0.0502997·v^2 does. Each run has its own amount of this hidden quantity: whatever y is lost turns up as v^2, and the total never changes. (The coefficient of v^2 is one over 19.88 m/s²: the same units as 'a' in my 'lab_push' experiences.)
+- Ultron _measure_: see_roll: new run Hill3; its hidden amount is 2.48913
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 21, attempt 1: passed
 - **Trainer**: What you found in 'see_push' is what people call Newton's second law, seen on video.
@@ -473,7 +473,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Lesson 24: Using what it knows
 - Ultron _meet_: new kind of experience: slide
 - Ultron _stuck_: slide: nothing stays constant yet (1 experiences)
-- Ultron _revise_: slide: d / u^2 = 0.175193 [m^-1·s^2] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: slide: d / u^2 = 0.174538 [m^-1·s^2] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 24, attempt 1: passed
 - **Trainer**: What you found in 'slide' is what people call sliding friction (stopping distance ∝ speed²).
@@ -491,19 +491,19 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _meet_: new kind of experience: one_sphere
 - **Trainer**: This is a real film from a laboratory microscope: spheres in water. The label says 24 pictures a second and 2.85 pixels per micron. Watch the first 150 pictures.
 - Ultron _reflect_: through my retina's OFF channel, 84% of what I see lasts from picture to picture; the other channel shows things that come and go. Real things last, so I'll look with OFF
-- Ultron _invent_: I trained my eyes on these real pictures with no one telling me what is there: what lasted at least 25 pictures I took as a real thing, everything else as nothing (and I kept looking at my old toy scenes so I don't forget them). Before, 82% of what I saw lasted; now 86%.
-- Ultron _reflect_: I followed 1507 spheres for at least 25 pictures each, after taking out how the whole view drifted. Two halves of them disagree by 1.0% about how far spheres get: that's how precise this measuring is
+- Ultron _invent_: I trained my eyes on these real pictures with no one telling me what is there: what lasted at least 25 pictures I took as a real thing, everything else as nothing (and I kept looking at my old toy scenes so I don't forget them). Before, 83% of what I saw lasted; now 88%.
+- Ultron _reflect_: I followed 1307 spheres for at least 25 pictures each, after taking out how the whole view drifted. Two halves of them disagree by 1.1% about how far spheres get: that's how precise this measuring is
 - Ultron _stuck_: jiggle: nothing stays constant yet (1 experiences)
-- Ultron _revise_: jiggle: s^2 / tau = 1.46624 [m^2·s^-1] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: jiggle: s^2 / tau = 1.42336 [m^2·s^-1] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
 - Ultron _stuck_: one_sphere: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _invent_: None of the kinds of explanation I was born with fits 'one_sphere': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(x) stays the same for everything (3 spheres). That is a new KIND of explanation, not just a new law: each reading is the same number of times the one before. I'll keep it and try it first next time.
 - Ultron _revise_: one_sphere: ρ(x) stays the same for everything (kind 3: each reading is the same number of times the one before)
-- Ultron _invent_: None of the kinds of explanation I was born with fits 'one_sphere': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(x^1/2) stays the same for everything (3 spheres). That is a new KIND of explanation, not just a new law: not the reading itself but its power 1/2: each reading is the same number of times the one before. I'll keep it and try it first next time.
-- Ultron _revise_: one_sphere: ρ(x^1/2) stays the same for everything (kind 4: not the reading itself but its power 1/2: each reading is the same number of times the one before)
-- Ultron _stuck_: one_sphere: nothing I can express stays the same (6 spheres, 787 readings)
+- Ultron _invent_: None of the kinds of explanation I was born with fits 'one_sphere': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(x^-1) stays the same for everything (4 spheres). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: each reading is the same number of times the one before. I'll keep it and try it first next time.
+- Ultron _revise_: one_sphere: ρ(x^-1) stays the same for everything (kind 4: not the reading itself but its power -1: each reading is the same number of times the one before)
+- Ultron _stuck_: one_sphere: nothing I can express stays the same (6 spheres, 754 readings)
 - Ultron _stuck_: one_sphere: nothing I can express stays the same (7 spheres, 901 readings)
 - Ultron _stuck_: one_sphere: nothing I can express stays the same (8 spheres, 1051 readings)
-- Ultron _invent_: From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.585: the spread squared grows in proportion to the time.
+- Ultron _invent_: From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.584: the spread squared grows in proportion to the time.
 - **Trainer**: Exam for lesson 26, attempt 1: passed
 - **Trainer**: What you found in 'jiggle' is what people call Brownian motion: Einstein's law (mean squared displacement = 4·D·t).
 
@@ -520,7 +520,7 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _revise_: swings: angle[n] = a1·angle[n-1] + a2·angle[n-2] stays the same for each pendulum (kind 5: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))
 - Ultron _stuck_: bumps: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _stuck_: bumps: nothing I can express stays the same (3 cars, 20 readings)
-- Ultron _reuse_: bumps: nothing I was born with explains it, but a kind of explanation I invented does: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down) (z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car); 200 steps of checking
+- Ultron _reuse_: bumps: nothing I was born with explains it, but a kind of explanation I invented does: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down) (z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car); 230 steps of checking
 - Ultron _revise_: bumps: z[n] = a1·z[n-1] + a2·z[n-2] stays the same for each car (kind 5: the next reading is the same mix of the last 2: how the state changes is a law of the state (it swings, or swings and dies down))
 - Ultron _stuck_: yeast: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _invent_: None of the kinds of explanation I was born with fits 'yeast': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(Δ(cells^-1)) stays the same for each jar (3 jars). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time.
@@ -556,17 +556,45 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 
 ## Lesson 29
 
-- **Trainer**: Lesson 29: The real world: falling
-- Ultron _meet_: new kind of experience: fall
-- **Trainer**: A real film from a physics lab: BallTossOut. The label says 30 pictures a second; the stick in view is 398.709 pixels to the metre (the lab's own calibration of the metre stick (Tracker file)).
-- Ultron _reflect_: BallTossOut: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 24 pictures, 19 of them with nothing touching it and all of it in view
-- **Trainer**: A real film from a physics lab: BallDrop. The label says 30 pictures a second, each frame taken as two half-pictures; the stick in view is 400.7 pixels to the metre (the metre stick's marks, 10 cm apart, read by the Trainer).
-- Ultron _reflect_: BallDrop: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 36 pictures, 21 of them with nothing touching it and all of it in view
-- **Trainer**: A real film from a physics lab: BallTossUp. The label says 30 pictures a second, each frame taken as two half-pictures; the stick in view is 400.3 pixels to the metre (the metre stick's marks, 10 cm apart, read by the Trainer).
-- Ultron _reflect_: BallTossUp: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 51 pictures, 50 of them with nothing touching it and all of it in view
-- Ultron _reflect_: after 0.167 s the ball goes faster by about the same amount in every film, give or take 2.7%: that's how precise this measuring is
-- Ultron _stuck_: fall: nothing stays constant yet (1 experiences)
-- Ultron _revise_: fall: dv / tau = 10.0919 [m/s²] in every experiment (2 candidates searched; tentative until it predicts 3 new experiences)
-- Ultron _invent_: From real films of a falling ball: dv / tau stays the same, 9.672 m/s²: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.
+- **Trainer**: Lesson 29: Words by pointing
+- **Trainer**: Here is a table with things on it. Just look, as long as you like.
+- Ultron _invent_: I looked at 182 things on 60 tables and measured each one. Their elongation falls into 2 separate groups (1837 bits to describe all of them as one spread, 1480 as groups); their fill falls into 2 separate groups (1837 bits to describe all of them as one spread, 1795 as groups); their hue falls into 4 separate groups (1837 bits to describe all of them as one spread, 1133 as groups); their size falls into 2 separate groups (1837 bits to describe all of them as one spread, 1645 as groups). Where they are (x, y) doesn't group: a boundary there would not pay for itself. So things come in kinds.
+- **Trainer**: Now I'll talk about the things on the table, one at a time.
+- Ultron _word_: 'ball' means things whose fill is in my group 1 (0.764 to 0.827)
+- Ultron _word_: 'bar' means things whose elongation is in my group 2 (2.7 to 4.23)
+- Ultron _word_: 'big' means things whose size is in my group 2 (107 to 154)
+- Ultron _word_: 'blue' means things whose hue is in my group 4 (231 to 234)
+- Ultron _word_: 'box' means things whose elongation is in my group 1 (1 to 1.17) and fill is in my group 2 (0.864 to 0.957)
+- Ultron _word_: 'green' means things whose hue is in my group 3 (119 to 122)
+- Ultron _word_: 'red' means things whose hue is in my group 1 (1.4 to 4.44)
+- Ultron _word_: 'small' means things whose size is in my group 1 (33 to 49)
+- Ultron _word_: 'the' means nothing: it fits every thing
+- Ultron _word_: 'yellow' means things whose hue is in my group 2 (55.6 to 57.4)
+- Ultron _reflect_: the shortest account of the 120 sentences I heard takes -209 bits: what each word means, and nothing more is needed to tell which thing was meant
 - **Trainer**: Exam for lesson 29, attempt 1: passed
-- **Trainer**: What you found in 'fall' is what people call free fall: the acceleration of gravity, g.
+- **Trainer**: What you found in 'kinds of thing' is what people call categories: colours, sizes and shapes.
+
+## Lesson 30
+
+- **Trainer**: Lesson 30: Words for what happens
+- **Trainer**: Now films of the same things. Watch; I'll say what happens.
+- Ultron _word_: 'bounces' means things where it comes back the way it went
+- Ultron _word_: 'falls' means things where its move up and down follows 'kind 7' (the steps between readings change by the same amount each time)
+- Ultron _word_: 'rolls' means things where its move across follows 'equal steps' (each reading goes up by the same step)
+- Ultron _word_: 'stops' means things where its move across follows 'kind 1' (the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
+- Ultron _invent_: Each word for what happens is the kind of motion present every time it was said about a thing: 'bounces': things where it comes back the way it went; 'falls': things where its move up and down follows 'kind 7' (the steps between readings change by the same amount each time); 'rolls': things where its move across follows 'equal steps' (each reading goes up by the same step); 'stops': things where its move across follows 'kind 1' (the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value)
+- **Trainer**: Now I'll compare things in the films.
+- Ultron _word_: 'after' says the first has more start than the second
+- Ultron _word_: 'are' says nothing I can check
+- Ultron _word_: 'before' says the first has less start than the second
+- Ultron _word_: 'faster' says the first has more speed than the second
+- Ultron _word_: 'fewer' says the first has less count than the second
+- Ultron _word_: 'heavier' says the first has more mass than the second
+- Ultron _word_: 'is' says nothing I can check
+- Ultron _word_: 'more' says the first has more count than the second
+- Ultron _word_: 'than' says nothing I can check
+- Ultron _word_: 'there' says nothing I can check
+- Ultron _invent_: Each comparing word is the quantity I measure, and which way round, that holds every time it is said: 'after': the first has more start; 'before': the first has less start; 'faster': the first has more speed; 'fewer': the first has less count; 'heavier': the first has more mass; 'more': the first has more count. I weigh things by my law that m·v adds up to the same before and after a knock.
+- **Trainer**: Exam for lesson 30, attempt 1: passed
+- **Trainer**: What you found in 'words for events' is what people call verbs, bound to kinds of motion.
+- **Trainer**: What you found in 'words for comparing' is what people call comparatives and before/after, bound to measured quantities (mass through conservation of momentum).

@@ -4421,74 +4421,81 @@
  },
  "29": {
   "attempt": 1,
-  "each_film_within_own_error": {
-   "examples": [
-    {
-     "question": "BallTossOut",
-     "truth": true,
-     "ultron": false
-    },
-    {
-     "question": "BallDrop",
-     "truth": true,
-     "ultron": true
-    },
-    {
-     "question": "BallTossUp",
-     "truth": true,
-     "ultron": false
-    }
-   ],
-   "name": "each film on its own: within 2 of its own errors of 9.80 (reported only: a film can't show its own perspective error)",
-   "scores": {
-    "lookup": [
-     0,
-     0
-    ],
-    "nearest": [
-     0,
-     0
-    ],
-    "ultron": [
-     1,
-     3
-    ]
-   },
-   "tolerance": null
-  },
-  "g": 9.753810430417117,
   "items": [
    {
+    "baselines": [
+     "co-occurrence",
+     "memoriser"
+    ],
     "examples": [
      {
-      "question": "BallTossOut",
-      "truth": true,
-      "ultron": true
+      "question": "the yellow ball",
+      "truth": 3,
+      "ultron": 3
      },
      {
-      "question": "BallDrop",
-      "truth": true,
-      "ultron": true
+      "question": "the green box",
+      "truth": 2,
+      "ultron": 2
      },
      {
-      "question": "BallTossUp",
-      "truth": true,
-      "ultron": true
+      "question": "the big blue box",
+      "truth": 0,
+      "ultron": 0
      }
     ],
-    "name": "the real films were watched and the ball followed (at least 2 of 3)",
+    "name": "the thing named, in word combinations never heard (new tables)",
     "scores": {
-     "lookup": [
-      0,
-      0
+     "co-occurrence": [
+      78,
+      200
      ],
-     "nearest": [
-      0,
-      0
+     "memoriser": [
+      41,
+      200
      ],
      "ultron": [
+      200,
+      200
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "baselines": [
+     "co-occurrence",
+     "memoriser"
+    ],
+    "examples": [
+     {
+      "question": "the shiny box",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "the orange box",
+      "truth": "I can't",
+      "ultron": null
+     },
+     {
+      "question": "the blue ring",
+      "truth": "I can't",
+      "ultron": null
+     }
+    ],
+    "name": "words never taught: it says it doesn't know them",
+    "scores": {
+     "co-occurrence": [
+      0,
+      30
+     ],
+     "memoriser": [
       3,
-      3
+      30
+     ],
+     "ultron": [
+      30,
+      30
      ]
     },
     "tolerance": null
@@ -4496,12 +4503,22 @@
    {
     "examples": [
      {
-      "question": "fall",
+      "question": "ball",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "bar",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "big",
       "truth": true,
       "ultron": true
      }
     ],
-    "name": "found the law of falling from the films: the change of speed grows in proportion to the time",
+    "name": "each word learned within 20 sentences that use it",
     "scores": {
      "lookup": [
       0,
@@ -4512,74 +4529,95 @@
       0
      ],
      "ultron": [
-      1,
-      1
-     ]
-    },
-    "tolerance": null
-   },
-   {
-    "examples": [
-     {
-      "question": "V3",
-      "truth": true,
-      "ultron": true
-     }
-    ],
-    "name": "V3: its g agrees with g at the lab (9.80 m/s\u00b2) within twice its measured error, and that error is at most 3%",
-    "scores": {
-     "lookup": [
-      0,
-      0
-     ],
-     "nearest": [
-      0,
-      0
-     ],
-     "ultron": [
-      1,
-      1
+      10,
+      10
      ]
     },
     "tolerance": null
    }
   ],
-  "law_constant": 9.671507762182276,
   "lesson": 29,
-  "measured_error": 0.1582580423990748,
-  "passed": true,
-  "per_film": {
-   "BallDrop": {
-    "fit_error": 0.09803461434653989,
-    "g": 9.670723296792161,
-    "pictures": 21,
-    "rate": 60
-   },
-   "BallTossOut": {
-    "fit_error": 0.03386493396975264,
-    "g": 10.059852050382077,
-    "pictures": 19,
-    "rate": 30
-   },
-   "BallTossUp": {
-    "fit_error": 0.030575291731326223,
-    "g": 9.53085594407711,
-    "pictures": 50,
-    "rate": 60
-   }
+  "lexicon": {
+   "ball": [
+    [
+     "fill",
+     0
+    ]
+   ],
+   "bar": [
+    [
+     "elongation",
+     1
+    ]
+   ],
+   "big": [
+    [
+     "size",
+     1
+    ]
+   ],
+   "blue": [
+    [
+     "hue",
+     3
+    ]
+   ],
+   "box": [
+    [
+     "elongation",
+     0
+    ],
+    [
+     "fill",
+     1
+    ]
+   ],
+   "green": [
+    [
+     "hue",
+     2
+    ]
+   ],
+   "red": [
+    [
+     "hue",
+     0
+    ]
+   ],
+   "small": [
+    [
+     "size",
+     0
+    ]
+   ],
+   "the": [],
+   "yellow": [
+    [
+     "hue",
+     1
+    ]
+   ]
   },
-  "story": "From real films of a falling ball: dv / tau stays the same, 9.672 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
-  "threshold": 0.6666666666666666,
-  "v3": {
-   "combined_error": 0.041371967540187564,
-   "error": 0.1582580423990748,
-   "films": 3,
-   "g": 9.753810430417117,
-   "passed": true,
-   "precise": true,
-   "spread_error": 0.1582580423990748,
-   "within": true
-  }
+  "margin_over_baselines": 0.61,
+  "passed": true,
+  "precision": [
+   200,
+   200
+  ],
+  "sentences_heard": 120,
+  "sentences_to_learn": {
+   "ball": 6,
+   "bar": 11,
+   "big": 6,
+   "blue": 4,
+   "box": 10,
+   "green": 4,
+   "red": 2,
+   "small": 2,
+   "the": 20,
+   "yellow": 3
+  },
+  "threshold": 0.95
  },
  "3": {
   "attempt": 1,
@@ -4640,6 +4678,163 @@
   "lesson": 3,
   "passed": true,
   "threshold": 0.99
+ },
+ "30": {
+  "attempt": 1,
+  "comparing_words": {
+   "after": [
+    "start",
+    ">"
+   ],
+   "are": null,
+   "before": [
+    "start",
+    "<"
+   ],
+   "faster": [
+    "speed",
+    ">"
+   ],
+   "fewer": [
+    "count",
+    "<"
+   ],
+   "heavier": [
+    "mass",
+    ">"
+   ],
+   "is": null,
+   "more": [
+    "count",
+    ">"
+   ],
+   "than": null,
+   "there": null
+  },
+  "event_words": {
+   "bounces": [
+    [
+     "turns back",
+     1
+    ]
+   ],
+   "falls": [
+    [
+     "updown",
+     4
+    ]
+   ],
+   "rolls": [
+    [
+     "across",
+     1
+    ]
+   ],
+   "stops": [
+    [
+     "across",
+     2
+    ]
+   ]
+  },
+  "items": [
+   {
+    "baselines": [
+     "co-occurrence",
+     "memoriser"
+    ],
+    "examples": [
+     {
+      "question": "the blue ball ...?",
+      "truth": "stops",
+      "ultron": "stops"
+     },
+     {
+      "question": "the ball ...?",
+      "truth": "stops",
+      "ultron": "stops"
+     },
+     {
+      "question": "the green box ...?",
+      "truth": "bounces",
+      "ultron": "bounces"
+     }
+    ],
+    "name": "what happens, in new films, to things never seen doing it",
+    "scores": {
+     "co-occurrence": [
+      200,
+      200
+     ],
+     "memoriser": [
+      6,
+      200
+     ],
+     "ultron": [
+      200,
+      200
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "baselines": [
+     "co-occurrence",
+     "memoriser"
+    ],
+    "examples": [
+     {
+      "question": "the yellow ball stops ___ the red ball",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "there are ___ green than yellow",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "the box is ___ than the ball",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "the comparing word, filled in, in new films",
+    "scores": {
+     "co-occurrence": [
+      100,
+      120
+     ],
+     "memoriser": [
+      16,
+      120
+     ],
+     "ultron": [
+      113,
+      120
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 30,
+  "passed": true,
+  "precision": [
+   200,
+   200
+  ],
+  "relation_precision": [
+   113,
+   113
+  ],
+  "sentences_heard": 220,
+  "sentences_to_learn": {
+   "bounces": 4,
+   "falls": 6,
+   "rolls": 3,
+   "stops": 10
+  },
+  "threshold": 0.9
  },
  "4": {
   "attempt": 1,
