@@ -42,7 +42,7 @@ score, and the actions Ultron spent to get there.
 
 | # | Criterion |
 |---|---|
-| W1 | **What my actions do.** On 40 held-out Trainer games, after exploring each with at most 150 button presses, Ultron predicts the **whole next picture** exactly for ≥ 95% of 50 held-out (picture, button) pairs per game, situations it never saw, made by the Trainer; precision ≥ 98% (it may say "I can't tell" instead of predicting). On 20 games with one piece it never met in training: ≥ 80%, precision ≥ 95%. It beats two baselines fixed in advance by ≥ 30 points: "nothing changes" and a memoriser of every (picture, button) → picture it saw |
+| W1 | **What my actions do.** On 40 held-out Trainer games, after exploring each with at most 150 button presses, Ultron predicts the **whole next picture** exactly for ≥ 95% of 50 held-out (picture, button) pairs per game, situations it never saw, made by the Trainer (5 walks of 10 presses on layouts of that game it never saw, its laws frozen; it predicts each picture before seeing it; presses that end a level are judged in W3 and W4, not here); precision ≥ 98% (it may say "I can't tell" instead of predicting). On 20 games with one piece it never met in training: ≥ 80%, precision ≥ 95%. It beats two baselines fixed in advance by ≥ 30 points: "nothing changes" and a memoriser of every (picture, button) → picture it saw |
 | W2 | **Experiments that decide.** Ultron chooses its own button presses to split its rival explanations. It reaches W1's level on the same 40 games with ≤ 0.5× the presses of a random explorer and ≤ 0.7× those of a fixed sweep (each button in turn from every place it reaches), both run with the same learner |
 | W3 | **What the game wants.** The goal is never told: the world says only "won" or "lost". After at most 3 wins in a held-out Trainer game, Ultron states the goal as a law, and on 30 held-out end pictures per game says which are wins ≥ 95% of the time (40 games), beating a baseline that remembers the winning pictures |
 | W4 | **Planning in its own model.** On the held-out levels of 40 held-out Trainer games (levels after the first), Ultron wins ≥ 90% of levels, with presses ≤ 1.25× the fewest possible (found by the Trainer's own search in the true game), counting every press, its experiments included. Baselines: a random player and a novelty-seeking player with the same budget |
@@ -73,7 +73,7 @@ which role, which button does what, the layouts and the combinations are drawn p
 | hazard | a cell that loses the level when the mover steps on it |
 | ice | cells on which the mover keeps sliding until something stops it |
 | door | cells that block until every pickup is gone, then vanish |
-| goals | one per game: mover on the target; every box on a target; every pickup gone; mover of the target's colour on the target |
+| goals | one per game: mover on the target; every box on a target; every pickup gone; the mover on the target wearing the paint's colour |
 
 Held out from training, used only in W1's one-new-piece set: **portal** (two cells of one
 colour; stepping on one puts the mover on the other).
