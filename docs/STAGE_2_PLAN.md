@@ -8,7 +8,7 @@ footage**.
 
 | # | Criterion |
 |---|---|
-| V1 | **Eyes:** every gating row of the failure lab's *eyes* experiment ≥ 23/25 trays counted right, with no regressions elsewhere in the lab |
+| V1 | ✅ **met, and robust** (2026-10-11): every gating eyes row ≥ 23/25 in the failure lab and on 8 fixed sets of 25 unseen trays (normal, 16% and 32% noise, big, faint: 100/100 each; touching 193/200, every set 23–25). Before Stage 2: 25, 1, 0, 0, 2, 19. No regressions elsewhere in the lab; 29 lessons pass on the first attempt; a retrain is byte-identical; 112 tests pass |
 | V2 | **Diffusion** from the real microscope film (lesson 26): Ultron's D agrees with the scientists' own tool within measured error |
 | V3 | **g** from real footage of falling, within measured error |
 | V4 | **Pendulum periods** from real footage, within measured error (and the √length law) |
@@ -34,7 +34,7 @@ and the blind tests. A retrain must stay byte for byte identical.
 
 | # | Status |
 |---|---|
-| V1 | ✅ **met, and robust** (2026-10-11): every gating eyes row ≥ 23/25 on the failure lab's trays **and on three sets of unseen trays** (normal 25; 16% noise 25; 32% noise 23–24; big 25; faint 25; touching 23–24). Before Stage 2: 25, 1, 0, 0, 2, 19. No regressions elsewhere in the lab; 29 lessons pass on the first attempt; a retrain is byte-identical; 111 tests pass |
+| V1 | ✅ **met** (2026-10-11): every gating eyes row 24–25/25 in the failure lab (was 25, 1, 0, 0, 2, 19); on a second set of unseen trays 24–25/25. No regressions elsewhere in the lab; all 28 lessons pass on the first attempt; a retrain is byte-identical; 109 tests pass |
 | V2 | ✅ **met** (2026-10-11): lesson 26 is in the curriculum and passes on the first attempt. From the real trackpy microscope film: Einstein's law (spread² ∝ time); D = 0.396 µm²/s against the scientists' tool trackpy's 0.412 (4%) and the textbook's 0.455 (13%); on 150 frames it never learned from it finds 87% of trackpy's spheres and predicts the spread at 1–2 s (21/21); it claims no law for a single sphere |
 | V3–V6 | open (needs real footage of falling, swinging and bouncing: see WP3) |
 
@@ -48,13 +48,24 @@ How V1 was met (`senses/eyes.py`, `senses/world.py`):
   views. Faint: 2 → 25.
 - **Stepping back:** the picture shrunk 2× and 3×, kept only when its eyes respond
   clearly more strongly there. Big things: 0 → 25.
-- **Broader handling:** lesson 19 handles things of varied size, with spacing from
-  touching (2× radius) to well apart (4×), and learns a sharper spot (σ 0.7). Light and
-  noise are left to how it looks: training on varied light made the eyes fire on
-  real-film noise.
-- **Looking longer at a crowded scene:** when the things it sees sit closer than 5 px,
-  it averages 4 pictures before counting, so touching neighbours no longer blur into one.
-  Touching: 19 → 23–24 on every tray set, where it had been 16–24.
+- **Broader handling:** lesson 19 handles things in varied spacing, size, light and
+  camera noise. Touching: 19 → 24.
+- **Explaining away** (2026-10-11): two things just touching (centres 3.0–3.2 px apart)
+  make one ridge in the eyes' map, and the dimmer one was never counted; every touching
+  error was that undercount, and the tray sets that scored lowest simply had more such
+  pairs. From touch the eyes now learn one thing's footprint in their map; close up, what
+  each thing seen accounts for is taken away, and a leftover beside a thing that is
+  clearly stronger than any leftover its hands said was nothing is a thing too. On 8
+  fixed sets of 25 touching trays: 162 → 193 right, every set 23–25 (was 17–23);
+  overlapping (ungated) 64 → 85 of 100; every other eyes row 100/100 before and after.
+- **The same trays for every pair of eyes:** the failure lab drew trays and camera
+  pictures from one generator, so eyes that looked a different number of times were
+  shown different trays. Trays and camera now have their own generators.
+- **Measured and not kept:** a sharper spot (σ 0.7) with handling from touching to apart
+  and looking longer at crowded scenes (4 pictures) reached touching 189/200 (worst set
+  22), 32% noise 96/100 (worst 23) and overlapping 62/100 on the same fixed trays;
+  combined with explaining away, 195/200 touching but 32% noise 94/100 (worst 22). 16
+  filters with explaining away: touching 187/200 (worst 20).
 
 Two measured pitfalls, fixed:
 - recentring the background on every picture dimmed small crowded things;
