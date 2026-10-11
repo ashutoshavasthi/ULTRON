@@ -8,7 +8,7 @@ footage**.
 
 | # | Criterion |
 |---|---|
-| V1 | **Eyes:** every gating row of the failure lab's *eyes* experiment ≥ 23/25 trays counted right, with no regressions elsewhere in the lab |
+| V1 | ✅ **met, and robust** (2026-10-11): every gating eyes row ≥ 23/25 in the failure lab and on 8 fixed sets of 25 unseen trays (normal, 16% and 32% noise, big, faint: 100/100 each; touching 193/200, every set 23–25). Before Stage 2: 25, 1, 0, 0, 2, 19. No regressions elsewhere in the lab; 29 lessons pass on the first attempt; a retrain is byte-identical; 112 tests pass |
 | V2 | **Diffusion** from the real microscope film (lesson 26): Ultron's D agrees with the scientists' own tool within measured error |
 | V3 | **g** from real footage of falling, within measured error |
 | V4 | **Pendulum periods** from real footage, within measured error (and the √length law) |
@@ -61,6 +61,11 @@ How V1 was met (`senses/eyes.py`, `senses/world.py`):
 - **The same trays for every pair of eyes:** the failure lab drew trays and camera
   pictures from one generator, so eyes that looked a different number of times were
   shown different trays. Trays and camera now have their own generators.
+- **Measured and not kept:** a sharper spot (σ 0.7) with handling from touching to apart
+  and looking longer at crowded scenes (4 pictures) reached touching 189/200 (worst set
+  22), 32% noise 96/100 (worst 23) and overlapping 62/100 on the same fixed trays;
+  combined with explaining away, 195/200 touching but 32% noise 94/100 (worst 22). 16
+  filters with explaining away: touching 187/200 (worst 20).
 
 Two measured pitfalls, fixed:
 - recentring the background on every picture dimmed small crowded things;
