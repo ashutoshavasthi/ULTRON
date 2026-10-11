@@ -22,6 +22,13 @@ Counting a still scene uses three things animals do too (Stage 2: eyes that gene
     turned up to what it is used to;
   * step back: the picture also looked at shrunk 2x and 3x, keeping the view where its
     eyes respond most strongly (where things look like the things it learned).
+
+Looking closely at a crowd, it also explains away: two things just touching make one
+ridge in its map, not two peaks, and the dimmer one sits on its neighbour's shoulder.
+From touch it knows what one thing looks like in its map (its footprint); taking away
+what each thing it saw accounts for, whatever still clearly stands out right beside one
+of them is a thing too. How strong such a leftover must be is learned from touch as
+well: clearly stronger than any leftover its hands said was nothing.
 """
 
 import numpy as np
@@ -31,6 +38,10 @@ SIGMA = 1.0
 BACKGROUND = 0.1    # where the background sits in the pictures its eyes grew up with
 DIM = 0.45          # things standing out less than this (of what it's used to): a dim scene
 STEP_BACK = 1.5     # a view from further back must look this much clearer to be preferred
+FOOT = 3            # one thing's footprint in the map: (2·FOOT + 1)² pixels
+ALONE = 7.0         # a handled thing this far from any other shows its footprint alone
+NEAR = 4.0          # a thing hidden on a neighbour's shoulder is this close to it (pixels)
+CLEARLY = 1.2       # a leftover must be this much stronger than any its hands said was nothing
 
 
 def _box(a, k):
@@ -105,6 +116,8 @@ class Eyes:
         self.trained_on = 0
         self.noise_ref = 0.08       # how noisy the pictures it learned from were
         self.contrast_ref = 0.75    # how far their things stood out
+        self.footprint = None       # what one thing looks like in its map (learned by touch)
+        self.leftover = None        # how strong a leftover beside a thing must be to be one
 
     # ---------------------------------------------------------------- network
     def _forward(self, x):
@@ -176,6 +189,7 @@ class Eyes:
             losses.append(total / len(x))
         self.trained_on += len(images)
         self._calibrate(images, touches)
+        self._learn_footprint(images, touches)
         self.noise_ref = float(np.median([noise_of(im) for im in images]))
         self.contrast_ref = float(np.median([contrast_of(im) for im, t in zip(images, touches)
                                              if len(t)]))
@@ -192,7 +206,67 @@ class Eyes:
                 best = (right, float(round(th, 3)))
         self.threshold = best[1]
 
+    def _learn_footprint(self, images, touches):
+        """What one thing looks like in its map, from things its hands found alone; and how
+        strong a leftover must be: clearly stronger than any its hands said was nothing."""
+        acc, k = np.zeros((2 * FOOT + 1, 2 * FOOT + 1)), 0
+        maps = [self.heat(im) for im in images]
+        for hm, t in zip(maps, touches):
+            h, w = hm.shape
+            p = np.array(t, dtype=float).reshape(-1, 2)
+            for i, (x, y) in enumerate(p):
+                d = np.hypot(p[:, 0] - x, p[:, 1] - y)
+                d[i] = np.inf
+                xi, yi = int(round(x)), int(round(y))
+                if d.min() > ALONE and FOOT <= xi < w - FOOT and FOOT <= yi < h - FOOT:
+                    patch = hm[yi - FOOT:yi + FOOT + 1, xi - FOOT:xi + FOOT + 1]
+                    if patch[FOOT, FOOT] > 0:
+                        acc += patch / patch[FOOT, FOOT]
+                        k += 1
+        if not k:
+            self.footprint = self.leftover = None
+            return
+        self.footprint = acc / k
+        nothing = 0.0
+        for hm, t in zip(maps, touches):
+            seen = _peaks(hm, self.threshold)
+            for x, y, v in self._leftovers(hm, seen, 0.0):
+                felt = [(a, b) for a, b in t if np.hypot(a - x, b - y) <= 1.5]
+                hidden = any(min(np.hypot(a - sx, b - sy) for sx, sy, _ in seen) > 1.5
+                             for a, b in felt)
+                if not hidden:
+                    nothing = max(nothing, v)
+        self.leftover = float(CLEARLY * max(nothing, self.threshold))
+
+    def _leftovers(self, hm, seen, threshold):
+        """Spots that still stand out right beside a thing seen, once what each thing seen
+        accounts for (its footprint, as strong as it is) is taken away."""
+        h, w = hm.shape
+        rest = hm.copy()
+        for x, y, v in seen:
+            xi, yi = int(round(x)), int(round(y))
+            y0, y1 = max(0, yi - FOOT), min(h, yi + FOOT + 1)
+            x0, x1 = max(0, xi - FOOT), min(w, xi + FOOT + 1)
+            rest[y0:y1, x0:x1] -= v * self.footprint[y0 - yi + FOOT:y1 - yi + FOOT,
+                                                     x0 - xi + FOOT:x1 - xi + FOOT]
+        out = []
+        for q in _peaks(rest, threshold):
+            d2 = [(q[0] - x) ** 2 + (q[1] - y) ** 2 for x, y, _ in seen]
+            if d2 and 2.0 ** 2 < min(d2) <= NEAR ** 2:
+                out.append(q)
+        return out
+
     # ---------------------------------------------------------------- seeing
+    def see_closely(self, img):
+        """The things in one picture, a crowd looked at closely: the things it sees, and
+        those hidden on a neighbour's shoulder (explaining away)."""
+        hm = self.heat(img)
+        seen = _peaks(hm, self.threshold)
+        if self.footprint is None or not seen:
+            return seen
+        return sorted(seen + self._leftovers(hm, seen, self.leftover),
+                      key=lambda p: (p[1], p[0]))
+
     def see(self, img):
         """The things in one picture: [(x, y, strength)], positions to a fraction of a pixel."""
         return _peaks(self.heat(img), self.threshold)
@@ -250,7 +324,8 @@ class Eyes:
         best = None
         for s in scales:
             view = _shrink(img, s) if s > 1 else img
-            seen = self.see(self._adapt(view))
+            # close up, crowds are looked at closely; stepping back is for big things
+            seen = self.see_closely(self._adapt(view)) if s == 1 else self.see(self._adapt(view))
             strength = float(np.mean([p[2] for p in seen])) if seen else 0.0
             # step back only when things clearly look more like what its eyes learned
             if best is None or strength > STEP_BACK * best[0]:
@@ -261,7 +336,9 @@ class Eyes:
     def to_json(self):
         return {"layers": [[w.tolist(), b.tolist()] for w, b in self.params],
                 "threshold": self.threshold, "trained_on": self.trained_on,
-                "noise_ref": self.noise_ref, "contrast_ref": self.contrast_ref}
+                "noise_ref": self.noise_ref, "contrast_ref": self.contrast_ref,
+                "footprint": self.footprint.tolist() if self.footprint is not None else None,
+                "leftover": self.leftover}
 
     @classmethod
     def from_json(cls, d):
@@ -271,6 +348,9 @@ class Eyes:
         e.trained_on = d.get("trained_on", 0)
         e.noise_ref = d.get("noise_ref", e.noise_ref)
         e.contrast_ref = d.get("contrast_ref", e.contrast_ref)
+        if d.get("footprint") is not None:
+            e.footprint = np.array(d["footprint"], dtype=float)
+            e.leftover = d["leftover"]
         return e
 
 
