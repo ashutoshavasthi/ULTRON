@@ -269,6 +269,23 @@ class RealFalling(Lesson):
     precision = 0.02
 
 
+class RealSwinging(Lesson):
+    number, title = 30, "The real world: swinging"
+    goal = ("Three real films of a pendulum, each with the length of its string: 0.5 m (a "
+            "school film from Aachen), 0.785 m and 1 m (physics lab films). Ultron is given "
+            "only the pictures, the frame rate and the length. Can it time each swing from "
+            "its own track, with an honest error, and find by itself how the time of a "
+            "swing depends on the length?")
+    kind = "guided"
+    FILMS = ("Pendulum50cm", "pendulum_drag", "Pendulum")
+
+    def specs(self):
+        return [Spec("swing", "quantity", {"L": LENGTH}, "T",
+                     units={"L": LENGTH, "T": (0, 0, 1)}, precision=self.precision)]
+
+    precision = 0.03
+
+
 def senses_lessons(seed=0):
     return [Handling(seed + 19), SeeingNumbers(seed + 20), WatchingMotion(seed + 21)]
 
@@ -278,4 +295,4 @@ def later_lessons(seed=0):
 
 
 def real_footage_lessons(seed=0):
-    return [RealFalling(seed + 29)]
+    return [RealFalling(seed + 29), RealSwinging(seed + 30)]

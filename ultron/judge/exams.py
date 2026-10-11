@@ -1383,6 +1383,40 @@ def exam_falling(brain, seed=1029):
                     "story": info["story"] if info else None})
 
 
+def exam_swinging(brain, seed=1030):
+    """Lesson 30 (Stage 2, V4): pendulum periods from real footage, and the √length law
+    found by Ultron itself, by the rules in docs/STAGE_2_PLAN.md."""
+    import math
+    from .footage_checks import G_LAB as G, sqrt_law
+    b = copy.deepcopy(brain)
+    info = b.inventions.get("swinging")
+    films = info["films"] if info else {}
+    timed = Tally("the real pendulum films were watched and their swings timed (all 3)")
+    for name in ("Pendulum50cm", "pendulum_drag", "Pendulum"):
+        timed.item(name, True, name in films)
+    law = b.qlaws.get("swing")
+    found = Tally("found the law of the pendulum from the films: the time of a swing grows as "
+                  "the square root of the length")
+    found.item("swing", True, law is not None and law.powers in ({"T": 2, "L": -1},
+                                                                 {"T": -2, "L": 1}))
+    judged = sqrt_law(films)
+    verdict = Tally("V4's square-root law: power 0.5 and constant 2π/√g, each within 2 of its "
+                    "errors, the constant's error at most 3%")
+    verdict.item("sqrt_law", True, judged["passed"])
+    each = Tally("V4 per film: within 2 errors of 2π√(L/g)(1 + θ²/16), error at most 3% "
+                 "(reported here, judged in the V4 check)")
+    for name, f in films.items():
+        ref = 2 * math.pi * math.sqrt(f["length_m"] / G) * (
+            1 + math.radians(f["angle_deg"]) ** 2 / 16)
+        each.item(name, True, abs(f["period"] - ref) <= 2 * f["error"]
+                  and f["error"] <= 0.03 * f["period"])
+    return _result(30, [timed, found, verdict], 2 / 3,
+                   {"sqrt_law": judged, "per_film": films,
+                    "each_film": each.to_json(),
+                    "law_constant": law.constant if law else None,
+                    "story": info["story"] if info else None})
+
+
 def exam_change(brain, seed=1027):
     """Lesson 27: laws where how the state changes is a law of the state."""
     from ..env.sequences import Funnels, Pendulums, ShockAbsorbers, YeastJars
@@ -1481,4 +1515,4 @@ EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          17: exam_coils, 18: exam_phase3, 19: exam_eyes, 20: exam_seeing_numbers,
          21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
          25: exam_phase3_senses, 26: exam_microscope,
-         27: exam_change, 28: exam_rows, 29: exam_falling}
+         27: exam_change, 28: exam_rows, 29: exam_falling, 30: exam_swinging}

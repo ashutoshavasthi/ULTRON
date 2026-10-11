@@ -5,6 +5,8 @@ The Trainer may look at the world's ground truth to grade answers. It never
 passes a law, formula or answer into the brain.
 """
 
+import math
+
 from ..brain.language import bind_number, bind_operation, bind_prefix, bind_relation
 from ..judge.exams import EXAMS
 from .lessons import RealData, all_lessons
@@ -77,6 +79,8 @@ class Trainer:
                 self.teach_microscope(lesson)
             elif lesson.number == 29:
                 self.teach_falling(lesson)
+            elif lesson.number == 30:
+                self.teach_swinging(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -384,6 +388,57 @@ class Trainer:
                        f"I found no steady law ({law.formula() if law else 'nothing'})."))}
         brain.note("invent", brain.inventions["falling"]["story"])
 
+    # ----------------------------------------------------------- lesson 30
+    def teach_swinging(self, lesson):
+        from ..env import footage
+        from ..senses import motion
+        brain = self.brain
+        timed = {}
+        for name in lesson.FILMS:
+            try:
+                pics = footage.frames(name)
+            except footage.Unavailable as e:
+                self.say(f"I couldn't get the film {name} ({e}).")
+                continue
+            lab = footage.label(name)
+            self.say(f"A real film of a pendulum: {name}. The label says {lab['fps']} pictures "
+                     f"a second, and the string is {lab['length_m']} m long "
+                     f"({lab['scale_from']}).")
+            _, _, ch, tracks = motion.watch(brain.eyes, pics, lab["interlaced"])
+            track = motion.whole_mover(tracks)
+            s = motion.swing(track, lab["fps"]) if track else None
+            if s is None:
+                brain.note("reflect", f"{name}: I couldn't follow anything swinging there and back")
+                continue
+            timed[name] = {"length_m": lab["length_m"], "period": s["period"],
+                           "error": s["error"], "angle_deg": math.degrees(s["angle"]),
+                           "half_swings": len(s["half_swings"]), "rate": lab["fps"]}
+            brain.note("reflect", f"{name}: through my {ch} channel I followed the bob through "
+                                  f"{len(track)} pictures and timed {len(s['half_swings'])} "
+                                  f"half swings: one swing there and back takes "
+                                  f"{s['period']:.3f} ± {s['error']:.3f} s")
+        if not timed:
+            self.say("No film could be timed. The lesson stops here.")
+            return
+        # its own timings say how precise this measuring is: the worst film's error
+        precision = max(lesson.precision, round(max(t["error"] / t["period"]
+                                                    for t in timed.values()), 3))
+        brain.memory.specs["swing"].precision = precision
+        brain.note("reflect", f"my timings are good to about {precision:.1%}")
+        for name, t in sorted(timed.items(), key=lambda kv: kv[1]["length_m"]):
+            brain.experience("swing", {"L": t["length_m"], "film": name}, t["period"])
+        law = brain.qlaws.get("swing")
+        root = law is not None and law.powers in ({"T": 2, "L": -1}, {"T": -2, "L": 1})
+        brain.inventions["swinging"] = {
+            "shape": "the real world", "primitives": [], "lesson": brain.lesson,
+            "precision": precision, "films": timed,
+            "story": (f"From real films of pendulums: " +
+                      (f"{law.formula()} stays the same, {law.constant:.4g}: the time of a "
+                       f"swing grows as the square root of the length of the string."
+                       if root else f"I found no law of the square root "
+                                    f"({law.formula() if law else 'nothing'})."))}
+        brain.note("invent", brain.inventions["swinging"]["story"])
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -420,6 +475,7 @@ class Trainer:
         24: {"slide": "sliding friction (stopping distance ∝ speed²)"},
         26: {"jiggle": "Brownian motion: Einstein's law (mean squared displacement = 4·D·t)"},
         29: {"fall": "free fall: the acceleration of gravity, g"},
+        30: {"swing": "the period of a pendulum (T = 2π√(L/g))"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }

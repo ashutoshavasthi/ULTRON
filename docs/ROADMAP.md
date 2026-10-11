@@ -155,11 +155,14 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
    ([`stage2_v3_falling.md`](../reports/stage2_v3_falling.md)).
 4. ✅ **Detection on par with a lab tool** (V6): Ultron's positions match the lab's own
    hand marks on both marked films ([`stage2_v4_v6.md`](../reports/stage2_v4_v6.md)).
-5. **Pendulum periods and the √length law, restitution** (V4, V5): not met. The real
-   pendulum films available fail the fixed rule (one is 2% fast, the other too short to
-   be precise), and there are only two lengths. No usable bouncing-ball film. Both need
-   new footage: a pendulum at three or more lengths and a ball bouncing, each beside a
-   ruler.
+5. **Pendulum periods and the √length law, restitution** (V4, V5): not met, with parts
+   met. Lesson 30: from three real pendulums (0.5, 0.785 and 1 m) Ultron finds by itself
+   that L/T² stays the same, and the √length law passes its fixed rule (power
+   0.470 ± 0.029; constant 2.023 ± 0.013 against 2.007). Per film, only the 0.5 m film
+   passes: 0.785 m is 2% fast, and 1 m shows one swing. V5: the GB Drop film passes
+   (e = 0.843 ± 0.003 against the lab's 0.836 ± 0.006), but in the corridor film Ultron
+   follows the ball through only one of four bounces
+   ([`stage2_v4_v6.md`](../reports/stage2_v4_v6.md)).
 
 Network note (updated 2026-10-11): this environment now also reaches Wikimedia (which
 rate-limits original files), YouTube and archive.org; earlier they were blocked. Stage 3

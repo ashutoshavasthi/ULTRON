@@ -64,15 +64,62 @@ def test_positions_on_par_with_the_labs_hand_marks(trained):
 
 
 def test_pendulum_periods_are_measured_and_judged(trained):
-    """V4 is judged, not assumed: both films are timed, the 1 m film agrees with the
-    textbook but is too short (one swing) to be precise, and with two lengths the
-    square-root law is not claimed."""
+    """V4 is judged, not assumed: all three films are timed. The 0.5 m film passes, the
+    1 m film agrees with the textbook but is too short (one swing) to be precise, and
+    the 0.785 m film is too far off, so V4 is not met; the square-root law, judged over
+    the three lengths, holds."""
     from ultron.judge import footage_checks
     brain, _ = trained
     v4 = footage_checks.v4(brain.eyes)
-    assert all(f["measured"] for f in v4["films"].values())
-    assert v4["films"]["Pendulum"]["within"] and not v4["films"]["Pendulum"]["precise"]
-    assert not v4["sqrt_law_judged"] and not v4["passed"]
+    films = v4["films"]
+    assert all(f["measured"] for f in films.values())
+    assert films["Pendulum50cm"]["passed"]
+    assert films["Pendulum"]["within"] and not films["Pendulum"]["precise"]
+    assert not films["pendulum_drag"]["within"]
+    assert v4["sqrt_law"]["judged"] and v4["sqrt_law"]["passed"] and not v4["passed"]
+
+
+def test_the_pendulum_law_found_by_ultron_itself(trained):
+    """Lesson 30: from its own timings of three real pendulums, Ultron finds that the
+    period squared over the length stays the same."""
+    brain, results = trained
+    r = results[30]
+    assert r["passed"], r
+    assert brain.qlaws["swing"].powers in ({"T": 2, "L": -1}, {"T": -2, "L": 1})
+
+
+def test_the_square_root_law_is_judged_by_its_rule():
+    """Periods exactly as T = 2π√(L/g) pass; periods growing in proportion to the
+    length fail on the power; two lengths are not judged."""
+    import math
+    from ultron.judge.footage_checks import sqrt_law
+    good = {str(L): {"length_m": L, "period": 2 * math.pi * math.sqrt(L / 9.8),
+                     "error": 0.01} for L in (0.5, 0.8, 1.0)}
+    assert sqrt_law(good)["passed"]
+    straight = {str(L): {"length_m": L, "period": 2.0 * L, "error": 0.01}
+                for L in (0.5, 0.8, 1.0)}
+    assert not sqrt_law(straight)["power_passed"]
+    assert not sqrt_law({k: good[k] for k in ("0.5", "1.0")})["judged"]
+
+
+def test_a_bounce_keeps_what_the_floor_gives_back():
+    """A ball dropped from rest 250 px above the floor, keeping 0.7 of its speed at each
+    bounce: every bounce with long enough flights is found, each kept share read as 0.7."""
+    g, e, floor = 0.5, 0.7, 300.0                 # pixels per picture², rows grow down
+    start, v = -(2 * 250.0 / g) ** 0.5, 0.0       # it left the floor (in effect) at rest
+    v = g * -start                                # ... as if thrown up this fast before
+    flights = []
+    while v > 2:                                  # each flight: (leaves floor at, speed up)
+        flights.append((start, v))
+        start, v = start + 2 * v / g, e * v
+    track = {}
+    for f in range(int(start)):
+        s0, v0 = max(fl for fl in flights if fl[0] <= f)
+        t = f - s0
+        track[f] = (100.0, floor - (v0 * t - g * t * t / 2))
+    found = motion.bounces(track)
+    assert len(found) >= 3
+    assert all(abs(k - e) < 0.03 for _, k in found)
 
 
 def test_a_swing_is_timed_and_its_angle_read_without_a_scale():

@@ -4456,7 +4456,7 @@
    },
    "tolerance": null
   },
-  "g": 9.753810430417117,
+  "g": 9.75477796328133,
   "items": [
    {
     "examples": [
@@ -4544,40 +4544,40 @@
     "tolerance": null
    }
   ],
-  "law_constant": 9.671507762182276,
+  "law_constant": 9.679076591166154,
   "lesson": 29,
-  "measured_error": 0.1582580423990748,
+  "measured_error": 0.15903239694942073,
   "passed": true,
   "per_film": {
    "BallDrop": {
-    "fit_error": 0.09803461434653989,
-    "g": 9.670723296792161,
-    "pictures": 21,
+    "fit_error": 0.08036966821376756,
+    "g": 9.680159215869708,
+    "pictures": 24,
     "rate": 60
    },
    "BallTossOut": {
-    "fit_error": 0.03386493396975264,
-    "g": 10.059852050382077,
+    "fit_error": 0.03386493396975197,
+    "g": 10.05985205038208,
     "pictures": 19,
     "rate": 30
    },
    "BallTossUp": {
-    "fit_error": 0.030575291731326223,
-    "g": 9.53085594407711,
-    "pictures": 50,
+    "fit_error": 0.03163343670365645,
+    "g": 9.524322623592198,
+    "pictures": 49,
     "rate": 60
    }
   },
-  "story": "From real films of a falling ball: dv / tau stays the same, 9.672 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
+  "story": "From real films of a falling ball: dv / tau stays the same, 9.679 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
   "threshold": 0.6666666666666666,
   "v3": {
-   "combined_error": 0.041371967540187564,
-   "error": 0.1582580423990748,
+   "combined_error": 0.036998252800054435,
+   "error": 0.15903239694942073,
    "films": 3,
-   "g": 9.753810430417117,
+   "g": 9.75477796328133,
    "passed": true,
    "precise": true,
-   "spread_error": 0.1582580423990748,
+   "spread_error": 0.15903239694942073,
    "within": true
   }
  },
@@ -4640,6 +4640,175 @@
   "lesson": 3,
   "passed": true,
   "threshold": 0.99
+ },
+ "30": {
+  "attempt": 1,
+  "each_film": {
+   "examples": [
+    {
+     "question": "Pendulum50cm",
+     "truth": true,
+     "ultron": true
+    },
+    {
+     "question": "pendulum_drag",
+     "truth": true,
+     "ultron": false
+    },
+    {
+     "question": "Pendulum",
+     "truth": true,
+     "ultron": false
+    }
+   ],
+   "name": "V4 per film: within 2 errors of 2\u03c0\u221a(L/g)(1 + \u03b8\u00b2/16), error at most 3% (reported here, judged in the V4 check)",
+   "scores": {
+    "lookup": [
+     0,
+     0
+    ],
+    "nearest": [
+     0,
+     0
+    ],
+    "ultron": [
+     1,
+     3
+    ]
+   },
+   "tolerance": null
+  },
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "Pendulum50cm",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "pendulum_drag",
+      "truth": true,
+      "ultron": true
+     },
+     {
+      "question": "Pendulum",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "the real pendulum films were watched and their swings timed (all 3)",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      3,
+      3
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "swing",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "found the law of the pendulum from the films: the time of a swing grows as the square root of the length",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "examples": [
+     {
+      "question": "sqrt_law",
+      "truth": true,
+      "ultron": true
+     }
+    ],
+    "name": "V4's square-root law: power 0.5 and constant 2\u03c0/\u221ag, each within 2 of its errors, the constant's error at most 3%",
+    "scores": {
+     "lookup": [
+      0,
+      0
+     ],
+     "nearest": [
+      0,
+      0
+     ],
+     "ultron": [
+      1,
+      1
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "law_constant": 0.2407402964303463,
+  "lesson": 30,
+  "passed": true,
+  "per_film": {
+   "Pendulum": {
+    "angle_deg": 37.32904481896168,
+    "error": 0.094375279437644,
+    "half_swings": 1,
+    "length_m": 1.0,
+    "period": 2.0602163098009916,
+    "rate": 29.97
+   },
+   "Pendulum50cm": {
+    "angle_deg": 25.29978287025131,
+    "error": 0.015468245874215357,
+    "half_swings": 4,
+    "length_m": 0.5,
+    "period": 1.44500688828953,
+    "rate": 25
+   },
+   "pendulum_drag": {
+    "angle_deg": 34.17432112964683,
+    "error": 0.014215545167612875,
+    "half_swings": 4,
+    "length_m": 0.785,
+    "period": 1.782145469828625,
+    "rate": 30
+   }
+  },
+  "sqrt_law": {
+   "constant": 2.023367274226723,
+   "constant_error": 0.012817815312699453,
+   "constant_off_by_errors": 1.2699005778389558,
+   "constant_passed": true,
+   "constant_reference": 2.007089923154493,
+   "judged": true,
+   "passed": true,
+   "power": 0.4699196715431209,
+   "power_error": 0.028657397370271225,
+   "power_off_by_errors": -1.0496531861642113,
+   "power_passed": true
+  },
+  "story": "From real films of pendulums: L / T^2 stays the same, 0.2407: the time of a swing grows as the square root of the length of the string.",
+  "threshold": 0.6666666666666666
  },
  "4": {
   "attempt": 1,

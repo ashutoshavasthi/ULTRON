@@ -360,6 +360,7 @@
     0.0,
     0.0,
     0.0,
+    0.0,
     0.0
    ],
    "funnel_h": [
@@ -2186,6 +2187,11 @@
     0.0,
     0.0
    ],
+   "swing": [
+    1.0,
+    1.0,
+    0.0
+   ],
    "swings": [
     1.0,
     1.0,
@@ -3523,29 +3529,29 @@
   "falling": {
    "films": {
     "BallDrop": {
-     "fit_error": 0.09803461434653989,
-     "g": 9.670723296792161,
-     "pictures": 21,
+     "fit_error": 0.08036966821376756,
+     "g": 9.680159215869708,
+     "pictures": 24,
      "rate": 60
     },
     "BallTossOut": {
-     "fit_error": 0.03386493396975264,
-     "g": 10.059852050382077,
+     "fit_error": 0.03386493396975197,
+     "g": 10.05985205038208,
      "pictures": 19,
      "rate": 30
     },
     "BallTossUp": {
-     "fit_error": 0.030575291731326223,
-     "g": 9.53085594407711,
-     "pictures": 50,
+     "fit_error": 0.03163343670365645,
+     "g": 9.524322623592198,
+     "pictures": 49,
      "rate": 60
     }
    },
    "lesson": 29,
-   "precision": 0.027,
+   "precision": 0.028,
    "primitives": [],
    "shape": "the real world",
-   "story": "From real films of a falling ball: dv / tau stays the same, 9.672 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
+   "story": "From real films of a falling ball: dv / tau stays the same, 9.679 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.",
    "watched": [
     "BallDrop",
     "BallTossOut",
@@ -3707,6 +3713,39 @@
    "primitives": [],
    "shape": "the real world",
    "story": "From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.584: the spread squared grows in proportion to the time."
+  },
+  "swinging": {
+   "films": {
+    "Pendulum": {
+     "angle_deg": 37.32904481896168,
+     "error": 0.094375279437644,
+     "half_swings": 1,
+     "length_m": 1.0,
+     "period": 2.0602163098009916,
+     "rate": 29.97
+    },
+    "Pendulum50cm": {
+     "angle_deg": 25.29978287025131,
+     "error": 0.015468245874215357,
+     "half_swings": 4,
+     "length_m": 0.5,
+     "period": 1.44500688828953,
+     "rate": 25
+    },
+    "pendulum_drag": {
+     "angle_deg": 34.17432112964683,
+     "error": 0.014215545167612875,
+     "half_swings": 4,
+     "length_m": 0.785,
+     "period": 1.782145469828625,
+     "rate": 30
+    }
+   },
+   "lesson": 30,
+   "precision": 0.046,
+   "primitives": [],
+   "shape": "the real world",
+   "story": "From real films of pendulums: L / T^2 stays the same, 0.2407: the time of a swing grows as the square root of the length of the string."
   },
   "why:coil_stretch": {
    "law": "coil_stretch~why",
@@ -13000,7 +13039,7 @@
   {
    "kind": "reflect",
    "lesson": 29,
-   "text": "BallTossOut: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 24 pictures, 19 of them with nothing touching it and all of it in view"
+   "text": "BallTossOut: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 26 pictures, 19 of them with nothing touching it and all of it in view"
   },
   {
    "kind": "trainer",
@@ -13010,7 +13049,7 @@
   {
    "kind": "reflect",
    "lesson": 29,
-   "text": "BallDrop: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 36 pictures, 21 of them with nothing touching it and all of it in view"
+   "text": "BallDrop: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 49 pictures, 24 of them with nothing touching it and all of it in view"
   },
   {
    "kind": "trainer",
@@ -13020,12 +13059,12 @@
   {
    "kind": "reflect",
    "lesson": 29,
-   "text": "BallTossUp: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 51 pictures, 50 of them with nothing touching it and all of it in view"
+   "text": "BallTossUp: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 72 pictures, 49 of them with nothing touching it and all of it in view"
   },
   {
    "kind": "reflect",
    "lesson": 29,
-   "text": "after 0.167 s the ball goes faster by about the same amount in every film, give or take 2.7%: that's how precise this measuring is"
+   "text": "after 0.167 s the ball goes faster by about the same amount in every film, give or take 2.8%: that's how precise this measuring is"
   },
   {
    "kind": "stuck",
@@ -13045,7 +13084,7 @@
   {
    "kind": "invent",
    "lesson": 29,
-   "text": "From real films of a falling ball: dv / tau stays the same, 9.672 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across."
+   "text": "From real films of a falling ball: dv / tau stays the same, 9.679 m/s\u00b2: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across."
   },
   {
    "kind": "trainer",
@@ -13056,6 +13095,76 @@
    "kind": "trainer",
    "lesson": 29,
    "text": "What you found in 'fall' is what people call free fall: the acceleration of gravity, g."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 30,
+   "text": "Lesson 30: The real world: swinging"
+  },
+  {
+   "kind": "meet",
+   "lesson": 30,
+   "text": "new kind of experience: swing"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 30,
+   "text": "A real film of a pendulum: Pendulum50cm. The label says 25 pictures a second, and the string is 0.5 m long (the film: '0,5 m' written beside the pendulum and in its description)."
+  },
+  {
+   "kind": "reflect",
+   "lesson": 30,
+   "text": "Pendulum50cm: through my ON channel I followed the bob through 80 pictures and timed 4 half swings: one swing there and back takes 1.445 \u00b1 0.015 s"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 30,
+   "text": "A real film of a pendulum: pendulum_drag. The label says 30 pictures a second, and the string is 0.785 m long (the lab's own calibration (Tracker file, a 0.5 m tape))."
+  },
+  {
+   "kind": "reflect",
+   "lesson": 30,
+   "text": "pendulum_drag: through my ON channel I followed the bob through 130 pictures and timed 4 half swings: one swing there and back takes 1.782 \u00b1 0.014 s"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 30,
+   "text": "A real film of a pendulum: Pendulum. The label says 29.97 pictures a second, and the string is 1.0 m long (the film: 'length: 1 m' printed on it)."
+  },
+  {
+   "kind": "reflect",
+   "lesson": 30,
+   "text": "Pendulum: through my ON channel I followed the bob through 60 pictures and timed 1 half swings: one swing there and back takes 2.060 \u00b1 0.094 s"
+  },
+  {
+   "kind": "reflect",
+   "lesson": 30,
+   "text": "my timings are good to about 4.6%"
+  },
+  {
+   "kind": "stuck",
+   "lesson": 30,
+   "text": "swing: nothing stays constant yet (1 experiences)"
+  },
+  {
+   "kind": "revise",
+   "lesson": 30,
+   "text": "swing: L / T^2 = 0.243311 [m/s\u00b2] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)"
+  },
+  {
+   "kind": "invent",
+   "lesson": 30,
+   "text": "From real films of pendulums: L / T^2 stays the same, 0.2407: the time of a swing grows as the square root of the length of the string."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 30,
+   "text": "Exam for lesson 30, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 30,
+   "text": "What you found in 'swing' is what people call the period of a pendulum (T = 2\u03c0\u221a(L/g))."
   }
  ],
  "memory": {
@@ -14748,7 +14857,7 @@
    ],
    "fall": [
     {
-     "dv": 0.3370161702974852,
+     "dv": 0.33701617029748504,
      "film": "BallTossOut",
      "tau": 0.03333333333333333
     },
@@ -14758,7 +14867,7 @@
      "tau": 0.06666666666666667
     },
     {
-     "dv": 1.0065572804897724,
+     "dv": 1.006557280489773,
      "film": "BallTossOut",
      "tau": 0.1
     },
@@ -14783,189 +14892,194 @@
      "tau": 0.23333333333333334
     },
     {
-     "dv": 2.679357251597475,
+     "dv": 2.6793572515974744,
      "film": "BallTossOut",
      "tau": 0.26666666666666666
     },
     {
-     "dv": 3.0160411836990684,
+     "dv": 3.016041183699068,
      "film": "BallTossOut",
      "tau": 0.3
     },
     {
-     "dv": 0.15730097941539906,
+     "dv": 0.16124288761380304,
      "film": "BallDrop",
      "tau": 0.016666666666666666
     },
     {
-     "dv": 0.3240540555800095,
+     "dv": 0.3226786841786539,
      "film": "BallDrop",
      "tau": 0.03333333333333333
     },
     {
-     "dv": 0.4817074153857668,
+     "dv": 0.4839180436273291,
      "film": "BallDrop",
      "tau": 0.05
     },
     {
-     "dv": 0.6464473937309447,
+     "dv": 0.6450950282545451,
      "film": "BallDrop",
      "tau": 0.06666666666666667
     },
     {
-     "dv": 0.8042877474686495,
+     "dv": 0.8065003835076023,
      "film": "BallDrop",
      "tau": 0.08333333333333333
     },
     {
-     "dv": 0.9708669347821005,
+     "dv": 0.9687431915844367,
      "film": "BallDrop",
      "tau": 0.1
     },
     {
-     "dv": 1.1255246093499027,
+     "dv": 1.1274433018574552,
      "film": "BallDrop",
      "tau": 0.11666666666666667
     },
     {
-     "dv": 1.2939754234174148,
+     "dv": 1.2920727174514033,
      "film": "BallDrop",
      "tau": 0.13333333333333333
     },
     {
-     "dv": 1.4487797830168223,
+     "dv": 1.4525871456991273,
      "film": "BallDrop",
      "tau": 0.15
     },
     {
-     "dv": 1.6154835974944004,
+     "dv": 1.6135555378466895,
      "film": "BallDrop",
      "tau": 0.16666666666666666
     },
     {
-     "dv": 0.15937726684780032,
+     "dv": 1.7745824738616742,
+     "film": "BallDrop",
+     "tau": 0.18333333333333332
+    },
+    {
+     "dv": 1.935908153303645,
+     "film": "BallDrop",
+     "tau": 0.2
+    },
+    {
+     "dv": 0.1604793394802585,
      "film": "BallTossUp",
      "tau": 0.016666666666666666
     },
     {
-     "dv": 0.31873645658792643,
+     "dv": 0.31897012349233816,
      "film": "BallTossUp",
      "tau": 0.03333333333333333
     },
     {
-     "dv": 0.4780426354862919,
+     "dv": 0.4791074118519944,
      "film": "BallTossUp",
      "tau": 0.05
     },
     {
-     "dv": 0.6373353394935849,
+     "dv": 0.6364396783082672,
      "film": "BallTossUp",
      "tau": 0.06666666666666667
     },
     {
-     "dv": 0.7961820721043307,
+     "dv": 0.7963761524605198,
      "film": "BallTossUp",
      "tau": 0.08333333333333333
     },
     {
-     "dv": 0.9544948700734801,
+     "dv": 0.9536161351216753,
      "film": "BallTossUp",
      "tau": 0.1
     },
     {
-     "dv": 1.1136797758376134,
+     "dv": 1.1140192158885767,
      "film": "BallTossUp",
      "tau": 0.11666666666666667
     },
     {
-     "dv": 1.2727161968606973,
+     "dv": 1.2711629011078773,
      "film": "BallTossUp",
      "tau": 0.13333333333333333
     },
     {
-     "dv": 1.4309502267355563,
+     "dv": 1.4302639717232581,
      "film": "BallTossUp",
      "tau": 0.15
     },
     {
-     "dv": 1.5897689328954039,
+     "dv": 1.5874521223796723,
      "film": "BallTossUp",
      "tau": 0.16666666666666666
     },
     {
-     "dv": 1.7488481764087207,
+     "dv": 1.7484550699961665,
      "film": "BallTossUp",
      "tau": 0.18333333333333332
     },
     {
-     "dv": 1.9064584344582127,
+     "dv": 1.90435123830037,
      "film": "BallTossUp",
      "tau": 0.2
     },
     {
-     "dv": 2.065143829169428,
+     "dv": 2.064310175737513,
      "film": "BallTossUp",
      "tau": 0.21666666666666667
     },
     {
-     "dv": 2.223712375865241,
+     "dv": 2.220292640538806,
      "film": "BallTossUp",
      "tau": 0.23333333333333334
     },
     {
-     "dv": 2.3826256945513697,
+     "dv": 2.380963216556929,
      "film": "BallTossUp",
      "tau": 0.25
     },
     {
-     "dv": 2.5399406150095203,
+     "dv": 2.538257965542055,
      "film": "BallTossUp",
      "tau": 0.26666666666666666
     },
     {
-     "dv": 2.7002118577288026,
+     "dv": 2.698400117548704,
      "film": "BallTossUp",
      "tau": 0.2833333333333333
     },
     {
-     "dv": 2.8576926327252354,
+     "dv": 2.8532481038795936,
      "film": "BallTossUp",
      "tau": 0.3
     },
     {
-     "dv": 3.014990892842914,
+     "dv": 3.014165259472511,
      "film": "BallTossUp",
      "tau": 0.31666666666666665
     },
     {
-     "dv": 3.174156784254773,
+     "dv": 3.170671645393516,
      "film": "BallTossUp",
      "tau": 0.3333333333333333
     },
     {
-     "dv": 3.3327668844555225,
+     "dv": 3.330638228646288,
      "film": "BallTossUp",
      "tau": 0.35
     },
     {
-     "dv": 3.4912149400613885,
+     "dv": 3.484994297949531,
      "film": "BallTossUp",
      "tau": 0.36666666666666664
     },
     {
-     "dv": 3.6484927361858848,
+     "dv": 3.648121737386037,
      "film": "BallTossUp",
      "tau": 0.38333333333333336
     },
     {
-     "dv": 3.8080505928721773,
+     "dv": 3.8031610500279207,
      "film": "BallTossUp",
      "tau": 0.4
-    },
-    {
-     "dv": 3.966719367575184,
-     "film": "BallTossUp",
-     "tau": 0.4166666666666667
     }
    ],
    "funnel_h": [
@@ -24729,6 +24843,23 @@
      "x": 0.479
     }
    ],
+   "swing": [
+    {
+     "L": 0.5,
+     "T": 1.44500688828953,
+     "film": "Pendulum50cm"
+    },
+    {
+     "L": 0.785,
+     "T": 1.782145469828625,
+     "film": "pendulum_drag"
+    },
+    {
+     "L": 1.0,
+     "T": 2.0602163098009916,
+     "film": "Pendulum"
+    }
+   ],
    "swings": [
     {
      "angle": 14.194,
@@ -26198,7 +26329,7 @@
     "name": "fall",
     "order_by": null,
     "out_type": null,
-    "precision": 0.027,
+    "precision": 0.028,
     "state_var": null,
     "surprise": 1e-06,
     "target": "dv",
@@ -27024,6 +27155,39 @@
       0,
       1,
       0
+     ]
+    }
+   },
+   "swing": {
+    "action": null,
+    "errors": null,
+    "group_by": null,
+    "inputs": {
+     "L": [
+      0,
+      1,
+      0
+     ]
+    },
+    "kind": "quantity",
+    "name": "swing",
+    "order_by": null,
+    "out_type": null,
+    "precision": 0.046,
+    "state_var": null,
+    "surprise": 1e-06,
+    "target": "T",
+    "tol": 1e-09,
+    "units": {
+     "L": [
+      0,
+      1,
+      0
+     ],
+     "T": [
+      0,
+      0,
+      1
      ]
     }
    },
@@ -28268,6 +28432,7 @@
   "see_take": "subtraction, seen",
   "slide": "sliding friction (stopping distance \u221d speed\u00b2)",
   "stretch": "stiffness (Hooke's law)",
+  "swing": "the period of a pendulum (T = 2\u03c0\u221a(L/g))",
   "take_away": "subtraction",
   "why:coil_stretch": "a law about a law: stiffness is inversely proportional to the number of coils"
  },
@@ -28370,7 +28535,7 @@
    "spread": 3.8861950694508257e-13
   },
   "fall": {
-   "constant": 9.671507762182276,
+   "constant": 9.679076591166154,
    "etype": "fall",
    "form": "product",
    "group_by": null,
@@ -28383,9 +28548,9 @@
    "provenance": {
     "experiences": 2,
     "lesson": 29,
-    "support": 42
+    "support": 43
    },
-   "spread": 0.0036752134979377853
+   "spread": 0.003675213497937258
   },
   "gas": {
    "constant": 1409.3076923076924,
@@ -28649,6 +28814,24 @@
     "support": 15
    },
    "spread": 2.571107591844849e-12
+  },
+  "swing": {
+   "constant": 0.2407402964303463,
+   "etype": "swing",
+   "form": "product",
+   "group_by": null,
+   "kind": "global",
+   "powers": {
+    "L": 1,
+    "T": -2
+   },
+   "properties": {},
+   "provenance": {
+    "experiences": 2,
+    "lesson": 30,
+    "support": 1
+   },
+   "spread": 0.03166523293869659
   }
  },
  "search_steps": {
@@ -28696,6 +28879,7 @@
   "spin": 116795,
   "square": 2258,
   "stretch": 176,
+  "swing": 32,
   "swings": 3364,
   "take_away": 705,
   "tall": 769438,
