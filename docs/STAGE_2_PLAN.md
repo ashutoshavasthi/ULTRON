@@ -205,6 +205,24 @@ and before Ultron or the Judge measured anything on them).
   |e − e_lab| ≤ 2·√(error² + error_lab²) over the same bounces, and Ultron's error is at
   most 5% of e. V5 is met when both films pass.
 
+**V4, a third length** (written 2026-10-11, before Ultron measured anything on this film).
+- **The film:** *Pendelgesetz (mit Rechnung)* by Rhetos (Mathe-AC Lernwerkstatt Aachen,
+  Wikimedia Commons, CC BY-SA 4.0), Wikimedia's 720p copy, 25 pictures/s. "0,5 m" is
+  written beside the pendulum and in the film's description; the pendulum swings ten
+  times.
+- **What Ultron is shown:** this is a teaching film, so the Trainer shows only the
+  experiment: the 17 seconds from 118 s, in which the pendulum swings, and the part of
+  the picture around it (x 330–650, y 0–440). That leaves out the text and the timer the
+  film's editor laid over it, the lesson on the board and the stopwatch. Ultron is given
+  the frame rate and the length, as for the other films.
+- **Frame rate check:** the film's own timer, laid over it in editing, runs one second
+  per 25 pictures. Nothing disagrees with the file's 25/s. (The timer stops at 14.20 s
+  for the ten swings; that is the film's own answer, and Ultron is not shown it.)
+- **Judged** by the same V4 rule. With three lengths (0.5, 0.785 and 1 m), the
+  √length law is judged too. Ultron must find it itself: across the films, the period
+  grows as the square root of the length (power 0.5 ± 2 errors), and its constant must
+  agree with 2π/√g within 2 errors.
+
 ### WP3: more real footage (V3–V6)
 
 **Status (2026-10-11):** the network now reaches Wikimedia, archive.org and YouTube.
