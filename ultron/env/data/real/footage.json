@@ -1,5 +1,5 @@
 {
- "source": "Open Source Physics / Tracker (Douglas Brown and colleagues), GPL-3.0",
+ "source": "Open Source Physics / Tracker (Douglas Brown and colleagues), GPL-3.0; bouncing balls: Open Source Physics Singapore (iwant2study.org), CC BY-SA 4.0",
  "archives": {
   "BallToss.zip": {
    "repo": "OpenSourcePhysics/resources",
@@ -24,6 +24,21 @@
    "commit": "3b07d46711a6f9669d0b98197066feceecd76fc8",
    "path": "docs/CAB/experiments/pendulum_drag.zip",
    "sha256": "170cf2ff18f0a17fd093bef50e35ea5d35b536f8073c214a8bb8df1e32f5b322"
+  },
+  "ballbouncingmodel.trz": {
+   "url": "https://iwant2study.org/lookangejss/02_newtonianmechanics_2kinematics/trz/ballbouncingmodel.trz",
+   "license": "CC BY-SA 4.0 (iwant2study.org; video Jit Ning, analysis Loo Kang Wee)",
+   "sha256": "3770e4c5341fb32d9d4daa2f09560479b02eaf444d0e6a1ce2f3102f3fba15b9"
+  },
+  "ballbouncelookang01_x264wee.trz": {
+   "url": "https://iwant2study.moe.edu.sg/lookangejss/02_newtonianmechanics_2kinematics/trz/ballbouncelookang01_x264wee.trz",
+   "license": "CC BY-SA 4.0 (iwant2study.org; Loo Kang Wee)",
+   "sha256": "cff70ddd2ce98b566073eee87ed937a7a865a82799fb1aa9d2d3ef21e8f1fc8f"
+  },
+  "Pendelgesetz_720p.webm": {
+   "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/00/Pendelgesetz_%28mit_Rechnung%29.webm/Pendelgesetz_%28mit_Rechnung%29.webm.720p.vp9.webm",
+   "license": "CC BY-SA 4.0 (Wikimedia Commons, User:Rhetos, Mathe-AC Lernwerkstatt Aachen)",
+   "sha256": "18dd672cf7e6a1dd13d8cba4486140022cd6edb1de21e623b0ca35d6ca145d4e"
   }
  },
  "films": {
@@ -96,6 +111,55 @@
    "scale_from": "the lab's own calibration (Tracker file, a 0.5 m tape)",
    "length_m": 0.785,
    "pixels_sha256": "f956a25485e4118b9684a7fe43640cca57e6b05977fa5d48f2be0097c1948503"
+  },
+  "GBDrop": {
+   "archive": "ballbouncingmodel.trz",
+   "video": "videos/GB Drop.mp4",
+   "tracker": "ballbouncingmodel.trk",
+   "size": [
+    1920,
+    1080
+   ],
+   "fps": 30,
+   "interlaced": false,
+   "pixels_per_metre": null,
+   "scale_from": "not needed: restitution is a ratio of speeds",
+   "pixels_sha256": "cc1333daec4f5dd1cce2c38904ceb73ad4bab91bc460bd5650200549824ca39d"
+  },
+  "BallBounceCorridor": {
+   "archive": "ballbouncelookang01_x264wee.trz",
+   "video": "videos/ballbouncelookang01_x264.mp4",
+   "tracker": "bouncingball.trk",
+   "size": [
+    720,
+    576
+   ],
+   "fps": 25,
+   "interlaced": false,
+   "pixels_per_metre": null,
+   "scale_from": "not needed: restitution is a ratio of speeds",
+   "pixels_sha256": "8fecf911031ed4b54ea542fb84c423253e88547697a9617ace1e3ffe168f2c78"
+  },
+  "Pendulum50cm": {
+   "file": "Pendelgesetz_720p.webm",
+   "start_s": 118,
+   "seconds": 17,
+   "crop": [
+    330,
+    0,
+    320,
+    440
+   ],
+   "size": [
+    320,
+    440
+   ],
+   "fps": 25,
+   "interlaced": false,
+   "pixels_per_metre": null,
+   "scale_from": "the film: '0,5 m' written beside the pendulum and in its description",
+   "length_m": 0.5,
+   "pixels_sha256": "080aedbf57d4fb5aa5ea570298f7b1ad23706d0d354094cddb71e748622d1728"
   }
  }
 }

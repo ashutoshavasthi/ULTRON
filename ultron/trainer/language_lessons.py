@@ -64,7 +64,7 @@ def _subsets(items, k):
 
 
 class WordsByPointing(Lesson):
-    number, title = 30, "Words by pointing"
+    number, title = 31, "Words by pointing"
     goal = ("Things of several colours, sizes and shapes on a table, seen through the "
             "camera. First Ultron only looks: does it find, from what it measures itself, "
             "that things come in kinds (colours, sizes, shapes), and that where they lie "
@@ -166,10 +166,10 @@ class WordsByPointing(Lesson):
         return said, self.table.look(things)
 
 
-# ---------------------------------------------------------------- lesson 31
+# ---------------------------------------------------------------- lesson 32
 VERBS = fl.EVENTS                                   # falls, bounces, rolls, stops
 RELATIONS = ("faster", "heavier", "before", "after", "more", "fewer")
-# Word pairs the Trainer never says together while teaching lesson 31 (numbered 30 then; fixed 2026-10-11,
+# Word pairs the Trainer never says together while teaching lesson 32 (numbered 30 then; fixed 2026-10-11,
 # before any measurement). Things of these kinds never do these things while it
 # teaches; the exam's films are all about them.
 EVENT_HELD_OUT = (("box", "bounces"), ("bar", "rolls"), ("ball", "stops"),
@@ -229,7 +229,7 @@ def truth(word, a, b):
 
 
 class WordsForWhatHappens(Lesson):
-    number, title = 31, "Words for what happens"
+    number, title = 32, "Words for what happens"
     goal = ("Films of the same coloured things, seen from the side: they fall, bounce, roll, "
             "slide to a stop and knock into each other. Ultron follows each thing and "
             "describes how it moved with its own kinds of law. The Trainer says what "
@@ -483,7 +483,7 @@ class WordsForWhatHappens(Lesson):
 
 
 def language_lessons(seed=0):
-    # Numbered 29 and 30 when their exams were fixed; renumbered 30 and 31 when Stage 2's
-    # falling lesson took 29. The seeds keep their first offsets, so teaching and exams see
+    # Numbered 29 and 30 when their exams were fixed; renumbered 31 and 32 when Stage 2's
+    # lessons took 29 (falling) and 30 (swinging). The seeds keep their first offsets, so teaching and exams see
     # exactly the worlds fixed in advance.
     return [WordsByPointing(seed + 29), WordsForWhatHappens(seed + 30)]

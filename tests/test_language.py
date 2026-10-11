@@ -101,10 +101,10 @@ def test_not_sure_when_heard_too_little():
     assert right >= 0.9 * gave
 
 
-def test_lesson_30_exam(trained):
+def test_lesson_31_exam(trained):
     """L1 on the trained brain: held-out combinations, words never taught, quick learning,
     a 20-point margin over both baselines, and never a wrong answer."""
-    r = trained[1][30]
+    r = trained[1][31]
     assert r["passed"]
     right, gave = r["precision"]
     assert right == gave

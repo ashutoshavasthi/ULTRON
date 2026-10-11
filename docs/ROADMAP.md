@@ -169,11 +169,14 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
    ([`stage2_v3_falling.md`](../reports/stage2_v3_falling.md)).
 4. ✅ **Detection on par with a lab tool** (V6): Ultron's positions match the lab's own
    hand marks on both marked films ([`stage2_v4_v6.md`](../reports/stage2_v4_v6.md)).
-5. **Pendulum periods and the √length law, restitution** (V4, V5): not met. The real
-   pendulum films available fail the fixed rule (one is 2% fast, the other too short to
-   be precise), and there are only two lengths. No usable bouncing-ball film. Both need
-   new footage: a pendulum at three or more lengths and a ball bouncing, each beside a
-   ruler.
+5. **Pendulum periods and the √length law, restitution** (V4, V5): not met, with parts
+   met. Lesson 30: from three real pendulums (0.5, 0.785 and 1 m) Ultron finds by itself
+   that L/T² stays the same, and the √length law passes its fixed rule (power
+   0.470 ± 0.029; constant 2.023 ± 0.013 against 2.007). Per film, only the 0.5 m film
+   passes: 0.785 m is 2% fast, and 1 m shows one swing. V5: the GB Drop film passes
+   (e = 0.843 ± 0.003 against the lab's 0.836 ± 0.006), but in the corridor film Ultron
+   follows the ball through only one of four bounces
+   ([`stage2_v4_v6.md`](../reports/stage2_v4_v6.md)).
 
 **Correction (2026-10-11):** the owner started **Stage 3, language**, before Stage 2's
 verdict, when Stage 2's V3–V6 seemed blocked on footage. Real footage has since been
@@ -181,22 +184,23 @@ found, so the two stages now run in parallel. Stage 2 stays open; its exit test 
 unchanged.
 
 **Lesson numbers (2026-10-11).** Stage 2 and Stage 3 were built side by side and both
-took lesson 29. In the combined curriculum, g from real footage keeps 29 and the two
-language lessons become 30 and 31. Their seeds, and so their teaching and exam worlds,
-are the ones fixed when they were 29 and 30; only the number changed.
+took lessons 29 and 30. In the combined curriculum, Stage 2 keeps 29 (g from real
+footage) and 30 (real pendulums), and the language lessons become 31 and 32. Their
+seeds, and so their teaching and exam worlds, are the ones fixed when they were 29 and
+30; only the number changed.
 
 Stage 3 plan and exit test: [STAGE_3_PLAN.md](STAGE_3_PLAN.md).
-1. ✅ **L1, words by pointing** (lesson 30): from sentences it overhears about tables,
+1. ✅ **L1, words by pointing** (lesson 31): from sentences it overhears about tables,
    with nobody saying which word means what or which thing is meant, it finds its own
    kinds of thing (4 colours, 2 sizes, shapes), then the words: 200/200 on word pairs it
    never heard (baselines 39% and 20%), words never taught refused 30/30, never a wrong
    answer in the exam or the failure lab.
-2. ✅ **L2, words for its own laws** (lesson 31): in films, it sees each motion as one of
+2. ✅ **L2, words for its own laws** (lesson 32): in films, it sees each motion as one of
    its own kinds of law and learns falls, bounces, rolls, stops, and the comparing words
    faster, heavier (by its momentum law), before, after, more, fewer. Naming what things
    never seen doing it do: 200/200 (a word counter given its kinds also 200/200);
    filling in the comparing word: 113/120 (counter 100/120), never a false word in the
-   exam or the failure lab (32 lessons).
+   exam or the failure lab (33 lessons).
 3. **L3–L4, grammar by MDL**, then SCAN and COGS.
 
 Network note (updated 2026-10-11): this environment reaches GitHub, the Python Package

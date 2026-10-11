@@ -1,10 +1,11 @@
 """Real lab films of falling, swinging and bouncing, fetched from the internet.
 
-The films are the Tracker project's (Douglas Brown and colleagues, Open Source Physics;
-GPL-3.0; https://github.com/OpenSourcePhysics/resources and .../tracker-website). They
-are real classroom-lab footage, made for students to measure physics from. Each file is
-fetched from a pinned commit and its SHA-256 checked against the manifest committed
-here; the decoded pictures are checked too, so every run sees exactly the same pixels.
+Most films are the Tracker project's (Douglas Brown and colleagues, Open Source Physics;
+GPL-3.0; https://github.com/OpenSourcePhysics/resources and .../tracker-website); the
+bouncing balls are from Singapore's Open Source Physics collection (iwant2study.org,
+Loo Kang Wee and colleagues; CC BY-SA 4.0). They are real classroom-lab footage, made for
+students to measure physics from. Each file is fetched from a pinned commit or address
+and its SHA-256 checked against the manifest committed here; the decoded pictures are checked too, so every run sees exactly the same pixels.
 Nothing is committed to this repository except the manifest. Files are cached under
 data/real/footage/ (not in git).
 
@@ -49,9 +50,12 @@ def _archive(man, name):
             data = f.read()
         if hashlib.sha256(data).hexdigest() == src["sha256"]:
             return data
-    url = f"https://raw.githubusercontent.com/{src['repo']}/{src['commit']}/{src['path']}"
+    url = src.get("url") or \
+        f"https://raw.githubusercontent.com/{src['repo']}/{src['commit']}/{src['path']}"
     try:
-        with urllib.request.urlopen(url, timeout=120) as r:
+        req = urllib.request.Request(url, headers={     # Wikimedia asks every client
+            "User-Agent": "Ultron/0.1 (https://github.com/ashutoshavasthi/ULTRON)"})
+        with urllib.request.urlopen(req, timeout=120) as r:
             data = r.read()
     except OSError as e:
         raise Unavailable(f"can't fetch {url}: {e}") from e
@@ -85,17 +89,26 @@ def member(film_name, kind="video"):
 
 
 def frames(film_name):
-    """The film as a list of brightness pictures (2-D uint8 arrays), in order."""
+    """The film as a list of brightness pictures (2-D uint8 arrays), in order: the whole
+    film, or the stretch and part of the picture the manifest names (where a teaching
+    film also shows a lesson, the Trainer shows only the experiment)."""
     import numpy as np
     film = manifest()["films"][film_name]
     path = os.path.join(CACHE, "real", "footage", film_name + ".mp4")
     if not os.path.exists(path):
-        data = member(film_name)
+        data = member(film_name) if "archive" in film else _archive(manifest(), film["file"])
         with open(path, "wb") as f:
             f.write(data)
     w, h = film["size"]
-    run = subprocess.run([_ffmpeg(), "-v", "error", "-i", path, "-f", "rawvideo",
-                          "-pix_fmt", "gray", "-"], capture_output=True)
+    cut = []                                  # the part of the film the Trainer shows
+    if "start_s" in film:
+        cut = ["-ss", str(film["start_s"]), "-t", str(film["seconds"])]
+    view = []
+    if "crop" in film:
+        x, y, w, h = film["crop"]
+        view = ["-vf", f"crop={w}:{h}:{x}:{y}"]
+    run = subprocess.run([_ffmpeg(), "-v", "error", *cut, "-i", path, *view, "-f",
+                          "rawvideo", "-pix_fmt", "gray", "-"], capture_output=True)
     if run.returncode != 0:
         raise Unavailable(f"ffmpeg couldn't decode {film_name}: {run.stderr[:200]!r}")
     raw = run.stdout

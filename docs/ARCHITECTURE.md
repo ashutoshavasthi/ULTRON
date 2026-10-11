@@ -149,7 +149,7 @@ Words are attached only to things Ultron already has:
 - **Its own laws** ("plus" is whichever law reproduces the Trainer's
   demonstrations, including argument order).
 - **Innate relations** ("equals").
-- **Kinds of thing it found itself** (stage 3, lesson 30). Looking at tables of things
+- **Kinds of thing it found itself** (stage 3, lesson 31). Looking at tables of things
   with nothing said, it measures each thing (`senses/things.py`: hue, size, elongation,
   fill, place) and keeps the groups each measure falls into when they pay for their
   boundaries (`categories.py`, MDL). Then from overheard sentences ("the big red ball"),
@@ -158,7 +158,7 @@ Words are attached only to things Ultron already has:
   sentence was about, minus the coincidences a meaning explains. Accounts nearly as short
   are kept as rivals; when they disagree it says it isn't sure. Words combine by
   "fits every word".
-- **Its own kinds of motion, and quantities it measures** (stage 3, lesson 31). In films
+- **Its own kinds of motion, and quantities it measures** (stage 3, lesson 32). In films
   of things falling, bouncing, rolling and knocking (`senses/floor.py`), it follows each
   thing (`senses/things.py`: `watch_film`) and describes its path across and up-down as
   the shortest run of pieces, each a kind of law it already had (`brain/events.py`). Event
@@ -212,8 +212,8 @@ ultron/trainer/   lessons: Phase 1 = 0-10 (7 noisy lab, 8 owing, 9 sharing cakes
                   closing the gaps = 17 coiled springs, 18 exam (columns, fractional repeats);
                   Phase 3 = 19-21 senses, 22-23 new kinds, 24 acting, 25 exam (senses_lessons.py);
                   stage 1 = 27 swinging and growing (E1), 28 rows (E2); stage 2 = 26 microscope film,
-                  29 real films of falling (senses_lessons.py);
-                  stage 3 = 30 words by pointing, 31 words for what happens (language_lessons.py)
+                  29 real films of falling, 30 real pendulums (senses_lessons.py);
+                  stage 3 = 31 words by pointing, 32 words for what happens (language_lessons.py)
 ultron/senses/    camera, eyes (learned CNN), world (visual worlds), measure, tabletop (colour
                   camera over things to talk about), floor (films of things falling, bouncing,
                   rolling, knocking), things (what each thing looks like; following it in a film)

@@ -119,10 +119,10 @@ def test_teaching_never_shows_a_held_out_pair():
         assert held_out_in(said.split(), RELATION_HELD_OUT)
 
 
-def test_lesson_31_exam(trained):
+def test_lesson_32_exam(trained):
     """L2 on the trained brain: what happens named right >= 90% in new films about things
     never seen doing it; comparing words filled in right >= 90%."""
-    r = trained[1][31]
+    r = trained[1][32]
     assert r["passed"]
     assert sorted(r["event_words"]) == sorted(VERBS)
 

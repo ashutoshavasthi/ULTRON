@@ -219,20 +219,20 @@ def special_section(results, brain):
         lines.append(f"- **Acting** (lesson 24): random kicks hit a mark "
                      f"{r24.get('random_kicks_hit')} of the time. On the never-touched carpet: "
                      f"_{' / '.join(r24.get('traces', [[]])[-1])}_")
-    r_words = results.get("30") or results.get(30)
+    r_words = results.get("31") or results.get(31)
     if r_words and r_words.get("precision"):
         right, gave = r_words["precision"]
-        lines.append(f"- **Words by pointing** (lesson 30, stage 3 L1): {right} right of "
+        lines.append(f"- **Words by pointing** (lesson 31, stage 3 L1): {right} right of "
                      f"{gave} answers given on sentences with word pairs it never heard; "
                      f"{round(100 * r_words['margin_over_baselines'])} points above the better "
                      f"baseline; it heard {r_words['sentences_heard']} sentences, and each word "
                      f"was settled after at most {max(r_words['sentences_to_learn'].values())} "
                      f"sentences that used it.")
-    r_events = results.get("31") or results.get(31)
+    r_events = results.get("32") or results.get(32)
     if r_events and r_events.get("precision"):
         right, gave = r_events["precision"]
         rr, rg = r_events["relation_precision"]
-        lines.append(f"- **Words for what happens** (lesson 31, stage 3 L2): named what "
+        lines.append(f"- **Words for what happens** (lesson 32, stage 3 L2): named what "
                      f"happens {right} times right of {gave} answers, in new films about "
                      f"things never seen doing it; the comparing word filled in with {rr} "
                      f"of {rg} answers wholly true; each event word settled after at most "
