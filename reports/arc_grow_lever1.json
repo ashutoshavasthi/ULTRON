@@ -1,0 +1,102 @@
+[
+ {
+  "round": 1,
+  "practice_half": 0,
+  "practised": 317,
+  "explained_in_practice": 35,
+  "steps": 5,
+  "step_list": [
+   "own1() = overlay(bottom(x), top(x))",
+   "own2() = things(x)",
+   "own3(T) = paint(x, _a)",
+   "own4() = rot180(x)",
+   "own5(T) = own3(recolour(_a, 3))"
+  ],
+  "unseen": 316,
+  "without": {
+   "right": 37,
+   "wrong": 4
+  },
+  "with": {
+   "right": 39,
+   "wrong": 6
+  },
+  "gained": [
+   "7b6016b9",
+   "913fb3ed",
+   "a79310a0"
+  ],
+  "lost": [
+   "5582e5ca"
+  ]
+ },
+ {
+  "round": 1,
+  "practice_half": 1,
+  "practised": 316,
+  "explained_in_practice": 40,
+  "steps": 5,
+  "step_list": [
+   "own1(C) = paint(x, recolour(holes(x), _a))",
+   "own2() = things(x)",
+   "own3() = flip(x)",
+   "own4() = flip_v(x)",
+   "own5() = upscale(x, 2)"
+  ],
+  "unseen": 317,
+  "without": {
+   "right": 31,
+   "wrong": 1
+  },
+  "with": {
+   "right": 33,
+   "wrong": 3
+  },
+  "gained": [
+   "543a7ed5",
+   "6d75e8bb",
+   "c0f76784",
+   "d5d6de2d"
+  ],
+  "lost": [
+   "3906de3d",
+   "810b9b61"
+  ]
+ },
+ {
+  "round": 2,
+  "practice_half": 0,
+  "practised": 317,
+  "explained_in_practice": 44,
+  "steps": 9,
+  "step_list": [
+   "own1(T) = paint(x, recolour(_a, 3))",
+   "own2() = things(x)",
+   "own3() = overlay(bottom(x), top(x))",
+   "own4() = rot180(x)",
+   "own5() = crop(own4(), least(own2(), colour))",
+   "own6() = ring(own2())",
+   "own7(T) = paint(x, _a)",
+   "own8() = alone(own2())",
+   "own9() = holes(x)"
+  ],
+  "unseen": 316,
+  "without": {
+   "right": 37,
+   "wrong": 4
+  },
+  "with": {
+   "right": 40,
+   "wrong": 11
+  },
+  "gained": [
+   "2de01db2",
+   "7b6016b9",
+   "913fb3ed",
+   "a79310a0"
+  ],
+  "lost": [
+   "5582e5ca"
+  ]
+ }
+]

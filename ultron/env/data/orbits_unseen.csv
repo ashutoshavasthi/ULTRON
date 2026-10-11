@@ -1,0 +1,8 @@
+# Bodies Ultron never sees during training, used only by the Judge.
+# Approximate published values: Ceres and Halley's Comet from the JPL Small-Body Database
+# (semi-major axis 2.7675 AU and 17.834 AU; periods ~1680 days and ~75.32 years);
+# Titan from the NASA Saturnian Satellite Fact Sheet. Same columns as orbits.csv.
+body,system,r,r_unit_km,T_days
+Ceres,Sun,414.01,1000000,1680.0
+Halley,Sun,2667.9,1000000,27510.0
+Titan,Saturn,1221.87,1000,15.945

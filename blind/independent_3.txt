@@ -1,0 +1,59 @@
+# Cooling cups: T with t (T = room + (start-room)*k^t)
+find T given t=10 T@0=92 T@1=81.35 T@2=72.297 | 34.9781
+find rest given T@0=92 T@1=81.35 T@2=72.297 | 21
+find T given t=8 T@3=45.312 T@4=39.414 T@5=34.813 | 26.2411
+find T given t=0 T@3=45.312 T@4=39.414 T@5=34.813 | 75
+find T given t=90 T@0=98 T@1=90.7 T@2=84.13 | 25.0056
+find rest given T@0=98 T@1=90.7 T@2=84.13 | 25
+find T given t=6 T@0=60 T@1=46.5 T@2=37.05 T@3=30.435 | 20.2942
+find T given t=5 T@0=88 T@2=66.378 T@4=51.84 | 46.4688
+# Bounces: h with k (h = drop*e^k)
+find h given k=6 h@0=2.5 h@1=1.8 h@2=1.296 | 0.348285
+find h given k=15 h@0=2.5 h@1=1.8 h@2=1.296 | 0.0181104
+find h given k=0 h@2=0.648 h@3=0.3888 h@4=0.2333 | 1.8
+find h given k=7 h@2=0.648 h@3=0.3888 h@4=0.2333 | 0.0503885
+find h given k=4 h@0=3.2 h@1=2.72 | 1.67042
+# Batteries: q with t (q = full*(1-k^t))
+find q given t=7 q@0=0 q@1=24 q@2=43.2 | 94.8342
+find rest given q@0=0 q@1=24 q@2=43.2 | 120
+find q given t=40 q@2=21.875 q@3=28.906 q@4=34.18 | 49.9995
+find rest given q@2=21.875 q@3=28.906 q@4=34.18 | 50
+find q given t=1 q@2=21.875 q@3=28.906 q@4=34.18 | 12.5
+# Springs by length: L with F (L = rest + F/stiffness)
+find L given F=30 L@3=0.26 L@12=0.32 | 0.44
+find L given F=0 L@3=0.26 L@12=0.32 | 0.24
+find L given F=14 L@5=0.5625 L@8=0.6 L@20=0.75 | 0.675
+# Candles: H with t, read at odd times (H = tall - rate*t)
+find H given t=20 H@1.5=23.475 H@4=22.6 H@9.25=20.762 | 17
+find H given t=0 H@1.5=23.475 H@4=22.6 H@9.25=20.762 | 24
+find H given t=60 H@2=14.76 H@7=14.16 | 7.8
+find H given t=3.5 H@2=14.76 H@7=14.16 | 14.58
+# Kicked pucks on wood
+find d given u=2 floor=wood | 0.679579
+find d given u=3.5 floor=wood | 2.08121
+find d given u=0.8 floor=wood | 0.108733
+find u given d=1 floor=wood | 2.42611
+find u given d=4.2 floor=wood | 4.97204
+# Refusals
+find x given t=10 x@0=0 x@1=0.42 x@2=-0.17 | refuse
+find rest given x@0=0.3 x@1=-0.25 x@2=0.61 | refuse
+find d given u=2 floor=ice | refuse
+find u given d=1 floor=carpet | refuse
+find rest given H@0=20 H@2=19.1 H@5=17.75 | refuse
+find T given k=5 T@0=80 T@1=70 T@2=62 | refuse
+find T given t=6 T@0=85 T@1=72 | refuse
+find h given k=4 h@0=2.2 | refuse
+find W given t=6 W@0=5 W@1=7 W@2=8 | refuse
+find L given F=20 L@2=0.31 | refuse
+# Earlier sections: arithmetic
+what is 17 times 23 | 391
+12 minus 5 times 3 | 21
+what plus 9 equals 4 | -5
+2 power what equals 512 | 9
+47 after 4 | 3
+# Earlier sections: physics
+find a given F=24 m=8 | 3
+find F given coils=4 x=0.2 | 30
+find v2_after given m1=2 v1=3 m2=1 v2=0 v1_after=1 | 4
+find v given y0=5 v0=0 y=0 | 9.90454
+find T given r=414010000000 system=Sun | 145290985
