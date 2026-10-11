@@ -124,6 +124,40 @@ changed; these are the details it left open, fixed before measuring:
   most 3% of g (so a vague answer can't pass), **and** at least 2 of the 3 films give an
   answer (a film where it cannot follow the ball is reported, not dropped).
 
+### How V4 and V6 are judged (written 2026-10-11, before Ultron measures them)
+
+The exit tests are unchanged. These details are fixed now:
+
+**V4, pendulum periods.**
+- **The films** are the two real pendulum films in the same source: *pendulum_drag* (a
+  small bob on a string; the lab's model gives the length as 0.785 m) and *Pendulum*
+  (Flashmedia 1997; "length: 1 m" is printed on the film; it shows about one swing).
+- **Ultron is given** the pictures, the frame rate and the length written by the lab.
+- **Ultron measures** each period from its own track of the bob, with an error from the
+  scatter of its own timings (or, with a single swing, the timing resolution: one picture
+  at each end).
+- **Pass, per film:** |T − T_ref| ≤ 2 × the measured error, with T_ref = 2π√(L/g)·(1 + θ₀²/16),
+  g = 9.80 m/s² and θ₀ the swing's angle as Ultron measures it. The error must be at most 3%.
+- **The √length law** needs at least three lengths. With two it is reported, not claimed,
+  and V4 stays open until a third real length is found.
+
+**V6, detection on par with a lab tool.**
+- **The lab tool** is the positions the lab itself marked by hand in Tracker. Those exist
+  on *BallTossOut* (11 points) and *Pendulum* (21 points).
+- **Pass, on every such film:**
+  - Ultron finds the object in at least 90% of the pictures the lab marked;
+  - the median distance between its positions and the lab's is at most the object's
+    radius;
+  - its positions scatter about a smooth path (a parabola for the ball; a sine for the
+    pendulum) at most 1.5 times as much as the lab's own marks do.
+- **Disclosed:** on BallTossOut, Ultron's distances to 6 of the lab's points (1.3–3.6 px)
+  were seen while V3 was being built, before this rule was written.
+
+**V5, restitution.** The only real bouncing footage in the source is a cart rolling down a
+slope against a spring bumper, not a bouncing ball. V5 will be fixed here before it is
+measured. A film of a bouncing ball beside a scale is the better test, and it is being
+looked for.
+
 ### WP3: more real footage (V3–V6)
 
 **Status (2026-10-11):** the network now reaches Wikimedia, archive.org and YouTube.
