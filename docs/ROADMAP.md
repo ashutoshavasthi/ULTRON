@@ -59,8 +59,8 @@ scale, nothing else matters.
 
 | Stage | The gap it closes | What gets built | Exit test (could fail) |
 |---|---|---|---|
-| **1. The scalable core** *(now)* | Search is exponential: Ultron finds small laws, not big programs | Robustness to bad data; laws of change; lists; speed; library learning on its own laws; an intuition trained on its own searches; ARC-AGI as the battlefield | The criteria in [STAGE_1_PLAN.md](STAGE_1_PLAN.md): R1–R6 (bad data), S1–S2 (laws of size 12, 10× less search), E1–E2 (oscillation, logistic, lists), A2–A3 (≥ 25%, then ≥ 40% on ARC-AGI-1 evaluation) |
-| **2. The real world through its eyes** | It has seen one real film, and its eyes don't generalise | First, **eyes that generalise** (double noise, faint and touching things). Then lesson 26 (the microscope film), then many real videos: falling, swinging, bouncing, colliding | Rediscovers g, pendulum periods, restitution and diffusion from **real footage**, within measured error |
+| **1. The scalable core** *(verdict written: A2–A3 not met, see below)* | Search is exponential: Ultron finds small laws, not big programs | Robustness to bad data; laws of change; lists; speed; library learning on its own laws; an intuition trained on its own searches; ARC-AGI as the battlefield | The criteria in [STAGE_1_PLAN.md](STAGE_1_PLAN.md): R1–R6 (bad data), S1–S2 (laws of size 12, 10× less search), E1–E2 (oscillation, logistic, lists), A2–A3 (≥ 25%, then ≥ 40% on ARC-AGI-1 evaluation) |
+| **2. The real world through its eyes** *(now)* | It has seen one real film, and its eyes don't generalise | First, **eyes that generalise** (double noise, faint and touching things). Then lesson 26 (the microscope film), then many real videos: falling, swinging, bouncing, colliding | Rediscovers g, pendulum periods, restitution and diffusion from **real footage**, within measured error |
 | **3. Interactive worlds** *(new)* | It has acted only with one kick in a world whose rules it was told | Grid games with unknown rules (like ARC-AGI-3). Ultron explores, runs experiments, learns the rules **and the goal** as laws, and plans in its own learned model. Laws that recur across games become priors | Wins held-out games it has never seen, in close to the fewest actions; later games need fewer actions than earlier ones (learning compounds) |
 | **4. The reader** | It knows only what it experienced | Open data and text read as **claims with sources**, checked against its laws, other sources and experiment; reading driven by curiosity | Learns laws from open data it was never taught and predicts held-out data. Catches ≥ 90% of planted false claims. Reaches a target accuracy with ≥ 100× fewer bytes read than a fixed, named small language-model baseline |
 | **5. Language** | It knows about 40 grounded words | Words by pointing, then grammar, then conversation, all grounded in concepts it already has | Understands new sentences about its worlds, answers questions, detects false statements, asks good questions; human blind evaluation |
@@ -136,16 +136,19 @@ not move.
   well.
 - **Stages 8–9** are unsolved in general. Nobody, including us, can promise them.
 
-## Next steps (Stage 1, to completion)
+## Next steps (Stage 2, now)
 
-1. **R2**: Ultron estimates its own measurement noise when it isn't told it.
-2. **R5**: when two measurement laws tie, it designs the experiment that separates them.
-3. **E1**: laws of change (oscillation, damped oscillation, logistic growth, t^1.5).
-4. **E2**: lists in its program language (map, filter, count, fold).
-5. **Speed, then S1**: library learning on its own laws, to reach laws of size 12.
-6. **S2**: intuition v2, trained on its own searches and dreams.
-7. **A2 (≥ 25%), then A3 (≥ 40%)** on ARC-AGI-1 evaluation, logged at checkpoints only.
-8. **The Stage 1 verdict**, with an independent blind test.
+**Stage 1 verdict** ([`reports/stage1_verdict.md`](../reports/stage1_verdict.md)):
+R1–R6, S1, E1–E2, A0–A1 met; S2 met only combined with library learning; A2–A3
+(ARC ≥ 25%, ≥ 40%) not met. **Correction (2026-10-11):** the owner moved the main line to
+Stage 2 because further ARC work was not paying off. ARC returns in Stage 3 (interactive
+worlds) and in the fixed AGI battery.
+
+Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
+1. **Eyes that generalise:** every eyes row of the failure lab ≥ 23/25 (look longer
+   at still scenes, adapt to the light, step back for big things, broader handling).
+2. **Lesson 26:** diffusion from the real microscope film, against the scientists' tool.
+3. **Real footage:** g, pendulum periods, restitution; detection on par with a lab tool.
 
 Network note: this environment can reach GitHub and the Python Package Index. Wikimedia,
 YouTube, archive.org and arcprize.org are blocked. They can be allowed under the cloud
