@@ -96,6 +96,33 @@ kept only if no row regresses and the curriculum still passes.
 Finish the work in progress end to end: real particles through the retina, tracks,
 mean squared displacement, then D compared with the scientists' tool on the same film.
 
+### How V3 is judged (written 2026-10-11, before any of Ultron's measurements)
+
+The exit test says "g from real footage of falling, within measured error". It is not
+changed; these are the details it left open, fixed before measuring:
+
+- **The films** are every real film of a freely falling or tossed ball in the source
+  found (the Tracker project's films on GitHub, `OpenSourcePhysics/resources` and
+  `tracker-website`, pinned commits): *BallTossOut*, *BallDrop* and *BallTossUp*, all three
+  filmed at Cabrillo College with the same metre stick in view. *FreeFall* (a kitchen
+  film) is left out because nothing in it gives a readable scale; *TossOutStrobe* and
+  *WhichLandsFirst* are left out because they are composites made for teaching, not plain
+  footage. This choice was made from what the films show, not from any g measured on them.
+- **What Ultron is given:** the pictures, the frame rate written in the file, and the
+  scale written on the stick (its marks are 10 cm apart; on *BallTossOut*, Tracker's own
+  calibration, 398.7 px per metre, is the label). No positions, tracks or answers.
+- **Ultron must find the law itself** (that the change of speed grows in proportion to
+  the time), and g is the constant of that law.
+- **Measured error:** Ultron's g is the mean of its per-film values. Its error is the
+  larger of (a) the standard error across films and (b) the combined error of each film
+  (its own fit, the scale it read, and 0.2% for the frame rate: NTSC cameras run at 29.97,
+  not 30). Errors that one film cannot show, such as perspective (the ball and the stick
+  at different distances from the camera), show up as disagreement between films, which
+  (a) counts.
+- **Pass:** |g − 9.80 m/s²| ≤ 2 × the measured error, **and** the measured error is at
+  most 3% of g (so a vague answer can't pass), **and** at least 2 of the 3 films give an
+  answer (a film where it cannot follow the ball is reported, not dropped).
+
 ### WP3: more real footage (V3–V6)
 
 Real videos of falling, swinging and bouncing. The network policy decides the sources:
