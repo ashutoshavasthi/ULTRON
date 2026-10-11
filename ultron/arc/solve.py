@@ -10,7 +10,7 @@ the same answer on any machine.
 
 import numpy as np
 
-from . import cells, objects, summary, symmetry, tiles
+from . import cells, objects, rules, summary, symmetry, tiles
 from . import ops as O
 from .grid import colours, key
 
@@ -91,6 +91,9 @@ def run(program, g):
         if name == "tiles":
             g = tiles.apply(p, g)
             continue
+        if name == "rules":
+            g = rules.apply(p, g)
+            continue
         if name == "compose":
             from . import compose
             g = compose.run(p, g)
@@ -141,6 +144,8 @@ def show(program):
             out.append(summary.describe(p))
         elif name == "tiles":
             out.append(tiles.describe(p))
+        elif name == "rules":
+            out.append(rules.describe(p))
         elif name.startswith("block") and LIBRARY[0]:
             from . import library
             out.append(library.show_use(LIBRARY[0][int(name[5:]) - 1], p))
@@ -177,6 +182,8 @@ def length(program):
             total += summary.length(p)
         elif name == "tiles":
             total += tiles.length(p)
+        elif name == "rules":
+            total += rules.length(p)
         else:
             total += 1
     return total
@@ -203,7 +210,7 @@ INTUITION = [None]      # intuition.py: which half-built programs to expand firs
 RECORD = [None]         # when a list: every one-step program and how it looked (to learn)
 FIRST = [None]          # operations spent when the first searched program was found
 LEARNED = {"colourmap", "cells", "things", "marks", "pick", "moves", "symmetry", "copies",
-           "gaps", "summary", "tiles"}
+           "gaps", "summary", "tiles", "rules"}
 LIBRARY = [None]        # building blocks Ultron learned itself (library.py), when switched on
 COMPOSE = [True]        # when no program of big operations explains a task: small steps
 BEST_FIRST = [True]     # with intuition on: grow the most promising program of any length
@@ -282,6 +289,9 @@ def _search(train, budget, max_depth, want):
     arrangement = tiles.learn(ins, targets)
     if arrangement is not None:
         found.append((("tiles", arrangement),))
+    cell_rules = rules.learn(ins, targets)
+    if cell_rules is not None:
+        found.append((("rules", cell_rules),))
     if desc is not None:
         for q in found:
             desc.offer_exact(q, length(q))
