@@ -30,6 +30,30 @@ and the blind tests. A retrain must stay byte for byte identical.
 | touching (gap = diameter) | 19/25 |
 | overlapping | 14/25 (a physical limit, reported only) |
 
+## Status
+
+| # | Status |
+|---|---|
+| V1 | ✅ **met** (2026-10-11): every gating eyes row 24–25/25 in the failure lab (was 25, 1, 0, 0, 2, 19); on a second set of unseen trays 24–25/25. No regressions elsewhere in the lab; all 28 lessons pass on the first attempt; a retrain is byte-identical; 109 tests pass |
+| V2–V6 | open |
+
+How V1 was met (`senses/eyes.py`, `senses/world.py`):
+- **Looking longer:** when a still scene is noisier than usual (its own noise measure, as
+  the retina's), pictures are lined up against shake and averaged until as clean as
+  usual. 16% noise: 1 → 25; 32%: 0 → 25.
+- **Adapting to the light:** the background is moved back to where the eyes are used to
+  it, but only when it is noticeably off. In a dim scene, once looking long enough makes
+  something really stand out, the contrast is turned up to how things look in its clear
+  views. Faint: 2 → 25.
+- **Stepping back:** the picture shrunk 2× and 3×, kept only when its eyes respond
+  clearly more strongly there. Big things: 0 → 25.
+- **Broader handling:** lesson 19 handles things in varied spacing, size, light and
+  camera noise. Touching: 19 → 24.
+
+Two measured pitfalls, fixed:
+- recentring the background on every picture dimmed small crowded things;
+- "usual brightness" averaged over dim scenes was too low.
+
 ## Work packages
 
 ### WP1: eyes that generalise (V1)

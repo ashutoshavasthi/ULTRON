@@ -2119,7 +2119,7 @@
       0
      ],
      "ultron": [
-      60,
+      59,
       60
      ]
     },
@@ -2173,7 +2173,7 @@
       0
      ],
      "ultron": [
-      228,
+      229,
       229
      ]
     },
@@ -2183,9 +2183,9 @@
   "lesson": 19,
   "mean_glances": 2.033333333333333,
   "passed": true,
-  "story": "I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 83.4 to 3.2). A spot must be at least 0.15 strong to be a thing: that threshold matched my hands best. From now on I see without touching.",
+  "story": "I handled things 400 times while watching. My hands said where each thing was; I trained a small network of 3 layers of 3x3 filters to light up where my hands felt something (error per picture fell from 81.1 to 5.9). A spot must be at least 0.50 strong to be a thing: that threshold matched my hands best. From now on I see without touching.",
   "threshold": 0.95,
-  "untrained_network_right": "5/60"
+  "untrained_network_right": "7/60"
  },
  "2": {
   "attempt": 1,
@@ -2426,7 +2426,7 @@
    "see_roll",
    "see_stretch"
   ],
-  "energy_law": "y + 0.0518642\u00b7v^2",
+  "energy_law": "y + 0.0514282\u00b7v^2",
   "items": [
    {
     "examples": [
@@ -2506,7 +2506,7 @@
        "m": 9.0
       },
       "truth": 1.8888888888888888,
-      "ultron": 1.8893184653175528
+      "ultron": 1.8882760139886268
      },
      {
       "question": {
@@ -2514,7 +2514,7 @@
        "m": 4.0
       },
       "truth": 1.5,
-      "ultron": 1.5003411342227626
+      "ultron": 1.4995133052262624
      },
      {
       "question": {
@@ -2522,7 +2522,7 @@
        "m": 9.0
       },
       "truth": 1.0,
-      "ultron": 1.000227422815175
+      "ultron": 0.9996755368175082
      }
     ],
     "name": "new pushes: acceleration predicted BEFORE watching, vs the true one",
@@ -2550,7 +2550,7 @@
        4
       ],
       "truth": 3.011554406442542,
-      "ultron": 3.007099782573994
+      "ultron": 3.002378788626985
      },
      {
       "question": [
@@ -2558,7 +2558,7 @@
        5
       ],
       "truth": 3.7644430080531777,
-      "ultron": 3.7588747282174926
+      "ultron": 3.752973485783731
      },
      {
       "question": [
@@ -2566,7 +2566,7 @@
        4
       ],
       "truth": 3.5059977126153066,
-      "ultron": 3.4916726115272656
+      "ultron": 3.497010430100805
      }
     ],
     "name": "NEVER HUNG: 4-5 blocks on its springs; how far will each stretch?",
@@ -2594,7 +2594,7 @@
        2.18
       ],
       "truth": 2.9987833537491686,
-      "ultron": 2.928866695591778
+      "ultron": 2.9856591950094895
      },
      {
       "question": [
@@ -2602,7 +2602,7 @@
        1.75
       ],
       "truth": 4.173893631657897,
-      "ultron": 4.106340538711724
+      "ultron": 4.155498158401172
      },
      {
       "question": [
@@ -2610,7 +2610,7 @@
        1.2
       ],
       "truth": 5.311687439678743,
-      "ultron": 5.241035006711218
+      "ultron": 5.28814747820198
      }
     ],
     "name": "new balls in the valley: after watching a moment, the speed at every later height",
@@ -3212,14 +3212,14 @@
   "threshold": 0.9,
   "traces": [
    [
-    "my law: d / u^2 = 0.1707",
-    "try 1: u = 4.15, so d should be 2.94; it was 2.93"
+    "my law: d / u^2 = 0.1698",
+    "try 1: u = 4.18, so d should be 2.97; it was 2.97"
    ],
    [
-    "I've never done this on carpet: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1707), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
-    "try 1: u = 2.82, so d should be 1.35; it was 0.905",
-    "so here d / u^2 = 0.114; now for the mark itself",
-    "try 2: u = 4.88, so d should be 2.71; it was 2.69"
+    "I've never done this on carpet: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1698), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
+    "try 1: u = 2.84, so d should be 1.37; it was 0.919",
+    "so here d / u^2 = 0.1137; now for the mark itself",
+    "try 2: u = 4.91, so d should be 2.74; it was 2.72"
    ]
   ]
  },
@@ -3233,10 +3233,10 @@
   "drain_scratch": 940,
   "ice_trace": [
    [
-    "I've never done this on ice: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1707), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
-    "try 1: u = 1.78, so d should be 0.542; it was 1.35",
-    "so here d / u^2 = 0.4258; now for the mark itself",
-    "try 2: u = 1.6, so d should be 1.08; it was 1.09"
+    "I've never done this on ice: my law's form should hold, but maybe not its number. A cautious first try, aimed at HALF the distance with the number I know (d / u^2 = 0.1698), so that even a slippery floor won't send it off the end; what I see will tell me this floor's number",
+    "try 1: u = 1.8, so d should be 0.548; it was 1.37",
+    "so here d / u^2 = 0.4257; now for the mark itself",
+    "try 2: u = 1.61, so d should be 1.1; it was 1.1"
    ]
   ],
   "items": [
@@ -3283,7 +3283,7 @@
        1
       ],
       "truth": 8.0,
-      "ultron": 8.0018193825214
+      "ultron": 7.997404294540066
      },
      {
       "question": [
@@ -3291,7 +3291,7 @@
        4
       ],
       "truth": 0.75,
-      "ultron": 0.7501705671113813
+      "ultron": 0.7497566526131312
      },
      {
       "question": [
@@ -3299,7 +3299,7 @@
        4
       ],
       "truth": 3.25,
-      "ultron": 3.250739124149319
+      "ultron": 3.248945494656902
      }
     ],
     "name": "predicts a push's acceleration BEFORE watching, counting the load by eye",

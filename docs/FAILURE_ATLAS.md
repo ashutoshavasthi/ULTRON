@@ -30,7 +30,7 @@ measurable
 | Tiny and huge numbers | ✅ |
 | A changing world | **Fixed**: re-measures after a lasting change; keeps history |
 | Law shapes | ✅ settling, lines, quadratic, oscillation, damped oscillation, logistic, t^1.5: each explained and predicted for a new object (kinds over a power of the reading; recurrences) |
-| Eyes | ❌ over-specialised (double noise, faint, touching). Wider dilated networks fixed big things (25/25) but cost accuracy elsewhere; not yet adopted |
+| Eyes | ✅ every eyes row ≥ 24/25 (Stage 2): look longer at a still scene, adapt to the light, step back, handle things in varied conditions. Overlapping things stay a physical limit (16/25, reported only) |
 | Wrong records, up to 20% | ✅ |
 | False laws on 100 datasets with nothing to find | ✅ 0 |
 
@@ -76,7 +76,7 @@ Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 
 | Failure | How we provoke it | Status | Fix | Stage |
 |---|---|---|---|---|
-| Heavier noise, different sizes, faint or crowded things | Lab: *eyes* | see lab | Train on varied scenes; scale-space (look at several sizes); self-teaching on what lasts (works on the real microscope film: 81% → 86% of the scientists' particles found) | B |
+| Heavier noise, different sizes, faint or crowded things | Lab: *eyes* | ✅ fixed (Stage 2 WP1) | Train on varied scenes (lesson 19 now does); look longer when noisier than usual; contrast adaptation in dim scenes; scale-space (step back 2×, 3×); self-teaching on what lasts (real microscope film: 81% → 86% of the scientists' particles found) | B |
 | **Simulator to real world** | Real microscope film | 🟡 one real film | Many real videos (needs network access to video sites). Self-teaching on each | B |
 | Clutter, 3D, occlusion, categories ("a cup") | ⬜ | 🔴 | Objects as things that move together (common fate), depth from motion; categories as concepts grounded by use | B, E |
 

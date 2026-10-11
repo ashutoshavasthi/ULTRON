@@ -8,17 +8,43 @@ _How big a law can it find by search?_ Breaks at: **(a+1)(b+2)(a+b)**
 
 | the law's size | what it did | |
 |---|---|---|
-| a+b | `get_paid(a, b)` | ✅ |
+| a+b | `merge(a, b)` | ✅ |
 | a·b | `groups(a, b)` | ✅ |
 | a·b+a | `groups(a, succ(b))` | ✅ |
 | a·b+a+b | `pred(groups(succ(a), succ(b)))` | ✅ |
-| a²+b | `get_paid(b, square(a))` | ✅ |
-| (a+b)² | `square(get_paid(a, b))` | ✅ |
+| a²+b | `merge(b, square(a))` | ✅ |
+| (a+b)² | `square(merge(a, b))` | ✅ |
 | a·b²+a | `groups(a, succ(square(b)))` | ✅ |
-| a³+b² | `get_paid(square(b), groups(a, square(a)))` | ✅ |
+| a³+b² | `merge(square(b), groups(a, square(a)))` | ✅ |
 | (a+1)(b+2)(a+b) | `nothing found` | ❌ |
 
 Search is size-ordered and exhaustive: cost grows exponentially with the size of the law.
+
+## library learning
+
+_After sleeping on laws that share a piece nobody taught it, does it find laws bigger than its search can reach?_ Breaks at: **did not break**
+
+| held-out law | what it did | |
+|---|---|---|
+| practice: 5 of 5 laws found; sleep | `piece1 = groups(succ(x1), succ(x2)) (saves 5); piece2 = piece1(x1, succ(x2)) (saves 1)` | ✅ |
+| S(S(a,b),a)+S(a,b) | `piece1(a, piece2(b, a)) — 10 pieces written out` | ✅ |
+| S(S(a,b),S(a,a)) | `piece1(square(succ(a)), piece1(a, b)) — 11 pieces written out` | ✅ |
+| S(S(a,b),S(b,b)) | `piece1(square(succ(b)), piece1(a, b)) — 11 pieces written out` | ✅ |
+| S(S(a,b),S(a,b))+a | `merge(a, square(succ(piece1(a, b)))) — 9 pieces written out` | ✅ |
+| S(T(a,b),T(b,a)) | `piece1(piece2(a, b), piece2(b, a)) — 15 pieces written out` | ✅ |
+| T(T(a,b),T(b,a)) | `piece2(piece2(a, b), piece2(b, a)) — 16 pieces written out` | ✅ |
+
+Its search alone stops at 7 pieces. The held-out laws are compositions of the family's pieces (S = (x+1)(y+1), T = (x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.
+
+## intuition
+
+_Does measuring description length against what its intuition expects cut search (S2, intuition alone)?_ Breaks at: **38 held-out laws (lab laws and unseen dreams)**
+
+| held-out set | what it did | |
+|---|---|---|
+| 38 held-out laws (lab laws and unseen dreams) | `search 0.7x less with the prior; 1 lost, 4 longer` | ❌ |
+
+Kept out of the brain until it pays: a wrong guess pushes a needed law to a dearer level, and search grows exponentially per level.
 
 ## wrong labels (programs)
 
@@ -61,9 +87,9 @@ _How does search time grow with more examples?_ Breaks at: **did not break**
 
 | examples | what it did | |
 |---|---|---|
-| 20 examples | `6.3 s` | ✅ |
-| 100 examples | `7.9 s` | ✅ |
-| 400 examples | `20.1 s` | ✅ |
+| 20 examples | `1.6 s` | ✅ |
+| 100 examples | `0.7 s` | ✅ |
+| 400 examples | `0.4 s` | ✅ |
 
 ## noise
 
@@ -165,17 +191,17 @@ Its grammar: Δ, ρ, composed; applied to a power of the reading; and recurrence
 
 ## eyes
 
-_How robust is its learned vision?_ Breaks at: **16% noise**
+_How robust is its learned vision?_ Breaks at: **did not break**
 
 | condition | what it did | |
 |---|---|---|
 | normal (8% noise) | `25/25 trays counted right` | ✅ |
-| 16% noise | `1/25 trays counted right` | ❌ |
-| 32% noise | `0/25 trays counted right` | ❌ |
-| big things (r 4-6) | `0/25 trays counted right` | ❌ |
-| faint things (30% brightness) | `2/25 trays counted right` | ❌ |
-| touching (gap = diameter) | `19/25 trays counted right` | ❌ |
-| overlapping (gap < diameter) | `14/25 trays counted right (merged blobs: a physical limit, reported only)` | ✅ |
+| 16% noise | `25/25 trays counted right` | ✅ |
+| 32% noise | `25/25 trays counted right` | ✅ |
+| big things (r 4-6) | `25/25 trays counted right` | ✅ |
+| faint things (30% brightness) | `25/25 trays counted right` | ✅ |
+| touching (gap = diameter) | `24/25 trays counted right` | ✅ |
+| overlapping (gap < diameter) | `16/25 trays counted right (merged blobs: a physical limit, reported only)` | ✅ |
 
 ## false laws
 

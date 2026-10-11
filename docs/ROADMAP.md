@@ -145,8 +145,9 @@ Stage 2 because further ARC work was not paying off. ARC returns in Stage 3 (int
 worlds) and in the fixed AGI battery.
 
 Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
-1. **Eyes that generalise:** every eyes row of the failure lab ≥ 23/25 (look longer
-   at still scenes, adapt to the light, step back for big things, broader handling).
+1. ✅ **Eyes that generalise:** every eyes row of the failure lab now 24–25/25 (look
+   longer at still scenes, adapt to the light, step back for big things, broader
+   handling).
 2. **Lesson 26:** diffusion from the real microscope film, against the scientists' tool.
 3. **Real footage:** g, pendulum periods, restitution; detection on par with a lab tool.
 

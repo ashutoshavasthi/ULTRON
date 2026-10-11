@@ -6,71 +6,151 @@
   "rows": [
    {
     "level": "a+b",
-    "outcome": "get_paid(a, b)",
+    "outcome": "merge(a, b)",
     "ok": true,
-    "steps": 356,
-    "seconds": 0.01
+    "steps": 292,
+    "seconds": 0.02
    },
    {
     "level": "a\u00b7b",
     "outcome": "groups(a, b)",
     "ok": true,
-    "steps": 360,
+    "steps": 296,
     "seconds": 0.0
    },
    {
     "level": "a\u00b7b+a",
     "outcome": "groups(a, succ(b))",
     "ok": true,
-    "steps": 1920,
-    "seconds": 0.06
+    "steps": 1605,
+    "seconds": 0.03
    },
    {
     "level": "a\u00b7b+a+b",
     "outcome": "pred(groups(succ(a), succ(b)))",
     "ok": true,
-    "steps": 116117,
-    "seconds": 3.75
+    "steps": 90707,
+    "seconds": 1.13
    },
    {
     "level": "a\u00b2+b",
-    "outcome": "get_paid(b, square(a))",
+    "outcome": "merge(b, square(a))",
     "ok": true,
-    "steps": 2071,
-    "seconds": 0.01
+    "steps": 1425,
+    "seconds": 0.0
    },
    {
     "level": "(a+b)\u00b2",
-    "outcome": "square(get_paid(a, b))",
+    "outcome": "square(merge(a, b))",
     "ok": true,
-    "steps": 2089,
-    "seconds": 0.01
+    "steps": 1556,
+    "seconds": 0.0
    },
    {
     "level": "a\u00b7b\u00b2+a",
     "outcome": "groups(a, succ(square(b)))",
     "ok": true,
-    "steps": 17372,
-    "seconds": 0.29
+    "steps": 12733,
+    "seconds": 0.1
    },
    {
     "level": "a\u00b3+b\u00b2",
-    "outcome": "get_paid(square(b), groups(a, square(a)))",
+    "outcome": "merge(square(b), groups(a, square(a)))",
     "ok": true,
-    "steps": 915958,
-    "seconds": 64.54
+    "steps": 539242,
+    "seconds": 11.97
    },
    {
     "level": "(a+1)(b+2)(a+b)",
     "outcome": "nothing found",
     "ok": false,
-    "steps": 738820,
-    "seconds": 51.12
+    "steps": 578689,
+    "seconds": 11.43
    }
   ],
   "breakpoint": "(a+1)(b+2)(a+b)",
   "note": "Search is size-ordered and exhaustive: cost grows exponentially with the size of the law.",
-  "seconds": 119.8
+  "seconds": 24.7
+ },
+ {
+  "name": "library learning",
+  "question": "After sleeping on laws that share a piece nobody taught it, does it find laws bigger than its search can reach?",
+  "dial": "held-out law",
+  "rows": [
+   {
+    "level": "practice: 5 of 5 laws found; sleep",
+    "outcome": "piece1 = groups(succ(x1), succ(x2)) (saves 5); piece2 = piece1(x1, succ(x2)) (saves 1)",
+    "ok": true
+   },
+   {
+    "level": "S(S(a,b),a)+S(a,b)",
+    "outcome": "piece1(a, piece2(b, a)) \u2014 10 pieces written out",
+    "ok": true,
+    "seconds": 0.3,
+    "size_written_out": 10,
+    "without_pieces": "nothing found"
+   },
+   {
+    "level": "S(S(a,b),S(a,a))",
+    "outcome": "piece1(square(succ(a)), piece1(a, b)) \u2014 11 pieces written out",
+    "ok": true,
+    "seconds": 15.9,
+    "size_written_out": 11,
+    "without_pieces": "nothing found"
+   },
+   {
+    "level": "S(S(a,b),S(b,b))",
+    "outcome": "piece1(square(succ(b)), piece1(a, b)) \u2014 11 pieces written out",
+    "ok": true,
+    "seconds": 8.9,
+    "size_written_out": 11,
+    "without_pieces": "nothing found"
+   },
+   {
+    "level": "S(S(a,b),S(a,b))+a",
+    "outcome": "merge(a, square(succ(piece1(a, b)))) \u2014 9 pieces written out",
+    "ok": true,
+    "seconds": 10.9,
+    "size_written_out": 9,
+    "without_pieces": "nothing found"
+   },
+   {
+    "level": "S(T(a,b),T(b,a))",
+    "outcome": "piece1(piece2(a, b), piece2(b, a)) \u2014 15 pieces written out",
+    "ok": true,
+    "seconds": 12.1,
+    "size_written_out": 15,
+    "without_pieces": "nothing found"
+   },
+   {
+    "level": "T(T(a,b),T(b,a))",
+    "outcome": "piece2(piece2(a, b), piece2(b, a)) \u2014 16 pieces written out",
+    "ok": true,
+    "seconds": 8.4,
+    "size_written_out": 16,
+    "without_pieces": "nothing found"
+   }
+  ],
+  "breakpoint": null,
+  "note": "Its search alone stops at 7 pieces. The held-out laws are compositions of the family's pieces (S = (x+1)(y+1), T = (x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.",
+  "seconds": 133.4
+ },
+ {
+  "name": "intuition",
+  "question": "Does measuring description length against what its intuition expects cut search (S2, intuition alone)?",
+  "dial": "held-out set",
+  "rows": [
+   {
+    "level": "38 held-out laws (lab laws and unseen dreams)",
+    "outcome": "search 0.7x less with the prior; 1 lost, 4 longer",
+    "ok": false,
+    "plain": 1325130,
+    "prior": 1776958
+   }
+  ],
+  "breakpoint": "38 held-out laws (lab laws and unseen dreams)",
+  "note": "Kept out of the brain until it pays: a wrong guess pushes a needed law to a dearer level, and search grows exponentially per level.",
+  "seconds": 95.4
  },
  {
   "name": "wrong labels (programs)",
@@ -100,7 +180,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 196.7
+  "seconds": 92.4
  },
  {
   "name": "hidden causes and noise",
@@ -120,7 +200,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 98.5
+  "seconds": 20.8
  },
  {
   "name": "few examples",
@@ -169,26 +249,26 @@
   "rows": [
    {
     "level": "20 examples",
-    "outcome": "6.3 s",
+    "outcome": "1.6 s",
     "ok": true,
-    "seconds": 6.34
+    "seconds": 1.63
    },
    {
     "level": "100 examples",
-    "outcome": "7.9 s",
+    "outcome": "0.7 s",
     "ok": true,
-    "seconds": 7.86
+    "seconds": 0.65
    },
    {
     "level": "400 examples",
-    "outcome": "20.1 s",
+    "outcome": "0.4 s",
     "ok": true,
-    "seconds": 20.05
+    "seconds": 0.38
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 34.3
+  "seconds": 2.7
  },
  {
   "name": "noise",
@@ -493,38 +573,38 @@
    },
    {
     "level": "16% noise",
-    "outcome": "1/25 trays counted right",
-    "ok": false
+    "outcome": "25/25 trays counted right",
+    "ok": true
    },
    {
     "level": "32% noise",
-    "outcome": "0/25 trays counted right",
-    "ok": false
+    "outcome": "25/25 trays counted right",
+    "ok": true
    },
    {
     "level": "big things (r 4-6)",
-    "outcome": "0/25 trays counted right",
-    "ok": false
+    "outcome": "25/25 trays counted right",
+    "ok": true
    },
    {
     "level": "faint things (30% brightness)",
-    "outcome": "2/25 trays counted right",
-    "ok": false
+    "outcome": "25/25 trays counted right",
+    "ok": true
    },
    {
     "level": "touching (gap = diameter)",
-    "outcome": "19/25 trays counted right",
-    "ok": false
+    "outcome": "24/25 trays counted right",
+    "ok": true
    },
    {
     "level": "overlapping (gap < diameter)",
-    "outcome": "14/25 trays counted right (merged blobs: a physical limit, reported only)",
+    "outcome": "16/25 trays counted right (merged blobs: a physical limit, reported only)",
     "ok": true
    }
   ],
-  "breakpoint": "16% noise",
+  "breakpoint": null,
   "note": "",
-  "seconds": 1.1
+  "seconds": 6.9
  },
  {
   "name": "false laws",
@@ -559,6 +639,6 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 15.2
+  "seconds": 9.8
  }
 ]
