@@ -37,6 +37,26 @@ def test_eyes_generalise_to_hard_conditions(trained):
     assert noise_of(clean) <= 1.25 * eyes.noise_ref
 
 
+def test_eyes_explain_away_touching_things(trained):
+    """Two things just touching make one ridge in its map; the eyes take away what each
+    thing seen accounts for and count the one hidden on its neighbour's shoulder."""
+    import copy
+    import numpy as np
+    from ultron.senses.camera import scatter, shoot
+    eyes = trained[0].eyes
+    assert eyes.footprint is not None and eyes.leftover > eyes.threshold
+    plain = copy.deepcopy(eyes)
+    plain.footprint = None                  # the same eyes, not explaining away
+    trays, camera = np.random.default_rng(31), np.random.default_rng(32)
+    right = plain_right = 0
+    for _ in range(12):
+        n = int(trays.integers(12, 25))
+        blobs = scatter(n, trays, gap=3.0, radius=(1.2, 1.5))
+        right += eyes.count(lambda: shoot(blobs, camera)[0])[0] == n
+        plain_right += plain.count(lambda: shoot(blobs, camera)[0])[0] == n
+    assert right >= 11 and right > plain_right, (right, plain_right)
+
+
 def test_diffusion_from_a_real_microscope_film(trained):
     """Lesson 26: Einstein's law and the diffusion constant from real pixels, matching the
     scientists' own tool; no law claimed for a single sphere's path."""

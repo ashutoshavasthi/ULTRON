@@ -497,7 +497,9 @@ def eyes_stress(brain):
              ("touching (gap = diameter)", 0.08, 3.0, (1.2, 1.5), 1.0, (1, 25), True),
              ("overlapping (gap < diameter)", 0.08, 3.0, (1.4, 2.6), 1.0, (1, 25), False)]
     for label, noise, gap, radius, dim, (lo, hi), gates in cases:
-        rng = np.random.default_rng(13)
+        # the trays come from their own generator and the camera from another, so the
+        # same trays are shown whatever the eyes do (looking longer takes more pictures)
+        rng, camera = np.random.default_rng(13), np.random.default_rng(10_013)
         right = tried = 0
         while tried < 25:
             n = int(rng.integers(lo, hi))
@@ -507,7 +509,7 @@ def eyes_stress(brain):
                 continue                # a tray that can't be built isn't a test
             tried += 1
             blobs = [(x, y, r, b * dim) for x, y, r, b in blobs]
-            right += brain.eyes.count(lambda: shoot(blobs, rng, noise=noise)[0])[0] == n
+            right += brain.eyes.count(lambda: shoot(blobs, camera, noise=noise)[0])[0] == n
         rows.append(_row(label, f"{right}/25 trays counted right"
                          + ("" if gates else " (merged blobs: a physical limit, reported only)"),
                          right >= 23 or not gates))
