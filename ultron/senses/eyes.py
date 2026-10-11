@@ -30,6 +30,7 @@ LAYERS = ((1, 8), (8, 8), (8, 1))
 SIGMA = 1.0
 BACKGROUND = 0.1    # where the background sits in the pictures its eyes grew up with
 DIM = 0.45          # things standing out less than this (of what it's used to): a dim scene
+STEP_BACK = 1.5     # a view from further back must look this much clearer to be preferred
 
 
 def _box(a, k):
@@ -176,8 +177,10 @@ class Eyes:
         self.trained_on += len(images)
         self._calibrate(images, touches)
         self.noise_ref = float(np.median([noise_of(im) for im in images]))
-        self.contrast_ref = float(np.median([contrast_of(im) for im, t in zip(images, touches)
-                                             if len(t)]))
+        # how far things stand out in its clear views (it handled things in dim light too,
+        # but "usual" is how they look when it sees them well)
+        self.contrast_ref = float(np.percentile([contrast_of(im) for im, t in
+                                                 zip(images, touches) if len(t)], 90))
         return losses
 
     def _calibrate(self, images, touches):
@@ -225,7 +228,13 @@ class Eyes:
             if c2 > 6 * noise_of(avg2):
                 g = min(self.contrast_ref / c2, 6.0)
                 avg = np.median(avg2) + g * (avg2 - np.median(avg2))
-        return np.clip(avg - np.median(avg) + BACKGROUND, 0.0, 1.0)
+        return self._adapt(avg)
+
+    def _adapt(self, img):
+        """Adapt to the light: the background put where its eyes are used to it, when it
+        is noticeably elsewhere."""
+        off = float(np.median(img)) - BACKGROUND
+        return np.clip(img - off, 0.0, 1.0) if abs(off) > 0.5 * self.noise_ref else img
 
     def _longer(self, look, frames, target, cap):
         avg = np.mean(frames, axis=0)
@@ -243,10 +252,10 @@ class Eyes:
         best = None
         for s in scales:
             view = _shrink(img, s) if s > 1 else img
-            view = np.clip(view - np.median(view) + BACKGROUND, 0.0, 1.0)
-            seen = self.see(view)
+            seen = self.see(self._adapt(view))
             strength = float(np.mean([p[2] for p in seen])) if seen else 0.0
-            if best is None or strength > best[0]:
+            # step back only when things clearly look more like what its eyes learned
+            if best is None or strength > STEP_BACK * best[0]:
                 best = (strength, [(x * s + (s - 1) / 2, y * s + (s - 1) / 2, v)
                                    for x, y, v in seen])
         return best[1]
