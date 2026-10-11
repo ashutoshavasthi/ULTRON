@@ -553,3 +553,37 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _confirm_: tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 28, attempt 1: passed
+
+## Lesson 29
+
+- **Trainer**: Lesson 29: The real world: falling
+- Ultron _meet_: new kind of experience: fall
+- **Trainer**: A real film from a physics lab: BallTossOut. The label says 30 pictures a second; the stick in view is 398.709 pixels to the metre (the lab's own calibration of the metre stick (Tracker file)).
+- Ultron _reflect_: BallTossOut: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 26 pictures, 19 of them with nothing touching it and all of it in view
+- **Trainer**: A real film from a physics lab: BallDrop. The label says 30 pictures a second, each frame taken as two half-pictures; the stick in view is 400.7 pixels to the metre (the metre stick's marks, 10 cm apart, read by the Trainer).
+- Ultron _reflect_: BallDrop: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 49 pictures, 24 of them with nothing touching it and all of it in view
+- **Trainer**: A real film from a physics lab: BallTossUp. The label says 30 pictures a second, each frame taken as two half-pictures; the stick in view is 400.3 pixels to the metre (the metre stick's marks, 10 cm apart, read by the Trainer).
+- Ultron _reflect_: BallTossUp: comparing each picture with how the room usually looks, through my ON channel, one thing moved further than anything else: I followed it through 72 pictures, 49 of them with nothing touching it and all of it in view
+- Ultron _reflect_: after 0.167 s the ball goes faster by about the same amount in every film, give or take 2.8%: that's how precise this measuring is
+- Ultron _stuck_: fall: nothing stays constant yet (1 experiences)
+- Ultron _revise_: fall: dv / tau = 10.0919 [m/s²] in every experiment (2 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _invent_: From real films of a falling ball: dv / tau stays the same, 9.679 m/s²: the change of speed grows in proportion to the time, whether the ball was dropped or thrown up or across.
+- **Trainer**: Exam for lesson 29, attempt 1: passed
+- **Trainer**: What you found in 'fall' is what people call free fall: the acceleration of gravity, g.
+
+## Lesson 30
+
+- **Trainer**: Lesson 30: The real world: swinging
+- Ultron _meet_: new kind of experience: swing
+- **Trainer**: A real film of a pendulum: Pendulum50cm. The label says 25 pictures a second, and the string is 0.5 m long (the film: '0,5 m' written beside the pendulum and in its description).
+- Ultron _reflect_: Pendulum50cm: through my ON channel I followed the bob through 80 pictures and timed 4 half swings: one swing there and back takes 1.445 ± 0.015 s
+- **Trainer**: A real film of a pendulum: pendulum_drag. The label says 30 pictures a second, and the string is 0.785 m long (the lab's own calibration (Tracker file, a 0.5 m tape)).
+- Ultron _reflect_: pendulum_drag: through my ON channel I followed the bob through 130 pictures and timed 4 half swings: one swing there and back takes 1.782 ± 0.014 s
+- **Trainer**: A real film of a pendulum: Pendulum. The label says 29.97 pictures a second, and the string is 1.0 m long (the film: 'length: 1 m' printed on it).
+- Ultron _reflect_: Pendulum: through my ON channel I followed the bob through 60 pictures and timed 1 half swings: one swing there and back takes 2.060 ± 0.094 s
+- Ultron _reflect_: my timings are good to about 4.6%
+- Ultron _stuck_: swing: nothing stays constant yet (1 experiences)
+- Ultron _revise_: swing: L / T^2 = 0.243311 [m/s²] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _invent_: From real films of pendulums: L / T^2 stays the same, 0.2407: the time of a swing grows as the square root of the length of the string.
+- **Trainer**: Exam for lesson 30, attempt 1: passed
+- **Trainer**: What you found in 'swing' is what people call the period of a pendulum (T = 2π√(L/g)).
