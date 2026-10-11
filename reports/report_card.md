@@ -78,7 +78,7 @@ Every law below was found by Ultron's own search from its own experiences. The n
 | `coil_stretch` | `F / x` = constant | one per spring (C1: 60, C2: 75, C4: 85.71, C5: 100, C6: 150, C7: 60) | N/m | established (13 confirmations) |  |
 | `coil_stretch~why` | `coil_stretch.property·coils` = 600 | a law about a law | — | 6 objects | a law about a law: stiffness is inversely proportional to the number of coils |
 | `gas` | `P·V` = constant | 1409.31 (same everywhere) | the data's own units | established (11 confirmations) | Boyle's law |
-| `jiggle` | `s^2 / tau` = constant | 1.5914 (same everywhere) | m^2·s^-1 | established (27 confirmations) | Brownian motion: Einstein's law (mean squared displacement = 4·D·t) |
+| `jiggle` | `s^2 / tau` = constant | 1.58549 (same everywhere) | m^2·s^-1 | established (27 confirmations) | Brownian motion: Einstein's law (mean squared displacement = 4·D·t) |
 | `lab_push` | `F / (a·m)` = constant | 1.00114 (same everywhere) | dimensionless | established (15 confirmations) | Newton's second law (measured with noise) |
 | `lab_stretch` | `F / x` = constant | one per spring (L1: 39.14, L2: 23.36, L3: 68.32, L4: 16.5, L5: 58.38) | N/m | established (11 confirmations) | stiffness (measured with noise) |
 | `orbit` | `T^2 / r^3` = constant | 2.96851e-19 (same everywhere) | m^-3·s^2 | established (4 confirmations) | Kepler's third law |
@@ -139,7 +139,7 @@ Invented:
 - **kind:yeast** (lesson 27, new primitive ``). In Ultron's words: _None of the kinds of explanation I was born with fits 'yeast': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(Δ(cells^-1)) stays the same for each jar (3 jars). That is a new KIND of explanation, not just a new law: not the reading itself but its power -1: the steps between readings shrink (or grow) by the same fraction each time: it settles toward a resting value. I'll keep it and try it first next time._
 - **ladder** (lesson 3, new primitive ``). In Ultron's words: _'groups' is 'merge' repeated (I have seen this shape 1 time). If REPEAT is a general way of making laws, then applied to 'groups' it predicts a law I have never met: repeated_groups(amount, times) = repeat times times [groups(·, amount)] starting from 1. That is only a guess from a pattern, so I'll keep it as a prediction until the world agrees. Repeating 'repeated_groups' could mean two different things: repeated_groups(2, 3) is not repeated_groups(3, 2), so I can't tell which input to feed back in. The REPEAT pattern stops telling me what comes next here, so I won't guess._
 - **negative numbers (the integers)** (lesson 8, new primitive `down`). In Ultron's words: _My coins/notes states all lie on ONE line: 'earn' and 'spend' undo each other, and from the empty state 'earn' counts coins up 1, 2, 3... But 'spend' from the empty state doesn't stop: it keeps going, into states with notes. Those are places *below* zero. I'll treat them as numbers too, and use a new step 'down' that has no floor._
-- **microscope** (lesson 26, new primitive ``). In Ultron's words: _From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.591: the spread squared grows in proportion to the time._
+- **microscope** (lesson 26, new primitive ``). In Ultron's words: _From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.585: the spread squared grows in proportion to the time._
 - **a law about a law: stiffness is inversely proportional to the number of coils** (lesson 17, new primitive ``). In Ultron's words: _Each spring's F / x (a property I invented, in N/m) isn't arbitrary: it·coils is the same, 600, for all 6 springs whose coils I have counted. That's a law about my law. Now I can know a new spring's property just by counting its coils, and predict what it will do before I ever try it._
 
 ## Held-out exams (problems never seen in training)
@@ -263,7 +263,7 @@ Invented:
 | 25 | NEVER MEASURED: how high the hole is (where the water stops), after 6 readings, to within 5 mm | **6/6 (100%)** | n/a | n/a |
 | 25 | the same brain with its invented kinds removed can't explain the tanks | **1/1 (100%)** | n/a | n/a |
 | 25 | goals on ICE (never touched): a cautious first kick, then within 10 cm on the second try | **10/10 (100%)** | n/a | n/a |
-| 26 | on 150 pictures it NEVER learned from, it finds the spheres the scientists' tool (trackpy) finds, within 1.5 pixels | **2475/2854 (87%)** | n/a | n/a |
+| 26 | on 150 pictures it NEVER learned from, it finds the spheres the scientists' tool (trackpy) finds, within 1.5 pixels | **2480/2854 (87%)** | n/a | n/a |
 | 26 | found the law of the jiggling from the film: spread² ∝ time | **1/1 (100%)** | n/a | n/a |
 | 26 | its diffusion constant D agrees with the scientists' tool on the same film | **1/1 (100%)** | n/a | n/a |
 | 26 | and with the textbook: D = kT/(6πηr) for 1-micron spheres in water at 22°C | **1/1 (100%)** | n/a | n/a |

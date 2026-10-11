@@ -492,17 +492,18 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: This is a real film from a laboratory microscope: spheres in water. The label says 24 pictures a second and 2.85 pixels per micron. Watch the first 150 pictures.
 - Ultron _reflect_: through my retina's OFF channel, 84% of what I see lasts from picture to picture; the other channel shows things that come and go. Real things last, so I'll look with OFF
 - Ultron _invent_: I trained my eyes on these real pictures with no one telling me what is there: what lasted at least 25 pictures I took as a real thing, everything else as nothing (and I kept looking at my old toy scenes so I don't forget them). Before, 82% of what I saw lasted; now 86%.
-- Ultron _reflect_: I followed 1461 spheres for at least 25 pictures each, after taking out how the whole view drifted. Two halves of them disagree by 1.0% about how far spheres get: that's how precise this measuring is
+- Ultron _reflect_: I followed 1507 spheres for at least 25 pictures each, after taking out how the whole view drifted. Two halves of them disagree by 1.0% about how far spheres get: that's how precise this measuring is
 - Ultron _stuck_: jiggle: nothing stays constant yet (1 experiences)
-- Ultron _revise_: jiggle: s^2 / tau = 1.44854 [m^2·s^-1] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
+- Ultron _revise_: jiggle: s^2 / tau = 1.46624 [m^2·s^-1] in every experiment (6 candidates searched; tentative until it predicts 3 new experiences)
 - Ultron _stuck_: one_sphere: no product or sum of the readings stays the same; none of the kinds of explanation I was born with fits
 - Ultron _invent_: None of the kinds of explanation I was born with fits 'one_sphere': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(x) stays the same for everything (3 spheres). That is a new KIND of explanation, not just a new law: each reading is the same number of times the one before. I'll keep it and try it first next time.
 - Ultron _revise_: one_sphere: ρ(x) stays the same for everything (kind 3: each reading is the same number of times the one before)
 - Ultron _invent_: None of the kinds of explanation I was born with fits 'one_sphere': no product and no sum of the readings stays the same. So I searched a new space: things I can compute along a sequence of readings, shortest first. ρ(x^1/2) stays the same for everything (3 spheres). That is a new KIND of explanation, not just a new law: not the reading itself but its power 1/2: each reading is the same number of times the one before. I'll keep it and try it first next time.
 - Ultron _revise_: one_sphere: ρ(x^1/2) stays the same for everything (kind 4: not the reading itself but its power 1/2: each reading is the same number of times the one before)
-- Ultron _stuck_: one_sphere: nothing I can express stays the same (7 spheres, 937 readings)
+- Ultron _stuck_: one_sphere: nothing I can express stays the same (6 spheres, 787 readings)
+- Ultron _stuck_: one_sphere: nothing I can express stays the same (7 spheres, 901 readings)
 - Ultron _stuck_: one_sphere: nothing I can express stays the same (8 spheres, 1051 readings)
-- Ultron _invent_: From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.591: the spread squared grows in proportion to the time.
+- Ultron _invent_: From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.585: the spread squared grows in proportion to the time.
 - **Trainer**: Exam for lesson 26, attempt 1: passed
 - **Trainer**: What you found in 'jiggle' is what people call Brownian motion: Einstein's law (mean squared displacement = 4·D·t).
 

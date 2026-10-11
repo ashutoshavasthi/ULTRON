@@ -85,7 +85,7 @@ Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 | Failure | How we provoke it | Status | Fix | Stage |
 |---|---|---|---|---|
 | It keeps every experience and re-checks them all | ⬜ grows with lessons | 🟡 | Consolidation: keep the laws plus the exceptions and a sample of experiences; forget the rest | A |
-| Forgetting old skills when learning new ones | Real film: eyes kept 40/40 on old trays with replay | 🟢 for eyes | Replay for every learned component; old exams always re-run | all |
+| Forgetting old skills when learning new ones | Real film: self-teaching on the film cost touching trays 24 → 18 of 25 even with replay | 🟢 for eyes | Replay for every learned component; old exams always re-run; an instrument-specific skill kept apart (microscope eyes) when replay is not enough | all |
 | Pure Python is slow | Lab timings | 🟡 | Hot paths in numpy or native code; the Engc twin | F |
 
 ## 7. Reasoning and learning dynamics

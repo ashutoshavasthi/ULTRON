@@ -3473,7 +3473,7 @@
   "threshold": 0.9
  },
  "26": {
-  "D": 0.39784973661392264,
+  "D": 0.3963732649319548,
   "attempt": 1,
   "items": [
    {
@@ -3489,7 +3489,7 @@
       0
      ],
      "ultron": [
-      "2475",
+      "2480",
       2854
      ]
     },
@@ -3525,7 +3525,7 @@
      {
       "question": "D",
       "truth": 0.41165443428163934,
-      "ultron": 0.39784973661392264
+      "ultron": 0.3963732649319548
      }
     ],
     "name": "its diffusion constant D agrees with the scientists' tool on the same film",
@@ -3550,7 +3550,7 @@
      {
       "question": "D",
       "truth": 0.4548943743322124,
-      "ultron": 0.39784973661392264
+      "ultron": 0.3963732649319548
      }
     ],
     "name": "and with the textbook: D = kT/(6\u03c0\u03b7r) for 1-micron spheres in water at 22\u00b0C",
@@ -3575,17 +3575,17 @@
      {
       "question": 20,
       "truth": 1.3922722740738842,
-      "ultron": 1.3261657887130756
+      "ultron": 1.3212442164398495
      },
      {
       "question": 21,
       "truth": 1.4637575444774638,
-      "ultron": 1.3924740781487295
+      "ultron": 1.387306427261842
      },
      {
       "question": 22,
       "truth": 1.5347830230638717,
-      "ultron": 1.4587823675843827
+      "ultron": 1.453368638083834
      }
     ],
     "name": "on the 150 pictures it never learned from: spread at 1-2 seconds (trained up to 1.25 s), predicted vs measured by trackpy",
@@ -3609,18 +3609,18 @@
     "examples": [
      {
       "question": 20,
-      "truth": 1.3983282600869988,
-      "ultron": 1.3261657887130756
+      "truth": 1.4009780477376645,
+      "ultron": 1.3212442164398492
      },
      {
       "question": 30,
-      "truth": 2.1469564893468465,
-      "ultron": 1.9892486830696132
+      "truth": 2.1439890887240507,
+      "ultron": 1.9818663246597739
      },
      {
       "question": 40,
-      "truth": 2.89883405686667,
-      "ultron": 2.652331577426151
+      "truth": 2.884967489008401,
+      "ultron": 2.6424884328796985
      }
     ],
     "name": "the same, against what its own eyes measure on those pictures",
@@ -3668,12 +3668,12 @@
   ],
   "lesson": 26,
   "passed": true,
-  "share_of_its_detections_that_last": 0.8526806896943621,
-  "story": "From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.591: the spread squared grows in proportion to the time.",
+  "share_of_its_detections_that_last": 0.8463880932741685,
+  "story": "From a real microscope film: each sphere's path is unpredictable (nothing I can express explains one), but all together s^2 / tau stays the same, 1.585: the spread squared grows in proportion to the time.",
   "textbook_D": 0.4548943743322124,
   "threshold": 0.75,
   "trackpy_D": 0.41165443428163934,
-  "tracks_followed": 1519
+  "tracks_followed": 1528
  },
  "27": {
   "attempt": 1,

@@ -23,14 +23,14 @@
     "outcome": "groups(a, succ(b))",
     "ok": true,
     "steps": 1605,
-    "seconds": 0.03
+    "seconds": 0.06
    },
    {
     "level": "a\u00b7b+a+b",
     "outcome": "pred(groups(succ(a), succ(b)))",
     "ok": true,
     "steps": 90707,
-    "seconds": 1.13
+    "seconds": 1.28
    },
    {
     "level": "a\u00b2+b",
@@ -58,19 +58,19 @@
     "outcome": "merge(square(b), groups(a, square(a)))",
     "ok": true,
     "steps": 539242,
-    "seconds": 11.97
+    "seconds": 11.75
    },
    {
     "level": "(a+1)(b+2)(a+b)",
     "outcome": "nothing found",
     "ok": false,
     "steps": 578689,
-    "seconds": 11.43
+    "seconds": 11.71
    }
   ],
   "breakpoint": "(a+1)(b+2)(a+b)",
   "note": "Search is size-ordered and exhaustive: cost grows exponentially with the size of the law.",
-  "seconds": 24.7
+  "seconds": 24.9
  },
  {
   "name": "library learning",
@@ -102,7 +102,7 @@
     "level": "S(S(a,b),S(b,b))",
     "outcome": "piece1(square(succ(b)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 8.9,
+    "seconds": 9.1,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -110,7 +110,7 @@
     "level": "S(S(a,b),S(a,b))+a",
     "outcome": "merge(a, square(succ(piece1(a, b)))) \u2014 9 pieces written out",
     "ok": true,
-    "seconds": 10.9,
+    "seconds": 10.8,
     "size_written_out": 9,
     "without_pieces": "nothing found"
    },
@@ -118,7 +118,7 @@
     "level": "S(T(a,b),T(b,a))",
     "outcome": "piece1(piece2(a, b), piece2(b, a)) \u2014 15 pieces written out",
     "ok": true,
-    "seconds": 12.1,
+    "seconds": 11.0,
     "size_written_out": 15,
     "without_pieces": "nothing found"
    },
@@ -126,14 +126,14 @@
     "level": "T(T(a,b),T(b,a))",
     "outcome": "piece2(piece2(a, b), piece2(b, a)) \u2014 16 pieces written out",
     "ok": true,
-    "seconds": 8.4,
+    "seconds": 8.7,
     "size_written_out": 16,
     "without_pieces": "nothing found"
    }
   ],
   "breakpoint": null,
   "note": "Its search alone stops at 7 pieces. The held-out laws are compositions of the family's pieces (S = (x+1)(y+1), T = (x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.",
-  "seconds": 133.4
+  "seconds": 131.3
  },
  {
   "name": "intuition",
@@ -150,7 +150,7 @@
   ],
   "breakpoint": "38 held-out laws (lab laws and unseen dreams)",
   "note": "Kept out of the brain until it pays: a wrong guess pushes a needed law to a dearer level, and search grows exponentially per level.",
-  "seconds": 95.4
+  "seconds": 93.2
  },
  {
   "name": "wrong labels (programs)",
@@ -180,7 +180,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 92.4
+  "seconds": 93.9
  },
  {
   "name": "hidden causes and noise",
@@ -200,7 +200,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 20.8
+  "seconds": 20.9
  },
  {
   "name": "few examples",
@@ -249,26 +249,26 @@
   "rows": [
    {
     "level": "20 examples",
-    "outcome": "1.6 s",
+    "outcome": "1.4 s",
     "ok": true,
-    "seconds": 1.63
+    "seconds": 1.43
    },
    {
     "level": "100 examples",
     "outcome": "0.7 s",
     "ok": true,
-    "seconds": 0.65
+    "seconds": 0.66
    },
    {
     "level": "400 examples",
     "outcome": "0.4 s",
     "ok": true,
-    "seconds": 0.38
+    "seconds": 0.39
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 2.7
+  "seconds": 2.5
  },
  {
   "name": "noise",
@@ -598,13 +598,13 @@
    },
    {
     "level": "overlapping (gap < diameter)",
-    "outcome": "16/25 trays counted right (merged blobs: a physical limit, reported only)",
+    "outcome": "17/25 trays counted right (merged blobs: a physical limit, reported only)",
     "ok": true
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 6.9
+  "seconds": 7.1
  },
  {
   "name": "false laws",
@@ -639,6 +639,6 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 9.8
+  "seconds": 10.2
  }
 ]

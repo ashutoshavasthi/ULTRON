@@ -35,7 +35,8 @@ and the blind tests. A retrain must stay byte for byte identical.
 | # | Status |
 |---|---|
 | V1 | ✅ **met** (2026-10-11): every gating eyes row 24–25/25 in the failure lab (was 25, 1, 0, 0, 2, 19); on a second set of unseen trays 24–25/25. No regressions elsewhere in the lab; all 28 lessons pass on the first attempt; a retrain is byte-identical; 109 tests pass |
-| V2–V6 | open |
+| V2 | ✅ **met** (2026-10-11): lesson 26 is in the curriculum and passes on the first attempt. From the real trackpy microscope film: Einstein's law (spread² ∝ time); D = 0.396 µm²/s against the scientists' tool trackpy's 0.412 (4%) and the textbook's 0.455 (13%); on 150 frames it never learned from it finds 87% of trackpy's spheres and predicts the spread at 1–2 s (21/21); it claims no law for a single sphere |
+| V3–V6 | open (needs real footage of falling, swinging and bouncing: see WP3) |
 
 How V1 was met (`senses/eyes.py`, `senses/world.py`):
 - **Looking longer:** when a still scene is noisier than usual (its own noise measure, as
@@ -53,6 +54,18 @@ How V1 was met (`senses/eyes.py`, `senses/world.py`):
 Two measured pitfalls, fixed:
 - recentring the background on every picture dimmed small crowded things;
 - "usual brightness" averaged over dim scenes was too low.
+
+How V2 was met:
+- **A false law closed.** "Each position is near the last" passed as a law of change for
+  one jiggling sphere. A recurrence must now explain at least 90% of the *change* (the
+  rule measurement laws already follow), so a random walk has none (test).
+- **Eyes learn form; looking handles light.** Handling in varied light and noise made
+  the eyes fire on real-film noise (66% vs 81% of trackpy's spheres before
+  self-teaching). Handling now varies only size and spacing, and noise and dim light are
+  handled at looking time (V1 still met).
+- **A new instrument kept apart.** Self-teaching on the film made the everyday eyes worse
+  at touching things (24 → 18 of 25). The adapted eyes are now kept separate
+  (`brain.microscope_eyes`) and used for the microscope only.
 
 ## Work packages
 

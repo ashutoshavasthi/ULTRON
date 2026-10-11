@@ -148,7 +148,8 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
 1. ✅ **Eyes that generalise:** every eyes row of the failure lab now 24–25/25 (look
    longer at still scenes, adapt to the light, step back for big things, broader
    handling).
-2. **Lesson 26:** diffusion from the real microscope film, against the scientists' tool.
+2. ✅ **Lesson 26:** diffusion from the real microscope film: D within 4% of the
+   scientists' tool, Einstein's law found, in the curriculum (29 lessons).
 3. **Real footage:** g, pendulum periods, restitution; detection on par with a lab tool.
 
 Network note: this environment can reach GitHub and the Python Package Index. Wikimedia,
