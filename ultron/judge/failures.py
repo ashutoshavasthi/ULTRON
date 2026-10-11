@@ -575,9 +575,75 @@ def false_laws(brain):
                       "audit", rows)
 
 
+def words_stress(brain):
+    """Words by pointing (stage 3, L1) under a Trainer who sometimes says the wrong word,
+    and with fewer sentences heard. Each row relearns the words from scratch (Ultron's
+    own kinds of thing kept) and is scored on 60 sentences about new tables, in word
+    combinations never heard."""
+    from ..brain.categories import kinds_of
+    from ..brain.language import fits, learn_lexicon
+    from ..senses.tabletop import COLOURS, SHAPES, SIZES
+    from ..senses.things import look_at_table
+    from ..trainer.language_lessons import WordsByPointing
+    from .exams import _meant
+    if brain.eyes is None or not brain.categories:
+        return experiment("words by pointing", "", "", [_row("no words", "untrained", False)])
+    cats = brain.categories
+    kinds = lambda seen: [kinds_of(cats, t) for t in seen]
+    teach = WordsByPointing(7029)
+    heard = [(said.split(), kinds(look_at_table(brain.eyes, look)))
+             for said, look, _, _ in teach.talks(120)]
+    test = []
+    for said, look, things, target in WordsByPointing(8029).talks(60, held_out=True):
+        seen = look_at_table(brain.eyes, look)
+        test.append((said.split(), kinds(seen), _meant(seen, things, target)))
+    families = [sorted(COLOURS), sorted(SIZES), sorted(SHAPES)]
+
+    def score(learned):
+        lexicon, rivals = learned
+        right = gave = 0
+        for words, ks, truth in test:
+            if any(w not in lexicon for w in words):
+                continue
+            pick = lambda lex: [i for i, k in enumerate(ks)
+                                if all(fits(lex[w], k) for w in words)]
+            hits = pick(lexicon)
+            if any(pick(r) != hits for r in rivals):
+                continue                        # not sure yet what a word means
+            if len(hits) == 1:
+                gave += 1
+                right += hits[0] == truth
+        return right, gave
+
+    rows = []
+    rng = random.Random(29)
+    for frac in (0.0, 0.05, 0.1, 0.2, 0.3):
+        spoilt = []
+        for words, ks in heard:
+            words = list(words)
+            if rng.random() < frac:
+                i = rng.randrange(1, len(words))
+                fam = next(f for f in families if words[i] in f)
+                words[i] = rng.choice([w for w in fam if w != words[i]])
+            spoilt.append((words, ks))
+        right, gave = score(learn_lexicon(spoilt, cats, rivals=True))
+        rows.append(_row(f"{frac:.0%} of sentences name the wrong thing",
+                         f"{right}/60 right ({right}/{gave} of its answers)", right >= 57,
+                         right=right, gave=gave))
+    for n in (120, 60, 40, 20, 10):
+        right, gave = score(learn_lexicon(heard[:n], cats, rivals=True))
+        rows.append(_row(f"{n} sentences heard", f"{right}/60 right ({right}/{gave} of its "
+                         f"answers)", right >= 57, right=right, gave=gave))
+    return experiment("words by pointing", "Does it still learn what words mean when the "
+                      "Trainer sometimes says the wrong word, or says less?",
+                      "wrong words; sentences heard", rows,
+                      note="A row passes at 57/60 (95%). The two dials are separate: "
+                           "the first breakpoint is the first row that fails.")
+
+
 EXPERIMENTS = [program_size, library_learning, intuition_prior, wrong_labels, hidden_cause, few_examples, program_compute,
                noise_ramp, noise_unknown, outliers, distractors, confounder, magnitudes, changing_world,
-               law_forms, eyes_stress, false_laws]
+               law_forms, eyes_stress, false_laws, words_stress]
 
 
 def run_all(brain):

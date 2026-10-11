@@ -129,4 +129,58 @@ WP1, then WP2 and WP3, then WP4 (the heart of the stage), then WP5 to WP8, then 
 
 | # | Status |
 |---|---|
-| L1–L10 | not started (plan and exit test fixed 2026-10-11) |
+| L1 | ✅ **met** (2026-10-11), lesson 29. On 200 sentences about new tables, each with a word pair never heard together: **200/200**, and 200 right of 200 answers given. Baselines: co-occurrence counter 78/200 (39%), memoriser 41/200 (20%): 61 points above the better one. Words never taught: 30/30 refused (baselines 0/30 and 3/30). Every word settled after at most 20 sentences that used it (most 2–11). 120 sentences heard in all |
+| L2–L10 | not started |
+
+How L1 was met (`senses/tabletop.py`, `senses/things.py`, `brain/categories.py`,
+`brain/language.py`, `trainer/language_lessons.py`):
+- **A table to talk about.** A colour camera over things of 4 colours, 2 sizes and 3
+  shapes. Its eyes say where things are; around each place, what stands out from the
+  table is the thing. It measures each thing itself: hue, size, how long it is, how much
+  of its outline box it fills, and where it is. 60 tables, 0 things missed.
+- **Kinds before words.** Looking at 60 tables with nothing said, it asks of each measure
+  whether the values fall into groups that pay for their boundaries (MDL). Hue: 4
+  groups, size: 2, elongation: 2, fill: 2. Where things lie: no groups.
+- **Words from overheard sentences.** The Trainer says "the big red ball" and never
+  says which word means what, or which thing it means. The lexicon kept is the
+  shortest account of all it heard: the bits to state each meaning, plus the bits still
+  needed to say which thing each sentence was about, minus the coincidences a meaning
+  explains (a word said only about blue things, if it meant nothing, would be chance).
+  The Trainer speaks to be understood, so an account in which its sentences were often
+  ambiguous is an unlikely one. Combining words is "fits every word"; a word means one
+  measure unless picking things out needs two ("box": not long, and filling its box).
+  These are the assumptions given; the meanings are found.
+- **Not sure yet.** Accounts nearly as short as the best are kept as rivals. When they
+  would pick different things, Ultron says it isn't sure what a word means instead of
+  guessing.
+
+Baselines, fixed in code before the first measurement (`judge/exams.py`): a co-occurrence
+counter (how much more often each kind of thing is on the table when a word is said) and
+a nearest-example memoriser (the thing whose kind was most often on the tables of the
+remembered sentences sharing the most words). Both see Ultron's own kinds of thing.
+
+**The failure lab found two weaknesses, now fixed** (`python -m ultron stress`, "words by
+pointing", taught on other tables than lesson 29). With the first lexicon learner, on the
+lab's tables, a word that was only ever said as an extra ("blue", 4 times) was never
+learned (53/60), and with 60 sentences or fewer it gave wrong answers. Fixes, kept because
+no row got worse: the coincidence term, the cooperative speaker, a wider search (started
+again from each word holding each kind; the first search stopped at an account 28 bits
+longer than the best), and rivals. Lesson 29's exam was 200/200 before and after.
+
+| Failure lab (60 sentences about new tables) | Right | Answers given |
+|---|---|---|
+| 0%, 5%, 10% of sentences name the wrong thing | 60 | 60 |
+| 20% name the wrong thing | 37 | 37 (it refuses the rest) |
+| 30% name the wrong thing | 60 | 60 |
+| 60 or 40 sentences heard | 40 | 40 |
+| 20 or 10 sentences heard | 0 | 0 |
+
+It gives **no wrong answer in any row**. It breaks (fewer than 57/60 answered) at 20% of
+sentences misnamed and at 60 sentences heard. The 30% row passing where 20% does not is
+chance in which sentences were spoiled, not a trend.
+
+**Limits, said plainly.** The world is small and clean: four well-separated colours, two
+sizes, three shapes, things never touching. The exam's tables were looked at several
+times during the work (Ultron scored 200/200 on them each time); the changes were made
+for the failure lab's tables, not for the exam's. Speech is one fixed sentence shape
+("the [size] [colour] [shape]"); grammar is L3.

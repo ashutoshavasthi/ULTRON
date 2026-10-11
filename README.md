@@ -61,8 +61,17 @@ It then passes a tough final exam with no teaching. The exam includes:
 Every law is a small program or formula it wrote and can explain. Every answer
 comes with its reasons.
 
+**Stage 3, language** (begun; see the [plan](docs/STAGE_3_PLAN.md)):
+- Looking at tables of coloured things with nothing said, it finds that things come in
+  **kinds** (four colours, two sizes, shapes) from what it measures itself, and that
+  where things lie doesn't group.
+- It then **learns words from sentences it overhears** ("the big red ball"), with nobody
+  saying which word means what or which thing is meant. It picks out the thing meant in
+  word pairs it never heard (200/200), refuses words it was never taught, and when it
+  isn't sure yet what a word means it says so instead of guessing.
+
 ```bash
-python -m ultron train                          # ~60 s; Python 3.10+ and numpy (for the eyes)
+python -m ultron train                          # a few minutes; Python 3.10+ and numpy (for the eyes)
 python -m ultron ask "what is 347 plus 1289?"
 python -m ultron ask "find a given spring=S2 x=0.3 m=4"
 python -m ultron ask "find rest given T@0=80 T@1=70 T@2=62"   # where a cooling cup settles

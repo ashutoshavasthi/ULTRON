@@ -33,6 +33,7 @@ measurable
 | Eyes | ✅ every eyes row ≥ 24/25 (Stage 2): look longer at a still scene, adapt to the light, step back, handle things in varied conditions. Overlapping things stay a physical limit (16/25, reported only) |
 | Wrong records, up to 20% | ✅ |
 | False laws on 100 datasets with nothing to find | ✅ 0 |
+| Words by pointing (stage 3, L1) | First run: a word only ever said as an extra was never learned (53/60), and with 60 sentences or fewer it answered wrongly → **fixed** (coincidences a meaning explains, a cooperative speaker, a wider search, rivals). Now never a wrong answer in any row; it stops answering (rather than guessing) at 20% misnamed sentences (37/60) and at 60 sentences heard (40/60) |
 
 Every ❌ is a work item in [Stage 1](STAGE_1_PLAN.md).
 

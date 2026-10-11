@@ -553,3 +553,23 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _confirm_: tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 28, attempt 1: passed
+
+## Lesson 29
+
+- **Trainer**: Lesson 29: Words by pointing
+- **Trainer**: Here is a table with things on it. Just look, as long as you like.
+- Ultron _invent_: I looked at 182 things on 60 tables and measured each one. Their elongation falls into 2 separate groups (1837 bits to describe all of them as one spread, 1480 as groups); their fill falls into 2 separate groups (1837 bits to describe all of them as one spread, 1795 as groups); their hue falls into 4 separate groups (1837 bits to describe all of them as one spread, 1133 as groups); their size falls into 2 separate groups (1837 bits to describe all of them as one spread, 1645 as groups). Where they are (x, y) doesn't group: a boundary there would not pay for itself. So things come in kinds.
+- **Trainer**: Now I'll talk about the things on the table, one at a time.
+- Ultron _word_: 'ball' means things whose fill is in my group 1 (0.764 to 0.827)
+- Ultron _word_: 'bar' means things whose elongation is in my group 2 (2.7 to 4.23)
+- Ultron _word_: 'big' means things whose size is in my group 2 (107 to 154)
+- Ultron _word_: 'blue' means things whose hue is in my group 4 (231 to 234)
+- Ultron _word_: 'box' means things whose elongation is in my group 1 (1 to 1.17) and fill is in my group 2 (0.864 to 0.957)
+- Ultron _word_: 'green' means things whose hue is in my group 3 (119 to 122)
+- Ultron _word_: 'red' means things whose hue is in my group 1 (1.4 to 4.44)
+- Ultron _word_: 'small' means things whose size is in my group 1 (33 to 49)
+- Ultron _word_: 'the' means nothing: it fits every thing
+- Ultron _word_: 'yellow' means things whose hue is in my group 2 (55.6 to 57.4)
+- Ultron _reflect_: the shortest account of the 120 sentences I heard takes -209 bits: what each word means, and nothing more is needed to tell which thing was meant
+- **Trainer**: Exam for lesson 29, attempt 1: passed
+- **Trainer**: What you found in 'kinds of thing' is what people call categories: colours, sizes and shapes.

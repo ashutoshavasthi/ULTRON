@@ -75,6 +75,8 @@ class Trainer:
                 self.teach_handling(lesson)
             elif lesson.number == 26:
                 self.teach_microscope(lesson)
+            elif lesson.number == 29:
+                self.teach_words(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -306,6 +308,55 @@ class Trainer:
                       )}
         brain.note("invent", brain.inventions["microscope"]["story"])
 
+    # ----------------------------------------------------------- lesson 29
+    def teach_words(self, lesson):
+        from ..brain import categories
+        from ..brain.language import (describe_meaning, heard_as_kinds, learn_lexicon,
+                                      lexicon_bits)
+        from ..senses.things import look_at_table
+        brain = self.brain
+        if brain.eyes is None:
+            self.say("You have no eyes yet. The lesson stops here.")
+            return
+        self.say("Here is a table with things on it. Just look, as long as you like.")
+        seen = [t for look in lesson.tables() for t in look_at_table(brain.eyes, look)]
+        found = categories.discover(seen, lesson.MEASURES)
+        brain.categories = found
+        grouped = {m: len(c["groups"]) for m, c in found.items() if len(c["groups"]) > 1}
+        flat = [m for m, c in found.items() if len(c["groups"]) == 1]
+        brain.inventions["kinds of thing"] = {
+            "shape": "categories", "primitives": [], "lesson": brain.lesson,
+            "groups": grouped,
+            "story": (f"I looked at {len(seen)} things on {lesson.LOOKS} tables and measured "
+                      f"each one. " + "; ".join(
+                          f"{'Their' if i == 0 else 'their'} {m} falls into {k} separate "
+                          f"groups ({found[m]['bits'][0]:.0f} bits to describe all of them as "
+                          f"one spread, {found[m]['bits'][1]:.0f} as groups)"
+                          for i, (m, k) in enumerate(sorted(grouped.items())))
+                      + f". Where they are ({', '.join(flat)}) doesn't group: a boundary "
+                        f"there would not pay for itself. So things come in kinds.")}
+        brain.note("invent", brain.inventions["kinds of thing"]["story"])
+        self.say("Now I'll talk about the things on the table, one at a time.")
+        for said, look, _, _ in lesson.talks():
+            brain.heard.append({"said": said, "things": look_at_table(brain.eyes, look)})
+        heard = heard_as_kinds(brain)
+        lexicon, rivals = learn_lexicon(heard, found, rivals=True)
+        for w, meaning in sorted(lexicon.items()):
+            if w in brain.vocab and brain.vocab[w][0] != "look":
+                continue                    # a word it already has another meaning for
+            brain.bind(w, ("look", [list(p) for p in meaning]))
+            others = sorted({r[w] for r in rivals if r[w] != meaning})
+            brain.note("word", f"'{w}' means {describe_meaning(brain, meaning)}"
+                       + (" (not sure yet: it could also mean "
+                          + "; or ".join(describe_meaning(brain, r) for r in others) + ")"
+                          if others else ""))
+        brain.rival_lexicons = [{w: [list(p) for p in m] for w, m in sorted(r.items())
+                                 if m != lexicon[w]} for r in rivals]
+        brain.note("reflect", f"the shortest account of the {len(heard)} sentences I heard "
+                              f"takes {lexicon_bits(heard, found, lexicon):.0f} bits: what each "
+                              f"word means, and nothing more is needed to tell which thing was "
+                              f"meant")
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -341,6 +392,7 @@ class Trainer:
              "unstretched length", "burn": "constant rate"},
         24: {"slide": "sliding friction (stopping distance ∝ speed²)"},
         26: {"jiggle": "Brownian motion: Einstein's law (mean squared displacement = 4·D·t)"},
+        29: {"kinds of thing": "categories: colours, sizes and shapes"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }

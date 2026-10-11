@@ -45,6 +45,7 @@ earned only when its test is passed.
 | 3. Senses, new kinds of explanation, a body | Eyes it learns itself; F = m·a, stiffness and energy from video; **two new kinds of explanation invented and reused**; goals reached on floors it never touched | [`phase3_senses_verdict.md`](../reports/phase3_senses_verdict.md) |
 | 3+. The real world (begun) | A real microscope film from the internet: Einstein's law of diffusion measured from raw pixels, matching the scientists' own tool (1.63 vs 1.65 µm²/s) | Scripts work; lesson 26 is Stage 2's first move |
 | Stage 1 (in progress) | Survives 20% wrong records, ±20% noise and 20% outliers; notices confounders; updates when the world changes; 0 false laws in 100; ARC-AGI-1 evaluation **12.75%** (51 of 63 answers right) | [`STAGE_1_PLAN.md`](STAGE_1_PLAN.md), [`ARC_REPORT.md`](ARC_REPORT.md) |
+| Stage 3, language (begun) | Finds kinds of thing (colours, sizes, shapes) before any word, then learns words from sentences it overhears about tables; picks out the thing meant in word pairs it never heard (200/200), refuses words never taught, never answers wrong | [`STAGE_3_PLAN.md`](STAGE_3_PLAN.md) |
 
 Blind tests by examiners who never saw the code scored 55/60, 54/60 and 45/50 on first
 sight. The examiners were the same underlying model as the trainer, so a human's blind
@@ -61,8 +62,8 @@ scale, nothing else matters.
 | Stage | The gap it closes | What gets built | Exit test (could fail) |
 |---|---|---|---|
 | **1. The scalable core** *(verdict written: A2–A3 not met, see below)* | Search is exponential: Ultron finds small laws, not big programs | Robustness to bad data; laws of change; lists; speed; library learning on its own laws; an intuition trained on its own searches; ARC-AGI as the battlefield | The criteria in [STAGE_1_PLAN.md](STAGE_1_PLAN.md): R1–R6 (bad data), S1–S2 (laws of size 12, 10× less search), E1–E2 (oscillation, logistic, lists), A2–A3 (≥ 25%, then ≥ 40% on ARC-AGI-1 evaluation) |
-| **2. The real world through its eyes** *(now)* | It has seen one real film, and its eyes don't generalise | First, **eyes that generalise** (double noise, faint and touching things). Then lesson 26 (the microscope film), then many real videos: falling, swinging, bouncing, colliding | Rediscovers g, pendulum periods, restitution and diffusion from **real footage**, within measured error |
-| **3. Language** *(next; restored 2026-10-11)* | It knows 37 grounded words, all about numbers; it cannot understand, say or ask a sentence | Words by pointing, then words for its own laws, then a grammar it finds by MDL, then understanding, answering, speaking, asking and being told. All grounded in concepts it already has; no pretrained language | The criteria in [STAGE_3_PLAN.md](STAGE_3_PLAN.md): L1–L10 on held-out scenes and sentences, against fixed baselines, including SCAN (≥ 95% on the jump and length splits) and COGS (≥ 90%), with ≤ 10,000 sentences heard |
+| **2. The real world through its eyes** *(V1–V2 met; V3–V6 wait on real footage)* | It has seen one real film, and its eyes don't generalise | First, **eyes that generalise** (double noise, faint and touching things). Then lesson 26 (the microscope film), then many real videos: falling, swinging, bouncing, colliding | Rediscovers g, pendulum periods, restitution and diffusion from **real footage**, within measured error |
+| **3. Language** *(now: started 2026-10-11, L1 met)* | It knows 37 grounded words, all about numbers; it cannot understand, say or ask a sentence | Words by pointing, then words for its own laws, then a grammar it finds by MDL, then understanding, answering, speaking, asking and being told. All grounded in concepts it already has; no pretrained language | The criteria in [STAGE_3_PLAN.md](STAGE_3_PLAN.md): L1–L10 on held-out scenes and sentences, against fixed baselines, including SCAN (≥ 95% on the jump and length splits) and COGS (≥ 90%), with ≤ 10,000 sentences heard |
 | **4. Interactive worlds** | It has acted only with one kick in a world whose rules it was told | Grid games with unknown rules (like ARC-AGI-3). Ultron explores, runs experiments, learns the rules **and the goal** as laws, and plans in its own learned model. Laws that recur across games become priors | Wins held-out games it has never seen, in close to the fewest actions; later games need fewer actions than earlier ones (learning compounds) |
 | **5. The reader** | It knows only what it experienced | Open data, then text (which needs stage 3), read as **claims with sources**, checked against its laws, other sources and experiment; reading driven by curiosity | Learns laws from open data it was never taught and predicts held-out data. Catches ≥ 90% of planted false claims. Reaches a target accuracy with ≥ 100× fewer bytes read than a fixed, named small language-model baseline |
 | **6. A body in 3D** | Its actions are 2D and few | A 3D physics simulator (MuJoCo or PyBullet), goals, planning with its own world model, tools | Solves new manipulation tasks by planning: a taller tower than it has ever seen, using an object as a tool |
@@ -149,7 +150,7 @@ not move.
   combined well.
 - **Stages 8–9** are unsolved in general. Nobody, including us, can promise them.
 
-## Next steps (Stage 2, now)
+## Next steps (Stage 3 now; Stage 2 waits on footage)
 
 **Stage 1 verdict** ([`reports/stage1_verdict.md`](../reports/stage1_verdict.md)):
 R1–R6, S1, E1–E2, A0–A1 met; S2 met only combined with library learning; A2–A3
@@ -166,9 +167,18 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
 3. **Real footage:** g, pendulum periods, restitution; detection on par with a lab tool.
    Blocked on footage (see the network note).
 
-Next: **Stage 3, language** ([STAGE_3_PLAN.md](STAGE_3_PLAN.md)). Exit test fixed
-2026-10-11; not started. Whether it starts now, while Stage 2 waits on footage, is the
-owner's call.
+**Correction (2026-10-11):** Stage 2's V3–V6 wait on real footage the network can't
+reach, so the owner started **Stage 3, language**, before Stage 2's verdict. Stage 2 stays
+open; its exit test is unchanged.
+
+Stage 3 plan and exit test: [STAGE_3_PLAN.md](STAGE_3_PLAN.md).
+1. ✅ **L1, words by pointing** (lesson 29): from sentences it overhears about tables,
+   with nobody saying which word means what or which thing is meant, it finds its own
+   kinds of thing (4 colours, 2 sizes, shapes), then the words: 200/200 on word pairs it
+   never heard (baselines 39% and 20%), words never taught refused 30/30, never a wrong
+   answer in the exam or the failure lab (30 lessons).
+2. **L2, words for its own laws:** falls, bounces, rolls, faster, heavier, before, after.
+3. **L3–L4, grammar by MDL**, then SCAN and COGS.
 
 Network note: this environment can reach GitHub and the Python Package Index. Wikimedia,
 YouTube, archive.org and arcprize.org are blocked. They can be allowed under the cloud

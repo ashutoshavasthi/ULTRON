@@ -57,11 +57,12 @@ def nearest(episodes, target, inputs):
 
 
 class Tally:
-    def __init__(self, name, tol=None, abs_tol=None):
+    def __init__(self, name, tol=None, abs_tol=None, baselines=("lookup", "nearest")):
         self.name = name
         self.tol = tol
         self.abs_tol = abs_tol      # when a relative tolerance would be unfair (tiny values)
-        self.scores = {"ultron": [0, 0], "lookup": [0, 0], "nearest": [0, 0]}
+        self.baselines = tuple(baselines)
+        self.scores = {"ultron": [0, 0], **{b: [0, 0] for b in self.baselines}}
         self.examples = []
 
     def ok(self, got, truth):
@@ -97,7 +98,9 @@ class Tally:
         return c / n if n else None
 
     def to_json(self):
-        return {"name": self.name, "scores": self.scores, "examples": self.examples,
+        extra = ({} if self.baselines == ("lookup", "nearest")
+                 else {"baselines": list(self.baselines)})
+        return {"name": self.name, "scores": self.scores, "examples": self.examples, **extra,
                 "tolerance": self.tol if self.abs_tol is None else f"±{self.abs_tol}"}
 
 
@@ -1417,6 +1420,120 @@ def exam_rows(brain, seed=1028):
     return _result(28, [basket, tall, rise, two], 0.99, {"laws": laws})
 
 
+# ---------------------------------------------------------------- lesson 29 (stage 3, L1)
+def cooccurrence_pick(heard, words, kinds):
+    """Baseline: a word-thing co-occurrence counter (fixed 2026-10-11, before measuring).
+    For a word w and a kind c (one group of one measure, in Ultron's own kinds), how much
+    more often are things of kind c on the table when w is said than overall? A thing
+    scores the sum of that over the words said and the kinds it is in; the highest score
+    is its answer (a tie: no answer). It never knows which thing a sentence was about."""
+    total, with_c = 0, {}
+    per_word = {}
+    for ws, things in heard:
+        for k in things:
+            total += 1
+            for c in k.items():
+                with_c[c] = with_c.get(c, 0) + 1
+            for w in set(ws):
+                n, cs = per_word.setdefault(w, [0, {}])
+                per_word[w][0] = n + 1
+                for c in k.items():
+                    cs[c] = cs.get(c, 0) + 1
+    def score(k):
+        out = 0.0
+        for w in words:
+            if w in per_word:
+                n, cs = per_word[w]
+                out += sum(cs.get(c, 0) / n - with_c.get(c, 0) / total for c in k.items())
+        return out
+    scores = [score(k) for k in kinds]
+    best = max(scores)
+    return scores.index(best) if scores.count(best) == 1 else None
+
+
+def memoriser_pick(heard, words, kinds):
+    """Baseline: a nearest-example memoriser (fixed 2026-10-11, before measuring). It
+    remembers every sentence with the things that were on the table. For a new sentence it
+    takes the remembered sentences sharing the most words with it, and answers with the
+    thing on the new table whose kind (all its groups together) was on those tables most
+    often (a tie: no answer)."""
+    ws = set(words)
+    shared = [len(ws & set(h)) for h, _ in heard]
+    top = max(shared)
+    seen = {}
+    for (h, things), n in zip(heard, shared):
+        if n == top:
+            for k in things:
+                key = tuple(sorted(k.items()))
+                seen[key] = seen.get(key, 0) + 1
+    scores = [seen.get(tuple(sorted(k.items())), 0) for k in kinds]
+    best = max(scores)
+    return scores.index(best) if scores.count(best) == 1 else None
+
+
+def _meant(seen, things, target):
+    """The Judge's own check: which of the things Ultron saw is the one the Trainer meant
+    (matched by where it really is). -1 when Ultron's eyes missed it: no answer is right."""
+    t = things[target]
+    if not seen:
+        return -1
+    i = min(range(len(seen)), key=lambda j: (seen[j]["x"] - t["x"]) ** 2
+            + (seen[j]["y"] - t["y"]) ** 2)
+    return i if (seen[i]["x"] - t["x"]) ** 2 + (seen[i]["y"] - t["y"]) ** 2 < 16 else -1
+
+
+def exam_words(brain, seed=1029):
+    """Lesson 29 (stage 3, L1): words by pointing, on new tables, in word combinations
+    never heard; words never taught; how quickly each word was learned."""
+    from ..brain.categories import kinds_of
+    from ..brain.language import heard_as_kinds, refer, settled_after
+    from ..senses.things import look_at_table
+    from ..trainer.language_lessons import WordsByPointing
+    b = copy.deepcopy(brain)
+    if b.eyes is None or not b.categories:
+        return _result(29, [Tally("the thing named")], 0.95)
+    lesson = WordsByPointing(seed)
+    heard = heard_as_kinds(b)
+    named = Tally("the thing named, in word combinations never heard (new tables)",
+                  baselines=("co-occurrence", "memoriser"))
+    gave = right = 0
+    for said, look, things, target in lesson.talks(200, held_out=True):
+        seen = look_at_table(b.eyes, look)
+        kinds = [kinds_of(b.categories, t) for t in seen]
+        truth = _meant(seen, things, target)
+        got, _ = refer(b, said, seen)
+        named.item(said, truth, got)
+        gave += got is not None
+        right += got is not None and got == truth
+        words = said.split()
+        named.add("co-occurrence", cooccurrence_pick(heard, words, kinds), truth)
+        named.add("memoriser", memoriser_pick(heard, words, kinds), truth)
+    new = Tally("words never taught: it says it doesn't know them",
+                baselines=("co-occurrence", "memoriser"))
+    for _ in range(30):
+        said, look = lesson.strange_word()
+        seen = look_at_table(b.eyes, look)
+        kinds = [kinds_of(b.categories, t) for t in seen]
+        got, why = refer(b, said, seen)
+        new.item(said, REFUSE, got)
+        words = said.split()
+        new.add("co-occurrence", cooccurrence_pick(heard, words, kinds), REFUSE)
+        new.add("memoriser", memoriser_pick(heard, words, kinds), REFUSE)
+    quick = Tally("each word learned within 20 sentences that use it")
+    settle = settled_after(heard, b.categories)
+    for w, n in settle.items():
+        quick.item(w, True, n <= 20)
+    margin = min(named.rate() - named.rate(x) for x in ("co-occurrence", "memoriser"))
+    r = _result(29, [named, new, quick], 0.95,
+                {"precision": [right, gave], "sentences_to_learn": settle,
+                 "margin_over_baselines": round(margin, 3),
+                 "sentences_heard": len(heard),
+                 "lexicon": {w: m[1] for w, m in sorted(b.vocab.items()) if m[0] == "look"}})
+    r["passed"] = (r["passed"] and new.rate() == 1.0 and quick.rate() == 1.0
+                   and margin >= 0.20)
+    return r
+
+
 EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          4: exam_language, 5: exam_mechanics, 6: exam_real_data, 7: exam_noisy_lab,
          8: exam_owing, 9: exam_sharing, 10: exam_final, 11: exam_wheel, 12: exam_ramps,
@@ -1424,4 +1541,4 @@ EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          17: exam_coils, 18: exam_phase3, 19: exam_eyes, 20: exam_seeing_numbers,
          21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
          25: exam_phase3_senses, 26: exam_microscope,
-         27: exam_change, 28: exam_rows}
+         27: exam_change, 28: exam_rows, 29: exam_words}

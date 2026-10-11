@@ -87,7 +87,7 @@ _How does search time grow with more examples?_ Breaks at: **did not break**
 
 | examples | what it did | |
 |---|---|---|
-| 20 examples | `1.5 s` | ✅ |
+| 20 examples | `1.8 s` | ✅ |
 | 100 examples | `0.7 s` | ✅ |
 | 400 examples | `0.4 s` | ✅ |
 
@@ -214,4 +214,23 @@ _On data with nothing to find, does it ever claim a law?_ Breaks at: **did not b
 | 50 measurement datasets with nothing to find | `0 false laws` | ✅ |
 | 25 datasets of pure noise, noise not told | `0 false laws` | ✅ |
 | 25 hidden causes (±5%) with repeated trials, noise not told | `0 false laws` | ✅ |
+
+## words by pointing
+
+_Does it still learn what words mean when the Trainer sometimes says the wrong word, or says less?_ Breaks at: **20% of sentences name the wrong thing**
+
+| wrong words; sentences heard | what it did | |
+|---|---|---|
+| 0% of sentences name the wrong thing | `60/60 right (60/60 of its answers)` | ✅ |
+| 5% of sentences name the wrong thing | `60/60 right (60/60 of its answers)` | ✅ |
+| 10% of sentences name the wrong thing | `60/60 right (60/60 of its answers)` | ✅ |
+| 20% of sentences name the wrong thing | `37/60 right (37/37 of its answers)` | ❌ |
+| 30% of sentences name the wrong thing | `60/60 right (60/60 of its answers)` | ✅ |
+| 120 sentences heard | `60/60 right (60/60 of its answers)` | ✅ |
+| 60 sentences heard | `40/60 right (40/40 of its answers)` | ❌ |
+| 40 sentences heard | `40/60 right (40/40 of its answers)` | ❌ |
+| 20 sentences heard | `0/60 right (0/0 of its answers)` | ❌ |
+| 10 sentences heard | `0/60 right (0/0 of its answers)` | ❌ |
+
+A row passes at 57/60 (95%). The two dials are separate: the first breakpoint is the first row that fails.
 

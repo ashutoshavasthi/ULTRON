@@ -68,6 +68,9 @@ class Brain:
         self.compress = True                # look for patterns among its own laws
         self.quantities = {}                # lengths etc. Ultron holds an idea about
         self.candidates = {}                # spec -> predictions kept in mind, not assumed
+        self.categories = {}                # measure -> groups it found (categories.py)
+        self.heard = []                     # sentences heard about tables, with what it saw
+        self.rival_lexicons = []            # other accounts of those words, nearly as short
         self.lesson = None
 
     # ------------------------------------------------------------------ utils
@@ -844,6 +847,9 @@ class Brain:
             "cycles": dict(sorted(self.library.cycles.items())),
             "symmetric": sorted(self.library.symmetric),
             "fast": dict(sorted(self.library.fast.items())),
+            "categories": dict(sorted(self.categories.items())),
+            "heard": self.heard,
+            "rival_lexicons": self.rival_lexicons,
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
@@ -874,6 +880,9 @@ class Brain:
         b.kinds = dict(d.get("kinds", {}))
         b.slaws = {k: SequenceLaw.from_json(v) for k, v in d.get("sequence_laws", {}).items()}
         b.kind_steps = dict(d.get("kind_steps", {}))
+        b.categories = dict(d.get("categories", {}))
+        b.heard = list(d.get("heard", []))
+        b.rival_lexicons = list(d.get("rival_lexicons", []))
         b.exceptions = dict(d.get("exceptions", {}))
         b.since = dict(d.get("since", {}))
         if d.get("eyes"):
