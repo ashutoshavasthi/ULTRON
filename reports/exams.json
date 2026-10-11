@@ -665,7 +665,7 @@
        "y": 4.90158416433331
       },
       "truth": 19.1224188769,
-      "ultron": 19.12241887689167
+      "ultron": 19.122418876891672
      },
      {
       "question": {
@@ -683,7 +683,7 @@
        "y": 6.035197769077039
       },
       "truth": 18.5317404681,
-      "ultron": 18.53174046813286
+      "ultron": 18.531740468132863
      }
     ],
     "name": "runs 10-50 m high (trained: 1-5 m): speed, after one look at the release",
@@ -743,17 +743,17 @@
      {
       "question": 8.314894679703595,
       "truth": 3.5238263779084176,
-      "ultron": 3.5238263779087653
+      "ultron": 3.5238263779087644
      },
      {
       "question": 32.656210906848884,
       "truth": 54.35413408728828,
-      "ultron": 54.35413408729364
+      "ultron": 54.35413408729362
      },
      {
       "question": 26.787073601485393,
       "truth": 36.57223813105992,
-      "ultron": 36.57223813106353
+      "ultron": 36.57223813106352
      }
     ],
     "name": "NEVER TRAINED: a ball thrown straight up at 5-40 m/s: how high?",
@@ -1023,7 +1023,7 @@
        "y": 3.9462462042153046
       },
       "truth": 13.4107384292,
-      "ultron": 13.410738429237709
+      "ultron": 13.410738429237712
      },
      {
       "question": {
@@ -1032,7 +1032,7 @@
        "y": 0.0
       },
       "truth": 5.71431304743,
-      "ultron": 5.714313047437538
+      "ultron": 5.71431304743752
      },
      {
       "question": {
@@ -1041,7 +1041,7 @@
        "y": 17.67666409261773
       },
       "truth": 11.6533447429,
-      "ultron": 11.653344742939128
+      "ultron": 11.653344742939131
      }
     ],
     "name": "runs 10-40 m high (trained: 1-5 m): speed on the hills and in the spring",
@@ -1066,17 +1066,17 @@
      {
       "question": "ExamS1",
       "truth": 1.1341808844805763,
-      "ultron": 1.1341808844807317
+      "ultron": 1.1341808844807313
      },
      {
       "question": "ExamS2",
       "truth": 1.553410108752701,
-      "ultron": 1.5534101087529137
+      "ultron": 1.553410108752913
      },
      {
       "question": "ExamS3",
       "truth": 1.470557233596318,
-      "ultron": 1.4705572335965194
+      "ultron": 1.4705572335965187
      }
     ],
     "name": "NEVER TRAINED: how far will the spring squash?",
@@ -1101,17 +1101,17 @@
      {
       "question": 0.9582732776936422,
       "truth": 9.360730629375293,
-      "ultron": 9.36073062937273
+      "ultron": 9.360730629372739
      },
      {
       "question": 0.6431856724724632,
       "truth": 4.217001113902698,
-      "ultron": 4.217001113901543
+      "ultron": 4.217001113901547
      },
      {
       "question": 0.4665878030728509,
       "truth": 2.2192067072003003,
-      "ultron": 2.219206707199693
+      "ultron": 2.219206707199695
      }
     ],
     "name": "NEVER TRAINED: a ball pushed off a squashed spring: how high does it go?",
@@ -1621,17 +1621,17 @@
      {
       "question": 20.314642049500602,
       "truth": 19.9643000631,
-      "ultron": 19.96430006314177
+      "ultron": 19.964300063141774
      },
      {
       "question": 79.29819541557146,
       "truth": 39.4440184826,
-      "ultron": 39.44401848257044
+      "ultron": 39.44401848257045
      },
      {
       "question": 26.865167233420237,
       "truth": 22.9585404832,
-      "ultron": 22.95854048322003
+      "ultron": 22.958540483220034
      }
     ],
     "name": "energy: a ball dropped from 2-80 m, speed at the ground",
@@ -1763,7 +1763,7 @@
        "x": 1.821
       },
       "truth": 64.2705882353,
-      "ultron": 64.27058823528995
+      "ultron": 64.27058823528996
      },
      {
       "question": {
@@ -1771,7 +1771,7 @@
        "x": 0.422
       },
       "truth": 16.88,
-      "ultron": 16.879999999998905
+      "ultron": 16.87999999999891
      },
      {
       "question": {
@@ -1815,7 +1815,7 @@
        0.355
       ],
       "truth": 9.0,
-      "ultron": 8.999999999999416
+      "ultron": 8.999999999999417
      },
      {
       "question": [
@@ -1823,7 +1823,7 @@
        0.596
       ],
       "truth": 14.0,
-      "ultron": 13.999999999999094
+      "ultron": 13.999999999999096
      }
     ],
     "name": "NEVER TRAINED: how many coils for a spring that pulls F at stretch x?",
@@ -2566,7 +2566,7 @@
        4
       ],
       "truth": 3.5059977126153066,
-      "ultron": 3.4933652014363923
+      "ultron": 3.493365201436394
      }
     ],
     "name": "NEVER HUNG: 4-5 blocks on its springs; how far will each stretch?",
@@ -2594,7 +2594,7 @@
        2.18
       ],
       "truth": 2.9987833537491686,
-      "ultron": 3.0123090350412465
+      "ultron": 3.012309035041246
      },
      {
       "question": [
@@ -2602,7 +2602,7 @@
        1.75
       ],
       "truth": 4.173893631657897,
-      "ultron": 4.178280094915628
+      "ultron": 4.1782800949156265
      },
      {
       "question": [
@@ -2610,7 +2610,7 @@
        1.2
       ],
       "truth": 5.311687439678743,
-      "ultron": 5.309688666676726
+      "ultron": 5.309688666676722
      }
     ],
     "name": "new balls in the valley: after watching a moment, the speed at every later height",
@@ -3781,7 +3781,7 @@
        "t": 7
       },
       "truth": 2.773,
-      "ultron": 2.7696023119272386
+      "ultron": 2.7696023119271875
      },
      {
       "question": {
@@ -3789,7 +3789,7 @@
        "t": 8
       },
       "truth": 3.865,
-      "ultron": 3.8594951469988246
+      "ultron": 3.8594951469987206
      },
      {
       "question": {
@@ -3797,7 +3797,7 @@
        "t": 15
       },
       "truth": 2.361,
-      "ultron": 2.349282895973281
+      "ultron": 2.349282895972805
      }
     ],
     "name": "new objects, after 6 readings: readings 2-10 steps later",
@@ -3822,7 +3822,7 @@
      {
       "question": "ExamPendulum1",
       "truth": 2.3597078071800683,
-      "ultron": 2.35883410056685
+      "ultron": 2.358834100566797
      },
      {
       "question": "ExamPendulum2",
@@ -3832,7 +3832,7 @@
      {
       "question": "ExamPendulum3",
       "truth": 1.8960413165301344,
-      "ultron": 1.8962627211350254
+      "ultron": 1.8962627211350271
      }
     ],
     "name": "NEVER MEASURED: a new pendulum's period, after 6 readings",
@@ -3857,7 +3857,7 @@
      {
       "question": "ExamCar1",
       "truth": 0.9359707807180068,
-      "ultron": 0.936035972769967
+      "ultron": 0.9360359727699668
      },
      {
       "question": "ExamCar2",

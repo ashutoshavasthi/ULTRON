@@ -50,6 +50,17 @@ How V1 was met (`senses/eyes.py`, `senses/world.py`):
   clearly more strongly there. Big things: 0 → 25.
 - **Broader handling:** lesson 19 handles things in varied spacing, size, light and
   camera noise. Touching: 19 → 24.
+- **Explaining away** (2026-10-11): two things just touching (centres 3.0–3.2 px apart)
+  make one ridge in the eyes' map, and the dimmer one was never counted; every touching
+  error was that undercount, and the tray sets that scored lowest simply had more such
+  pairs. From touch the eyes now learn one thing's footprint in their map; close up, what
+  each thing seen accounts for is taken away, and a leftover beside a thing that is
+  clearly stronger than any leftover its hands said was nothing is a thing too. On 8
+  fixed sets of 25 touching trays: 162 → 193 right, every set 23–25 (was 17–23);
+  overlapping (ungated) 64 → 85 of 100; every other eyes row 100/100 before and after.
+- **The same trays for every pair of eyes:** the failure lab drew trays and camera
+  pictures from one generator, so eyes that looked a different number of times were
+  shown different trays. Trays and camera now have their own generators.
 
 Two measured pitfalls, fixed:
 - recentring the background on every picture dimmed small crowded things;
