@@ -37,7 +37,7 @@ def steps(program):
             for name, q in library._spell(b["steps"], p):
                 out.append([name, _plain(q)])
         else:
-            out.append([n, None if n in ("colourmap", "cells", "things", "marks", "pick", "moves", "symmetry", "copies", "gaps", "summary", "tiles") else _plain(p)])
+            out.append([n, None if n in ("colourmap", "cells", "things", "marks", "pick", "moves", "symmetry", "copies", "gaps", "summary", "tiles", "rules") else _plain(p)])
     return out
 
 
