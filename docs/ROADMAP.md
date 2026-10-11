@@ -189,7 +189,7 @@ Stage 3 plan and exit test: [STAGE_3_PLAN.md](STAGE_3_PLAN.md).
    nobody saying which thing is meant or what a word does, it finds what each word does
    and how it combines (a small categorial grammar). On held-out sentences: 69/70 nested
    deeper than any it heard, 59/60 with more phrases joined, 70/70 with words in new
-   places; never a wrong answer in the exam or the failure lab (31 lessons).
+   places; never a wrong answer in the exam or the failure lab (32 lessons).
 4. ⏸ **L4, SCAN and COGS**: paused on 2026-10-11 (the owner's decision) until the coding
    work passes. Published baselines confirmed and recorded in the plan.
 
