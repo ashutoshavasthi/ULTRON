@@ -10,13 +10,66 @@ How it learns, like a child: while it handles things, touch tells it where each
 object is. The pictures it sees at the same moment, paired with those touches, are
 its training data. After that lesson touch is gone, and the eyes are all it has.
 It also learns how strong a spot must be to count as a thing, by choosing the
-threshold that best matches what its hands felt.
+threshold that best matches what its hands felt, and remembers what the pictures it
+learned from were like (how noisy, how bright its things were).
+
+Counting a still scene uses three things animals do too (Stage 2: eyes that generalise):
+  * look longer when the picture is noisier than usual: several pictures of the still
+    scene, lined up against the camera's shake, averaged until the picture is as clean
+    as the ones its eyes are used to (its own noise measure, as the retina's);
+  * adapt to the light: the background put where its eyes are used to it, and in a dim
+    scene, after looking long enough that something really stands out, the contrast
+    turned up to what it is used to;
+  * step back: the picture also looked at shrunk 2x and 3x, keeping the view where its
+    eyes respond most strongly (where things look like the things it learned).
 """
 
 import numpy as np
 
 LAYERS = ((1, 8), (8, 8), (8, 1))
 SIGMA = 1.0
+BACKGROUND = 0.1    # where the background sits in the pictures its eyes grew up with
+DIM = 0.45          # things standing out less than this (of what it's used to): a dim scene
+
+
+def _box(a, k):
+    """Mean over a k x k neighbourhood."""
+    pad = k // 2
+    p = np.pad(a, pad, mode="reflect")
+    c = np.pad(np.cumsum(np.cumsum(p, axis=0), axis=1), ((1, 0), (1, 0)))
+    h, w = a.shape
+    return (c[k:k + h, k:k + w] - c[:h, k:k + w] - c[k:k + h, :w] + c[:h, :w]) / (k * k)
+
+
+def noise_of(img):
+    """How noisy a picture is, measured from the picture itself (robust spread of what
+    is left after smoothing)."""
+    r = np.asarray(img, dtype=float) - _box(np.asarray(img, dtype=float), 3)
+    return float(1.4826 * np.median(np.abs(r - np.median(r))))
+
+
+def contrast_of(img):
+    """How far the brightest thing stands out from the background."""
+    a = np.asarray(img, dtype=float)
+    return float(np.max(_box(a, 3)) - np.median(a))
+
+
+def _align(ref, img, r=2):
+    """img shifted by the few pixels that line it up best with ref (camera shake)."""
+    best = None
+    rc = ref - ref.mean()
+    for dy in range(-r, r + 1):
+        for dx in range(-r, r + 1):
+            s = np.roll(np.roll(img, dy, 0), dx, 1)
+            c = float(((s - s.mean()) * rc).sum())
+            if best is None or c > best[0]:
+                best = (c, s)
+    return best[1]
+
+
+def _shrink(img, s):
+    h, w = (img.shape[0] // s) * s, (img.shape[1] // s) * s
+    return img[:h, :w].reshape(h // s, s, w // s, s).mean(axis=(1, 3))
 
 
 # ------------------------------------------------------------------ convolution
@@ -49,6 +102,8 @@ class Eyes:
             self.params.append([w, np.zeros(cout)])
         self.threshold = 0.5
         self.trained_on = 0
+        self.noise_ref = 0.08       # how noisy the pictures it learned from were
+        self.contrast_ref = 0.75    # how far their things stood out
 
     # ---------------------------------------------------------------- network
     def _forward(self, x):
@@ -120,6 +175,9 @@ class Eyes:
             losses.append(total / len(x))
         self.trained_on += len(images)
         self._calibrate(images, touches)
+        self.noise_ref = float(np.median([noise_of(im) for im in images]))
+        self.contrast_ref = float(np.median([contrast_of(im) for im, t in zip(images, touches)
+                                             if len(t)]))
         return losses
 
     def _calibrate(self, images, touches):
@@ -139,18 +197,64 @@ class Eyes:
         return _peaks(self.heat(img), self.threshold)
 
     def count(self, look, glances=5):
-        """How many things? Looks, and looks again until two glances agree."""
+        """How many things in a still scene? Looks (longer if it must), steps back if it
+        helps, and looks again until two glances agree."""
         seen = []
         for _ in range(glances):
-            seen.append(len(self.see(look())))
+            seen.append(len(self.see_views(self.stare(look))))
             for n in set(seen):
                 if seen.count(n) >= 2:
                     return n, len(seen)
         return max(set(seen), key=lambda n: (seen.count(n), -n)), len(seen)
 
+    # ---------------------------------------------------------------- still scenes
+    def stare(self, look, cap=64):
+        """One picture of a still scene, as clean and as clear as the ones it learned from."""
+        first = look()
+        if noise_of(first) <= 1.25 * self.noise_ref and \
+                contrast_of(first) >= DIM * self.contrast_ref:
+            return first                # like the pictures its eyes are used to: one look
+        avg, frames = self._longer(look, [first], self.noise_ref, cap)
+        c = contrast_of(avg)
+        if c < DIM * self.contrast_ref:
+            # a dim scene: look longer still; if something really stands out, turn the
+            # contrast up to what its eyes are used to
+            avg2, frames = self._longer(look, frames, self.noise_ref * c / self.contrast_ref,
+                                        cap)
+            c2 = contrast_of(avg2)
+            if c2 > 6 * noise_of(avg2):
+                g = min(self.contrast_ref / c2, 6.0)
+                avg = np.median(avg2) + g * (avg2 - np.median(avg2))
+        return np.clip(avg - np.median(avg) + BACKGROUND, 0.0, 1.0)
+
+    def _longer(self, look, frames, target, cap):
+        avg = np.mean(frames, axis=0)
+        while noise_of(avg) > target and len(frames) < cap:
+            frames = frames + [look() for _ in range(len(frames))]
+            avg = np.mean(frames, axis=0)
+            for _ in range(2):          # line each picture up against the camera's shake
+                frames = [_align(avg, f) for f in frames]
+                avg = np.mean(frames, axis=0)
+        return avg, frames
+
+    def see_views(self, img, scales=(1, 2, 3)):
+        """Step back: the picture as it is and shrunk; the view where its eyes respond
+        most strongly (positions given in the picture's own pixels)."""
+        best = None
+        for s in scales:
+            view = _shrink(img, s) if s > 1 else img
+            view = np.clip(view - np.median(view) + BACKGROUND, 0.0, 1.0)
+            seen = self.see(view)
+            strength = float(np.mean([p[2] for p in seen])) if seen else 0.0
+            if best is None or strength > best[0]:
+                best = (strength, [(x * s + (s - 1) / 2, y * s + (s - 1) / 2, v)
+                                   for x, y, v in seen])
+        return best[1]
+
     def to_json(self):
         return {"layers": [[w.tolist(), b.tolist()] for w, b in self.params],
-                "threshold": self.threshold, "trained_on": self.trained_on}
+                "threshold": self.threshold, "trained_on": self.trained_on,
+                "noise_ref": self.noise_ref, "contrast_ref": self.contrast_ref}
 
     @classmethod
     def from_json(cls, d):
@@ -158,6 +262,8 @@ class Eyes:
         e.params = [[np.array(w, dtype=float), np.array(b, dtype=float)] for w, b in d["layers"]]
         e.threshold = d["threshold"]
         e.trained_on = d.get("trained_on", 0)
+        e.noise_ref = d.get("noise_ref", e.noise_ref)
+        e.contrast_ref = d.get("contrast_ref", e.contrast_ref)
         return e
 
 

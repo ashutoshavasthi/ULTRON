@@ -37,10 +37,27 @@ class Trays:
         blobs = scatter(n, self.rng, size=size)
         return lambda: shoot(blobs, self.rng, size=size)[0]
 
-    def handle(self, n, size=48):
-        """Handling things: a picture and where the hands feel each thing (touch)."""
-        blobs = scatter(n, self.rng, size=size)
-        img, (dx, dy) = shoot(blobs, self.rng, size=size, spoil=False)
+    def handle(self, n, size=48, varied=False):
+        """Handling things: a picture and where the hands feel each thing (touch). varied:
+        things handled in all conditions, as a child handles them: close together or
+        apart, small or larger, in bright or dim light, with a clearer or noisier view."""
+        if not varied:
+            blobs = scatter(n, self.rng, size=size)
+            img, (dx, dy) = shoot(blobs, self.rng, size=size, spoil=False)
+            return img, [(x + dx, y + dy) for x, y, _, _ in blobs]
+        rng = self.rng
+        r0 = rng.uniform(1.1, 2.0)
+        radius = (r0, r0 + rng.uniform(0.2, 1.0))
+        gap = max(rng.uniform(2.5, 6.0), 2.1 * radius[1])
+        dim, noise = rng.uniform(0.4, 1.0), rng.uniform(0.05, 0.11)
+        while True:
+            try:
+                blobs = scatter(n, rng, size=size, gap=gap, radius=radius)
+                break
+            except ValueError:
+                n -= 1                  # as many as fit on the tray
+        blobs = [(x, y, r, b * dim) for x, y, r, b in blobs]
+        img, (dx, dy) = shoot(blobs, rng, size=size, spoil=False, noise=noise)
         return img, [(x + dx, y + dy) for x, y, _, _ in blobs]
 
 

@@ -12,6 +12,30 @@ def test_eyes_learned_from_touch(trained):
     assert all(c >= 0.95 * n for c, n in items.values())
 
 
+def test_eyes_generalise_to_hard_conditions(trained):
+    """Stage 2: looking longer at a still scene, adapting to the light and stepping back
+    let the eyes count in conditions they never counted in."""
+    import numpy as np
+    from ultron.senses.camera import scatter, shoot
+    from ultron.senses.eyes import noise_of
+    eyes = trained[0].eyes
+    rng = np.random.default_rng(21)
+    for noise, gap, radius, dim, hi in ((0.32, 5.0, (1.4, 2.6), 1.0, 20),   # 4x the noise
+                                        (0.08, 13.0, (4, 6), 1.0, 6),        # big things
+                                        (0.08, 5.0, (1.4, 2.6), 0.3, 20)):   # faint things
+        right = 0
+        for _ in range(5):
+            n = int(rng.integers(1, hi))
+            blobs = [(x, y, r, b * dim) for x, y, r, b in scatter(n, rng, gap=gap, radius=radius)]
+            look = lambda: shoot(blobs, rng, noise=noise)[0]
+            right += eyes.count(look)[0] == n
+        assert right >= 4, (noise, radius, dim, right)
+    # looking longer makes a noisy picture as clean as the ones its eyes are used to
+    blobs = scatter(8, rng)
+    clean = eyes.stare(lambda: shoot(blobs, rng, noise=0.16)[0])
+    assert noise_of(clean) <= 1.25 * eyes.noise_ref
+
+
 def test_laws_rediscovered_from_video(trained):
     brain, results = trained
     assert results[21]["passed"]

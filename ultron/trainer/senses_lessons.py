@@ -30,7 +30,7 @@ class Handling(Lesson):
         rng = self.trays.rng
         for i in range(self.SCENES):
             n = int(rng.integers(0, 14)) if i % 4 else int(rng.integers(14, 30))
-            yield self.trays.handle(n)
+            yield self.trays.handle(n, varied=True)
 
 
 class SeeingNumbers(Lesson):
