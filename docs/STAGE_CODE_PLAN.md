@@ -89,6 +89,47 @@ Everything earlier stages passed must still pass: the curriculum, every exam, ev
 failure-lab row, the blind tests and the full test suite. A retrain stays byte-for-byte
 identical.
 
+### C4 in detail (fixed 2026-10-12, before any C4 work)
+
+**The list, by the rule above.** A brain or library handed in as context does not count
+as an input; an input that is a name, a law, a word or a program does not qualify; a pair
+such as an amount `(count, kind)` is a row. Applied to the three files, the rule gives
+these 10 functions (`columns.py` has no qualifying top-level function; its arithmetic is
+in class methods):
+
+| # | function | inputs | returns |
+|---|---|---|---|
+| 1 | `dsl.check(v)` | a number | a number |
+| 2 | `amounts._times(a, b)` | two numbers | a number |
+| 3 | `amounts._recut(n, m)` | two numbers | a number |
+| 4 | `amounts.common(x, y)` | two amounts | a row of 3 numbers |
+| 5 | `amounts.same(x, y)` | two amounts | true or false |
+| 6 | `amounts._fits_evenly(d, n)` | two numbers | a number, or nothing |
+| 7 | `amounts._kinds_that_fit(n)` | a number | a row |
+| 8 | `amounts.simplest(x)` | an amount | an amount |
+| 9 | `amounts._simplest(k, n)` | two numbers | an amount |
+| 10 | `amounts._plus_one(acc, sign)` | an amount and a number | an amount |
+
+The truth is what each function returns when run with the fully trained brain.
+
+**(a) Watching it run.** For each function Ultron chooses its own inputs (counts 0–12,
+kinds and divisors 1–12, `n` up to 30 for 6–7, signs −1, 0, 1 for 10) and runs it at
+most 20 times, then settles on a law in its own program language (or says it found
+none). Each function is then asked 50 held-out inputs, wider than any it ran: counts and kinds 13–99 (13–300 for 2–3,
+21–1,000,000 for 1, `n` 31–500 for 7, `d` 2–50 and `n` 50–2,000 with half of them
+dividing evenly for 6, half of the pairs for 5 the same amount written two ways, and
+amounts with a common factor for 8–9). A function counts as found when its law answers
+≥ 49 of its 50 right. Exit: ≥ 8 of the 10 found, and over all functions with a law, ≥ 98%
+of their held-out answers right.
+
+**(b) Reading the source.** Ultron is given the Python source of the three files (as
+text, never run) and predicts the same 500 held-out outputs by working the source
+through in its head: ≥ 80% right (≥ 400 of 500), precision ≥ 98%. What it may know of
+Python is what it learned in C3 plus what C4's lessons show it by films, as in C3.
+
+**Baselines** (for both): lookup and nearest from its 20 runs per function. Exam seed
+7007. The exam generator is committed with this paragraph, before any C4 work.
+
 ## Rules for this stage
 
 - **Nothing learned by hand-coding the answer.** No table from Engc words to meanings,
