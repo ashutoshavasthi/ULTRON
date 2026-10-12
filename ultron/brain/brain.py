@@ -68,6 +68,17 @@ class Brain:
         self.compress = True                # look for patterns among its own laws
         self.quantities = {}                # lengths etc. Ultron holds an idea about
         self.candidates = {}                # spec -> predictions kept in mind, not assumed
+        self.categories = {}                # measure -> groups it found (categories.py)
+        self.heard = []                     # sentences heard about tables, with what it saw
+        self.rival_lexicons = []            # other accounts of those words, nearly as short
+        self.films = []                     # films it watched while words were said (L2)
+        self.event_words = []               # words it learned for what happens in films
+        self.senses = {}                    # a second meaning for a word it already had
+        self.rival_relations = []           # other accounts of the comparing words
+        self.tables = []                    # tables talked about in longer sentences (L3)
+        self.grammar = {}                   # what each word does and how it combines (L3)
+        self.rival_grammars = []            # other grammars nearly as short
+        self.grammar_doubts = []            # words the grammar fits badly (it says so)
         self.lesson = None
 
     # ------------------------------------------------------------------ utils
@@ -844,6 +855,17 @@ class Brain:
             "cycles": dict(sorted(self.library.cycles.items())),
             "symmetric": sorted(self.library.symmetric),
             "fast": dict(sorted(self.library.fast.items())),
+            "categories": dict(sorted(self.categories.items())),
+            "heard": self.heard,
+            "rival_lexicons": self.rival_lexicons,
+            "films": self.films,
+            "event_words": self.event_words,
+            "senses": dict(sorted(self.senses.items())),
+            "rival_relations": self.rival_relations,
+            "tables": self.tables,
+            "grammar": {w: list(o) for w, o in sorted(self.grammar.items())},
+            "rival_grammars": self.rival_grammars,
+            "grammar_doubts": self.grammar_doubts,
             "curiosity": self.curiosity.to_json(),
             "memory": self.memory.to_json(),
             "log": self.log,
@@ -874,6 +896,17 @@ class Brain:
         b.kinds = dict(d.get("kinds", {}))
         b.slaws = {k: SequenceLaw.from_json(v) for k, v in d.get("sequence_laws", {}).items()}
         b.kind_steps = dict(d.get("kind_steps", {}))
+        b.categories = dict(d.get("categories", {}))
+        b.heard = list(d.get("heard", []))
+        b.rival_lexicons = list(d.get("rival_lexicons", []))
+        b.films = list(d.get("films", []))
+        b.event_words = list(d.get("event_words", []))
+        b.senses = dict(d.get("senses", {}))
+        b.rival_relations = list(d.get("rival_relations", []))
+        b.tables = list(d.get("tables", []))
+        b.grammar = dict(d.get("grammar", {}))
+        b.rival_grammars = list(d.get("rival_grammars", []))
+        b.grammar_doubts = list(d.get("grammar_doubts", []))
         b.exceptions = dict(d.get("exceptions", {}))
         b.since = dict(d.get("since", {}))
         if d.get("eyes"):

@@ -9,7 +9,7 @@
     "outcome": "merge(a, b)",
     "ok": true,
     "steps": 292,
-    "seconds": 0.01
+    "seconds": 0.02
    },
    {
     "level": "a\u00b7b",
@@ -23,54 +23,54 @@
     "outcome": "groups(a, succ(b))",
     "ok": true,
     "steps": 1605,
-    "seconds": 0.03
+    "seconds": 0.05
    },
    {
     "level": "a\u00b7b+a+b",
     "outcome": "pred(groups(succ(a), succ(b)))",
     "ok": true,
     "steps": 90707,
-    "seconds": 1.06
+    "seconds": 1.5
    },
    {
     "level": "a\u00b2+b",
     "outcome": "merge(b, square(a))",
     "ok": true,
     "steps": 1425,
-    "seconds": 0.0
+    "seconds": 0.01
    },
    {
     "level": "(a+b)\u00b2",
     "outcome": "square(merge(a, b))",
     "ok": true,
     "steps": 1556,
-    "seconds": 0.0
+    "seconds": 0.01
    },
    {
     "level": "a\u00b7b\u00b2+a",
     "outcome": "groups(a, succ(square(b)))",
     "ok": true,
     "steps": 12733,
-    "seconds": 0.11
+    "seconds": 0.12
    },
    {
     "level": "a\u00b3+b\u00b2",
     "outcome": "merge(square(b), groups(a, square(a)))",
     "ok": true,
     "steps": 539242,
-    "seconds": 12.15
+    "seconds": 14.96
    },
    {
     "level": "(a+1)(b+2)(a+b)",
     "outcome": "nothing found",
     "ok": false,
     "steps": 578689,
-    "seconds": 11.81
+    "seconds": 14.41
    }
   ],
   "breakpoint": "(a+1)(b+2)(a+b)",
   "note": "Search is size-ordered and exhaustive: cost grows exponentially with the size of the law.",
-  "seconds": 25.2
+  "seconds": 31.1
  },
  {
   "name": "library learning",
@@ -86,7 +86,7 @@
     "level": "S(S(a,b),a)+S(a,b)",
     "outcome": "piece1(a, piece2(b, a)) \u2014 10 pieces written out",
     "ok": true,
-    "seconds": 0.3,
+    "seconds": 0.9,
     "size_written_out": 10,
     "without_pieces": "nothing found"
    },
@@ -94,7 +94,7 @@
     "level": "S(S(a,b),S(a,a))",
     "outcome": "piece1(square(succ(a)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 16.1,
+    "seconds": 48.4,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -102,7 +102,7 @@
     "level": "S(S(a,b),S(b,b))",
     "outcome": "piece1(square(succ(b)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 8.8,
+    "seconds": 21.1,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -110,7 +110,7 @@
     "level": "S(S(a,b),S(a,b))+a",
     "outcome": "merge(a, square(succ(piece1(a, b)))) \u2014 9 pieces written out",
     "ok": true,
-    "seconds": 10.1,
+    "seconds": 12.5,
     "size_written_out": 9,
     "without_pieces": "nothing found"
    },
@@ -118,7 +118,7 @@
     "level": "S(T(a,b),T(b,a))",
     "outcome": "piece1(piece2(a, b), piece2(b, a)) \u2014 15 pieces written out",
     "ok": true,
-    "seconds": 11.2,
+    "seconds": 13.3,
     "size_written_out": 15,
     "without_pieces": "nothing found"
    },
@@ -126,14 +126,14 @@
     "level": "T(T(a,b),T(b,a))",
     "outcome": "piece2(piece2(a, b), piece2(b, a)) \u2014 16 pieces written out",
     "ok": true,
-    "seconds": 8.3,
+    "seconds": 14.2,
     "size_written_out": 16,
     "without_pieces": "nothing found"
    }
   ],
   "breakpoint": null,
   "note": "Its search alone stops at 7 pieces. The held-out laws are compositions of the family's pieces (S = (x+1)(y+1), T = (x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.",
-  "seconds": 130.7
+  "seconds": 272.9
  },
  {
   "name": "intuition",
@@ -150,7 +150,7 @@
   ],
   "breakpoint": "38 held-out laws (lab laws and unseen dreams)",
   "note": "Kept out of the brain until it pays: a wrong guess pushes a needed law to a dearer level, and search grows exponentially per level.",
-  "seconds": 93.2
+  "seconds": 213.2
  },
  {
   "name": "wrong labels (programs)",
@@ -180,7 +180,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 96.0
+  "seconds": 169.3
  },
  {
   "name": "hidden causes and noise",
@@ -200,7 +200,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 21.1
+  "seconds": 34.1
  },
  {
   "name": "few examples",
@@ -249,26 +249,26 @@
   "rows": [
    {
     "level": "20 examples",
-    "outcome": "1.5 s",
+    "outcome": "3.8 s",
     "ok": true,
-    "seconds": 1.54
+    "seconds": 3.81
    },
    {
     "level": "100 examples",
-    "outcome": "0.7 s",
+    "outcome": "1.4 s",
     "ok": true,
-    "seconds": 0.67
+    "seconds": 1.42
    },
    {
     "level": "400 examples",
-    "outcome": "0.4 s",
+    "outcome": "1.0 s",
     "ok": true,
-    "seconds": 0.39
+    "seconds": 1.01
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 2.6
+  "seconds": 6.2
  },
  {
   "name": "noise",
@@ -424,26 +424,26 @@
     "outcome": "F / (a\u00b7m)",
     "ok": true,
     "steps": 266,
-    "seconds": 0.01
+    "seconds": 0.02
    },
    {
     "level": "6 irrelevant",
     "outcome": "F / (a\u00b7m)",
     "ok": true,
     "steps": 552,
-    "seconds": 0.02
+    "seconds": 0.05
    },
    {
     "level": "10 irrelevant",
     "outcome": "F / (a\u00b7m)",
     "ok": true,
     "steps": 1612,
-    "seconds": 0.05
+    "seconds": 0.14
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 0.1
+  "seconds": 0.2
  },
  {
   "name": "confounders",
@@ -593,18 +593,18 @@
    },
    {
     "level": "touching (gap = diameter)",
-    "outcome": "24/25 trays counted right",
+    "outcome": "25/25 trays counted right",
     "ok": true
    },
    {
     "level": "overlapping (gap < diameter)",
-    "outcome": "19/25 trays counted right (merged blobs: a physical limit, reported only)",
+    "outcome": "20/25 trays counted right (merged blobs: a physical limit, reported only)",
     "ok": true
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 6.5
+  "seconds": 16.0
  },
  {
   "name": "false laws",
@@ -639,6 +639,246 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 10.4
+  "seconds": 23.2
+ },
+ {
+  "name": "words by pointing",
+  "question": "Does it still learn what words mean when the Trainer sometimes says the wrong word, or says less?",
+  "dial": "wrong words; sentences heard",
+  "rows": [
+   {
+    "level": "0% of sentences name the wrong thing",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "5% of sentences name the wrong thing",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "10% of sentences name the wrong thing",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "20% of sentences name the wrong thing",
+    "outcome": "37/60 right (37/37 of its answers)",
+    "ok": false,
+    "right": 37,
+    "gave": 37
+   },
+   {
+    "level": "30% of sentences name the wrong thing",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "120 sentences heard",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "60 sentences heard",
+    "outcome": "40/60 right (40/40 of its answers)",
+    "ok": false,
+    "right": 40,
+    "gave": 40
+   },
+   {
+    "level": "40 sentences heard",
+    "outcome": "40/60 right (40/40 of its answers)",
+    "ok": false,
+    "right": 40,
+    "gave": 40
+   },
+   {
+    "level": "20 sentences heard",
+    "outcome": "0/60 right (0/0 of its answers)",
+    "ok": false,
+    "right": 0,
+    "gave": 0
+   },
+   {
+    "level": "10 sentences heard",
+    "outcome": "0/60 right (0/0 of its answers)",
+    "ok": false,
+    "right": 0,
+    "gave": 0
+   }
+  ],
+  "breakpoint": "20% of sentences name the wrong thing",
+  "note": "A row passes at 57/60 (95%). The two dials are separate: the first breakpoint is the first row that fails.",
+  "seconds": 75.0
+ },
+ {
+  "name": "words for what happens",
+  "question": "Does it still learn words for events and for comparing when the Trainer sometimes says the wrong word, says less, or the camera is noisier?",
+  "dial": "wrong words; sentences heard; camera noise",
+  "rows": [
+   {
+    "level": "0% of event sentences say the wrong word",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "10% of event sentences say the wrong word",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "20% of event sentences say the wrong word",
+    "outcome": "0/60 right (0/0 of its answers)",
+    "ok": false,
+    "right": 0,
+    "gave": 0
+   },
+   {
+    "level": "30% of event sentences say the wrong word",
+    "outcome": "0/60 right (0/0 of its answers)",
+    "ok": false,
+    "right": 0,
+    "gave": 0
+   },
+   {
+    "level": "50 event sentences heard",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "25 event sentences heard",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "12 event sentences heard",
+    "outcome": "33/60 right (33/33 of its answers)",
+    "ok": false,
+    "right": 33,
+    "gave": 33
+   },
+   {
+    "level": "camera 2 times as noisy",
+    "outcome": "50/60 right (50/50 of its answers)",
+    "ok": false,
+    "right": 50,
+    "gave": 50
+   },
+   {
+    "level": "camera 3 times as noisy",
+    "outcome": "33/60 right (33/33 of its answers)",
+    "ok": false,
+    "right": 33,
+    "gave": 33
+   },
+   {
+    "level": "0% of comparing sentences say the wrong word",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "10% of comparing sentences say the wrong word",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "20% of comparing sentences say the wrong word",
+    "outcome": "15/60 right (15/15 of its answers)",
+    "ok": false,
+    "right": 15,
+    "gave": 15
+   }
+  ],
+  "breakpoint": "20% of event sentences say the wrong word",
+  "note": "A row passes at 54/60 (90%). Event words were taught with 100 sentences and comparing words with 120 in the first rows.",
+  "seconds": 548.2
+ },
+ {
+  "name": "how words combine",
+  "question": "Does it still find how words combine when it mishears words, when the Trainer talks about another table, when a word has two meanings, or when it hears less?",
+  "dial": "misheard words; wrong tables; two meanings; sentences heard",
+  "rows": [
+   {
+    "level": "0% of sentences have a word misheard",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "20% of sentences have a word misheard",
+    "outcome": "34/60 right (34/34 of its answers)",
+    "ok": false,
+    "right": 34,
+    "gave": 34
+   },
+   {
+    "level": "40% of sentences have a word misheard",
+    "outcome": "19/60 right (19/19 of its answers)",
+    "ok": false,
+    "right": 19,
+    "gave": 19
+   },
+   {
+    "level": "20% of sentences are about another table",
+    "outcome": "60/60 right (60/60 of its answers)",
+    "ok": true,
+    "right": 60,
+    "gave": 60
+   },
+   {
+    "level": "40% of sentences are about another table",
+    "outcome": "0/60 right (0/0 of its answers)",
+    "ok": false,
+    "right": 0,
+    "gave": 0
+   },
+   {
+    "level": "'left' has two meanings (also 'above', half the time)",
+    "outcome": "35/60 right (35/35 of its answers)",
+    "ok": false,
+    "right": 35,
+    "gave": 35
+   },
+   {
+    "level": "75 sentences heard",
+    "outcome": "25/60 right (25/25 of its answers)",
+    "ok": false,
+    "right": 25,
+    "gave": 25
+   },
+   {
+    "level": "30 sentences heard",
+    "outcome": "0/60 right (0/0 of its answers)",
+    "ok": false,
+    "right": 0,
+    "gave": 0
+   }
+  ],
+  "breakpoint": "20% of sentences have a word misheard",
+  "note": "A row passes at 57/60 (95%). The grammar was found from 300 sentences in the first rows.",
+  "seconds": 2327.1
  }
 ]

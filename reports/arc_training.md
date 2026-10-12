@@ -4,11 +4,11 @@ Official scoring (2 attempts per test output). Development uses the training spl
 
 | Set | Split | Tasks | Score | Seconds | Budget (operations per task) |
 |---|---|---|---|---|---|
-| ARC-AGI-1 | training | 400 | **35.4%** (141.5) | 604.5 | 40000 |
+| ARC-AGI-1 | training | 400 | **37.1%** (148.5) | 951.4 | 40000 |
 
 ## ARC-AGI-1 training: what it found
 
-142 tasks solved; 13 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 245 with no program within budget.
+149 tasks solved; 14 where a program fitted every example but gave the wrong answer on the test (wrong generalisation); 237 with no program within budget.
 
 | Task | Program Ultron found |
 |---|---|
@@ -33,6 +33,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 1f85a75f | `crop_thing(('largest', False))` |
 | 1f876c06 | `connect(diagonals)` |
 | 22168020 | `connect(rows)` |
+| 2281f1f4 | `cell rules: if ray_right = ray_up: paint 2; else copy colour` |
 | 22eb0ac0 | `lines between things: what fills a gap depends on whether the ends match (2 kinds of gap)` |
 | 23b5c85d | `crop_thing(('smallest', False))` |
 | 253bf280 | `lines between things: what fills a gap depends on whether the ends match (1 kinds of gap)` |
@@ -47,7 +48,8 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 3906de3d | `gravity(up)` |
 | 39a8645d | `the thing with shape_count_rank=most` |
 | 3af2c5a8 | `mirror_tile(both)` |
-| 3c9b0459 | `rot180` |
+| 3c9b0459 | `cell rules: ; else copy mirror_hv` |
+| 40853293 | `cell rules: if ray_down = ray_up: copy ray_down; if ray_left = ray_right: copy ray_left; else copy colour` |
 | 4258a5f9 | `frame_things(1)` |
 | 42a50994 | `remove_specks(1)` |
 | 4347f46a | `hollow_things` |
@@ -62,13 +64,13 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 543a7ed5 | `fill_enclosed(4) ▸ frame_things(3)` |
 | 5521c0d9 | `things move by (): 1 kinds (moves by its own size)` |
 | 5582e5ca | `blank(alone(fill_box(pieces(x)))) ▸ recolour 3→4` |
-| 6150a2bd | `rot180` |
+| 6150a2bd | `cell rules: ; else copy mirror_hv` |
 | 62c24649 | `mirror_tile(both)` |
 | 6430c8c4 | `combine(('lines', 'nor', 3))` |
 | 67385a82 | `thing law on (size): 8 except 1 kind` |
-| 67a3c6ac | `flip_h` |
+| 67a3c6ac | `cell rules: ; else copy mirror_h` |
 | 67e8384a | `mirror_tile(both)` |
-| 68b16354 | `flip_v` |
+| 68b16354 | `cell rules: ; else copy mirror_v` |
 | 694f12f3 | `local law on (colour, count8, rank): 2 situations change colour` |
 | 6c434453 | `local law on (colour, count8, rank): 4 situations change colour` |
 | 6d0aefbc | `mirror_tile(h)` |
@@ -79,8 +81,9 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 72ca375d | `the thing with symmetric=True` |
 | 7468f01a | `flip_h ▸ the thing with ` |
 | 746b3537 | `one cell per uniform block` |
-| 74dd1130 | `transpose` |
+| 74dd1130 | `cell rules: ; else copy mirror_d` |
 | 7b6016b9 | `fill_enclosed(2) ▸ recolour 0→3` |
+| 7f4411dc | `cell rules: if count4 is 0: paint 0; if count4 is 1: paint 0; else copy colour` |
 | 7fe24cdd | `copies in a 2x2 grid: as it is, three quarter turn | quarter turn, half turn` |
 | 810b9b61 | `thing law on (holes): 3 except 1 kind` |
 | 868de0fa | `fill_enclosed(2) ▸ thing law on (size): keep except 3 kinds` |
@@ -96,15 +99,16 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | 95990924 | `marks around things by (): 1 kinds leave marks` |
 | 963e52fc | `continue_pattern(((1, 1), (2, 1)))` |
 | 99b1bc43 | `combine(('lines', 'xor', 3))` |
-| 9dfd6313 | `transpose` |
+| 9dfd6313 | `cell rules: ; else copy mirror_d` |
 | 9ecd008a | `symmetry (h) about its own centre fills what colour 0 hides, answer is the repaired patch` |
 | a416b8f3 | `copies in a 1x2 grid: as it is, as it is` |
 | a5313dff | `fill_enclosed(1)` |
+| a5f85a15 | `cell rules: if col_parity is 1 and ground is 0: paint 4; else copy colour` |
 | a61f2674 | `thing law on (size_rank): 3 kinds of thing` |
 | a65b410d | `marks around things by (): 1 kinds leave marks` |
 | a699fb00 | `local law on (colour, line): 2 situations change colour` |
 | a740d043 | `crop_content ▸ recolour 1→0` |
-| a79310a0 | `paint(blank(x), shift(things(x), down)) ▸ recolour 8→2` |
+| a79310a0 | `cell rules: if n_up is 8: paint 2; else paint 0` |
 | a87f7484 | `the box where the most common colour is` |
 | ac0a08a4 | `upscale(x, count(things(x)))` |
 | ae3edfdc | `things move by (colour): 2 kinds (goes toward what stays put)` |
@@ -116,10 +120,12 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | b6afb2da | `local law on (colour, count8): 3 situations change colour` |
 | b8825c91 | `symmetry (rot180) about its own centre fills what colour 4 hides` |
 | b9b7f026 | `the colour of the thing with filled=False` |
+| ba26e723 | `cell rules: if col_mod3 is 0 and ground is 1: paint 6; else copy colour` |
 | bb43febb | `local law on (colour, count8): 1 situations change colour` |
 | bdad9b1f | `lines_through((2, 'h')) ▸ local law on (colour, col): 2 situations change colour` |
 | be94b721 | `crop_thing(('largest', False))` |
 | c0f76784 | `fill_enclosed(6) ▸ thing law on (size): keep except 2 kinds` |
+| c1d99e64 | `cell rules: if col_busy is 0: paint 2; if row_busy is 0: paint 2; else copy colour` |
 | c3f564a4 | `complete_pattern(0)` |
 | c59eb873 | `upscale(2)` |
 | c8f0f002 | `recolour 7→5` |
@@ -144,6 +150,7 @@ Official scoring (2 attempts per test output). Development uses the training spl
 | e76a88a6 | `copies of the thing with colour_count=1 centred on every other thing` |
 | e8593010 | `thing law on (size): 3 kinds of thing` |
 | e98196ab | `overlay_parts` |
+| e9afcf9a | `cell rules: if col_parity is 1: copy mirror_hv; else copy colour` |
 | ea32f347 | `thing law on (size_rank): 3 kinds of thing` |
 | ea786f4a | `marks around things by (): 1 kinds leave marks` |
 | eb5a1d5d | `one cell per uniform block` |

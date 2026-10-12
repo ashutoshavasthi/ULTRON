@@ -45,7 +45,7 @@ decided to **move to Stage 2 now** because further ARC work is not paying off. T
 decision is recorded here and in the roadmap as a correction.
 
 ARC returns in two places:
-- **Stage 3 (interactive worlds),** with ARC-AGI-3-style games;
+- **Stage 4 (interactive worlds; numbered 3 when this was written),** with ARC-AGI-3-style games;
 - **the AGI battery,** where ARC-AGI-1, -2 and -3 remain fixed tests.
 
 Everything built stays in the repository, and every measurement stays recorded:

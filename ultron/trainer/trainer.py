@@ -5,6 +5,8 @@ The Trainer may look at the world's ground truth to grade answers. It never
 passes a law, formula or answer into the brain.
 """
 
+import math
+
 from ..brain.language import bind_number, bind_operation, bind_prefix, bind_relation
 from ..judge.exams import EXAMS
 from .lessons import RealData, all_lessons
@@ -75,6 +77,16 @@ class Trainer:
                 self.teach_handling(lesson)
             elif lesson.number == 26:
                 self.teach_microscope(lesson)
+            elif lesson.number == 29:
+                self.teach_falling(lesson)
+            elif lesson.number == 30:
+                self.teach_swinging(lesson)
+            elif lesson.number == 31:
+                self.teach_words(lesson)
+            elif lesson.number == 32:
+                self.teach_events(lesson)
+            elif lesson.number == 33:
+                self.teach_grammar(lesson)
             elif lesson.number == 13 and attempt == 1:
                 free_play(brain, lesson, lesson.budget)
                 bind_operation(brain, "power", lesson.power_demos())
@@ -306,6 +318,331 @@ class Trainer:
                       )}
         brain.note("invent", brain.inventions["microscope"]["story"])
 
+    # ----------------------------------------------------------- lesson 29
+    def teach_falling(self, lesson):
+        from ..env import footage
+        from ..senses import motion
+        brain = self.brain
+        watched = {}
+        for name in lesson.FILMS:
+            try:
+                pics = footage.frames(name)
+            except footage.Unavailable as e:
+                self.say(f"I couldn't get the film {name} ({e}).")
+                continue
+            lab = footage.label(name)
+            halves = ", each frame taken as two half-pictures" if lab["interlaced"] else ""
+            self.say(f"A real film from a physics lab: {name}. The label says {lab['fps']} "
+                     f"pictures a second{halves}; the stick in view is "
+                     f"{lab['pixels_per_metre']} pixels to the metre ({lab['scale_from']}).")
+            track, per, ch, tracks = motion.watch(brain.eyes, pics, lab["interlaced"])
+            if track is None:
+                brain.note("reflect", f"{name}: I can't follow anything moving in this film")
+                continue
+            free = motion.alone(track, tracks, pics[0].shape)
+            if len(free) < 6:
+                brain.note("reflect", f"{name}: I followed something, but it was never on its "
+                                      f"own for long enough to measure")
+                continue
+            rate = lab["fps"] * per
+            watched[name] = (free, rate, lab["pixels_per_metre"])
+            brain.note("reflect", f"{name}: comparing each picture with how the room usually "
+                                  f"looks, through my {ch} channel, one thing moved further "
+                                  f"than anything else: I followed it through {len(track)} "
+                                  f"pictures, {len(free)} of them with nothing touching it "
+                                  f"and all of it in view")
+        if not watched:
+            self.say("No film could be watched. The lesson stops here.")
+            return
+        # how precise is this measuring? the films compared on how much faster the ball
+        # goes after the same short while (no law needed for that)
+        cmp = []
+        for free, rate, ppm in watched.values():
+            dv, _ = motion.speed_change(free, round(lesson.COMPARE * rate), rate, ppm)
+            if dv is not None:
+                cmp.append(dv)
+        precision = lesson.precision
+        if len(cmp) >= 2:
+            precision = max(0.01, round((max(cmp) - min(cmp)) / (2 * abs(sum(cmp) / len(cmp))),
+                                        3))
+        brain.memory.specs["fall"].precision = precision
+        brain.note("reflect", f"after {lesson.COMPARE:.3g} s the ball goes faster by about the "
+                              f"same amount in every film, give or take {precision:.1%}: that's "
+                              f"how precise this measuring is")
+        for name, (free, rate, ppm) in watched.items():
+            span = max(free) - min(free) + 1
+            for lag in range(1, span // 2 + 1):
+                dv, n = motion.speed_change(free, lag, rate, ppm)
+                if dv is not None:
+                    brain.experience("fall", {"tau": lag / rate, "film": name}, dv)
+        law = brain.qlaws.get("fall")
+        steady = law is not None and law.powers in ({"dv": 1, "tau": -1}, {"dv": -1, "tau": 1})
+        films = {}
+        if steady:
+            # its law says speed changes steadily: so each film's rate of change, and how
+            # sure it is of it, from the line through all its speeds
+            for name, (free, rate, ppm) in watched.items():
+                g, se = motion.steady_change(free, rate, ppm)
+                films[name] = {"g": g, "fit_error": se, "pictures": len(free), "rate": rate}
+        brain.inventions["falling"] = {
+            "shape": "the real world", "primitives": [], "lesson": brain.lesson,
+            "precision": precision, "films": films, "watched": sorted(watched),
+            "story": (f"From real films of a falling ball: " +
+                      (f"{law.formula()} stays the same, {law.constant:.4g} m/s²: the change "
+                       f"of speed grows in proportion to the time, whether the ball was "
+                       f"dropped or thrown up or across." if steady else
+                       f"I found no steady law ({law.formula() if law else 'nothing'})."))}
+        brain.note("invent", brain.inventions["falling"]["story"])
+
+    # ----------------------------------------------------------- lesson 30
+    def teach_swinging(self, lesson):
+        from ..env import footage
+        from ..senses import motion
+        brain = self.brain
+        timed = {}
+        for name in lesson.FILMS:
+            try:
+                pics = footage.frames(name)
+            except footage.Unavailable as e:
+                self.say(f"I couldn't get the film {name} ({e}).")
+                continue
+            lab = footage.label(name)
+            self.say(f"A real film of a pendulum: {name}. The label says {lab['fps']} pictures "
+                     f"a second, and the string is {lab['length_m']} m long "
+                     f"({lab['scale_from']}).")
+            _, _, ch, tracks = motion.watch(brain.eyes, pics, lab["interlaced"])
+            track = motion.whole_mover(tracks)
+            s = motion.swing(track, lab["fps"]) if track else None
+            if s is None:
+                brain.note("reflect", f"{name}: I couldn't follow anything swinging there and back")
+                continue
+            timed[name] = {"length_m": lab["length_m"], "period": s["period"],
+                           "error": s["error"], "angle_deg": math.degrees(s["angle"]),
+                           "half_swings": len(s["half_swings"]), "rate": lab["fps"]}
+            brain.note("reflect", f"{name}: through my {ch} channel I followed the bob through "
+                                  f"{len(track)} pictures and timed {len(s['half_swings'])} "
+                                  f"half swings: one swing there and back takes "
+                                  f"{s['period']:.3f} ± {s['error']:.3f} s")
+        if not timed:
+            self.say("No film could be timed. The lesson stops here.")
+            return
+        # its own timings say how precise this measuring is: the worst film's error
+        precision = max(lesson.precision, round(max(t["error"] / t["period"]
+                                                    for t in timed.values()), 3))
+        brain.memory.specs["swing"].precision = precision
+        brain.note("reflect", f"my timings are good to about {precision:.1%}")
+        for name, t in sorted(timed.items(), key=lambda kv: kv[1]["length_m"]):
+            brain.experience("swing", {"L": t["length_m"], "film": name}, t["period"])
+        law = brain.qlaws.get("swing")
+        root = law is not None and law.powers in ({"T": 2, "L": -1}, {"T": -2, "L": 1})
+        brain.inventions["swinging"] = {
+            "shape": "the real world", "primitives": [], "lesson": brain.lesson,
+            "precision": precision, "films": timed,
+            "story": (f"From real films of pendulums: " +
+                      (f"{law.formula()} stays the same, {law.constant:.4g}: the time of a "
+                       f"swing grows as the square root of the length of the string."
+                       if root else f"I found no law of the square root "
+                                    f"({law.formula() if law else 'nothing'})."))}
+        brain.note("invent", brain.inventions["swinging"]["story"])
+
+    # ----------------------------------------------------------- lesson 31
+    def teach_words(self, lesson):
+        from ..brain import categories
+        from ..brain.language import (describe_meaning, heard_as_kinds, learn_lexicon,
+                                      lexicon_bits)
+        from ..senses.things import look_at_table
+        brain = self.brain
+        if brain.eyes is None:
+            self.say("You have no eyes yet. The lesson stops here.")
+            return
+        self.say("Here is a table with things on it. Just look, as long as you like.")
+        seen = [t for look in lesson.tables() for t in look_at_table(brain.eyes, look)]
+        found = categories.discover(seen, lesson.MEASURES)
+        brain.categories = found
+        grouped = {m: len(c["groups"]) for m, c in found.items() if len(c["groups"]) > 1}
+        flat = [m for m, c in found.items() if len(c["groups"]) == 1]
+        brain.inventions["kinds of thing"] = {
+            "shape": "categories", "primitives": [], "lesson": brain.lesson,
+            "groups": grouped,
+            "story": (f"I looked at {len(seen)} things on {lesson.LOOKS} tables and measured "
+                      f"each one. " + "; ".join(
+                          f"{'Their' if i == 0 else 'their'} {m} falls into {k} separate "
+                          f"groups ({found[m]['bits'][0]:.0f} bits to describe all of them as "
+                          f"one spread, {found[m]['bits'][1]:.0f} as groups)"
+                          for i, (m, k) in enumerate(sorted(grouped.items())))
+                      + f". Where they are ({', '.join(flat)}) doesn't group: a boundary "
+                        f"there would not pay for itself. So things come in kinds.")}
+        brain.note("invent", brain.inventions["kinds of thing"]["story"])
+        self.say("Now I'll talk about the things on the table, one at a time.")
+        for said, look, _, _ in lesson.talks():
+            brain.heard.append({"said": said, "things": look_at_table(brain.eyes, look)})
+        heard = heard_as_kinds(brain)
+        lexicon, rivals = learn_lexicon(heard, found, rivals=True)
+        for w, meaning in sorted(lexicon.items()):
+            if w in brain.vocab and brain.vocab[w][0] != "look":
+                continue                    # a word it already has another meaning for
+            brain.bind(w, ("look", [list(p) for p in meaning]))
+            others = sorted({r[w] for r in rivals if r[w] != meaning})
+            brain.note("word", f"'{w}' means {describe_meaning(brain, meaning)}"
+                       + (" (not sure yet: it could also mean "
+                          + "; or ".join(describe_meaning(brain, r) for r in others) + ")"
+                          if others else ""))
+        brain.rival_lexicons = [{w: [list(p) for p in m] for w, m in sorted(r.items())
+                                 if m != lexicon[w]} for r in rivals]
+        brain.note("reflect", f"the shortest account of the {len(heard)} sentences I heard "
+                              f"takes {lexicon_bits(heard, found, lexicon):.0f} bits: what each "
+                              f"word means, and nothing more is needed to tell which thing was "
+                              f"meant")
+
+    # ----------------------------------------------------------- lesson 32
+    def teach_events(self, lesson):
+        from ..brain import events
+        from ..brain.language import (comparing, learn_lexicon,
+                                      learn_relations)
+        brain = self.brain
+        if brain.eyes is None:
+            self.say("You have no eyes yet. The lesson stops here.")
+            return
+        self.say("Now films of the same things. Watch; I'll say what happens.")
+        heard = []
+        for said, watch, _, _ in lesson.event_talks():
+            film = events.watch(brain, watch())
+            film["said"] = said
+            brain.films.append(film)
+            heard.append((said.split(), [events.kinds_of_thing(brain, t)
+                                         for t in film["things"]]))
+        found = dict(brain.categories)
+        found.update(events.categories(brain))
+        known = {w: m[1] for w, m in brain.vocab.items() if m[0] == "look"}
+        lexicon, rivals = learn_lexicon(heard, found, rivals=True, known=known)
+        kinds = events.motion_kinds(brain)
+        new = sorted(w for w in lexicon if w not in known)
+        brain.event_words = new             # a word whose meaning it didn't find: it says so
+        for w in new:
+            if w in brain.vocab:
+                continue                    # a word it already has another meaning for
+            brain.bind(w, ("look", [list(p) for p in lexicon[w]]))
+            others = sorted({r[w] for r in rivals if r[w] != lexicon[w]})
+            brain.note("word", f"'{w}' means {self._motion_meaning(lexicon[w], kinds)}"
+                       + (" (not sure yet: it could also mean " + "; or ".join(
+                           self._motion_meaning(r, kinds) for r in others) + ")"
+                          if others else ""))
+        brain.rival_lexicons = brain.rival_lexicons + [
+            {w: [list(p) for p in r[w]] for w in new if r[w] != lexicon[w]}
+            for r in rivals if any(r[w] != lexicon[w] for w in new)]
+        brain.inventions["words for events"] = {
+            "shape": "words", "primitives": [], "lesson": brain.lesson,
+            "words": {w: [list(p) for p in lexicon[w]] for w in brain.event_words if lexicon[w]},
+            "story": "Each word for what happens is the kind of motion present every time "
+                     "it was said about a thing: " + "; ".join(
+                         f"'{w}': {self._motion_meaning(lexicon[w], kinds)}"
+                         for w in brain.event_words if lexicon[w])}
+        brain.note("invent", brain.inventions["words for events"]["story"])
+
+        self.say("Now I'll compare things in the films.")
+        compared = []
+        for said, watch, _, _, _, _ in lesson.relation_talks():
+            film = events.watch(brain, watch())
+            film["said"] = said
+            brain.films.append(film)
+            got = comparing(brain, said, film)
+            if got is not None:
+                compared.append((got[0], film, got[1], got[2]))
+        best, rivals = learn_relations(compared, rivals=True)
+        for w, o in sorted(best.items()):
+            meaning = ("order", list(o) if o else None)
+            if w in brain.vocab and brain.vocab[w][0] != "order":
+                brain.senses[w] = list(meaning)  # lesson 4's 'after' keeps its meaning
+            else:
+                brain.bind(w, meaning)
+            others = sorted({str(r[w]) for r in rivals if r[w] != o})
+            brain.note("word", f"'{w}' " + (f"says the first has {'more' if o[1] == '>' else 'less'}"
+                                             f" {o[0]} than the second" if o else
+                                             "says nothing I can check")
+                       + (f" (not sure yet: it could also be {', '.join(others)})"
+                          if others else ""))
+        brain.rival_relations = [{w: (list(o) if o else None) for w, o in sorted(r.items())
+                                  if o != best[w]} for r in rivals]
+        brain.inventions["words for comparing"] = {
+            "shape": "words", "primitives": [], "lesson": brain.lesson,
+            "words": {w: (list(o) if o else None) for w, o in sorted(best.items())},
+            "story": "Each comparing word is the quantity I measure, and which way round, "
+                     "that holds every time it is said: " + "; ".join(
+                         f"'{w}': the first has {'more' if o[1] == '>' else 'less'} {o[0]}"
+                         for w, o in sorted(best.items()) if o)
+                     + ". I weigh things by my law that m·v adds up to the same before and "
+                       "after a knock."}
+        brain.note("invent", brain.inventions["words for comparing"]["story"])
+
+    # ----------------------------------------------------------- lesson 33
+    def teach_grammar(self, lesson):
+        from ..brain import grammar
+        brain = self.brain
+        if brain.eyes is None:
+            self.say("You have no eyes yet. The lesson stops here.")
+            return
+        self.say("Back to the tables. I'll say longer things now.")
+        heard = []
+        for said, look, _, _, _ in lesson.talks():
+            seen = grammar.see_table(brain, look)
+            brain.tables.append({"said": said, "things": seen})
+            heard.append(grammar.heard_as(brain, said, seen))
+        known = grammar.known_kinds(brain)
+        lexicon, rivals = grammar.learn_grammar(heard, brain.categories, known=known,
+                                                rivals=True)
+        brain.grammar = {w: grammar.to_json(o) for w, o in lexicon.items()}
+        brain.rival_grammars = [{w: grammar.to_json(o) for w, o in r.items() if o != lexicon[w]}
+                                for r in rivals]
+        badly = grammar.doubtful_words(heard, lexicon)
+        unsteady = grammar.unsteady_words(heard, brain.categories, known=known)
+        brain.grammar_doubts = sorted(set(badly) | set(unsteady))
+        for w in badly:
+            brain.note("word", f"I'm not sure what '{w}' does: the sentences with it often "
+                               f"fit no reading")
+        for w in unsteady:
+            brain.note("word", f"I'm not sure what '{w}' does: I'd find it differently from "
+                               f"each half of what I heard")
+        names = grammar.kind_names(brain)
+        for w, o in sorted(lexicon.items()):
+            if w not in brain.vocab:
+                brain.bind(w, ("grammar", grammar.to_json(o)))
+            others = sorted({r[w] for r in rivals if r[w] != o})
+            brain.note("word", f"'{w}' {grammar.describe_option(o, names)}"
+                       + (" (not sure yet: it could also be that it "
+                          + "; or ".join(grammar.describe_option(r, names) for r in others)
+                          + ")" if others else ""))
+        kinds = sorted({o[0] for o in lexicon.values() if o[0] != "nothing"})
+        brain.inventions["how words combine"] = {
+            "shape": "grammar", "primitives": [], "lesson": brain.lesson,
+            "grammar": dict(sorted(brain.grammar.items())),
+            "story": ("Each word does one of a few things to the phrase next to it, and the "
+                      "words that do the same thing combine the same way: "
+                      + "; ".join(f"'{w}' {grammar.describe_option(o, names)}"
+                                  for w, o in sorted(lexicon.items()) if o[0] != "nothing")
+                      + ". " + ", ".join(f"'{w}'" for w, o in sorted(lexicon.items())
+                                          if o[0] == "nothing")
+                      + " mean nothing by themselves. A phrase can sit inside another of "
+                        "the same kind, as deep as you like, and phrases can be joined "
+                        f"({len(kinds)} kinds of word in all).")}
+        brain.note("invent", brain.inventions["how words combine"]["story"])
+
+    @staticmethod
+    def _motion_meaning(meaning, kinds):
+        if not meaning:
+            return "nothing: it fits every thing"
+        parts = []
+        for m, g in meaning:
+            if m in ("across", "updown"):
+                way = "across" if m == "across" else "up and down"
+                name, _, words = kinds[g]
+                parts.append(f"its move {way} follows '{name}' ({words})")
+            elif m == "turns back":
+                parts.append("it comes back the way it went" if g else
+                             "it never comes back the way it went")
+            else:
+                parts.append(f"its {m} is in my group {g + 1}")
+        return "things where " + " and ".join(parts)
+
     # ----------------------------------------------------------- naming
     CONCEPT_NAMES = {
         0: {"peekaboo": "object permanence"},
@@ -341,6 +678,14 @@ class Trainer:
              "unstretched length", "burn": "constant rate"},
         24: {"slide": "sliding friction (stopping distance ∝ speed²)"},
         26: {"jiggle": "Brownian motion: Einstein's law (mean squared displacement = 4·D·t)"},
+        29: {"fall": "free fall: the acceleration of gravity, g"},
+        30: {"swing": "the period of a pendulum (T = 2π√(L/g))"},
+        31: {"kinds of thing": "categories: colours, sizes and shapes"},
+        32: {"words for events": "verbs, bound to kinds of motion",
+             "words for comparing": "comparatives and before/after, bound to measured "
+                                    "quantities (mass through conservation of momentum)"},
+        33: {"how words combine": "a categorial grammar: word classes, word order, "
+                                  "recursion (nesting) and coordination"},
         15: {"gaps": "irrational numbers (the real numbers)",
              "diagonal": "the square root of 2 (√2), a tile's diagonal"},
     }

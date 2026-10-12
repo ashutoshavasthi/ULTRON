@@ -941,8 +941,10 @@ def all_lessons(seed=0):
 def _phase3(seed):
     """Phase 3 needs numpy for its senses; without it, lessons 0-18 still run."""
     try:
-        from .senses_lessons import later_lessons, senses_lessons
+        from .language_lessons import language_lessons
+        from .senses_lessons import later_lessons, real_footage_lessons, senses_lessons
     except ImportError:
         return []
     return (senses_lessons(seed) + [CoolingLesson(seed + 22), SettlingLesson(seed + 23)]
-            + later_lessons(seed) + [ChangeLesson(seed + 27), RowsLesson(seed + 28)])
+            + later_lessons(seed) + [ChangeLesson(seed + 27), RowsLesson(seed + 28)]
+            + real_footage_lessons(seed) + language_lessons(seed))
