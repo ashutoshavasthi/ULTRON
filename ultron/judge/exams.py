@@ -1432,8 +1432,10 @@ def _code_exams():
     from ..code import sandbox
     if not sandbox.available():
         return {}
-    from .code_exams import exam_reading_engc, exam_reading_statements
-    return {100: exam_reading_engc, 101: exam_reading_statements}
+    from .code_exams import (exam_invented, exam_python, exam_reading_engc,
+                             exam_reading_statements)
+    return {100: exam_reading_engc, 101: exam_reading_statements, 102: exam_invented,
+            103: exam_python}
 
 
 EXAMS.update(_code_exams())

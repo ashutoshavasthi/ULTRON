@@ -9,6 +9,7 @@
    "4": "L",
    "5": "R"
   },
+  "borrowed": {},
   "cycles": {
    "step:MODULO/2": "param"
   },
@@ -21,6 +22,5255 @@
     "."
    ]
   ],
+  "invented": {
+   "aside": [],
+   "assoc": {
+    "0": "L",
+    "1": "L",
+    "2": "L",
+    "3": "L",
+    "4": "L",
+    "5": "R"
+   },
+   "borrowed": {
+    "!!/2": ">/2",
+    "!/2": "!=/2",
+    "#/2": "+/2",
+    "&/2": "**/2",
+    ";/2": "</2",
+    "=>/2": ">=/2",
+    "?/2": "*/2",
+    "@/2": "%/2",
+    "DANA/2": "+/2",
+    "KETE/1": "-/1",
+    "KETE/2": "-/2",
+    "LINEGO/2": "OR/2",
+    "NUMO/2": "%/2",
+    "TESE/2": "*/2",
+    "VIPE TUPU/2": "**/2",
+    "VIVO/2": "AND/2",
+    "VOSEVE DEMI TUPU/2": "==/2",
+    "VOSEVE KUKU NEDA/2": ">/2",
+    "VOSEVE NAKU NEDA/2": "</2",
+    "VOSEVE PURENI DEKUDA/2": ">=/2",
+    "VOSEVE PURENI VEFA/2": "<=/2",
+    "VOSEVE ZOGO/2": "!=/2",
+    "ZOGO/1": "NOT/1",
+    "^/2": "==/2",
+    "{/1": "-/1",
+    "{/2": "-/2",
+    "}/2": "<=/2"
+   },
+   "cycles": {
+    "step:MODULO/2": "param"
+   },
+   "flipped": false,
+   "frame": [
+    [
+     "SULE"
+    ],
+    [
+     "~"
+    ]
+   ],
+   "laws": {
+    "engc:!!/2": {
+     "expr": [
+      "lt",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     "name": "engc:!!/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:!/2": {
+     "expr": [
+      "not",
+      [
+       "eq",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ],
+     "name": "engc:!/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 4
+     }
+    },
+    "engc:#/2": {
+     "expr": [
+      "call",
+      "merge",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:#/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:&/2": {
+     "expr": [
+      "call",
+      "repeated_groups",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:&/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:;/2": {
+     "expr": [
+      "lt",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:;/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 3
+     }
+    },
+    "engc:=>/2": {
+     "expr": [
+      "not",
+      [
+       "lt",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ],
+     "name": "engc:=>/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 4
+     }
+    },
+    "engc:?/2": {
+     "expr": [
+      "call",
+      "groups",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:?/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:@/2": {
+     "expr": [
+      "iter",
+      [
+       "call",
+       "step:MODULO/2",
+       [
+        "var",
+        "y"
+       ]
+      ],
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "name": "engc:@/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 5
+     }
+    },
+    "engc:DANA/2": {
+     "expr": [
+      "call",
+      "merge",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:DANA/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 3
+     }
+    },
+    "engc:KETE/1": {
+     "expr": [
+      "call",
+      "pay",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "name": "engc:KETE/1",
+     "out_type": "int",
+     "params": [
+      "x"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:KETE/2": {
+     "expr": [
+      "call",
+      "pay",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     "name": "engc:KETE/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:LINEGO/2": {
+     "expr": [
+      "not",
+      [
+       "and",
+       [
+        "not",
+        [
+         "var",
+         "p"
+        ]
+       ],
+       [
+        "not",
+        [
+         "var",
+         "q"
+        ]
+       ]
+      ]
+     ],
+     "name": "engc:LINEGO/2",
+     "out_type": "bool",
+     "params": [
+      "p",
+      "q"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 6
+     }
+    },
+    "engc:NUMO/2": {
+     "expr": [
+      "iter",
+      [
+       "call",
+       "step:MODULO/2",
+       [
+        "var",
+        "y"
+       ]
+      ],
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "name": "engc:NUMO/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 5
+     }
+    },
+    "engc:TESE/2": {
+     "expr": [
+      "call",
+      "groups",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:TESE/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:VIPE TUPU/2": {
+     "expr": [
+      "call",
+      "repeated_groups",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:VIPE TUPU/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:VIVO/2": {
+     "expr": [
+      "and",
+      [
+       "var",
+       "p"
+      ],
+      [
+       "var",
+       "q"
+      ]
+     ],
+     "name": "engc:VIVO/2",
+     "out_type": "bool",
+     "params": [
+      "p",
+      "q"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:VOSEVE DEMI TUPU/2": {
+     "expr": [
+      "eq",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:VOSEVE DEMI TUPU/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 3
+     }
+    },
+    "engc:VOSEVE KUKU NEDA/2": {
+     "expr": [
+      "lt",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     "name": "engc:VOSEVE KUKU NEDA/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:VOSEVE NAKU NEDA/2": {
+     "expr": [
+      "lt",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:VOSEVE NAKU NEDA/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 3
+     }
+    },
+    "engc:VOSEVE PURENI DEKUDA/2": {
+     "expr": [
+      "not",
+      [
+       "lt",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ],
+     "name": "engc:VOSEVE PURENI DEKUDA/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 4
+     }
+    },
+    "engc:VOSEVE PURENI VEFA/2": {
+     "expr": [
+      "not",
+      [
+       "lt",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ]
+     ],
+     "name": "engc:VOSEVE PURENI VEFA/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 4
+     }
+    },
+    "engc:VOSEVE ZOGO/2": {
+     "expr": [
+      "not",
+      [
+       "eq",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ],
+     "name": "engc:VOSEVE ZOGO/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 4
+     }
+    },
+    "engc:ZOGO/1": {
+     "expr": [
+      "not",
+      [
+       "var",
+       "p"
+      ]
+     ],
+     "name": "engc:ZOGO/1",
+     "out_type": "bool",
+     "params": [
+      "p"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 2
+     }
+    },
+    "engc:^/2": {
+     "expr": [
+      "eq",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:^/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 3,
+      "size": 3
+     }
+    },
+    "engc:{/1": {
+     "expr": [
+      "call",
+      "pay",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "name": "engc:{/1",
+     "out_type": "int",
+     "params": [
+      "x"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:{/2": {
+     "expr": [
+      "call",
+      "pay",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     "name": "engc:{/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:}/2": {
+     "expr": [
+      "not",
+      [
+       "lt",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ]
+     ],
+     "name": "engc:}/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 102,
+      "runs": 2,
+      "size": 4
+     }
+    },
+    "step:MODULO/2": {
+     "expr": [
+      "ite",
+      [
+       "eq",
+       [
+        "var",
+        "acc"
+       ],
+       [
+        "pred",
+        [
+         "var",
+         "t"
+        ]
+       ]
+      ],
+      [
+       "const",
+       0
+      ],
+      [
+       "succ",
+       [
+        "var",
+        "acc"
+       ]
+      ]
+     ],
+     "name": "step:MODULO/2",
+     "out_type": "int",
+     "params": [
+      "acc",
+      "t"
+     ],
+     "provenance": {
+      "found_by": "stepping",
+      "how": "rule and exceptions",
+      "size": 8
+     }
+    }
+   },
+   "levels": {
+    "!!/2": 2,
+    "!/2": 2,
+    "#/2": 3,
+    "&/2": 5,
+    ";/2": 2,
+    "=>/2": 2,
+    "?/2": 4,
+    "@/2": 4,
+    "KETE/1": 4,
+    "KETE/2": 3,
+    "LINEGO/2": 0,
+    "VIVO/2": 1,
+    "VOSEVE DEMI TUPU/2": 2,
+    "VOSEVE PURENI VEFA/2": 2,
+    "ZOGO/1": 1
+   },
+   "marks": {
+    "$": "open",
+    "|": "close"
+   },
+   "phrases": {
+    "!!/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        10,
+        12
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:!!/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "!!"
+     ]
+    },
+    "!/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        11,
+        6
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        1
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:!/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "!"
+     ]
+    },
+    "#/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        7,
+        16
+       ],
+       [
+        "23"
+       ]
+      ],
+      [
+       [
+        0,
+        3
+       ],
+       [
+        "3"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:#/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "#"
+     ]
+    },
+    "&/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        9,
+        0
+       ],
+       [
+        "1"
+       ]
+      ],
+      [
+       [
+        4,
+        8
+       ],
+       [
+        "65536"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:&/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "&"
+     ]
+    },
+    ";/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        6,
+        16
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        1,
+        0
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:;/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      ";"
+     ]
+    },
+    "=>/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        13,
+        12
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:=>/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "=>"
+     ]
+    },
+    "?/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        15,
+        19
+       ],
+       [
+        "285"
+       ]
+      ],
+      [
+       [
+        8,
+        1
+       ],
+       [
+        "8"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:?/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "?"
+     ]
+    },
+    "@/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        13,
+        16
+       ],
+       [
+        "13"
+       ]
+      ],
+      [
+       [
+        8,
+        0
+       ],
+       null
+      ]
+     ],
+     "fails": [
+      "eq",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "law": "engc:@/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "@"
+     ]
+    },
+    "DANA/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        4,
+        19
+       ],
+       [
+        "23"
+       ]
+      ],
+      [
+       [
+        11,
+        5
+       ],
+       [
+        "16"
+       ]
+      ],
+      [
+       [
+        9,
+        0
+       ],
+       [
+        "9"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:DANA/2",
+     "out": "int",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "DANA"
+     ]
+    },
+    "KETE/1": {
+     "arity": 1,
+     "demos": [
+      [
+       [
+        2
+       ],
+       [
+        "-2"
+       ]
+      ],
+      [
+       [
+        0
+       ],
+       [
+        "0"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:KETE/1",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int"
+     ],
+     "words": [
+      "KETE"
+     ]
+    },
+    "KETE/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        17,
+        19
+       ],
+       [
+        "-2"
+       ]
+      ],
+      [
+       [
+        7,
+        6
+       ],
+       [
+        "1"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:KETE/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "KETE"
+     ]
+    },
+    "LINEGO/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        true,
+        true
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        false,
+        true
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:LINEGO/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "bool",
+      "bool"
+     ],
+     "words": [
+      "LINEGO"
+     ]
+    },
+    "NUMO/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        9,
+        14
+       ],
+       [
+        "9"
+       ]
+      ],
+      [
+       [
+        7,
+        2
+       ],
+       [
+        "1"
+       ]
+      ]
+     ],
+     "fails": [
+      "eq",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "law": "engc:NUMO/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "NUMO"
+     ]
+    },
+    "TESE/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        5,
+        12
+       ],
+       [
+        "60"
+       ]
+      ],
+      [
+       [
+        12,
+        4
+       ],
+       [
+        "48"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:TESE/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "TESE"
+     ]
+    },
+    "VIPE TUPU/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        0,
+        1
+       ],
+       [
+        "0"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "1"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:VIPE TUPU/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "VIPE",
+      "TUPU"
+     ]
+    },
+    "VIVO/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        true,
+        true
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        false,
+        true
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:VIVO/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "bool",
+      "bool"
+     ],
+     "words": [
+      "VIVO"
+     ]
+    },
+    "VOSEVE DEMI TUPU/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        4,
+        2
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        1
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:VOSEVE DEMI TUPU/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "VOSEVE",
+      "DEMI",
+      "TUPU"
+     ]
+    },
+    "VOSEVE KUKU NEDA/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        12,
+        14
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:VOSEVE KUKU NEDA/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "VOSEVE",
+      "KUKU",
+      "NEDA"
+     ]
+    },
+    "VOSEVE NAKU NEDA/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        7,
+        16
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        1,
+        0
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:VOSEVE NAKU NEDA/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "VOSEVE",
+      "NAKU",
+      "NEDA"
+     ]
+    },
+    "VOSEVE PURENI DEKUDA/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        1,
+        5
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        1,
+        0
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:VOSEVE PURENI DEKUDA/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "VOSEVE",
+      "PURENI",
+      "DEKUDA"
+     ]
+    },
+    "VOSEVE PURENI VEFA/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        19,
+        18
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        1
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:VOSEVE PURENI VEFA/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "VOSEVE",
+      "PURENI",
+      "VEFA"
+     ]
+    },
+    "VOSEVE ZOGO/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        14,
+        16
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        1,
+        0
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:VOSEVE ZOGO/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "VOSEVE",
+      "ZOGO"
+     ]
+    },
+    "ZOGO/1": {
+     "arity": 1,
+     "demos": [
+      [
+       [
+        true
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        false
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:ZOGO/1",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "bool"
+     ],
+     "words": [
+      "ZOGO"
+     ]
+    },
+    "^/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        13,
+        19
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        1,
+        0
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:^/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "^"
+     ]
+    },
+    "{/1": {
+     "arity": 1,
+     "demos": [
+      [
+       [
+        18
+       ],
+       [
+        "-18"
+       ]
+      ],
+      [
+       [
+        0
+       ],
+       [
+        "0"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:{/1",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int"
+     ],
+     "words": [
+      "{"
+     ]
+    },
+    "{/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        16,
+        4
+       ],
+       [
+        "12"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "0"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:{/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "{"
+     ]
+    },
+    "}/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        4,
+        5
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:}/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "}"
+     ]
+    }
+   },
+   "reader": {
+    "aside": [],
+    "assoc": {
+     "0": "L",
+     "1": "L",
+     "2": "L",
+     "3": "L",
+     "4": "L",
+     "5": "R"
+    },
+    "borrowed": {
+     "!!/2": ">/2",
+     "!/2": "!=/2",
+     "#/2": "+/2",
+     "&/2": "**/2",
+     ";/2": "</2",
+     "=>/2": ">=/2",
+     "?/2": "*/2",
+     "@/2": "%/2",
+     "DANA/2": "+/2",
+     "KETE/1": "-/1",
+     "KETE/2": "-/2",
+     "LINEGO/2": "OR/2",
+     "NUMO/2": "%/2",
+     "TESE/2": "*/2",
+     "VIPE TUPU/2": "**/2",
+     "VIVO/2": "AND/2",
+     "VOSEVE DEMI TUPU/2": "==/2",
+     "VOSEVE KUKU NEDA/2": ">/2",
+     "VOSEVE NAKU NEDA/2": "</2",
+     "VOSEVE PURENI DEKUDA/2": ">=/2",
+     "VOSEVE PURENI VEFA/2": "<=/2",
+     "VOSEVE ZOGO/2": "!=/2",
+     "ZOGO/1": "NOT/1",
+     "^/2": "==/2",
+     "{/1": "-/1",
+     "{/2": "-/2",
+     "}/2": "<=/2"
+    },
+    "cycles": {
+     "step:MODULO/2": "param"
+    },
+    "flipped": false,
+    "frame": [
+     [
+      "SULE"
+     ],
+     [
+      "~"
+     ]
+    ],
+    "laws": {
+     "engc:!!/2": {
+      "expr": [
+       "lt",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ],
+      "name": "engc:!!/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:!/2": {
+      "expr": [
+       "not",
+       [
+        "eq",
+        [
+         "var",
+         "x"
+        ],
+        [
+         "var",
+         "y"
+        ]
+       ]
+      ],
+      "name": "engc:!/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 4
+      }
+     },
+     "engc:#/2": {
+      "expr": [
+       "call",
+       "merge",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:#/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:&/2": {
+      "expr": [
+       "call",
+       "repeated_groups",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:&/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:;/2": {
+      "expr": [
+       "lt",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:;/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 3
+      }
+     },
+     "engc:=>/2": {
+      "expr": [
+       "not",
+       [
+        "lt",
+        [
+         "var",
+         "x"
+        ],
+        [
+         "var",
+         "y"
+        ]
+       ]
+      ],
+      "name": "engc:=>/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 4
+      }
+     },
+     "engc:?/2": {
+      "expr": [
+       "call",
+       "groups",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:?/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:@/2": {
+      "expr": [
+       "iter",
+       [
+        "call",
+        "step:MODULO/2",
+        [
+         "var",
+         "y"
+        ]
+       ],
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "name": "engc:@/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 5
+      }
+     },
+     "engc:DANA/2": {
+      "expr": [
+       "call",
+       "merge",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:DANA/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 3
+      }
+     },
+     "engc:KETE/1": {
+      "expr": [
+       "call",
+       "pay",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "name": "engc:KETE/1",
+      "out_type": "int",
+      "params": [
+       "x"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:KETE/2": {
+      "expr": [
+       "call",
+       "pay",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ],
+      "name": "engc:KETE/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:LINEGO/2": {
+      "expr": [
+       "not",
+       [
+        "and",
+        [
+         "not",
+         [
+          "var",
+          "p"
+         ]
+        ],
+        [
+         "not",
+         [
+          "var",
+          "q"
+         ]
+        ]
+       ]
+      ],
+      "name": "engc:LINEGO/2",
+      "out_type": "bool",
+      "params": [
+       "p",
+       "q"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 6
+      }
+     },
+     "engc:NUMO/2": {
+      "expr": [
+       "iter",
+       [
+        "call",
+        "step:MODULO/2",
+        [
+         "var",
+         "y"
+        ]
+       ],
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "name": "engc:NUMO/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 5
+      }
+     },
+     "engc:TESE/2": {
+      "expr": [
+       "call",
+       "groups",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:TESE/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:VIPE TUPU/2": {
+      "expr": [
+       "call",
+       "repeated_groups",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:VIPE TUPU/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:VIVO/2": {
+      "expr": [
+       "and",
+       [
+        "var",
+        "p"
+       ],
+       [
+        "var",
+        "q"
+       ]
+      ],
+      "name": "engc:VIVO/2",
+      "out_type": "bool",
+      "params": [
+       "p",
+       "q"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:VOSEVE DEMI TUPU/2": {
+      "expr": [
+       "eq",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:VOSEVE DEMI TUPU/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 3
+      }
+     },
+     "engc:VOSEVE KUKU NEDA/2": {
+      "expr": [
+       "lt",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ],
+      "name": "engc:VOSEVE KUKU NEDA/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:VOSEVE NAKU NEDA/2": {
+      "expr": [
+       "lt",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:VOSEVE NAKU NEDA/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 3
+      }
+     },
+     "engc:VOSEVE PURENI DEKUDA/2": {
+      "expr": [
+       "not",
+       [
+        "lt",
+        [
+         "var",
+         "x"
+        ],
+        [
+         "var",
+         "y"
+        ]
+       ]
+      ],
+      "name": "engc:VOSEVE PURENI DEKUDA/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 4
+      }
+     },
+     "engc:VOSEVE PURENI VEFA/2": {
+      "expr": [
+       "not",
+       [
+        "lt",
+        [
+         "var",
+         "y"
+        ],
+        [
+         "var",
+         "x"
+        ]
+       ]
+      ],
+      "name": "engc:VOSEVE PURENI VEFA/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 4
+      }
+     },
+     "engc:VOSEVE ZOGO/2": {
+      "expr": [
+       "not",
+       [
+        "eq",
+        [
+         "var",
+         "x"
+        ],
+        [
+         "var",
+         "y"
+        ]
+       ]
+      ],
+      "name": "engc:VOSEVE ZOGO/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 4
+      }
+     },
+     "engc:ZOGO/1": {
+      "expr": [
+       "not",
+       [
+        "var",
+        "p"
+       ]
+      ],
+      "name": "engc:ZOGO/1",
+      "out_type": "bool",
+      "params": [
+       "p"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 2
+      }
+     },
+     "engc:^/2": {
+      "expr": [
+       "eq",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:^/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 3,
+       "size": 3
+      }
+     },
+     "engc:{/1": {
+      "expr": [
+       "call",
+       "pay",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "name": "engc:{/1",
+      "out_type": "int",
+      "params": [
+       "x"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:{/2": {
+      "expr": [
+       "call",
+       "pay",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ],
+      "name": "engc:{/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:}/2": {
+      "expr": [
+       "not",
+       [
+        "lt",
+        [
+         "var",
+         "y"
+        ],
+        [
+         "var",
+         "x"
+        ]
+       ]
+      ],
+      "name": "engc:}/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 102,
+       "runs": 2,
+       "size": 4
+      }
+     },
+     "step:MODULO/2": {
+      "expr": [
+       "ite",
+       [
+        "eq",
+        [
+         "var",
+         "acc"
+        ],
+        [
+         "pred",
+         [
+          "var",
+          "t"
+         ]
+        ]
+       ],
+       [
+        "const",
+        0
+       ],
+       [
+        "succ",
+        [
+         "var",
+         "acc"
+        ]
+       ]
+      ],
+      "name": "step:MODULO/2",
+      "out_type": "int",
+      "params": [
+       "acc",
+       "t"
+      ],
+      "provenance": {
+       "found_by": "stepping",
+       "how": "rule and exceptions",
+       "size": 8
+      }
+     }
+    },
+    "levels": {
+     "!!/2": 2,
+     "!/2": 2,
+     "#/2": 3,
+     "&/2": 5,
+     ";/2": 2,
+     "=>/2": 2,
+     "?/2": 4,
+     "@/2": 4,
+     "KETE/1": 4,
+     "KETE/2": 3,
+     "LINEGO/2": 0,
+     "VIVO/2": 1,
+     "VOSEVE DEMI TUPU/2": 2,
+     "VOSEVE PURENI VEFA/2": 2,
+     "ZOGO/1": 1
+    },
+    "marks": {
+     "$": "open",
+     "|": "close"
+    },
+    "phrases": {
+     "!!/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         10,
+         12
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:!!/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "!!"
+      ]
+     },
+     "!/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         11,
+         6
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         1
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:!/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "!"
+      ]
+     },
+     "#/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         7,
+         16
+        ],
+        [
+         "23"
+        ]
+       ],
+       [
+        [
+         0,
+         3
+        ],
+        [
+         "3"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:#/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "#"
+      ]
+     },
+     "&/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         9,
+         0
+        ],
+        [
+         "1"
+        ]
+       ],
+       [
+        [
+         4,
+         8
+        ],
+        [
+         "65536"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:&/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "&"
+      ]
+     },
+     ";/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         6,
+         16
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         1,
+         0
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:;/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       ";"
+      ]
+     },
+     "=>/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         13,
+         12
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:=>/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "=>"
+      ]
+     },
+     "?/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         15,
+         19
+        ],
+        [
+         "285"
+        ]
+       ],
+       [
+        [
+         8,
+         1
+        ],
+        [
+         "8"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:?/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "?"
+      ]
+     },
+     "@/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         13,
+         16
+        ],
+        [
+         "13"
+        ]
+       ],
+       [
+        [
+         8,
+         0
+        ],
+        null
+       ]
+      ],
+      "fails": [
+       "eq",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "law": "engc:@/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "@"
+      ]
+     },
+     "DANA/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         4,
+         19
+        ],
+        [
+         "23"
+        ]
+       ],
+       [
+        [
+         11,
+         5
+        ],
+        [
+         "16"
+        ]
+       ],
+       [
+        [
+         9,
+         0
+        ],
+        [
+         "9"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:DANA/2",
+      "out": "int",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "DANA"
+      ]
+     },
+     "KETE/1": {
+      "arity": 1,
+      "demos": [
+       [
+        [
+         2
+        ],
+        [
+         "-2"
+        ]
+       ],
+       [
+        [
+         0
+        ],
+        [
+         "0"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:KETE/1",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int"
+      ],
+      "words": [
+       "KETE"
+      ]
+     },
+     "KETE/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         17,
+         19
+        ],
+        [
+         "-2"
+        ]
+       ],
+       [
+        [
+         7,
+         6
+        ],
+        [
+         "1"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:KETE/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "KETE"
+      ]
+     },
+     "LINEGO/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         true,
+         true
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         false,
+         true
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:LINEGO/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "bool",
+       "bool"
+      ],
+      "words": [
+       "LINEGO"
+      ]
+     },
+     "NUMO/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         9,
+         14
+        ],
+        [
+         "9"
+        ]
+       ],
+       [
+        [
+         7,
+         2
+        ],
+        [
+         "1"
+        ]
+       ]
+      ],
+      "fails": [
+       "eq",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "law": "engc:NUMO/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "NUMO"
+      ]
+     },
+     "TESE/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         5,
+         12
+        ],
+        [
+         "60"
+        ]
+       ],
+       [
+        [
+         12,
+         4
+        ],
+        [
+         "48"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:TESE/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "TESE"
+      ]
+     },
+     "VIPE TUPU/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         0,
+         1
+        ],
+        [
+         "0"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "1"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:VIPE TUPU/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "VIPE",
+       "TUPU"
+      ]
+     },
+     "VIVO/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         true,
+         true
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         false,
+         true
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:VIVO/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "bool",
+       "bool"
+      ],
+      "words": [
+       "VIVO"
+      ]
+     },
+     "VOSEVE DEMI TUPU/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         4,
+         2
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         1
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:VOSEVE DEMI TUPU/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "VOSEVE",
+       "DEMI",
+       "TUPU"
+      ]
+     },
+     "VOSEVE KUKU NEDA/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         12,
+         14
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:VOSEVE KUKU NEDA/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "VOSEVE",
+       "KUKU",
+       "NEDA"
+      ]
+     },
+     "VOSEVE NAKU NEDA/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         7,
+         16
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         1,
+         0
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:VOSEVE NAKU NEDA/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "VOSEVE",
+       "NAKU",
+       "NEDA"
+      ]
+     },
+     "VOSEVE PURENI DEKUDA/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         1,
+         5
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         1,
+         0
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:VOSEVE PURENI DEKUDA/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "VOSEVE",
+       "PURENI",
+       "DEKUDA"
+      ]
+     },
+     "VOSEVE PURENI VEFA/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         19,
+         18
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         1
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:VOSEVE PURENI VEFA/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "VOSEVE",
+       "PURENI",
+       "VEFA"
+      ]
+     },
+     "VOSEVE ZOGO/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         14,
+         16
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         1,
+         0
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:VOSEVE ZOGO/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "VOSEVE",
+       "ZOGO"
+      ]
+     },
+     "ZOGO/1": {
+      "arity": 1,
+      "demos": [
+       [
+        [
+         true
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         false
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:ZOGO/1",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "bool"
+      ],
+      "words": [
+       "ZOGO"
+      ]
+     },
+     "^/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         13,
+         19
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         1,
+         0
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:^/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "^"
+      ]
+     },
+     "{/1": {
+      "arity": 1,
+      "demos": [
+       [
+        [
+         18
+        ],
+        [
+         "-18"
+        ]
+       ],
+       [
+        [
+         0
+        ],
+        [
+         "0"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:{/1",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int"
+      ],
+      "words": [
+       "{"
+      ]
+     },
+     "{/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         16,
+         4
+        ],
+        [
+         "12"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "0"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:{/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "{"
+      ]
+     },
+     "}/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         4,
+         5
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:}/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "}"
+      ]
+     }
+    },
+    "runs": [
+     [
+      "SULE 4 DANA 19 ~",
+      [
+       "23"
+      ]
+     ],
+     [
+      "SULE 11 DANA 5 ~",
+      [
+       "16"
+      ]
+     ],
+     [
+      "SULE 9 DANA 0 ~",
+      [
+       "9"
+      ]
+     ],
+     [
+      "SULE 17 KETE 19 ~",
+      [
+       "-2"
+      ]
+     ],
+     [
+      "SULE 7 KETE 6 ~",
+      [
+       "1"
+      ]
+     ],
+     [
+      "SULE 5 TESE 12 ~",
+      [
+       "60"
+      ]
+     ],
+     [
+      "SULE 12 TESE 4 ~",
+      [
+       "48"
+      ]
+     ],
+     [
+      "SULE 9 NUMO 14 ~",
+      [
+       "9"
+      ]
+     ],
+     [
+      "SULE 7 NUMO 2 ~",
+      [
+       "1"
+      ]
+     ],
+     [
+      "SULE 0 VIPE TUPU 1 ~",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SULE 0 VIPE TUPU 0 ~",
+      [
+       "1"
+      ]
+     ],
+     [
+      "SULE 12 VOSEVE KUKU NEDA 14 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE KUKU NEDA 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 7 VOSEVE NAKU NEDA 16 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE NAKU NEDA 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 1 VOSEVE NAKU NEDA 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 4 VOSEVE DEMI TUPU 2 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE DEMI TUPU 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE DEMI TUPU 1 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 1 VOSEVE PURENI DEKUDA 5 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE PURENI DEKUDA 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 1 VOSEVE PURENI DEKUDA 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 19 VOSEVE PURENI VEFA 18 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE PURENI VEFA 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE PURENI VEFA 1 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 14 VOSEVE ZOGO 16 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE ZOGO 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 1 VOSEVE ZOGO 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 7 # 16 ~",
+      [
+       "23"
+      ]
+     ],
+     [
+      "SULE 0 # 3 ~",
+      [
+       "3"
+      ]
+     ],
+     [
+      "SULE 16 { 4 ~",
+      [
+       "12"
+      ]
+     ],
+     [
+      "SULE 0 { 0 ~",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SULE 15 ? 19 ~",
+      [
+       "285"
+      ]
+     ],
+     [
+      "SULE 8 ? 1 ~",
+      [
+       "8"
+      ]
+     ],
+     [
+      "SULE 13 @ 16 ~",
+      [
+       "13"
+      ]
+     ],
+     [
+      "SULE 8 @ 0 ~",
+      null
+     ],
+     [
+      "SULE 9 & 0 ~",
+      [
+       "1"
+      ]
+     ],
+     [
+      "SULE 4 & 8 ~",
+      [
+       "65536"
+      ]
+     ],
+     [
+      "SULE 10 !! 12 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 0 !! 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 6 ; 16 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 ; 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 1 ; 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 13 ^ 19 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 0 ^ 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 1 ^ 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 13 => 12 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 => 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 4 } 5 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 } 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 11 ! 6 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 ! 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 0 ! 1 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE KETE 2 ~",
+      [
+       "-2"
+      ]
+     ],
+     [
+      "SULE KETE 0 ~",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SULE { 18 ~",
+      [
+       "-18"
+      ]
+     ],
+     [
+      "SULE { 0 ~",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SULE 7 VOSEVE ZOGO 9 VIVO 13 VOSEVE NAKU NEDA 17 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 !! 0 VIVO 1 !! 0 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 19 VOSEVE PURENI DEKUDA 8 LINEGO 10 VOSEVE ZOGO 15 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 0 !! 0 LINEGO 1 !! 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE ZOGO 17 VOSEVE ZOGO 14 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE ZOGO 0 !! 0 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE KETE 6 ; 19 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 3 VOSEVE PURENI DEKUDA 9 NUMO 2 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE ZOGO 10 ; 14 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 19 { 0 @ 2 ~",
+      [
+       "19"
+      ]
+     ],
+     [
+      "SULE 14 ? 13 VOSEVE DEMI TUPU 7 ~",
+      [
+       "False"
+      ]
+     ],
+     [
+      "SULE 20 @ 7 VOSEVE NAKU NEDA 8 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE $ 15 KETE 4 | TESE 0 ~",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SULE 5 KETE $ 20 DANA 13 | ~",
+      [
+       "-28"
+      ]
+     ],
+     [
+      "SULE $ 5 DANA 2 | TESE 20 ~",
+      [
+       "140"
+      ]
+     ],
+     [
+      "SULE { $ 11 ? 5 KETE 0 | DANA 9 # 8 ~",
+      [
+       "-38"
+      ]
+     ],
+     [
+      "SULE $ { $ 8 # $ 1 TESE 5 | { 9 | | # 8 ~",
+      [
+       "4"
+      ]
+     ],
+     [
+      "SULE 0 VOSEVE NAKU NEDA $ 1 ? $ 2 & 0 | | # 1 ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE 12 !! 6 KETE $ 7 { 11 # 1 KETE 1 | ~",
+      [
+       "True"
+      ]
+     ],
+     [
+      "SULE { 11 { $ 5 @ 8 ? 3 | ~",
+      [
+       "-26"
+      ]
+     ]
+    ],
+    "stats": {
+     "own": 40,
+     "trainer": 37
+    },
+    "symbols": [
+     "False",
+     "True"
+    ]
+   },
+   "runs": [
+    [
+     "SULE 4 DANA 19 ~",
+     [
+      "23"
+     ]
+    ],
+    [
+     "SULE 11 DANA 5 ~",
+     [
+      "16"
+     ]
+    ],
+    [
+     "SULE 9 DANA 0 ~",
+     [
+      "9"
+     ]
+    ],
+    [
+     "SULE 17 KETE 19 ~",
+     [
+      "-2"
+     ]
+    ],
+    [
+     "SULE 7 KETE 6 ~",
+     [
+      "1"
+     ]
+    ],
+    [
+     "SULE 5 TESE 12 ~",
+     [
+      "60"
+     ]
+    ],
+    [
+     "SULE 12 TESE 4 ~",
+     [
+      "48"
+     ]
+    ],
+    [
+     "SULE 9 NUMO 14 ~",
+     [
+      "9"
+     ]
+    ],
+    [
+     "SULE 7 NUMO 2 ~",
+     [
+      "1"
+     ]
+    ],
+    [
+     "SULE 0 VIPE TUPU 1 ~",
+     [
+      "0"
+     ]
+    ],
+    [
+     "SULE 0 VIPE TUPU 0 ~",
+     [
+      "1"
+     ]
+    ],
+    [
+     "SULE 12 VOSEVE KUKU NEDA 14 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE KUKU NEDA 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 7 VOSEVE NAKU NEDA 16 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE NAKU NEDA 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 1 VOSEVE NAKU NEDA 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 4 VOSEVE DEMI TUPU 2 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE DEMI TUPU 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE DEMI TUPU 1 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 1 VOSEVE PURENI DEKUDA 5 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE PURENI DEKUDA 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 1 VOSEVE PURENI DEKUDA 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 19 VOSEVE PURENI VEFA 18 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE PURENI VEFA 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE PURENI VEFA 1 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 14 VOSEVE ZOGO 16 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE ZOGO 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 1 VOSEVE ZOGO 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 7 # 16 ~",
+     [
+      "23"
+     ]
+    ],
+    [
+     "SULE 0 # 3 ~",
+     [
+      "3"
+     ]
+    ],
+    [
+     "SULE 16 { 4 ~",
+     [
+      "12"
+     ]
+    ],
+    [
+     "SULE 0 { 0 ~",
+     [
+      "0"
+     ]
+    ],
+    [
+     "SULE 15 ? 19 ~",
+     [
+      "285"
+     ]
+    ],
+    [
+     "SULE 8 ? 1 ~",
+     [
+      "8"
+     ]
+    ],
+    [
+     "SULE 13 @ 16 ~",
+     [
+      "13"
+     ]
+    ],
+    [
+     "SULE 8 @ 0 ~",
+     null
+    ],
+    [
+     "SULE 9 & 0 ~",
+     [
+      "1"
+     ]
+    ],
+    [
+     "SULE 4 & 8 ~",
+     [
+      "65536"
+     ]
+    ],
+    [
+     "SULE 10 !! 12 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 0 !! 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 6 ; 16 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 ; 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 1 ; 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 13 ^ 19 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 0 ^ 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 1 ^ 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 13 => 12 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 => 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 4 } 5 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 } 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 11 ! 6 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 ! 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 0 ! 1 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE KETE 2 ~",
+     [
+      "-2"
+     ]
+    ],
+    [
+     "SULE KETE 0 ~",
+     [
+      "0"
+     ]
+    ],
+    [
+     "SULE { 18 ~",
+     [
+      "-18"
+     ]
+    ],
+    [
+     "SULE { 0 ~",
+     [
+      "0"
+     ]
+    ],
+    [
+     "SULE 7 VOSEVE ZOGO 9 VIVO 13 VOSEVE NAKU NEDA 17 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 !! 0 VIVO 1 !! 0 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 19 VOSEVE PURENI DEKUDA 8 LINEGO 10 VOSEVE ZOGO 15 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 0 !! 0 LINEGO 1 !! 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE ZOGO 17 VOSEVE ZOGO 14 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE ZOGO 0 !! 0 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE KETE 6 ; 19 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 3 VOSEVE PURENI DEKUDA 9 NUMO 2 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE ZOGO 10 ; 14 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 19 { 0 @ 2 ~",
+     [
+      "19"
+     ]
+    ],
+    [
+     "SULE 14 ? 13 VOSEVE DEMI TUPU 7 ~",
+     [
+      "False"
+     ]
+    ],
+    [
+     "SULE 20 @ 7 VOSEVE NAKU NEDA 8 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE $ 15 KETE 4 | TESE 0 ~",
+     [
+      "0"
+     ]
+    ],
+    [
+     "SULE 5 KETE $ 20 DANA 13 | ~",
+     [
+      "-28"
+     ]
+    ],
+    [
+     "SULE $ 5 DANA 2 | TESE 20 ~",
+     [
+      "140"
+     ]
+    ],
+    [
+     "SULE { $ 11 ? 5 KETE 0 | DANA 9 # 8 ~",
+     [
+      "-38"
+     ]
+    ],
+    [
+     "SULE $ { $ 8 # $ 1 TESE 5 | { 9 | | # 8 ~",
+     [
+      "4"
+     ]
+    ],
+    [
+     "SULE 0 VOSEVE NAKU NEDA $ 1 ? $ 2 & 0 | | # 1 ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE 12 !! 6 KETE $ 7 { 11 # 1 KETE 1 | ~",
+     [
+      "True"
+     ]
+    ],
+    [
+     "SULE { 11 { $ 5 @ 8 ? 3 | ~",
+     [
+      "-26"
+     ]
+    ]
+   ],
+   "statements": {
+    "blocks": {
+     "close": "ROSOSA",
+     "middle": [
+      "PETUPE"
+     ],
+     "open": ">>"
+    },
+    "call": {
+     "bind": [
+      "DEMI",
+      "TUPU"
+     ],
+     "close": null,
+     "sep": "<<",
+     "with": [
+      "PIPA"
+     ],
+     "word": "ROPE"
+    },
+    "end": "~",
+    "kinds": {
+     "GEGUME": {
+      "does": "return",
+      "fixed": [
+       "GEGUME"
+      ],
+      "span": [
+       1,
+       1
+      ]
+     },
+     "MIRO": {
+      "does": "set",
+      "fixed": [
+       "MIRO",
+       "\u00b7",
+       "TUPU"
+      ],
+      "name": 1,
+      "span": [
+       3,
+       1
+      ]
+     },
+     "RAZI": {
+      "again": true,
+      "does": "test",
+      "fixed": [
+       "RAZI"
+      ],
+      "span": [
+       1,
+       2
+      ]
+     },
+     "SOSUNU": {
+      "does": "routine",
+      "fixed": [
+       "SOSUNU",
+       "METE"
+      ],
+      "name": 2
+     },
+     "SULE": {
+      "does": "print",
+      "fixed": [
+       "SULE"
+      ],
+      "span": [
+       1,
+       1
+      ]
+     },
+     "TONE": {
+      "again": false,
+      "does": "test",
+      "fixed": [
+       "TONE"
+      ],
+      "span": [
+       1,
+       2
+      ]
+     },
+     "ZOFELE": {
+      "does": "walk",
+      "fixed": [
+       "ZOFELE",
+       "RESI",
+       "\u00b7",
+       "FUROSI"
+      ],
+      "name": 2,
+      "span": [
+       4,
+       1
+      ]
+     }
+    },
+    "phrases": {
+     "DAVE BIKO VOSO": {
+      "head": [
+       "DAVE",
+       "BIKO",
+       "VOSO"
+      ],
+      "law": [
+       "fold",
+       "merge",
+       [
+        "var",
+        "row"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "lead": false,
+      "names": [
+       "row"
+      ],
+      "out": "int",
+      "runs": 3,
+      "tail": [
+       [
+        "slot"
+       ]
+      ],
+      "types": [
+       "list"
+      ]
+     },
+     "DAVE BOGO MILI": {
+      "head": [
+       "DAVE",
+       "BOGO",
+       "MILI"
+      ],
+      "law": [
+       "nil"
+      ],
+      "lead": false,
+      "names": [],
+      "out": "list",
+      "runs": 2,
+      "tail": [],
+      "types": []
+     },
+     "DAVE MEMESI": {
+      "head": [
+       "DAVE",
+       "MEMESI"
+      ],
+      "law": [
+       "upto",
+       [
+        "var",
+        "a"
+       ],
+       [
+        "var",
+        "b"
+       ]
+      ],
+      "lead": false,
+      "names": [
+       "a",
+       "b"
+      ],
+      "out": "list",
+      "runs": 3,
+      "tail": [
+       [
+        "slot"
+       ],
+       [
+        "fixed",
+        "TUPU"
+       ],
+       [
+        "slot"
+       ]
+      ],
+      "types": [
+       "int",
+       "int"
+      ]
+     },
+     "DAVE MILI": {
+      "head": [
+       "DAVE",
+       "MILI"
+      ],
+      "law": [
+       "var",
+       "row"
+      ],
+      "lead": false,
+      "names": [
+       "row"
+      ],
+      "out": "list",
+      "runs": 11,
+      "tail": [
+       [
+        "series",
+        "<<"
+       ]
+      ],
+      "types": [
+       "list"
+      ]
+     },
+     "DAVE SEKA VOSO": {
+      "head": [
+       "DAVE",
+       "SEKA",
+       "VOSO"
+      ],
+      "law": [
+       "len",
+       [
+        "var",
+        "row"
+       ]
+      ],
+      "lead": false,
+      "names": [
+       "row"
+      ],
+      "out": "int",
+      "runs": 3,
+      "tail": [
+       [
+        "slot"
+       ]
+      ],
+      "types": [
+       "list"
+      ]
+     },
+     "\u00b7 PIPA": {
+      "head": [
+       "PIPA"
+      ],
+      "law": [
+       "snoc",
+       [
+        "var",
+        "row"
+       ],
+       [
+        "var",
+        "b"
+       ]
+      ],
+      "lead": true,
+      "names": [
+       "row",
+       "b"
+      ],
+      "out": "list",
+      "runs": 3,
+      "tail": [
+       [
+        "slot"
+       ],
+       [
+        "fixed",
+        "FOTE"
+       ]
+      ],
+      "types": [
+       "list",
+       "int"
+      ]
+     }
+    },
+    "rows": [
+     "[",
+     ", ",
+     "]"
+    ],
+    "seen": [
+     [
+      "MIRO b TUPU 2 ~\nMIRO c TUPU b DANA 2 ~\nSULE c ~\n",
+      [
+       "4"
+      ]
+     ],
+     [
+      "MIRO b TUPU 0 ~\nTONE b VOSEVE KUKU NEDA 4 DATE >>\n    SULE 3 ~\nPETUPE >>\n    SULE 2 ~\nROSOSA TONE ~\n",
+      [
+       "2"
+      ]
+     ],
+     [
+      "MIRO i TUPU 0 ~\nMIRO b TUPU 0 ~\nRAZI i VOSEVE NAKU NEDA 3 TEPOTU >>\n    MIRO b TUPU b DANA i ~\n    MIRO i TUPU i DANA 1 ~\nROSOSA RAZI ~\nSULE b ~\n",
+      [
+       "3"
+      ]
+     ],
+     [
+      "MIRO seen TUPU DAVE MILI 9 << 6 << 7 ~\nSULE seen ~\n",
+      [
+       "[9, 6, 7]"
+      ]
+     ],
+     [
+      "MIRO seen TUPU DAVE BOGO MILI ~\nMIRO seen TUPU seen PIPA 1 FOTE ~\nMIRO seen TUPU seen PIPA 5 FOTE ~\nSULE seen ~\n",
+      [
+       "[1, 5]"
+      ]
+     ],
+     [
+      "MIRO seen TUPU DAVE MILI 7 << 7 ~\nMIRO b TUPU DAVE SEKA VOSO seen ~\nMIRO c TUPU DAVE BIKO VOSO seen ~\nSULE b ~\nSULE c ~\n",
+      [
+       "2",
+       "14"
+      ]
+     ],
+     [
+      "MIRO b TUPU 0 ~\nZOFELE RESI e FUROSI DAVE MEMESI 2 TUPU 3 >>\n    MIRO b TUPU b DANA e ~\nROSOSA ZOFELE ~\nSULE b ~\n",
+      [
+       "5"
+      ]
+     ],
+     [
+      "MIRO seen TUPU DAVE MILI 2 << 0 << 4 ~\nZOFELE RESI e FUROSI seen >>\n    SULE e ~\nROSOSA ZOFELE ~\n",
+      [
+       "2",
+       "0",
+       "4"
+      ]
+     ],
+     [
+      "ZOFELE RESI e FUROSI DAVE MILI 4 << 8 << 2 >>\n    SULE e TESE 2 ~\nROSOSA ZOFELE ~\n",
+      [
+       "8",
+       "16",
+       "4"
+      ]
+     ],
+     [
+      "SOSUNU METE fold PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    GEGUME n TESE m ~\nROSOSA METE ~\nMIRO b TUPU ROPE fold PIPA n DEMI TUPU 7 << m DEMI TUPU 3 ~\nSULE b ~\n",
+      [
+       "21"
+      ]
+     ],
+     [
+      "SOSUNU METE fold PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 1 DATE >>\n        GEGUME 0 ~\n    ROSOSA TONE ~\n    GEGUME n DANA $ ROPE fold PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nSULE ROPE fold PIPA n DEMI TUPU 2 ~\n",
+      [
+       "3"
+      ]
+     ],
+     [
+      "SOSUNU METE step PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME n ~\n    ROSOSA TONE ~\n    GEGUME 2 DANA $ ROPE step PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nSULE 4 ~\n",
+      [
+       "4"
+      ]
+     ],
+     [
+      "SOSUNU METE fold PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 1 DATE >>\n        GEGUME 2 ~\n    ROSOSA TONE ~\n    GEGUME n TESE $ ROPE fold PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nSULE 5 ? 3 ~\nMIRO n2 TUPU 1 DANA 5 ~\nMIRO picks TUPU DAVE MILI n2 ~\nSULE picks ~\nSULE n2 ~\n",
+      [
+       "15",
+       "[6]",
+       "6"
+      ]
+     ],
+     [
+      "SOSUNU METE grow PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME n @ 5 ~\n    ROSOSA TONE ~\n    GEGUME n TESE $ ROPE grow PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nSULE 3 ~\n",
+      [
+       "3"
+      ]
+     ],
+     [
+      "SOSUNU METE h PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME 3 KETE 8 ~\n    ROSOSA TONE ~\n    GEGUME n DANA $ ROPE h PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nSULE 0 ~\n",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SOSUNU METE grow PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE 7 VOSEVE PURENI VEFA n DATE >>\n        GEGUME 3 ~\n    ROSOSA TONE ~\n    GEGUME m DANA 7 ~\nROSOSA METE ~\nSULE 7 ~\n",
+      [
+       "7"
+      ]
+     ],
+     [
+      "SOSUNU METE f PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME n KETE n ~\n    ROSOSA TONE ~\n    GEGUME n TESE $ ROPE f PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nSULE 8 ~\n",
+      [
+       "8"
+      ]
+     ],
+     [
+      "MIRO count TUPU 5 @ 2 ~\nMIRO seen TUPU DAVE MILI count << 3 << count ~\nSULE count ~\n",
+      [
+       "1"
+      ]
+     ],
+     [
+      "SOSUNU METE step PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME 3 ~\n    ROSOSA TONE ~\n    GEGUME 2 TESE $ ROPE step PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nMIRO y TUPU ROPE step PIPA n DEMI TUPU 2 ~\nSULE y ~\n",
+      [
+       "6"
+      ]
+     ],
+     [
+      "SOSUNU METE h PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 1 DATE >>\n        GEGUME 0 ~\n    ROSOSA TONE ~\n    GEGUME 7 TESE $ ROPE h PIPA n DEMI TUPU n KETE 1 << m DEMI TUPU m | ~\nROSOSA METE ~\nSULE 9 VOSEVE PURENI DEKUDA 5 ~\nMIRO m TUPU 3 KETE 2 ~\nMIRO seen TUPU DAVE MILI m << m << m ~\nMIRO acc TUPU m TESE m KETE DAVE BIKO VOSO seen ~\nSULE acc ~\n",
+      [
+       "True",
+       "-2"
+      ]
+     ],
+     [
+      "SOSUNU METE grow PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    GEGUME 6 ~\nROSOSA METE ~\nMIRO y TUPU 0 ~\nZOFELE RESI e FUROSI DAVE MILI y << y << 3 << 9 >>\n    SULE y ~\n    MIRO best TUPU ROPE grow PIPA n DEMI TUPU 0 TESE e << m DEMI TUPU 6 ~\nROSOSA ZOFELE ~\nMIRO row TUPU DAVE BOGO MILI ~\nMIRO row TUPU row PIPA e FOTE ~\nSULE e KETE y NUMO 5 ~\nSULE y ~\n",
+      [
+       "0",
+       "0",
+       "0",
+       "0",
+       "9",
+       "0"
+      ]
+     ],
+     [
+      "SOSUNU METE fold PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 1 DATE >>\n        GEGUME n ~\n    ROSOSA TONE ~\n    GEGUME m KETE $ ROPE fold PIPA n DEMI TUPU n KETE 1 << m DEMI TUPU m | ~\nROSOSA METE ~\nSULE 2 ~\n",
+      [
+       "2"
+      ]
+     ],
+     [
+      "SOSUNU METE step PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE 3 KETE m VOSEVE NAKU NEDA n DATE >>\n        GEGUME n NUMO 5 @ 5 ~\n    ROSOSA TONE ~\n    GEGUME 0 TESE n # n ~\nROSOSA METE ~\nSULE 0 KETE 9 TESE 3 ~\nMIRO seen TUPU DAVE MILI 3 << 5 << 6 ~\nSULE 6 DANA 6 ~\nSULE DAVE BIKO VOSO seen KETE 7 VOSEVE PURENI DEKUDA 3 ~\nSULE 3 ~\n",
+      [
+       "-27",
+       "12",
+       "True",
+       "3"
+      ]
+     ],
+     [
+      "SOSUNU METE h PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE m # m VOSEVE DEMI TUPU 9 DATE >>\n        GEGUME m DANA 9 ~\n    ROSOSA TONE ~\n    GEGUME m TESE m @ 9 ~\nROSOSA METE ~\nMIRO xs TUPU DAVE MILI 8 << 5 << 3 << 9 ~\nSULE 6 ~\n",
+      [
+       "6"
+      ]
+     ],
+     [
+      "SOSUNU METE h PIPA n DOZEKA TIMEGI >>\n    GEGUME 3 ~\nROSOSA METE ~\nMIRO i TUPU 0 ~\nRAZI i VOSEVE NAKU NEDA 6 TEPOTU >>\n    SULE 8 ~\n    MIRO s TUPU ROPE h PIPA n DEMI TUPU 9 ~\n    MIRO i TUPU i DANA 1 ~\nROSOSA RAZI ~\nSULE i ~\n",
+      [
+       "8",
+       "8",
+       "8",
+       "8",
+       "8",
+       "8",
+       "6"
+      ]
+     ],
+     [
+      "SOSUNU METE f PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE m VOSEVE KUKU NEDA m DATE >>\n        GEGUME 4 KETE m ~\n    ROSOSA TONE ~\n    GEGUME 8 ~\nROSOSA METE ~\nMIRO u TUPU 0 NUMO 4 ? 3 ~\nMIRO a TUPU 2 ~\nSULE u ~\n",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SOSUNU METE step PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    GEGUME 2 ~\nROSOSA METE ~\nMIRO count TUPU ROPE step PIPA n DEMI TUPU 1 ? 6 << m DEMI TUPU 3 ~\nMIRO v TUPU count { 9 ~\nSULE 9 ~\nMIRO v TUPU 4 NUMO 4 NUMO 7 ~\nMIRO s TUPU ROPE step PIPA n DEMI TUPU 0 << m DEMI TUPU count ~\nMIRO v TUPU 2 DANA 0 DANA s ~\nSULE s ~\n",
+      [
+       "9",
+       "2"
+      ]
+     ],
+     [
+      "SOSUNU METE fold PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 1 DATE >>\n        GEGUME 7 ~\n    ROSOSA TONE ~\n    GEGUME 6 KETE $ ROPE fold PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nSULE 6 ~\n",
+      [
+       "6"
+      ]
+     ],
+     [
+      "SOSUNU METE fold PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE 9 # n VOSEVE KUKU NEDA n VIVO m VOSEVE KUKU NEDA m DATE >>\n        GEGUME 8 DANA 6 ~\n    ROSOSA TONE ~\n    GEGUME n TESE m ~\nROSOSA METE ~\nMIRO n2 TUPU ROPE fold PIPA n DEMI TUPU 2 KETE 9 << m DEMI TUPU 1 ~\nMIRO s TUPU ROPE fold PIPA n DEMI TUPU 2 << m DEMI TUPU 5 ~\nSULE s ~\n",
+      [
+       "10"
+      ]
+     ],
+     [
+      "SOSUNU METE grow PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME n NUMO 6 ~\n    ROSOSA TONE ~\n    GEGUME 8 DANA $ ROPE grow PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nMIRO seen TUPU DAVE MILI 7 ~\nZOFELE RESI e FUROSI seen >>\n    SULE 4 @ 6 ? e ~\nROSOSA ZOFELE ~\nSULE e ~\n",
+      [
+       "28",
+       "7"
+      ]
+     ],
+     [
+      "SOSUNU METE f PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME m DANA n ~\n    ROSOSA TONE ~\n    GEGUME n KETE $ ROPE f PIPA n DEMI TUPU n KETE 1 << m DEMI TUPU m | ~\nROSOSA METE ~\nMIRO b TUPU 7 ~\nMIRO n2 TUPU b ~\nSULE b VOSEVE ZOGO b ~\nSULE b ~\n",
+      [
+       "False",
+       "7"
+      ]
+     ],
+     [
+      "MIRO a TUPU DAVE MILI 3 << 1 << 4 ~\nMIRO count TUPU DAVE BIKO VOSO a ~\n",
+      []
+     ],
+     [
+      "MIRO a TUPU DAVE BOGO MILI ~\nMIRO count TUPU DAVE BIKO VOSO a ~\n",
+      []
+     ],
+     [
+      "MIRO count TUPU DAVE MEMESI 3 TUPU 6 ~\n",
+      []
+     ],
+     [
+      "MIRO count TUPU DAVE MEMESI 0 TUPU 2 ~\n",
+      []
+     ],
+     [
+      "MIRO a TUPU DAVE MILI 3 << 1 << 4 ~\nMIRO count TUPU DAVE SEKA VOSO a ~\n",
+      []
+     ],
+     [
+      "MIRO a TUPU DAVE BOGO MILI ~\nMIRO count TUPU DAVE SEKA VOSO a ~\n",
+      []
+     ],
+     [
+      "SOSUNU METE grow PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 1 DATE >>\n        GEGUME 4 ~\n    ROSOSA TONE ~\n    GEGUME 8 DANA $ ROPE grow PIPA n DEMI TUPU n KETE 1 << m DEMI TUPU m | ~\nROSOSA METE ~\nSULE 2 ~\n",
+      [
+       "2"
+      ]
+     ],
+     [
+      "SOSUNU METE step PIPA n DOZEKA TIMEGI << m DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 1 DATE >>\n        GEGUME n ~\n    ROSOSA TONE ~\n    GEGUME m TESE $ ROPE step PIPA n DEMI TUPU n KETE 1 << m DEMI TUPU m | ~\nROSOSA METE ~\nMIRO s TUPU 6 DANA 3 KETE 8 ~\nSULE s ~\n",
+      [
+       "1"
+      ]
+     ],
+     [
+      "SOSUNU METE grow PIPA n DOZEKA TIMEGI >>\n    GEGUME n ~\nROSOSA METE ~\nSULE 7 ~\n",
+      [
+       "7"
+      ]
+     ],
+     [
+      "SOSUNU METE grow PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME 8 ~\n    ROSOSA TONE ~\n    GEGUME n TESE $ ROPE grow PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nTONE 0 VOSEVE PURENI DEKUDA 0 DATE >>\n    MIRO u TUPU 7 ~\n    MIRO d TUPU 3 # u KETE u ~\nPETUPE >>\n    SULE 9 @ 2 @ 8 ~\nROSOSA TONE ~\nSULE 6 ~\n",
+      [
+       "6"
+      ]
+     ],
+     [
+      "SOSUNU METE step PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE DEMI TUPU n DATE >>\n        GEGUME 4 ? 1 NUMO 7 ~\n    ROSOSA TONE ~\n    GEGUME n # n KETE n ~\nROSOSA METE ~\nZOFELE RESI e FUROSI DAVE MILI 1 >>\n    MIRO row TUPU DAVE MILI e << e << e ~\n    MIRO n2 TUPU e DANA e ~\n    MIRO n2 TUPU 8 { 1 ~\nROSOSA ZOFELE ~\nSULE e DANA 5 ~\nSULE e ~\n",
+      [
+       "6",
+       "1"
+      ]
+     ],
+     [
+      "MIRO t TUPU 7 DANA 6 ~\nSULE t NUMO 7 VOSEVE ZOGO 1 LINEGO t VOSEVE PURENI VEFA 4 ~\nSULE t ~\n",
+      [
+       "True",
+       "13"
+      ]
+     ],
+     [
+      "SOSUNU METE h PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 0 LINEGO n VOSEVE ZOGO n DATE >>\n        GEGUME n ~\n    ROSOSA TONE ~\n    GEGUME 0 NUMO 3 ~\nROSOSA METE ~\nMIRO k TUPU ROPE h PIPA n DEMI TUPU 0 ~\nMIRO c TUPU ROPE h PIPA n DEMI TUPU k ~\nZOFELE RESI e FUROSI DAVE MILI k << k << 1 << c >>\n    MIRO n2 TUPU c ~\n    MIRO k TUPU 8 ~\n    MIRO t TUPU c # e KETE k ~\nROSOSA ZOFELE ~\nSULE e ~\n",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SOSUNU METE g PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE ZOGO n DATE >>\n        GEGUME 0 ~\n    ROSOSA TONE ~\n    GEGUME 1 TESE n DANA 7 ~\nROSOSA METE ~\nSULE 6 ~\nMIRO i TUPU 0 ~\nRAZI i VOSEVE NAKU NEDA 3 TEPOTU >>\n    MIRO v TUPU i ? i ~\n    MIRO i TUPU i DANA 1 ~\nROSOSA RAZI ~\nSULE i ~\n",
+      [
+       "6",
+       "3"
+      ]
+     ],
+     [
+      "MIRO x TUPU 2 TESE 6 NUMO 4 ~\nMIRO seen TUPU DAVE MILI x ~\nSULE x ~\n",
+      [
+       "0"
+      ]
+     ],
+     [
+      "SOSUNU METE fold PIPA n DOZEKA TIMEGI >>\n    TONE n VOSEVE NAKU NEDA 2 DATE >>\n        GEGUME 1 ~\n    ROSOSA TONE ~\n    GEGUME n TESE $ ROPE fold PIPA n DEMI TUPU n KETE 1 | ~\nROSOSA METE ~\nMIRO w TUPU 2 TESE 0 ~\nSULE w NUMO 4 VOSEVE PURENI DEKUDA 3 VIVO 5 VOSEVE DEMI TUPU 9 ~\nMIRO seen TUPU DAVE MILI 3 << w << w ~\nSULE w ~\n",
+      [
+       "False",
+       "0"
+      ]
+     ]
+    ],
+    "stats": {
+     "own": 6,
+     "trainer": 41
+    }
+   },
+   "stats": {
+    "own": 40,
+    "trainer": 37
+   },
+   "symbols": [
+    "False",
+    "True"
+   ]
+  },
   "laws": {
    "engc:!=/2": {
     "expr": [
@@ -3658,6 +8908,3257 @@
     ]
    }
   },
+  "python": {
+   "aside": [],
+   "assoc": {
+    "0": "L",
+    "1": "L",
+    "2": "L",
+    "3": "L",
+    "4": "L",
+    "5": "R"
+   },
+   "borrowed": {
+    "!=/2": "!=/2",
+    "%/2": "%/2",
+    "**/2": "**/2",
+    "*/2": "*/2",
+    "+/2": "+/2",
+    "-/1": "-/1",
+    "-/2": "-/2",
+    "</2": "</2",
+    "<=/2": "<=/2",
+    "==/2": "==/2",
+    ">/2": ">/2",
+    ">=/2": ">=/2",
+    "and/2": "AND/2",
+    "not/1": "NOT/1",
+    "or/2": "OR/2"
+   },
+   "cycles": {
+    "step:MODULO/2": "param"
+   },
+   "flipped": false,
+   "frame": [
+    [
+     "print",
+     "("
+    ],
+    [
+     ")"
+    ]
+   ],
+   "laws": {
+    "engc:!=/2": {
+     "expr": [
+      "not",
+      [
+       "eq",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ],
+     "name": "engc:!=/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 3,
+      "size": 4
+     }
+    },
+    "engc:%/2": {
+     "expr": [
+      "iter",
+      [
+       "call",
+       "step:MODULO/2",
+       [
+        "var",
+        "y"
+       ]
+      ],
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "name": "engc:%/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 5
+     }
+    },
+    "engc:**/2": {
+     "expr": [
+      "call",
+      "repeated_groups",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:**/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:*/2": {
+     "expr": [
+      "call",
+      "groups",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:*/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:+/2": {
+     "expr": [
+      "call",
+      "merge",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:+/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 3,
+      "size": 3
+     }
+    },
+    "engc:-/1": {
+     "expr": [
+      "call",
+      "pay",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "name": "engc:-/1",
+     "out_type": "int",
+     "params": [
+      "x"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:-/2": {
+     "expr": [
+      "call",
+      "pay",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     "name": "engc:-/2",
+     "out_type": "int",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:</2": {
+     "expr": [
+      "lt",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:</2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 3,
+      "size": 3
+     }
+    },
+    "engc:<=/2": {
+     "expr": [
+      "not",
+      [
+       "lt",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ]
+     ],
+     "name": "engc:<=/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 4
+     }
+    },
+    "engc:==/2": {
+     "expr": [
+      "eq",
+      [
+       "var",
+       "x"
+      ],
+      [
+       "var",
+       "y"
+      ]
+     ],
+     "name": "engc:==/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 3,
+      "size": 3
+     }
+    },
+    "engc:>/2": {
+     "expr": [
+      "lt",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "var",
+       "x"
+      ]
+     ],
+     "name": "engc:>/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:>=/2": {
+     "expr": [
+      "not",
+      [
+       "lt",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ]
+     ],
+     "name": "engc:>=/2",
+     "out_type": "bool",
+     "params": [
+      "x",
+      "y"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 4
+     }
+    },
+    "engc:and/2": {
+     "expr": [
+      "and",
+      [
+       "var",
+       "p"
+      ],
+      [
+       "var",
+       "q"
+      ]
+     ],
+     "name": "engc:and/2",
+     "out_type": "bool",
+     "params": [
+      "p",
+      "q"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 3
+     }
+    },
+    "engc:not/1": {
+     "expr": [
+      "not",
+      [
+       "var",
+       "p"
+      ]
+     ],
+     "name": "engc:not/1",
+     "out_type": "bool",
+     "params": [
+      "p"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 2
+     }
+    },
+    "engc:or/2": {
+     "expr": [
+      "not",
+      [
+       "and",
+       [
+        "not",
+        [
+         "var",
+         "p"
+        ]
+       ],
+       [
+        "not",
+        [
+         "var",
+         "q"
+        ]
+       ]
+      ]
+     ],
+     "name": "engc:or/2",
+     "out_type": "bool",
+     "params": [
+      "p",
+      "q"
+     ],
+     "provenance": {
+      "found_by": "known",
+      "lesson": 103,
+      "runs": 2,
+      "size": 6
+     }
+    },
+    "step:MODULO/2": {
+     "expr": [
+      "ite",
+      [
+       "eq",
+       [
+        "var",
+        "acc"
+       ],
+       [
+        "pred",
+        [
+         "var",
+         "t"
+        ]
+       ]
+      ],
+      [
+       "const",
+       0
+      ],
+      [
+       "succ",
+       [
+        "var",
+        "acc"
+       ]
+      ]
+     ],
+     "name": "step:MODULO/2",
+     "out_type": "int",
+     "params": [
+      "acc",
+      "t"
+     ],
+     "provenance": {
+      "found_by": "stepping",
+      "how": "rule and exceptions",
+      "size": 8
+     }
+    }
+   },
+   "levels": {
+    "!=/2": 2,
+    "%/2": 4,
+    "**/2": 5,
+    "*/2": 4,
+    "+/2": 3,
+    "-/1": 4,
+    "-/2": 3,
+    "</2": 2,
+    "<=/2": 2,
+    "==/2": 2,
+    ">/2": 2,
+    ">=/2": 2,
+    "and/2": 1,
+    "not/1": 1,
+    "or/2": 0
+   },
+   "marks": {
+    "(": "open",
+    ")": "close"
+   },
+   "phrases": {
+    "!=/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        13,
+        7
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        1
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:!=/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "!="
+     ]
+    },
+    "%/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        10,
+        16
+       ],
+       [
+        "10"
+       ]
+      ],
+      [
+       [
+        12,
+        6
+       ],
+       [
+        "0"
+       ]
+      ]
+     ],
+     "fails": [
+      "eq",
+      [
+       "var",
+       "y"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "law": "engc:%/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "%"
+     ]
+    },
+    "**/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        3,
+        0
+       ],
+       [
+        "1"
+       ]
+      ],
+      [
+       [
+        8,
+        4
+       ],
+       [
+        "4096"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:**/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "**"
+     ]
+    },
+    "*/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        12,
+        14
+       ],
+       [
+        "168"
+       ]
+      ],
+      [
+       [
+        11,
+        4
+       ],
+       [
+        "44"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:*/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "*"
+     ]
+    },
+    "+/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        14,
+        6
+       ],
+       [
+        "20"
+       ]
+      ],
+      [
+       [
+        2,
+        19
+       ],
+       [
+        "21"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "0"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:+/2",
+     "out": "int",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "+"
+     ]
+    },
+    "-/1": {
+     "arity": 1,
+     "demos": [
+      [
+       [
+        18
+       ],
+       [
+        "-18"
+       ]
+      ],
+      [
+       [
+        0
+       ],
+       [
+        "0"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:-/1",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int"
+     ],
+     "words": [
+      "-"
+     ]
+    },
+    "-/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        3,
+        20
+       ],
+       [
+        "-17"
+       ]
+      ],
+      [
+       [
+        12,
+        3
+       ],
+       [
+        "9"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:-/2",
+     "out": "int",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "-"
+     ]
+    },
+    "</2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        3,
+        4
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        1,
+        0
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:</2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "<"
+     ]
+    },
+    "<=/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        13,
+        18
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:<=/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "<="
+     ]
+    },
+    "==/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        19,
+        16
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        1
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:==/2",
+     "out": "bool",
+     "runs": 3,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      "=="
+     ]
+    },
+    ">/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        1,
+        7
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "False"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:>/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      ">"
+     ]
+    },
+    ">=/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        9,
+        5
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        0,
+        0
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:>=/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "int",
+      "int"
+     ],
+     "words": [
+      ">="
+     ]
+    },
+    "and/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        false,
+        true
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        true,
+        true
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:and/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "bool",
+      "bool"
+     ],
+     "words": [
+      "and"
+     ]
+    },
+    "not/1": {
+     "arity": 1,
+     "demos": [
+      [
+       [
+        true
+       ],
+       [
+        "False"
+       ]
+      ],
+      [
+       [
+        false
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:not/1",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "bool"
+     ],
+     "words": [
+      "not"
+     ]
+    },
+    "or/2": {
+     "arity": 2,
+     "demos": [
+      [
+       [
+        true,
+        true
+       ],
+       [
+        "True"
+       ]
+      ],
+      [
+       [
+        false,
+        true
+       ],
+       [
+        "True"
+       ]
+      ]
+     ],
+     "fails": null,
+     "law": "engc:or/2",
+     "out": "bool",
+     "runs": 2,
+     "types": [
+      "bool",
+      "bool"
+     ],
+     "words": [
+      "or"
+     ]
+    }
+   },
+   "reader": {
+    "aside": [],
+    "assoc": {
+     "0": "L",
+     "1": "L",
+     "2": "L",
+     "3": "L",
+     "4": "L",
+     "5": "R"
+    },
+    "borrowed": {
+     "!=/2": "!=/2",
+     "%/2": "%/2",
+     "**/2": "**/2",
+     "*/2": "*/2",
+     "+/2": "+/2",
+     "-/1": "-/1",
+     "-/2": "-/2",
+     "</2": "</2",
+     "<=/2": "<=/2",
+     "==/2": "==/2",
+     ">/2": ">/2",
+     ">=/2": ">=/2",
+     "and/2": "AND/2",
+     "not/1": "NOT/1",
+     "or/2": "OR/2"
+    },
+    "cycles": {
+     "step:MODULO/2": "param"
+    },
+    "flipped": false,
+    "frame": [
+     [
+      "print",
+      "("
+     ],
+     [
+      ")"
+     ]
+    ],
+    "laws": {
+     "engc:!=/2": {
+      "expr": [
+       "not",
+       [
+        "eq",
+        [
+         "var",
+         "x"
+        ],
+        [
+         "var",
+         "y"
+        ]
+       ]
+      ],
+      "name": "engc:!=/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 3,
+       "size": 4
+      }
+     },
+     "engc:%/2": {
+      "expr": [
+       "iter",
+       [
+        "call",
+        "step:MODULO/2",
+        [
+         "var",
+         "y"
+        ]
+       ],
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "name": "engc:%/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 5
+      }
+     },
+     "engc:**/2": {
+      "expr": [
+       "call",
+       "repeated_groups",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:**/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:*/2": {
+      "expr": [
+       "call",
+       "groups",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:*/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:+/2": {
+      "expr": [
+       "call",
+       "merge",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:+/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 3,
+       "size": 3
+      }
+     },
+     "engc:-/1": {
+      "expr": [
+       "call",
+       "pay",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "name": "engc:-/1",
+      "out_type": "int",
+      "params": [
+       "x"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:-/2": {
+      "expr": [
+       "call",
+       "pay",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ],
+      "name": "engc:-/2",
+      "out_type": "int",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:</2": {
+      "expr": [
+       "lt",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:</2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 3,
+       "size": 3
+      }
+     },
+     "engc:<=/2": {
+      "expr": [
+       "not",
+       [
+        "lt",
+        [
+         "var",
+         "y"
+        ],
+        [
+         "var",
+         "x"
+        ]
+       ]
+      ],
+      "name": "engc:<=/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 4
+      }
+     },
+     "engc:==/2": {
+      "expr": [
+       "eq",
+       [
+        "var",
+        "x"
+       ],
+       [
+        "var",
+        "y"
+       ]
+      ],
+      "name": "engc:==/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 3,
+       "size": 3
+      }
+     },
+     "engc:>/2": {
+      "expr": [
+       "lt",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "var",
+        "x"
+       ]
+      ],
+      "name": "engc:>/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:>=/2": {
+      "expr": [
+       "not",
+       [
+        "lt",
+        [
+         "var",
+         "x"
+        ],
+        [
+         "var",
+         "y"
+        ]
+       ]
+      ],
+      "name": "engc:>=/2",
+      "out_type": "bool",
+      "params": [
+       "x",
+       "y"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 4
+      }
+     },
+     "engc:and/2": {
+      "expr": [
+       "and",
+       [
+        "var",
+        "p"
+       ],
+       [
+        "var",
+        "q"
+       ]
+      ],
+      "name": "engc:and/2",
+      "out_type": "bool",
+      "params": [
+       "p",
+       "q"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 3
+      }
+     },
+     "engc:not/1": {
+      "expr": [
+       "not",
+       [
+        "var",
+        "p"
+       ]
+      ],
+      "name": "engc:not/1",
+      "out_type": "bool",
+      "params": [
+       "p"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 2
+      }
+     },
+     "engc:or/2": {
+      "expr": [
+       "not",
+       [
+        "and",
+        [
+         "not",
+         [
+          "var",
+          "p"
+         ]
+        ],
+        [
+         "not",
+         [
+          "var",
+          "q"
+         ]
+        ]
+       ]
+      ],
+      "name": "engc:or/2",
+      "out_type": "bool",
+      "params": [
+       "p",
+       "q"
+      ],
+      "provenance": {
+       "found_by": "known",
+       "lesson": 103,
+       "runs": 2,
+       "size": 6
+      }
+     },
+     "step:MODULO/2": {
+      "expr": [
+       "ite",
+       [
+        "eq",
+        [
+         "var",
+         "acc"
+        ],
+        [
+         "pred",
+         [
+          "var",
+          "t"
+         ]
+        ]
+       ],
+       [
+        "const",
+        0
+       ],
+       [
+        "succ",
+        [
+         "var",
+         "acc"
+        ]
+       ]
+      ],
+      "name": "step:MODULO/2",
+      "out_type": "int",
+      "params": [
+       "acc",
+       "t"
+      ],
+      "provenance": {
+       "found_by": "stepping",
+       "how": "rule and exceptions",
+       "size": 8
+      }
+     }
+    },
+    "levels": {
+     "!=/2": 2,
+     "%/2": 4,
+     "**/2": 5,
+     "*/2": 4,
+     "+/2": 3,
+     "-/1": 4,
+     "-/2": 3,
+     "</2": 2,
+     "<=/2": 2,
+     "==/2": 2,
+     ">/2": 2,
+     ">=/2": 2,
+     "and/2": 1,
+     "not/1": 1,
+     "or/2": 0
+    },
+    "marks": {
+     "(": "open",
+     ")": "close"
+    },
+    "phrases": {
+     "!=/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         13,
+         7
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         1
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:!=/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "!="
+      ]
+     },
+     "%/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         10,
+         16
+        ],
+        [
+         "10"
+        ]
+       ],
+       [
+        [
+         12,
+         6
+        ],
+        [
+         "0"
+        ]
+       ]
+      ],
+      "fails": [
+       "eq",
+       [
+        "var",
+        "y"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "law": "engc:%/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "%"
+      ]
+     },
+     "**/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         3,
+         0
+        ],
+        [
+         "1"
+        ]
+       ],
+       [
+        [
+         8,
+         4
+        ],
+        [
+         "4096"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:**/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "**"
+      ]
+     },
+     "*/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         12,
+         14
+        ],
+        [
+         "168"
+        ]
+       ],
+       [
+        [
+         11,
+         4
+        ],
+        [
+         "44"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:*/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "*"
+      ]
+     },
+     "+/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         14,
+         6
+        ],
+        [
+         "20"
+        ]
+       ],
+       [
+        [
+         2,
+         19
+        ],
+        [
+         "21"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "0"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:+/2",
+      "out": "int",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "+"
+      ]
+     },
+     "-/1": {
+      "arity": 1,
+      "demos": [
+       [
+        [
+         18
+        ],
+        [
+         "-18"
+        ]
+       ],
+       [
+        [
+         0
+        ],
+        [
+         "0"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:-/1",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int"
+      ],
+      "words": [
+       "-"
+      ]
+     },
+     "-/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         3,
+         20
+        ],
+        [
+         "-17"
+        ]
+       ],
+       [
+        [
+         12,
+         3
+        ],
+        [
+         "9"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:-/2",
+      "out": "int",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "-"
+      ]
+     },
+     "</2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         3,
+         4
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         1,
+         0
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:</2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "<"
+      ]
+     },
+     "<=/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         13,
+         18
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:<=/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "<="
+      ]
+     },
+     "==/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         19,
+         16
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         1
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:==/2",
+      "out": "bool",
+      "runs": 3,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       "=="
+      ]
+     },
+     ">/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         1,
+         7
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "False"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:>/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       ">"
+      ]
+     },
+     ">=/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         9,
+         5
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         0,
+         0
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:>=/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "int",
+       "int"
+      ],
+      "words": [
+       ">="
+      ]
+     },
+     "and/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         false,
+         true
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         true,
+         true
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:and/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "bool",
+       "bool"
+      ],
+      "words": [
+       "and"
+      ]
+     },
+     "not/1": {
+      "arity": 1,
+      "demos": [
+       [
+        [
+         true
+        ],
+        [
+         "False"
+        ]
+       ],
+       [
+        [
+         false
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:not/1",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "bool"
+      ],
+      "words": [
+       "not"
+      ]
+     },
+     "or/2": {
+      "arity": 2,
+      "demos": [
+       [
+        [
+         true,
+         true
+        ],
+        [
+         "True"
+        ]
+       ],
+       [
+        [
+         false,
+         true
+        ],
+        [
+         "True"
+        ]
+       ]
+      ],
+      "fails": null,
+      "law": "engc:or/2",
+      "out": "bool",
+      "runs": 2,
+      "types": [
+       "bool",
+       "bool"
+      ],
+      "words": [
+       "or"
+      ]
+     }
+    },
+    "runs": [
+     [
+      "print ( 14 + 6 )",
+      [
+       "20"
+      ]
+     ],
+     [
+      "print ( 2 + 19 )",
+      [
+       "21"
+      ]
+     ],
+     [
+      "print ( 0 + 0 )",
+      [
+       "0"
+      ]
+     ],
+     [
+      "print ( 3 - 20 )",
+      [
+       "-17"
+      ]
+     ],
+     [
+      "print ( 12 - 3 )",
+      [
+       "9"
+      ]
+     ],
+     [
+      "print ( 12 * 14 )",
+      [
+       "168"
+      ]
+     ],
+     [
+      "print ( 11 * 4 )",
+      [
+       "44"
+      ]
+     ],
+     [
+      "print ( 10 % 16 )",
+      [
+       "10"
+      ]
+     ],
+     [
+      "print ( 12 % 6 )",
+      [
+       "0"
+      ]
+     ],
+     [
+      "print ( 3 ** 0 )",
+      [
+       "1"
+      ]
+     ],
+     [
+      "print ( 8 ** 4 )",
+      [
+       "4096"
+      ]
+     ],
+     [
+      "print ( 1 > 7 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 0 > 0 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 3 < 4 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 0 < 0 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 1 < 0 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 19 == 16 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 0 == 0 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 0 == 1 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 9 >= 5 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 0 >= 0 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 13 <= 18 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 0 <= 0 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 13 != 7 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 0 != 0 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 0 != 1 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( - 18 )",
+      [
+       "-18"
+      ]
+     ],
+     [
+      "print ( - 0 )",
+      [
+       "0"
+      ]
+     ],
+     [
+      "print ( 19 < 2 and 11 < 18 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 0 != 1 and 0 != 1 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 6 != 19 or 16 >= 8 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 0 != 0 or 0 != 1 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( not 9 != 6 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( not 0 != 0 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( not 16 != 9 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( - 3 >= 18 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 8 % 2 % 5 )",
+      [
+       "0"
+      ]
+     ],
+     [
+      "print ( 7 <= 4 - 18 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 1 + 20 * 7 )",
+      [
+       "141"
+      ]
+     ],
+     [
+      "print ( 19 ** 0 == 19 )",
+      [
+       "False"
+      ]
+     ],
+     [
+      "print ( 4 - ( 10 - 20 ) )",
+      [
+       "14"
+      ]
+     ],
+     [
+      "print ( 9 - ( 9 - 19 ) )",
+      [
+       "19"
+      ]
+     ],
+     [
+      "print ( 4 - ( 14 + 14 ) )",
+      [
+       "-24"
+      ]
+     ],
+     [
+      "print ( 0 ** 9 ** 2 <= 12 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( - ( - 12 + 11 * 10 ) )",
+      [
+       "-98"
+      ]
+     ],
+     [
+      "print ( - ( ( 6 % 6 * 5 ) * 4 ) )",
+      [
+       "0"
+      ]
+     ],
+     [
+      "print ( - 11 < 11 ** 7 )",
+      [
+       "True"
+      ]
+     ],
+     [
+      "print ( 0 >= 1 - 9 or 10 != 7 )",
+      [
+       "True"
+      ]
+     ]
+    ],
+    "stats": {
+     "own": 23,
+     "trainer": 25
+    },
+    "symbols": [
+     "False",
+     "True"
+    ]
+   },
+   "runs": [
+    [
+     "print ( 14 + 6 )",
+     [
+      "20"
+     ]
+    ],
+    [
+     "print ( 2 + 19 )",
+     [
+      "21"
+     ]
+    ],
+    [
+     "print ( 0 + 0 )",
+     [
+      "0"
+     ]
+    ],
+    [
+     "print ( 3 - 20 )",
+     [
+      "-17"
+     ]
+    ],
+    [
+     "print ( 12 - 3 )",
+     [
+      "9"
+     ]
+    ],
+    [
+     "print ( 12 * 14 )",
+     [
+      "168"
+     ]
+    ],
+    [
+     "print ( 11 * 4 )",
+     [
+      "44"
+     ]
+    ],
+    [
+     "print ( 10 % 16 )",
+     [
+      "10"
+     ]
+    ],
+    [
+     "print ( 12 % 6 )",
+     [
+      "0"
+     ]
+    ],
+    [
+     "print ( 3 ** 0 )",
+     [
+      "1"
+     ]
+    ],
+    [
+     "print ( 8 ** 4 )",
+     [
+      "4096"
+     ]
+    ],
+    [
+     "print ( 1 > 7 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 0 > 0 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 3 < 4 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 0 < 0 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 1 < 0 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 19 == 16 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 0 == 0 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 0 == 1 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 9 >= 5 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 0 >= 0 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 13 <= 18 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 0 <= 0 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 13 != 7 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 0 != 0 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 0 != 1 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( - 18 )",
+     [
+      "-18"
+     ]
+    ],
+    [
+     "print ( - 0 )",
+     [
+      "0"
+     ]
+    ],
+    [
+     "print ( 19 < 2 and 11 < 18 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 0 != 1 and 0 != 1 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 6 != 19 or 16 >= 8 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 0 != 0 or 0 != 1 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( not 9 != 6 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( not 0 != 0 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( not 16 != 9 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( - 3 >= 18 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 8 % 2 % 5 )",
+     [
+      "0"
+     ]
+    ],
+    [
+     "print ( 7 <= 4 - 18 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 1 + 20 * 7 )",
+     [
+      "141"
+     ]
+    ],
+    [
+     "print ( 19 ** 0 == 19 )",
+     [
+      "False"
+     ]
+    ],
+    [
+     "print ( 4 - ( 10 - 20 ) )",
+     [
+      "14"
+     ]
+    ],
+    [
+     "print ( 9 - ( 9 - 19 ) )",
+     [
+      "19"
+     ]
+    ],
+    [
+     "print ( 4 - ( 14 + 14 ) )",
+     [
+      "-24"
+     ]
+    ],
+    [
+     "print ( 0 ** 9 ** 2 <= 12 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( - ( - 12 + 11 * 10 ) )",
+     [
+      "-98"
+     ]
+    ],
+    [
+     "print ( - ( ( 6 % 6 * 5 ) * 4 ) )",
+     [
+      "0"
+     ]
+    ],
+    [
+     "print ( - 11 < 11 ** 7 )",
+     [
+      "True"
+     ]
+    ],
+    [
+     "print ( 0 >= 1 - 9 or 10 != 7 )",
+     [
+      "True"
+     ]
+    ]
+   ],
+   "statements": {
+    "blocks": {
+     "close": null,
+     "indent": true,
+     "middle": [
+      "else"
+     ],
+     "open": ":"
+    },
+    "call": {
+     "bind": [
+      "="
+     ],
+     "close": ")",
+     "sep": ",",
+     "with": [
+      "("
+     ],
+     "word": null
+    },
+    "end": "",
+    "kinds": {
+     "def": {
+      "does": "routine",
+      "fixed": [
+       "def"
+      ],
+      "name": 1
+     },
+     "for": {
+      "does": "walk",
+      "fixed": [
+       "for",
+       "\u00b7",
+       "in"
+      ],
+      "name": 1,
+      "span": [
+       3,
+       1
+      ]
+     },
+     "if": {
+      "again": false,
+      "does": "test",
+      "fixed": [
+       "if"
+      ],
+      "span": [
+       1,
+       1
+      ]
+     },
+     "print": {
+      "does": "print",
+      "fixed": [
+       "print",
+       "("
+      ],
+      "span": [
+       2,
+       1
+      ]
+     },
+     "return": {
+      "does": "return",
+      "fixed": [
+       "return"
+      ],
+      "span": [
+       1,
+       0
+      ]
+     },
+     "while": {
+      "again": true,
+      "does": "test",
+      "fixed": [
+       "while"
+      ],
+      "span": [
+       1,
+       1
+      ]
+     },
+     "\u00b7 =": {
+      "does": "set",
+      "fixed": [
+       "\u00b7",
+       "="
+      ],
+      "name": 0,
+      "span": [
+       2,
+       0
+      ]
+     }
+    },
+    "phrases": {
+     "[": {
+      "head": [
+       "["
+      ],
+      "law": [
+       "var",
+       "row"
+      ],
+      "lead": false,
+      "names": [
+       "row"
+      ],
+      "out": "list",
+      "runs": 16,
+      "tail": [
+       [
+        "series",
+        ","
+       ],
+       [
+        "fixed",
+        "]"
+       ]
+      ],
+      "types": [
+       "list"
+      ]
+     },
+     "[ ]": {
+      "head": [
+       "[",
+       "]"
+      ],
+      "law": [
+       "nil"
+      ],
+      "lead": false,
+      "names": [],
+      "out": "list",
+      "runs": 2,
+      "tail": [],
+      "types": []
+     },
+     "len (": {
+      "head": [
+       "len",
+       "("
+      ],
+      "law": [
+       "len",
+       [
+        "var",
+        "row"
+       ]
+      ],
+      "lead": false,
+      "names": [
+       "row"
+      ],
+      "out": "int",
+      "runs": 5,
+      "tail": [
+       [
+        "slot"
+       ],
+       [
+        "fixed",
+        ")"
+       ]
+      ],
+      "types": [
+       "list"
+      ]
+     },
+     "range (": {
+      "head": [
+       "range",
+       "("
+      ],
+      "law": [
+       "upto",
+       [
+        "var",
+        "a"
+       ],
+       [
+        "pred",
+        [
+         "var",
+         "b"
+        ]
+       ]
+      ],
+      "lead": false,
+      "names": [
+       "a",
+       "b"
+      ],
+      "out": "list",
+      "runs": 3,
+      "tail": [
+       [
+        "slot"
+       ],
+       [
+        "fixed",
+        ","
+       ],
+       [
+        "slot"
+       ],
+       [
+        "fixed",
+        ")"
+       ]
+      ],
+      "types": [
+       "int",
+       "int"
+      ]
+     },
+     "sum (": {
+      "head": [
+       "sum",
+       "("
+      ],
+      "law": [
+       "fold",
+       "merge",
+       [
+        "var",
+        "row"
+       ],
+       [
+        "const",
+        0
+       ]
+      ],
+      "lead": false,
+      "names": [
+       "row"
+      ],
+      "out": "int",
+      "runs": 3,
+      "tail": [
+       [
+        "slot"
+       ],
+       [
+        "fixed",
+        ")"
+       ]
+      ],
+      "types": [
+       "list"
+      ]
+     }
+    },
+    "rows": [
+     "[",
+     ", ",
+     "]"
+    ],
+    "seen": [
+     [
+      "v = 1\nu = v + 7\nprint ( u )\n",
+      [
+       "8"
+      ]
+     ],
+     [
+      "v = 0\nif v > 4 :\n    print ( 5 )\nelse :\n    print ( 2 )\n",
+      [
+       "2"
+      ]
+     ],
+     [
+      "i = 0\nv = 0\nwhile i < 3 :\n    v = v + i\n    i = i + 1\nprint ( v )\n",
+      [
+       "3"
+      ]
+     ],
+     [
+      "picks = [ 7 , 6 , 1 , 4 ]\nprint ( picks )\n",
+      [
+       "[7, 6, 1, 4]"
+      ]
+     ],
+     [
+      "picks = [ ]\npicks = picks WITH 0 ADDED\npicks = picks WITH 9 ADDED\nprint ( picks )\n",
+      null
+     ],
+     [
+      "picks = [ 9 ]\nv = len ( picks )\nu = sum ( picks )\nprint ( v )\nprint ( u )\n",
+      [
+       "1",
+       "9"
+      ]
+     ],
+     [
+      "v = 0\nfor e in range ( 0 , 4 ) :\n    v = v + e\nprint ( v )\n",
+      [
+       "6"
+      ]
+     ],
+     [
+      "picks = [ 2 , 8 , 5 ]\nfor e in picks :\n    print ( e )\n",
+      [
+       "2",
+       "8",
+       "5"
+      ]
+     ],
+     [
+      "for e in [ 8 ] :\n    print ( e * 2 )\n",
+      [
+       "16"
+      ]
+     ],
+     [
+      "def f ( n , m ) :\n    return n * m\nv = f ( n = 4 , m = 3 )\nprint ( v )\n",
+      [
+       "12"
+      ]
+     ],
+     [
+      "def f ( n ) :\n    if n < 1 :\n        return 0\n    return n + ( f ( n = n - 1 ) )\nprint ( f ( n = 3 ) )\n",
+      [
+       "6"
+      ]
+     ],
+     [
+      "def h ( n , m ) :\n    if n < 2 :\n        return m - m\n    return 8 - ( h ( n = n - 1 , m = m ) )\ncount = 6 + 7\ncount = 1 - count * count\nprint ( count )\n",
+      [
+       "-168"
+      ]
+     ],
+     [
+      "def g ( n , m ) :\n    return 1 % 6 * 5\nw = g ( n = 0 - 2 , m = 6 )\ny = w + 8\nbest = y + y + w\nprint ( 3 * 9 )\nseen = [ w , w ]\nrow = [ 2 , len ( seen ) , 7 ]\nx = g ( n = w , m = best )\nprint ( best % 5 + 3 )\nprint ( row )\npicks = [ ]\nprint ( x )\n",
+      [
+       "27",
+       "4",
+       "[2, 2, 7]",
+       "5"
+      ]
+     ],
+     [
+      "total = 5 - 6\nprint ( total * 9 )\nprint ( total )\n",
+      [
+       "-9",
+       "-1"
+      ]
+     ],
+     [
+      "def f ( n , m ) :\n    if n < 2 :\n        return m\n    return m - ( f ( n = n - 1 , m = m ) )\nprint ( 0 )\n",
+      [
+       "0"
+      ]
+     ],
+     [
+      "def g ( n , m ) :\n    if not m < m :\n        return m + 7 % 8\n    return 6 - 9 * 6\nr = 9 % 4\nprint ( r )\n",
+      [
+       "1"
+      ]
+     ],
+     [
+      "def fold ( n , m ) :\n    if n < 2 :\n        return m\n    return m - ( fold ( n = n - 1 , m = m ) )\nprint ( 2 )\n",
+      [
+       "2"
+      ]
+     ],
+     [
+      "def grow ( n ) :\n    if n < 2 :\n        return 0 + n\n    return n + ( grow ( n = n - 1 ) )\nz = grow ( n = 2 )\nk = 5 * 2\ns = grow ( n = 1 )\nys = [ 8 ]\nprint ( z )\n",
+      [
+       "3"
+      ]
+     ],
+     [
+      "def g ( n , m ) :\n    if n < 2 :\n        return m - m\n    return n - ( g ( n = n - 1 , m = m ) )\nprint ( 6 )\n",
+      [
+       "6"
+      ]
+     ],
+     [
+      "def fold ( n ) :\n    if n < 1 :\n        return n % 5\n    return n + ( fold ( n = n - 1 ) )\nfor e in range ( 3 , 8 ) :\n    ys = [ e , 2 , e , 7 ]\nprint ( e )\n",
+      [
+       "7"
+      ]
+     ],
+     [
+      "def fold ( n , m ) :\n    return n + n\nprint ( 8 )\n",
+      [
+       "8"
+      ]
+     ],
+     [
+      "def g ( n ) :\n    if 2 * n == n :\n        return n - n - n\n    return n + n\ns = 8\nif not 6 <= s and s > s :\n    print ( 3 * s <= s )\nprint ( s )\n",
+      [
+       "8"
+      ]
+     ],
+     [
+      "def step ( n ) :\n    if n < 1 :\n        return n + n\n    return n + ( step ( n = n - 1 ) )\nys = [ 5 , 8 ]\nfor e in range ( 3 , 5 ) :\n    a = step ( n = 0 )\ne = sum ( ys ) - 1 + e\nprint ( e )\n",
+      [
+       "16"
+      ]
+     ],
+     [
+      "def grow ( n , m ) :\n    return 0 * n\nif 0 + 5 >= 1 and 4 == 0 :\n    k = 8\nt = 2\nt = t + 2 % 4\nprint ( 8 * t % 6 )\ny = grow ( n = t * 5 , m = t )\nprint ( t )\n",
+      [
+       "2",
+       "4"
+      ]
+     ],
+     [
+      "def grow ( n , m ) :\n    return n\nprint ( 3 )\n",
+      [
+       "3"
+      ]
+     ],
+     [
+      "def f ( n ) :\n    if n > n :\n        return n + 0\n    return 7\nk = 8 + 1 * 1\nseen = [ k ]\nprint ( k )\n",
+      [
+       "9"
+      ]
+     ],
+     [
+      "def g ( n ) :\n    return n\nv = 2 * 7 % 8\nxs = [ 7 , 4 , v , v ]\nif v != 9 :\n    t = g ( n = 9 )\n    b = g ( n = 8 )\nfor e in [ v , sum ( xs ) , v , 1 ] :\n    print ( len ( xs ) )\n    k = g ( n = 1 * 6 )\nprint ( e )\n",
+      [
+       "4",
+       "4",
+       "4",
+       "4",
+       "1"
+      ]
+     ],
+     [
+      "def grow ( n , m ) :\n    if n < 1 :\n        return m\n    return 0 - ( grow ( n = n - 1 , m = m ) )\nif 9 < 4 and 6 == 5 :\n    acc = 0 * 4\n    acc = acc\n    u = acc\nrow = [ 0 , 7 , 8 ]\nprint ( 7 )\n",
+      [
+       "7"
+      ]
+     ],
+     [
+      "def g ( n ) :\n    if n < 2 :\n        return 9\n    return 4 * ( g ( n = n - 1 ) )\nv = 5 - 8\npicks = [ v , v , 3 ]\nprint ( v )\n",
+      [
+       "-3"
+      ]
+     ],
+     [
+      "print ( 7 * 2 != 2 )\nrow = [ ]\nprint ( 1 )\n",
+      [
+       "True",
+       "1"
+      ]
+     ],
+     [
+      "def g ( n ) :\n    if n < 1 :\n        return 2 - n\n    return n * ( g ( n = n - 1 ) )\nbest = 9 * 3 % 8\ns = g ( n = 2 )\nv = best\nbest = 4\nprint ( s )\n",
+      [
+       "4"
+      ]
+     ],
+     [
+      "a = [ 3 , 1 , 4 ]\ni = sum ( a )\n",
+      []
+     ],
+     [
+      "a = [ ]\ni = sum ( a )\n",
+      []
+     ],
+     [
+      "def g ( n , m ) :\n    if n < 1 :\n        return 5 * m\n    return n * ( g ( n = n - 1 , m = m ) )\nprint ( 4 )\n",
+      [
+       "4"
+      ]
+     ],
+     [
+      "def step ( n ) :\n    if n < 1 :\n        return n\n    return n - ( step ( n = n - 1 ) )\nprint ( 3 )\n",
+      [
+       "3"
+      ]
+     ],
+     [
+      "def f ( n , m ) :\n    return 6 - 0\nprint ( 1 )\n",
+      [
+       "1"
+      ]
+     ],
+     [
+      "def h ( n , m ) :\n    if n < 1 :\n        return m % 2\n    return 7 - ( h ( n = n - 1 , m = m ) )\nacc = h ( n = 0 , m = 1 )\nseen = [ ]\nprint ( acc )\n",
+      [
+       "1"
+      ]
+     ],
+     [
+      "def g ( n , m ) :\n    if n % 5 < m :\n        return m\n    return 8 * m - 6\ni = 0\nwhile i < 3 :\n    v = g ( n = i + i , m = i )\n    i = i + 1\ncount = g ( n = i , m = 0 )\nt = g ( n = i % 5 , m = count )\nprint ( t )\n",
+      [
+       "-54"
+      ]
+     ],
+     [
+      "def h ( n ) :\n    if n < 1 :\n        return n + n\n    return n - ( h ( n = n - 1 ) )\nfor e in range ( 1 , 2 ) :\n    k = h ( n = 2 )\n    k = 3 * e\nprint ( 0 * e )\nprint ( 1 + 8 + e )\nacc = h ( n = 3 )\nprint ( acc )\n",
+      [
+       "0",
+       "10",
+       "2"
+      ]
+     ],
+     [
+      "def h ( n , m ) :\n    if n < 2 :\n        return 8\n    return 0 * ( h ( n = n - 1 , m = m ) )\nn2 = h ( n = 0 , m = 8 )\nprint ( 3 + 1 % 7 )\nt = n2 % 4\nprint ( 5 + 5 - n2 )\nprint ( 1 * t )\nprint ( n2 )\n",
+      [
+       "4",
+       "2",
+       "0",
+       "8"
+      ]
+     ],
+     [
+      "def g ( n ) :\n    if n < 2 :\n        return 4 % 8\n    return n * ( g ( n = n - 1 ) )\nprint ( 9 )\n",
+      [
+       "9"
+      ]
+     ],
+     [
+      "def grow ( n , m ) :\n    if n < 1 :\n        return m + n\n    return n + ( grow ( n = n - 1 , m = m ) )\nys = [ 1 , 5 ]\nprint ( 7 )\nrow = [ ]\nxs = [ ]\nprint ( sum ( xs ) )\nbest = grow ( n = 2 , m = len ( ys ) )\nprint ( best )\n",
+      [
+       "7",
+       "0",
+       "5"
+      ]
+     ],
+     [
+      "def f ( n ) :\n    return 8 % 9 % 6\nprint ( 4 )\n",
+      [
+       "4"
+      ]
+     ]
+    ],
+    "stats": {
+     "own": 2,
+     "trainer": 41
+    }
+   },
+   "stats": {
+    "own": 23,
+    "trainer": 25
+   },
+   "symbols": [
+    "False",
+    "True"
+   ]
+  },
   "runs": [
    [
     "PRINT 4 PLUS 14 .",
@@ -5631,6 +14132,7 @@
      "EQUAL",
      "TO"
     ],
+    "close": null,
     "sep": ",",
     "with": [
      "WITH"
@@ -5752,7 +14254,7 @@
       "row"
      ],
      "out": "int",
-     "runs": 7,
+     "runs": 3,
      "tail": [
       [
        "slot"
@@ -6470,22 +14972,6 @@
      []
     ],
     [
-     "SET a TO THE EMPTY LIST .\nSET d TO THE LENGTH OF a .\n",
-     []
-    ],
-    [
-     "SET a TO THE LIST 5 .\nSET d TO THE LENGTH OF a .\n",
-     []
-    ],
-    [
-     "SET a TO THE LIST 2 , 7 , 1 , 8 .\nSET d TO THE LENGTH OF a .\n",
-     []
-    ],
-    [
-     "SET a TO THE LIST 9 , 9 .\nSET d TO THE LENGTH OF a .\n",
-     []
-    ],
-    [
      "DEFINE ROUTINE step WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 6 .\n    END IF .\n    RETURN n MINUS ( CALL step WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nFOR EACH e IN THE NUMBERS 0 TO 2 :\n    SET k TO 7 MODULO 9 + e .\n    SET acc TO e * 8 .\n    PRINT 1 PLUS 2 .\nEND FOR .\nPRINT e .\n",
      [
       "3",
@@ -6558,7 +15044,7 @@
     ]
    ],
    "stats": {
-    "own": 5,
+    "own": 1,
     "trainer": 92
    }
   },
@@ -19874,12 +28360,12 @@
   {
    "kind": "code",
    "lesson": 101,
-   "text": "I wrote 5 programs of my own to see what 'THE LENGTH OF' does"
+   "text": "I wrote 1 program of my own to see what 'THE LENGTH OF' does"
   },
   {
    "kind": "code",
    "lesson": 101,
-   "text": "'THE LENGTH OF' means how many in row to me (7 examples)"
+   "text": "'THE LENGTH OF' means how many in row to me (3 examples)"
   },
   {
    "kind": "trainer",
@@ -19894,12 +28380,477 @@
   {
    "kind": "trainer",
    "lesson": 101,
-   "text": "That's all: 97 programs run (92 by me, 5 by you)."
+   "text": "That's all: 93 programs run (92 by me, 1 by you)."
   },
   {
    "kind": "trainer",
    "lesson": 101,
    "text": "Exam for lesson 101, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 102,
+   "text": "Lesson 102: A language never seen: the same ideas, every word new"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 102,
+   "text": "A language you have never seen. I'll run some programs in it."
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "every program starts with 'SULE' and ends with '~': those words never change what is printed"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'DANA' means what '+/2' meant (merge(x, y)), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'KETE' means what '-/2' meant (pay(y, x)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'TESE' means what '*/2' meant (groups(x, y)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'NUMO' means what '%/2' meant (repeat x times [step:MODULO/2(\u00b7, y)] starting from 0), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'VIPE TUPU' means what '**/2' meant (repeated_groups(x, y)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'VOSEVE KUKU NEDA' means what '>/2' meant (lt(y, x)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'VOSEVE NAKU NEDA' means what '</2' meant (lt(x, y)), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'VOSEVE DEMI TUPU' means what '==/2' meant (eq(x, y)), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'VOSEVE PURENI DEKUDA' means what '>=/2' meant (not(lt(x, y))), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'VOSEVE PURENI VEFA' means what '<=/2' meant (not(lt(y, x))), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'VOSEVE ZOGO' means what '!=/2' meant (not(eq(x, y))), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'#' means what '+/2' meant (merge(x, y)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'{' means what '-/2' meant (pay(y, x)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'?' means what '*/2' meant (groups(x, y)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'@' means what '%/2' meant (repeat x times [step:MODULO/2(\u00b7, y)] starting from 0), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'&' means what '**/2' meant (repeated_groups(x, y)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'!!' means what '>/2' meant (lt(y, x)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "';' means what '</2' meant (lt(x, y)), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'^' means what '==/2' meant (eq(x, y)), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'=>' means what '>=/2' meant (not(lt(x, y))), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'}' means what '<=/2' meant (not(lt(y, x))), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'!' means what '!=/2' meant (not(eq(x, y))), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'KETE' means what '-/1' meant (pay(x, 0)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'{' means what '-/1' meant (pay(x, 0)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'VIVO' means what 'AND/2' meant (and(p, q)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'LINEGO' means what 'OR/2' meant (not(and(not(p), not(q)))), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'ZOGO' means what 'NOT/1' meant (not(p)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "the mark '$' opens a group: what follows, up to its partner, is worked out first"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "the mark '|' closes a group"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "my grammar: tightest first: {&}, chaining from the right > {?, @, KETE(before a value)}, chaining from the left > {#, KETE}, chaining from the left > {!, !!, ;, =>, VOSEVE DEMI TUPU, VOSEVE PURENI VEFA}, chaining from the left > {VIVO, ZOGO(before a value)}, chaining from the left > {LINEGO}, chaining from the left (5 longer programs I wrote predicted in a row; the same grouping as the language I knew)"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "lines ending '>>' open a block of lines, a line starting 'ROSOSA' closes it; a line starting 'PETUPE' splits a block in two (54 jumps explained)"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a line starting 'GEGUME' hands back the value of the words after it, and the routine ends"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a line starting 'MIRO' gives the name in place 2 the value of the words after 'MIRO \u00b7 TUPU'"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a line starting 'RAZI' runs its block again and again while the words after it hold"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a line starting 'SOSUNU' names a routine (the word in place 3): its block runs only when called"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a row prints as [one, two]"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a line starting 'SULE' prints the value of the words after it"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a line starting 'TONE' runs its block only if the words after it hold (else the part after the split, if any)"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a line starting 'ZOFELE' runs its block once for each thing in the row after it, with the name in place 3 holding that thing"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "a call is written 'ROPE <routine> PIPA <input> DEMI TUPU <value>', inputs split by '<<'"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'DAVE BOGO MILI' means an empty row to me (2 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'DAVE MILI' means row to me (11 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'\u00b7 PIPA' means row with b at the end to me (3 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "I wrote 2 programs of my own to see what 'DAVE BIKO VOSO' does"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "I wrote 2 programs of my own to see what 'DAVE MEMESI' does"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "I wrote 2 programs of my own to see what 'DAVE SEKA VOSO' does"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'DAVE BIKO VOSO' means start at 0 and merge in each of row to me (3 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'DAVE MEMESI' means counting from a to b to me (3 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 102,
+   "text": "'DAVE SEKA VOSO' means how many in row to me (3 examples)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 102,
+   "text": "That's all: 124 programs run in this language (77 with one line, 47 with many)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 102,
+   "text": "Exam for lesson 102, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 103,
+   "text": "Lesson 103: A language never seen: a small part of Python"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 103,
+   "text": "A language you have never seen. I'll run some programs in it."
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "every program starts with 'print (' and ends with ')': those words never change what is printed"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'+' means what '+/2' meant (merge(x, y)), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'-' means what '-/2' meant (pay(y, x)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'*' means what '*/2' meant (groups(x, y)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'%' means what '%/2' meant (repeat x times [step:MODULO/2(\u00b7, y)] starting from 0), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'**' means what '**/2' meant (repeated_groups(x, y)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'>' means what '>/2' meant (lt(y, x)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'<' means what '</2' meant (lt(x, y)), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'==' means what '==/2' meant (eq(x, y)), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'>=' means what '>=/2' meant (not(lt(x, y))), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'<=' means what '<=/2' meant (not(lt(y, x))), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'!=' means what '!=/2' meant (not(eq(x, y))), 3 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'-' means what '-/1' meant (pay(x, 0)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'and' means what 'AND/2' meant (and(p, q)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'or' means what 'OR/2' meant (not(and(not(p), not(q)))), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'not' means what 'NOT/1' meant (not(p)), 2 runs"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "the mark '(' opens a group: what follows, up to its partner, is worked out first"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "the mark ')' closes a group"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "my grammar: tightest first: {**}, chaining from the right > {%, *, -(before a value)}, chaining from the left > {+, -}, chaining from the left > {!=, <, <=, ==, >, >=}, chaining from the left > {and, not(before a value)}, chaining from the left > {or}, chaining from the left (5 longer programs I wrote predicted in a row; the same grouping as the language I knew)"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "lines ending ':' open a block of lines, the lines pushed in further after it are the block; a line starting 'else' splits a block in two (57 jumps explained)"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a line starting 'def' names a routine (the word in place 2): its block runs only when called"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a line starting 'for' runs its block once for each thing in the row after it, with the name in place 2 holding that thing"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a line starting 'if' runs its block only if the words after it hold (else the part after the split, if any)"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a row prints as [one, two]"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a line starting 'print' prints the value of the words after it"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a line starting 'return' hands back the value of the words after it, and the routine ends"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a line starting 'while' runs its block again and again while the words after it hold"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a line starting '\u00b7 =' gives the name in place 1 the value of the words after '\u00b7 ='"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "a call is written '<routine> ( <input> = <value> )', inputs split by ','"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'[' means row to me (16 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'[ ]' means an empty row to me (2 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'len (' means how many in row to me (5 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'range (' means counting from a to pred(b) to me (3 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "I wrote 2 programs of my own to see what 'sum (' does"
+  },
+  {
+   "kind": "code",
+   "lesson": 103,
+   "text": "'sum (' means start at 0 and merge in each of row to me (3 examples)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 103,
+   "text": "That's all: 91 programs run in this language (48 with one line, 43 with many)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 103,
+   "text": "Exam for lesson 103, attempt 1: passed"
   }
  ],
  "memory": {

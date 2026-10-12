@@ -570,5 +570,19 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Lesson 101: Reading Engc: what statements do
 - **Trainer**: Now programs with many lines. I'll run each one and you can watch it line by line: which line runs next, and what every name holds.
 - **Trainer**: Now tell me what each new program prints before I run it.
-- **Trainer**: That's all: 97 programs run (92 by me, 5 by you).
+- **Trainer**: That's all: 93 programs run (92 by me, 1 by you).
 - **Trainer**: Exam for lesson 101, attempt 1: passed
+
+## Lesson 102
+
+- **Trainer**: Lesson 102: A language never seen: the same ideas, every word new
+- **Trainer**: A language you have never seen. I'll run some programs in it.
+- **Trainer**: That's all: 124 programs run in this language (77 with one line, 47 with many).
+- **Trainer**: Exam for lesson 102, attempt 1: passed
+
+## Lesson 103
+
+- **Trainer**: Lesson 103: A language never seen: a small part of Python
+- **Trainer**: A language you have never seen. I'll run some programs in it.
+- **Trainer**: That's all: 91 programs run in this language (48 with one line, 43 with many).
+- **Trainer**: Exam for lesson 103, attempt 1: passed

@@ -137,7 +137,7 @@ class _Builder:
             self.ints.append(name)
             return 1
         if kind == "list":
-            if self.lists and rng.random() < 0.6:
+            if self.lists and rng.random() < 0.6 and "added" in self.features:
                 xs = rng.choice([x for x in self.lists if x not in self.busy] or [None])
                 if xs is None:
                     return 0
@@ -280,7 +280,7 @@ class _Builder:
         return "\n".join(self.lines) + "\n"
 
 
-FEATURES = ("lists", "routines")
+FEATURES = ("lists", "routines", "added")
 
 
 def program(rng, spec=LESSON, features=FEATURES, tries=200):
@@ -310,12 +310,12 @@ def _huge(line):
     return False
 
 
-def exam_programs(seed, n=200):
+def exam_programs(seed, n=200, features=FEATURES):
     """The C2 exam: n held-out programs, 5-40 lines, loops up to 1,000 turns, blocks
     nested up to 3 deep. Recursion goes deeper than the lesson's because exam programs
     call their routines with bigger numbers."""
     rng = random.Random(seed)
-    return [program(rng, EXAM) for _ in range(n)]
+    return [program(rng, EXAM, features) for _ in range(n)]
 
 
 def first_programs(rng):

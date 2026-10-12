@@ -74,6 +74,9 @@ class Reader:
         self.cycles = dict(st.get("cycles", {}))
         self.stats = dict(st.get("stats", {"trainer": 0, "own": 0}))
         self.aside = list(st.get("aside", []))      # runs it can't explain yet, kept apart
+        self.meanings = []      # meanings from a language it already reads (C3)
+        self.prior = None       # the grouping those meanings had there
+        self.borrowed = {}      # word -> the word it means the same as, in that language
         self.library = copy.deepcopy(brain.library)
         for law in self.laws.values():
             if law.name.startswith("step:"):
@@ -92,7 +95,7 @@ class Reader:
                 "marks": dict(sorted(self.marks.items())), "runs": self.runs,
                 "laws": {k: v.to_json() for k, v in sorted(self.laws.items())},
                 "cycles": dict(sorted(self.cycles.items())), "stats": self.stats,
-                "aside": self.aside}
+                "aside": self.aside, "borrowed": dict(sorted(self.borrowed.items()))}
 
     def note(self, kind, text):
         self.brain.note(kind, text)
@@ -302,7 +305,8 @@ class Reader:
             return None, [], res.steps
         return res.expr, res.rivals, res.steps
 
-    def adopt(self, key, words, arity, demos, expr, types, out_type, how="search"):
+    def adopt(self, key, words, arity, demos, expr, types, out_type, how="search",
+              failures=True):
         name = f"engc:{key}"
         names = _names(arity, types)
         law = Law(name, sorted(names), expr, out_type,
@@ -313,7 +317,8 @@ class Reader:
         self.phrases[key] = {"words": list(words), "arity": arity, "law": name,
                              "types": list(types), "out": out_type, "runs": len(demos),
                              "demos": [[list(i), o] for i, o in demos], "fails": old}
-        self._learn_failures(key, names, demos)
+        if failures:
+            self._learn_failures(key, names, demos)
         self._sigs = {}
         self._cache = {}
 
@@ -442,6 +447,113 @@ class Reader:
                                       + ")")
                     return spent
         return spent
+
+    # ------------------------------------------------------------ another language (C3)
+    def borrow(self, other):
+        """What it knows from a language it already reads: each meaning it found there
+        (as a law, with where it fails and how it grouped), the truth symbols (the same
+        world prints them), and the steps it invented there (as for MODULO)."""
+        seen = set()
+        for k in sorted(other.phrases):
+            p = other.phrases[k]
+            law = other.laws[p["law"]]
+            sig = (p["arity"], tuple(p["types"]), p["out"], show(law.expr), str(p.get("fails")))
+            if sig in seen:
+                continue
+            seen.add(sig)
+            lv = other.levels.get(other.cls(k)) if other.levels else None
+            self.meanings.append({"from": k, "expr": law.expr, "arity": p["arity"],
+                               "types": list(p["types"]), "out": p["out"],
+                               "fails": p.get("fails"), "level": lv,
+                               "assoc": other.assoc.get(lv, "L") if lv is not None else None})
+        for name, law in other.laws.items():
+            if name.startswith("step:"):
+                self.laws[name] = law
+                self.library.add(law)
+        self.cycles.update(other.cycles)
+        self.library.cycles.update(other.cycles)
+        self.symbols, self.flipped = list(other.symbols), other.flipped
+
+    def _known_says(self, m, args):
+        from ..brain.dsl import from_json
+        env = dict(zip(_names(m["arity"], m["types"]), args))
+        try:
+            if m["fails"] is not None and evaluate(from_json(m["fails"]), env, self.library):
+                return "fails"
+            v = evaluate(m["expr"], env, self.library)
+        except (Overflow, KeyError, TypeError, RecursionError):
+            return "?"
+        return "fails" if v is None else self.show_value(v)
+
+    def study_known(self, words, arity, demos, budget):
+        """A new word, when it already knows many meanings: which of them is it? It
+        tries cases where the meanings still possible disagree, then one fresh case;
+        only if none fits does it search afresh (study). Returns runs spent."""
+        key = self.key(words, arity)
+        good = [(i, o) for i, o in demos]
+        if not good:
+            return 0
+        types = [_type_of(v) for v in good[0][0]]
+        spent = 0
+
+        def says(o):
+            return "fails" if o is None else o[0]
+        cands = [m for m in self.meanings if m["arity"] == arity and m["types"] == types]
+        confirmed = False
+        while spent < budget:
+            cands = [m for m in cands
+                     if all(self._known_says(m, i) == says(o) for i, o in demos)]
+            if not cands:
+                break
+            tried = {tuple(i) for i, _ in demos}
+            if len(cands) > 1:
+                # the case that splits the meanings still possible most evenly
+                best, probe = 1, None
+                for args in self._domain(types):
+                    if tuple(args) in tried:
+                        continue
+                    n = len({self._known_says(m, args) for m in cands})
+                    if n > best:
+                        best, probe = n, args
+                if probe is None:
+                    cands = cands[:1]       # they never disagree: one meaning
+                    continue
+            elif confirmed or (len(demos) >= 2 and spent > 0):
+                # the one meaning left, after cases chosen to tell meanings apart
+                m = cands[0]
+                self.adopt(key, words, arity, demos, m["expr"], types, m["out"], how="known",
+                           failures=False)
+                self.phrases[key]["fails"] = m["fails"]
+                self.borrowed[key] = m["from"]
+                self.note("code", f"'{' '.join(words)}' means what '{m['from']}' meant "
+                                  f"({show(m['expr'])}), {len(demos)} runs")
+                return spent
+            else:
+                probe = self._fresh(types, demos)
+                confirmed = True
+            printed = self.run(self.write(words, probe))
+            spent += 1
+            demos.append((tuple(probe), printed))
+        self.note("code", f"'{' '.join(words)}' is none of the meanings I knew: I study it")
+        return spent + self.study(words, arity, demos, budget - spent)
+
+    def borrow_grammar(self):
+        """Group each word as the word with its meaning grouped in the other language."""
+        levels, assoc = {}, {}
+        for c in self.classes():
+            p = self.phrases[c]
+            law = self.laws[p["law"]]
+            m = next((m for m in self.meanings if m["expr"] == law.expr and
+                      m["types"] == p["types"] and m["arity"] == p["arity"]), None)
+            if m is None or m["level"] is None:
+                return
+            levels[c] = m["level"]
+            if p["arity"] == 2:
+                assoc[m["level"]] = m["assoc"]
+        order = sorted(set(levels.values()))
+        squeeze = {v: i for i, v in enumerate(order)}
+        self.prior = ({c: squeeze[v] for c, v in levels.items()},
+                      {squeeze[v]: a for v, a in assoc.items()})
 
     def _rival_fits(self, key, expr, demos):
         p = self.phrases.get(key)
@@ -814,6 +926,10 @@ class Reader:
         kinds of word; levels are the longest chains of 'more tightly'. Returns
         (levels, assoc) or None if no grammar of this shape explains the runs."""
         runs = self.grammar_runs() if runs is None else runs
+        if self.prior and not extra and all(
+                self._explains(p, o, levels=self.prior[0], assoc=self.prior[1], marks=marks)
+                for p, o, _ in runs):
+            return self.prior          # what it knew from another language still holds
         cons = set(extra) | self._typed_order()
         for program, printed, _ in runs:
             rel = self.relations(program, printed)
@@ -901,7 +1017,7 @@ class Reader:
             assoc[level[c]] = side[c]
         return level, assoc
 
-    def learn_grammar(self, budget):
+    def learn_grammar(self, budget, confirm=GRAMMAR_CONFIRM):
         """Find the grouping, then design experiments where rival grammars disagree, then
         confirm on longer programs it writes itself. Returns runs spent."""
         spent = 0
@@ -914,7 +1030,7 @@ class Reader:
                 self.note("stuck", "no grammar with few levels explains every run")
                 return spent
             self.levels, self.assoc = best
-            probe = self._grammar_experiment(best, tried)
+            probe = None if best == self.prior else self._grammar_experiment(best, tried)
             if probe is not None:
                 printed = self.run(probe)
                 spent += 1
@@ -928,10 +1044,11 @@ class Reader:
             spent += 1
             if printed is not None and guess == printed[0]:
                 streak += 1
-                if streak >= GRAMMAR_CONFIRM:
+                if streak >= confirm:
                     self.note("code", "my grammar: " + self.describe_grammar() +
-                              f" ({GRAMMAR_CONFIRM} longer programs I wrote predicted in a "
-                              f"row)")
+                              f" ({confirm} longer programs I wrote predicted in a row" +
+                              ("; the same grouping as the language I knew"
+                               if best == self.prior else "") + ")")
                     return spent
             else:
                 streak = 0

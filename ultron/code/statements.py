@@ -17,15 +17,17 @@ What it is given (core knowledge, stated plainly, as `dsl.py` is for numbers):
 
 What it finds itself, from the films (nothing about Engc is written in here):
 
-  * which mark opens a block, which word closes one, which line splits a block in
-    two (the "otherwise" part);
+  * which mark opens a block, which word closes one (or that a block is the lines
+    pushed in further, with no closing word), which line splits a block in two (the
+    "otherwise" part);
   * for each kind of line (by its first word): what it does (changes a name, prints,
     hands back a value, tests and enters its block, repeats it, walks a row, or is a
     routine), which word is the name, which words are the value or the test;
   * what each new phrase means (`THE LENGTH OF`, a row written out, counting out
     numbers, a row with one more), as the shortest program in its own language;
-  * how a call is written: the word that calls, the words before the inputs, the
-    words between an input's name and its value, the mark between inputs;
+  * how a call is written: the word that calls (or the routine's own name), the words
+    before the inputs, the words between an input's name and its value, the mark
+    between inputs, the mark that ends the call;
   * how a row is printed.
 
 The meanings of operators, how they group, and how numbers and truth values print
@@ -66,6 +68,7 @@ class Program:
     def __init__(self, text):
         self.text = text
         self.lines = [ln.split() for ln in text.split("\n")]
+        self.indent = [len(ln) - len(ln.lstrip(" ")) for ln in text.split("\n")]
         while self.lines and not self.lines[-1]:
             self.lines.pop()
 
@@ -111,8 +114,8 @@ class Machine:
         steps = [{"line": s["line"], "depth": s["depth"], "printed": s["printed"],
                   "memory": {k: _norm(v) for k, v in s["memory"].items()}}
                  for s in film["steps"]]
-        names = sorted({k for s in steps for k in s["memory"]})
         final = {k: _norm(v) for k, v in (film.get("final") or {}).items()}
+        names = sorted({k for s in steps for k in s["memory"]} | set(final))
         self.films.append((Program(text), {"ok": film["ok"], "printed": film["printed"],
                                            "steps": steps, "names": names,
                                            "final": final if film["ok"] else None}))
@@ -148,6 +151,18 @@ class Machine:
             if toks[i:i + len(words)] == words and (best is None or len(words) > len(best[1])):
                 best = (head, words)
         return best
+
+    def _is_call(self, toks, i):
+        """Does a call start here: the calling word, or (when there is none) a routine's
+        name followed by the words before the inputs, an input and its binding words."""
+        c = self.call
+        if not c:
+            return False
+        if c["word"] is not None:
+            return toks[i] == c["word"]
+        w, b = len(c["with"]), len(c["bind"])
+        return toks[i][0].isalpha() and toks[i + 1:i + 1 + w] == c["with"] and \
+            toks[i + 2 + w:i + 2 + w + b] == c["bind"] and i + 1 + w < len(toks)
 
     def _marks(self):
         m = self.reader.marks
@@ -206,7 +221,7 @@ class Machine:
                     raise Unknown("a group that doesn't close")
                 pos[0] += 1
                 return e
-            if self.call and t == self.call["word"]:
+            if self._is_call(toks, pos[0]):
                 return call()
             ph = self._match_phrase(toks, pos[0], lead=False)
             if ph is not None:
@@ -232,9 +247,11 @@ class Machine:
                         raise Unknown("not the phrase I know")
                     pos[0] += 1
                 elif part[0] == "series":
-                    j = self._extent(toks, pos[0], ())
+                    nxt = parts[k + 1] if k + 1 < len(parts) else None
+                    stop = {nxt[1]} if nxt is not None and nxt[0] == "fixed" else set()
+                    j = self._extent(toks, pos[0], stop)
                     items, start, depth = [], pos[0], 0
-                    for q in range(pos[0], j + 1):
+                    for q in range(pos[0], j + 1 if j > pos[0] or not stop else pos[0]):
                         if q == j or (depth == 0 and toks[q] == part[1]):
                             if q == start:
                                 raise Unknown("an empty place in a row")
@@ -258,7 +275,8 @@ class Machine:
 
         def call():
             c = self.call
-            pos[0] += 1
+            if c["word"] is not None:
+                pos[0] += 1
             if pos[0] >= len(toks):
                 raise Unknown("a call to nothing")
             routine = toks[pos[0]]
@@ -281,6 +299,10 @@ class Machine:
                 if c.get("sep") and pos[0] < len(toks) and toks[pos[0]] == c["sep"]:
                     pos[0] += 1
                     continue
+                if c.get("close"):
+                    if pos[0] >= len(toks) or toks[pos[0]] != c["close"]:
+                        raise Unknown("a call that doesn't close")
+                    pos[0] += 1
                 return ("call", routine, binds)
 
         def expr(minl):
@@ -369,6 +391,8 @@ class Machine:
         b = blocks or self.blocks
         if not b:
             return None
+        if b.get("indent"):
+            return self._indented(prog, b)
         heads, middles, closers, parent = {}, {}, set(), {}
         stack = []
         for n in range(1, len(prog) + 1):
@@ -381,6 +405,7 @@ class Machine:
                     return None
                 h = stack.pop()
                 heads[h]["end"] = n
+                heads[h]["after"] = n + 1
                 closers.add(n)
             elif t[-1] == b["open"] and t[0] in b["middle"]:
                 if not stack:
@@ -393,6 +418,43 @@ class Machine:
         if stack:
             return None
         return heads, middles, closers, parent
+
+    def _indented(self, prog, b):
+        """Blocks shown only by how far lines are pushed in: a block is the lines after
+        its opening line that are pushed in further; a splitting line stands as far in
+        as the line that opened the block."""
+        heads, middles, parent = {}, {}, {}
+        stack = []                  # (line, how far in)
+        lines = [n for n in range(1, len(prog) + 1) if prog.toks(n)]
+
+        def close(n):
+            h, _ = stack.pop()
+            heads[h]["end"] = n
+            heads[h]["after"] = n
+        for n in lines:
+            t, ind = prog.toks(n), prog.indent[n - 1]
+            while stack and ind <= stack[-1][1]:
+                if ind == stack[-1][1] and t[-1] == b["open"] and t[0] in b["middle"] and \
+                        heads[stack[-1][0]]["middle"] is None:
+                    break
+                close(n)
+            parent[n] = stack[-1][0] if stack else None
+            if stack and ind == stack[-1][1]:
+                h = stack[-1][0]
+                heads[h]["middle"] = n
+                middles[n] = h
+            elif t[-1] == b["open"]:
+                if t[0] in b["middle"]:
+                    return None
+                heads[n] = {"end": None, "middle": None}
+                stack.append((n, ind))
+        while stack:
+            close(len(prog) + 1)
+        if any(heads[h]["end"] == h + 1 or heads[h]["middle"] == h + 1 or
+               (heads[h]["middle"] and heads[h]["end"] == heads[h]["middle"] + 1)
+               for h in heads):
+            return None             # a block with nothing in it
+        return heads, middles, set(), parent
 
     # ============================================================ learning
     def _frame_next(self, steps, i):
@@ -438,6 +500,14 @@ class Machine:
                 score = self._explained(cand)
                 if score is not None and (best is None or score > best[0]):
                     best = (score, cand)
+        for o in sorted(lasts):
+            # or no closing word: a block is the lines pushed in further
+            middle = sorted({t[0] for prog, _ in self.films for t in prog.lines
+                             if t and t[-1] == o and t[0] not in words_ran})
+            cand = {"open": o, "close": None, "indent": True, "middle": middle}
+            score = self._explained(cand)
+            if score is not None and (best is None or score > best[0]):
+                best = (score, cand)
         if best is None:
             self.note("stuck", "no marks explain where the programs jump")
             return False
@@ -446,9 +516,10 @@ class Machine:
         if changed:
             mid = (f"; a line starting '{best[1]['middle'][0]}' splits a block in two"
                    if best[1]["middle"] else "")
-            self.note("code", f"lines ending '{best[1]['open']}' open a block of lines, a "
-                              f"line starting '{best[1]['close']}' closes it{mid} "
-                              f"({best[0]} jumps explained)")
+            close = (f"a line starting '{best[1]['close']}' closes it" if best[1]["close"]
+                     else "the lines pushed in further after it are the block")
+            self.note("code", f"lines ending '{best[1]['open']}' open a block of lines, "
+                              f"{close}{mid} ({best[0]} jumps explained)")
         return True
 
     def _explained(self, cand):
@@ -469,17 +540,17 @@ class Machine:
                 ok = False
                 if a in heads:
                     h = heads[a]
-                    ok = b == a + 1 or (h["end"] is not None and b == h["end"] + 1) or \
+                    ok = b == a + 1 or (h["end"] is not None and b == h["after"]) or \
                         (h["middle"] is not None and b == h["middle"] + 1)
                 anc = parent.get(a)
                 while not ok and anc is not None:
-                    ok = b == anc or b == heads[anc]["end"] + 1
+                    ok = b == anc or b == heads[anc]["after"]
                     anc = parent.get(anc)
                 if not ok and a in heads and heads[a]["end"] is not None:
                     # a block skipped inside another: on to where that one goes next
                     anc = parent.get(a)
                     while not ok and anc is not None:
-                        ok = b == anc or b == heads[anc]["end"] + 1
+                        ok = b == anc or b == heads[anc]["after"]
                         anc = parent.get(anc)
                 if not ok:
                     return None
@@ -513,8 +584,23 @@ class Machine:
                             "depth": s["depth"], "calls": deeper,
                             "said": film["printed"][s["printed"]:printed_to]
                             if printed_to is not None else None,
-                            "header": s["line"] in heads, "heads": heads})
+                            "header": s["line"] in heads, "heads": heads,
+                            "key": self._key(prog.toks(s["line"]), film["names"])})
         return out
+
+    @staticmethod
+    def _key(toks, names):
+        """A kind of line is known by its first word; or, when its first word is a name,
+        by the word after the name."""
+        if toks[0] in names and len(toks) > 1:
+            return "· " + toks[1]
+        return toks[0]
+
+    def kind_of(self, toks):
+        k = self.kinds.get(toks[0])
+        if k is None and len(toks) > 1:
+            k = self.kinds.get("· " + toks[1])
+        return k
 
     def _shared(self, rows, names=()):
         """The words every instance has in the same place, from the start and from the
@@ -539,10 +625,12 @@ class Machine:
         inst = self._instances()
         by = {}
         for x in inst:
-            by.setdefault(x["toks"][0], []).append(x)
+            by.setdefault(x["key"], []).append(x)
         plain_ends = {x["toks"][-1] for x in inst if not x["header"]}
         if len(plain_ends) == 1:
             self.end = next(iter(plain_ends))
+        elif plain_ends:
+            self.end = ""           # lines end in all sorts of words: no ending mark
         demos = []
         for word in sorted(by):
             xs = by[word]
@@ -784,9 +872,10 @@ class Machine:
         have. Their shape (fixed words, places for values, a mark between many values)
         comes from lining examples up; their meaning is its ordinary law search."""
         groups = {}
+        c = self.call
         for toks, env, want in demos:
-            if self.call and self.call["word"] in toks:
-                continue
+            if c and any(self._is_call(toks, i) for i in range(len(toks))):
+                continue                # a call: not a phrase
             shape = self._shape(toks, env)
             if shape is None:
                 continue
@@ -794,23 +883,38 @@ class Machine:
             g = groups.setdefault(key, {"lead": lead, "ex": []})
             g["ex"].append((parts, lead_val, want, env))
         for key, g in groups.items():
+            head = key.replace("· ", "").split()
+            g["ex"] = [e for e in g["ex"] if not any(
+                [p[1] if p[0] == "fixed" else None for p in e[0][i:i + len(head)]] == head
+                for i in range(len(e[0])))]
             # many values with one mark between them, in some example: a row of values
-            sep = None
+            # (perhaps with a mark after the last one)
+            sep, closer = None, None
+
+            def body(parts, closer):
+                if closer is None:
+                    return parts
+                return parts[:-1] if parts and parts[-1] == ("fixed", closer) else None
             for parts, _, _, _ in g["ex"]:
-                marks = {parts[i][1] for i in range(1, len(parts), 2) if parts[i][0] == "fixed"}
-                if len(parts) >= 5 and len(marks) == 1 and \
-                        all(parts[i][0] == "slot" for i in range(0, len(parts), 2)):
-                    sep = next(iter(marks))
+                for cl in (None, parts[-1][1] if parts and parts[-1][0] == "fixed" else None):
+                    b = body(parts, cl) if cl else parts
+                    marks = {b[i][1] for i in range(1, len(b), 2) if b[i][0] == "fixed"}
+                    if len(b) >= 5 and len(marks) == 1 and \
+                            all(b[i][0] == "slot" for i in range(0, len(b), 2)):
+                        sep, closer = next(iter(marks)), cl
+                        break
             ex, tails = [], []
             for parts, lead_val, want, env in g["ex"]:
                 if sep is not None:
-                    if not all(parts[i][0] == "slot" for i in range(0, len(parts), 2)) or \
-                            any(parts[i] != ("fixed", sep) for i in range(1, len(parts), 2)):
+                    b = body(parts, closer)
+                    if b is None or not all(b[i][0] == "slot" for i in range(0, len(b), 2)) or \
+                            any(b[i] != ("fixed", sep) for i in range(1, len(b), 2)) or \
+                            (not b and closer is None):
                         continue
-                    args = [tuple(self._val(parts[i][1], env) for i in range(0, len(parts), 2))]
+                    args = [tuple(self._val(b[i][1], env) for i in range(0, len(b), 2))]
                     if any(v == "?" for v in args[0]):
                         continue
-                    tail = (("series", sep),)
+                    tail = (("series", sep),) + ((("fixed", closer),) if closer else ())
                 else:
                     args = [self._val(p[1], env) for p in parts if p[0] == "slot"]
                     tail = tuple(("fixed", p[1]) if p[0] == "fixed" else ("slot",)
@@ -828,6 +932,7 @@ class Machine:
                 continue
             # the shape most examples have (others had more than this phrase in them)
             common = max(sorted(set(tails)), key=tails.count)
+            g["one shape"] = len(set(tails)) == 1
             g["ex"] = [(a, w) for t, a, w in ex if t == common]
             g["tail"] = [list(t) for t in common]
             g["kinds"] = [k for k in g.get("kinds", []) if len(k) == sum(
@@ -850,12 +955,19 @@ class Machine:
             if g["tail"] is None:
                 continue
             ex = [(a, w) for a, w in g["ex"] if all(not isinstance(v, str) for v in a)]
-            if len(ex) < 3 and not g["lead"] and g.get("kinds"):
+            if len(ex) < 3 and g.get("kinds"):
                 # too few clean examples: it will try the phrase itself
                 kinds = [k for k in g["kinds"] if None not in k]
+                if g["lead"]:
+                    # the value before it: of the kind it held in the examples
+                    kinds = [[_type(ex[0][0][0])] + kinds[0]] if ex and kinds else []
                 if kinds:
-                    self.wanting[key] = {"tail": g["tail"], "types": kinds[0]}
-            if len(ex) < 3 or len({len(a) for a, _ in ex}) != 1:
+                    self.wanting[key] = {"tail": g["tail"], "types": kinds[0], "have": len(ex)}
+            # a phrase with no places for values always means the same thing: one
+            # example says what
+            if len(ex) < (1 if g["one shape"] and not any(t[0] != "fixed" for t in g["tail"])
+                          else 3) or \
+                    len({len(a) for a, _ in ex}) != 1 or len({str(w) for a, w in ex if not a}) > 1:
                 continue
             self.wanting.pop(key, None)
             types = [_type(v) for v in ex[0][0]]
@@ -889,18 +1001,51 @@ class Machine:
         """Line up a phrase: its fixed words (those that are not values it can read)
         and the places in between that hold values. Returns (key, the parts after its
         first fixed words, whether a value comes first, that value)."""
-        def readable(t):
-            return self.reader.number(t) is not None or t in env or \
-                self._match_op([t], 0, 2) is not None or self._match_op([t], 0, 1) is not None \
-                or t in self.reader.marks
+        def readable(k):
+            """How many words from k it can read as part of a value (0 for none)."""
+            t = toks[k]
+            if self.reader.number(t) is not None or t in env or t in self.reader.marks:
+                return 1
+            op = self._match_op(toks, k, 2) or self._match_op(toks, k, 1)
+            return op[1] if op else 0
+        opens, closes = self._marks()
+
+        def pairs(run):
+            """Where each opening mark's partner is (None: not in this run)."""
+            out, stack = {}, []
+            for i, t in enumerate(run):
+                if t in opens:
+                    stack.append(i)
+                    out[i] = None
+                elif t in closes:
+                    out[i] = stack.pop() if stack else None
+                    if out[i] is not None:
+                        out[out[i]] = i
+            return out
         parts = []
         k = 0
         while k < len(toks):
-            if readable(toks[k]):
+            if readable(k):
                 j = k
-                while j < len(toks) and readable(toks[j]):
-                    j += 1
-                parts.append(("slot", toks[k:j]))
+                while j < len(toks) and readable(j):
+                    j += readable(j)
+                run = toks[k:j]
+                # a mark that opens a group closed only after the run (or closes one
+                # opened before it) belongs to the phrase, not to the value; so does a
+                # group right after the phrase's words that holds the whole value
+                pr = pairs(run)
+                a, b = 0, len(run)
+                while a < b and run[a] in opens and pr.get(a) is None:
+                    a += 1
+                while b > a and run[b - 1] in closes and pr.get(b - 1) is None:
+                    b -= 1
+                if a == 0 and b == len(run) and j == len(toks) and parts and \
+                        all(q[0] == "fixed" for q in parts) and len(run) > 2 and run[0] in opens and pr.get(0) == len(run) - 1:
+                    a, b = 1, len(run) - 1
+                parts += [("fixed", t) for t in run[:a]]
+                if b > a:
+                    parts.append(("slot", run[a:b]))
+                parts += [("fixed", t) for t in run[b:]]
                 k = j
             else:
                 parts.append(("fixed", toks[k]))
@@ -950,12 +1095,12 @@ class Machine:
                 found.append((line, line.index(routine), a["memory"], b["memory"]))
         if not found:
             return False
-        words = {line[q - 1] for line, q, _, _ in found if q > 0}
-        if len(words) != 1:
-            return False
+        words = {line[q - 1] if q > 0 else None for line, q, _, _ in found}
+        # one word always comes before the routine's name, or the name itself calls it
+        word = next(iter(words)) if len(words) == 1 else None
         best = None
         for nbind in range(0, 4):
-            for nwith in range(0, 3):
+            for nwith in range(0 if word else 1, 3):
                 cand = self._call_guess(found, nwith, nbind)
                 if cand is not None and (best is None or (-cand["checked"], nbind + nwith)
                                          < best[0]):
@@ -965,18 +1110,20 @@ class Machine:
             return False
         cand = best[1]
         cand.pop("checked")
-        cand["word"] = next(iter(words))
+        cand["word"] = word
         if cand != self.call:
             self.call = cand
-            self.note("code", f"a call is written '{cand['word']} <routine> "
+            self.note("code", f"a call is written '{(word + ' ') if word else ''}<routine> "
                               f"{' '.join(cand['with'])} <input> {' '.join(cand['bind'])} "
-                              f"<value>'" + (f", inputs split by '{cand['sep']}'"
-                                             if cand.get("sep") else ""))
+                              f"<value>{(' ' + cand['close']) if cand.get('close') else ''}'"
+                              + (f", inputs split by '{cand['sep']}'"
+                                 if cand.get("sep") else ""))
         return True
 
     def _call_guess(self, found, nwith, nbind):
-        withs, binds, seps = set(), set(), set()
+        withs, binds, seps, ends = set(), set(), set(), set()
         checked = 0
+        opens, closes = self._marks()
         for line, q, mem, entry in found:
             w = tuple(line[q + 1:q + 1 + nwith])
             withs.add(w)
@@ -1009,10 +1156,19 @@ class Machine:
                     return None
                 checked += 1
                 p = end + 1
+            ends.add(line[p - 1] if 0 < p <= len(line) else None)
         if len(withs) != 1 or len(binds) != 1 or len(seps) > 1 or not checked:
             return None
-        return {"with": list(next(iter(withs))), "bind": list(next(iter(binds))),
-                "sep": next(iter(seps)) if seps else None, "checked": checked}
+        w = next(iter(withs))
+        close = None
+        if any(t in opens for t in w):
+            # its inputs sit inside a group: the call ends where the group closes
+            if len(ends) != 1 or next(iter(ends)) not in closes:
+                return None
+            close = next(iter(ends))
+        return {"with": list(w), "bind": list(next(iter(binds))),
+                "sep": next(iter(seps)) if seps else None, "close": close,
+                "checked": checked}
 
     # ------------------------------------------------------------ its own experiments
     def write_set(self, name, words):
@@ -1021,7 +1177,17 @@ class Machine:
         if k is None or self.end is None:
             raise Unknown("I can't write a line that sets a name yet")
         return " ".join([name if w == "·" else w for w in k["fixed"]] + list(words) +
-                        [self.end])
+                        ([self.end] if self.end else []))
+
+    def write_walk(self, name, words, other):
+        """A block that walks along a row, copying each thing to another name."""
+        k = next((k for k in self.kinds.values() if k["does"] == "walk"), None)
+        b = self.blocks
+        if k is None or not b:
+            raise Unknown("I can't write a walk yet")
+        head = [name if w == "·" else w for w in k["fixed"]] + list(words) + [b["open"]]
+        return [" ".join(head), "    " + self.write_set(other, [name])] + \
+            ([b["close"]] if b.get("close") else [])
 
     def write_value(self, v):
         """Words for a value: a number, or a row written out."""
@@ -1029,12 +1195,13 @@ class Machine:
             # the way of writing it saw most often
             for head, p in sorted(self.phrases.items(), key=lambda kv: (-kv[1]["runs"], kv[0])):
                 law = p.get("law")
-                if v and len(p["tail"]) == 1 and p["tail"][0][0] == "series" and \
-                        law == ["var", p["names"][0]]:
+                tail = p["tail"]
+                if tail and tail[0][0] == "series" and all(t[0] == "fixed" for t in tail[1:]) \
+                        and law == ["var", p["names"][0]] and (v or len(tail) > 1):
                     out = list(p["head"])
                     for i, x in enumerate(v):
-                        out += ([p["tail"][0][1]] if i else []) + self.write_value(x)
-                    return out
+                        out += ([tail[0][1]] if i else []) + self.write_value(x)
+                    return out + [t[1] for t in tail[1:]]
                 if not v and law == ["nil"] and not p["tail"]:
                     return list(p["head"])
             raise Unknown("I can't write that row")
@@ -1048,32 +1215,55 @@ class Machine:
         values it chooses, runs them and watches. Returns runs spent."""
         spent = 0
         rows = [(3, 1, 4), (), (5,), (2, 7, 1, 8), (9, 9)]
-        nums = [3, 0, 7, 12, 5]
+        pairs = [(3, 6), (0, 2), (7, 9), (1, 4), (5, 5)]
         names = sorted({n for _, f in self.films for n in f["names"]})[:6]
         for key in sorted(self.wanting):
             want = self.wanting[key]
-            if want["tail"] != [["slot"]] or len(names) < 3:
+            if len(names) < 3 or any(p[0] == "series" for p in want["tail"]):
                 continue
-            for k in range(5):
+            wrote, need, walk = 0, max(1, 3 - want.get("have", 0)), False
+            k = 0
+            while k < need:
                 if spent >= budget:
-                    return spent
-                args = [rows[k] if t == LIST else nums[k] for t in want["types"]]
+                    break
+                lead = key.startswith("· ")
                 try:
-                    lines, words = [], list(key.split())
-                    for i, a in enumerate(args):
-                        if isinstance(a, tuple):
-                            lines.append(self.write_set(names[i], self.write_value(a)))
-                            words.append(names[i])
+                    lines, words, slot = [], [], 0
+
+                    def put(t, slot):
+                        if t == LIST:
+                            lines.append(self.write_set(names[slot], self.write_value(rows[k])))
+                            words.append(names[slot])
                         else:
-                            words += self.write_value(a)
-                    lines.append(self.write_set(names[-1], words))
+                            words.extend(self.write_value(pairs[k][slot % 2]))
+                    if lead:
+                        put(want["types"][0], 0)
+                        slot = 1
+                    words += key.replace("· ", "").split()
+                    for part in want["tail"]:
+                        if part[0] == "fixed":
+                            words.append(part[1])
+                            continue
+                        put(want["types"][slot], slot)
+                        slot += 1
+                    if walk:
+                        lines += self.write_walk(names[-2], words, names[-1])
+                    else:
+                        lines.append(self.write_set(names[-1], words))
                 except Unknown:
                     break
                 text = "\n".join(lines) + "\n"
                 film = self.world(text)
                 self.watch(text, film, who="own")
                 spent += 1
-            self.note("code", f"I wrote {k + 1} programs of my own to see what '{key}' does")
+                wrote += 1
+                k += 1
+                if not walk and film["ok"] and names[-1] not in (film.get("final") or {}):
+                    # a value no name can hold: it can only be walked along
+                    walk, k = True, k - 1
+            if wrote:
+                self.note("code", f"I wrote {wrote} program{'s' if wrote > 1 else ''} of my "
+                                  f"own to see what '{key}' does")
         self.wanting = {}
         return spent
 
@@ -1099,7 +1289,7 @@ class Machine:
         for word, k in sorted(self.kinds.items()):
             if k["does"] not in ("set", "walk", "test", "print", "return"):
                 continue
-            xs = [x for x in inst if x["toks"][0] == word]
+            xs = [x for x in inst if x["key"] == word]
             lo = k["name"] + 1 if "name" in k else 1
             for start in range(lo, k["span"][0]):
                 reads = [self._reads(k, x, start) for x in xs]
@@ -1202,7 +1392,7 @@ class _Run:
             self.steps += 1
             if self.steps > MAX_STEPS:
                 raise Unknown("too long to work through in my head")
-            k = m.kinds.get(toks[0])
+            k = m.kind_of(toks)
             if k is None:
                 raise Unknown(f"I don't know what '{toks[0]}' does")
             fixed = k.get("fixed", [])
@@ -1216,14 +1406,14 @@ class _Run:
                     raise Unknown("an open block")
                 mid = h["middle"]
                 if d == "routine":
-                    n = end + 1
+                    n = h["after"]
                     continue
                 if d == "test" and not k["again"]:
                     if self.truth(k, toks, env):
                         self.block(n + 1, mid or end, env)
                     elif mid is not None:
                         self.block(mid + 1, end, env)
-                    n = end + 1
+                    n = h["after"]
                     continue
                 if d == "test":
                     while self.truth(k, toks, env):
@@ -1231,7 +1421,7 @@ class _Run:
                         self.steps += 1
                         if self.steps > MAX_STEPS:
                             raise Unknown("too long to work through in my head")
-                    n = end + 1
+                    n = h["after"]
                     continue
                 if d == "walk":
                     row = m.value(self.span(k, toks), env, self)
@@ -1241,7 +1431,7 @@ class _Run:
                         env[toks[k["name"]]] = item
                         self.block(n + 1, end, env)
                         self.steps += 1
-                    n = end + 1
+                    n = h["after"]
                     continue
                 raise Unknown(f"I don't know how '{toks[0]}' runs its block")
             if d == "set":

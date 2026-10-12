@@ -157,6 +157,169 @@ class ReadingStatements(Lesson):
                     f"({m.stats.get('trainer', 0)} by me, {m.stats.get('own', 0)} by you).")
 
 
+class SecondLanguage(Lesson):
+    """C3: a language it has never seen, learned to the level of lessons 100 and 101
+    with at most a third of the runs Engc took, by carrying over what it knows."""
+    kind = "guided"
+    RUNS = 141           # one third of the 425 runs Engc took (328 + 97)
+    SHOWN = 1            # the Trainer's demonstration of each word
+    PER_WORD = 6
+    TWO_OPS = 6
+    BRACKETS = 3
+    GRAMMAR_CONFIRM = 5
+    MIXED = 20
+    OWN = 10
+    CONFIRM = 10
+    store = None
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.rng = random.Random(seed)
+
+    def language(self):
+        raise NotImplementedError
+
+    def words(self):
+        """(Engc words the Trainer uses, arity) in the order it shows them."""
+        return [(w, 2) for w in WORDS + SYMBOLS] + [(w, 1) for w in UNARY] + LOGIC
+
+    def teach(self, trainer):
+        from ..code.reading import Reader
+        from ..code.statements import Machine
+        from . import engc_statements as S
+        brain = trainer.brain
+        rng = self.rng
+        lang = self.language()
+        engc = Reader(brain, brain.code)
+        reader = Reader(brain, {"seed": self.seed})
+        reader.borrow(engc)
+
+        def world(text):
+            out = lang.run(text)
+            return out["printed"] if out["ok"] else None
+        reader.world = world
+
+        def tr(text):
+            return lang.from_engc(text).strip()
+
+        trainer.say("A language you have never seen. I'll run some programs in it.")
+        first = [P.one_op(rng, "PLUS") for _ in range(2)]
+        reader.find_frame([tr(t) for t, _ in first])
+        spent_words = set()
+        for engc_words, arity in self.words():
+            words = self.spell(engc_words, arity)
+            if words is None or (words, arity) in spent_words:
+                continue
+            spent_words.add((words, arity))
+            shown = first if engc_words == "PLUS" else \
+                [P.one_op(rng, engc_words, unary=arity == 1) for _ in range(self.SHOWN)]
+            demos = []
+            for text, printed in shown:
+                text = tr(text)
+                reader.watch(text, printed)
+                got = reader.demo_from(text, printed)
+                if got is not None:
+                    demos.append((got[2], got[3]))
+            if not demos:
+                reader.note("stuck", f"I couldn't tell what '{words}' joins")
+                continue
+            reader.study_known(tuple(words.split()), arity, demos,
+                               min(self.PER_WORD, self.RUNS - reader.total_runs - 60))
+        reader.borrow_grammar()
+        if reader.prior:
+            reader.levels, reader.assoc = reader.prior
+        for _ in range(self.TWO_OPS):
+            text, printed = P.program(rng, 2, 20)
+            reader.watch(tr(text), printed)
+        for _ in range(self.BRACKETS):
+            text, printed = P.bracketed(rng)
+            reader.watch(tr(text), printed)
+        reader.learn_marks()
+        reader.learn_grammar(max(0, self.RUNS - reader.total_runs - 45),
+                             confirm=self.GRAMMAR_CONFIRM)
+        code = dict(brain.code or {})
+        code[self.store] = reader.to_json()
+        brain.code = code
+
+        # statements: films, carrying over what it knows about lines
+        m = Machine(brain, reader)
+        m.world = lang.trace
+
+        def left():
+            return self.RUNS - reader.total_runs - m.total_runs
+
+        def show(text):
+            m.watch(text, lang.trace(text))
+        for text, _ in S.first_programs(rng):
+            try:
+                show(lang.from_engc(text))
+            except ValueError:
+                pass        # something this language has no way of saying
+        for _ in range(self.MIXED):
+            show(lang.from_engc(S.program(rng, S.LESSON, self.features)[0]))
+        m.learn()
+        m.experiment(min(self.OWN, left()))
+        m.learn()
+        streak = 0
+        while streak < self.CONFIRM and left() > 0:
+            text = lang.from_engc(S.program(rng, S.LESSON, self.features)[0])
+            film = lang.trace(text)
+            guess = m.predict(text)
+            m.watch(text, film)
+            if film["ok"] and guess == film["printed"]:
+                streak += 1
+                continue
+            streak = 0
+            m.learn()
+            if m.wanting and left() > 0:
+                m.experiment(min(self.OWN, left()))
+                m.learn()
+        code = dict(brain.code)
+        state = dict(code[self.store])
+        state["reader"] = reader.to_json()
+        state["statements"] = m.to_json()
+        code[self.store] = state
+        brain.code = code
+        trainer.say(f"That's all: {reader.total_runs + m.total_runs} programs run in this "
+                    f"language ({reader.total_runs} with one line, {m.total_runs} with many).")
+
+
+class InventedLanguage(SecondLanguage):
+    number, title = 102, "A language never seen: the same ideas, every word new"
+    goal = ("Every Engc word and mark is replaced by a fresh one. Can Ultron read its "
+            "expressions and its statements as well as Engc's, from a third of the runs?")
+    store = "invented"
+    features = ("lists", "routines", "added")
+
+    def language(self):
+        from .languages import Invented
+        return Invented()
+
+    def spell(self, engc_words, arity):
+        lang = self.language()
+        return " ".join(lang.out[w] for w in engc_words.split())
+
+
+class PythonSubset(SecondLanguage):
+    number, title = 103, "A language never seen: a small part of Python"
+    goal = ("Python's own words and marks, blocks shown only by how far a line is pushed "
+            "in. Can Ultron read its expressions and its statements as well as Engc's, "
+            "from a third of the runs?")
+    store = "python"
+    features = ("lists", "routines")
+
+    def language(self):
+        from .languages import Python
+        return Python()
+
+    def spell(self, engc_words, arity):
+        from .languages import PY_OPS
+        if engc_words == "MINUS" and arity == 1:
+            return "-"
+        return PY_OPS.get(tuple(engc_words.split()), engc_words if not
+                          engc_words.isalpha() else None)
+
+
 def _world(sandbox):
     def run(text):
         out = sandbox.run(text)
@@ -169,4 +332,5 @@ def code_lessons(seed):
     from ..code import sandbox
     if not sandbox.available():
         return []
-    return [ReadingEngc(seed + 100), ReadingStatements(seed + 101)]
+    return [ReadingEngc(seed + 100), ReadingStatements(seed + 101),
+            InventedLanguage(seed + 102), PythonSubset(seed + 103)]

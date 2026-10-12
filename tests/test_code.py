@@ -1,4 +1,5 @@
-"""The Code stage (docs/STAGE_CODE_PLAN.md): lesson 100, reading Engc expressions (C1)."""
+"""The Code stage (docs/STAGE_CODE_PLAN.md): lessons 100-103, reading Engc and two
+languages never seen (C1-C3)."""
 
 import ast
 import pathlib
@@ -86,3 +87,37 @@ def test_lesson_101_reads_held_out_programs(trained):
     best = max(v[0] for k, v in s.items() if k != "ultron")
     assert s["ultron"][0] - best >= 60
     assert r["runs"]["trainer"] + r["runs"]["own"] <= 1000
+
+
+def test_python_programs_run_as_python():
+    from ultron.trainer.languages import Python, py_trace
+    py = Python()
+    text = py.from_engc("DEFINE ROUTINE f WITH n AS NUMBER :\n    RETURN n TIMES 2 .\nEND\n"
+                        "SET x TO CALL f WITH n EQUAL TO 4 .\nPRINT x .\n")
+    assert text == "def f ( n ) :\n    return n * 2\nx = f ( n = 4 )\nprint ( x )\n"
+    film = py_trace(text)
+    assert film["printed"] == ["8"] and film["final"] == {"x": 8}
+    assert [s["depth"] for s in film["steps"]] == [0, 0, 1, 0]
+
+
+def test_invented_words_are_all_new():
+    from ultron.trainer.languages import ENGC_MARKS, ENGC_WORDS, Invented
+    lang = Invented()
+    assert not set(lang.out.values()) & set(ENGC_WORDS + ENGC_MARKS)
+    text = "SET x TO 3 PLUS 4 .\nPRINT x .\n"
+    assert lang.to_engc(lang.from_engc(text)) == text
+    assert lang.run(lang.from_engc(text))["printed"] == ["7"]
+
+
+@pytest.mark.parametrize("lesson", [102, 103])
+def test_second_languages_are_learned_from_a_third_of_the_runs(trained, lesson):
+    """C3: the C1 and C2 exams in a language never seen, from <= 141 runs in all."""
+    _, results = trained
+    r = results[lesson]
+    assert r["passed"]
+    assert r["runs in all"] <= 141
+    c1, c2 = (it["scores"] for it in r["items"])
+    assert c1["ultron"][0] >= 190 and c2["ultron"][0] >= 180
+    assert r["precision"][0] >= 0.99 and r["precision"][1] >= 0.98
+    for s in (c1, c2):
+        assert s["ultron"][0] - max(v[0] for k, v in s.items() if k != "ultron") >= 60
