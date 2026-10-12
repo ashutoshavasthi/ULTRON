@@ -47,13 +47,15 @@ def test_eyes_explain_away_touching_things(trained):
     assert eyes.footprint is not None and eyes.leftover > eyes.threshold
     plain = copy.deepcopy(eyes)
     plain.footprint = None                  # the same eyes, not explaining away
-    trays, camera = np.random.default_rng(31), np.random.default_rng(32)
+    trays = np.random.default_rng(31)
     right = plain_right = 0
-    for _ in range(12):
+    for i in range(12):
         n = int(trays.integers(12, 25))
         blobs = scatter(n, trays, gap=3.0, radius=(1.2, 1.5))
-        right += eyes.count(lambda: shoot(blobs, camera)[0])[0] == n
-        plain_right += plain.count(lambda: shoot(blobs, camera)[0])[0] == n
+        # both pairs of eyes are shown the same pictures of each tray
+        cam, plain_cam = np.random.default_rng(1000 + i), np.random.default_rng(1000 + i)
+        right += eyes.count(lambda: shoot(blobs, cam)[0])[0] == n
+        plain_right += plain.count(lambda: shoot(blobs, plain_cam)[0])[0] == n
     assert right >= 11 and right > plain_right, (right, plain_right)
 
 

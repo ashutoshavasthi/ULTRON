@@ -86,7 +86,7 @@ are below #6 is overlapping, which is not gated (merged blobs, reported only).
 | Blind tests | 60/60, 60/60, 50/50, and 14/14 on the non-blind example |
 | ARC-AGI-1 training split | 37.1% (148.5 of 400; 149 answers, 14 wrong), as #11 measured. The evaluation split was not opened |
 | Failure lab | every row passes; every breakpoint as before. Rows identical to the source PRs except run times and the eyes: touching 25/25 (#6 and base 24), 32% noise 24/25 (#6 25, base 24), overlapping (ungated) 20/25 (#6 24, base 19). The language and events rows are exactly #8's |
-| Full test suite | running |
+| Full test suite | 144 of 145 pass. The one failure was PR #6's own explaining-away test: on 12 trays it showed one shared camera stream to the explaining-away eyes and then to the plain eyes, so they saw different pictures (11 vs 12). With each tray's pictures shown to both (as PR #6 did for the failure lab), explaining away gets 12/12 and plain 11/12; the test now pairs the pictures and passes |
 
 Lesson 29 g = 9.757 ± 0.157 m/s², lesson 30 √length law power 0.470 ± 0.029 and constant
 2.023 ± 0.013, L1 200/200 with every word within 20 sentences, L2 200/200 and 113/120,
