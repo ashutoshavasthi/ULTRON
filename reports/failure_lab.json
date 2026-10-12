@@ -23,14 +23,14 @@
     "outcome": "groups(a, succ(b))",
     "ok": true,
     "steps": 1605,
-    "seconds": 0.08
+    "seconds": 0.05
    },
    {
     "level": "a\u00b7b+a+b",
     "outcome": "pred(groups(succ(a), succ(b)))",
     "ok": true,
     "steps": 90707,
-    "seconds": 1.63
+    "seconds": 1.5
    },
    {
     "level": "a\u00b2+b",
@@ -51,26 +51,26 @@
     "outcome": "groups(a, succ(square(b)))",
     "ok": true,
     "steps": 12733,
-    "seconds": 0.14
+    "seconds": 0.12
    },
    {
     "level": "a\u00b3+b\u00b2",
     "outcome": "merge(square(b), groups(a, square(a)))",
     "ok": true,
     "steps": 539242,
-    "seconds": 17.92
+    "seconds": 14.96
    },
    {
     "level": "(a+1)(b+2)(a+b)",
     "outcome": "nothing found",
     "ok": false,
     "steps": 578689,
-    "seconds": 15.68
+    "seconds": 14.41
    }
   ],
   "breakpoint": "(a+1)(b+2)(a+b)",
   "note": "Search is size-ordered and exhaustive: cost grows exponentially with the size of the law.",
-  "seconds": 35.5
+  "seconds": 31.1
  },
  {
   "name": "library learning",
@@ -86,7 +86,7 @@
     "level": "S(S(a,b),a)+S(a,b)",
     "outcome": "piece1(a, piece2(b, a)) \u2014 10 pieces written out",
     "ok": true,
-    "seconds": 0.3,
+    "seconds": 0.9,
     "size_written_out": 10,
     "without_pieces": "nothing found"
    },
@@ -94,7 +94,7 @@
     "level": "S(S(a,b),S(a,a))",
     "outcome": "piece1(square(succ(a)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 20.0,
+    "seconds": 48.4,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -102,7 +102,7 @@
     "level": "S(S(a,b),S(b,b))",
     "outcome": "piece1(square(succ(b)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 11.8,
+    "seconds": 21.1,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -110,7 +110,7 @@
     "level": "S(S(a,b),S(a,b))+a",
     "outcome": "merge(a, square(succ(piece1(a, b)))) \u2014 9 pieces written out",
     "ok": true,
-    "seconds": 12.9,
+    "seconds": 12.5,
     "size_written_out": 9,
     "without_pieces": "nothing found"
    },
@@ -118,7 +118,7 @@
     "level": "S(T(a,b),T(b,a))",
     "outcome": "piece1(piece2(a, b), piece2(b, a)) \u2014 15 pieces written out",
     "ok": true,
-    "seconds": 14.1,
+    "seconds": 13.3,
     "size_written_out": 15,
     "without_pieces": "nothing found"
    },
@@ -126,14 +126,14 @@
     "level": "T(T(a,b),T(b,a))",
     "outcome": "piece2(piece2(a, b), piece2(b, a)) \u2014 16 pieces written out",
     "ok": true,
-    "seconds": 10.8,
+    "seconds": 14.2,
     "size_written_out": 16,
     "without_pieces": "nothing found"
    }
   ],
   "breakpoint": null,
   "note": "Its search alone stops at 7 pieces. The held-out laws are compositions of the family's pieces (S = (x+1)(y+1), T = (x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.",
-  "seconds": 170.1
+  "seconds": 272.9
  },
  {
   "name": "intuition",
@@ -150,7 +150,7 @@
   ],
   "breakpoint": "38 held-out laws (lab laws and unseen dreams)",
   "note": "Kept out of the brain until it pays: a wrong guess pushes a needed law to a dearer level, and search grows exponentially per level.",
-  "seconds": 127.5
+  "seconds": 213.2
  },
  {
   "name": "wrong labels (programs)",
@@ -180,7 +180,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 133.7
+  "seconds": 169.3
  },
  {
   "name": "hidden causes and noise",
@@ -200,7 +200,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 35.1
+  "seconds": 34.1
  },
  {
   "name": "few examples",
@@ -240,7 +240,7 @@
   ],
   "breakpoint": "1 examples",
   "note": "Failing with very few examples is expected: many laws fit. The point is how fast it converges.",
-  "seconds": 0.2
+  "seconds": 0.1
  },
  {
   "name": "compute vs data",
@@ -249,26 +249,26 @@
   "rows": [
    {
     "level": "20 examples",
-    "outcome": "3.2 s",
+    "outcome": "3.8 s",
     "ok": true,
-    "seconds": 3.19
+    "seconds": 3.81
    },
    {
     "level": "100 examples",
-    "outcome": "1.0 s",
+    "outcome": "1.4 s",
     "ok": true,
-    "seconds": 0.97
+    "seconds": 1.42
    },
    {
     "level": "400 examples",
-    "outcome": "0.5 s",
+    "outcome": "1.0 s",
     "ok": true,
-    "seconds": 0.52
+    "seconds": 1.01
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 4.7
+  "seconds": 6.2
  },
  {
   "name": "noise",
@@ -424,26 +424,26 @@
     "outcome": "F / (a\u00b7m)",
     "ok": true,
     "steps": 266,
-    "seconds": 0.01
+    "seconds": 0.02
    },
    {
     "level": "6 irrelevant",
     "outcome": "F / (a\u00b7m)",
     "ok": true,
     "steps": 552,
-    "seconds": 0.02
+    "seconds": 0.05
    },
    {
     "level": "10 irrelevant",
     "outcome": "F / (a\u00b7m)",
     "ok": true,
     "steps": 1612,
-    "seconds": 0.1
+    "seconds": 0.14
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 0.1
+  "seconds": 0.2
  },
  {
   "name": "confounders",
@@ -593,18 +593,18 @@
    },
    {
     "level": "touching (gap = diameter)",
-    "outcome": "24/25 trays counted right",
+    "outcome": "25/25 trays counted right",
     "ok": true
    },
    {
     "level": "overlapping (gap < diameter)",
-    "outcome": "19/25 trays counted right (merged blobs: a physical limit, reported only)",
+    "outcome": "20/25 trays counted right (merged blobs: a physical limit, reported only)",
     "ok": true
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 10.4
+  "seconds": 16.0
  },
  {
   "name": "false laws",
@@ -639,7 +639,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 17.0
+  "seconds": 23.2
  },
  {
   "name": "words by pointing",
@@ -719,7 +719,7 @@
   ],
   "breakpoint": "20% of sentences name the wrong thing",
   "note": "A row passes at 57/60 (95%). The two dials are separate: the first breakpoint is the first row that fails.",
-  "seconds": 63.1
+  "seconds": 75.0
  },
  {
   "name": "words for what happens",
@@ -813,7 +813,7 @@
   ],
   "breakpoint": "20% of event sentences say the wrong word",
   "note": "A row passes at 54/60 (90%). Event words were taught with 100 sentences and comparing words with 120 in the first rows.",
-  "seconds": 592.0
+  "seconds": 548.2
  },
  {
   "name": "how words combine",
@@ -879,6 +879,6 @@
   ],
   "breakpoint": "20% of sentences have a word misheard",
   "note": "A row passes at 57/60 (95%). The grammar was found from 300 sentences in the first rows.",
-  "seconds": 2771.8
+  "seconds": 2327.1
  }
 ]

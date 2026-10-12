@@ -87,9 +87,9 @@ _How does search time grow with more examples?_ Breaks at: **did not break**
 
 | examples | what it did | |
 |---|---|---|
-| 20 examples | `3.2 s` | ✅ |
-| 100 examples | `1.0 s` | ✅ |
-| 400 examples | `0.5 s` | ✅ |
+| 20 examples | `3.8 s` | ✅ |
+| 100 examples | `1.4 s` | ✅ |
+| 400 examples | `1.0 s` | ✅ |
 
 ## noise
 
@@ -200,8 +200,8 @@ _How robust is its learned vision?_ Breaks at: **did not break**
 | 32% noise | `24/25 trays counted right` | ✅ |
 | big things (r 4-6) | `25/25 trays counted right` | ✅ |
 | faint things (30% brightness) | `25/25 trays counted right` | ✅ |
-| touching (gap = diameter) | `24/25 trays counted right` | ✅ |
-| overlapping (gap < diameter) | `19/25 trays counted right (merged blobs: a physical limit, reported only)` | ✅ |
+| touching (gap = diameter) | `25/25 trays counted right` | ✅ |
+| overlapping (gap < diameter) | `20/25 trays counted right (merged blobs: a physical limit, reported only)` | ✅ |
 
 ## false laws
 

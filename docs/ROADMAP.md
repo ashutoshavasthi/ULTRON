@@ -172,8 +172,8 @@ Stage 2 plan and exit test: [STAGE_2_PLAN.md](STAGE_2_PLAN.md).
 2. ✅ **Lesson 26:** diffusion from the real microscope film: D within 4% of the
    scientists' tool, Einstein's law found, in the curriculum (29 lessons).
 3. ✅ **g from real footage** (lesson 29): the law of falling found from three real lab
-   films; g = 9.65 ± 0.15 m/s² against 9.80
-   ([`stage2_v3_falling.md`](../reports/stage2_v3_falling.md)).
+   films; g = 9.76 ± 0.16 m/s² against 9.80 (9.65 ± 0.15 before the V6 changes to how
+   it looks) ([`stage2_v3_falling.md`](../reports/stage2_v3_falling.md)).
 4. ✅ **Detection on par with a lab tool** (V6): Ultron's positions match the lab's own
    hand marks on both marked films ([`stage2_v4_v6.md`](../reports/stage2_v4_v6.md)).
 5. **Pendulum periods and the √length law, restitution** (V4, V5): not met, with parts
@@ -196,12 +196,12 @@ footage) and 30 (real pendulums), and the language lessons become 31, 32 and 33.
 seeds, and so their teaching and exam worlds, are the ones fixed when they were 29, 30
 and 31; only the number changed.
 
-**The combined candidate (2026-10-11)**
+**The combined candidate (2026-10-12)**
 ([`reports/integration.md`](../reports/integration.md)). All open PRs on one branch:
-retrain byte-identical, 32 of 34 lessons on the first attempt. Two lessons that pass in
-their own PRs fail there, both because of PR #6's eyes: lesson 30 (the 0.5 m pendulum is
-timed 8.5% loose, so the shortest law becomes L/T) and lesson 31 (L1's "≤ 20 sentences"
-rested on a 0.1-bit tie, which the better eyes tip). Marks below are each PR's own.
+34 of 34 lessons on the first attempt, retrain byte-identical, and the exams of lessons
+29-33 exactly their own PRs' numbers. Explaining away (PR #6) now sits on the eyes the
+later lessons were built with; PR #6's wider-spot eyes had cost lesson 30 (the 0.5 m
+pendulum timed 8.5% loose) and L1 (a 0.1-bit tie at 20 sentences).
 
 Stage 3 plan and exit test: [STAGE_3_PLAN.md](STAGE_3_PLAN.md).
 1. ✅ **L1, words by pointing** (lesson 31): from sentences it overhears about tables,

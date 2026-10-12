@@ -8,7 +8,7 @@ footage**.
 
 | # | Criterion |
 |---|---|
-| V1 | ✅ **met, and robust** (2026-10-11): every gating eyes row ≥ 23/25 in the failure lab and on 8 fixed sets of 25 unseen trays (normal, 16% and 32% noise, big, faint: 100/100 each; touching 193/200, every set 23–25). Before Stage 2: 25, 1, 0, 0, 2, 19. No regressions elsewhere in the lab; 29 lessons pass on the first attempt; a retrain is byte-identical; 112 tests pass |
+| V1 | ✅ **met, and robust** (2026-10-12): every gating eyes row ≥ 23/25 in the failure lab and on 8 fixed sets of 25 unseen trays (normal, 16% noise, big, faint 200/200; 32% noise 199/200; touching 195/200, every set 23–25), and on 8 fresh sets (touching 197/200). Before Stage 2: 25, 1, 0, 0, 2, 19. No regressions elsewhere in the lab; 34 lessons pass on the first attempt; a retrain is byte-identical |
 | V2 | **Diffusion** from the real microscope film (lesson 26): Ultron's D agrees with the scientists' own tool within measured error |
 | V3 | **g** from real footage of falling, within measured error |
 | V4 | **Pendulum periods** from real footage, within measured error (and the √length law) |
@@ -70,6 +70,22 @@ How V1 was met (`senses/eyes.py`, `senses/world.py`):
   22), 32% noise 96/100 (worst 23) and overlapping 62/100 on the same fixed trays;
   combined with explaining away, 195/200 touching but 32% noise 94/100 (worst 22). 16
   filters with explaining away: touching 187/200 (worst 20).
+- **Combined with the later lessons (2026-10-12).** The σ 1.0 eyes above, on their own
+  trays, were not the eyes Stage 2's real films (lessons 29–30) and Stage 3's tables were
+  built and measured with (σ 0.7, the trays from touching to apart). With them, the 0.5 m
+  pendulum was timed 8.5% loose (two things stitched into one swing), BallTossOut lost
+  one of its 10/11 marks, and L1's ≤ 20 sentences flipped on a 0.1-bit tie: 32 of 34
+  lessons. So explaining away now sits on the σ 0.7 eyes (their learned weights are
+  byte-for-byte the ones lessons 20–33 were measured with), close up and when a crowd is
+  looked at longer; and a noisy still scene is looked at until it is a little cleaner
+  than usual (0.8 of its noise reference), which removes the 32% noise dip above. On the
+  failure lab's protocol, 8 fixed sets of 25 (seeds 13, 99, 7, 2024, 1–4): normal, 16%
+  noise, big, faint 200/200; 32% noise 199/200; touching 195/200, every set 23–25;
+  overlapping (ungated) 121/200. On 8 fresh sets never used before (seeds 5001–5008),
+  against the σ 1.0 eyes: 32% noise 199 vs 198, faint 200 vs 199, touching **197 vs
+  192**, other gated rows 200 both; overlapping (ungated) 131 vs 170 (the one row that
+  is lower). All 34 lessons pass on the first attempt; the exams of lessons 21–33 are
+  identical to the PRs that built them.
 
 Two measured pitfalls, fixed:
 - recentring the background on every picture dimmed small crowded things;
