@@ -876,6 +876,211 @@
   "threshold": 0.9,
   "wrong": []
  },
+ "104": {
+  "answered": 450,
+  "attempt": 1,
+  "found": 9,
+  "items": [
+   {
+    "law": "(a) -> a",
+    "name": "dsl.check: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      0,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "(a, b) -> groups(a, b)",
+    "name": "amounts._times: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      0,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "(a, b) -> amounts._times(a, b)",
+    "name": "amounts._recut: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      0,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "(a, b, c, d) -> (amounts._recut(a, d); amounts._recut(b, c); amounts._recut(b, d))",
+    "name": "amounts.common: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      0,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "I don't know",
+    "name": "amounts.same: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      25,
+      50
+     ],
+     "ultron": [
+      0,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "(a, b) -> the number q with amounts._recut(q, a) = b",
+    "name": "amounts._fits_evenly: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      0,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "(a) -> those of counting from 1 to a for which there is the number q with amounts._recut(q, it) = a",
+    "name": "amounts._kinds_that_fit: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      0,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "(a, b) -> (the number q with amounts._recut(q, b) = amounts._recut(a, the first of counting from 1 to b for which there is the number q with amounts._recut(q, b) = amounts._recut(a, it)); the first of counting from 1 to b for which there is the number q with amounts._recut(q, b) = amounts._recut(a, it))",
+    "name": "amounts.simplest: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      0,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "(a, b) -> (amounts.simplest#0(a, b); amounts.simplest#1(a, b))",
+    "name": "amounts._simplest: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      1,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   },
+   {
+    "law": "(a, b, c) -> (if lt(c, 1) then pay(b, a) else merge(a, b); b)",
+    "name": "amounts._plus_one: 50 held-out inputs, wider than any it ran",
+    "scores": {
+     "lookup": [
+      0,
+      50
+     ],
+     "nearest": [
+      0,
+      50
+     ],
+     "ultron": [
+      50,
+      50
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "lesson": 104,
+  "passed": true,
+  "precision": 1.0,
+  "runs": {
+   "own": 193
+  },
+  "threshold": 0.8,
+  "wrong": []
+ },
  "11": {
   "attempt": 1,
   "items": [

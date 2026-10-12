@@ -586,3 +586,11 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: A language you have never seen. I'll run some programs in it.
 - **Trainer**: That's all: 91 programs run in this language (48 with one line, 43 with many).
 - **Trainer**: Exam for lesson 103, attempt 1: passed
+
+## Lesson 104
+
+- **Trainer**: Lesson 104: Its own code, watched from outside
+- **Trainer**: These are some of your own functions. Run each one on inputs you choose, at most 20 times, and tell me what it does.
+- Ultron _stuck_: I ran amounts.same 20 times and found no law I trust
+- **Trainer**: That's all: laws for 9 of 10 functions.
+- **Trainer**: Exam for lesson 104, attempt 1: passed

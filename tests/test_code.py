@@ -121,3 +121,26 @@ def test_second_languages_are_learned_from_a_third_of_the_runs(trained, lesson):
     assert r["precision"][0] >= 0.99 and r["precision"][1] >= 0.98
     for s in (c1, c2):
         assert s["ultron"][0] - max(v[0] for k, v in s.items() if k != "ultron") >= 60
+
+
+def test_undo_finds_the_number_or_nothing():
+    from ultron.brain.brain import Brain
+    from ultron.brain.dsl import evaluate
+    brain = Brain.load(str(ROOT / "brain" / "ultron_brain.json"))
+    lib = brain.library
+    e = ("undo", "groups", ("var", "d"), ("var", "n"))
+    assert evaluate(e, {"d": 7, "n": 91}, lib) == 13
+    assert evaluate(e, {"d": 7, "n": 90}, lib) is None
+    assert evaluate(("some", e), {"d": 3, "n": 90}, lib) is True
+    keep = ("keep", ("some", ("undo", "groups", ("var", "it"), ("var", "n"))),
+            ("upto", ("const", 1), ("var", "n")))
+    assert evaluate(keep, {"n": 12}, lib) == (1, 2, 3, 4, 6, 12)
+
+
+def test_lesson_104_finds_laws_for_its_own_functions(trained):
+    """C4 (a): laws for >= 8 of its 10 functions, each right on >= 49 of 50 held-out
+    inputs; >= 98% of the answers from functions with a law right; <= 20 runs each."""
+    _, results = trained
+    r = results[104]
+    assert r["passed"] and r["found"] >= 8 and r["precision"] >= 0.98
+    assert r["runs"]["own"] <= 200

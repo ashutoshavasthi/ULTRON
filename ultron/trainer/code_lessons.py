@@ -320,6 +320,33 @@ class PythonSubset(SecondLanguage):
                           engc_words.isalpha() else None)
 
 
+class OwnCodeWatched(Lesson):
+    number, title = 104, "Its own code, watched from outside"
+    goal = ("Ultron runs ten of its own functions (from dsl.py and amounts.py) on inputs "
+            "it chooses, at most 20 times each. Can it find a law in its own program "
+            "language for at least eight of them that holds far beyond the inputs it ran?")
+    kind = "guided"
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+
+    def teach(self, trainer):
+        from ..code.own import OwnCode
+        from . import own_code as O
+        brain = trainer.brain
+        oc = OwnCode(brain, (brain.code or {}).get("own"))
+        trainer.say("These are some of your own functions. Run each one on inputs you "
+                    "choose, at most 20 times, and tell me what it does.")
+        for i, f in enumerate(O.FUNCTIONS):
+            oc.study(O.name(f), lambda args, f=f: O.run(brain, f, args),
+                     lambda rng, f=f: O.lesson_range(f, rng),
+                     lambda args, f=f: O.allowed(f, args), self.seed * 100 + i, O.RUNS)
+        code = dict(brain.code or {})
+        code["own"] = oc.to_json()
+        brain.code = code
+        trainer.say(f"That's all: laws for {len(oc.found)} of {len(O.FUNCTIONS)} functions.")
+
+
 def _world(sandbox):
     def run(text):
         out = sandbox.run(text)
@@ -333,4 +360,4 @@ def code_lessons(seed):
     if not sandbox.available():
         return []
     return [ReadingEngc(seed + 100), ReadingStatements(seed + 101),
-            InventedLanguage(seed + 102), PythonSubset(seed + 103)]
+            InventedLanguage(seed + 102), PythonSubset(seed + 103), OwnCodeWatched(seed + 104)]

@@ -64,6 +64,23 @@ def lesson_range(f, rng):
     return tuple((rng.randint(0, 12), rng.randint(1, 12)) for _ in f[2])
 
 
+def allowed(f, args):
+    """May Ultron run f on these (the lesson ranges)?"""
+    fn = f[1]
+    flat = [v for a in args for v in (a if isinstance(a, tuple) else (a,))]
+    if fn == "_fits_evenly":
+        return 1 <= args[0] <= 12 and 1 <= args[1] <= 30
+    if fn == "_kinds_that_fit":
+        return 1 <= args[0] <= 30
+    if fn == "_plus_one":
+        return 0 <= args[0][0] <= 12 and 1 <= args[0][1] <= 12 and args[1] in (-1, 0, 1)
+    if fn in ("check", "_times", "_recut"):
+        return all(0 <= v <= 12 for v in flat)
+    if fn == "_simplest":
+        return 0 <= args[0] <= 12 and 1 <= args[1] <= 12
+    return all(0 <= a[0] <= 12 and 1 <= a[1] <= 12 for a in args)
+
+
 def _held_out_one(f, rng, i):
     fn = f[1]
     r = rng.randint

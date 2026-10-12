@@ -213,3 +213,63 @@ def exam_python(brain, seed=7005):
     from ..trainer.languages import Python
     return _second_language(brain, 103, "python", Python(), PythonSubset.features,
                             (seed, seed + 1), "Python")
+
+
+C4_FOUND, C4_PRECISION, C4_PER = 8, 0.98, 49
+
+
+def exam_own_code(brain, seed=7007):
+    """C4 (a): its own functions, watched from outside. For each of the 10 functions,
+    50 held-out inputs wider than any it ran; a function counts as found when its law
+    answers at least 49 of the 50 right. Passed: at least 8 found, and at least 98% of
+    the answers from functions with a law right. Baselines: lookup and nearest from its
+    own runs of each function."""
+    from ..code.own import OwnCode
+    from ..trainer import own_code as O
+    state = (brain.code or {}).get("own")
+    if not state:
+        return {"lesson": 104, "passed": False, "items": [],
+                "note": "lesson 104 was never taken"}
+    oc = OwnCode(brain, state)
+    held = O.held_out(seed)
+    items, found, right, answered, wrong = [], 0, 0, 0, []
+    for f in O.FUNCTIONS:
+        name = O.name(f)
+        runs = [(_tup(a), _tup(o)) for a, o in oc.runs.get(name, [])]
+        sc = {"ultron": [0, 0], "lookup": [0, 0], "nearest": [0, 0]}
+        for args in held[name]:
+            truth = O.run(brain, f, args)
+            ok, guess = oc.predict(name, args)
+            answered += ok
+            hit = ok and guess == truth
+            sc["ultron"][0] += hit
+            right += hit
+            if ok and not hit and len(wrong) < 10:
+                wrong.append({"function": name, "inputs": repr(args), "truth": repr(truth),
+                              "ultron": repr(guess)})
+            sc["lookup"][0] += next((o for a, o in runs if a == args), "?") == truth
+            near = min(runs, key=lambda r: _dist(r[0], args))[1] if runs else "?"
+            sc["nearest"][0] += near == truth
+            for v in sc.values():
+                v[1] += 1
+        found += sc["ultron"][0] >= C4_PER
+        items.append({"name": f"{name}: 50 held-out inputs, wider than any it ran",
+                      "scores": sc, "law": oc.describe(name), "tolerance": None})
+    precision = right / answered if answered else None
+    passed = found >= C4_FOUND and precision is not None and precision >= C4_PRECISION
+    return {"lesson": 104, "passed": passed, "threshold": C4_FOUND / len(O.FUNCTIONS),
+            "items": items, "found": found, "answered": answered, "precision": precision,
+            "runs": {"own": sum(len(v) for v in oc.runs.values())}, "wrong": wrong}
+
+
+def _tup(v):
+    return tuple(_tup(x) for x in v) if isinstance(v, list) else v
+
+
+def _dist(a, b):
+    def flat(v):
+        return [x for y in v for x in flat(y)] if isinstance(v, tuple) else [v]
+    fa, fb = flat(a), flat(b)
+    if len(fa) != len(fb):
+        return float("inf")
+    return sum(abs(x - y) for x, y in zip(fa, fb))
