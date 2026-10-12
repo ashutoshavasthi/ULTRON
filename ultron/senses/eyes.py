@@ -15,8 +15,8 @@ learned from were like (how noisy, how bright its things were).
 
 Counting a still scene uses three things animals do too (Stage 2: eyes that generalise):
   * look longer when the picture is noisier than usual: several pictures of the still
-    scene, lined up against the camera's shake, averaged until the picture is as clean
-    as the ones its eyes are used to (its own noise measure, as the retina's);
+    scene, lined up against the camera's shake, averaged until the picture is a little
+    cleaner than the ones its eyes are used to (its own noise measure, as the retina's);
   * adapt to the light: the background put where its eyes are used to it, and in a dim
     scene, after looking long enough that something really stands out, the contrast
     turned up to what it is used to;
@@ -34,10 +34,13 @@ well: clearly stronger than any leftover its hands said was nothing.
 import numpy as np
 
 LAYERS = ((1, 8), (8, 8), (8, 1))
-SIGMA = 1.0
+SIGMA = 0.7         # how wide a spot it learns to light up where its hands felt a thing
 BACKGROUND = 0.1    # where the background sits in the pictures its eyes grew up with
 DIM = 0.45          # things standing out less than this (of what it's used to): a dim scene
 STEP_BACK = 1.5     # a view from further back must look this much clearer to be preferred
+CLEANER = 0.8       # a noisy scene is looked at until it is this clean (of what it's used to)
+CROWDED = 5.0       # things this close (median distance to a neighbour, pixels): crowded
+CROWDED_LOOKS = 4   # pictures it averages when a scene is crowded
 FOOT = 3            # one thing's footprint in the map: (2·FOOT + 1)² pixels
 ALONE = 7.0         # a handled thing this far from any other shows its footprint alone
 NEAR = 4.0          # a thing hidden on a neighbour's shoulder is this close to it (pixels)
@@ -77,6 +80,16 @@ def _align(ref, img, r=2):
             if best is None or c > best[0]:
                 best = (c, s)
     return best[1]
+
+
+def _crowding(seen):
+    """How close things sit: the median distance from each to its nearest neighbour."""
+    if len(seen) < 2:
+        return float("inf")
+    p = np.array([(x, y) for x, y, _ in seen])
+    d = np.sqrt(((p[:, None] - p[None]) ** 2).sum(-1))
+    np.fill_diagonal(d, np.inf)
+    return float(np.median(d.min(axis=1)))
 
 
 def _shrink(img, s):
@@ -276,11 +289,28 @@ class Eyes:
         helps, and looks again until two glances agree."""
         seen = []
         for _ in range(glances):
-            seen.append(len(self.see_views(self.stare(look))))
+            seen.append(len(self.look_at(look)))
             for n in set(seen):
                 if seen.count(n) >= 2:
                     return n, len(seen)
         return max(set(seen), key=lambda n: (seen.count(n), -n)), len(seen)
+
+    def look_at(self, look):
+        """The things in a still scene. In a crowded scene, where neighbours can blur into
+        one, it looks a little longer (a few pictures lined up and averaged) and closely
+        (explaining away)."""
+        img = self.stare(look)
+        seen = self.see_views(img)
+        if _crowding(seen) <= CROWDED:
+            frames = [img] + [look() for _ in range(CROWDED_LOOKS - 1)]
+            avg = np.mean(frames, axis=0)
+            for _ in range(2):
+                frames = [_align(avg, f) for f in frames]
+                avg = np.mean(frames, axis=0)
+            closer = self.see_closely(self._adapt(avg))
+            if len(closer) >= len(seen):
+                seen = closer
+        return seen
 
     # ---------------------------------------------------------------- still scenes
     def stare(self, look, cap=64):
@@ -289,13 +319,13 @@ class Eyes:
         if noise_of(first) <= 1.25 * self.noise_ref and \
                 contrast_of(first) >= DIM * self.contrast_ref:
             return first                # like the pictures its eyes are used to: one look
-        avg, frames = self._longer(look, [first], self.noise_ref, cap)
+        avg, frames = self._longer(look, [first], CLEANER * self.noise_ref, cap)
         c = contrast_of(avg)
         if c < DIM * self.contrast_ref:
             # a dim scene: look longer still; if something really stands out, turn the
             # contrast up to what its eyes are used to
-            avg2, frames = self._longer(look, frames, self.noise_ref * c / self.contrast_ref,
-                                        cap)
+            avg2, frames = self._longer(look, frames,
+                                        CLEANER * self.noise_ref * c / self.contrast_ref, cap)
             c2 = contrast_of(avg2)
             if c2 > 6 * noise_of(avg2):
                 g = min(self.contrast_ref / c2, 6.0)
