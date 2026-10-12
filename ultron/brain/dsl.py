@@ -31,6 +31,13 @@ Lists (a row of things: prices in a basket, children's heights):
                                   addition Ultron invented; nobody gives it "sum")
     ("zip", law, L1, L2)          pair two rows one by one with a law
 
+Building rows (core knowledge for the code world, offered to a search only when it
+asks for "rows"; earlier lessons never see them):
+
+    ("nil",)                      an empty row
+    ("snoc", L, x)                the row L with x put at its end
+    ("upto", a, b)                counting out loud from a to b: a, a+1, ..., b
+
 These primitives are the only thing designed by hand. Addition,
 subtraction, multiplication and place value are not here: the brain has to
 discover them as programs built from these pieces.
@@ -331,6 +338,15 @@ def evaluate(expr, env, library):
         return iterate(F, evaluate(expr[2], env, library), evaluate(expr[3], env, library), t, library)
     if tag == "len":
         return len(evaluate(expr[1], env, library))
+    if tag == "nil":
+        return ()
+    if tag == "snoc":
+        return tuple(evaluate(expr[1], env, library)) + (evaluate(expr[2], env, library),)
+    if tag == "upto":
+        a, b = evaluate(expr[1], env, library), evaluate(expr[2], env, library)
+        if b - a > MAX_ITER:
+            raise Overflow()
+        return tuple(range(a, b + 1))
     if tag == "map":
         F = expr[1]
         t = evaluate(F[2], env, library) if F[0] == "call" else None
@@ -359,11 +375,11 @@ def safe_evaluate(expr, env, library):
 def size(expr):
     """Description length of a program: one unit per node (library laws cost 1)."""
     tag = expr[0]
-    if tag in ("var", "const"):
+    if tag in ("var", "const", "nil"):
         return 1
     if tag in ("succ", "pred", "down", "not"):
         return 1 + size(expr[1])
-    if tag in ("and", "eq", "lt"):
+    if tag in ("and", "eq", "lt", "snoc", "upto"):
         return 1 + size(expr[1]) + size(expr[2])
     if tag == "call":
         return 1 + size(expr[2]) + size(expr[3])
@@ -397,11 +413,11 @@ def cost(expr, costs=None):
         return size(expr)
     c = lambda name: costs.get(name, 1)
     tag = expr[0]
-    if tag in ("var", "const"):
+    if tag in ("var", "const", "nil"):
         return 1
     if tag in ("succ", "pred", "down", "not", "len"):
         return 1 + cost(expr[1], costs)
-    if tag in ("and", "eq", "lt"):
+    if tag in ("and", "eq", "lt", "snoc", "upto"):
         return 1 + cost(expr[1], costs) + cost(expr[2], costs)
     if tag == "call":
         return c(expr[1]) + cost(expr[2], costs) + cost(expr[3], costs)
@@ -450,6 +466,12 @@ def show(expr):
         return f"repeat {show(expr[2])} times [{f}] starting from {show(expr[3])}"
     if tag == "len":
         return f"how many in {show(expr[1])}"
+    if tag == "nil":
+        return "an empty row"
+    if tag == "snoc":
+        return f"{show(expr[1])} with {show(expr[2])} at the end"
+    if tag == "upto":
+        return f"counting from {show(expr[1])} to {show(expr[2])}"
     if tag == "map":
         F = expr[1]
         f = (f"{F[1]}(·, {show(F[2])})" if F[0] == "call"

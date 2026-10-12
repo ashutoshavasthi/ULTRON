@@ -5618,6 +5618,950 @@
     ]
    ]
   ],
+  "statements": {
+   "blocks": {
+    "close": "END",
+    "middle": [
+     "ELSE"
+    ],
+    "open": ":"
+   },
+   "call": {
+    "bind": [
+     "EQUAL",
+     "TO"
+    ],
+    "sep": ",",
+    "with": [
+     "WITH"
+    ],
+    "word": "CALL"
+   },
+   "end": ".",
+   "kinds": {
+    "DEFINE": {
+     "does": "routine",
+     "fixed": [
+      "DEFINE",
+      "ROUTINE"
+     ],
+     "name": 2
+    },
+    "FOR": {
+     "does": "walk",
+     "fixed": [
+      "FOR",
+      "EACH",
+      "\u00b7",
+      "IN"
+     ],
+     "name": 2,
+     "span": [
+      4,
+      1
+     ]
+    },
+    "IF": {
+     "again": false,
+     "does": "test",
+     "fixed": [
+      "IF"
+     ],
+     "span": [
+      1,
+      2
+     ]
+    },
+    "PRINT": {
+     "does": "print",
+     "fixed": [
+      "PRINT"
+     ],
+     "span": [
+      1,
+      1
+     ]
+    },
+    "RETURN": {
+     "does": "return",
+     "fixed": [
+      "RETURN"
+     ],
+     "span": [
+      1,
+      1
+     ]
+    },
+    "SET": {
+     "does": "set",
+     "fixed": [
+      "SET",
+      "\u00b7",
+      "TO"
+     ],
+     "name": 1,
+     "span": [
+      3,
+      1
+     ]
+    },
+    "WHILE": {
+     "again": true,
+     "does": "test",
+     "fixed": [
+      "WHILE"
+     ],
+     "span": [
+      1,
+      2
+     ]
+    }
+   },
+   "phrases": {
+    "THE EMPTY LIST": {
+     "head": [
+      "THE",
+      "EMPTY",
+      "LIST"
+     ],
+     "law": [
+      "nil"
+     ],
+     "lead": false,
+     "names": [],
+     "out": "list",
+     "runs": 9,
+     "tail": [],
+     "types": []
+    },
+    "THE LENGTH OF": {
+     "head": [
+      "THE",
+      "LENGTH",
+      "OF"
+     ],
+     "law": [
+      "len",
+      [
+       "var",
+       "row"
+      ]
+     ],
+     "lead": false,
+     "names": [
+      "row"
+     ],
+     "out": "int",
+     "runs": 7,
+     "tail": [
+      [
+       "slot"
+      ]
+     ],
+     "types": [
+      "list"
+     ]
+    },
+    "THE LIST": {
+     "head": [
+      "THE",
+      "LIST"
+     ],
+     "law": [
+      "var",
+      "row"
+     ],
+     "lead": false,
+     "names": [
+      "row"
+     ],
+     "out": "list",
+     "runs": 25,
+     "tail": [
+      [
+       "series",
+       ","
+      ]
+     ],
+     "types": [
+      "list"
+     ]
+    },
+    "THE NUMBERS": {
+     "head": [
+      "THE",
+      "NUMBERS"
+     ],
+     "law": [
+      "upto",
+      [
+       "var",
+       "a"
+      ],
+      [
+       "var",
+       "b"
+      ]
+     ],
+     "lead": false,
+     "names": [
+      "a",
+      "b"
+     ],
+     "out": "list",
+     "runs": 10,
+     "tail": [
+      [
+       "slot"
+      ],
+      [
+       "fixed",
+       "TO"
+      ],
+      [
+       "slot"
+      ]
+     ],
+     "types": [
+      "int",
+      "int"
+     ]
+    },
+    "THE SUM OF": {
+     "head": [
+      "THE",
+      "SUM",
+      "OF"
+     ],
+     "law": [
+      "fold",
+      "merge",
+      [
+       "var",
+       "row"
+      ],
+      [
+       "const",
+       0
+      ]
+     ],
+     "lead": false,
+     "names": [
+      "row"
+     ],
+     "out": "int",
+     "runs": 3,
+     "tail": [
+      [
+       "slot"
+      ]
+     ],
+     "types": [
+      "list"
+     ]
+    },
+    "\u00b7 WITH": {
+     "head": [
+      "WITH"
+     ],
+     "law": [
+      "snoc",
+      [
+       "var",
+       "row"
+      ],
+      [
+       "var",
+       "b"
+      ]
+     ],
+     "lead": true,
+     "names": [
+      "row",
+      "b"
+     ],
+     "out": "list",
+     "runs": 6,
+     "tail": [
+      [
+       "slot"
+      ],
+      [
+       "fixed",
+       "ADDED"
+      ]
+     ],
+     "types": [
+      "list",
+      "int"
+     ]
+    }
+   },
+   "rows": [
+    "[",
+    ", ",
+    "]"
+   ],
+   "seen": [
+    [
+     "SET v TO 7 .\nSET d TO v PLUS 0 .\nPRINT d .\n",
+     [
+      "7"
+     ]
+    ],
+    [
+     "SET v TO 8 .\nIF v IS GREATER THAN 4 THEN :\n    PRINT 3 .\nELSE :\n    PRINT 9 .\nEND IF .\n",
+     [
+      "3"
+     ]
+    ],
+    [
+     "SET i TO 0 .\nSET v TO 0 .\nWHILE i IS LESS THAN 3 DO :\n    SET v TO v PLUS i .\n    SET i TO i PLUS 1 .\nEND WHILE .\nPRINT v .\n",
+     [
+      "3"
+     ]
+    ],
+    [
+     "SET picks TO THE LIST 7 , 3 , 5 .\nPRINT picks .\n",
+     [
+      "[7, 3, 5]"
+     ]
+    ],
+    [
+     "SET picks TO THE EMPTY LIST .\nSET picks TO picks WITH 7 ADDED .\nSET picks TO picks WITH 1 ADDED .\nPRINT picks .\n",
+     [
+      "[7, 1]"
+     ]
+    ],
+    [
+     "SET picks TO THE LIST 3 , 2 , 1 .\nSET v TO THE LENGTH OF picks .\nSET d TO THE SUM OF picks .\nPRINT v .\nPRINT d .\n",
+     [
+      "3",
+      "6"
+     ]
+    ],
+    [
+     "SET v TO 0 .\nFOR EACH e IN THE NUMBERS 1 TO 5 :\n    SET v TO v PLUS e .\nEND FOR .\nPRINT v .\n",
+     [
+      "15"
+     ]
+    ],
+    [
+     "SET picks TO THE LIST 5 , 3 , 7 .\nFOR EACH e IN picks :\n    PRINT e .\nEND FOR .\n",
+     [
+      "5",
+      "3",
+      "7"
+     ]
+    ],
+    [
+     "FOR EACH e IN THE LIST 3 , 6 :\n    PRINT e TIMES 2 .\nEND FOR .\n",
+     [
+      "6",
+      "12"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    RETURN n TIMES m .\nEND ROUTINE .\nSET v TO CALL h WITH n EQUAL TO 6 , m EQUAL TO 3 .\nPRINT v .\n",
+     [
+      "18"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 0 .\n    END IF .\n    RETURN n PLUS ( CALL h WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nPRINT CALL h WITH n EQUAL TO 2 .\n",
+     [
+      "3"
+     ]
+    ],
+    [
+     "SET n2 TO 1 .\nSET t TO n2 PLUS 9 .\nPRINT t .\n",
+     [
+      "10"
+     ]
+    ],
+    [
+     "SET n2 TO 5 .\nIF n2 IS GREATER THAN 4 THEN :\n    PRINT 4 .\nELSE :\n    PRINT 6 .\nEND IF .\n",
+     [
+      "4"
+     ]
+    ],
+    [
+     "SET i TO 0 .\nSET n2 TO 0 .\nWHILE i IS LESS THAN 5 DO :\n    SET n2 TO n2 PLUS i .\n    SET i TO i PLUS 1 .\nEND WHILE .\nPRINT n2 .\n",
+     [
+      "10"
+     ]
+    ],
+    [
+     "SET seen TO THE LIST 6 , 1 .\nPRINT seen .\n",
+     [
+      "[6, 1]"
+     ]
+    ],
+    [
+     "SET seen TO THE EMPTY LIST .\nSET seen TO seen WITH 6 ADDED .\nSET seen TO seen WITH 6 ADDED .\nPRINT seen .\n",
+     [
+      "[6, 6]"
+     ]
+    ],
+    [
+     "SET seen TO THE LIST 7 .\nSET n2 TO THE LENGTH OF seen .\nSET t TO THE SUM OF seen .\nPRINT n2 .\nPRINT t .\n",
+     [
+      "1",
+      "7"
+     ]
+    ],
+    [
+     "SET n2 TO 0 .\nFOR EACH e IN THE NUMBERS 0 TO 5 :\n    SET n2 TO n2 PLUS e .\nEND FOR .\nPRINT n2 .\n",
+     [
+      "15"
+     ]
+    ],
+    [
+     "SET seen TO THE LIST 1 , 5 , 0 .\nFOR EACH e IN seen :\n    PRINT e .\nEND FOR .\n",
+     [
+      "1",
+      "5",
+      "0"
+     ]
+    ],
+    [
+     "FOR EACH e IN THE LIST 5 , 0 :\n    PRINT e TIMES 2 .\nEND FOR .\n",
+     [
+      "10",
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER , m AS NUMBER :\n    RETURN n TIMES m .\nEND ROUTINE .\nSET n2 TO CALL g WITH n EQUAL TO 4 , m EQUAL TO 9 .\nPRINT n2 .\n",
+     [
+      "36"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 0 .\n    END IF .\n    RETURN n PLUS ( CALL g WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nPRINT CALL g WITH n EQUAL TO 2 .\n",
+     [
+      "3"
+     ]
+    ],
+    [
+     "SET k TO 5 MODULO 6 .\nPRINT 1 PLUS k PLUS 9 .\nPRINT k .\n",
+     [
+      "15",
+      "5"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER :\n    IF 2 + 5 IS AT LEAST n OR n IS EQUAL TO n THEN :\n        RETURN n .\n    END IF .\n    RETURN n .\nEND ROUTINE .\nSET a TO 6 MODULO 2 TIMES 4 .\nSET ys TO THE LIST a , a , 6 .\nSET acc TO a .\nPRINT a TIMES THE SUM OF ys .\nPRINT acc .\nSET acc TO 0 TIMES a % 2 .\nPRINT a .\n",
+     [
+      "0",
+      "0",
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER , m AS NUMBER :\n    RETURN 0 PLUS n .\nEND ROUTINE .\nSET r TO 5 PLUS 6 .\nSET r TO r - 2 .\nPRINT 8 .\nSET t TO CALL fold WITH n EQUAL TO r , m EQUAL TO r .\nPRINT r IS EQUAL TO r AND 4 IS EQUAL TO t .\nPRINT t .\n",
+     [
+      "8",
+      "False",
+      "9"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN n .\n    END IF .\n    RETURN n TIMES ( CALL fold WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nPRINT 7 .\n",
+     [
+      "7"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER , m AS NUMBER :\n    RETURN n .\nEND ROUTINE .\nSET u TO 6 .\nPRINT 7 * u IS GREATER THAN u .\nSET z TO u .\nSET z TO 2 MODULO 9 .\nPRINT 2 MINUS u .\nSET b TO CALL g WITH n EQUAL TO 0 , m EQUAL TO 7 .\nPRINT z .\n",
+     [
+      "True",
+      "-4",
+      "2"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN 7 .\n    END IF .\n    RETURN n MINUS ( CALL grow WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET xs TO THE LIST 7 .\nPRINT 8 .\nSET z TO CALL grow WITH n EQUAL TO 1 , m EQUAL TO 0 .\nPRINT z .\n",
+     [
+      "8",
+      "7"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE f WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN n .\n    END IF .\n    RETURN n MINUS ( CALL f WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nSET s TO CALL f WITH n EQUAL TO 1 .\nPRINT 1 IS AT MOST s AND s IS AT LEAST 2 .\nSET i TO 0 .\nWHILE i IS LESS THAN 1 DO :\n    SET a TO i - 6 .\n    SET i TO i PLUS 1 .\nEND WHILE .\nPRINT s .\n",
+     [
+      "False",
+      "1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER :\n    RETURN 6 TIMES n .\nEND ROUTINE .\nSET z TO CALL h WITH n EQUAL TO 0 .\nFOR EACH e IN THE NUMBERS 3 TO 4 :\n    SET z TO e .\n    SET y TO CALL h WITH n EQUAL TO z MODULO 7 .\n    SET xs TO THE LIST 8 , 4 .\nEND FOR .\nSET z TO z MODULO 5 .\nPRINT 3 * e IS NOT z .\nSET x TO z PLUS 6 .\nPRINT e .\n",
+     [
+      "True",
+      "4"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER :\n    IF NOT n IS EQUAL TO 9 THEN :\n        RETURN 0 MINUS 9 .\n    END IF .\n    RETURN n MINUS n .\nEND ROUTINE .\nPRINT 6 .\n",
+     [
+      "6"
+     ]
+    ],
+    [
+     "SET w TO 1 .\nSET w TO w .\nPRINT w .\n",
+     [
+      "1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN n .\n    END IF .\n    RETURN 6 TIMES ( CALL grow WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nFOR EACH e IN THE LIST 6 , 1 , 9 :\n    PRINT 1 MODULO 2 .\nEND FOR .\nPRINT e .\nSET s TO CALL grow WITH n EQUAL TO 1 .\nSET xs TO THE LIST e , e , 9 .\nSET m TO 0 MODULO 4 .\nPRINT s .\n",
+     [
+      "1",
+      "1",
+      "1",
+      "9",
+      "1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN 2 .\n    END IF .\n    RETURN n TIMES ( CALL grow WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nSET c TO CALL grow WITH n EQUAL TO 4 .\nSET c TO 2 TIMES c MINUS c .\nPRINT NOT c IS EQUAL TO c .\nPRINT c PLUS c % 6 .\nSET b TO 1 .\nPRINT 6 TIMES 0 MINUS b .\nPRINT b .\n",
+     [
+      "False",
+      "48",
+      "-1",
+      "1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER :\n    RETURN 3 TIMES n % 6 .\nEND ROUTINE .\nPRINT 0 .\n",
+     [
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN n + 5 .\n    END IF .\n    RETURN n TIMES ( CALL g WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nFOR EACH e IN THE NUMBERS 2 TO 2 :\n    PRINT NOT 8 MODULO 7 IS EQUAL TO e .\nEND FOR .\nPRINT e MODULO 6 MINUS e .\nPRINT e .\n",
+     [
+      "True",
+      "0",
+      "2"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 1 .\n    END IF .\n    RETURN 5 PLUS ( CALL h WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nIF NOT 7 PLUS 7 IS NOT 6 THEN :\n    SET picks TO THE LIST 2 , 6 , 7 .\n    SET d TO CALL h WITH n EQUAL TO 2 .\nEND IF .\nPRINT 8 .\n",
+     [
+      "8"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE f WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN 9 % 7 .\n    END IF .\n    RETURN 9 PLUS ( CALL f WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET v TO 9 .\nSET s TO CALL f WITH n EQUAL TO 3 , m EQUAL TO 4 .\nSET d TO CALL f WITH n EQUAL TO 3 , m EQUAL TO s .\nPRINT s .\n",
+     [
+      "20"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER , m AS NUMBER :\n    IF m PLUS m IS NOT 6 OR m IS AT MOST 9 THEN :\n        RETURN 6 + n PLUS n .\n    END IF .\n    RETURN n .\nEND ROUTINE .\nSET t TO 4 MODULO 6 MODULO 7 .\nSET t TO t MODULO 4 .\nSET b TO CALL step WITH n EQUAL TO t , m EQUAL TO t .\nSET r TO CALL step WITH n EQUAL TO t MINUS b , m EQUAL TO 2 .\nSET row TO THE LIST 4 , t , 4 .\nPRINT b .\n",
+     [
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN n MODULO 9 .\n    END IF .\n    RETURN m PLUS ( CALL grow WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nPRINT 7 .\n",
+     [
+      "7"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 5 .\n    END IF .\n    RETURN m PLUS ( CALL g WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nPRINT 8 TIMES 3 .\nPRINT 9 .\n",
+     [
+      "24",
+      "9"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN n PLUS 2 .\n    END IF .\n    RETURN n PLUS ( CALL g WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nPRINT 6 .\n",
+     [
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER :\n    RETURN 6 MODULO 9 .\nEND ROUTINE .\nSET xs TO THE EMPTY LIST .\nSET x TO THE SUM OF xs .\nSET xs TO xs WITH x ADDED .\nPRINT 1 MINUS THE LENGTH OF xs PLUS x .\nPRINT xs .\nPRINT x .\n",
+     [
+      "0",
+      "[0]",
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER :\n    RETURN n * 1 MINUS 6 .\nEND ROUTINE .\nSET x TO 3 MINUS 8 .\nSET xs TO THE LIST 4 .\nPRINT THE SUM OF xs MODULO 8 TIMES x .\nSET x TO THE LENGTH OF xs TIMES x .\nPRINT x .\nSET total TO CALL step WITH n EQUAL TO x TIMES 2 .\nSET total TO total MINUS THE LENGTH OF xs .\nPRINT x .\n",
+     [
+      "-20",
+      "-5",
+      "-5"
+     ]
+    ],
+    [
+     "SET a TO 2 .\nSET z TO a PLUS a + 8 .\nPRINT z .\n",
+     [
+      "12"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER :\n    IF n - n IS AT MOST n OR n IS GREATER THAN n THEN :\n        RETURN 8 MODULO 7 .\n    END IF .\n    RETURN n TIMES 6 .\nEND ROUTINE .\nSET xs TO THE LIST 2 , 5 .\nSET z TO CALL step WITH n EQUAL TO 1 MODULO 6 .\nFOR EACH e IN THE NUMBERS 0 TO 5 :\n    SET z TO e .\nEND FOR .\nPRINT z .\n",
+     [
+      "5"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN m PLUS 5 .\n    END IF .\n    RETURN n MINUS ( CALL h WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET y TO 0 .\nPRINT y .\n",
+     [
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN 3 MODULO 9 .\n    END IF .\n    RETURN 1 MINUS ( CALL g WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nSET i TO 0 .\nWHILE i IS LESS THAN 1 DO :\n    PRINT i TIMES i + i .\n    SET z TO 4 MINUS i TIMES 7 .\n    SET i TO i PLUS 1 .\nEND WHILE .\nSET ys TO THE LIST i .\nPRINT i .\n",
+     [
+      "0",
+      "1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER :\n    RETURN 1 MODULO 6 .\nEND ROUTINE .\nPRINT 7 .\n",
+     [
+      "7"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    IF m MINUS n IS AT MOST 3 THEN :\n        RETURN 5 .\n    END IF .\n    RETURN 0 MINUS m .\nEND ROUTINE .\nPRINT 6 .\n",
+     [
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER :\n    RETURN n .\nEND ROUTINE .\nSET seen TO THE EMPTY LIST .\nPRINT 5 PLUS THE SUM OF seen .\nSET xs TO THE LIST 4 , 3 , THE LENGTH OF seen .\nPRINT 5 .\n",
+     [
+      "5",
+      "5"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN n .\n    END IF .\n    RETURN m MINUS ( CALL step WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nPRINT 3 * 4 .\nPRINT 3 .\n",
+     [
+      "12",
+      "3"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE f WITH n AS NUMBER :\n    RETURN n PLUS n .\nEND ROUTINE .\nPRINT 0 MODULO 6 MINUS 6 .\nSET d TO 9 .\nFOR EACH e IN THE NUMBERS 2 TO 4 :\n    SET picks TO THE LIST e , 6 , e , e .\nEND FOR .\nSET d TO d PLUS e .\nSET d TO d PLUS 9 .\nPRINT d .\n",
+     [
+      "-6",
+      "22"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN n MINUS n .\n    END IF .\n    RETURN n PLUS ( CALL fold WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nPRINT 9 .\n",
+     [
+      "9"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER :\n    RETURN n MINUS 1 PLUS n .\nEND ROUTINE .\nFOR EACH e IN THE LIST 6 , 2 , 8 , 8 , 0 :\n    SET total TO 3 MODULO 7 .\n    SET total TO total MODULO 2 .\n    SET best TO 3 TIMES total - e .\nEND FOR .\nSET x TO CALL step WITH n EQUAL TO e TIMES e .\nPRINT e .\nSET xs TO THE EMPTY LIST .\nPRINT x .\n",
+     [
+      "0",
+      "-1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER :\n    IF n IS GREATER THAN n THEN :\n        RETURN n .\n    END IF .\n    RETURN 7 .\nEND ROUTINE .\nPRINT 9 .\n",
+     [
+      "9"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE f WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN m .\n    END IF .\n    RETURN 4 MINUS ( CALL f WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nFOR EACH e IN THE NUMBERS 1 TO 1 :\n    SET a TO e .\nEND FOR .\nPRINT e .\n",
+     [
+      "1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 7 .\n    END IF .\n    RETURN n TIMES ( CALL h WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nPRINT 6 .\n",
+     [
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN 6 PLUS n .\n    END IF .\n    RETURN m MINUS ( CALL grow WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET d TO 0 .\nPRINT d .\n",
+     [
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER :\n    IF 8 IS AT LEAST 6 THEN :\n        RETURN n MINUS n .\n    END IF .\n    RETURN 5 TIMES n MODULO 9 .\nEND ROUTINE .\nFOR EACH e IN THE NUMBERS 1 TO 3 :\n    SET u TO e PLUS e - 4 .\nEND FOR .\nSET r TO 6 MODULO 3 .\nPRINT r .\n",
+     [
+      "0"
+     ]
+    ],
+    [
+     "PRINT 3 IS EQUAL TO 9 AND 1 IS LESS THAN 1 .\nSET xs TO THE EMPTY LIST .\nPRINT 6 .\n",
+     [
+      "False",
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER :\n    IF n IS GREATER THAN n THEN :\n        RETURN n + n * n .\n    END IF .\n    RETURN n .\nEND ROUTINE .\nSET s TO 3 % 8 MODULO 5 .\nPRINT s .\nPRINT s .\n",
+     [
+      "3",
+      "3"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER , m AS NUMBER :\n    IF NOT 0 IS AT LEAST m THEN :\n        RETURN n .\n    END IF .\n    RETURN 5 TIMES n .\nEND ROUTINE .\nSET z TO 5 PLUS 2 .\nPRINT z IS GREATER THAN 5 AND 7 IS EQUAL TO 4 .\nSET seen TO THE EMPTY LIST .\nSET d TO CALL fold WITH n EQUAL TO z TIMES z , m EQUAL TO z .\nSET seen TO seen WITH 9 ADDED .\nPRINT THE SUM OF seen * z .\nPRINT d .\n",
+     [
+      "False",
+      "63",
+      "49"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN m .\n    END IF .\n    RETURN m MINUS ( CALL step WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET picks TO THE LIST 3 .\nSET a TO 1 .\nPRINT a .\nFOR EACH e IN THE NUMBERS 3 TO 7 :\n    PRINT a .\n    SET best TO CALL step WITH n EQUAL TO 4 , m EQUAL TO 3 .\nEND FOR .\nPRINT a .\n",
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1",
+      "1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER , m AS NUMBER :\n    RETURN m MINUS m .\nEND ROUTINE .\nSET x TO 8 TIMES 8 .\nSET seen TO THE EMPTY LIST .\nPRINT x .\n",
+     [
+      "64"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER , m AS NUMBER :\n    IF 7 IS GREATER THAN 9 THEN :\n        RETURN m % 5 * n .\n    END IF .\n    RETURN 8 MODULO 8 PLUS n .\nEND ROUTINE .\nSET acc TO 6 PLUS 5 TIMES 6 .\nFOR EACH e IN THE NUMBERS 3 TO 3 :\n    SET row TO THE LIST 6 , e , e , acc .\n    SET acc TO acc * e PLUS e .\nEND FOR .\nPRINT acc .\n",
+     [
+      "111"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 0 TIMES n .\n    END IF .\n    RETURN 4 MINUS ( CALL g WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nIF NOT 9 TIMES 7 IS AT MOST 4 THEN :\n    SET picks TO THE EMPTY LIST .\n    SET picks TO picks WITH 6 MINUS THE LENGTH OF picks ADDED .\nEND IF .\nSET c TO 0 .\nPRINT c MINUS c PLUS 7 .\nPRINT c .\n",
+     [
+      "7",
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN m .\n    END IF .\n    RETURN 8 MINUS ( CALL step WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET d TO CALL step WITH n EQUAL TO 3 , m EQUAL TO 1 .\nPRINT 3 MINUS d PLUS 7 .\nSET c TO 3 .\nPRINT c .\n",
+     [
+      "3",
+      "3"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER , m AS NUMBER :\n    RETURN m .\nEND ROUTINE .\nPRINT 0 .\n",
+     [
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE f WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 4 TIMES 9 .\n    END IF .\n    RETURN n TIMES ( CALL f WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nSET i TO 0 .\nWHILE i IS LESS THAN 3 DO :\n    PRINT i IS LESS THAN 5 .\n    PRINT i .\n    SET i TO i PLUS 1 .\nEND WHILE .\nSET k TO 8 MINUS 1 TIMES 0 .\nPRINT k .\n",
+     [
+      "True",
+      "0",
+      "True",
+      "1",
+      "True",
+      "2",
+      "8"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE f WITH n AS NUMBER :\n    IF 1 IS AT MOST n THEN :\n        RETURN 9 PLUS n .\n    END IF .\n    RETURN n MODULO 7 MODULO 7 .\nEND ROUTINE .\nPRINT 0 MINUS 7 .\nIF 1 IS GREATER THAN 4 THEN :\n    SET ys TO THE LIST 1 , 9 , 0 , 3 .\nEND IF .\nPRINT 2 PLUS 4 IS NOT 6 .\nPRINT 0 MINUS 1 .\nPRINT 6 .\n",
+     [
+      "-7",
+      "False",
+      "-1",
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE f WITH n AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN n .\n    END IF .\n    RETURN n TIMES ( CALL f WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nSET y TO CALL f WITH n EQUAL TO 0 .\nSET y TO y .\nSET a TO y MODULO 9 .\nPRINT a .\n",
+     [
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 5 .\n    END IF .\n    RETURN 8 PLUS ( CALL h WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nPRINT 9 .\n",
+     [
+      "9"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER , m AS NUMBER :\n    RETURN 8 TIMES 2 PLUS n .\nEND ROUTINE .\nSET picks TO THE LIST 0 , 8 , 0 , 4 .\nPRINT 5 .\n",
+     [
+      "5"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN 6 .\n    END IF .\n    RETURN n PLUS ( CALL fold WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET x TO 9 MINUS 2 .\nPRINT x .\nSET x TO x PLUS x .\nSET y TO CALL fold WITH n EQUAL TO 1 , m EQUAL TO x .\nPRINT 2 IS EQUAL TO x .\nPRINT y .\n",
+     [
+      "7",
+      "False",
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN n MINUS 7 .\n    END IF .\n    RETURN 2 PLUS ( CALL grow WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nPRINT 9 .\n",
+     [
+      "9"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN n .\n    END IF .\n    RETURN 0 TIMES ( CALL fold WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET i TO 0 .\nWHILE i IS LESS THAN 6 DO :\n    PRINT 1 + 9 .\n    SET m TO CALL fold WITH n EQUAL TO 2 , m EQUAL TO 6 .\n    SET c TO i TIMES m * 0 .\n    SET i TO i PLUS 1 .\nEND WHILE .\nPRINT i .\n",
+     [
+      "10",
+      "10",
+      "10",
+      "10",
+      "10",
+      "10",
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN n MINUS 2 .\n    END IF .\n    RETURN n MINUS ( CALL h WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nPRINT 1 .\n",
+     [
+      "1"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN m .\n    END IF .\n    RETURN m MINUS ( CALL h WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET k TO 1 % 4 PLUS 7 .\nPRINT k .\n",
+     [
+      "8"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 0 MINUS m .\n    END IF .\n    RETURN m MINUS ( CALL g WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nPRINT 6 .\n",
+     [
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER , m AS NUMBER :\n    RETURN m MINUS n PLUS 0 .\nEND ROUTINE .\nPRINT 1 PLUS 6 .\nSET x TO CALL g WITH n EQUAL TO 4 + 7 , m EQUAL TO 8 .\nIF x TIMES x IS AT MOST x OR x IS AT LEAST x THEN :\n    SET v TO x MODULO 9 * x .\n    PRINT 6 - 8 IS EQUAL TO v OR v IS NOT 5 .\nELSE :\n    SET x TO x .\n    SET b TO 9 % 4 PLUS x .\nEND IF .\nPRINT 6 .\nPRINT x .\n",
+     [
+      "7",
+      "True",
+      "6",
+      "-3"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 7 .\n    END IF .\n    RETURN n TIMES ( CALL fold WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nSET v TO CALL fold WITH n EQUAL TO 3 .\nPRINT 8 .\nSET a TO CALL fold WITH n EQUAL TO 1 .\nPRINT v .\n",
+     [
+      "8",
+      "42"
+     ]
+    ],
+    [
+     "SET a TO THE LIST 3 , 1 , 4 .\nSET d TO THE LENGTH OF a .\n",
+     []
+    ],
+    [
+     "SET a TO THE EMPTY LIST .\nSET d TO THE LENGTH OF a .\n",
+     []
+    ],
+    [
+     "SET a TO THE LIST 5 .\nSET d TO THE LENGTH OF a .\n",
+     []
+    ],
+    [
+     "SET a TO THE LIST 2 , 7 , 1 , 8 .\nSET d TO THE LENGTH OF a .\n",
+     []
+    ],
+    [
+     "SET a TO THE LIST 9 , 9 .\nSET d TO THE LENGTH OF a .\n",
+     []
+    ],
+    [
+     "DEFINE ROUTINE step WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN 6 .\n    END IF .\n    RETURN n MINUS ( CALL step WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nFOR EACH e IN THE NUMBERS 0 TO 2 :\n    SET k TO 7 MODULO 9 + e .\n    SET acc TO e * 8 .\n    PRINT 1 PLUS 2 .\nEND FOR .\nPRINT e .\n",
+     [
+      "3",
+      "3",
+      "3",
+      "2"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER , m AS NUMBER :\n    IF m - n IS LESS THAN n THEN :\n        RETURN 6 MINUS m TIMES 2 .\n    END IF .\n    RETURN m .\nEND ROUTINE .\nIF 0 * 4 IS GREATER THAN 3 THEN :\n    SET a TO 4 TIMES 1 MODULO 8 .\nELSE :\n    SET acc TO 3 .\nEND IF .\nPRINT 8 .\n",
+     [
+      "8"
+     ]
+    ],
+    [
+     "SET x TO 7 MODULO 3 MINUS 4 .\nSET x TO x + x - x .\nPRINT x .\n",
+     [
+      "-3"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER :\n    IF n IS AT LEAST n THEN :\n        RETURN 7 .\n    END IF .\n    RETURN n MINUS n .\nEND ROUTINE .\nSET count TO CALL g WITH n EQUAL TO 9 .\nSET z TO 2 MINUS 6 PLUS count .\nSET row TO THE LIST count , count .\nPRINT z TIMES THE SUM OF row TIMES z .\nSET z TO 1 % 2 MODULO 2 .\nPRINT row .\nSET row TO row WITH z ADDED .\nPRINT count .\n",
+     [
+      "126",
+      "[7, 7]",
+      "7"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE fold WITH n AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN 6 .\n    END IF .\n    RETURN n TIMES ( CALL fold WITH n EQUAL TO n MINUS 1 ) .\nEND ROUTINE .\nSET c TO 0 + 4 PLUS 7 .\nPRINT c IS AT LEAST 7 .\nSET c TO 0 .\nPRINT c .\n",
+     [
+      "True",
+      "0"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN 7 MINUS n .\n    END IF .\n    RETURN 7 MINUS ( CALL g WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET k TO 7 % 8 PLUS 1 .\nSET best TO CALL g WITH n EQUAL TO 3 , m EQUAL TO 1 .\nPRINT best .\n",
+     [
+      "6"
+     ]
+    ],
+    [
+     "PRINT 2 MODULO 5 IS AT LEAST 1 .\nPRINT 4 IS LESS THAN 9 .\nPRINT 3 .\n",
+     [
+      "True",
+      "True",
+      "3"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 2 THEN :\n        RETURN m PLUS 9 .\n    END IF .\n    RETURN n MINUS ( CALL h WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nPRINT 6 .\n",
+     [
+      "6"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE grow WITH n AS NUMBER , m AS NUMBER :\n    IF m MODULO 7 IS GREATER THAN 0 THEN :\n        RETURN 4 PLUS m MODULO 3 .\n    END IF .\n    RETURN 8 .\nEND ROUTINE .\nPRINT 9 .\n",
+     [
+      "9"
+     ]
+    ],
+    [
+     "DEFINE ROUTINE g WITH n AS NUMBER , m AS NUMBER :\n    RETURN n .\nEND ROUTINE .\nSET m TO 0 MINUS 1 .\nPRINT m IS NOT m .\nIF 2 IS AT LEAST 8 THEN :\n    PRINT m MODULO 5 .\n    SET m TO 7 + 0 .\n    PRINT 3 .\n    PRINT 7 .\nEND IF .\nPRINT m MINUS 0 - m .\nPRINT 1 .\nPRINT m .\n",
+     [
+      "False",
+      "0",
+      "1",
+      "-1"
+     ]
+    ]
+   ],
+   "stats": {
+    "own": 5,
+    "trainer": 92
+   }
+  },
   "stats": {
    "own": 221,
    "trainer": 107
@@ -18841,6 +19785,121 @@
    "kind": "trainer",
    "lesson": 100,
    "text": "Exam for lesson 100, attempt 1: passed"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 101,
+   "text": "Lesson 101: Reading Engc: what statements do"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 101,
+   "text": "Now programs with many lines. I'll run each one and you can watch it line by line: which line runs next, and what every name holds."
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "lines ending ':' open a block of lines, a line starting 'END' closes it; a line starting 'ELSE' splits a block in two (198 jumps explained)"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a line starting 'DEFINE' names a routine (the word in place 3): its block runs only when called"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a line starting 'FOR' runs its block once for each thing in the row after it, with the name in place 3 holding that thing"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a line starting 'IF' runs its block only if the words after it hold (else the part after the split, if any)"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a row prints as [one, two]"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a line starting 'PRINT' prints the value of the words after it"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a line starting 'RETURN' hands back the value of the words after it, and the routine ends"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a line starting 'SET' gives the name in place 2 the value of the words after 'SET \u00b7 TO'"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a line starting 'WHILE' runs its block again and again while the words after it hold"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "a call is written 'CALL <routine> WITH <input> EQUAL TO <value>', inputs split by ','"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "'THE EMPTY LIST' means an empty row to me (9 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "'THE LIST' means row to me (25 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "'THE NUMBERS' means counting from a to b to me (10 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "'THE SUM OF' means start at 0 and merge in each of row to me (3 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "'\u00b7 WITH' means row with b at the end to me (6 examples)"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "I wrote 5 programs of my own to see what 'THE LENGTH OF' does"
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "'THE LENGTH OF' means how many in row to me (7 examples)"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 101,
+   "text": "Now tell me what each new program prints before I run it."
+  },
+  {
+   "kind": "code",
+   "lesson": 101,
+   "text": "10 new programs in a row predicted right"
+  },
+  {
+   "kind": "trainer",
+   "lesson": 101,
+   "text": "That's all: 97 programs run (92 by me, 5 by you)."
+  },
+  {
+   "kind": "trainer",
+   "lesson": 101,
+   "text": "Exam for lesson 101, attempt 1: passed"
   }
  ],
  "memory": {

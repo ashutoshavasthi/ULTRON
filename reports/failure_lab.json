@@ -9,7 +9,7 @@
     "outcome": "merge(a, b)",
     "ok": true,
     "steps": 292,
-    "seconds": 0.03
+    "seconds": 0.02
    },
    {
     "level": "a\u00b7b",
@@ -23,14 +23,14 @@
     "outcome": "groups(a, succ(b))",
     "ok": true,
     "steps": 1605,
-    "seconds": 0.05
+    "seconds": 0.04
    },
    {
     "level": "a\u00b7b+a+b",
     "outcome": "pred(groups(succ(a), succ(b)))",
     "ok": true,
     "steps": 90707,
-    "seconds": 1.49
+    "seconds": 1.48
    },
    {
     "level": "a\u00b2+b",
@@ -51,26 +51,26 @@
     "outcome": "groups(a, succ(square(b)))",
     "ok": true,
     "steps": 12733,
-    "seconds": 0.14
+    "seconds": 0.13
    },
    {
     "level": "a\u00b3+b\u00b2",
     "outcome": "merge(square(b), groups(a, square(a)))",
     "ok": true,
     "steps": 539242,
-    "seconds": 16.43
+    "seconds": 14.58
    },
    {
     "level": "(a+1)(b+2)(a+b)",
     "outcome": "nothing found",
     "ok": false,
     "steps": 578689,
-    "seconds": 17.37
+    "seconds": 17.22
    }
   ],
   "breakpoint": "(a+1)(b+2)(a+b)",
   "note": "Search is size-ordered and exhaustive: cost grows exponentially with the size of the law.",
-  "seconds": 35.5
+  "seconds": 33.5
  },
  {
   "name": "library learning",
@@ -86,7 +86,7 @@
     "level": "S(S(a,b),a)+S(a,b)",
     "outcome": "piece1(a, piece2(b, a)) \u2014 10 pieces written out",
     "ok": true,
-    "seconds": 0.5,
+    "seconds": 0.6,
     "size_written_out": 10,
     "without_pieces": "nothing found"
    },
@@ -94,7 +94,7 @@
     "level": "S(S(a,b),S(a,a))",
     "outcome": "piece1(square(succ(a)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 25.8,
+    "seconds": 30.8,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -102,7 +102,7 @@
     "level": "S(S(a,b),S(b,b))",
     "outcome": "piece1(square(succ(b)), piece1(a, b)) \u2014 11 pieces written out",
     "ok": true,
-    "seconds": 11.7,
+    "seconds": 15.9,
     "size_written_out": 11,
     "without_pieces": "nothing found"
    },
@@ -118,7 +118,7 @@
     "level": "S(T(a,b),T(b,a))",
     "outcome": "piece1(piece2(a, b), piece2(b, a)) \u2014 15 pieces written out",
     "ok": true,
-    "seconds": 15.3,
+    "seconds": 14.5,
     "size_written_out": 15,
     "without_pieces": "nothing found"
    },
@@ -126,14 +126,14 @@
     "level": "T(T(a,b),T(b,a))",
     "outcome": "piece2(piece2(a, b), piece2(b, a)) \u2014 16 pieces written out",
     "ok": true,
-    "seconds": 11.1,
+    "seconds": 11.3,
     "size_written_out": 16,
     "without_pieces": "nothing found"
    }
   ],
   "breakpoint": null,
   "note": "Its search alone stops at 7 pieces. The held-out laws are compositions of the family's pieces (S = (x+1)(y+1), T = (x+1)(y+2)); S1 asks for laws of 12 pieces written out, within 60 s.",
-  "seconds": 189.1
+  "seconds": 201.4
  },
  {
   "name": "intuition",
@@ -150,7 +150,7 @@
   ],
   "breakpoint": "38 held-out laws (lab laws and unseen dreams)",
   "note": "Kept out of the brain until it pays: a wrong guess pushes a needed law to a dearer level, and search grows exponentially per level.",
-  "seconds": 134.8
+  "seconds": 131.4
  },
  {
   "name": "wrong labels (programs)",
@@ -180,7 +180,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 124.2
+  "seconds": 118.6
  },
  {
   "name": "hidden causes and noise",
@@ -200,7 +200,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 29.5
+  "seconds": 26.2
  },
  {
   "name": "few examples",
@@ -249,26 +249,26 @@
   "rows": [
    {
     "level": "20 examples",
-    "outcome": "2.2 s",
+    "outcome": "2.0 s",
     "ok": true,
-    "seconds": 2.22
+    "seconds": 1.96
    },
    {
     "level": "100 examples",
     "outcome": "0.8 s",
     "ok": true,
-    "seconds": 0.79
+    "seconds": 0.78
    },
    {
     "level": "400 examples",
     "outcome": "0.5 s",
     "ok": true,
-    "seconds": 0.5
+    "seconds": 0.53
    }
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 3.5
+  "seconds": 3.3
  },
  {
   "name": "noise",
@@ -604,7 +604,7 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 8.7
+  "seconds": 7.2
  },
  {
   "name": "false laws",
@@ -639,6 +639,6 @@
   ],
   "breakpoint": null,
   "note": "",
-  "seconds": 12.7
+  "seconds": 11.9
  }
 ]

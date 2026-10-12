@@ -564,3 +564,11 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - **Trainer**: Now programs with brackets.
 - **Trainer**: That's all: 328 programs run (107 by me, 221 by you).
 - **Trainer**: Exam for lesson 100, attempt 1: passed
+
+## Lesson 101
+
+- **Trainer**: Lesson 101: Reading Engc: what statements do
+- **Trainer**: Now programs with many lines. I'll run each one and you can watch it line by line: which line runs next, and what every name holds.
+- **Trainer**: Now tell me what each new program prints before I run it.
+- **Trainer**: That's all: 97 programs run (92 by me, 5 by you).
+- **Trainer**: Exam for lesson 101, attempt 1: passed

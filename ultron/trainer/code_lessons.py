@@ -91,6 +91,72 @@ class ReadingEngc(Lesson):
         reader.study(tuple(words.split()), arity, demos, budget)
 
 
+class ReadingStatements(Lesson):
+    number, title = 101, "Reading Engc: what statements do"
+    goal = ("The Trainer runs Engc programs with statements (names, tests, loops, rows, "
+            "routines that call themselves) and Ultron watches each one run line by line. "
+            "Can it find what every kind of line does to memory, from at most 1,000 runs, "
+            "then say what longer, more deeply nested programs print, without running them?")
+    kind = "guided"
+    RUNS = 1000
+    ROUNDS = 2           # rounds of the Trainer's short first programs
+    MIXED = 60           # then programs mixing everything
+    OWN = 40             # runs Ultron may spend on its own experiments at a time
+    CONFIRM = 10         # fresh programs predicted right in a row before it is trusted
+
+    def __init__(self, seed=0):
+        super().__init__(seed)
+        self.rng = random.Random(seed)
+
+    def teach(self, trainer):
+        from ..code import sandbox
+        from ..code.reading import Reader
+        from ..code.statements import Machine
+        from . import engc_statements as S
+        brain = trainer.brain
+        rng = self.rng
+        reader = Reader(brain, brain.code)
+        m = Machine(brain, reader, (brain.code or {}).get("statements"))
+        m.world = sandbox.trace
+
+        def show(text):
+            m.watch(text, sandbox.trace(text))
+
+        trainer.say("Now programs with many lines. I'll run each one and you can watch it "
+                    "line by line: which line runs next, and what every name holds.")
+        for _ in range(self.ROUNDS):
+            for text, _ in S.first_programs(rng):
+                show(text)
+        for _ in range(self.MIXED):
+            show(S.program(rng, S.LESSON)[0])
+        m.learn()
+        m.experiment(self.OWN)
+        m.learn()
+        trainer.say("Now tell me what each new program prints before I run it.")
+        streak = 0
+        while streak < self.CONFIRM and m.total_runs < self.RUNS:
+            text, printed = S.program(rng, S.LESSON)
+            guess = m.predict(text)
+            show(text)
+            if guess == printed:
+                streak += 1
+                continue
+            streak = 0
+            m.note("code", "I didn't know what that program prints" if guess is None else
+                           f"I expected {guess[:4]}, it printed {printed[:4]}: I think again")
+            m.learn()
+            if m.wanting:
+                m.experiment(min(self.OWN, self.RUNS - m.total_runs))
+                m.learn()
+        if streak >= self.CONFIRM:
+            m.note("code", f"{self.CONFIRM} new programs in a row predicted right")
+        code = dict(brain.code or {})
+        code["statements"] = m.to_json()
+        brain.code = code
+        trainer.say(f"That's all: {m.total_runs} programs run "
+                    f"({m.stats.get('trainer', 0)} by me, {m.stats.get('own', 0)} by you).")
+
+
 def _world(sandbox):
     def run(text):
         out = sandbox.run(text)
@@ -103,4 +169,4 @@ def code_lessons(seed):
     from ..code import sandbox
     if not sandbox.available():
         return []
-    return [ReadingEngc(seed + 100)]
+    return [ReadingEngc(seed + 100), ReadingStatements(seed + 101)]

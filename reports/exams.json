@@ -493,6 +493,88 @@
   "threshold": 0.95,
   "wrong": []
  },
+ "101": {
+  "answered": 197,
+  "attempt": 1,
+  "items": [
+   {
+    "examples": [
+     {
+      "question": "DEFINE ROUTINE h WITH n AS NUMBER , m AS NUMBER :\n    IF n IS LESS THAN 1 THEN :\n        RETURN n + 22 .\n    END IF .\n    RETURN m TIMES ( CALL h WITH n EQUAL TO n MINUS 1 , m EQUAL TO m ) .\nEND ROUTINE .\nSET m TO 18 .\nSET m TO m .\nSET total TO 41 PLUS 61 .\nPRINT total .\nPRINT NOT total IS NOT total .\nSET d TO 58 MINUS total PLUS 67 .\nSET xs TO THE LIST 26 , d , d .\nSET n2 TO total TIMES m .\nSET total TO THE LENGTH OF xs TIMES m MODULO 7 .\nPRINT total .\n",
+      "truth": [
+       "102",
+       "True",
+       "5"
+      ],
+      "ultron": [
+       "102",
+       "True",
+       "5"
+      ]
+     },
+     {
+      "question": "DEFINE ROUTINE fold WITH n AS NUMBER , m AS NUMBER :\n    RETURN n .\nEND ROUTINE .\nSET b TO 89 MINUS 42 .\nFOR EACH e IN THE LIST b :\n    SET i TO 0 .\n    WHILE i IS LESS THAN 2 DO :\n        SET j TO 0 .\n        WHILE j IS LESS THAN 1 DO :\n            PRINT i * b * e .\n            SET j TO j PLUS 1 .\n        END WHILE .\n        SET i TO i PLUS 1 .\n    END WHILE .\nEND FOR .\nSET b TO b MINUS e .\nIF b IS AT LEAST e THEN :\n    SET acc TO 99 PLUS e .\n    FOR EACH item IN THE NUMBERS 2 TO 2 :\n        SET row TO THE LIST 5 , 22 , item .\n    END FOR .\nEND IF .\nPRINT e .\n",
+      "truth": [
+       "0",
+       "2209",
+       "47"
+      ],
+      "ultron": [
+       "0",
+       "2209",
+       "47"
+      ]
+     }
+    ],
+    "name": "everything 200 held-out Engc programs print (5-40 lines, loops up to 1,000 turns, blocks nested up to 3 deep, recursion), worked out without running them",
+    "scores": {
+     "lookup": [
+      0,
+      200
+     ],
+     "nearest": [
+      0,
+      200
+     ],
+     "straight line": [
+      64,
+      200
+     ],
+     "ultron": [
+      197,
+      200
+     ]
+    },
+    "tolerance": null
+   }
+  ],
+  "kinds": {
+   "DEFINE": "names a routine (the word in place 3): its block runs only when called",
+   "FOR": "runs its block once for each thing in the row after it, with the name in place 3 holding that thing",
+   "IF": "runs its block only if the words after it hold (else the part after the split, if any)",
+   "PRINT": "prints the value of the words after it",
+   "RETURN": "hands back the value of the words after it, and the routine ends",
+   "SET": "gives the name in place 2 the value of the words after 'SET \u00b7 TO'",
+   "WHILE": "runs its block again and again while the words after it hold"
+  },
+  "lesson": 101,
+  "passed": true,
+  "phrases": {
+   "THE EMPTY LIST": "an empty row",
+   "THE LENGTH OF": "how many in row",
+   "THE LIST": "row",
+   "THE NUMBERS": "counting from a to b",
+   "THE SUM OF": "start at 0 and merge in each of row",
+   "\u00b7 WITH": "row with b at the end"
+  },
+  "precision": 1.0,
+  "runs": {
+   "own": 5,
+   "trainer": 92
+  },
+  "threshold": 0.9,
+  "wrong": []
+ },
  "11": {
   "attempt": 1,
   "items": [

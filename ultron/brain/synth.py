@@ -262,6 +262,8 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
         if out_type == BOOL:
             for c in (True, False):
                 consider(("const", c), BOOL, tuple(c for _ in inputs), 1)
+        if "rows" in extra:
+            consider(("nil",), LIST, tuple(() for _ in inputs), 1)
 
         for s in range(2, max_size + 1):
             if state["near"] is not None and s >= state["near"][0]:
@@ -319,6 +321,18 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
 
             # rows of things: how many, each one stepped, those below/above/equal to
             # something, everything combined with a law, two rows paired by a law
+            if "rows" in extra:
+                for i in range(1, s - 1):
+                    j = s - 1 - i
+                    for L, lv in list(at(LIST, i)):
+                        for x, xv in list(at(INT, j)):
+                            consider(("snoc", L, x), LIST,
+                                     tuple(tuple(l) + (v,) for l, v in zip(lv, xv)), s)
+                    for a, av in list(at(INT, i)):
+                        for b, bv in list(at(INT, j)):
+                            if all(y - x <= 10000 for x, y in zip(av, bv)):
+                                consider(("upto", a, b), LIST,
+                                         tuple(tuple(range(x, y + 1)) for x, y in zip(av, bv)), s)
             if bank[LIST]:
                 _lists(s, at, consider, steps, ulibs, libs, library, cost)
                 if dear:

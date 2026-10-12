@@ -57,3 +57,32 @@ def test_lesson_100_reads_held_out_expressions(trained):
     best = max(v[0] for k, v in s.items() if k != "ultron")
     assert s["ultron"][0] - best >= 60
     assert r["runs"]["trainer"] + r["runs"]["own"] <= 400
+
+
+def test_films_show_each_line_and_memory():
+    film = sandbox.trace("SET x TO 2 .\nSET x TO x TIMES 3 .\nPRINT x .\n")
+    assert film["printed"] == ["6"]
+    assert [s["line"] for s in film["steps"]] == [1, 2, 3]
+    assert film["steps"][2]["memory"] == {"x": 6} and film["final"] == {"x": 6}
+
+
+def test_statement_reader_never_sees_engc_words():
+    """No Engc keyword is written into the statement learner: every word it uses
+    comes from what it watched."""
+    text = (ROOT / "ultron" / "code" / "statements.py").read_text()
+    for word in ("SET", "PRINT", "WHILE", "FOR EACH", "END", "ELSE", "CALL", "RETURN",
+                 "DEFINE", "THE LIST", "ADDED", "EQUAL TO"):
+        assert f'"{word}"' not in text and f"'{word}'" not in text, word
+
+
+def test_lesson_101_reads_held_out_programs(trained):
+    """C2: >= 180/200 held-out programs, precision >= 98%, >= 60 points over the best
+    baseline, from <= 1,000 runs."""
+    _, results = trained
+    r = results[101]
+    s = r["items"][0]["scores"]
+    assert r["passed"]
+    assert s["ultron"][0] >= 180 and r["precision"] >= 0.98
+    best = max(v[0] for k, v in s.items() if k != "ultron")
+    assert s["ultron"][0] - best >= 60
+    assert r["runs"]["trainer"] + r["runs"]["own"] <= 1000
