@@ -51,6 +51,13 @@ test still counts for more.
 
 ## The road ahead
 
+> **First priority now: the Code stage** ([STAGE_CODE_PLAN.md](STAGE_CODE_PLAN.md)). On
+> 2026-10-11 the owner made learning how code works, Ultron's own code first, then
+> writing itself in Engc and improving itself continuously, the first priority. It
+> merges stages 7 and 8 below and moves them to the front; its exit tests C1–C9 (coding in general, Engc, AI and ML, its twin, self-improvement) are fixed
+> in its plan. The other stages keep running alongside; ARC is re-measured after each
+> Code criterion is met, as a yardstick.
+
 One campaign, numbered the same here and in [MASTER_PLAN.md](MASTER_PLAN.md). Each stage
 closes one of the honest gaps between today's Ultron and general intelligence. It is the
 main line only once the stage before it has passed **every** exit test on held-out
@@ -65,8 +72,8 @@ scale, nothing else matters.
 | **4. The reader** | It knows only what it experienced | Open data and text read as **claims with sources**, checked against its laws, other sources and experiment; reading driven by curiosity | Learns laws from open data it was never taught and predicts held-out data. Catches ≥ 90% of planted false claims. Reaches a target accuracy with ≥ 100× fewer bytes read than a fixed, named small language-model baseline |
 | **5. Language** | It knows about 40 grounded words | Words by pointing, then grammar, then conversation, all grounded in concepts it already has | Understands new sentences about its worlds, answers questions, detects false statements, asks good questions; human blind evaluation |
 | **6. A body in 3D** | Its actions are 2D and few | A 3D physics simulator (MuJoCo or PyBullet), goals, planning with its own world model, tools | Solves new manipulation tasks by planning: a taller tower than it has ever seen, using an object as a tool |
-| **7. Code, itself, and Engc** | It can't write real programs | Its program language grows into a general one. It studies its own Python source as a world. It learns [Engc-V1](https://github.com/ashutoshavasthi/Engc-V1) and writes its twin in Engc | Correct programs for unseen specs; predicts its own modules' behaviour; its Engc twin passes every exam with identical answers |
-| **8. Self-improvement, safely** | Its building blocks are still designed by people | Proposes changes to its own code and grammar, each sandboxed, kept only if every exam passes and learning measurably improves, reversible, and **approved by a human** | Measurably better at *learning*, with zero regressions; invents a building block nobody gave it, and uses it |
+| **7. Code, itself, and Engc** *(now first: the Code stage, C1–C8)* | It can't write real programs | Its program language grows into a general one. It studies its own Python source as a world. It learns [Engc-V1](https://github.com/ashutoshavasthi/Engc-V1) and writes its twin in Engc | Correct programs for unseen specs; predicts its own modules' behaviour; its Engc twin passes every exam with identical answers |
+| **8. Self-improvement, safely** *(now first: the Code stage, C9)* | Its building blocks are still designed by people | Proposes changes to its own code and grammar, each sandboxed, kept only if every exam passes and learning measurably improves, reversible, and **approved by a human** | Measurably better at *learning*, with zero regressions; invents a building block nobody gave it, and uses it |
 | **9. A scientist** | Everything it knows, someone knew before | Cross-domain analogy, its own experiment design, real literature read as claims, deep mastery of one field (for example, mathematics with machine-checked proofs) | **Discovers something new** in a field it was not taught, verified independently |
 
 ### The safety track runs alongside, not at the end

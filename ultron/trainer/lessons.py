@@ -935,7 +935,13 @@ def all_lessons(seed=0):
             Owing(seed + 8), Sharing(seed + 9), FinalExam(seed + 10),
             WheelLesson(seed + 11), Ramps(seed + 12), Growing(seed + 13),
             SpringyHills(seed + 14), Diagonal(seed + 15), Phase2Exam(seed + 16),
-            CoiledSprings(seed + 17), Phase3Exam(seed + 18)] + _phase3(seed)
+            CoiledSprings(seed + 17), Phase3Exam(seed + 18)] + _phase3(seed) + _code(seed)
+
+
+def _code(seed):
+    """Code lessons (from 100) need Engc in the sandbox; without it they are left out."""
+    from .code_lessons import code_lessons
+    return code_lessons(seed)
 
 
 def _phase3(seed):

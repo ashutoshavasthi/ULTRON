@@ -553,3 +553,44 @@ Everything Ultron and the Trainer said, in order (individual play choices omitte
 - Ultron _confirm_: tall: how many in those of heights above mark predicted 8 new experiences in a row; added to my library of building blocks
 - Ultron _bored_: nothing here is teaching me anything new any more
 - **Trainer**: Exam for lesson 28, attempt 1: passed
+
+## Lesson 100
+
+- **Trainer**: Lesson 100: Reading Engc: what expressions mean
+- **Trainer**: These are programs in a language called Engc. I'll run some and you watch what each one prints. Later you can write and run your own.
+- Ultron _invent_: 'MODULO': no short law explained 'MODULO/2' directly, so I watched it step: raising the first number by one does if eq(acc, pred(t)) then 0 else succ(acc) (found as rule and exceptions), starting from 0; so 'MODULO/2' is: start there and step x times; and t steps always come back to the start, so only the steps after whole turns matter
+- **Trainer**: Now words that join whole statements.
+- **Trainer**: Now programs with two operators.
+- **Trainer**: Now programs with brackets.
+- **Trainer**: That's all: 328 programs run (107 by me, 221 by you).
+- **Trainer**: Exam for lesson 100, attempt 1: passed
+
+## Lesson 101
+
+- **Trainer**: Lesson 101: Reading Engc: what statements do
+- **Trainer**: Now programs with many lines. I'll run each one and you can watch it line by line: which line runs next, and what every name holds.
+- **Trainer**: Now tell me what each new program prints before I run it.
+- **Trainer**: That's all: 93 programs run (92 by me, 1 by you).
+- **Trainer**: Exam for lesson 101, attempt 1: passed
+
+## Lesson 102
+
+- **Trainer**: Lesson 102: A language never seen: the same ideas, every word new
+- **Trainer**: A language you have never seen. I'll run some programs in it.
+- **Trainer**: That's all: 124 programs run in this language (77 with one line, 47 with many).
+- **Trainer**: Exam for lesson 102, attempt 1: passed
+
+## Lesson 103
+
+- **Trainer**: Lesson 103: A language never seen: a small part of Python
+- **Trainer**: A language you have never seen. I'll run some programs in it.
+- **Trainer**: That's all: 91 programs run in this language (48 with one line, 43 with many).
+- **Trainer**: Exam for lesson 103, attempt 1: passed
+
+## Lesson 104
+
+- **Trainer**: Lesson 104: Its own code, watched from outside
+- **Trainer**: These are some of your own functions. Run each one on inputs you choose, at most 20 times, and tell me what it does.
+- Ultron _stuck_: I ran amounts.same 20 times and found no law I trust
+- **Trainer**: That's all: laws for 9 of 10 functions.
+- **Trainer**: Exam for lesson 104, attempt 1: passed

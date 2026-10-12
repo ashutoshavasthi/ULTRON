@@ -12,7 +12,7 @@ Rivals are what make designing an experiment possible.
 """
 
 from . import dsl
-from .dsl import BOOL, INT, LIST, Overflow, apply_step
+from .dsl import BOOL, INT, LIST, MAYBE, Overflow, apply_step
 
 
 class SearchResult:
@@ -184,8 +184,8 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
                 n_rivals, extra, n_exceptions=0, verify=None, costs=None):
     target = tuple(targets)
     names = sorted(var_types)
-    bank = {INT: {}, BOOL: {}, LIST: {}}    # type -> size -> [(expr, vec)]
-    seen = {INT: set(), BOOL: set(), LIST: set()}
+    bank = {INT: {}, BOOL: {}, LIST: {}, MAYBE: {}}    # type -> size -> [(expr, vec)]
+    seen = {INT: set(), BOOL: set(), LIST: set(), MAYBE: set()}
     if out_type == LIST:
         target = tuple(tuple(t) for t in target)
     state = {"steps": 0, "total": 0, "matches": [], "first_size": None, "near": None}
@@ -262,6 +262,8 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
         if out_type == BOOL:
             for c in (True, False):
                 consider(("const", c), BOOL, tuple(c for _ in inputs), 1)
+        if "rows" in extra:
+            consider(("nil",), LIST, tuple(() for _ in inputs), 1)
 
         for s in range(2, max_size + 1):
             if state["near"] is not None and s >= state["near"][0]:
@@ -319,6 +321,20 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
 
             # rows of things: how many, each one stepped, those below/above/equal to
             # something, everything combined with a law, two rows paired by a law
+            if "rows" in extra:
+                for i in range(1, s - 1):
+                    j = s - 1 - i
+                    for L, lv in list(at(LIST, i)):
+                        for x, xv in list(at(INT, j)):
+                            consider(("snoc", L, x), LIST,
+                                     tuple(tuple(l) + (v,) for l, v in zip(lv, xv)), s)
+                    for a, av in list(at(INT, i)):
+                        for b, bv in list(at(INT, j)):
+                            if all(y - x <= 10000 for x, y in zip(av, bv)):
+                                consider(("upto", a, b), LIST,
+                                         tuple(tuple(range(x, y + 1)) for x, y in zip(av, bv)), s)
+            if "code" in extra:
+                _undo(s, at, consider, libs, library)
             if bank[LIST]:
                 _lists(s, at, consider, steps, ulibs, libs, library, cost)
                 if dear:
@@ -344,6 +360,29 @@ def _synthesize(inputs, targets, var_types, out_type, library, consts, max_size,
     except _Done:
         return result(False)
     return result(True)
+
+
+UNDO_PARTS = 4      # undo is tried on parts of at most this size in all (it is slow)
+
+
+def _undo(s, at, consider, libs, library):
+    """The number that, used with a in a law, gives b; or nothing. And whether there is
+    one at all."""
+    for e, v in list(at(MAYBE, s - 1)):
+        consider(("some", e), BOOL, tuple(x is not None for x in v), s)
+    for i in range(1, min(s - 2, UNDO_PARTS)):
+        j = s - 2 - i
+        if j < 1 or i + j > UNDO_PARTS:
+            continue
+        for law in libs:
+            for a, av in list(at(INT, i)):
+                for b, bv in list(at(INT, j)):
+                    try:
+                        vec = tuple(dsl.undo(law.name, x, y, library) for x, y in zip(av, bv))
+                    except Overflow:
+                        continue
+                    expr = ("undo", law.name, a, b)
+                    consider(expr, MAYBE if None in vec else INT, vec, s)
 
 
 def _lists_dear(s, at, consider, libs, library, cost):

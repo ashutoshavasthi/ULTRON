@@ -1425,3 +1425,17 @@ EXAMS = {0: exam_permanence, 1: exam_pairing, 2: exam_combining, 3: exam_groups,
          21: exam_watching, 22: exam_cooling, 23: exam_settling, 24: exam_acting,
          25: exam_phase3_senses, 26: exam_microscope,
          27: exam_change, 28: exam_rows}
+
+
+def _code_exams():
+    """The code lessons' exams, when Engc is there to run the lessons at all."""
+    from ..code import sandbox
+    if not sandbox.available():
+        return {}
+    from .code_exams import (exam_invented, exam_own_code, exam_python, exam_reading_engc,
+                             exam_reading_statements)
+    return {100: exam_reading_engc, 101: exam_reading_statements, 102: exam_invented,
+            103: exam_python, 104: exam_own_code}
+
+
+EXAMS.update(_code_exams())

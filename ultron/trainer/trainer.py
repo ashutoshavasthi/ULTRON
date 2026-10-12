@@ -59,6 +59,8 @@ class Trainer:
         for attempt in range(1, MAX_ATTEMPTS + 1):
             if lesson.kind == "exam":
                 self.say("No teaching today. Show me what you can do.")
+            elif hasattr(lesson, "teach"):
+                lesson.teach(self)
             elif lesson.number == 4:
                 self.teach_names(lesson)
             elif lesson.number == 6:

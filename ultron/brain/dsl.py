@@ -31,12 +31,33 @@ Lists (a row of things: prices in a basket, children's heights):
                                   addition Ultron invented; nobody gives it "sum")
     ("zip", law, L1, L2)          pair two rows one by one with a law
 
+Building rows (core knowledge for the code world, offered to a search only when it
+asks for "rows"; earlier lessons never see them):
+
+    ("nil",)                      an empty row
+    ("snoc", L, x)                the row L with x put at its end
+    ("upto", a, b)                counting out loud from a to b: a, a+1, ..., b
+
+Undoing and choosing (core knowledge for reading its own code, C4; offered to a search
+only when it asks for "code"; earlier lessons never see them):
+
+    ("undo", law, a, b)           the number q with law(q, a) = b, or nothing if no
+                                  number does it (how many a's make b, what added to a
+                                  makes b)
+    ("some", e)                   e is something, not nothing
+    ("keep", P, L)                those of the row L for which P holds (P may use "it":
+                                  the one being looked at)
+    ("first", P, L)               the first one of L for which P holds, or nothing
+    ("sure", e)                   e, which must not be nothing (a law in the library
+                                  always gives a number)
+
 These primitives are the only thing designed by hand. Addition,
 subtraction, multiplication and place value are not here: the brain has to
 discover them as programs built from these pieces.
 """
 
 INT, BOOL, LIST = "int", "bool", "list"
+MAYBE = "maybe"         # a number, or nothing
 RELS = ("below", "above", "equal")
 
 
@@ -276,6 +297,11 @@ def iterate(F, n, x, t, library):
     if F[0] == "call1" and F[1] in library.cycles:
         # on a cycle, k repeats change nothing, and going back = going on round
         n = n % library.cycles[F[1]]
+    elif F[0] == "call" and library.cycles.get(F[1]) == "param" and isinstance(t, int) \
+            and not isinstance(t, bool) and t > 0:
+        # a step Ultron checked comes back to where it started after as many repeats as
+        # its own setting (code lesson 100): only the repeats after whole turns matter
+        n = n % t
     if n < 0:
         # doing something a below-zero number of times = undoing it that many times
         G = library.inverse_of(F)
@@ -313,10 +339,15 @@ def evaluate(expr, env, library):
     if tag == "lt":
         return evaluate(expr[1], env, library) < evaluate(expr[2], env, library)
     if tag == "call":
-        return check(library.call(expr[1], evaluate(expr[2], env, library),
-                                  evaluate(expr[3], env, library)))
+        a, b = evaluate(expr[2], env, library), evaluate(expr[3], env, library)
+        if a is None or b is None:
+            raise Overflow()        # nothing to work with (only "undo" gives nothing)
+        return check(library.call(expr[1], a, b))
     if tag == "call1":
-        return check(library.call1(expr[1], evaluate(expr[2], env, library)))
+        a = evaluate(expr[2], env, library)
+        if a is None:
+            raise Overflow()
+        return check(library.call1(expr[1], a))
     if tag == "ite":
         return (evaluate(expr[2], env, library) if evaluate(expr[1], env, library)
                 else evaluate(expr[3], env, library))
@@ -326,6 +357,15 @@ def evaluate(expr, env, library):
         return iterate(F, evaluate(expr[2], env, library), evaluate(expr[3], env, library), t, library)
     if tag == "len":
         return len(evaluate(expr[1], env, library))
+    if tag == "nil":
+        return ()
+    if tag == "snoc":
+        return tuple(evaluate(expr[1], env, library)) + (evaluate(expr[2], env, library),)
+    if tag == "upto":
+        a, b = evaluate(expr[1], env, library), evaluate(expr[2], env, library)
+        if b - a > MAX_ITER:
+            raise Overflow()
+        return tuple(range(a, b + 1))
     if tag == "map":
         F = expr[1]
         t = evaluate(F[2], env, library) if F[0] == "call" else None
@@ -341,7 +381,63 @@ def evaluate(expr, env, library):
     if tag == "zip":
         return tuple(check(library.call(expr[1], a, b)) for a, b in
                      zip(evaluate(expr[2], env, library), evaluate(expr[3], env, library)))
+    if tag == "undo":
+        a, b = evaluate(expr[2], env, library), evaluate(expr[3], env, library)
+        return undo(expr[1], a, b, library)
+    if tag == "some":
+        return evaluate(expr[1], env, library) is not None
+    if tag == "keep":
+        return tuple(x for x in evaluate(expr[2], env, library)
+                     if evaluate(expr[1], {**env, "it": x}, library))
+    if tag == "first":
+        return next((x for x in evaluate(expr[2], env, library)
+                     if evaluate(expr[1], {**env, "it": x}, library)), None)
+    if tag == "sure":
+        v = evaluate(expr[1], env, library)
+        if v is None:
+            raise Overflow()
+        return v
     raise ValueError(f"unknown program node {tag!r}")
+
+
+def undo(name, a, b, library):
+    """The number q with law(q, a) == b, or None. It looks only as far as |a| + |b| + 1
+    either side of 0, by halving when the law only ever grows (or only shrinks) in q
+    there, else one by one for small ranges."""
+    if not all(isinstance(v, int) and not isinstance(v, bool) for v in (a, b)):
+        return None
+    lim = abs(a) + abs(b) + 1
+
+    def f(q):
+        return library.call(name, q, a)
+    lo, hi = -lim, lim
+    flo, fhi = f(lo), f(hi)
+    if not all(isinstance(v, int) and not isinstance(v, bool) for v in (flo, fhi)):
+        return None
+    if flo == b:
+        return lo
+    if fhi == b:
+        return hi
+    if flo < fhi and flo < b < fhi or flo > fhi and flo > b > fhi:
+        up = flo < fhi
+        while hi - lo > 1:
+            mid = (lo + hi) // 2
+            v = f(mid)
+            if v == b:
+                return mid
+            if (v < b) == up:
+                lo = mid
+            else:
+                hi = mid
+        # halving found nothing: make sure it really only grows (or shrinks) there
+        if hi - lo <= 1 and lim > 60:
+            return None
+    if lim > 60:
+        return None
+    for q in sorted(range(-lim, lim + 1), key=lambda q: (abs(q), q < 0)):
+        if f(q) == b:
+            return q
+    return None
 
 
 def safe_evaluate(expr, env, library):
@@ -354,11 +450,11 @@ def safe_evaluate(expr, env, library):
 def size(expr):
     """Description length of a program: one unit per node (library laws cost 1)."""
     tag = expr[0]
-    if tag in ("var", "const"):
+    if tag in ("var", "const", "nil"):
         return 1
     if tag in ("succ", "pred", "down", "not"):
         return 1 + size(expr[1])
-    if tag in ("and", "eq", "lt"):
+    if tag in ("and", "eq", "lt", "snoc", "upto"):
         return 1 + size(expr[1]) + size(expr[2])
     if tag == "call":
         return 1 + size(expr[2]) + size(expr[3])
@@ -381,6 +477,12 @@ def size(expr):
         return 2 + size(expr[2]) + size(expr[3])
     if tag == "zip":
         return 2 + size(expr[2]) + size(expr[3])
+    if tag == "undo":
+        return 2 + size(expr[2]) + size(expr[3])
+    if tag in ("some", "sure"):
+        return (tag == "some") + size(expr[1])
+    if tag in ("keep", "first"):
+        return 1 + size(expr[1]) + size(expr[2])
     raise ValueError(tag)
 
 
@@ -392,11 +494,11 @@ def cost(expr, costs=None):
         return size(expr)
     c = lambda name: costs.get(name, 1)
     tag = expr[0]
-    if tag in ("var", "const"):
+    if tag in ("var", "const", "nil"):
         return 1
     if tag in ("succ", "pred", "down", "not", "len"):
         return 1 + cost(expr[1], costs)
-    if tag in ("and", "eq", "lt"):
+    if tag in ("and", "eq", "lt", "snoc", "upto"):
         return 1 + cost(expr[1], costs) + cost(expr[2], costs)
     if tag == "call":
         return c(expr[1]) + cost(expr[2], costs) + cost(expr[3], costs)
@@ -416,8 +518,10 @@ def cost(expr, costs=None):
         return 1 + f_cost + cost(expr[2], costs)
     if tag == "filter":
         return 2 + cost(expr[2], costs) + cost(expr[3], costs)
-    if tag in ("fold", "zip"):
+    if tag in ("fold", "zip", "undo"):
         return 1 + c(expr[1]) + cost(expr[2], costs) + cost(expr[3], costs)
+    if tag in ("some", "sure", "keep", "first"):
+        return size(expr)
     raise ValueError(tag)
 
 
@@ -445,6 +549,12 @@ def show(expr):
         return f"repeat {show(expr[2])} times [{f}] starting from {show(expr[3])}"
     if tag == "len":
         return f"how many in {show(expr[1])}"
+    if tag == "nil":
+        return "an empty row"
+    if tag == "snoc":
+        return f"{show(expr[1])} with {show(expr[2])} at the end"
+    if tag == "upto":
+        return f"counting from {show(expr[1])} to {show(expr[2])}"
     if tag == "map":
         F = expr[1]
         f = (f"{F[1]}(·, {show(F[2])})" if F[0] == "call"
@@ -456,6 +566,16 @@ def show(expr):
         return f"start at {show(expr[3])} and {expr[1]} in each of {show(expr[2])}"
     if tag == "zip":
         return f"{expr[1]} pair by pair of {show(expr[2])} and {show(expr[3])}"
+    if tag == "undo":
+        return f"the number q with {expr[1]}(q, {show(expr[2])}) = {show(expr[3])}"
+    if tag == "some":
+        return f"there is {show(expr[1])}"
+    if tag == "sure":
+        return show(expr[1])
+    if tag == "keep":
+        return f"those of {show(expr[2])} for which {show(expr[1])}"
+    if tag == "first":
+        return f"the first of {show(expr[2])} for which {show(expr[1])}"
     raise ValueError(tag)
 
 

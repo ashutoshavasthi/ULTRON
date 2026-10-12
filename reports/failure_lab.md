@@ -87,9 +87,9 @@ _How does search time grow with more examples?_ Breaks at: **did not break**
 
 | examples | what it did | |
 |---|---|---|
-| 20 examples | `1.5 s` | ✅ |
-| 100 examples | `0.7 s` | ✅ |
-| 400 examples | `0.4 s` | ✅ |
+| 20 examples | `2.0 s` | ✅ |
+| 100 examples | `0.8 s` | ✅ |
+| 400 examples | `0.5 s` | ✅ |
 
 ## noise
 
