@@ -254,15 +254,19 @@ class Nursery:
     def _move_body(self, action):
         turn = [0.0] * 4 if self.seated else body.clip_turn(action.turn)
         for arm in (0, 1):
-            new = list(self.joints)
-            new[2 * arm] += turn[2 * arm]
-            new[2 * arm + 1] += turn[2 * arm + 1]
-            new = body.clip_joints(new)
-            hx, hy, _ = body.hand_at(new, arm)
-            box = (hx, hy, body.HAND_R, body.HAND_R)
-            blocked = any(min(_overlap(box, _step_box(g))) > 0 for g in HARD)
-            if not blocked and 0 <= hx <= W:
-                self.joints = new
+            # the whole move if the hand can make it; else as much as one joint alone can
+            # (a hand pressing on the mat slides along it rather than freezing)
+            a, e = 2 * arm, 2 * arm + 1
+            for da, de in ((turn[a], turn[e]), (turn[a], 0.0), (0.0, turn[e])):
+                new = list(self.joints)
+                new[a] += da
+                new[e] += de
+                new = body.clip_joints(new)
+                hx, hy, _ = body.hand_at(new, arm)
+                box = (hx, hy, body.HAND_R, body.HAND_R)
+                if 0 <= hx <= W and not any(min(_overlap(box, _step_box(g))) > 0 for g in HARD):
+                    self.joints = new
+                    break
             self.hands[arm] = list(body.hand_at(self.joints, arm)[:2])
         dx, dy = body.clip_look(action.look)
         self.gaze = [float(np.clip(self.gaze[0] + dx, VIEW[1] / 2, W - VIEW[1] / 2)),
