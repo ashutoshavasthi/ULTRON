@@ -3,7 +3,8 @@
 It has a head with eyes that open and close (where its eyes sit shows where it looks),
 a mouth that smiles, a body and two hands. It comes and goes, looks at toys, shows them,
 hands them over, hides them behind the screen, plays peekaboo, presses the light toy and
-strokes the baby, and it smiles when the baby moves while it is near.
+strokes the baby, and it smiles when the baby moves while it is near. When the baby fusses
+it comes (if it is away) and strokes it, as a parent answers crying.
 
 What it may not do (docs/AGE_0_1_PLAN.md): read anything inside Ultron, change what it
 does depending on how an exam is going, reward the answer to a milestone, or act on exam
@@ -20,6 +21,7 @@ to the script is a visible change to the plan.
 import numpy as np
 
 HOME_X = 128.0          # where it sits
+HEARS = 30              # steps of fussing before it comes back from elsewhere
 AWAY_X = 182.0          # out of the room
 HEAD_Y = 44.0           # where its head is (it sits on the floor)
 BABY_FACE = (16.0, 50.0)
@@ -75,12 +77,20 @@ class Caregiver:
                 names = [e for e, _ in EPISODES]
                 weights = np.array([w for _, w in EPISODES], dtype=float)
                 episode = names[int(self.rng.choice(len(names), p=weights / weights.sum()))]
+                if self.seen["baby_fussing"]:
+                    episode = "stroke"          # it answers crying first
                 yield from getattr(self, "_" + episode)()
             yield from self._leave()
             yield from self._wait(int(self.rng.integers(300, 2000)))
 
     def _wait(self, n):
+        """Away (or not yet come) for n steps, unless the baby cries for a while."""
+        crying = 0
         for _ in range(n):
+            crying = crying + 1 if self.seen["baby_fussing"] else 0
+            if crying >= HEARS:
+                self._note("heard_crying")
+                return
             yield
 
     def _arrive(self):

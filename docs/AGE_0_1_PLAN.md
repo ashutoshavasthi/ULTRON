@@ -57,7 +57,8 @@ with the simulator; only the Judge may read it.
 A scripted person with a face (eyes that open and close), a head that turns, and two hands.
 
 **What it may do:** come and go; look at things; show, hand over, hide and move toys; play
-peekaboo; press the light toy; smile when Ultron is near and active (the comfort signal).
+peekaboo; press the light toy; smile when Ultron is near and active (the comfort signal);
+come and stroke the baby when it cries (added in WP3, as a parent answers crying).
 
 **What it may not do:**
 - read Ultron's insides;
@@ -69,7 +70,10 @@ The script is a fixed program with randomness, **committed with its hash before 
 Everything it does is logged. A failure-lab row turns it off, and another makes its gaze
 mislead, so we can see what Ultron learns from it and what it doesn't.
 
-`ultron/nursery/caregiver.py` SHA-256: `498e7e25c74b0cb97e5e9807c144cb3a3797450cd0251dc3f0e81e2c020ce589`
+`ultron/nursery/caregiver.py` SHA-256: `6d69dfa82030715513b24824e920e2505c8198d5fe73d7e41dcb5f026067a54e`
+
+History of the script, all before any milestone was measured: `498e7e25…` (WP2), then
+`6d69dfa8…` (WP3: it hears the baby cry and comes to stroke it).
 
 A test (`tests/test_nursery.py`) fails if the script changes without this line changing
 too. It also fails if the script imports Ultron's brain or the Judge.
@@ -83,6 +87,21 @@ too. It also fails if the script imports Ultron's brain or the Judge.
 | Core knowledge | Things are bounded lumps that move as one; a moving thing is followed along a connected path (`senses/track.py`); things that start moving by themselves are agents; faces stand out; sets of 1–3 are seen at a glance, larger amounts only roughly |
 | Learning | The explanation engine (MDL search, kinds, laws with exceptions, rival laws); training small networks on its own experience (as the eyes were trained); episodic memory; sleep (consolidation and abstraction, `brain/abstraction.py`) |
 | Drives | Curiosity as learning progress (`brain/curiosity.py`); habituation (familiar things become boring, new things interesting); comfort near the caregiver |
+
+**Proposed additions from WP3, waiting for the owner's approval (rule 5).** Building the
+newborn's eyes needed four things the list above does not name. Each is something human
+newborns have:
+- **a blurry wide view** (`Senses.around`): a coarse picture of almost everything around
+  where it looks, as newborns see coarsely almost everywhere. Without it, a toy outside the
+  sharp middle can never catch its eye;
+- **saccadic suppression:** change in the wide view is not noticed while the eyes move,
+  because while they move everything seems to change;
+- **inhibition of return:** a spot it has just looked away from can't pull its eyes
+  straight back;
+- **crying** when comfort is low.
+
+Until the owner approves them they are marked as proposed in the ledger
+([LEDGER.md](LEDGER.md)), and the Age 0 gate can't pass with them unapproved.
 
 **Not innate** (it must be learned):
 - object permanence;
@@ -102,7 +121,7 @@ learning).
 
 | # | Milestone | Pass rule | Baselines | Human comparison |
 |---|---|---|---|---|
-| N1 | **Habituation and novelty.** One event is shown again and again, then a new one | In ≥ 18 of 20 held-out event pairs: looking time (steps with gaze on the event) falls to ≤ 50% of the first three showings within 10 showings, and recovers to ≥ 2× the habituated level for the new event | Random gaze; the motion-and-contrast reflex alone | The standard infant-controlled habituation criterion (looking falls to 50%), used with newborns |
+| N1 | **Habituation and novelty.** One event is shown again and again, then a new one. *Protocol details, added in WP3 before N1 was measured (pass rule unchanged):* the baby sits in an infant seat (its arms rest); the experimenter dangles a toy in front of it, swinging 8 units side to side, for 60-step showings with 40-step gaps; the new event is a toy of a different colour; looking means the toy is within 10 units of the middle of its view | In ≥ 18 of 20 held-out event pairs: looking time (steps with gaze on the event) falls to ≤ 50% of the first three showings within 10 showings, and recovers to ≥ 2× the habituated level for the new event | Random gaze; the motion-and-contrast reflex alone | The standard infant-controlled habituation criterion (looking falls to 50%), used with newborns |
 | N2 | **The eyes, in the nursery.** Lesson 19 (eyes trained from touch) re-hosted: the training pairs come from its own grasps during the days | On 25 held-out nursery scenes: every toy found within 1.5 pixels in ≥ 23/25, and the count right in ≥ 23/25 | The untrained retina's blobs | None direct (engineering milestone) |
 | N3 | **A body map.** From babbling only, no reaching lessons | On 100 held-out toy positions, including ones its hands never touched: the hand's first reach ends within one toy-width of the toy in ≥ 90 | Random reaching; reaching to the nearest position remembered | Reaching for seen objects appears at about 3–5 months |
 | N4 | **The caregiver and where they look.** | On 100 held-out scenes: tells the caregiver from toys in ≥ 98; the caregiver's head direction within 30° in ≥ 90 | A detector of the biggest moving thing | Newborns prefer faces; head direction is a precursor to gaze following (I7) |
@@ -172,6 +191,7 @@ I1–I10. Ultron must behave like a 12-month-old in ≥ 8.
 |---|---|
 | WP1 | **done** (2026-10-15): the nursery, the body, days and nights, the innate reflexes (`brain/reflexes.py`); 4.5 ms per step; deterministic (same seed, same day); the curriculum's retrain unchanged |
 | WP2 | **done** (2026-10-15): the caregiver's script, hash recorded above; modes `normal`, `off`, `misleading_gaze`. The failure-lab rows that use the modes are added in WP3, when there is a learner to stress |
-| WP0, WP3–WP7 | open |
+| WP3 | **done** (2026-10-15): the newborn mind (`brain/newborn.py`): habituation, curiosity by learning progress over arm postures, comfort and crying, episodic memory of fixations, sleep. Failure-lab rows (`judge/nursery_lab.py`): habituation (breaks at 3× camera noise), curiosity and the noisy TV, the caregiver switched off. The misleading-gaze row joins with gaze following (WP6). Four innate additions are proposed above and wait for the owner |
+| WP0, WP4–WP7 | open |
 | N1–N6 | open (main line) |
 | I1–I10 | open (exit tests fixed) |

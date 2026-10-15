@@ -109,8 +109,8 @@ def test_the_screen_hides_what_is_behind_it():
 
 def test_senses_hold_no_hidden_truth():
     s = Nursery(0).senses()
-    assert set(Senses.__slots__) == {"picture", "joints", "gaze", "touch"}
-    assert s.picture.shape == (48, 64, 3)
+    assert set(Senses.__slots__) == {"picture", "joints", "gaze", "touch", "around"}
+    assert s.picture.shape == (48, 64, 3) and s.around.shape == (48, 80, 3)
     assert len(s.joints) == 4 and len(s.gaze) == 2
     assert set(s.touch) == {"palms", "body"}
 

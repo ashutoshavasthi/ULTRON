@@ -40,7 +40,9 @@ GROUND = ((-50.0, body.TORSO[2], body.TORSO[1]), (MAT[0], MAT[2], MAT[1]), (MAT[
 HARD = GROUND[1:]                   # what the baby's hands can't go into (its own body they can)
 DT = 0.1
 GRAVITY = 60.0                      # units per second squared
-VIEW = (48, 64)                     # rows, columns of what the eyes see
+VIEW = (48, 64)                     # rows, columns of what the eyes see sharply
+AROUND = (48, 80)                   # rows, columns of the blurry wide view around it
+COARSE = 4                          # room units per pixel of the wide view
 SHARP = 12.0                        # the sharp middle of the view (radius, pixels)
 NOISE = 0.08
 BOUNCE = 0.3
@@ -69,19 +71,20 @@ def _canvas(x0, y0, h, w):
 class _Painter:
     """Paints opaque shapes, anti-aliased, onto the part of the room in view."""
 
-    def __init__(self, img, ox, oy):
-        self.img, self.ox, self.oy = img, ox, oy
+    def __init__(self, img, ox, oy, scale=1.0):
+        self.img, self.ox, self.oy, self.s = img, ox, oy, scale
         self.h, self.w = img.shape[:2]
 
     def _window(self, x0, y0, x1, y1):
-        c0 = max(0, int(math.floor(x0 - self.ox)) - 1)
-        c1 = min(self.w, int(math.ceil(x1 - self.ox)) + 2)
-        r0 = max(0, int(math.floor(y0 - self.oy)) - 1)
-        r1 = min(self.h, int(math.ceil(y1 - self.oy)) + 2)
+        s = self.s
+        c0 = max(0, int(math.floor((x0 - self.ox) / s)) - 1)
+        c1 = min(self.w, int(math.ceil((x1 - self.ox) / s)) + 2)
+        r0 = max(0, int(math.floor((y0 - self.oy) / s)) - 1)
+        r1 = min(self.h, int(math.ceil((y1 - self.oy) / s)) + 2)
         if c0 >= c1 or r0 >= r1:
             return None
         yy, xx = np.mgrid[r0:r1, c0:c1]
-        return r0, r1, c0, c1, xx + self.ox + 0.5, yy + self.oy + 0.5
+        return r0, r1, c0, c1, (xx + 0.5) * s + self.ox, (yy + 0.5) * s + self.oy
 
     def _fill(self, win, cover, rgb):
         r0, r1, c0, c1 = win[:4]
@@ -93,8 +96,8 @@ class _Painter:
         if win is None:
             return
         xx, yy = win[4], win[5]
-        cover = (np.clip(np.minimum(xx - x0, x1 - xx) + 0.5, 0, 1)
-                 * np.clip(np.minimum(yy - y0, y1 - yy) + 0.5, 0, 1))
+        cover = (np.clip(np.minimum(xx - x0, x1 - xx) / self.s + 0.5, 0, 1)
+                 * np.clip(np.minimum(yy - y0, y1 - yy) / self.s + 0.5, 0, 1))
         self._fill(win, cover, rgb)
 
     def disc(self, x, y, r, rgb):
@@ -102,7 +105,7 @@ class _Painter:
         if win is None:
             return
         xx, yy = win[4], win[5]
-        cover = np.clip(r + 0.5 - np.sqrt((xx - x) ** 2 + (yy - y) ** 2), 0, 1)
+        cover = np.clip((r - np.sqrt((xx - x) ** 2 + (yy - y) ** 2)) / self.s + 0.5, 0, 1)
         self._fill(win, cover, rgb)
 
     def stick(self, a, b, width, rgb):
@@ -115,7 +118,7 @@ class _Painter:
         dx, dy = bx - ax, by - ay
         t = np.clip(((xx - ax) * dx + (yy - ay) * dy) / (dx * dx + dy * dy or 1e-9), 0, 1)
         d = np.sqrt((xx - ax - t * dx) ** 2 + (yy - ay - t * dy) ** 2)
-        self._fill(win, np.clip(r + 0.5 - d, 0, 1), rgb)
+        self._fill(win, np.clip((r - d) / self.s + 0.5, 0, 1), rgb)
 
 
 # ---------------------------------------------------------------- the room
@@ -135,21 +138,24 @@ def _box(t):
 
 
 class Nursery:
-    def __init__(self, seed=0, caregiver="normal", noise=True):
+    def __init__(self, seed=0, caregiver="normal", noise=True, noise_level=NOISE):
         self.seed = seed
         self.rng = np.random.default_rng(seed)
         self.camera_rng = np.random.default_rng(seed + 104729)
         self.noise = noise
+        self.noise_level = noise_level
         self.t = 0
         self.joints = list(body.START)
         self.gaze = [60.0, 70.0]
         self.grip = [False, False]
         self.hands = [list(body.hand_at(self.joints, a)[:2]) for a in (0, 1)]
         self.hand_speed = [0.0, 0.0]
+        self.fussing = False
+        self.seated = False             # the Judge's infant seat: arms rest (looking studies)
         self.held = {}                  # hand name -> (thing id, dx, dy)
         self.things = []
         self.stats = {"grasps": 0, "releases": 0, "palm_contacts": 0, "lights": 0,
-                      "body_touches": 0}
+                      "body_touches": 0, "fussing": 0}
         self._furnish()
         self.caregiver = Caregiver(seed + 7919, mode=caregiver) if caregiver != "none" else None
         self._cg = None                 # what the caregiver looks like this step
@@ -161,7 +167,8 @@ class Nursery:
     def _add(self, kind, x, y, hx, hy, rgb, layer="toys"):
         t = {"id": len(self.things), "kind": kind, "x": float(x), "y": float(y),
              "hx": float(hx), "hy": float(hy), "rgb": tuple(float(c) for c in rgb),
-             "vx": 0.0, "vy": 0.0, "dx": 0.0, "on": None, "lit": 0, "layer": layer}
+             "vx": 0.0, "vy": 0.0, "dx": 0.0, "on": None, "lit": 0, "layer": layer,
+             "away": False, "pinned": False}
         self.things.append(t)
         return t
 
@@ -191,6 +198,25 @@ class Nursery:
 
     def thing(self, kind):
         return [t for t in self.things if t["kind"] == kind]
+
+    def _here(self):
+        return [t for t in self.things if not t["away"]]
+
+    # ---- for the Judge's protocols (exams and the failure lab), never for Ultron
+
+    def put_away(self, tid):
+        """Take a thing out of the room (as an experimenter does between showings)."""
+        t = self.things[tid]
+        t["away"] = True
+        for name in [k for k, v in self.held.items() if v[0] == tid]:
+            del self.held[name]
+
+    def bring(self, tid, x, y, vx=0.0, vy=0.0, pinned=False):
+        """Put a thing (back) in the room at (x, y), moving at (vx, vy). pinned: the
+        experimenter holds it there (it neither falls nor is pushed; move it with bring)."""
+        t = self.things[tid]
+        t.update(away=False, x=float(x), y=float(y), vx=float(vx), vy=float(vy), on=None, lit=0,
+                 pinned=bool(pinned))
 
     # ---- one step
 
@@ -226,7 +252,7 @@ class Nursery:
         return [list(h) for h in self.hands] + self._cg_hands()
 
     def _move_body(self, action):
-        turn = body.clip_turn(action.turn)
+        turn = [0.0] * 4 if self.seated else body.clip_turn(action.turn)
         for arm in (0, 1):
             new = list(self.joints)
             new[2 * arm] += turn[2 * arm]
@@ -242,6 +268,8 @@ class Nursery:
         self.gaze = [float(np.clip(self.gaze[0] + dx, VIEW[1] / 2, W - VIEW[1] / 2)),
                      float(np.clip(self.gaze[1] + dy, VIEW[0] / 2, H - VIEW[0] / 2))]
         self.grip = list(action.grip)
+        self.fussing = action.voice
+        self.stats["fussing"] += int(action.voice)
 
     def _grasp(self, hands, grips):
         names = ("left", "right", "cg_left", "cg_right")
@@ -259,7 +287,7 @@ class Nursery:
                 continue
             taken = {v[0] for v in self.held.values()}
             box = (hx, hy, body.HAND_R + 0.5, body.HAND_R + 0.5)
-            for t in self.things:
+            for t in self._here():
                 if t["kind"] in SOLID and t["id"] not in taken and min(_overlap(box, _box(t))) > 0:
                     self.held[name] = (t["id"], t["x"] - hx, t["y"] - hy)
                     if i < 2:
@@ -274,7 +302,8 @@ class Nursery:
                 tid, ox, oy = self.held[name]
                 held[tid] = (hands[i][0] + ox, hands[i][1] + oy)
         before = {t["id"]: t["x"] for t in self.things}
-        solids = [t for t in self.things if t["kind"] in SOLID]
+        solids = [t for t in self.things
+                  if t["kind"] in SOLID and not t["away"] and not t["pinned"]]
         for t in solids:
             t["_bottom"] = t["y"] + t["hy"]
             if t["id"] in held:
@@ -386,7 +415,7 @@ class Nursery:
         for i, name in enumerate(("left", "right")):
             hx, hy = hands[i]
             box = (hx, hy, body.HAND_R + 0.5, body.HAND_R + 0.5)
-            contact = any(min(_overlap(box, _box(t))) > 0 for t in self.things if t["kind"] in SOLID)
+            contact = any(min(_overlap(box, _box(t))) > 0 for t in self._here() if t["kind"] in SOLID)
             contact = contact or any(min(_overlap(box, _step_box(g))) > 0 for g in HARD)
             if self._cg_present():
                 contact = contact or any(math.hypot(hx - c[0], hy - c[1]) < 2 * body.HAND_R + 0.5
@@ -415,10 +444,21 @@ class Nursery:
 
     def senses(self):
         img = self.view(self.gaze, noise=self.noise)
+        around = self.wide(self.gaze, noise=self.noise)
         pan = (self.gaze[0] - W / 2) / (W / 2 - VIEW[1] / 2)
         tilt = (self.gaze[1] - H / 2) / (H / 2 - VIEW[0] / 2)
         return body.Senses(img, [round(j, 6) for j in self.joints],
-                           (round(pan, 6), round(tilt, 6)), dict(self._touch))
+                           (round(pan, 6), round(tilt, 6)), dict(self._touch), around)
+
+    def wide(self, centre, noise=True):
+        """The blurry wide view around where it looks (a newborn sees coarsely almost
+        everywhere): COARSE room units per pixel, wide enough to hold the whole room."""
+        h, w = AROUND
+        ox, oy = centre[0] - w * COARSE / 2, centre[1] - h * COARSE / 2
+        img = self.paint(ox, oy, h, w, scale=COARSE)       # coarse: blurred already
+        if noise:       # a coarse pixel pools COARSE x COARSE sharp ones: less noise
+            img = img + self.camera_rng.normal(0.0, self.noise_level / COARSE, size=img.shape)
+        return np.clip(img, 0.0, 1.0)
 
     def view(self, centre, noise=True):
         """The picture around a point: sharp in the middle, blurred toward the edges."""
@@ -434,24 +474,24 @@ class Nursery:
         far = np.clip((np.hypot(xx - w / 2, yy - h / 2) - SHARP) / 16.0, 0, 1)[:, :, None]
         img = (1 - far) * img + far * soft
         if noise:
-            img = img + self.camera_rng.normal(0.0, NOISE, size=img.shape)
+            img = img + self.camera_rng.normal(0.0, self.noise_level, size=img.shape)
         return np.clip(img, 0.0, 1.0)
 
     def room(self):
         """The whole room, noise-free (for people looking at the nursery, not for Ultron)."""
         return np.clip(self.paint(0, 0, H, W), 0.0, 1.0)
 
-    def paint(self, ox, oy, h, w):
+    def paint(self, ox, oy, h, w, scale=1.0):
         img = _canvas(ox, oy, h, w)
-        p = _Painter(img, ox, oy)
+        p = _Painter(img, ox, oy, scale)
         p.rect(-10, FLOOR, W + 10, H + 10, FLOOR_RGB)
         p.rect(*MAT, MAT_RGB)
         p.rect(*CUSHION, MAT_RGB * 0.8)
         self._paint_caregiver(p, hands=False)
-        for t in self.things:
+        for t in self._here():
             if t["kind"] == "cloth":
                 p.rect(t["x"] - t["hx"], t["y"] - t["hy"], t["x"] + t["hx"], t["y"] + t["hy"], t["rgb"])
-        for t in self.things:
+        for t in self._here():
             if t["kind"] in ("ball", "block", "light"):
                 rgb = LIT if t["lit"] else t["rgb"]
                 if t["kind"] == "ball":
@@ -459,7 +499,7 @@ class Nursery:
                 else:
                     p.rect(t["x"] - t["hx"], t["y"] - t["hy"], t["x"] + t["hx"], t["y"] + t["hy"], rgb)
         self._paint_caregiver(p, hands=True)
-        for t in self.things:
+        for t in self._here():
             if t["kind"] == "screen":
                 p.rect(t["x"] - t["hx"], t["y"] - t["hy"], t["x"] + t["hx"], t["y"] + t["hy"], t["rgb"])
         self._paint_baby(p)
@@ -509,9 +549,9 @@ class Nursery:
                             "hx": t["hx"], "hy": t["hy"],
                             "held": any(v[0] == t["id"] for k, v in self.held.items()
                                         if k in ("left", "right"))}
-                           for t in self.things],
+                           for t in self._here()],
                 "baby_hands": [tuple(h) for h in self.hands],
-                "baby_moving": max(self.hand_speed)}
+                "baby_moving": max(self.hand_speed), "baby_fussing": self.fussing}
 
     def truth(self):
         """The whole state of the room (for the Judge only)."""

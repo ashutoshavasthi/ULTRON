@@ -16,7 +16,8 @@ HAND_R = 3.0
 LIMITS = ((-1.5, 1.4), (-0.3, 2.6))         # shoulder, elbow (radians; + turns down)
 START = (0.9, 2.5, 0.8, 2.4)                # left shoulder, left elbow, right ...
 MAX_TURN = 0.08                             # most a joint can turn in one step
-MAX_GAZE = 3.0                              # most the gaze can move in one step (units)
+MAX_GAZE = 30.0                             # most the gaze can move in one step (units):
+                                            # a saccade takes a step or two, as real ones do
 TORSO = (8.0, 58.0, 24.0, 90.0)             # x0, y0, x1, y1
 HEAD = (16.0, 50.0, 7.0)                    # x, y, radius
 
@@ -39,14 +40,16 @@ def clip_joints(joints):
 
 class Action:
     """What Ultron does in one step: turn its joints a little, move its gaze a little,
-    close or open each hand."""
+    close or open each hand, and fuss (cry) or not."""
 
-    __slots__ = ("turn", "look", "grip")
+    __slots__ = ("turn", "look", "grip", "voice")
 
-    def __init__(self, turn=(0.0, 0.0, 0.0, 0.0), look=(0.0, 0.0), grip=(False, False)):
+    def __init__(self, turn=(0.0, 0.0, 0.0, 0.0), look=(0.0, 0.0), grip=(False, False),
+                 voice=False):
         self.turn = tuple(float(t) for t in turn)
         self.look = tuple(float(v) for v in look)
         self.grip = tuple(bool(g) for g in grip)
+        self.voice = bool(voice)
 
 
 class Senses:
@@ -54,15 +57,19 @@ class Senses:
 
     picture: the view around where it is looking (48 x 64 x 3, brightness 0-1), sharp in
              the middle and blurred toward the edges, with camera noise and shake;
+    around:  the blurry wide view (48 x 80 x 3, four room units a pixel), centred where
+             it looks and wide enough to hold the whole room, as a newborn sees coarsely
+             almost everywhere;
     joints:  its four joint angles (left shoulder, left elbow, right shoulder, right elbow);
     gaze:    where its eyes point (pan, tilt), each from -1 to 1;
     touch:   'palms': for each hand, (contact 0/1, weight held); 'body': being touched.
     """
 
-    __slots__ = ("picture", "joints", "gaze", "touch")
+    __slots__ = ("picture", "joints", "gaze", "touch", "around")
 
-    def __init__(self, picture, joints, gaze, touch):
+    def __init__(self, picture, joints, gaze, touch, around=None):
         self.picture = picture
+        self.around = around
         self.joints = tuple(joints)
         self.gaze = tuple(gaze)
         self.touch = touch
