@@ -1,5 +1,23 @@
 # ULTRON
 
+**The goal: human-like general intelligence, grown the way a child grows.** Ultron is raised
+from a newborn (a body in one continuous nursery world, with a caregiver) through the
+ages a child passes through: infant, toddler, preschooler, school child, adolescent, adult.
+Each age ends at a gate made of the milestones real children are tested on, compared with
+what children actually do, and checked by someone who did not build it. There is no
+pretrained model and no language model, and it uses about as much experience as a child
+gets. **Now: Age 0, the newborn** ([plan](docs/AGE_0_1_PLAN.md)).
+
+- [Master plan](docs/MASTER_PLAN.md): the architecture of a child's mind and the rules of development
+- [Roadmap](docs/ROADMAP.md): the ages, where Ultron stands, what's next
+- [Development map](docs/DEVELOPMENT_MAP.md): where every earlier result belongs
+
+Everything below was built before the plan was rebuilt (2026-10-15). It is kept and
+banked at the age it belongs to. Most of it is school-age and teenage work done at a desk,
+which must now stand on the baby and toddler foundations built first.
+
+---
+
 A learner that understands instead of memorising. It is built like a child: a
 **Brain** in an **Environment**, taught by a **Trainer** and examined by a
 **Judge** on problems it has never seen.
@@ -92,5 +110,5 @@ python -m ultron blind blind/independent_2.txt       # an independent examiner's
 
 - [How it works](docs/ARCHITECTURE.md)
 - [Report card](reports/report_card.md), the [Phase 1 verdict](reports/judge_verdict.md) the [Phase 2 verdict](reports/phase2_verdict.md) and the [verdict on closing its gaps](reports/phase3_verdict.md) and the [Phase 3 verdict](reports/phase3_senses_verdict.md)
-- [Roadmap to a self-improving expert](docs/ROADMAP.md)
-- Original requirements: [PRD v1](ULTRON_PRD_V1.md), [PRD v2](ULTRON_PRD_V2.md)
+- [Roadmap: growing up](docs/ROADMAP.md)
+- Original requirements (historical; the master plan is the current spec): [PRD v1](ULTRON_PRD_V1.md), [PRD v2](ULTRON_PRD_V2.md)

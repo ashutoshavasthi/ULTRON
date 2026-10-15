@@ -832,6 +832,14 @@ EXPERIMENTS = [program_size, library_learning, intuition_prior, wrong_labels, hi
                grammar_stress]
 
 
+def _newborn():
+    from .nursery_lab import EXPERIMENTS as NEWBORN     # Age 0: the nursery (WP3)
+    return NEWBORN
+
+
+EXPERIMENTS += _newborn()
+
+
 def run_all(brain):
     out = []
     for exp in EXPERIMENTS:
