@@ -368,23 +368,27 @@ class Newborn:
         return p["where"], p["last"]
 
     def stored(self):
-        """How many things it is keeping in memory."""
-        return (len(self.episodes) + len(self.vivid) + len(self.protos)
-                + sum(len(v) for v in self.curiosity.errors.values()))
+        """How much of its experience it is keeping: the episodes of its days, the vivid
+        ones kept from earlier days, and one record per thing it knows. (Curiosity's few
+        recent errors per posture are working state, not experiences.)"""
+        return len(self.episodes) + len(self.vivid) + len(self.protos)
 
     # ------------------------------------------------------------ sleep
 
     def sleep(self, log=None):
-        """Consolidate the day: keep a record per familiar thing and the most vivid
-        episodes, forget the rest, and wake without the day's short-term habituation."""
+        """Consolidate the day: keep a record per familiar thing (met more than once, or
+        once vividly) and the most vivid episodes, forget the rest, and wake without the
+        day's short-term habituation."""
         before = self.stored()
         self._end_fixation(self.fix["where"] if self.fix else (0.0, 0.0))
         day = self.episodes
         self.vivid += sorted(day, key=lambda e: (-e["surprise"], e["t"]))[:VIVID]
         self.episodes = []
         merged = []
+        vivid = {tuple(e["where"]) for e in self.vivid}
         for p in sorted(self.protos, key=lambda q: (-q["seen"], q["last"] or 0)):
-            if p["seen"] == 0:
+            # a thing glimpsed once is forgotten, unless that glimpse was a vivid one
+            if p["seen"] == 0 or (p["seen"] == 1 and tuple(p["where"]) not in vivid):
                 continue
             twin = next((m for m in merged
                          if math.sqrt(((m["what"] - p["what"]) ** 2).mean()) < MATCH / 2), None)
