@@ -160,6 +160,25 @@ I1–I10. Ultron must behave like a 12-month-old in ≥ 8.
 
 ---
 
+## What the newborn's failure lab found (WP3, development seeds)
+
+Rows in `judge/nursery_lab.py`, run with `python -m ultron stress`.
+
+| Row | Result |
+|---|---|
+| **Habituation** against camera noise (5 seeds each) | 4/5 habituate at the normal noise (0.08) and at 2× (0.16). It **breaks at 3×** (0.24: 3/5) and is gone at 4× (0.32: 1/5). At normal noise, looking falls from about 14 steps to 5, and the new toy gets 20 |
+| **Curiosity and the noisy TV** (share of time in postures where the palm feels pure noise; 2 seeds) | With 1, 3 and 5 noisy postures of 9: learning progress 7%, 35%, 54%; random babbling 11%, 38%, 58%; chasing the biggest error 38%, 43%, 66%. Curiosity never gets stuck in the noise, and the error-chaser does. But it keeps away only a little better than babbling at random |
+| **Comfort without the caregiver** (2 seeds) | With the caregiver: fussing 5% of the time, mean comfort 0.72. Caregiver off: fussing 77%, mean comfort 0.17 |
+
+**How the curiosity row got there.** It broke twice first (at 3 noisy postures: 79%, then
+64% of the time in noise, against 52% and 38% at random). It took three fixes:
+- one averaged record per posture per stretch of babbling, instead of a record every step
+  (single steps are coin-flip noisy);
+- a hand pressing on the mat now slides along it instead of freezing (a body fix);
+- a posture it aims for and never reaches counts as a try with nothing learned.
+
+None of the three adds a mechanism: they are how the listed curiosity and body work.
+
 ## Work packages
 
 | WP | What | Done when |
@@ -191,7 +210,7 @@ I1–I10. Ultron must behave like a 12-month-old in ≥ 8.
 |---|---|
 | WP1 | **done** (2026-10-15): the nursery, the body, days and nights, the innate reflexes (`brain/reflexes.py`); 4.5 ms per step; deterministic (same seed, same day); the curriculum's retrain unchanged |
 | WP2 | **done** (2026-10-15): the caregiver's script, hash recorded above; modes `normal`, `off`, `misleading_gaze`. The failure-lab rows that use the modes are added in WP3, when there is a learner to stress |
-| WP3 | **done** (2026-10-15): the newborn mind (`brain/newborn.py`): habituation, curiosity by learning progress over arm postures, comfort and crying, episodic memory of fixations, sleep. Failure-lab rows (`judge/nursery_lab.py`): habituation (breaks at 3× camera noise), curiosity and the noisy TV, the caregiver switched off. The misleading-gaze row joins with gaze following (WP6). Four innate additions are proposed above and wait for the owner |
+| WP3 | **done** (2026-10-15): the newborn mind (`brain/newborn.py`): habituation, curiosity by learning progress over arm postures, comfort and crying, episodic memory of fixations, sleep. Failure-lab rows (`judge/nursery_lab.py`; results above): habituation (breaks at 3× camera noise), curiosity and the noisy TV (does not break), the caregiver switched off. The misleading-gaze row joins with gaze following (WP6). Four innate additions are proposed above and wait for the owner |
 | WP0, WP4–WP7 | open |
 | N1–N6 | open (main line) |
 | I1–I10 | open (exit tests fixed) |
