@@ -305,6 +305,12 @@ class Newborn:
             # touch guesses were there on average (single steps are too noisy to compare)
             for key in sorted(self.pending):
                 self.curiosity.record(key, float(np.mean(self.pending[key])))
+            # a posture it aimed for and never reached is a try with nothing learned:
+            # after a fair number of such tries it stops straining for it
+            if self.goal is not None:
+                aim = f"{self.goal[0]}:{_posture_bin(list(self.goal[1]) * 2, 0)}"
+                if aim not in self.pending:
+                    self.curiosity.record(aim, 1.0)
             self.pending = {}
             options = [f"{arm}:{b}" for arm in (0, 1) for b in range(BINS * BINS)]
             choice = None
