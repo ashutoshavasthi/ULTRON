@@ -6,32 +6,32 @@ Seed 0, caregiver normal, 2 day(s) of 10,000 waking steps.
 
 | What happened | Count |
 |---|---|
-| grasps | 334 |
-| releases | 333 |
-| lights | 35 |
-| body touches | 679 |
-| fussing | 1,030 |
-| palm contacts | 23,211 |
+| grasps | 267 |
+| releases | 266 |
+| lights | 67 |
+| body touches | 684 |
+| fussing | 980 |
+| palm contacts | 18,704 |
 | caregiver: arrive | 11 |
-| caregiver: hand over | 20 |
-| caregiver: heard crying | 7 |
-| caregiver: hide | 12 |
+| caregiver: hand over | 19 |
+| caregiver: heard crying | 6 |
+| caregiver: hide | 14 |
 | caregiver: idle | 14 |
 | caregiver: leave | 10 |
-| caregiver: look | 20 |
-| caregiver: peekaboo | 6 |
-| caregiver: press | 10 |
-| caregiver: show | 17 |
-| caregiver: stroke | 18 |
+| caregiver: look | 19 |
+| caregiver: peekaboo | 5 |
+| caregiver: press | 11 |
+| caregiver: show | 18 |
+| caregiver: stroke | 17 |
 
 | Night | Kept in memory before sleep | after | Things it knows |
 |---|---|---|---|
-| 1 | 22,223 | 405 | 107 |
-| 2 | 22,521 | 436 | 128 |
+| 1 | 2,224 | 99 | 89 |
+| 2 | 2,101 | 123 | 103 |
 
 ## Cost (this machine; not part of the deterministic record)
 
-- 6.25 ms per step, 63 s per day of 10,000 steps, about 94 minutes for the 90 days of the Age 0 budget, with newborn as the mind
+- 6.17 ms per step, 62 s per day of 10,000 steps, about 93 minutes for the 90 days of the Age 0 budget, with newborn as the mind
 
 ![the nursery](nursery.png)
 
