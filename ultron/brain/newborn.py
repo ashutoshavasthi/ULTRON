@@ -126,6 +126,7 @@ class Newborn:
         # curiosity over postures
         self.curiosity = Curiosity()
         self.guess = {}                     # posture bin -> how likely a touch is
+        self.pending = {}                   # posture bin -> errors since the last record
         self.goal = None
         self.turning = np.zeros(4)
         # comfort and grasping
@@ -300,6 +301,11 @@ class Newborn:
         rng = self.rng
         joints = np.array(senses.joints)
         if self.t % GOAL_EVERY == 1 or self.goal is None:
+            # one record per posture visited in the last stretch of babbling: how wrong its
+            # touch guesses were there on average (single steps are too noisy to compare)
+            for key in sorted(self.pending):
+                self.curiosity.record(key, float(np.mean(self.pending[key])))
+            self.pending = {}
             options = [f"{arm}:{b}" for arm in (0, 1) for b in range(BINS * BINS)]
             choice = None
             if self.chooser == "progress":
@@ -325,7 +331,7 @@ class Newborn:
             key = f"{arm}:{_posture_bin(senses.joints, arm)}"
             touched = float(senses.touch["palms"][arm][0])
             guess = self.guess.get(key, 0.5)
-            self.curiosity.record(key, abs(touched - guess))
+            self.pending.setdefault(key, []).append(abs(touched - guess))
             self.guess[key] = guess + LEARN * (touched - guess)
         if senses.touch["body"]:
             self.comfort = min(1.0, self.comfort + SOOTHE)
