@@ -128,7 +128,25 @@ The quietest way to fail: believing we've succeeded.
 | Test data leaking into training | ⬜ | 🟡 | Held-out sets are never loaded during training; checked by tests |
 | Big claims ahead of evidence | — | — | A claim is made only with the test that backs it. The vision can be as big as we like; the evidence decides what we say happened |
 
+## 11. Growing up (added 2026-10-15)
+
+These are the ways the developmental plan ([MASTER_PLAN.md](MASTER_PLAN.md)) could fool us
+or fail.
+
+| Failure | How we provoke it | Status | Fix | Age |
+|---|---|---|---|---|
+| **The caregiver teaches the answer** (a script that quietly does the learning for Ultron) | Failure-lab rows "caregiver off" and "misleading gaze"; the script is committed with its hash before any milestone is measured | ⬜ | The caregiver may show, hide, look and play, never reward an exam answer; everything it does is logged | 0–3 |
+| **A nursery too clean to carry over** | The outside yardsticks (IntPhys, Baby Intuitions Benchmark) at the Age 1 gate | ⬜ | Noise, clutter and varied things in the nursery; a gate without its outside yardstick is marked as such | 0–1 |
+| **One hand-built module per milestone** (passing the tests without one general learner) | The ledger of hand-built mechanisms per age | ⬜ | The ledger is printed in every gate's verdict; if it doesn't shrink as Ultron grows, we say so | all |
+| **Skipping ages** (moving on when an age gets hard) | Hard gates (rule 1) | 🟡 the rule is written; the history shows it was broken three times under the old campaign | Later-age work is only a labelled prototype until its gate | all |
+| **Mental-age islands** (desk skills with nothing under them) | The development map | 🔴 today: school and teen islands, Ages 0–3 missing | Build Ages 0–3 first; re-examine banked results at their own gates | 0–5 |
+| **Designed-world scores hide outside gaps** | Every gate reports its designed-world score next to its outside benchmark | 🔴 today: ARC 12.75%, V4 and V5 partly met | Outside yardstick and the owner's blind check at every gate (rule 2) | all |
+| **The innate kit grows quietly** | Additions need the owner's approval and a recorded reason | ⬜ | The innate list is in [AGE_0_1_PLAN.md](AGE_0_1_PLAN.md); any change is a visible diff | all |
+
 ## The order of attack
+
+> Written for the old campaign. Under the new plan, the order is the ages:
+> [ROADMAP.md](ROADMAP.md).
 
 1. **Robustness of the core** (sections 2 and 3): tolerant program fitting, robust quantity
    fitting, ambiguity detection and separating experiments. These are cheap, measurable in

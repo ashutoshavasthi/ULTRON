@@ -1,5 +1,10 @@
 # Stage 3: language
 
+> **No longer the main line (2026-10-15).** The plan was rebuilt around growing up
+> from a newborn ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)). This plan is
+> kept as a record and its results are banked: words (L1, L2) are re-hosted with the caregiver at Age 2 (toddler), and grammar and conversation (L3–L10, with SCAN and COGS) belong to Age 3 (preschool). See
+> [DEVELOPMENT_MAP.md](DEVELOPMENT_MAP.md).
+
 **Mission.** Ultron knows 37 grounded words, all about numbers and arithmetic (lesson 4
 and its follow-ups). It cannot understand a sentence, say one, or ask a question.
 Stage 3 gives it language the way it got numbers: words attached to things it already
