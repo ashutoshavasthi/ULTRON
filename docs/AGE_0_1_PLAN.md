@@ -30,10 +30,27 @@ with the simulator; only the Judge may read it.
   centre), two arms with hands, touch at the hands, and a sense of where its hands are.
   Each step it may move its gaze and its hands, and grasp or let go.
 - **Time:** a **day** is 10,000 waking steps followed by a night of sleep. Days are counted
-  and reported next to children's ages (rule 4). The step cost is measured in WP1. If a day
-  must be shortened, that is recorded **before any milestone is measured**.
+  and reported next to children's ages (rule 4). If a day must be shortened, that is
+  recorded **before any milestone is measured**.
+  - Measured in WP1: 4.5 ms per step with reflexes only, which is 45 s per day and about
+    67 minutes for the 90-day Age 0 budget. The day stays at 10,000 steps.
 - **Budgets:** the Age 0 gate within 90 simulated days; the Age 1 gate within 365 days in
   all.
+
+**As built in WP1** (`ultron/nursery/`, `python -m ultron nursery`):
+- **The ground:** three steps that touch, so nothing can get wedged between them: the
+  baby and the cushion it leans against, the mat, and the floor. Nothing ever goes under
+  the ground.
+- **Collisions** use boxes. A ball is a circle only in the picture.
+- **How good the physics is:** a check of 24,000 steps of babbling over 6 seeds found
+  nothing ever inside the ground. Solid things overlapped by more than 0.3 units 4 times,
+  by at most 2.1 units, each time briefly, when things were squeezed together sideways.
+- **What exists now:** balls, blocks, a cloth, a screen and the light toy. Cups, the box
+  with a lid, the stick and the mirror come with the work packages that first need them
+  (WP6 and the Toddler plan).
+- **What Ultron gets:** only its senses (`body.Senses`): the view around where it looks,
+  its four joint angles, its gaze, and touch at its palms and body. Hand positions and the
+  positions of things stay with the world.
 
 ## The caregiver
 
@@ -51,6 +68,11 @@ peekaboo; press the light toy; smile when Ultron is near and active (the comfort
 The script is a fixed program with randomness, **committed with its hash before WP5**.
 Everything it does is logged. A failure-lab row turns it off, and another makes its gaze
 mislead, so we can see what Ultron learns from it and what it doesn't.
+
+`ultron/nursery/caregiver.py` SHA-256: `498e7e25c74b0cb97e5e9807c144cb3a3797450cd0251dc3f0e81e2c020ce589`
+
+A test (`tests/test_nursery.py`) fails if the script changes without this line changing
+too. It also fails if the script imports Ultron's brain or the Judge.
 
 ## The innate endowment (fixed; rule 5)
 
@@ -148,5 +170,8 @@ I1–I10. Ultron must behave like a 12-month-old in ≥ 8.
 
 | # | Status |
 |---|---|
+| WP1 | **done** (2026-10-15): the nursery, the body, days and nights, the innate reflexes (`brain/reflexes.py`); 4.5 ms per step; deterministic (same seed, same day); the curriculum's retrain unchanged |
+| WP2 | **done** (2026-10-15): the caregiver's script, hash recorded above; modes `normal`, `off`, `misleading_gaze`. The failure-lab rows that use the modes are added in WP3, when there is a learner to stress |
+| WP0, WP3–WP7 | open |
 | N1–N6 | open (main line) |
 | I1–I10 | open (exit tests fixed) |

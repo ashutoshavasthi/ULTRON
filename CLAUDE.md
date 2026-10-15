@@ -32,17 +32,22 @@ the same plan.
 ## Working on the code
 - `python -m ultron train` retrains everything (about 20 minutes) and must be
   byte-identical across runs. `python -m pytest` runs the tests. `python -m ultron stress`
-  runs the failure lab.
+  runs the failure lab. `python -m ultron nursery` lives a day in the nursery with only a
+  newborn's reflexes, and writes `reports/nursery.md` and `reports/nursery.png`.
 - Layout:
   - `ultron/brain` (the explanation engine, memory, curiosity, language);
   - `ultron/senses` (camera, retina, eyes, tracking);
   - `ultron/env` (worlds);
+  - `ultron/nursery` (Age 0–1: the room, the body, the caregiver, days and nights);
   - `ultron/trainer` (lessons);
   - `ultron/judge` (exams, failure lab);
   - `ultron/arc`;
   - `reports/`;
   - `docs/`.
 - Every lesson 0–33 must keep passing on the first attempt as a regression check.
+- The caregiver's script (`ultron/nursery/caregiver.py`) is hashed in
+  `docs/AGE_0_1_PLAN.md`. Changing it means recording the new hash in the plan, as a visible
+  change.
 
 ## Open branches (2026-10-15)
 - `claude/integrate-stages-5hnowy` (PR #12): all the earlier work combined (lessons 0–33).
