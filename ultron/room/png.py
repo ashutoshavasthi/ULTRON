@@ -1,4 +1,4 @@
-"""A small PNG writer (numpy, zlib and struct only), for pictures of the nursery."""
+"""A small PNG writer (numpy, zlib and struct only), for pictures of the room."""
 
 import struct
 import zlib

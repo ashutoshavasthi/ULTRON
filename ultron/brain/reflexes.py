@@ -1,17 +1,16 @@
-"""A newborn's reflexes: what Ultron does before it has learned anything.
+"""Reflexes: what Ultron does before it has learned anything.
 
-All three are on the innate list (docs/AGE_0_1_PLAN.md), as they are for a human baby:
+All three are in its starting kit (docs/LEVEL_0_PLAN.md), as they are in animals:
   * motor babbling: its arms wander smoothly at random;
   * orienting: its eyes turn toward what just changed in the picture (motion, a light);
   * grasping: a hand closes when something touches its palm, and lets go after a while.
 
-They are the whole of its mind until drives, memory and sleep arrive (WP3). They learn
-nothing.
+They learn nothing; the explorer (brain/explorer.py) builds on them.
 """
 
 import numpy as np
 
-from ..nursery.body import Action
+from ..room.body import Action
 from ..senses.retina import _box, luminance
 
 MOMENTUM = 0.9

@@ -1,6 +1,6 @@
-"""Ultron's life in the nursery: days of waking steps, each followed by a night.
+"""Ultron's life in the room: days of waking steps, each followed by a night.
 
-A day is DAY_STEPS waking steps (docs/AGE_0_1_PLAN.md). Each step the mind gets its
+A day is DAY_STEPS waking steps (docs/LEVEL_0_PLAN.md). Each step the mind gets its
 senses and gives an action; at night the mind may sleep on its day (if it can). Days
 are counted, so every milestone can be reported in simulated days next to children's.
 
@@ -25,7 +25,7 @@ class Life:
 
     def day(self, steps=DAY_STEPS, watch=None):
         """Live one day of `steps` waking steps, then a night. watch(t, senses) is called
-        each step (for people looking at the nursery; it can't change anything)."""
+        each step (for people looking at the room; it can't change anything)."""
         w, mind = self.world, self.mind
         start_t = w.t
         clock = time.perf_counter()
@@ -39,7 +39,7 @@ class Life:
         self.seconds += time.perf_counter() - clock
         self.steps += steps
         log = {"day": self.days, "from": start_t, "to": w.t, "stats": dict(w.stats),
-               "caregiver": [e for e in (w.caregiver.log if w.caregiver else [])
+               "teacher": [e for e in (w.teacher.log if w.teacher else [])
                              if start_t <= e["t"] < w.t]}
         if hasattr(mind, "sleep"):
             mind.sleep(log)

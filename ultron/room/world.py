@@ -1,10 +1,10 @@
-"""The nursery: one room, seen from the side, where Ultron lives day after day.
+"""The room: Ultron's first world (Level 0), seen from the side, lived in day after day.
 
-What is in it: a floor, a low mat, the cushion the baby leans against (together the
+What is in it: a floor, a low mat, the cushion Ultron leans against (together the
 ground, in steps that touch), toys (balls, blocks, a light toy that glows when
 pressed), a cloth that things lie on, a screen that hides what is behind it, Ultron's
-body (body.py) and a caregiver (caregiver.py). Cups, a box with a lid, a stick and a
-mirror come with the work packages that need them (docs/AGE_0_1_PLAN.md).
+body (body.py) and a teacher (teacher.py). More things come with the work packages
+that need them (docs/LEVEL_0_PLAN.md).
 
 How it behaves (one step is a tenth of a second):
   * gravity: unsupported things fall; things rest on the floor, the mat or other things;
@@ -15,7 +15,7 @@ How it behaves (one step is a tenth of a second):
   * hands are moved by their owner; they push things aside, and a closed hand holds
     what it is touching until it opens.
 
-Ultron gets only Senses (body.py). The caregiver sees what a person in the room would
+Ultron gets only Senses (body.py). The teacher sees what anyone in the room would
 see (public_state). The full truth is for the Judge (truth). Shapes are boxes for
 collisions (a ball is a circle only in the picture), a simplification recorded in the
 plan.
@@ -28,16 +28,16 @@ import numpy as np
 from ..senses.camera import _blur
 from ..senses.tabletop import COLOURS
 from . import body
-from .caregiver import Caregiver
+from .teacher import Teacher
 
 W, H = 160, 96                      # the room, in units (one unit = one pixel)
 FLOOR = 90.0
 MAT = (24.0, 84.0, 112.0, FLOOR)    # x0, y0, x1, y1
-CUSHION = (0.0, 58.0, 8.0, FLOOR)   # what the baby leans against
-# The ground, in steps (x0, x1, top): the baby and its cushion, the mat, the floor. They
+CUSHION = (0.0, 58.0, 8.0, FLOOR)   # what Ultron leans against
+# The ground, in steps (x0, x1, top): Ultron and its cushion, the mat, the floor. They
 # touch, so nothing can get wedged between them; nothing ever goes under the ground.
 GROUND = ((-50.0, body.TORSO[2], body.TORSO[1]), (MAT[0], MAT[2], MAT[1]), (MAT[2], W + 50.0, FLOOR))
-HARD = GROUND[1:]                   # what the baby's hands can't go into (its own body they can)
+HARD = GROUND[1:]                   # what its hands can't go into (its own body they can)
 DT = 0.1
 GRAVITY = 60.0                      # units per second squared
 VIEW = (48, 64)                     # rows, columns of what the eyes see sharply
@@ -51,7 +51,7 @@ WALL = np.array([0.10, 0.10, 0.11])
 FLOOR_RGB = np.array([0.20, 0.17, 0.14])
 MAT_RGB = np.array([0.30, 0.24, 0.20])
 SKIN = np.array([0.85, 0.66, 0.52])
-BABY_CLOTHES = np.array([0.45, 0.55, 0.75])
+BODY_RGB = np.array([0.45, 0.55, 0.75])
 GROWN_CLOTHES = np.array([0.55, 0.35, 0.45])
 SCREEN_RGB = np.array([0.58, 0.58, 0.62])
 DARK = np.array([0.05, 0.04, 0.04])
@@ -137,8 +137,8 @@ def _box(t):
     return (t["x"], t["y"], t["hx"], t["hy"])
 
 
-class Nursery:
-    def __init__(self, seed=0, caregiver="normal", noise=True, noise_level=NOISE):
+class Room:
+    def __init__(self, seed=0, teacher="normal", noise=True, noise_level=NOISE):
         self.seed = seed
         self.rng = np.random.default_rng(seed)
         self.camera_rng = np.random.default_rng(seed + 104729)
@@ -150,15 +150,14 @@ class Nursery:
         self.grip = [False, False]
         self.hands = [list(body.hand_at(self.joints, a)[:2]) for a in (0, 1)]
         self.hand_speed = [0.0, 0.0]
-        self.fussing = False
-        self.seated = False             # the Judge's infant seat: arms rest (looking studies)
+        self.arms_still = False         # the Judge may hold its arms still (attention studies)
         self.held = {}                  # hand name -> (thing id, dx, dy)
         self.things = []
         self.stats = {"grasps": 0, "releases": 0, "palm_contacts": 0, "lights": 0,
-                      "body_touches": 0, "fussing": 0}
+                      "body_touches": 0}
         self._furnish()
-        self.caregiver = Caregiver(seed + 7919, mode=caregiver) if caregiver != "none" else None
-        self._cg = None                 # what the caregiver looks like this step
+        self.teacher = Teacher(seed + 7919, mode=teacher) if teacher != "none" else None
+        self._cg = None                 # how the teacher looks this step
         self._touch = {"palms": ((0, 0.0), (0, 0.0)), "body": 0}
         self._pressed = False
 
@@ -227,8 +226,8 @@ class Nursery:
     def step(self):
         action = getattr(self, "_action", None) or body.Action()
         self._action = None
-        if self.caregiver is not None:
-            self._cg = self.caregiver.step(self.public_state(), self.t)
+        if self.teacher is not None:
+            self._cg = self.teacher.step(self.public_state(), self.t)
         old_hands = [list(h) for h in self.hands] + self._cg_hands()
         self._move_body(action)
         hands = self._all_hands()
@@ -252,7 +251,7 @@ class Nursery:
         return [list(h) for h in self.hands] + self._cg_hands()
 
     def _move_body(self, action):
-        turn = [0.0] * 4 if self.seated else body.clip_turn(action.turn)
+        turn = [0.0] * 4 if self.arms_still else body.clip_turn(action.turn)
         for arm in (0, 1):
             # the whole move if the hand can make it; else as much as one joint alone can
             # (a hand pressing on the mat slides along it rather than freezing)
@@ -272,8 +271,6 @@ class Nursery:
         self.gaze = [float(np.clip(self.gaze[0] + dx, VIEW[1] / 2, W - VIEW[1] / 2)),
                      float(np.clip(self.gaze[1] + dy, VIEW[0] / 2, H - VIEW[0] / 2))]
         self.grip = list(action.grip)
-        self.fussing = action.voice
-        self.stats["fussing"] += int(action.voice)
 
     def _grasp(self, hands, grips):
         names = ("left", "right", "cg_left", "cg_right")
@@ -455,7 +452,7 @@ class Nursery:
                            (round(pan, 6), round(tilt, 6)), dict(self._touch), around)
 
     def wide(self, centre, noise=True):
-        """The blurry wide view around where it looks (a newborn sees coarsely almost
+        """The blurry wide view around where it looks (eyes see coarsely almost
         everywhere): COARSE room units per pixel, wide enough to hold the whole room."""
         h, w = AROUND
         ox, oy = centre[0] - w * COARSE / 2, centre[1] - h * COARSE / 2
@@ -482,7 +479,7 @@ class Nursery:
         return np.clip(img, 0.0, 1.0)
 
     def room(self):
-        """The whole room, noise-free (for people looking at the nursery, not for Ultron)."""
+        """The whole room, noise-free (for people looking at the room, not for Ultron)."""
         return np.clip(self.paint(0, 0, H, W), 0.0, 1.0)
 
     def paint(self, ox, oy, h, w, scale=1.0):
@@ -491,7 +488,7 @@ class Nursery:
         p.rect(-10, FLOOR, W + 10, H + 10, FLOOR_RGB)
         p.rect(*MAT, MAT_RGB)
         p.rect(*CUSHION, MAT_RGB * 0.8)
-        self._paint_caregiver(p, hands=False)
+        self._paint_teacher(p, hands=False)
         for t in self._here():
             if t["kind"] == "cloth":
                 p.rect(t["x"] - t["hx"], t["y"] - t["hy"], t["x"] + t["hx"], t["y"] + t["hy"], t["rgb"])
@@ -502,23 +499,23 @@ class Nursery:
                     p.disc(t["x"], t["y"], t["hx"], rgb)
                 else:
                     p.rect(t["x"] - t["hx"], t["y"] - t["hy"], t["x"] + t["hx"], t["y"] + t["hy"], rgb)
-        self._paint_caregiver(p, hands=True)
+        self._paint_teacher(p, hands=True)
         for t in self._here():
             if t["kind"] == "screen":
                 p.rect(t["x"] - t["hx"], t["y"] - t["hy"], t["x"] + t["hx"], t["y"] + t["hy"], t["rgb"])
-        self._paint_baby(p)
+        self._paint_body(p)
         return img
 
-    def _paint_baby(self, p):
-        p.rect(*body.TORSO, BABY_CLOTHES)
+    def _paint_body(self, p):
+        p.rect(*body.TORSO, BODY_RGB)
         p.disc(*body.HEAD, SKIN)
         for arm in (0, 1):
             hx, hy, elbow = body.hand_at(self.joints, arm)
-            p.stick(body.SHOULDERS[arm], elbow, 4.0, BABY_CLOTHES)
+            p.stick(body.SHOULDERS[arm], elbow, 4.0, BODY_RGB)
             p.stick(elbow, (hx, hy), 3.0, SKIN)
             p.disc(hx, hy, body.HAND_R, SKIN * (0.95 if self.grip[arm] else 1.0))
 
-    def _paint_caregiver(self, p, hands):
+    def _paint_teacher(self, p, hands):
         if not self._cg_present():
             return
         cg = self._cg
@@ -538,24 +535,20 @@ class Nursery:
                 p.disc(ex, ey, 1.2, DARK)
             else:
                 p.rect(ex - 1.5, ey - 0.4, ex + 1.5, ey + 0.4, DARK)
-        if cg["smile"]:
-            p.stick((hx - 3, hy + 3), (hx, hy + 4.5), 1.0, DARK)
-            p.stick((hx, hy + 4.5), (hx + 3, hy + 3), 1.0, DARK)
-        else:
-            p.stick((hx - 2, hy + 4), (hx + 2, hy + 4), 1.0, DARK)
+        p.stick((hx - 2, hy + 4), (hx + 2, hy + 4), 1.0, DARK)
 
     # ---- what a person in the room sees, and the full truth
 
     def public_state(self):
-        """What the caregiver can see: where things and the baby's hands are, and how
-        much the baby is moving. Never anything inside Ultron."""
+        """What the teacher can see: where things and Ultron's hands are, and how much
+        it is moving. Never anything inside Ultron."""
         return {"things": [{"id": t["id"], "kind": t["kind"], "x": t["x"], "y": t["y"],
                             "hx": t["hx"], "hy": t["hy"],
                             "held": any(v[0] == t["id"] for k, v in self.held.items()
                                         if k in ("left", "right"))}
                            for t in self._here()],
-                "baby_hands": [tuple(h) for h in self.hands],
-                "baby_moving": max(self.hand_speed), "baby_fussing": self.fussing}
+                "learner_hands": [tuple(h) for h in self.hands],
+                "learner_moving": max(self.hand_speed)}
 
     def truth(self):
         """The whole state of the room (for the Judge only)."""
@@ -564,5 +557,5 @@ class Nursery:
                 "held": {k: v[0] for k, v in sorted(self.held.items())},
                 "things": [{k: v for k, v in t.items() if not k.startswith("_")}
                            for t in self.things],
-                "caregiver": None if self._cg is None else
+                "teacher": None if self._cg is None else
                 {k: v for k, v in self._cg.items() if k != "log"}}

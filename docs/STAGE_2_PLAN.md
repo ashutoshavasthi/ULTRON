@@ -1,9 +1,9 @@
 # Stage 2: the real world through its eyes
 
-> **No longer the main line (2026-10-15).** The plan was rebuilt around growing up
-> from a newborn ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)). This plan is
-> kept as a record and its results are banked: the eyes (V1) are re-hosted in the nursery at Age 0 (N2), and the real-footage criteria (V2–V6) belong to Age 5 (adolescent). See
-> [DEVELOPMENT_MAP.md](DEVELOPMENT_MAP.md).
+> **No longer the main line.** The plan is now a ladder of capability levels, from a
+> child's start to beyond human ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)).
+> This plan is kept as a record and its results are banked: the eyes (V1) are a core property, checked in the room as L0-1, and the real-footage criteria (V2–V6) belong to L3. See
+> [LEVEL_MAP.md](LEVEL_MAP.md).
 
 **Mission.** Ultron has seen one real film, and its eyes don't generalise. Stage 2 gives
 it eyes that hold up in hard conditions, then has it rediscover physics from **real

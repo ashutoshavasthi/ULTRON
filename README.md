@@ -1,20 +1,27 @@
 # ULTRON
 
-**The goal: human-like general intelligence, grown the way a child grows.** Ultron is raised
-from a newborn (a body in one continuous nursery world, with a caregiver) through the
-ages a child passes through: infant, toddler, preschooler, school child, adolescent, adult.
-Each age ends at a gate made of the milestones real children are tested on, compared with
-what children actually do, and checked by someone who did not build it. There is no
-pretrained model and no language model, and it uses about as much experience as a child
-gets. **Now: Age 0, the newborn** ([plan](docs/AGE_0_1_PLAN.md)).
+**The goal: grow from a child's start to the most advanced intelligence we can reach**, human
+level and then beyond, built on understanding instead of volume. Ultron starts like a child:
+a body in a small world, a few built-in abilities, and the drive to explain what it sees.
+It then climbs a ladder of capability levels:
+- foundations;
+- concepts and language;
+- causes, agents and plans;
+- knowledge and science;
+- expert reasoning;
+- general learning;
+- beyond human.
 
-- [Master plan](docs/MASTER_PLAN.md): the architecture of a child's mind and the rules of development
-- [Roadmap](docs/ROADMAP.md): the ages, where Ultron stands, what's next
-- [Development map](docs/DEVELOPMENT_MAP.md): where every earlier result belongs
+Each level ends at a gate of outside benchmarks and a blind check by someone who did not
+build it. Human scores are a checkpoint, never the ceiling. There is no pretrained model and
+no language model. **Now: Level 0, foundations** ([plan](docs/LEVEL_0_PLAN.md)).
 
-Everything below was built before the plan was rebuilt (2026-10-15). It is kept and
-banked at the age it belongs to. Most of it is school-age and teenage work done at a desk,
-which must now stand on the baby and toddler foundations built first.
+- [Master plan](docs/MASTER_PLAN.md): the bet, the architecture, the ladder and the rules
+- [Roadmap](docs/ROADMAP.md): the levels, where Ultron stands, what's next
+- [Level map](docs/LEVEL_MAP.md): where every earlier result belongs
+
+Everything below was built before the ladder (2026-10-18). It is kept and banked at the
+level it belongs to.
 
 ---
 

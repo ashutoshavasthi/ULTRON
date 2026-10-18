@@ -1,9 +1,9 @@
 # Stage 4: interactive worlds
 
-> **No longer the main line (2026-10-15).** The plan was rebuilt around growing up
-> from a newborn ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)). This plan is
-> kept as a record and its results are banked: learning what its actions do (W1, W2, W7) moves into the nursery at Age 1 (infant), games with unknown rules (W3–W5) belong to Age 3, and ARC-AGI-3 (W6, W8) to Age 4. See
-> [DEVELOPMENT_MAP.md](DEVELOPMENT_MAP.md).
+> **No longer the main line.** The plan is now a ladder of capability levels, from a
+> child's start to beyond human ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)).
+> This plan is kept as a record and its results are banked: W1 and W7 have room forms at L0 (L0-9, L0-11), and the games (W2–W6, W8, with ARC-AGI-3) belong to L2. See
+> [LEVEL_MAP.md](LEVEL_MAP.md).
 
 **Mission.** Ultron has acted only once: one kick of a puck in a world whose quantities it
 was told, running a law it already had backwards (`brain/body.py`). It has never been

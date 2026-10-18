@@ -832,12 +832,12 @@ EXPERIMENTS = [program_size, library_learning, intuition_prior, wrong_labels, hi
                grammar_stress]
 
 
-def _newborn():
-    from .nursery_lab import EXPERIMENTS as NEWBORN     # Age 0: the nursery (WP3)
-    return NEWBORN
+def _level0():
+    from .room_lab import EXPERIMENTS as LEVEL0         # Level 0: the room (WP3)
+    return LEVEL0
 
 
-EXPERIMENTS += _newborn()
+EXPERIMENTS += _level0()
 
 
 def run_all(brain):

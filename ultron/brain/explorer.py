@@ -1,31 +1,28 @@
-"""The newborn mind (Age 0, WP3): drives, memory of its days, and sleep.
+"""The explorer (Level 0, WP3): attention, curiosity, memory of its days, and sleep.
 
-Everything here is on the innate list (docs/AGE_0_1_PLAN.md). It learns, but only in
-the ways a newborn's brain is built to learn:
+Everything here is in the starting kit (docs/LEVEL_0_PLAN.md):
 
-  * habituation: what is in the middle of its view is interesting while it is new; the
+  * attention (habituation): what is in the middle of its view is interesting while it is new; the
     longer it looks, the less interesting it gets, and something new catches it again.
     A spot it has just left can't pull its eyes straight back (inhibition of return);
   * curiosity by learning progress (brain/curiosity.py): its babbling drifts toward the
     postures where its guess "will my palm touch something here?" is getting better,
     and leaves both the mastered ones and the hopeless (pure noise) ones;
-  * comfort: a level that falls while it is left alone and rises when it is stroked;
-    when it is low the baby fusses, and a caregiver may hear;
   * episodic memory: every fixation is kept (when, where it looked, what it saw, how long,
     how surprising);
   * sleep: at night the day is consolidated. One record per familiar thing (where and when
     it was last seen, how often) and the most vivid episodes are kept; the rest is
     forgotten, and the day's short-term habituation is reset.
 
-It sees only Senses (nursery/body.py).
+It sees only Senses (room/body.py).
 """
 
 import math
 
 import numpy as np
 
-from ..nursery.body import Action, LIMITS
-from ..nursery.world import COARSE
+from ..room.body import Action, LIMITS
+from ..room.world import COARSE
 from ..senses.retina import _box, luminance
 from ..senses.things import _regions
 from .curiosity import Curiosity
@@ -50,10 +47,6 @@ BINS = 3                # posture bins per joint
 GOAL_EVERY = 40         # steps between choosing where to babble toward
 PULL = 0.04             # how hard it babbles toward the chosen posture
 LEARN = 0.1             # how fast its touch guesses follow what happens
-# comfort
-LONELY = 0.0005         # comfort lost per step when nobody touches it
-SOOTHE = 0.05           # comfort gained per step of being stroked
-FUSS, CALM = 0.3, 0.6
 # sleep
 VIVID = 10              # episodes kept from each day
 
@@ -63,7 +56,7 @@ def _descriptor(picture):
     middle that stands out from its surroundings (the retina's centre-surround, so a wide
     even mat or wall is not a thing), described by its colour, how much of the middle it
     fills, and how stretched it is. None when no lump is there. (Seeing bounded lumps is
-    on the innate list.)"""
+    in the starting kit.)"""
     lum = luminance(picture)
     diff = _box(lum, 3) - _box(lum, SURROUND)
     noise = 1.4826 * float(np.median(np.abs(diff - np.median(diff)))) or 1e-9
@@ -89,8 +82,8 @@ def _descriptor(picture):
 
 
 def _room(gaze):
-    """Where its eyes point, from its sense of its own eyes (innate, like the oculomotor
-    map that lets a newborn turn its eyes toward something it glimpsed)."""
+    """Where its eyes point, from its sense of its own eyes (in the starting kit, like the
+    oculomotor map that lets an animal turn its eyes toward something it glimpsed)."""
     return (gaze[0] * PAN, gaze[1] * TILT)
 
 
@@ -103,7 +96,7 @@ def _posture_bin(joints, arm):
     return out[0] * BINS + out[1]
 
 
-class Newborn:
+class Explorer:
     def __init__(self, seed=0, chooser="progress"):
         self.rng = np.random.default_rng(seed)
         # where to babble: "progress" (its own way), or for comparison in the failure lab,
@@ -129,9 +122,7 @@ class Newborn:
         self.pending = {}                   # posture bin -> errors since the last record
         self.goal = None
         self.turning = np.zeros(4)
-        # comfort and grasping
-        self.comfort = 1.0
-        self.fussing = False
+        # grasping
         self.holding = [0, 0]
 
     # ------------------------------------------------------------ one step
@@ -142,7 +133,7 @@ class Newborn:
         turn = self._babble(senses)
         grip = self._grasp(senses)
         self._feel(senses)
-        return Action(turn=turn, look=look, grip=grip, voice=self.fussing)
+        return Action(turn=turn, look=look, grip=grip)
 
     # ---- eyes: habituation
 
@@ -339,14 +330,6 @@ class Newborn:
             guess = self.guess.get(key, 0.5)
             self.pending.setdefault(key, []).append(abs(touched - guess))
             self.guess[key] = guess + LEARN * (touched - guess)
-        if senses.touch["body"]:
-            self.comfort = min(1.0, self.comfort + SOOTHE)
-        else:
-            self.comfort = max(0.0, self.comfort - LONELY)
-        if self.comfort < FUSS:
-            self.fussing = True
-        elif self.comfort > CALM:
-            self.fussing = False
 
     def _grasp(self, senses):
         grip = []

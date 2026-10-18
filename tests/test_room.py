@@ -1,4 +1,4 @@
-"""The nursery (Age 0, WP1 and WP2): the world, the body, the caregiver, a day of life."""
+"""The room (Level 0, WP1 and WP2): the world, the body, the teacher, a day of life."""
 
 import ast
 import hashlib
@@ -9,10 +9,10 @@ import numpy as np
 import pytest
 
 from ultron.brain.reflexes import Reflexes
-from ultron.nursery import body, caregiver as caregiver_module, png
-from ultron.nursery.body import Action, Senses
-from ultron.nursery.life import EXAM_SEEDS, Life
-from ultron.nursery.world import GROUND, Nursery
+from ultron.room import body, png, teacher as teacher_module
+from ultron.room.body import Action, Senses
+from ultron.room.life import EXAM_SEEDS, Life
+from ultron.room.world import GROUND, Room
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -33,14 +33,14 @@ def _free_solids(world):
 
 
 def test_same_seed_same_life():
-    a, b = Nursery(3), Nursery(3)
+    a, b = Room(3), Room(3)
     sa, sb = _live(a, 300), _live(b, 300)
     assert sa.picture.tobytes() == sb.picture.tobytes()
     assert a.truth() == b.truth()
 
 
 def test_a_dropped_ball_comes_to_rest_on_the_mat():
-    w = Nursery(0, caregiver="off")
+    w = Room(0, teacher="off")
     ball = w.thing("ball")[0]
     ball["x"], ball["y"], ball["vy"] = 70.0, 20.0, 0.0
     for _ in range(120):
@@ -50,7 +50,7 @@ def test_a_dropped_ball_comes_to_rest_on_the_mat():
 
 
 def test_a_block_on_the_cloth_moves_when_the_cloth_is_dragged():
-    w = Nursery(0, caregiver="off")
+    w = Room(0, teacher="off")
     cloth = w.thing("cloth")[0]
     block = w.thing("block")[0]
     block["x"], block["y"] = cloth["x"], cloth["y"] - cloth["hy"] - block["hy"] - 2.0
@@ -58,8 +58,8 @@ def test_a_block_on_the_cloth_moves_when_the_cloth_is_dragged():
         w.step()
     assert block["on"] == cloth["id"]
     start = block["x"]
-    # a hand (the caregiver's, scripted here) holds the cloth and drags it 10 units right
-    w.caregiver = None
+    # a hand (the teacher's, scripted here) holds the cloth and drags it 10 units right
+    w.teacher = None
     hand = [cloth["x"] + cloth["hx"] - 1.0, cloth["y"]]       # holding its far end
     w.held["cg_left"] = (cloth["id"], cloth["x"] - hand[0], 0.0)
     for _ in range(10):
@@ -71,7 +71,7 @@ def test_a_block_on_the_cloth_moves_when_the_cloth_is_dragged():
 
 def test_solid_things_never_stay_inside_each_other_or_the_ground():
     for seed in (0, 1):
-        w = Nursery(seed)
+        w = Room(seed)
         mind = Reflexes(seed)
         senses = w.senses()
         for step in range(600):
@@ -93,7 +93,7 @@ def test_solid_things_never_stay_inside_each_other_or_the_ground():
 
 
 def test_the_screen_hides_what_is_behind_it():
-    w = Nursery(0, caregiver="off", noise=False)
+    w = Room(0, teacher="off", noise=False)
     screen = w.thing("screen")[0]
     block = w.thing("block")[0]
     block["x"], block["y"] = screen["x"], screen["y"] + screen["hy"] - block["hy"]
@@ -108,49 +108,49 @@ def test_the_screen_hides_what_is_behind_it():
 
 
 def test_senses_hold_no_hidden_truth():
-    s = Nursery(0).senses()
+    s = Room(0).senses()
     assert set(Senses.__slots__) == {"picture", "joints", "gaze", "touch", "around"}
     assert s.picture.shape == (48, 64, 3) and s.around.shape == (48, 80, 3)
     assert len(s.joints) == 4 and len(s.gaze) == 2
     assert set(s.touch) == {"palms", "body"}
 
 
-def test_caregiver_never_looks_inside_ultron_and_its_script_is_recorded():
-    path = caregiver_module.__file__
+def test_teacher_never_looks_inside_ultron_and_its_script_is_recorded():
+    path = teacher_module.__file__
     tree = ast.parse(open(path).read())
     for node in ast.walk(tree):
         if isinstance(node, (ast.Import, ast.ImportFrom)):
             names = [a.name for a in node.names] + [getattr(node, "module", "") or ""]
             assert not any("brain" in n or "judge" in n for n in names)
     digest = hashlib.sha256(open(path, "rb").read()).hexdigest()
-    plan = open(os.path.join(ROOT, "docs", "AGE_0_1_PLAN.md")).read()
-    recorded = re.search(r"caregiver\.py` SHA-256: `([0-9a-f]{64})`", plan)
-    assert recorded, "the caregiver script's hash must be recorded in the plan"
-    assert recorded.group(1) == digest, "the caregiver script changed: record its new hash"
+    plan = open(os.path.join(ROOT, "docs", "LEVEL_0_PLAN.md")).read()
+    recorded = re.search(r"teacher\.py` SHA-256: `([0-9a-f]{64})`", plan)
+    assert recorded, "the teacher script's hash must be recorded in the plan"
+    assert recorded.group(1) == digest, "the teacher script changed: record its new hash"
 
 
-def test_caregiver_off_never_comes():
-    w = Nursery(2, caregiver="off")
+def test_teacher_off_never_comes():
+    w = Room(2, teacher="off")
     _live(w, 1500)
-    assert w.caregiver.log == []
-    assert not w.caregiver.present
+    assert w.teacher.log == []
+    assert not w.teacher.present
 
 
 def test_misleading_gaze_looks_at_another_toy():
-    w = Nursery(2, caregiver="misleading_gaze")
+    w = Room(2, teacher="misleading_gaze")
     _live(w, 3000)
-    acts = [e for e in w.caregiver.log if e["toy"] is not None]
+    acts = [e for e in w.teacher.log if e["toy"] is not None]
     assert acts
     assert all(e["gaze_toy"] != e["toy"] for e in acts)
-    normal = Nursery(2)
+    normal = Room(2)
     _live(normal, 3000)
-    assert all(e["gaze_toy"] == e["toy"] for e in normal.caregiver.log if e["toy"] is not None)
+    assert all(e["gaze_toy"] == e["toy"] for e in normal.teacher.log if e["toy"] is not None)
 
 
 def test_a_life_to_learn_refuses_exam_seeds():
     with pytest.raises(ValueError):
-        Life(Nursery(EXAM_SEEDS), Reflexes(0))
-    Life(Nursery(EXAM_SEEDS), Reflexes(0), exam=True)
+        Life(Room(EXAM_SEEDS), Reflexes(0))
+    Life(Room(EXAM_SEEDS), Reflexes(0), exam=True)
 
 
 def test_a_palm_touch_closes_the_hand():
@@ -162,7 +162,7 @@ def test_a_palm_touch_closes_the_hand():
 
 
 def test_hands_can_not_go_into_the_mat():
-    w = Nursery(0, caregiver="off")
+    w = Room(0, teacher="off")
     for _ in range(300):
         w.act(Action(turn=(0.08, -0.08, 0.08, -0.08)))
         w.step()
@@ -173,12 +173,12 @@ def test_hands_can_not_go_into_the_mat():
 
 
 def test_a_short_day():
-    w = Nursery(0)
+    w = Room(0)
     life = Life(w, Reflexes(0))
     log = life.day(steps=1500)
     assert life.days == 1 and log["to"] == 1500
     assert log["stats"]["palm_contacts"] > 0
-    assert log["caregiver"], "the caregiver came during the day"
+    assert log["teacher"], "the teacher came during the day"
 
 
 def test_png_is_a_png():
