@@ -17,6 +17,8 @@ Kept separately, and not counted against the mind:
 | WP3 | **3, proposed for the starting kit** (waiting for the owner): a blurry wide view, saccadic suppression, inhibition of return | None was in the kit. Without the wide view, nothing outside the sharp middle could catch its eye. Without suppression, every eye movement looked like a change everywhere. Without inhibition of return, it kept coming back to what it had just left |
 | WP3 | otherwise none | Attention, curiosity, episodic memory and sleep are in the kit. The explorer sees "the lump nearest the middle" by the retina's centre-surround, which is the kit's "things are bounded lumps" |
 
+| WP4 | **1:** self-teaching the eyes on lumps that last across glimpses (in room coordinates), and leaving out bright-and-dark gaps | The kit has the priors (bounded lumps, connected paths, training small networks), but not the rule that turns them into labels. Lesson 26's self-teaching is the precedent |
+
 A fourth proposal (crying, with a comfort drive) was made on 2026-10-15 and withdrawn on
 2026-10-18, when the child-imitation parts were removed.
 
@@ -35,5 +37,5 @@ A fourth proposal (crying, with a comfort drive) was made on 2026-10-15 and with
   stand out.
 - The Level 0 exams use seeds 8001 and up, which no learning or building has used.
 
-**Count for Level 0 so far: 3 proposed starting-kit additions (waiting for the owner), 0
-other hand-built mechanisms.**
+**Count for Level 0 so far: 3 proposed starting-kit additions (waiting for the owner), 1
+other hand-built mechanism (WP4's self-teaching rule).**
