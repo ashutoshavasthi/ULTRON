@@ -15,7 +15,8 @@ Everything here is in the starting kit (docs/LEVEL_0_PLAN.md):
     forgotten, and the day's short-term habituation is reset;
   * its eyes (WP4) learn at night from glimpses kept during the day: the bounded lumps that
     lasted from glimpse to glimpse are taken as real things (as in lesson 26's
-    self-teaching), and a small network (senses/eyes.py) is trained to light up there.
+    self-teaching), and a small network (senses/eyes.py), looking through the retina's
+    ON channel, is trained to light up there.
 
 It sees only Senses (room/body.py).
 """
@@ -28,7 +29,7 @@ from ..room.body import Action, LIMITS
 from ..room.world import COARSE
 from ..senses import track
 from ..senses.eyes import Eyes
-from ..senses.retina import _box, luminance
+from ..senses.retina import _box, channels, luminance
 from ..senses.things import _regions
 from .curiosity import Curiosity
 
@@ -94,24 +95,17 @@ def _descriptor(picture):
     return np.array([*rgb, math.sqrt(len(yy) / 576.0), sx / (sx + sy + 1e-9)])
 
 
-def _median_around(lum, k):
-    """The middle value of each point's k x k surroundings (a bright thing nearby doesn't
-    pull it up, so the gap between two bright things isn't seen as dark)."""
-    pad = k // 2
-    win = np.lib.stride_tricks.sliding_window_view(np.pad(lum, pad, mode="reflect"), (k, k))
-    return np.median(win.reshape(*lum.shape, k * k), axis=2)
-
-
 def lumps(lum):
-    """The bounded lumps in a picture that stand out from their surroundings (centre
-    against the middle value around it): their middles [(x, y)], weighted by how strongly
-    they stand out. Long thin ones are edges, not lumps; two middles within 3 pixels are
-    one lump."""
-    diff = _box(lum, 3) - _median_around(lum, SURROUND)
+    """The bounded lumps in a picture that stand out brighter than their surroundings (the
+    retina's ON centre-surround): their middles [(x, y)], weighted by how strongly they
+    stand out. Long thin ones are edges, not lumps; two middles within 3 pixels are one
+    lump. (Darker-than-around lumps are left out: between two bright things the gap looks
+    dark, and that is not a thing.)"""
+    diff = _box(lum, 3) - _box(lum, SURROUND)
     noise = 1.4826 * float(np.median(np.abs(diff - np.median(diff)))) or 1e-9
     z = diff / noise
     out = []
-    for sign in (1, -1):
+    for sign in (1,):
         labels, n = _regions(sign * z > LUMP)
         for k in range(1, n + 1):
             yy, xx = np.nonzero(labels == k)
@@ -478,12 +472,12 @@ class Explorer:
         rng = np.random.default_rng(self.seed * 1000 + self.day)
         pick = sorted(int(i) for i in rng.choice(len(glimpses), size=min(TEACH, len(glimpses)),
                                                 replace=False))
-        imgs = [glimpses[i][0].astype(float) for i in pick]
+        imgs = [channels(glimpses[i][0].astype(float))[0] for i in pick]
         touches = [[(t[i][0] - offsets[i][0], t[i][1] - offsets[i][1]) for t in lasting if i in t]
                    for i in pick]
         if not any(touches):
             return {"glimpses": len(glimpses), "lasted": len(lasting), "learned": 0}
         if self.eyes is None:
             self.eyes = Eyes(seed=self.seed)
-        self.eyes.learn(imgs, touches, seed=self.seed + self.day, epochs=8)
+        self.eyes.learn(imgs, touches, seed=self.seed + self.day, epochs=14)
         return {"glimpses": len(glimpses), "lasted": len(lasting), "learned": len(imgs)}

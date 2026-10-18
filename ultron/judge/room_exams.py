@@ -9,7 +9,7 @@ import numpy as np
 
 from ..brain.explorer import lumps
 from ..room.world import MAT, Room
-from ..senses.retina import luminance
+from ..senses.retina import channels, luminance
 
 TOYS = ("ball", "block", "light")
 LOOK_AT = (92.0, 66.0)          # where the scene is seen from (its own body is out of view)
@@ -83,9 +83,10 @@ def seeing(detect, seeds=DEV_SEEDS):
 
 
 def by_eyes(eyes):
-    return lambda pic: [(x, y) for x, y, _ in eyes.see(pic)]
+    """Its learned eyes, looking through the retina's ON channel (as they learned)."""
+    return lambda pic: [(x, y) for x, y, _ in eyes.see(channels(pic)[0])]
 
 
 def by_retina(pic):
-    """The baseline: the untrained retina's lumps."""
+    """The baseline: the untrained retina's lumps (ON centre-surround)."""
     return lumps(pic)
