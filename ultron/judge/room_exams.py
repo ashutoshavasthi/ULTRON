@@ -12,12 +12,14 @@ from ..room.world import MAT, Room
 from ..senses.retina import channels, luminance
 
 TOYS = ("ball", "block", "light")
-LOOK_AT = (92.0, 66.0)          # where the scene is seen from (its own body is out of view)
+LOOK_AT = (92.0, 68.0)          # where the scene is seen from: its own body out of view,
+                                # every toy whole in view (on the mat or the floor)
 SPAN = (64.0, 120.0)            # where toys are put (inside that view)
 GLANCES = 5
 NEAR = 1.5                      # pixels: "found" means a detection this close
 EXAM_SEEDS = tuple(range(8001, 8026))
 DEV_SEEDS = tuple(range(5101, 5126))
+FRESH_SEEDS = tuple(range(5201, 5226))   # development seeds kept back to check the first set
 
 
 def scene(seed):
@@ -88,5 +90,21 @@ def by_eyes(eyes):
 
 
 def by_retina(pic):
-    """The baseline: the untrained retina's lumps (ON centre-surround)."""
+    """Its retina: the bounded lumps that stand out from their surroundings (what L0-1
+    tests, by the owner's decision of 2026-10-18)."""
     return lumps(pic)
+
+
+def by_brightness(pic):
+    """The baseline: bright spots with no comparison to their surroundings (pixels well
+    above the picture's middle brightness, joined into regions)."""
+    from ..senses.things import _regions
+    level = np.median(pic)
+    noise = 1.4826 * float(np.median(np.abs(pic - level))) or 1e-9
+    labels, n = _regions(pic > level + 4 * noise)
+    out = []
+    for k in range(1, n + 1):
+        yy, xx = np.nonzero(labels == k)
+        if len(yy) >= 6:
+            out.append((float(xx.mean()), float(yy.mean())))
+    return out

@@ -13,7 +13,8 @@ Everything here is in the starting kit (docs/LEVEL_0_PLAN.md):
   * sleep: at night the day is consolidated. One record per familiar thing (where and when
     it was last seen, how often) and the most vivid episodes are kept; the rest is
     forgotten, and the day's short-term habituation is reset;
-  * its eyes (WP4) learn at night from glimpses kept during the day: the bounded lumps that
+  * (a prototype, off unless asked for) its eyes learn at night from glimpses kept during
+    the day: the bounded lumps that
     lasted from glimpse to glimpse are taken as real things (as in lesson 26's
     self-teaching), and a small network (senses/eyes.py), looking through the retina's
     ON channel, is trained to light up there.
@@ -104,20 +105,19 @@ def lumps(lum):
     diff = _box(lum, 3) - _box(lum, SURROUND)
     noise = 1.4826 * float(np.median(np.abs(diff - np.median(diff)))) or 1e-9
     z = diff / noise
+    labels, n = _regions(z > LUMP)
     out = []
-    for sign in (1,):
-        labels, n = _regions(sign * z > LUMP)
-        for k in range(1, n + 1):
-            yy, xx = np.nonzero(labels == k)
-            if not SMALLEST <= len(yy) <= LARGEST:
-                continue
-            wide, tall = int(np.ptp(xx)) + 1, int(np.ptp(yy)) + 1
-            if wide > 3 * tall or tall > 3 * wide:
-                continue
-            wgt = np.abs(z[yy, xx])
-            p = (float((xx * wgt).sum() / wgt.sum()), float((yy * wgt).sum() / wgt.sum()))
-            if all(math.dist(p, q) > 3.0 for q in out):
-                out.append(p)
+    for k in range(1, n + 1):
+        yy, xx = np.nonzero(labels == k)
+        if not SMALLEST <= len(yy) <= LARGEST:
+            continue
+        wide, tall = int(np.ptp(xx)) + 1, int(np.ptp(yy)) + 1
+        if wide > 3 * tall or tall > 3 * wide:
+            continue
+        wgt = z[yy, xx]
+        p = (float((xx * wgt).sum() / wgt.sum()), float((yy * wgt).sum() / wgt.sum()))
+        if all(math.dist(p, q) > 3.0 for q in out):
+            out.append(p)
     return out
 
 
@@ -137,7 +137,7 @@ def _posture_bin(joints, arm):
 
 
 class Explorer:
-    def __init__(self, seed=0, chooser="progress"):
+    def __init__(self, seed=0, chooser="progress", learn_eyes=False):
         self.rng = np.random.default_rng(seed)
         # where to babble: "progress" (its own way), or for comparison in the failure lab,
         # "error" (chase the biggest recent error) and "random"
@@ -164,8 +164,11 @@ class Explorer:
         self.turning = np.zeros(4)
         # grasping
         self.holding = [0, 0]
-        # eyes (WP4): none until it has slept on what it saw
+        # eyes (WP4): learned at night from what lasted. At Level 0 its retina does the
+        # seeing (the owner's decision, 2026-10-18), so this is off unless asked for: a
+        # prototype banked for the level that needs learned eyes
         self.seed = seed
+        self.learn_eyes = learn_eyes
         self.eyes = None
         self.glimpses = []
 
@@ -174,7 +177,7 @@ class Explorer:
     def act(self, senses):
         self.t += 1
         look = self._look(senses)
-        if (self.step_len < 0.25 and self.t % GLIMPSE_EVERY == 0
+        if (self.learn_eyes and self.step_len < 0.25 and self.t % GLIMPSE_EVERY == 0
                 and len(self.glimpses) < GLIMPSES):
             self.glimpses.append((luminance(senses.picture).astype(np.float32),
                                   _room(senses.gaze)))

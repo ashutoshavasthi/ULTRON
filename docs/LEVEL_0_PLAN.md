@@ -123,7 +123,7 @@ Each test is on held-out situations (exam seeds 8001 onwards, never used in lear
 
 | # | Test | Pass rule | Baselines | Was |
 |---|---|---|---|---|
-| L0-1 | **Seeing things.** Its learned eyes, trained in the room. *Protocol change (WP4, before any exam run; pass rule unchanged):* first planned as "trained from touch", but in the room a touch says *that* a hand holds something, not *where* it is in the picture (lesson 19's trays gave picture coordinates outright). So the eyes are self-taught, as in lesson 26: lumps that last from glimpse to glimpse are taken as real things. Scenes: 0–5 toys at rest in view, its body out of view, no teacher, screen or cloth (`judge/room_exams.py`) | On 25 held-out room scenes: every toy found within 1.5 pixels in ≥ 23/25, and the count right in ≥ 23/25 | The untrained retina's blobs | N2 |
+| L0-1 | **Seeing things, with its retina.** *Changed 2026-10-18 by the owner's decision, before any exam run (pass rule unchanged):* at Level 0, seeing is the job of the retina in the starting kit (bounded lumps that stand out from their surroundings, `brain/explorer.py: lumps`). Learned eyes move to the level that needs them (clutter, real films). Scenes: 0–5 toys at rest, whole in view, its body out of view, no teacher, screen or cloth; looked at once for positions, 5 times for the count (`judge/room_exams.py`) | On 25 held-out room scenes: every toy found within 1.5 pixels in ≥ 23/25, and the count right in ≥ 23/25 | Bright spots with no comparison to their surroundings (`by_brightness`) | N2 |
 | L0-2 | **Reaching.** From babbling only, no reaching lessons | On 100 held-out toy positions, including ones its hands never touched: the hand's first reach ends within one toy-width of the toy in ≥ 90 | Random reaching; reaching to the nearest remembered position | N3 |
 | L0-3 | **Memory of yesterday** | On 50 held-out probes about the previous day ("where was the red ball left?"), asked as a search task: it looks there first in ≥ 45 | Search where it last looked; random | N5 |
 | L0-4 | **Sleep consolidates** | After a night, stored experiences fall ≥ 10× while every prediction on held-out events from that day stays as good (within 1 point) | Keep everything; keep a random 10% | N6 |
@@ -172,32 +172,44 @@ None of the three adds a mechanism: they are how curiosity and the body work.
 A comfort row (with and without the caregiver) was measured on 2026-10-15 and removed on
 2026-10-18, together with comfort itself.
 
-## WP4 so far (development seeds 5101–5125; the exam seeds are untouched)
+## WP4 so far (development seeds; the exam seeds are untouched)
 
 L0-1's protocol runs (`judge/room_exams.py`, `seeing()`). In each scene: are all the toys
-found within 1.5 pixels, and is the count right?
+found within 1.5 pixels, and is the count right? There are two development sets: 5101–5125,
+used while building, and 5201–5225, kept back to check them.
 
 | Who looks | All toys found | Count right |
 |---|---|---|
-| The untrained retina (ON centre-surround lumps): the baseline | 22/25 | 21/25 |
-| Its self-taught eyes after 1 day | 7/25 | 12/25 |
-| Its self-taught eyes after 2 days | 7/25 | 8/25 |
+| **Its retina** (what L0-1 now tests) | 22/25 and 20/25 | 20/25 and 19/25 |
+| Bright spots, no surround (the baseline) | 8/25 and 8/25 | 11/25 and 11/25 |
+| Learned eyes, self-taught on what lasts (first version; now a prototype) | 7/25 after 1 day and after 2 | 12/25 after 1 day, 8/25 after 2 |
 
-**Learned eyes are worse than their teacher so far, and more days made them worse.** The
-gate needs 23/25 on both.
+**Not yet at the gate's 23/25.** Nearly every remaining error is the **front face of the
+mat**: a long bright band whose pieces between toys pass as lumps. A few are toys missed
+when five crowd together. Tried while building, none of which reached 23/25 on both sets:
+- a smallest-lump size of 10 pixels;
+- splitting lumps with two peaks;
+- requiring lumps to be compact;
+- looking longer (averaging 5 aligned glances), which put toys better (22/25 on both sets)
+  but counted worse (the band showed more).
 
-What was tried while building it:
-- lumps from the average surround, and then from the median surround;
-- both bright and dark lumps, and then bright only (dark "lumps" were the gaps between
-  bright toys);
-- labels from every lump, and then only from lumps that last;
-- input as brightness, as the retina's ON channel, and as ON and OFF together.
+**The principled fix:** Ultron learns which parts of what it sees are its room, the fixed
+structure that is there every time it looks (the mat's edge), and which are things that
+come and go. It needs that anyway for L0-11 (noticing that its world changed), so it is
+built in WP5 and L0-1 is re-measured then.
 
-The best learned version (an offline test on one day's glimpses) reached 10–12/25 for
-positions. Its counts matched the baseline (18–21/25). The likely causes:
+**The first approach, kept as a prototype** (`Explorer(learn_eyes=True)`): eyes self-taught
+at night on lumps that last across glimpses, as lesson 26 did. They lost to the retina
+they learn from. The likely causes:
 - the network's 7×7 view is smaller than the larger toys;
-- the self-taught labels miss some real things and include other lumps (its own arms, the
-  teacher), so the teaching is inconsistent.
+- the self-taught labels are inconsistent (some real toys missed, its own arms and the
+  teacher included).
+
+What was tried for them:
+- average and median surrounds;
+- bright and dark lumps, and bright only;
+- labels from every lump, and only from lumps that last;
+- brightness, ON, and ON and OFF as input.
 
 ## Work packages
 
@@ -207,8 +219,8 @@ positions. Its counts matched the baseline (18–21/25). The likely causes:
 | WP1 | The room and the body; days and nights; the step cost measured | **done** |
 | WP2 | The teacher's script | **done** |
 | WP3 | Attention, curiosity, episodic memory, sleep (`brain/explorer.py`); failure-lab rows | **done** |
-| WP4 | The eyes trained in the room (self-taught on what lasts) | L0-1 measurable: **done**; see "WP4 so far" |
-| WP5 | Objects and actions: predicting what happens, searching, means-end, noticing change | L0-2 to L0-11 measurable |
+| WP4 | Seeing in the room: L0-1's protocol, its retina and a baseline (learned eyes kept as a prototype) | L0-1 measurable: **done**; see "WP4 so far" |
+| WP5 | Objects and actions: predicting what happens, searching, means-end, noticing change; and **knowing its room** (what is always there, as opposed to things), then L0-1 re-measured | L0-2 to L0-11 measurable |
 | WP6 | **Level 0 gate:** every test, the owner's blind check, the ledger, merge to `main`; the Level 1 plan written with its exit tests fixed | Every test met, or the gate reported as not passed |
 
 ## Rules for this level
