@@ -12,7 +12,10 @@ Everything here is in the starting kit (docs/LEVEL_0_PLAN.md):
     how surprising);
   * sleep: at night the day is consolidated. One record per familiar thing (where and when
     it was last seen, how often) and the most vivid episodes are kept; the rest is
-    forgotten, and the day's short-term habituation is reset.
+    forgotten, and the day's short-term habituation is reset;
+  * its eyes (WP4) learn at night from glimpses kept during the day: the bounded lumps that
+    lasted from glimpse to glimpse are taken as real things (as in lesson 26's
+    self-teaching), and a small network (senses/eyes.py) is trained to light up there.
 
 It sees only Senses (room/body.py).
 """
@@ -23,6 +26,8 @@ import numpy as np
 
 from ..room.body import Action, LIMITS
 from ..room.world import COARSE
+from ..senses import track
+from ..senses.eyes import Eyes
 from ..senses.retina import _box, luminance
 from ..senses.things import _regions
 from .curiosity import Curiosity
@@ -49,6 +54,12 @@ PULL = 0.04             # how hard it babbles toward the chosen posture
 LEARN = 0.1             # how fast its touch guesses follow what happens
 # sleep
 VIVID = 10              # episodes kept from each day
+# eyes (WP4)
+GLIMPSE_EVERY = 4       # while its eyes are still, a glimpse is kept every this many steps
+GLIMPSES = 2500         # at most this many glimpses a day
+LASTS = 8               # a lump seen in this many glimpses (along one path) is a real thing
+TEACH = 300             # glimpses the eyes learn from each night
+SMALLEST, LARGEST = 6, 200  # a lump's size in pixels (smaller is noise, bigger is a surface)
 
 
 def _descriptor(picture):
@@ -79,6 +90,31 @@ def _descriptor(picture):
     rgb = patch[yy, xx].mean(axis=0)
     sx, sy = float(xx.std()), float(yy.std())
     return np.array([*rgb, math.sqrt(len(yy) / 576.0), sx / (sx + sy + 1e-9)])
+
+
+def lumps(lum):
+    """The bounded lumps in a picture that stand out from their surroundings (the retina's
+    centre-surround): their middles [(x, y)], weighted by how strongly they stand out.
+    Long thin ones are edges, not lumps; two middles within 3 pixels are one lump (a thing
+    and the halo around it)."""
+    diff = _box(lum, 3) - _box(lum, SURROUND)
+    noise = 1.4826 * float(np.median(np.abs(diff - np.median(diff)))) or 1e-9
+    z = diff / noise
+    out = []
+    for sign in (1, -1):
+        labels, n = _regions(sign * z > LUMP)
+        for k in range(1, n + 1):
+            yy, xx = np.nonzero(labels == k)
+            if not SMALLEST <= len(yy) <= LARGEST:
+                continue
+            wide, tall = int(np.ptp(xx)) + 1, int(np.ptp(yy)) + 1
+            if wide > 3 * tall or tall > 3 * wide:
+                continue
+            wgt = np.abs(z[yy, xx])
+            p = (float((xx * wgt).sum() / wgt.sum()), float((yy * wgt).sum() / wgt.sum()))
+            if all(math.dist(p, q) > 3.0 for q in out):
+                out.append(p)
+    return out
 
 
 def _room(gaze):
@@ -124,12 +160,20 @@ class Explorer:
         self.turning = np.zeros(4)
         # grasping
         self.holding = [0, 0]
+        # eyes (WP4): none until it has slept on what it saw
+        self.seed = seed
+        self.eyes = None
+        self.glimpses = []
 
     # ------------------------------------------------------------ one step
 
     def act(self, senses):
         self.t += 1
         look = self._look(senses)
+        if (self.step_len < 0.25 and self.t % GLIMPSE_EVERY == 0
+                and len(self.glimpses) < GLIMPSES):
+            self.glimpses.append((luminance(senses.picture).astype(np.float32),
+                                  _room(senses.gaze)))
         turn = self._babble(senses)
         grip = self._grasp(senses)
         self._feel(senses)
@@ -387,5 +431,31 @@ class Explorer:
         for key in self.curiosity.errors:
             self.curiosity.errors[key] = self.curiosity.errors[key][-16:]
         self.inhibit = []
+        eyes = self._teach_eyes()
         self.day += 1
-        return {"before": before, "after": self.stored(), "things": len(self.protos)}
+        return {"before": before, "after": self.stored(), "things": len(self.protos),
+                "eyes": eyes}
+
+    def _teach_eyes(self):
+        """Train its eyes on the day's glimpses: what lasted is a real thing, the rest is
+        nothing. Glimpses are forgotten afterwards."""
+        glimpses, self.glimpses = self.glimpses, []
+        if len(glimpses) < 50:
+            return None
+        h, w = glimpses[0][0].shape
+        offsets = [(here[0] - w / 2, here[1] - h / 2) for _, here in glimpses]
+        dets = [[(x + ox, y + oy) for x, y in lumps(lum)]
+                for (lum, _), (ox, oy) in zip(glimpses, offsets)]
+        lasting = track.lasting(track.link(dets, max_step=3.0), LASTS)
+        rng = np.random.default_rng(self.seed * 1000 + self.day)
+        pick = sorted(int(i) for i in rng.choice(len(glimpses), size=min(TEACH, len(glimpses)),
+                                                replace=False))
+        imgs = [glimpses[i][0].astype(float) for i in pick]
+        touches = [[(t[i][0] - offsets[i][0], t[i][1] - offsets[i][1]) for t in lasting if i in t]
+                   for i in pick]
+        if not any(touches):
+            return {"glimpses": len(glimpses), "lasted": len(lasting), "learned": 0}
+        if self.eyes is None:
+            self.eyes = Eyes(seed=self.seed)
+        self.eyes.learn(imgs, touches, seed=self.seed + self.day, epochs=8)
+        return {"glimpses": len(glimpses), "lasted": len(lasting), "learned": len(imgs)}

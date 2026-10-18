@@ -469,6 +469,7 @@ class Room:
             shake = (int(self.camera_rng.integers(-1, 2)), int(self.camera_rng.integers(-1, 2)))
         ox = round(centre[0] - w / 2) + shake[0]
         oy = round(centre[1] - h / 2) + shake[1]
+        self.view_origin = (ox, oy)     # for the Judge: where this picture's corner was
         img = self.paint(ox, oy, h, w)
         soft = np.stack([_blur(_blur(_blur(img[:, :, c]))) for c in range(3)], axis=2)
         yy, xx = np.mgrid[0:h, 0:w]
