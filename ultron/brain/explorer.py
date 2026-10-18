@@ -57,7 +57,9 @@ VIVID = 10              # episodes kept from each day
 # eyes (WP4)
 GLIMPSE_EVERY = 4       # while its eyes are still, a glimpse is kept every this many steps
 GLIMPSES = 2500         # at most this many glimpses a day
-LASTS = 8               # a lump seen in this many glimpses (along one path) is a real thing
+LASTS = 5               # a lump seen in this many glimpses (along one path) is a real thing
+REMEMBER = 50           # glimpses a thing may go unseen and still be the same thing
+CELL = 3.0              # room units: how finely it remembers where lumps are
 TEACH = 300             # glimpses the eyes learn from each night
 SMALLEST, LARGEST = 6, 200  # a lump's size in pixels (smaller is noise, bigger is a surface)
 
@@ -92,12 +94,20 @@ def _descriptor(picture):
     return np.array([*rgb, math.sqrt(len(yy) / 576.0), sx / (sx + sy + 1e-9)])
 
 
+def _median_around(lum, k):
+    """The middle value of each point's k x k surroundings (a bright thing nearby doesn't
+    pull it up, so the gap between two bright things isn't seen as dark)."""
+    pad = k // 2
+    win = np.lib.stride_tricks.sliding_window_view(np.pad(lum, pad, mode="reflect"), (k, k))
+    return np.median(win.reshape(*lum.shape, k * k), axis=2)
+
+
 def lumps(lum):
-    """The bounded lumps in a picture that stand out from their surroundings (the retina's
-    centre-surround): their middles [(x, y)], weighted by how strongly they stand out.
-    Long thin ones are edges, not lumps; two middles within 3 pixels are one lump (a thing
-    and the halo around it)."""
-    diff = _box(lum, 3) - _box(lum, SURROUND)
+    """The bounded lumps in a picture that stand out from their surroundings (centre
+    against the middle value around it): their middles [(x, y)], weighted by how strongly
+    they stand out. Long thin ones are edges, not lumps; two middles within 3 pixels are
+    one lump."""
+    diff = _box(lum, 3) - _median_around(lum, SURROUND)
     noise = 1.4826 * float(np.median(np.abs(diff - np.median(diff)))) or 1e-9
     z = diff / noise
     out = []
@@ -446,7 +456,25 @@ class Explorer:
         offsets = [(here[0] - w / 2, here[1] - h / 2) for _, here in glimpses]
         dets = [[(x + ox, y + oy) for x, y in lumps(lum)]
                 for (lum, _), (ox, oy) in zip(glimpses, offsets)]
-        lasting = track.lasting(track.link(dets, max_step=3.0), LASTS)
+        # the room itself: spots that hold a lump every time they are seen (a corner of
+        # the mat) are part of the room, not things; things come and go (they move as one)
+        seen, held = {}, {}
+        for (ox, oy), pts in zip(offsets, dets):
+            for cx in range(int(ox // CELL) + 1, int((ox + w) // CELL)):
+                for cy in range(int(oy // CELL) + 1, int((oy + h) // CELL)):
+                    seen[cx, cy] = seen.get((cx, cy), 0) + 1
+            for x, y in pts:
+                c = (int(x // CELL), int(y // CELL))
+                held[c] = held.get(c, 0) + 1
+        scenery = {c for c, n in held.items() if seen.get(c, 0) >= 20 and n >= 0.8 * seen[c]}
+
+        def room_part(p):
+            cx, cy = int(p[0] // CELL), int(p[1] // CELL)
+            return any((cx + i, cy + j) in scenery for i in (-1, 0, 1) for j in (-1, 0, 1))
+
+        tracks = track.link(dets, max_step=3.0, memory=REMEMBER)
+        lasting = [t for t in track.lasting(tracks, LASTS)
+                   if not room_part(next(iter(t.values())))]
         rng = np.random.default_rng(self.seed * 1000 + self.day)
         pick = sorted(int(i) for i in rng.choice(len(glimpses), size=min(TEACH, len(glimpses)),
                                                 replace=False))
