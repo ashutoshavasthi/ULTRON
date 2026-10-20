@@ -4,7 +4,7 @@
 
 This is a pre-mortem. Every way Ultron could fail is listed here, with how we provoke it
 on purpose, what happens today, and how we fix it. The ones we can simulate are measured
-by the [failure lab](../reports/failure_lab.md) (`python -m ultron stress`), which turns
+by the [failure lab](../../reports/failure_lab.md) (`python -m ultron stress`), which turns
 one dial at a time until Ultron breaks.
 
 Closing every known failure doesn't prove success: unknown failures remain. But every
@@ -128,7 +128,27 @@ The quietest way to fail: believing we've succeeded.
 | Test data leaking into training | ⬜ | 🟡 | Held-out sets are never loaded during training; checked by tests |
 | Big claims ahead of evidence | — | — | A claim is made only with the test that backs it. The vision can be as big as we like; the evidence decides what we say happened |
 
+## 11. Climbing the ladder (added 2026-10-15, revised 2026-10-18)
+
+These are the ways the plan of levels ([MASTER_PLAN.md](MASTER_PLAN.md)) could fool us or
+fail.
+
+| Failure | How we provoke it | Status | Fix | Level |
+|---|---|---|---|---|
+| **Imitating a child instead of growing past it** | The owner's review | 🔴 happened 2026-10-15 to 10-18: ages, a simulated baby, comfort and crying | Capability levels with no ceiling; the order of learning is borrowed from children, the destination is not (rule 9) | all |
+| **A ceiling at human level** | Every gate's yardstick | ⬜ | Human scores are a checkpoint; the ladder continues to L6, beyond human | L5–L6 |
+| **The teacher teaches the answer** (a script that quietly does the learning) | Teacher modes "off" and "misleading gaze"; the script is hashed before any exam | ⬜ | The teacher may show, hide, look and press, never reward an exam answer; everything it does is logged | L0–L2 |
+| **A room too clean to carry over** | IntPhys at the L0 gate | ⬜ | Noise, clutter and varied things in the room; a gate without its outside yardstick is marked as such | L0 |
+| **One hand-built module per test** | The ledger | ⬜ | The ledger is printed in every gate's verdict; if it doesn't shrink as Ultron climbs, we say so | all |
+| **Skipping levels** (moving on when a level gets hard) | Hard gates (rule 1) | 🟡 the rule is written; it was broken three times under the old campaign | Higher-level work is only a labelled prototype until its gate | all |
+| **Lingering at the bottom** (polishing foundations for their own sake) | The pace rule in [ROADMAP.md](ROADMAP.md) | ⬜ | L0 and L1 take only what their gates need; most effort goes to L3 and up | L0–L1 |
+| **Designed-world scores hide outside gaps** | Every gate reports its designed-world score next to its outside benchmark | 🔴 today: ARC 12.75%, V4 and V5 partly met | An outside yardstick and the owner's blind check at every gate (rule 2) | all |
+| **The starting kit grows quietly** | Additions need the owner's approval and a recorded reason | 🟡 3 additions proposed and waiting | The kit is in [LEVEL_0_PLAN.md](LEVEL_0_PLAN.md); any change is a visible diff | all |
+
 ## The order of attack
+
+> Written for the old campaign. Under the new plan, the order is the ages:
+> [ROADMAP.md](ROADMAP.md).
 
 1. **Robustness of the core** (sections 2 and 3): tolerant program fitting, robust quantity
    fitting, ambiguity detection and separating experiments. These are cheap, measurable in

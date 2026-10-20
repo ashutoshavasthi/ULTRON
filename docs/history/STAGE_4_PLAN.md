@@ -1,5 +1,10 @@
 # Stage 4: interactive worlds
 
+> **No longer the main line.** The plan is now a ladder of capability levels, from a
+> child's start to beyond human ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)).
+> This plan is kept as a record and its results are banked: W1 and W7 have room forms at L0 (L0-9, L0-11), and the games (W2–W6, W8, with ARC-AGI-3) belong to L2. See
+> [LEVEL_MAP.md](LEVEL_MAP.md).
+
 **Mission.** Ultron has acted only once: one kick of a puck in a world whose quantities it
 was told, running a law it already had backwards (`brain/body.py`). It has never been
 dropped into a world whose rules nobody told it, had to find out what its own actions do,

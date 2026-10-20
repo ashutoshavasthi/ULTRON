@@ -1,5 +1,24 @@
 # ULTRON
 
+**Ultron is a learner that writes programs in a language it builds itself**, to explain what it
+sees from a few examples. There is no pretrained model and no language model.
+- **The goal:** general intelligence that improves itself, then goes beyond human. The
+  first checkpoint is human level on ARC-AGI.
+- **How:** one loop:
+  1. solve tasks by writing the shortest program that explains them;
+  2. turn recurring pieces into new words of its language;
+  3. learn to write programs faster;
+  4. climb to harder tasks.
+- **Progress:** `python -m ultron score` adds a row to the
+  [scoreboard](reports/scoreboard.md). The last logged ARC-AGI-1 evaluation score is
+  12.75%.
+
+The whole plan is on one page: **[docs/PLAN.md](docs/PLAN.md)**.
+
+Below: what Ultron learned before this plan, from its lessons.
+
+---
+
 A learner that understands instead of memorising. It is built like a child: a
 **Brain** in an **Environment**, taught by a **Trainer** and examined by a
 **Judge** on problems it has never seen.
@@ -61,7 +80,7 @@ It then passes a tough final exam with no teaching. The exam includes:
 Every law is a small program or formula it wrote and can explain. Every answer
 comes with its reasons.
 
-**Stage 3, language** (begun; see the [plan](docs/STAGE_3_PLAN.md)):
+**Stage 3, language** (begun; see the [plan](docs/history/STAGE_3_PLAN.md)):
 - Looking at tables of coloured things with nothing said, it finds that things come in
   **kinds** (four colours, two sizes, shapes) from what it measures itself, and that
   where things lie doesn't group.
@@ -92,5 +111,4 @@ python -m ultron blind blind/independent_2.txt       # an independent examiner's
 
 - [How it works](docs/ARCHITECTURE.md)
 - [Report card](reports/report_card.md), the [Phase 1 verdict](reports/judge_verdict.md) the [Phase 2 verdict](reports/phase2_verdict.md) and the [verdict on closing its gaps](reports/phase3_verdict.md) and the [Phase 3 verdict](reports/phase3_senses_verdict.md)
-- [Roadmap to a self-improving expert](docs/ROADMAP.md)
-- Original requirements: [PRD v1](ULTRON_PRD_V1.md), [PRD v2](ULTRON_PRD_V2.md)
+- Original requirements (historical; [docs/PLAN.md](docs/PLAN.md) is the plan): [PRD v1](ULTRON_PRD_V1.md), [PRD v2](ULTRON_PRD_V2.md)

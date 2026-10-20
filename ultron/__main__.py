@@ -9,6 +9,8 @@
     python -m ultron show             what Ultron knows
     python -m ultron blind FILE       score Ultron on questions someone else wrote
     python -m ultron experiment       designing experiments vs watching (slow, ~4 min)
+    python -m ultron score            the scoreboard: is it getting better at learning?
+    python -m ultron learn            rounds of the learning loop: Ultron grows its language
 """
 
 import argparse
@@ -77,6 +79,8 @@ def cmd_arc(args):
     from .arc import harness, library, solve
     if not args.no_library:
         solve.LIBRARY[0] = library.load() or None
+        from .arc import compose, loop
+        compose.LIBRARY[0] = loop.load_words()          # the words of its language
     results = []
     for name in args.sets:
         r = harness.score_set(name, args.split, limit=args.limit, budget=args.budget,
@@ -93,6 +97,46 @@ def cmd_arc(args):
         _json.dump([{k: v for k, v in r.items()} for r in results], f, indent=0, default=str)
         f.write("\n")
     print(f"written to {out}")
+
+
+def cmd_score(args):
+    """The scoreboard (docs/PLAN.md): one round of the learning loop held out, the main
+    solver on ARC-AGI-1 training, and the lessons; one row in reports/scoreboard.md."""
+    from . import score
+    r = score.run(quick=args.quick, workers=args.workers, skip_lessons=args.skip_lessons,
+                  brain_path=args.brain)
+    loop = r["loop"]
+    print(f"round {loop['round']}, held out ({loop['unseen']} tasks): {loop['without'][0]} "
+          f"right without its words, {loop['with'][0]} with them (gain {loop['gain']:+d}, "
+          f"{loop['change']:+d} from last round); {loop['words']} words from "
+          f"{loop['explained']} tasks explained in practice")
+    for w in loop["word_list"]:
+        print("   ", w)
+    a = r["arc"]
+    print(f"ARC-AGI-1 training: {a['percent']:.1f}% of {a['tasks']} "
+          f"({a['right']} right of {a['answered']} answered)")
+    if r["lessons"]:
+        print(f"lessons: {r['lessons']['passed']}/{r['lessons']['of']} exams passed"
+              + (f" (not: {', '.join(r['lessons']['failed'])})" if r["lessons"]["failed"] else ""))
+    print(f"row added to reports/scoreboard.md ({r['seconds']} s)")
+
+
+def cmd_learn(args):
+    """Rounds of the learning loop (arc/loop.py): its language is kept and grown, and each
+    round is tested on held-out tasks it never learns from."""
+    from .arc import loop
+    path = args.state or (loop.STATE if not args.quick
+                          else os.path.join("brain", "language_quick.json"))
+    rows, state = loop.run(rounds=args.rounds, quick=args.quick, workers=args.workers,
+                           state_path=path)
+    for r in rows:
+        print(f"round {r['round']}: practice explained {r['explained']} (+{r['new']}), "
+              f"{r['words']} words; held out {r['right']} right ({r['wrong']} wrong), "
+              f"without words {state['without'][0]}; gain {r['gain']:+d} "
+              f"({r['change']:+d} from last round)")
+    for w in rows[-1]["word_list"] if rows else []:
+        print("   ", w)
+    print(f"language kept in {path}; curve in reports/learning_curve.md")
 
 
 def cmd_look(args):
@@ -276,12 +320,22 @@ def main(argv=None):
                     help="tasks solved at once (same answers as one at a time)")
     ar.add_argument("--no-library", action="store_true",
                     help="without the building blocks Ultron learned itself")
+    le = sub.add_parser("learn")
+    le.add_argument("--rounds", type=int, default=1)
+    le.add_argument("--quick", action="store_true", help="60 practice and 60 held-out tasks")
+    le.add_argument("--workers", type=int, default=4)
+    le.add_argument("--state", default=None, help="where its language is kept")
+    sc = sub.add_parser("score")
+    sc.add_argument("--quick", action="store_true", help="fewer tasks: a fast check")
+    sc.add_argument("--workers", type=int, default=4)
+    sc.add_argument("--skip-lessons", action="store_true")
     lk = sub.add_parser("look")
     lk.add_argument("file")
     args = p.parse_args(argv)
     {"train": cmd_train, "exam": cmd_exam, "ask": cmd_ask, "why": cmd_why,
      "show": cmd_show, "blind": cmd_blind, "experiment": cmd_experiment,
-     "look": cmd_look, "stress": cmd_stress, "arc": cmd_arc}[args.cmd](args)
+     "look": cmd_look, "stress": cmd_stress, "arc": cmd_arc,
+     "score": cmd_score, "learn": cmd_learn}[args.cmd](args)
 
 
 if __name__ == "__main__":

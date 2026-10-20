@@ -1,5 +1,10 @@
 # Stage 3: language
 
+> **No longer the main line.** The plan is now a ladder of capability levels, from a
+> child's start to beyond human ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)).
+> This plan is kept as a record and its results are banked: its criteria (written S3-L1 to S3-L10 in the level map, to avoid clashing with level names) belong to L1, with SCAN and COGS as L1's outside yardstick. See
+> [LEVEL_MAP.md](LEVEL_MAP.md).
+
 **Mission.** Ultron knows 37 grounded words, all about numbers and arithmetic (lesson 4
 and its follow-ups). It cannot understand a sentence, say one, or ask a question.
 Stage 3 gives it language the way it got numbers: words attached to things it already
