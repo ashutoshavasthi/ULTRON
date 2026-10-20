@@ -832,14 +832,6 @@ EXPERIMENTS = [program_size, library_learning, intuition_prior, wrong_labels, hi
                grammar_stress]
 
 
-def _level0():
-    from .room_lab import EXPERIMENTS as LEVEL0         # Level 0: the room (WP3)
-    return LEVEL0
-
-
-EXPERIMENTS += _level0()
-
-
 def run_all(brain):
     out = []
     for exp in EXPERIMENTS:

@@ -63,14 +63,14 @@ view, saccadic suppression, inhibition of return; see [LEDGER.md](LEDGER.md)).
   history.
 - **2026-09-30 to 10-09, Phases 1–3:** inventing numbers and laws, eyes from touch, laws from
   video, new kinds of explanation, acting by running laws backwards
-  ([`judge_verdict.md`](../reports/judge_verdict.md),
-  [`phase2_verdict.md`](../reports/phase2_verdict.md),
-  [`phase3_verdict.md`](../reports/phase3_verdict.md),
-  [`phase3_senses_verdict.md`](../reports/phase3_senses_verdict.md)).
+  ([`judge_verdict.md`](../../reports/judge_verdict.md),
+  [`phase2_verdict.md`](../../reports/phase2_verdict.md),
+  [`phase3_verdict.md`](../../reports/phase3_verdict.md),
+  [`phase3_senses_verdict.md`](../../reports/phase3_senses_verdict.md)).
 - **2026-10-09 to 10-12, a 9-stage campaign:** the core and ARC (Stage 1: ARC ≥ 25% not
-  met; [`stage1_verdict.md`](../reports/stage1_verdict.md)), real films (Stage 2), language
+  met; [`stage1_verdict.md`](../../reports/stage1_verdict.md)), real films (Stage 2), language
   L1–L3 (Stage 3), the Code stage C1–C4(a). All of it was combined in PR #12
-  ([`integration.md`](../reports/integration.md)).
+  ([`integration.md`](../../reports/integration.md)).
 - **2026-10-15, first rebuild.** A review found the campaign:
   - moving on whenever a stage got hard;
   - measuring itself mostly in its own worlds;

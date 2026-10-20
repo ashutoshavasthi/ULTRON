@@ -75,7 +75,7 @@ These lessons are on branch `claude/stage-coding-engc-1j7rdc` and are not yet in
 
 ## Old stage criteria
 
-### Stage 1, the scalable core ([STAGE_1_PLAN.md](STAGE_1_PLAN.md), [verdict](../reports/stage1_verdict.md))
+### Stage 1, the scalable core ([STAGE_1_PLAN.md](STAGE_1_PLAN.md), [verdict](../../reports/stage1_verdict.md))
 
 | Criterion | Result | Level | Status |
 |---|---|---|---|

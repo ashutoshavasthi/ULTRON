@@ -4,7 +4,7 @@
 
 This is a pre-mortem. Every way Ultron could fail is listed here, with how we provoke it
 on purpose, what happens today, and how we fix it. The ones we can simulate are measured
-by the [failure lab](../reports/failure_lab.md) (`python -m ultron stress`), which turns
+by the [failure lab](../../reports/failure_lab.md) (`python -m ultron stress`), which turns
 one dial at a time until Ultron breaks.
 
 Closing every known failure doesn't prove success: unknown failures remain. But every
