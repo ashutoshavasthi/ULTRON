@@ -2,3 +2,6 @@ __pycache__/
 *.pyc
 .pytest_cache/
 /data/
+
+# quick runs of the learning loop (the full language is brain/language.json)
+brain/language_quick.json
