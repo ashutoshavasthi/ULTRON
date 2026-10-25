@@ -1,0 +1,39 @@
+name: wrist-agent
+on:
+  push:
+    paths: ["wrist-agent/**", ".github/workflows/wrist-agent.yml"]
+  pull_request:
+    paths: ["wrist-agent/**", ".github/workflows/wrist-agent.yml"]
+
+jobs:
+  gateway:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: wrist-agent/gateway } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: wrist-agent/gateway/package-lock.json }
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+
+  android:
+    runs-on: ubuntu-latest
+    defaults: { run: { working-directory: wrist-agent/android } }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: 17 }
+      # The runner image already ships the Android SDK; just make sure the pieces we need are there.
+      - name: Install Android SDK packages
+        run: |
+          SDKM=$(ls -d "$ANDROID_HOME"/cmdline-tools/*/bin/sdkmanager | head -1)
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "platforms;android-34" "build-tools;34.0.0"
+      - uses: gradle/actions/setup-gradle@v4
+        with: { gradle-version: 8.14.3 }
+      - run: gradle --no-daemon assembleDebug
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wrist-agent-debug-apk
+          path: wrist-agent/android/app/build/outputs/apk/debug/app-debug.apk
