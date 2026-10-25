@@ -1,0 +1,12 @@
+{
+  "name": "kindle-dash",
+  "version": "1.0.0",
+  "description": "Turn an old Kindle Paperwhite into an e-ink dashboard: clock, date, day tasks, quotes, wallpaper.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/smoke.js"
+  },
+  "engines": { "node": ">=16" },
+  "license": "MIT"
+}

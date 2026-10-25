@@ -1,0 +1,62 @@
+/* E-ink display. Old-WebKit safe: no grid, no variables, no modern flexbox.
+   Grayscale only; sizes are in em, and kindle.js sets body font-size from the screen width. */
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #fff; color: #000; overflow: hidden; }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-text-size-adjust: none; }
+#app { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: #fff;
+       -webkit-background-size: cover; background-size: cover; background-position: center; }
+.blk { position: absolute; overflow: hidden; -webkit-box-sizing: border-box; box-sizing: border-box; }
+.card { background: #fff; border: 2px solid #000; padding: 0 0.3em; }
+
+/* date */
+#date .in { padding: 0 0.1em; }
+.dl { float: left; }
+.dr { float: right; text-align: right; font-size: 0.62em; color: #444; padding-top: 0.55em; }
+.dw { font-size: 0.78em; font-weight: bold; letter-spacing: 0.22em; text-transform: uppercase; }
+.dd { font-family: Georgia, "Times New Roman", serif; font-size: 0.8em; color: #333; margin-top: 0.1em; }
+.wk { color: #666; }
+
+/* clock */
+#clock { text-align: center; white-space: nowrap; font-weight: bold; letter-spacing: -0.02em; }
+#clock.inverted { background: #000; color: #fff; }
+.ch { display: inline-block; min-width: 0.56em; text-align: center; }
+.ch.col { min-width: 0.28em; position: relative; top: -0.06em; }
+.ch.inv { background: #000; color: #fff; }
+#clock.inverted .ch.inv { background: #fff; color: #000; }
+.ap { font-size: 0.22em; letter-spacing: 0.1em; margin-left: 0.4em; font-weight: bold; }
+
+/* day progress */
+#prog .bar { height: 0.7em; }
+#prog .seg { float: left; width: 4.1666%; height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; border: 1px solid #000; border-right-width: 0; }
+#prog .seg.last { border-right-width: 1px; }
+#prog .seg.f { background: #000; }
+#prog .seg.p { background: #999; }
+#prog .lab { clear: both; font-size: 0.5em; letter-spacing: 0.12em; color: #444; padding-top: 0.5em; text-transform: uppercase; }
+#prog .lab b { color: #000; }
+
+/* wallpaper panel */
+#wall { border: 2px solid #000; background-color: #fff; -webkit-background-size: cover; background-size: cover; background-position: center; }
+
+/* tasks */
+.th { border-bottom: 2px solid #000; height: 1.5em; line-height: 1.5em; font-size: 0.62em; letter-spacing: 0.22em; font-weight: bold; }
+.th span { float: right; letter-spacing: 0.1em; }
+.tr { height: 1.75em; line-height: 1.75em; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #bbb; position: relative; }
+.tb { display: inline-block; width: 0.62em; height: 0.62em; border: 2px solid #000; margin-right: 0.45em; vertical-align: -0.04em; -webkit-box-sizing: border-box; box-sizing: border-box; position: relative; }
+.tb i { position: absolute; left: 0.1em; top: 0.1em; right: 0.1em; bottom: 0.1em; background: #000; }
+.tt { font-size: 0.6em; color: #444; margin-right: 0.6em; letter-spacing: 0.04em; display: inline-block; min-width: 2.7em; }
+.tx { font-size: 0.82em; }
+.tr.dn .tx { text-decoration: line-through; color: #777; }
+.tr.dn .tt { color: #888; }
+.tr.nx { font-weight: bold; background: #eee; border-left: 0.2em solid #000; padding-left: 0.3em; }
+.tm { font-size: 0.55em; color: #555; padding-top: 0.5em; letter-spacing: 0.1em; text-transform: uppercase; }
+.none { font-family: Georgia, serif; font-style: italic; color: #555; padding-top: 0.6em; font-size: 0.8em; }
+
+/* quote */
+#quote .in { padding: 0.05em 0.1em 0; border-top: 2px solid #000; }
+.qt { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 0.78em; line-height: 1.28; padding-top: 0.45em; }
+.qt .hid { visibility: hidden; }
+.qa { font-size: 0.5em; letter-spacing: 0.2em; text-transform: uppercase; color: #444; margin-top: 0.5em; }
+.qa.hid { visibility: hidden; }
+#quote.card .in, #quote.card { border-top: 2px solid #000; }
+
+#status { position: absolute; right: 4px; bottom: 2px; font-size: 10px; color: #666; }
+#flash { display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #000; z-index: 99; }

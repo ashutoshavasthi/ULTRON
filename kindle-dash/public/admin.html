@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kindle Dash</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0e0f11">
+<link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+<header>
+  <div class="brand"><span class="logo"></span><b>Kindle Dash</b></div>
+  <div class="sync" id="sync"><i></i><span>connecting</span></div>
+</header>
+
+<main>
+  <section id="tab-today" class="tab on">
+    <div class="hero">
+      <div><h1 id="todayTitle">Today</h1><p id="todaySub"></p></div>
+      <button class="ghost" id="clearDone">Clear done</button>
+    </div>
+    <form id="taskForm" class="addrow">
+      <input id="taskText" placeholder="Add a task for today…" maxlength="120" autocomplete="off">
+      <input id="taskTime" type="time" aria-label="Time (optional)">
+      <button class="primary" aria-label="Add task">Add</button>
+    </form>
+    <ul id="taskList" class="list"></ul>
+  </section>
+
+  <section id="tab-quotes" class="tab">
+    <div class="hero"><div><h1>Quotes</h1><p>Shown on the Kindle, one at a time.</p></div></div>
+    <form id="quoteForm" class="stack">
+      <textarea id="quoteText" rows="2" placeholder="A line worth reading every day…" maxlength="220"></textarea>
+      <div class="addrow"><input id="quoteAuthor" placeholder="Author (optional)" maxlength="60"><button class="primary">Add</button></div>
+    </form>
+    <ul id="quoteList" class="list"></ul>
+  </section>
+
+  <section id="tab-look" class="tab">
+    <div class="hero"><div><h1>Look &amp; feel</h1><p>Changes appear on the Kindle within about 30 seconds.</p></div></div>
+
+    <div class="grid2">
+      <div>
+        <div class="card">
+          <h3>Layout</h3>
+          <div class="seg" data-set="layout">
+            <button data-v="classic">Classic</button><button data-v="minimal">Minimal</button><button data-v="poster">Poster</button>
+          </div>
+          <label class="row"><span>Your name</span><input id="setName" placeholder="for the greeting" maxlength="40"></label>
+          <div class="row"><span>Clock</span><div class="seg small" data-set="clock24" data-bool><button data-v="true">24h</button><button data-v="false">12h</button></div></div>
+          <label class="row"><span>Day progress bar</span><input type="checkbox" class="sw" data-check="showProgress"></label>
+          <label class="row"><span>Show tasks</span><input type="checkbox" class="sw" data-check="showTasks"></label>
+          <label class="row"><span>Max tasks shown</span><input type="number" min="1" max="12" id="setMaxTasks" class="num"></label>
+        </div>
+
+        <div class="card">
+          <h3>Quotes &amp; motion</h3>
+          <div class="row"><span>Quote mode</span>
+            <select id="setQuoteMode"><option value="rotate">Rotate</option><option value="random">Shuffle</option><option value="daily">One per day</option><option value="off">Off</option></select></div>
+          <label class="row"><span>Change every (min)</span><input type="number" min="1" max="1440" id="setQuoteMinutes" class="num"></label>
+          <label class="row"><span>E-ink animations<small>Flip digits, typewriter quotes</small></span><input type="checkbox" class="sw" data-check="animations"></label>
+          <label class="row"><span>Anti-ghost flash every (min)<small>0 turns it off</small></span><input type="number" min="0" max="240" id="setFlash" class="num"></label>
+        </div>
+      </div>
+
+      <div>
+        <div class="card">
+          <h3>Live preview</h3>
+          <div class="seg small" data-set="device">
+            <button data-v="758x1024">PW 1/2 · 758×1024</button><button data-v="1072x1448">PW 3+ · 1072×1448</button>
+          </div>
+          <div class="preview" id="previewBox"><iframe id="preview" src="/?fast=1" title="Kindle preview" scrolling="no"></iframe></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Wallpaper</h3>
+      <div class="seg" data-set="wallpaperMode">
+        <button data-v="panel">Framed panel</button><button data-v="full">Full background</button><button data-v="off">None</button>
+      </div>
+      <p class="hint">Pick a preset or upload a photo. It gets resized, turned grayscale and dithered to the Kindle's 16 grays so it looks crisp on e-ink.</p>
+      <div class="presets" id="presets"></div>
+      <div class="addrow"><label class="file">Upload photo<input type="file" id="file" accept="image/*"></label>
+        <button class="ghost" id="removeWall">Remove wallpaper</button></div>
+      <div class="studio" id="studio" hidden>
+        <canvas id="canvas"></canvas>
+        <div class="stack">
+          <label class="row"><span>Brightness</span><input type="range" id="wBright" min="-80" max="80" value="0"></label>
+          <label class="row"><span>Contrast</span><input type="range" id="wContrast" min="-50" max="100" value="20"></label>
+          <label class="row"><span>Dither (grain)</span><input type="checkbox" class="sw" id="wDither" checked></label>
+          <label class="row"><span>Invert</span><input type="checkbox" class="sw" id="wInvert"></label>
+          <button class="primary" id="applyWall">Send to Kindle</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<nav>
+  <button data-tab="today" class="on"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Today</button>
+  <button data-tab="quotes"><svg viewBox="0 0 24 24"><path d="M5 7h5v5H7a2 2 0 0 0 2 3M14 7h5v5h-3a2 2 0 0 0 2 3"/></svg>Quotes</button>
+  <button data-tab="look"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Look</button>
+</nav>
+<div id="toast"></div>
+<script src="/admin.js"></script>
+</body>
+</html>
