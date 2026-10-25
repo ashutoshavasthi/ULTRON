@@ -83,3 +83,9 @@ nav button.on { color: var(--ink); background: var(--soft); }
 nav svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 #toast { position: fixed; left: 50%; bottom: 96px; transform: translate(-50%, 20px); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 99px; opacity: 0; pointer-events: none; transition: .25s; font-size: 13px; }
 #toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+.code { background: var(--soft); border-radius: 10px; padding: 12px; font: 12px/1.5 ui-monospace, Menlo, Consolas, monospace; white-space: pre-wrap; word-break: break-all; margin: 0 0 10px; }
+.spark { width: 84px; height: 28px; flex: none; }
+.item .val { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.item.pick { cursor: pointer; } .item.pick:hover { border-color: var(--ink); }
+nav button { padding: 6px 16px; }

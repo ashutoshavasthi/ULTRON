@@ -2,7 +2,7 @@
 // Companion app. Modern browsers only (it runs on your phone or PC, not the Kindle).
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-let state = null, lastRev = 0;
+let state = null, lastRev = 0, sensors = [];
 
 /* ---------- api ---------- */
 const getPin = () => { try { return localStorage.getItem('kd-pin') || ''; } catch { return ''; } };
@@ -66,7 +66,21 @@ function render() {
   const setVal = (el, v) => { if (document.activeElement !== el) el.value = v; };
   setVal($('#setName'), s.name); setVal($('#setMaxTasks'), s.maxTasks); setVal($('#setFlash'), s.flashMinutes);
   setVal($('#setQuoteMinutes'), s.quoteMinutes); setVal($('#setQuoteMode'), s.quoteMode);
+  setVal($('#setMaxMetrics'), s.maxMetrics);
+  $('#cityNow').textContent = s.lat === null ? 'No location set: the forecast stays hidden until you pick one.' : `Forecast for ${s.city || 'your location'} (${s.lat.toFixed(2)}, ${s.lon.toFixed(2)})`;
+  renderSensors();
   fitPreview();
+}
+
+function renderSensors() {
+  const dark = matchMedia('(prefers-color-scheme: dark)').matches ? 'w' : 'k';
+  $('#sensorList').innerHTML = sensors.length ? sensors.map(m => `
+    <li class="item" data-id="${esc(m.id)}"><img class="spark" alt="" src="/api/spark/${encodeURIComponent(m.id)}.svg?w=168&h=56&c=${dark}&v=${m.t}">
+    <div class="body"><b>${esc(m.label)}</b><small>${esc(m.id)} · ${new Date(m.t).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</small></div>
+    <span class="val">${Math.round(m.value * 10) / 10} ${esc(m.unit)}</span>
+    <button class="mini" data-a="dels" aria-label="Delete">✕</button></li>`).join('') : '<li class="empty">No sensors yet. Add a reading above or try the demo sensors below.</li>';
+  const pin = getPin() ? ` -H 'x-pin: ${getPin()}'` : '';
+  $('#curl').textContent = `curl -X POST ${location.origin}/api/metrics${pin} \\\n  -H 'content-type: application/json' \\\n  -d '{"id":"co2","label":"CO2","value":812,"unit":"ppm"}'`;
 }
 
 function fitPreview() {
@@ -79,6 +93,36 @@ function fitPreview() {
 addEventListener('resize', () => state && fitPreview());
 
 /* ---------- events ---------- */
+$('#sensorForm').onsubmit = async e => {
+  e.preventDefault();
+  const label = $('#sLabel').value.trim(), value = $('#sValue').value;
+  if (!label || value === '') return toast('Name and value needed');
+  try { await api('POST', '/api/metrics', { id: label, label, value: Number(value), unit: $('#sUnit').value }); await refresh(true); toast('Saved'); } catch (err) { toast(err.message); }
+  $('#sValue').value = '';
+};
+$('#sensorList').onclick = async e => {
+  const b = e.target.closest('[data-a=dels]'); if (!b) return;
+  try { await api('DELETE', '/api/metrics/' + b.closest('.item').dataset.id); await refresh(true); } catch (err) { toast(err.message); }
+};
+$('#demoSensors').onclick = async () => { try { await api('POST', '/api/metrics/demo', {}); await refresh(true); toast('Demo sensors added'); } catch (err) { toast(err.message); } };
+$('#copyCurl').onclick = () => { navigator.clipboard?.writeText($('#curl').textContent).then(() => toast('Copied'), () => toast('Select and copy manually')); };
+
+async function findCity() {
+  const q = $('#cityQ').value.trim(); if (!q) return;
+  const box = $('#cityResults'); box.innerHTML = '<li class="empty">Searching…</li>';
+  try {
+    const { results } = await (await fetch('/api/geocode?q=' + encodeURIComponent(q))).json();
+    box.innerHTML = results?.length ? results.map((r, i) => `<li class="item pick" data-i="${i}"><div class="body"><b>${esc(r.name)}</b><small>${esc([r.region, r.country].filter(Boolean).join(', '))}</small></div></li>`).join('') : '<li class="empty">No match</li>';
+    box.onclick = e => {
+      const li = e.target.closest('.pick'); if (!li) return;
+      const r = results[li.dataset.i]; box.innerHTML = '';
+      saveSetting({ city: r.name, lat: r.lat, lon: r.lon }).then(() => toast('Location set'));
+    };
+  } catch { box.innerHTML = '<li class="empty">Search unavailable right now</li>'; }
+}
+$('#cityGo').onclick = findCity;
+$('#cityQ').onkeydown = e => { if (e.key === 'Enter') { e.preventDefault(); findCity(); } };
+
 $$('nav button').forEach(b => b.onclick = () => {
   $$('nav button').forEach(x => x.classList.toggle('on', x === b));
   $$('.tab').forEach(t => t.classList.toggle('on', t.id === 'tab-' + b.dataset.tab));
@@ -123,7 +167,7 @@ $$('[data-check]').forEach(c => c.onchange = () => saveSetting({ [c.dataset.chec
 const debounced = (el, key, conv = v => v) => el.oninput = () => {
   clearTimeout(el.t); el.t = setTimeout(() => saveSetting({ [key]: conv(el.value) }), 500);
 };
-debounced($('#setName'), 'name'); debounced($('#setMaxTasks'), 'maxTasks', Number);
+debounced($('#setName'), 'name'); debounced($('#setMaxMetrics'), 'maxMetrics', Number); debounced($('#setMaxTasks'), 'maxTasks', Number);
 debounced($('#setFlash'), 'flashMinutes', Number); debounced($('#setQuoteMinutes'), 'quoteMinutes', Number);
 $('#setQuoteMode').onchange = e => saveSetting({ quoteMode: e.target.value });
 
@@ -232,8 +276,9 @@ $('#removeWall').onclick = () => act('DELETE', '/api/wallpaper');
 async function refresh(force) {
   try {
     const { rev } = await (await fetch('/api/rev')).json();
+    sensors = (await (await fetch('/api/metrics')).json()).metrics;
     if (force || rev !== lastRev) setState(await (await fetch('/api/state')).json());
-    else setSync(true, 'synced');
+    else { setSync(true, 'synced'); renderSensors(); }
   } catch { setSync(false, 'offline'); }
 }
 refresh(true).then(buildPresets);

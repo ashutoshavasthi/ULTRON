@@ -8,7 +8,8 @@ var http = require('http');
 
 process.env.DATA_DIR = fs.mkdtempSync(path.join(os.tmpdir(), 'kd-'));
 process.env.KINDLE_PIN = '4321';
-var server = require('../server.js');
+var mock = require('./mock-meteo.js');
+var server;
 
 function call(port, method, url, body, headers) {
   return new Promise(function (resolve, reject) {
@@ -28,6 +29,9 @@ function call(port, method, url, body, headers) {
   });
 }
 
+mock(function (meteo, base) {
+process.env.OPEN_METEO_URL = base; process.env.OPEN_METEO_GEO_URL = base;
+server = require('../server.js');
 server.listen(0, async function () {
   var port = server.address().port, r, rev;
   try {
@@ -74,7 +78,36 @@ server.listen(0, async function () {
     r = await call(port, 'GET', '/'); assert.equal(r.status, 200);
     r = await call(port, 'GET', '/admin'); assert.equal(r.status, 200);
 
+    // weather + geocode
+    r = await call(port, 'GET', '/api/geocode?q=Berlin');
+    assert.equal(r.json.results[0].name, 'Berlin');
+    r = await call(port, 'GET', '/api/live');
+    assert.equal(r.json.weather, null, 'no weather until a location is set');
+    r = await call(port, 'PUT', '/api/settings', { city: 'Berlin', lat: 52.52, lon: '13.41' });
+    assert.equal(r.json.settings.lon, 13.41);
+    r = await call(port, 'GET', '/api/live');
+    assert.equal(r.json.weather.days.length, 5); assert.equal(r.json.weather.days[0].icon, 'snow');
+    assert.equal(r.json.weather.now.temp, 6.5);
+
+    // sensors
+    r = await call(port, 'POST', '/api/metrics', { id: 'CO2', label: 'CO2', value: 812, unit: 'ppm' });
+    assert.equal(r.status, 200); assert.equal(r.json.id, 'co2');
+    r = await call(port, 'POST', '/api/metrics', { id: 'co2', value: 'abc' });
+    assert.equal(r.status, 400);
+    r = await call(port, 'POST', '/api/metrics', { id: 'x', value: 1 }, { 'x-pin': 'wrong' });
+    assert.equal(r.status, 401, 'sensors need the PIN');
+    rev = (await call(port, 'GET', '/api/rev')).json.rev;
+    await call(port, 'POST', '/api/metrics', { id: 'co2', value: 900 });
+    assert.equal((await call(port, 'GET', '/api/rev')).json.rev, rev, 'sensor data must not bump rev');
+    await call(port, 'POST', '/api/metrics/demo', {});
+    r = await call(port, 'GET', '/api/live'); assert(r.json.metrics.length === 4);
+    r = await call(port, 'GET', '/api/spark/inside.svg?c=w');
+    assert.equal(r.status, 200); assert(/<polyline/.test(r.buf.toString()));
+    r = await call(port, 'GET', '/api/icon/rain.svg?c=k'); assert(/<svg/.test(r.buf.toString()));
+    r = await call(port, 'DELETE', '/api/metrics/co2'); assert(!r.json.metrics.some(function (m) { return m.id === 'co2'; }));
+
     console.log('smoke ok');
     process.exit(0);
   } catch (e) { console.error(e); process.exit(1); }
+});
 });

@@ -36,6 +36,22 @@
     <ul id="quoteList" class="list"></ul>
   </section>
 
+  <section id="tab-sensors" class="tab">
+    <div class="hero"><div><h1>Sensors</h1><p>Temperature, humidity, CO₂, anything: shown as tiles with a 24h graph.</p></div></div>
+    <form id="sensorForm" class="card stack">
+      <h3>Add a reading</h3>
+      <div class="addrow" style="margin:0"><input id="sLabel" placeholder="Name (e.g. Inside)" maxlength="24"><input id="sValue" type="number" step="any" placeholder="Value" style="width:110px"></div>
+      <div class="addrow" style="margin:0"><input id="sUnit" placeholder="Unit (°C, %, ppm)" maxlength="8"><button class="primary">Save</button></div>
+    </form>
+    <ul id="sensorList" class="list"></ul>
+    <div class="card" style="margin-top:14px">
+      <h3>Connect a real sensor</h3>
+      <p class="hint">Any device, script or Home Assistant automation can POST a value. The graph fills in automatically.</p>
+      <pre id="curl" class="code"></pre>
+      <div class="addrow"><button class="ghost" id="copyCurl" type="button">Copy command</button><button class="ghost" id="demoSensors" type="button">Add demo sensors</button></div>
+    </div>
+  </section>
+
   <section id="tab-look" class="tab">
     <div class="hero"><div><h1>Look &amp; feel</h1><p>Changes appear on the Kindle within about 30 seconds.</p></div></div>
 
@@ -44,13 +60,24 @@
         <div class="card">
           <h3>Layout</h3>
           <div class="seg" data-set="layout">
-            <button data-v="classic">Classic</button><button data-v="minimal">Minimal</button><button data-v="poster">Poster</button>
+            <button data-v="hub">Hub</button><button data-v="classic">Classic</button><button data-v="minimal">Minimal</button><button data-v="poster">Poster</button>
           </div>
+          <div class="row"><span>Screen</span><div class="seg small" data-set="theme"><button data-v="dark">Dark</button><button data-v="light">Light</button></div></div>
           <label class="row"><span>Your name</span><input id="setName" placeholder="for the greeting" maxlength="40"></label>
           <div class="row"><span>Clock</span><div class="seg small" data-set="clock24" data-bool><button data-v="true">24h</button><button data-v="false">12h</button></div></div>
           <label class="row"><span>Day progress bar</span><input type="checkbox" class="sw" data-check="showProgress"></label>
           <label class="row"><span>Show tasks</span><input type="checkbox" class="sw" data-check="showTasks"></label>
+          <label class="row"><span>Sensor tiles (Hub)</span><input type="number" min="0" max="6" id="setMaxMetrics" class="num"></label>
           <label class="row"><span>Max tasks shown</span><input type="number" min="1" max="12" id="setMaxTasks" class="num"></label>
+        </div>
+
+        <div class="card">
+          <h3>Weather</h3>
+          <div class="row"><span>Show forecast<small>Hub layout · 5 days · Open-Meteo</small></span><input type="checkbox" class="sw" data-check="showWeather"></div>
+          <div class="row"><span>Units</span><div class="seg small" data-set="units"><button data-v="c">°C</button><button data-v="f">°F</button></div></div>
+          <div class="addrow" style="margin:10px 0 0"><input id="cityQ" placeholder="Search your city…" autocomplete="off"><button class="primary" id="cityGo" type="button">Find</button></div>
+          <ul class="list" id="cityResults" style="margin-top:8px"></ul>
+          <p class="hint" id="cityNow" style="margin:10px 0 0"></p>
         </div>
 
         <div class="card">
@@ -100,6 +127,7 @@
 <nav>
   <button data-tab="today" class="on"><svg viewBox="0 0 24 24"><path d="M5 12l4 4 10-10"/></svg>Today</button>
   <button data-tab="quotes"><svg viewBox="0 0 24 24"><path d="M5 7h5v5H7a2 2 0 0 0 2 3M14 7h5v5h-3a2 2 0 0 0 2 3"/></svg>Quotes</button>
+  <button data-tab="sensors"><svg viewBox="0 0 24 24"><path d="M3 17l5-6 4 3 5-8 4 5"/></svg>Sensors</button>
   <button data-tab="look"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6"/></svg>Look</button>
 </nav>
 <div id="toast"></div>

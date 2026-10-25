@@ -6,7 +6,7 @@ Turn an old **Kindle Paperwhite** into a clean e-ink dashboard: big clock, date,
  phone / PC  ──(admin app)──►  Node server  ◄──(polls every 30s)──  Kindle browser
 ```
 
-No dependencies and no build step. Just Node 16+.
+No dependencies and no build step. Just Node 18+.
 
 ## Quick start
 
@@ -45,6 +45,21 @@ Choose your model under *Live preview*: Paperwhite 1/2 = 758×1024, Paperwhite 3
 
 Edits appear on the Kindle within about 30 seconds (it polls a tiny `/api/rev` endpoint and only reloads when something changed).
 
+## Hub layout: weather and live sensors
+
+The default **Hub** layout (dark or light) shows a greeting, the clock, a 5-day forecast, sensor tiles with 24h graphs, your tasks and a quote. It budgets space by priority: with many sensor tiles it drops the quote first, then the task list, rather than clipping.
+
+- **Weather**: Look → Weather → search your city. Uses [Open-Meteo](https://open-meteo.com) (free, no API key, cached 20 min). °C or °F.
+- **Sensors**: anything that can send an HTTP request can feed a tile (temperature, humidity, CO₂, power, steps...). The Sensors tab has a ready-made command and an "Add demo sensors" button:
+
+```bash
+curl -X POST http://<server>:8080/api/metrics -H 'x-pin: 1234' \
+  -H 'content-type: application/json' \
+  -d '{"id":"co2","label":"CO2","value":812,"unit":"ppm"}'
+```
+
+Send a value whenever you have one (the graph keeps one point per 5 minutes for 24h). Works from ESP32/Arduino, Raspberry Pi scripts, or a Home Assistant `rest_command` automation. Sensor data never touches the settings revision, so frequent updates are cheap.
+
 ## E-ink friendly animations
 
 E-ink can't animate smoothly, so motion is done in stepped, low-refresh ways (toggle in *Look*):
@@ -60,12 +75,13 @@ E-ink can't animate smoothly, so motion is done in stepped, low-refresh ways (to
 |---|---|---|
 | `PORT` | `8080` | Server port |
 | `KINDLE_PIN` | none | Required (header `x-pin`) for every change. The Kindle only reads, so it never needs it |
-| `DATA_DIR` | `./data` | Where `state.json` and `wallpaper.png` live |
+| `DATA_DIR` | `./data` | Where `state.json`, `metrics.json` and `wallpaper.png` live |
+| `OPEN_METEO_URL`, `OPEN_METEO_GEO_URL` | Open-Meteo | Override the weather endpoints (used by tests) |
 
 ## Development
 
 ```bash
-npm test     # API smoke test
+npm test     # API smoke test (uses a mock weather service, no internet needed)
 ```
 
 The Kindle page (`public/kindle.js`, `kindle.css`) is deliberately **ES5 and old-WebKit CSS only**: no `let`/`const`, arrow functions, `fetch`, grid or CSS variables. Keep it that way. The admin app is free to use modern JS.
