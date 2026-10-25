@@ -56,7 +56,7 @@ body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-text
 .qt .hid { visibility: hidden; }
 .qa { font-size: 0.5em; letter-spacing: 0.2em; text-transform: uppercase; color: #444; margin-top: 0.5em; }
 .qa.hid { visibility: hidden; }
-#quote.card .in, #quote.card { border-top: 2px solid #000; }
+#quote.card .in { border-top: 0; }
 
 #status { position: absolute; right: 4px; bottom: 2px; font-size: 10px; color: #666; }
 #flash { display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #000; z-index: 99; }

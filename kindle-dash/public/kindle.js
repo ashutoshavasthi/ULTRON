@@ -4,7 +4,7 @@
   var FAST = /[?&]fast=1/.test(location.search); // used by the admin live preview
   var state = null, lastRev = 0, clockTimer = null, quoteTimers = [];
   var prevClock = '', lastQuoteKey = null, lastFlash = new Date().getTime();
-  var taskFit = 6, cache = {};
+  var taskFit = 6, clockBase = 100, cache = {};
   var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -74,7 +74,7 @@
     app.style.backgroundImage = full ? 'url(' + url + ')' : 'none';
 
     var m = Math.round(W * 0.05), g = Math.round(H * 0.013), cw = W - 2 * m;
-    var hDate = Math.round(H * 0.07);
+    var hDate = Math.round(H * (full ? 0.085 : 0.07));
     var hClock = Math.round(H * (s.layout === 'minimal' ? 0.36 : s.layout === 'poster' ? 0.22 : 0.2));
     var hProg = wantProg ? Math.round(H * 0.072) : 0;
     var hQuote = wantQuote ? Math.round(H * (s.layout === 'minimal' ? 0.2 : 0.15)) : 0;
@@ -114,7 +114,8 @@
     var fs = Math.round(W / 20);
     var clockPx = Math.min(hClock * 0.82, (cw - 20) / 2.75);
     var ce = $('clock');
-    ce.style.fontSize = Math.round(clockPx) + 'px';
+    clockBase = Math.round(clockPx);
+    ce.style.fontSize = clockBase + 'px';
     ce.style.lineHeight = hClock + 'px';
     // tasks that fit: header 1.5em*0.62 + rows 1.75em*0.82? rows are 1.75 body-em
     var cap = s.layout === 'minimal' ? 3 : s.maxTasks;
@@ -157,8 +158,17 @@
     if (suffix) { html += '<span class="ap">' + suffix + '</span>'; }
     prevClock = str;
     setHtml('clock', html);
+    fitClock();
     // Stepped "flip": changed digits show inverted for a moment, then settle.
     if (changed) { setTimeout(function () { renderClock(new Date(), true); }, 900); }
+  }
+  // The AM/PM suffix makes the clock wider than the digits-only estimate: shrink to fit.
+  function fitClock() {
+    var el = $('clock');
+    el.style.fontSize = clockBase + 'px';
+    if (el.scrollWidth > el.clientWidth) {
+      el.style.fontSize = Math.floor(clockBase * el.clientWidth / el.scrollWidth * 0.96) + 'px';
+    }
   }
   function renderProgress(d) {
     if ($('prog').style.display === 'none') { return; }
