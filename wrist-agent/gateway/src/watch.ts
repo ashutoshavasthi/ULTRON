@@ -10,7 +10,8 @@ export function toWatchCards(text: string, limit = CARD_LIMIT): string[] {
     .replace(/\s+/g, " ")
     .trim();
   if (!clean) return [];
-  const pieces = clean.match(/[^.!?\n]+[.!?]?/g) ?? [clean];
+  // Only split where punctuation is followed by whitespace, so "hello.txt" stays whole.
+  const pieces = clean.split(/(?<=[.!?])\s+/);
   const cards: string[] = [];
   let cur = "";
   for (const raw of pieces) {

@@ -57,7 +57,7 @@ wss.on("connection", (ws) => {
         const cwd = resolve(ROOT, msg.cwd);
         const rel = relative(ROOT, cwd);
         if (rel.startsWith("..") || resolve(rel) === rel) return send({ type: "error", message: `cwd must be inside ${ROOT}` });
-        const s = new Session({ cwd, name: msg.name, model: msg.model, permissionMode: msg.permissionMode, emit: broadcast });
+        const s = new Session({ cwd, name: msg.name, model: msg.model, permissionMode: msg.permissionMode, approvalTimeoutMs: Number(process.env.WRIST_APPROVAL_TIMEOUT_MS) || undefined, emit: broadcast });
         sessions.set(s.id, s);
         return broadcast({ type: "session.started", session: s.info() });
       }

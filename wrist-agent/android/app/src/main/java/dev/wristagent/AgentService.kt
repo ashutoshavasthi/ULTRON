@@ -29,9 +29,12 @@ class AgentService : Service(), Gateway.Listener {
         notifier = Notifier(this)
         voice = Voice(this, onHeard = { text -> sessionId?.let { send("utterance", it, text) } }, log = ::log)
         voice.start()
+        // Android 14 throws if the microphone type is declared without RECORD_AUDIO granted.
+        val mic = checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == android.content.pm.PackageManager.PERMISSION_GRANTED
         startForeground(
             1, notifier.foreground("Starting..."),
-            ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE or ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+            if (mic) ServiceInfo.FOREGROUND_SERVICE_TYPE_MICROPHONE or ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
+            else ServiceInfo.FOREGROUND_SERVICE_TYPE_MEDIA_PLAYBACK
         )
         startMedia()
         CallTrick.log = ::log

@@ -44,8 +44,9 @@ class Voice(private val ctx: Context, private val onHeard: (String) -> Unit, pri
     /** Route call audio to a connected Bluetooth SCO device. Returns the device name or null. */
     fun routeToWatch(): String? {
         val sco = audio.availableCommunicationDevices.firstOrNull { it.type == AudioDeviceInfo.TYPE_BLUETOOTH_SCO }
+            ?: return null // no watch connected: leave the phone's own mic and speaker alone
         audio.mode = AudioManager.MODE_IN_COMMUNICATION
-        return if (sco != null && audio.setCommunicationDevice(sco)) sco.productName.toString() else null
+        return if (audio.setCommunicationDevice(sco)) sco.productName.toString() else null
     }
 
     fun releaseRoute() {
@@ -55,6 +56,7 @@ class Voice(private val ctx: Context, private val onHeard: (String) -> Unit, pri
 
     fun speak(text: String, then: (() -> Unit)? = null) {
         if (!ttsReady) return log("tts not ready")
+        routeToWatch()
         onSpeechDone = then
         tts?.setOnUtteranceProgressListener(object : android.speech.tts.UtteranceProgressListener() {
             override fun onStart(id: String?) {}
@@ -70,6 +72,7 @@ class Voice(private val ctx: Context, private val onHeard: (String) -> Unit, pri
 
     fun listen() = main.post {
         stopSpeaking()
+        routeToWatch()
         if (!SpeechRecognizer.isRecognitionAvailable(ctx)) return@post log("no speech recognizer on this phone")
         recognizer?.destroy()
         recognizer = SpeechRecognizer.createSpeechRecognizer(ctx).also { r ->

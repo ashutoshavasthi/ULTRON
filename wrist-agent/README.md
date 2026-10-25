@@ -13,7 +13,7 @@ Android app  <-- WebSocket over Tailscale -->  gateway (your laptop / cloud box)
 
 | Piece | State |
 |---|---|
-| `gateway/`: real Claude Code sessions via the Agent SDK, approvals (tools, **plans**, questions), voice-intent parsing, watch-sized text cards, default-deny timeout, token auth | Built. 10 unit tests pass with a faked Claude. **Not yet run against the real API.** |
+| `gateway/`: real Claude Code sessions via the Agent SDK, approvals (tools, **plans**, questions), voice-intent parsing, watch-sized text cards, default-deny timeout, token auth | Built. 11 unit tests pass, and one live run against the real Agent SDK worked end to end: plan proposed, **modify** feedback produced a revised plan, approve, tool approval, file written. Sessions default to plan mode. |
 | `android/`: gateway client, foreground service, TTS/STT, notifications with Approve/Deny/Modify actions, media-button mapping, probe buttons | Compiles to an APK. **Not yet run on a device.** |
 | Noise watch channels (below) | **Unverified.** That is what the probes are for. |
 
@@ -48,10 +48,10 @@ notification access for "Wrist Agent". Tap **Connect** first (starts the service
 1. **Route audio + speak test:** does the test sentence play from the *watch* speaker? Then tap *Talk* and speak into the watch: does the log show `heard: ...`?
 2. **Media buttons:** open the watch's music/camera-remote controls and press play/next/previous. Does the log show `media key: ...`?
 3. **Notification mirror:** does "Watch text test" appear on the watch? Does the long text scroll?
-4. **Call trick (4a and 4b):** does the watch ring with the question as the caller name? Do Answer/Reject show `call ANSWERED` / `call REJECTED`? (4b needs the account enabled under Phone → Settings → Calling accounts.)
+4. **Call trick (4a and 4b):** does the watch ring with the question as the caller name? Do Answer/Reject show `call ANSWERED` / `call REJECTED`? (4a is self-managed, so the system may not ring Bluetooth for it and it may only show a notification; 4b needs the account enabled under Phone → Settings → Calling accounts and is the more likely to reach a watch.)
 
 Whatever fails, we fall back: voice-only approvals plus mirrored notifications always work if (1) and (3) do.
 
 ## Not built yet
 
-Gemini CLI / OpenCode adapters, a web dashboard, session resume after gateway restart, and a Wear OS client.
+Gemini CLI / OpenCode adapters (only Claude Code works), a web dashboard, WebSocket auto-reconnect, session resume after a gateway restart, and a Wear OS client.

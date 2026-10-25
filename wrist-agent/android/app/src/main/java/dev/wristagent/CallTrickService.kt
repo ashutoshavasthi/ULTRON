@@ -63,6 +63,10 @@ class CallTrickService : ConnectionService() {
             override fun onAnswer() { CallTrick.log("call ANSWERED"); CallTrick.onAnswer?.invoke(); end() }
             override fun onAnswer(videoState: Int) = onAnswer()
             override fun onReject() { CallTrick.log("call REJECTED"); CallTrick.onReject?.invoke(); end() }
+            override fun onShowIncomingCallUi() {
+                // Self-managed calls must show their own UI; a notification is also what a watch can mirror.
+                Notifier(applicationContext).card(3001, "Incoming: Wrist Agent", title)
+            }
             override fun onDisconnect() { CallTrick.log("call disconnected"); end() }
             private fun end() { setDisconnected(DisconnectCause(DisconnectCause.LOCAL)); destroy() }
         }

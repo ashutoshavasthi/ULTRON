@@ -52,7 +52,7 @@ export class Session {
       options: {
         cwd: opts.cwd,
         model: opts.model,
-        permissionMode: opts.permissionMode ?? "default",
+        permissionMode: opts.permissionMode ?? "plan", // plans are the main thing to approve from the wrist
         canUseTool: this.canUseTool,
       },
     });
@@ -198,7 +198,9 @@ export class Session {
     let choices: PendingApproval["options"];
     if (toolName === "ExitPlanMode") {
       kind = "plan";
-      detail = typeof input.plan === "string" ? input.plan : JSON.stringify(input, null, 2);
+      // The SDK's input type doesn't document where the plan text lives, so try the known spots.
+      const planText = [input.plan, options.description, options.title].find((v) => typeof v === "string" && v.trim());
+      detail = (planText as string | undefined) ?? "Claude has a plan ready. Open the phone app to read it.";
       title = "Approve plan?";
     } else if (toolName === "AskUserQuestion") {
       kind = "question";
@@ -207,6 +209,7 @@ export class Session {
       detail = q.question;
       choices = q.options;
     }
+    if (process.env.WRIST_DEBUG) console.error("[canUseTool]", toolName, JSON.stringify({ input, title: options.title, description: options.description }));
     const id = randomUUID();
     const watchCards = kind === "question"
       ? [title, ...(choices ?? []).map((o, i) => `${i + 1}. ${o.label}`)]

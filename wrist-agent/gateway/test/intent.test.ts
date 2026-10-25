@@ -36,3 +36,7 @@ test("watch cards respect the limit and are numbered", () => {
   assert.deepEqual(toWatchCards("Short."), ["Short."]);
   assert.deepEqual(toWatchCards("```x```"), ["[code]"]);
 });
+
+test("filenames and versions are not split at the dot", () => {
+  assert.deepEqual(toWatchCards("Create hello.txt and bump v1.2.3 now."), ["Create hello.txt and bump v1.2.3 now."]);
+});
