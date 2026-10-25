@@ -1,0 +1,111 @@
+/* E-ink display. Old-WebKit safe: no grid, no variables, no modern flexbox.
+   Grayscale only; sizes are in em, and kindle.js sets body font-size from the screen width. */
+html, body { margin: 0; padding: 0; width: 100%; height: 100%; background: #fff; color: #000; overflow: hidden; }
+body { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-text-size-adjust: none; }
+#app { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background-color: #fff;
+       -webkit-background-size: cover; background-size: cover; background-position: center; }
+.blk { position: absolute; overflow: hidden; -webkit-box-sizing: border-box; box-sizing: border-box; }
+.card { background: #fff; border: 2px solid #000; padding: 0 0.3em; }
+
+/* date */
+#date .in { padding: 0 0.1em; }
+.dl { float: left; }
+.dr { float: right; text-align: right; font-size: 0.62em; color: #444; padding-top: 0.55em; }
+.dw { font-size: 0.78em; font-weight: bold; letter-spacing: 0.22em; text-transform: uppercase; }
+.dd { font-family: Georgia, "Times New Roman", serif; font-size: 0.8em; color: #333; margin-top: 0.1em; }
+.wk { color: #666; }
+
+/* clock */
+#clock { text-align: center; white-space: nowrap; font-weight: bold; letter-spacing: -0.02em; }
+#clock.inverted { background: #000; color: #fff; }
+.ch { display: inline-block; min-width: 0.56em; text-align: center; }
+.ch.col { min-width: 0.28em; position: relative; top: -0.06em; }
+.ch.inv { background: #000; color: #fff; }
+#clock.inverted .ch.inv { background: #fff; color: #000; }
+.ap { font-size: 0.22em; letter-spacing: 0.1em; margin-left: 0.4em; font-weight: bold; }
+
+/* day progress */
+#prog .bar { height: 0.7em; }
+#prog .seg { float: left; width: 4.1666%; height: 100%; -webkit-box-sizing: border-box; box-sizing: border-box; border: 1px solid #000; border-right-width: 0; }
+#prog .seg.last { border-right-width: 1px; }
+#prog .seg.f { background: #000; }
+#prog .seg.p { background: #999; }
+#prog .lab { clear: both; font-size: 0.5em; letter-spacing: 0.12em; color: #444; padding-top: 0.5em; text-transform: uppercase; }
+#prog .lab b { color: #000; }
+
+/* wallpaper panel */
+#wall { border: 2px solid #000; background-color: #fff; -webkit-background-size: cover; background-size: cover; background-position: center; }
+
+/* tasks */
+.th { border-bottom: 2px solid #000; height: 1.5em; line-height: 1.5em; font-size: 0.62em; letter-spacing: 0.22em; font-weight: bold; }
+.th span { float: right; letter-spacing: 0.1em; }
+.tr { height: 1.75em; line-height: 1.75em; white-space: nowrap; overflow: hidden; border-bottom: 1px solid #bbb; position: relative; }
+.tb { display: inline-block; width: 0.62em; height: 0.62em; border: 2px solid #000; margin-right: 0.45em; vertical-align: -0.04em; -webkit-box-sizing: border-box; box-sizing: border-box; position: relative; }
+.tb i { position: absolute; left: 0.1em; top: 0.1em; right: 0.1em; bottom: 0.1em; background: #000; }
+.tt { font-size: 0.6em; color: #444; margin-right: 0.6em; letter-spacing: 0.04em; display: inline-block; min-width: 2.7em; }
+.tx { font-size: 0.82em; }
+.tr.dn .tx { text-decoration: line-through; color: #777; }
+.tr.dn .tt { color: #888; }
+.tr.nx { font-weight: bold; background: #eee; border-left: 0.2em solid #000; padding-left: 0.3em; }
+.tm { font-size: 0.55em; color: #555; padding-top: 0.5em; letter-spacing: 0.1em; text-transform: uppercase; }
+.none { font-family: Georgia, serif; font-style: italic; color: #555; padding-top: 0.6em; font-size: 0.8em; }
+
+/* quote */
+#quote .in { padding: 0.05em 0.1em 0; border-top: 2px solid #000; }
+.qt { font-family: Georgia, "Times New Roman", serif; font-style: italic; font-size: 0.78em; line-height: 1.28; padding-top: 0.45em; }
+.qt .hid { visibility: hidden; }
+.qa { font-size: 0.5em; letter-spacing: 0.2em; text-transform: uppercase; color: #444; margin-top: 0.5em; }
+.qa.hid { visibility: hidden; }
+#quote.card .in { border-top: 0; }
+
+#status { position: absolute; right: 4px; bottom: 2px; font-size: 10px; color: #666; }
+#flash { display: none; position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: #000; z-index: 99; }
+
+/* ---------- hub layout: greeting, forecast strip, sensor tiles ---------- */
+.hub #date .in { text-align: center; padding: 0; }
+.hub .dl { float: none; }
+.hub .dr { display: none; }
+.hub .dw { font-size: 1.05em; letter-spacing: 0.01em; text-transform: none; }
+.hub .dd { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 0.62em; color: #444; margin-top: 0.2em; }
+#weather { border-top: 2px solid #000; border-bottom: 2px solid #000; }
+.wd { float: left; width: 20%; text-align: center; padding-top: 0.25em; }
+.wn { font-size: 0.5em; letter-spacing: 0.14em; text-transform: uppercase; color: #444; }
+.wi { display: block; width: 2em; height: 2em; margin: 0.1em auto 0; }
+.hi { font-size: 0.78em; font-weight: bold; margin-top: 0.05em; }
+.lo { font-size: 0.55em; color: #555; }
+#metrics { overflow: hidden; }
+.mt { float: left; width: 50%; -webkit-box-sizing: border-box; box-sizing: border-box; padding: 0.15em 0.35em 0.2em 0; border-bottom: 1px solid #bbb; }
+.mt.r { padding: 0.15em 0 0.2em 0.35em; }
+.ml { font-size: 0.5em; letter-spacing: 0.14em; text-transform: uppercase; color: #444; }
+.mv { font-size: 1.55em; font-weight: bold; line-height: 1.15; letter-spacing: -0.02em; white-space: nowrap; }
+.mu { font-size: 0.4em; font-weight: normal; color: #555; margin-left: 0.3em; letter-spacing: 0; }
+.ms { display: block; width: 100%; height: 1.3em; margin-top: 0.1em; }
+.hub #status { left: 5%; right: auto; bottom: 1.2%; font-size: 0.5em; color: #555; letter-spacing: 0.06em; }
+.hub #clock { font-weight: bold; }
+
+/* ---------- dark theme (white on black) ---------- */
+body.dark, body.dark html { background: #000; color: #fff; }
+.dark #app { background-color: #000; }
+.dark .card { background: #000; border-color: #fff; }
+.dark .dd, .dark .hub .dd { color: #bbb; }
+.dark .dr, .dark .wk { color: #bbb; }
+.dark #clock.inverted { background: #fff; color: #000; }
+.dark .ch.inv { background: #fff; color: #000; }
+.dark #clock.inverted .ch.inv { background: #000; color: #fff; }
+.dark #prog .seg { border-color: #fff; }
+.dark #prog .seg.f { background: #fff; }
+.dark #prog .seg.p { background: #777; }
+.dark #prog .lab { color: #bbb; } .dark #prog .lab b { color: #fff; }
+.dark #wall { border-color: #fff; background-color: #000; }
+.dark .th { border-bottom-color: #fff; }
+.dark .tr { border-bottom-color: #444; }
+.dark .tb { border-color: #fff; } .dark .tb i { background: #fff; }
+.dark .tt, .dark .tm, .dark .none { color: #bbb; }
+.dark .tr.dn .tx { color: #888; } .dark .tr.dn .tt { color: #777; }
+.dark .tr.nx { background: #222; border-left-color: #fff; }
+.dark #quote .in { border-top-color: #fff; }
+.dark .qa { color: #bbb; }
+.dark #weather { border-color: #fff; }
+.dark .wn, .dark .ml, .dark .lo, .dark .mu, .dark .hub #status, .dark #status { color: #aaa; }
+.dark .mt { border-bottom-color: #444; }
+.dark #flash { background: #fff; }
