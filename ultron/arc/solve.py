@@ -438,8 +438,11 @@ def predict(train, tests, **kw):
         # nothing built from the big operations explains every example: try programs of
         # small composable steps (compose.py), with their own budget
         from . import compose
+        # with the words Ultron grew (arc/loop.py), tried only when the given steps alone
+        # find nothing, so every task those answer is answered as before
         ca, cused, cspent = compose.predict(train, tests, budget=compose.BUDGET,
-                                            steps=compose.BASIC, cells_up_to=0, loo=True)
+                                            steps=compose.BASIC, cells_up_to=0, loo=True,
+                                            own_after=True)
         if cused:
             attempts, used = ca, [(("compose", e),) for e in cused]
         spent += cspent

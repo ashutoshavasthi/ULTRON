@@ -1,5 +1,10 @@
 # The Code stage: how programs work, Engc, and improving itself
 
+> **No longer the main line.** The plan is now a ladder of capability levels, from a
+> child's start to beyond human ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)).
+> This plan is kept as a record and its results are banked: C1–C8 belong to L4 (expert reasoning) and self-improvement (C9) to L6. See
+> [LEVEL_MAP.md](LEVEL_MAP.md).
+
 **Mission.** Ultron finds laws in worlds, but it cannot read or write a real program,
 it has never looked at its own code, and every building block it has was designed by
 people. The Code stage teaches it how programs work the way it learned physics: by

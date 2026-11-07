@@ -9,6 +9,9 @@
     python -m ultron show             what Ultron knows
     python -m ultron blind FILE       score Ultron on questions someone else wrote
     python -m ultron experiment       designing experiments vs watching (slow, ~4 min)
+    python -m ultron score            the scoreboard: is it getting better at learning?
+    python -m ultron learn            rounds of the learning loop: Ultron grows its language
+    python -m ultron net train|score  engine 2: the network Ultron trains itself (M2)
 """
 
 import argparse
@@ -77,6 +80,9 @@ def cmd_arc(args):
     from .arc import harness, library, solve
     if not args.no_library:
         solve.LIBRARY[0] = library.load() or None
+        from .arc import compose, loop
+        compose.LIBRARY[0] = loop.load_words()          # the words of its language
+        compose.ORDER[0] = loop.load_order()            # and its intuition
     results = []
     for name in args.sets:
         r = harness.score_set(name, args.split, limit=args.limit, budget=args.budget,
@@ -93,6 +99,81 @@ def cmd_arc(args):
         _json.dump([{k: v for k, v in r.items()} for r in results], f, indent=0, default=str)
         f.write("\n")
     print(f"written to {out}")
+
+
+def cmd_score(args):
+    """The scoreboard (docs/PLAN.md): one round of the learning loop held out, the main
+    solver on ARC-AGI-1 training, and the lessons; one row in reports/scoreboard.md."""
+    from . import score
+    r = score.run(quick=args.quick, workers=args.workers, skip_lessons=args.skip_lessons,
+                  brain_path=args.brain)
+    loop = r["loop"]
+    print(f"round {loop['round']}, held out ({loop['unseen']} tasks): {loop['without'][0]} "
+          f"right without its words, {loop['with'][0]} with them (gain {loop['gain']:+d}, "
+          f"{loop['change']:+d} from last round); {loop['words']} words from "
+          f"{loop['explained']} tasks explained in practice")
+    for w in loop["word_list"]:
+        print("   ", w)
+    a = r["arc"]
+    print(f"ARC-AGI-1 training: {a['percent']:.1f}% of {a['tasks']} "
+          f"({a['right']} right of {a['answered']} answered)")
+    if r["lessons"]:
+        print(f"lessons: {r['lessons']['passed']}/{r['lessons']['of']} exams passed"
+              + (f" (not: {', '.join(r['lessons']['failed'])})" if r["lessons"]["failed"] else ""))
+    print(f"row added to reports/scoreboard.md ({r['seconds']} s)")
+
+
+def cmd_learn(args):
+    """Rounds of the learning loop (arc/loop.py): its language is kept and grown, and each
+    round is tested on held-out tasks it never learns from (answering only when it earns
+    it). --rescore measures what it has now under that rule, without learning."""
+    from .arc import loop
+    path = args.state or (loop.STATE if not args.quick
+                          else os.path.join("brain", "language_quick.json"))
+    if args.rescore:
+        row, state = loop.rescore(quick=args.quick, workers=args.workers, state_path=path)
+        rows = [row]
+    else:
+        rows, state = loop.run(rounds=args.rounds, quick=args.quick, workers=args.workers,
+                               state_path=path)
+    w = state["strict_without"]
+    for r in rows:
+        change = "" if r["change"] is None else f" ({r['change']:+d} from last round)"
+        print(f"round {r['round']}: practice explained {r['explained']} (+{r['new']}), "
+              f"{r['words']} words, {r.get('dreams', 0)} dreams; held out {r['right']} right "
+              f"({r['wrong']} wrong), net {r['net']}; without anything grown {w[0]} right "
+              f"({w[1]} wrong), net {w[0] - w[1]}{change}")
+        if "interval" in r:
+            b = r["bottleneck"]
+            print(f"   gain in net: 95% interval {r['interval'][0]:+d} to {r['interval'][1]:+d}; "
+                  f"missed {b['missed']}: of {b['sampled']} re-searched with 4x budget, "
+                  f"{b['found with 4x budget']} found, {b['not found']} not")
+    for word in rows[-1]["word_list"] if rows else []:
+        print("   ", word)
+    print(f"language kept in {path}; curve in reports/learning_curve.md")
+
+
+def cmd_net(args):
+    """Engine 2 (docs/PLAN.md, M2): train Ultron's own network, or score the held-out half
+    with the judge (programs, network, both)."""
+    from .arc import judge
+    from .arc.net import train as nettrain
+    path = os.path.join("brain", "net_quick.pt") if args.quick else nettrain.CKPT
+    if args.action == "train":
+        nettrain.train(quick=args.quick, device=args.device, steps=args.steps, path=path)
+        print(f"network saved to {path}; training report in {nettrain.REPORT}")
+        return
+    r = judge.score(quick=args.quick, device=args.device, workers=args.workers, path=path)
+    rule = (f"the network answers when >= {r['k']} of {r['views']} views agree"
+            if r["k"] <= r["views"] else "the network never answers: on the calibration "
+            "puzzles no number of agreeing views reached 95% precision")
+    print(f"held out ({r['held_out']} puzzles; {rule}):")
+    for name, row in r["rows"].items():
+        p = "-" if row["precision"] is None else f"{row['precision']:.0%}"
+        print(f"  {name:9s} {row['right']} right, {row['wrong']} wrong, net {row['net']}, "
+              f"precision {p}")
+    lo, hi = r["gain_over_programs"]
+    print(f"  gain in net of both over programs alone: 95% interval {lo:+d} to {hi:+d}")
 
 
 def cmd_look(args):
@@ -276,12 +357,30 @@ def main(argv=None):
                     help="tasks solved at once (same answers as one at a time)")
     ar.add_argument("--no-library", action="store_true",
                     help="without the building blocks Ultron learned itself")
+    le = sub.add_parser("learn")
+    le.add_argument("--rounds", type=int, default=1)
+    le.add_argument("--quick", action="store_true", help="60 practice and 60 held-out tasks")
+    le.add_argument("--workers", type=int, default=4)
+    le.add_argument("--state", default=None, help="where its language is kept")
+    le.add_argument("--rescore", action="store_true",
+                    help="measure what it has now (held-out answers must earn it); no learning")
+    nt = sub.add_parser("net")
+    nt.add_argument("action", choices=["train", "score"])
+    nt.add_argument("--quick", action="store_true", help="a tiny CPU run: checks the pipeline")
+    nt.add_argument("--device", default="cpu", help="cpu, or cuda on a GPU machine")
+    nt.add_argument("--steps", type=int, default=None)
+    nt.add_argument("--workers", type=int, default=4)
+    sc = sub.add_parser("score")
+    sc.add_argument("--quick", action="store_true", help="fewer tasks: a fast check")
+    sc.add_argument("--workers", type=int, default=4)
+    sc.add_argument("--skip-lessons", action="store_true")
     lk = sub.add_parser("look")
     lk.add_argument("file")
     args = p.parse_args(argv)
     {"train": cmd_train, "exam": cmd_exam, "ask": cmd_ask, "why": cmd_why,
      "show": cmd_show, "blind": cmd_blind, "experiment": cmd_experiment,
-     "look": cmd_look, "stress": cmd_stress, "arc": cmd_arc}[args.cmd](args)
+     "look": cmd_look, "stress": cmd_stress, "arc": cmd_arc,
+     "score": cmd_score, "learn": cmd_learn, "net": cmd_net}[args.cmd](args)
 
 
 if __name__ == "__main__":

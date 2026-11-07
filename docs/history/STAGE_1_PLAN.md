@@ -1,5 +1,10 @@
 # Stage 1: the scalable, unbreakable core
 
+> **No longer the main line.** The plan is now a ladder of capability levels, from a
+> child's start to beyond human ([MASTER_PLAN.md](MASTER_PLAN.md), [ROADMAP.md](ROADMAP.md)).
+> This plan is kept as a record and its results are banked: its robustness, speed and expressiveness criteria (R, S, E) are core properties checked at every level, and ARC-AGI (A2, A3) is an outside yardstick for L3. See
+> [LEVEL_MAP.md](LEVEL_MAP.md).
+
 **Mission:** make Ultron's core (the explanation engine, its intuition and its library)
 strong enough to carry everything that comes after. It must survive bad data, scale past
 the exponential wall, express the shapes real laws take, and prove itself on a public

@@ -37,7 +37,10 @@ def fetch(name):
     folder = _folder(name)
     if not os.path.isdir(os.path.join(folder, "data")):
         os.makedirs(os.path.dirname(folder), exist_ok=True)
-        subprocess.run(["git", "clone", "-q", info["url"], folder], check=True,
+        # autocrlf off: Git for Windows would otherwise turn line ends into CRLF, and the
+        # files would no longer match their pinned checksums
+        subprocess.run(["git", "clone", "-q", "-c", "core.autocrlf=false", info["url"],
+                        folder], check=True,
                        env={**os.environ, "GIT_LFS_SKIP_SMUDGE": "1"})
     head = subprocess.run(["git", "-C", folder, "rev-parse", "HEAD"], capture_output=True,
                           text=True).stdout.strip()

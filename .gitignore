@@ -2,3 +2,8 @@ __pycache__/
 *.pyc
 .pytest_cache/
 /data/
+
+# quick runs of the learning loop (the full language is brain/language.json)
+brain/language_quick.json
+# its network: too large for git (train it with python -m ultron net train)
+brain/net*.pt
