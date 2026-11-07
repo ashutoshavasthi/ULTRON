@@ -59,10 +59,19 @@ def test_held_out_answers_must_earn_it_and_switches_are_restored(tmp_path):
 
     grow.run = spy
     try:
-        right, wrong = loop.held_out(state, tasks, held[:4], [], {"things": 3}, 1)
+        outcomes = loop.held_out(state, tasks, held[:4], [], {"things": 3}, 1)
     finally:
         grow.run = real_run
     assert all(loo for loo, _ in seen)                       # held out: leave one out
     assert seen[0][1] is None and seen[-1][1] == {"things": 3}  # baseline has no intuition
-    assert state["strict_without"] is not None and right >= 0 and wrong >= 0
+    assert set(outcomes) == set(held[:4]) and set(outcomes.values()) <= {-1, 0, 1}
+    assert set(state["strict_without_tasks"]) == set(held[:4])
     assert (compose.ORDER[0], grow.LOO[0]) == before
+
+
+def test_the_interval_of_a_gain():
+    without = {"a": 0, "b": 0, "c": -1, "d": 1}
+    assert loop.interval(dict(without), without) == (0, 0)
+    better = {"a": 1, "b": 1, "c": 0, "d": 1}
+    lo, hi = loop.interval(better, without)
+    assert 0 < lo <= hi <= 4          # four tasks, each at most +1 when resampled

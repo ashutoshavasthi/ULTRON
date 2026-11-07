@@ -529,8 +529,9 @@ BASIC = STEPS[:27]
 LIBRARY = [None]        # steps Ultron built itself from these (learn_library), when on
 FINISH = [True]         # check each new set of things / picture as a finished answer
 OWN_LAST = [False]      # try its own steps after the given ones at each size
-ORDER = [None]          # its intuition (loop.py): {step: uses in its own solutions}, most
-                        # used tried first at each size; None keeps the given order
+ORDER = [None]          # its intuition (loop.py): {step: score}, or a guide (dreams.py)
+                        # giving that for each puzzle; the highest are tried first at
+                        # each size. None keeps the given order
 CELLS_UP_TO = 4         # a local law per cell is tried on pictures made in this many steps
 
 
@@ -733,7 +734,9 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None, steps=None, cel
     base_steps = STEPS if steps is None else steps
     steps = base_steps + own if OWN_LAST[0] else own + base_steps
     if ORDER[0]:
-        steps = sorted(steps, key=lambda st: -ORDER[0].get(st[0], 0))    # stable on ties
+        # its intuition: a fixed ranking, or a guide that ranks the steps for this puzzle
+        rank = ORDER[0](train) if callable(ORDER[0]) else ORDER[0]
+        steps = sorted(steps, key=lambda st: -rank.get(st[0], 0))        # stable on ties
     try:
         for s in range(1, max_size + 1):
             for name, argt, outt, f in steps:

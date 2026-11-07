@@ -139,9 +139,14 @@ def cmd_learn(args):
     for r in rows:
         change = "" if r["change"] is None else f" ({r['change']:+d} from last round)"
         print(f"round {r['round']}: practice explained {r['explained']} (+{r['new']}), "
-              f"{r['words']} words; held out {r['right']} right ({r['wrong']} wrong), net "
-              f"{r['net']}; without anything grown {w[0]} right ({w[1]} wrong), net "
-              f"{w[0] - w[1]}{change}")
+              f"{r['words']} words, {r.get('dreams', 0)} dreams; held out {r['right']} right "
+              f"({r['wrong']} wrong), net {r['net']}; without anything grown {w[0]} right "
+              f"({w[1]} wrong), net {w[0] - w[1]}{change}")
+        if "interval" in r:
+            b = r["bottleneck"]
+            print(f"   gain in net: 95% interval {r['interval'][0]:+d} to {r['interval'][1]:+d}; "
+                  f"missed {b['missed']}: of {b['sampled']} re-searched with 4x budget, "
+                  f"{b['found with 4x budget']} found, {b['not found']} not")
     for word in rows[-1]["word_list"] if rows else []:
         print("   ", word)
     print(f"language kept in {path}; curve in reports/learning_curve.md")
