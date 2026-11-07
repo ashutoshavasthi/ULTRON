@@ -7,3 +7,11 @@ One row per round of `python -m ultron learn` (docs/PLAN.md). Practice: tasks ex
 | 1 | 2026-10-20 09:15 | full (316 held out) | 35 (+35) | 5 | 37 (4) | 39 (6) | +2 | +2 |
 | 2 | 2026-10-20 09:35 | full (316 held out) | 45 (+10) | 8 | 37 (4) | 40 (11) | +3 | +1 |
 | 3 | 2026-10-20 09:55 | full (316 held out) | 46 (+1) | 9 | 37 (4) | 42 (9) | +5 | +2 |
+
+## From here on: held-out answers must earn their place
+
+Rows above answered whenever any program fit the examples, and their wrong answers rose with the right ones. From here on a held-out answer is given only when its explanation also holds with any one example left out (as the main solver does), and Ultron tries first the steps it uses most (its intuition). **Net** = right - wrong; **precision** = right / answered. Learning compounds when net and right rise while wrong stays low.
+
+| Round | When | Run | Practice explained (new) | Words | Held out without: right (wrong) | with its words and intuition | Net (without -> with) | Precision | Change in net from last round |
+|---|---|---|---|---|---|---|---|---|---|
+| 3b | 2026-11-07 03:51 | full (316 held out) | 46 (+0) | 9 | 30 (1) | 34 (0) | 29 -> 34 | 100% | - |

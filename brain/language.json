@@ -1747,6 +1747,117 @@
     ]
    ]
   ],
+  "b60334d2": [
+   "cells",
+   [
+    "overlay",
+    [
+     "paint",
+     [
+      "x"
+     ],
+     [
+      "recolour",
+      [
+       "ring",
+       [
+        "things",
+        [
+         "x"
+        ]
+       ]
+      ],
+      [
+       "k",
+       3
+      ]
+     ]
+    ],
+    [
+     "flip",
+     [
+      "rot180",
+      [
+       "x"
+      ]
+     ]
+    ]
+   ],
+   [
+    "k",
+    [
+     [
+      "colour",
+      "orth_set"
+     ],
+     [
+      [
+       [
+        0,
+        []
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         3,
+         5
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         5
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         3,
+         5
+        ]
+       ],
+       1
+      ],
+      [
+       [
+        3,
+        [
+         3
+        ]
+       ],
+       5
+      ],
+      [
+       [
+        5,
+        [
+         3
+        ]
+       ],
+       0
+      ]
+     ]
+    ]
+   ]
+  ],
   "be94b721": [
    "alone",
    [
@@ -2280,6 +2391,73 @@
    ]
   ]
  },
+ "order": {
+  "above": 1,
+  "alone": 6,
+  "beside": 3,
+  "bottom": 4,
+  "count": 1,
+  "crop": 4,
+  "dots": 4,
+  "erase": 1,
+  "fill_box": 1,
+  "flip": 3,
+  "flip_v": 2,
+  "holes": 4,
+  "inside": 1,
+  "least": 3,
+  "left": 2,
+  "most": 4,
+  "overlay": 7,
+  "own1": 11,
+  "own2": 19,
+  "own3": 3,
+  "own4": 4,
+  "own5": 7,
+  "own6": 2,
+  "own7": 4,
+  "own8": 3,
+  "own9": 2,
+  "paint": 17,
+  "recolour": 13,
+  "right": 1,
+  "ring": 9,
+  "rot180": 7,
+  "rot90": 2,
+  "shift": 2,
+  "slide": 1,
+  "things": 22,
+  "top": 4,
+  "transpose": 2,
+  "upscale": 2
+ },
+ "rescored": [
+  {
+   "change": null,
+   "explained": 46,
+   "held_out": 316,
+   "mode": "full",
+   "net": 34,
+   "new": 0,
+   "right": 34,
+   "round": "3b",
+   "strict": true,
+   "when": "2026-11-07 03:51",
+   "word_list": [
+    "own1(T) = paint(x, recolour(_a, 3))",
+    "own2() = things(x)",
+    "own3() = overlay(bottom(x), top(x))",
+    "own4() = crop(rot180(x), least(own2(), colour))",
+    "own5() = ring(own2())",
+    "own6(T) = paint(x, _a)",
+    "own7() = rot180(x)",
+    "own8() = holes(x)",
+    "own9() = own1(own5())"
+   ],
+   "words": 9,
+   "wrong": 0
+  }
+ ],
  "rounds": [
   {
    "change": 2,
@@ -2347,7 +2525,36 @@
    ],
    "words": 9,
    "wrong": 9
+  },
+  {
+   "change": null,
+   "explained": 47,
+   "held_out": 316,
+   "mode": "full",
+   "net": 32,
+   "new": 1,
+   "right": 32,
+   "round": 4,
+   "strict": true,
+   "when": "2026-11-07 04:10",
+   "word_list": [
+    "own1(T) = paint(x, recolour(_a, 3))",
+    "own2() = things(x)",
+    "own3() = overlay(bottom(x), top(x))",
+    "own4() = own1(ring(own2()))",
+    "own5() = rot180(x)",
+    "own6() = crop(own5(), least(own2(), colour))",
+    "own7(T) = paint(x, _a)",
+    "own8() = holes(x)",
+    "own9() = own7(ring(own2()))"
+   ],
+   "words": 9,
+   "wrong": 0
   }
+ ],
+ "strict_without": [
+  30,
+  1
  ],
  "without": [
   37,
@@ -2376,7 +2583,7 @@
      ]
     ]
    ],
-   "saving": 26,
+   "saving": 29,
    "tasks": [
     "25ff71a9",
     "3aa6fb7a",
@@ -2385,12 +2592,13 @@
     "810b9b61",
     "ad38a9d0",
     "ae3edfdc",
+    "b60334d2",
     "c0f76784",
     "d5d6de2d",
     "d9fac9be"
    ],
    "type": "G",
-   "uses": 10
+   "uses": 11
   },
   {
    "args": [],
@@ -2401,7 +2609,7 @@
      "x"
     ]
    ],
-   "saving": 16,
+   "saving": 17,
    "tasks": [
     "2013d3e2",
     "25ff71a9",
@@ -2417,13 +2625,14 @@
     "ae3edfdc",
     "aedd82e4",
     "b27ca6d3",
+    "b60334d2",
     "be94b721",
     "d9fac9be",
     "e98196ab",
     "ff805c23"
    ],
    "type": "T",
-   "uses": 18
+   "uses": 19
   },
   {
    "args": [],
@@ -2456,12 +2665,53 @@
    "args": [],
    "name": "own4",
    "pattern": [
+    "own1",
+    [
+     "ring",
+     [
+      "own2"
+     ]
+    ]
+   ],
+   "saving": 5,
+   "tasks": [
+    "543a7ed5",
+    "ae3edfdc",
+    "b60334d2",
+    "d9fac9be"
+   ],
+   "type": "G",
+   "uses": 4
+  },
+  {
+   "args": [],
+   "name": "own5",
+   "pattern": [
+    "rot180",
+    [
+     "x"
+    ]
+   ],
+   "saving": 5,
+   "tasks": [
+    "3c9b0459",
+    "6150a2bd",
+    "9ecd008a",
+    "b60334d2",
+    "e729b7be",
+    "ed36ccf7",
+    "ff805c23"
+   ],
+   "type": "G",
+   "uses": 7
+  },
+  {
+   "args": [],
+   "name": "own6",
+   "pattern": [
     "crop",
     [
-     "rot180",
-     [
-      "x"
-     ]
+     "own5"
     ],
     [
      "least",
@@ -2474,7 +2724,7 @@
      ]
     ]
    ],
-   "saving": 4,
+   "saving": 3,
    "tasks": [
     "9ecd008a",
     "ff805c23"
@@ -2483,31 +2733,10 @@
    "uses": 2
   },
   {
-   "args": [],
-   "name": "own5",
-   "pattern": [
-    "ring",
-    [
-     "own2"
-    ]
-   ],
-   "saving": 4,
-   "tasks": [
-    "543a7ed5",
-    "54d9e175",
-    "6d75e8bb",
-    "ae3edfdc",
-    "b27ca6d3",
-    "d9fac9be"
-   ],
-   "type": "T",
-   "uses": 6
-  },
-  {
    "args": [
     "T"
    ],
-   "name": "own6",
+   "name": "own7",
    "pattern": [
     "paint",
     [
@@ -2524,25 +2753,6 @@
     "6d75e8bb",
     "aedd82e4",
     "b27ca6d3"
-   ],
-   "type": "G",
-   "uses": 4
-  },
-  {
-   "args": [],
-   "name": "own7",
-   "pattern": [
-    "rot180",
-    [
-     "x"
-    ]
-   ],
-   "saving": 2,
-   "tasks": [
-    "3c9b0459",
-    "6150a2bd",
-    "e729b7be",
-    "ed36ccf7"
    ],
    "type": "G",
    "uses": 4
@@ -2569,19 +2779,21 @@
    "args": [],
    "name": "own9",
    "pattern": [
-    "own1",
+    "own7",
     [
-     "own5"
+     "ring",
+     [
+      "own2"
+     ]
     ]
    ],
    "saving": 1,
    "tasks": [
-    "543a7ed5",
-    "ae3edfdc",
-    "d9fac9be"
+    "54d9e175",
+    "6d75e8bb"
    ],
    "type": "G",
-   "uses": 3
+   "uses": 2
   }
  ]
 }
