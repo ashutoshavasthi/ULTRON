@@ -31,15 +31,23 @@ def _program(job):
     return tid, attempts if used else [[] for _ in t["test"]]
 
 
+def _init(words, order):
+    compose.LIBRARY[0], compose.ORDER[0] = words, order
+
+
 def programs(tasks, ids, words, order, workers=4):
     """{task: [answers for each test input]} from its programs, answering only when an
     explanation earns it."""
     old = compose.LIBRARY[0], compose.ORDER[0]
-    compose.LIBRARY[0], compose.ORDER[0] = (list(words) or None), order
+    words = list(words) or None
+    _init(words, order)
     try:
         jobs = [(t, tasks[t]) for t in ids]
         if workers > 1:
-            with mp.get_context("fork").Pool(workers) as pool:
+            # fork where there is one; Windows has only spawn, whose workers start fresh and
+            # get its language and search order from _init
+            method = "fork" if "fork" in mp.get_all_start_methods() else "spawn"
+            with mp.get_context(method).Pool(workers, _init, (words, order)) as pool:
                 rows = pool.map(_program, jobs, chunksize=1)
         else:
             rows = [_program(j) for j in jobs]

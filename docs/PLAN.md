@@ -92,6 +92,10 @@ python -m ultron net train --device cuda      # about a day on one H100-class GP
 python -m ultron net score --device cuda      # held out, judged: programs / network / both
 ```
 
+- **On Windows (PowerShell):** type the commands one per line (Windows PowerShell 5 doesn't
+  accept `&&`). Install PyTorch's CUDA build before the `pip install -e` line:
+  `pip install torch --index-url https://download.pytorch.org/whl/cu128`. Plain
+  `pip install torch` on Windows gives a build without GPU support.
 - **Cost:** the full setting is about 2×10¹⁹ operations in bfloat16. That's roughly 15–25
   hours on one H100-class GPU (more on smaller ones). `--steps` makes it shorter.
 - **Scale:** we only go bigger (more views, steps, GPUs) if the held-out curve justifies it.
