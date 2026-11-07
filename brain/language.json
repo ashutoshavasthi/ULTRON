@@ -15,6 +15,134 @@
     ]
    ]
   ],
+  "25ff71a9": [
+   "cells",
+   [
+    "paint",
+    [
+     "x"
+    ],
+    [
+     "recolour",
+     [
+      "shift",
+      [
+       "things",
+       [
+        "x"
+       ]
+      ],
+      [
+       "k",
+       "down"
+      ]
+     ],
+     [
+      "k",
+      3
+     ]
+    ]
+   ],
+   [
+    "k",
+    [
+     [
+      "colour",
+      "col"
+     ],
+     [
+      [
+       [
+        0,
+        []
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         1,
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         2,
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        1,
+        [
+         1,
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        2,
+        [
+         2,
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         1,
+         3
+        ]
+       ],
+       1
+      ],
+      [
+       [
+        3,
+        [
+         2,
+         3
+        ]
+       ],
+       2
+      ]
+     ]
+    ]
+   ]
+  ],
+  "28bf18c6": [
+   "beside",
+   [
+    "alone",
+    [
+     "things",
+     [
+      "x"
+     ]
+    ]
+   ],
+   [
+    "alone",
+    [
+     "things",
+     [
+      "x"
+     ]
+    ]
+   ]
+  ],
   "2dee498d": [
    "crop",
    [
@@ -411,6 +539,57 @@
     "up"
    ]
   ],
+  "3aa6fb7a": [
+   "map",
+   [
+    "paint",
+    [
+     "paint",
+     [
+      "x"
+     ],
+     [
+      "recolour",
+      [
+       "fill_box",
+       [
+        "things",
+        [
+         "x"
+        ]
+       ]
+      ],
+      [
+       "k",
+       3
+      ]
+     ]
+    ],
+    [
+     "things",
+     [
+      "x"
+     ]
+    ]
+   ],
+   [
+    "k",
+    [
+     [
+      0,
+      0
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      8,
+      8
+     ]
+    ]
+   ]
+  ],
   "3c9b0459": [
    "rot180",
    [
@@ -428,6 +607,132 @@
      "things",
      [
       "x"
+     ]
+    ]
+   ]
+  ],
+  "543a7ed5": [
+   "cells",
+   [
+    "paint",
+    [
+     "x"
+    ],
+    [
+     "recolour",
+     [
+      "ring",
+      [
+       "things",
+       [
+        "x"
+       ]
+      ]
+     ],
+     [
+      "k",
+      3
+     ]
+    ]
+   ],
+   [
+    "k",
+    [
+     [
+      "colour",
+      "line"
+     ],
+     [
+      [
+       [
+        3,
+        [
+         false,
+         false
+        ]
+       ],
+       3
+      ],
+      [
+       [
+        3,
+        [
+         false,
+         true
+        ]
+       ],
+       3
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         false
+        ]
+       ],
+       3
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         true
+        ]
+       ],
+       3
+      ],
+      [
+       [
+        6,
+        [
+         true,
+         true
+        ]
+       ],
+       6
+      ],
+      [
+       [
+        8,
+        [
+         false,
+         false
+        ]
+       ],
+       8
+      ],
+      [
+       [
+        8,
+        [
+         false,
+         true
+        ]
+       ],
+       8
+      ],
+      [
+       [
+        8,
+        [
+         true,
+         false
+        ]
+       ],
+       8
+      ],
+      [
+       [
+        8,
+        [
+         true,
+         true
+        ]
+       ],
+       4
+      ]
      ]
     ]
    ]
@@ -568,6 +873,57 @@
     ]
    ]
   ],
+  "6d75e8bb": [
+   "map",
+   [
+    "paint",
+    [
+     "x"
+    ],
+    [
+     "recolour",
+     [
+      "holes",
+      [
+       "paint",
+       [
+        "x"
+       ],
+       [
+        "ring",
+        [
+         "things",
+         [
+          "x"
+         ]
+        ]
+       ]
+      ]
+     ],
+     [
+      "k",
+      3
+     ]
+    ]
+   ],
+   [
+    "k",
+    [
+     [
+      0,
+      0
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      8,
+      8
+     ]
+    ]
+   ]
+  ],
   "6fa7a44f": [
    "above",
    [
@@ -690,6 +1046,28 @@
     ]
    ]
   ],
+  "9ecd008a": [
+   "crop",
+   [
+    "rot180",
+    [
+     "x"
+    ]
+   ],
+   [
+    "least",
+    [
+     "things",
+     [
+      "x"
+     ]
+    ],
+    [
+     "k",
+     "colour"
+    ]
+   ]
+  ],
   "a416b8f3": [
    "beside",
    [
@@ -801,6 +1179,500 @@
     ]
    ]
   ],
+  "ad38a9d0": [
+   "cells",
+   [
+    "paint",
+    [
+     "x"
+    ],
+    [
+     "recolour",
+     [
+      "most",
+      [
+       "things",
+       [
+        "x"
+       ]
+      ],
+      [
+       "k",
+       "height"
+      ]
+     ],
+     [
+      "k",
+      3
+     ]
+    ]
+   ],
+   [
+    "k",
+    [
+     [
+      "colour",
+      "size"
+     ],
+     [
+      [
+       [
+        3,
+        3
+       ],
+       2
+      ],
+      [
+       [
+        3,
+        5
+       ],
+       3
+      ],
+      [
+       [
+        6,
+        2
+       ],
+       9
+      ],
+      [
+       [
+        6,
+        3
+       ],
+       4
+      ],
+      [
+       [
+        6,
+        4
+       ],
+       8
+      ],
+      [
+       [
+        6,
+        6
+       ],
+       5
+      ],
+      [
+       [
+        7,
+        0
+       ],
+       7
+      ]
+     ]
+    ]
+   ]
+  ],
+  "ae3edfdc": [
+   "cells",
+   [
+    "paint",
+    [
+     "x"
+    ],
+    [
+     "recolour",
+     [
+      "ring",
+      [
+       "things",
+       [
+        "x"
+       ]
+      ]
+     ],
+     [
+      "k",
+      3
+     ]
+    ]
+   ],
+   [
+    "k",
+    [
+     [
+      "colour",
+      "line",
+      "orth_set"
+     ],
+     [
+      [
+       [
+        0,
+        [
+         false,
+         false
+        ],
+        []
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         false,
+         false
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         false,
+         true
+        ],
+        []
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         false,
+         true
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         true,
+         false
+        ],
+        []
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         true,
+         false
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         true,
+         true
+        ],
+        []
+       ],
+       0
+      ],
+      [
+       [
+        0,
+        [
+         true,
+         true
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        1,
+        [
+         true,
+         true
+        ],
+        [
+         3
+        ]
+       ],
+       1
+      ],
+      [
+       [
+        2,
+        [
+         true,
+         true
+        ],
+        [
+         3
+        ]
+       ],
+       2
+      ],
+      [
+       [
+        3,
+        [
+         false,
+         false
+        ],
+        [
+         3,
+         7
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         false,
+         false
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         false,
+         true
+        ],
+        [
+         1,
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         false,
+         true
+        ],
+        [
+         2,
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         false,
+         true
+        ],
+        [
+         3,
+         7
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         false,
+         true
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         false
+        ],
+        [
+         1,
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         false
+        ],
+        [
+         2,
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         false
+        ],
+        [
+         3,
+         7
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         false
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         true
+        ],
+        [
+         1,
+         3
+        ]
+       ],
+       7
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         true
+        ],
+        [
+         1,
+         3,
+         7
+        ]
+       ],
+       7
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         true
+        ],
+        [
+         2,
+         3
+        ]
+       ],
+       3
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         true
+        ],
+        [
+         3,
+         7
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        [
+         true,
+         true
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        7,
+        [
+         false,
+         true
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        7,
+        [
+         true,
+         false
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ],
+      [
+       [
+        7,
+        [
+         true,
+         true
+        ],
+        [
+         3
+        ]
+       ],
+       0
+      ]
+     ]
+    ]
+   ]
+  ],
   "aedd82e4": [
    "paint",
    [
@@ -888,6 +1760,88 @@
     [
      "k",
      "size"
+    ]
+   ]
+  ],
+  "c0f76784": [
+   "cells",
+   [
+    "paint",
+    [
+     "x"
+    ],
+    [
+     "recolour",
+     [
+      "holes",
+      [
+       "x"
+      ]
+     ],
+     [
+      "k",
+      3
+     ]
+    ]
+   ],
+   [
+    "k",
+    [
+     [
+      "colour",
+      "size"
+     ],
+     [
+      [
+       [
+        0,
+        0
+       ],
+       0
+      ],
+      [
+       [
+        3,
+        1
+       ],
+       6
+      ],
+      [
+       [
+        3,
+        4
+       ],
+       7
+      ],
+      [
+       [
+        3,
+        9
+       ],
+       8
+      ],
+      [
+       [
+        5,
+        12
+       ],
+       5
+      ],
+      [
+       [
+        5,
+        16
+       ],
+       5
+      ],
+      [
+       [
+        5,
+        8
+       ],
+       5
+      ]
+     ]
     ]
    ]
   ],
@@ -1128,6 +2082,41 @@
     ]
    ]
   ],
+  "d9fac9be": [
+   "alone",
+   [
+    "most",
+    [
+     "things",
+     [
+      "paint",
+      [
+       "x"
+      ],
+      [
+       "recolour",
+       [
+        "ring",
+        [
+         "things",
+         [
+          "x"
+         ]
+        ]
+       ],
+       [
+        "k",
+        3
+       ]
+      ]
+     ]
+    ],
+    [
+     "k",
+     "left"
+    ]
+   ]
+  ],
   "dae9d2b5": [
    "map",
    [
@@ -1267,6 +2256,28 @@
      "x"
     ]
    ]
+  ],
+  "ff805c23": [
+   "crop",
+   [
+    "rot180",
+    [
+     "x"
+    ]
+   ],
+   [
+    "least",
+    [
+     "things",
+     [
+      "x"
+     ]
+    ],
+    [
+     "k",
+     "colour"
+    ]
+   ]
   ]
  },
  "rounds": [
@@ -1289,6 +2300,53 @@
    ],
    "words": 5,
    "wrong": 6
+  },
+  {
+   "change": 1,
+   "explained": 45,
+   "gain": 3,
+   "held_out": 316,
+   "mode": "full",
+   "new": 10,
+   "right": 40,
+   "round": 2,
+   "when": "2026-10-20 09:35",
+   "word_list": [
+    "own1(T) = paint(x, recolour(_a, 3))",
+    "own2() = things(x)",
+    "own3() = overlay(bottom(x), top(x))",
+    "own4() = crop(rot180(x), least(own2(), colour))",
+    "own5() = ring(own2())",
+    "own6(T) = paint(x, _a)",
+    "own7() = rot180(x)",
+    "own8() = holes(x)"
+   ],
+   "words": 8,
+   "wrong": 11
+  },
+  {
+   "change": 2,
+   "explained": 46,
+   "gain": 5,
+   "held_out": 316,
+   "mode": "full",
+   "new": 1,
+   "right": 42,
+   "round": 3,
+   "when": "2026-10-20 09:55",
+   "word_list": [
+    "own1(T) = paint(x, recolour(_a, 3))",
+    "own2() = things(x)",
+    "own3() = overlay(bottom(x), top(x))",
+    "own4() = crop(rot180(x), least(own2(), colour))",
+    "own5() = ring(own2())",
+    "own6(T) = paint(x, _a)",
+    "own7() = rot180(x)",
+    "own8() = holes(x)",
+    "own9() = own1(own5())"
+   ],
+   "words": 9,
+   "wrong": 9
   }
  ],
  "without": [
@@ -1297,8 +2355,79 @@
  ],
  "words": [
   {
-   "args": [],
+   "args": [
+    "T"
+   ],
    "name": "own1",
+   "pattern": [
+    "paint",
+    [
+     "x"
+    ],
+    [
+     "recolour",
+     [
+      "hole",
+      0
+     ],
+     [
+      "k",
+      3
+     ]
+    ]
+   ],
+   "saving": 26,
+   "tasks": [
+    "25ff71a9",
+    "3aa6fb7a",
+    "543a7ed5",
+    "6d75e8bb",
+    "810b9b61",
+    "ad38a9d0",
+    "ae3edfdc",
+    "c0f76784",
+    "d5d6de2d",
+    "d9fac9be"
+   ],
+   "type": "G",
+   "uses": 10
+  },
+  {
+   "args": [],
+   "name": "own2",
+   "pattern": [
+    "things",
+    [
+     "x"
+    ]
+   ],
+   "saving": 16,
+   "tasks": [
+    "2013d3e2",
+    "25ff71a9",
+    "28bf18c6",
+    "3aa6fb7a",
+    "4347f46a",
+    "543a7ed5",
+    "54d9e175",
+    "6d75e8bb",
+    "9ecd008a",
+    "ac0a08a4",
+    "ad38a9d0",
+    "ae3edfdc",
+    "aedd82e4",
+    "b27ca6d3",
+    "be94b721",
+    "d9fac9be",
+    "e98196ab",
+    "ff805c23"
+   ],
+   "type": "T",
+   "uses": 18
+  },
+  {
+   "args": [],
+   "name": "own3",
    "pattern": [
     "overlay",
     [
@@ -1325,32 +2454,60 @@
   },
   {
    "args": [],
-   "name": "own2",
+   "name": "own4",
    "pattern": [
-    "things",
+    "crop",
     [
-     "x"
+     "rot180",
+     [
+      "x"
+     ]
+    ],
+    [
+     "least",
+     [
+      "own2"
+     ],
+     [
+      "k",
+      "colour"
+     ]
     ]
    ],
-   "saving": 6,
+   "saving": 4,
    "tasks": [
-    "2013d3e2",
-    "4347f46a",
+    "9ecd008a",
+    "ff805c23"
+   ],
+   "type": "G",
+   "uses": 2
+  },
+  {
+   "args": [],
+   "name": "own5",
+   "pattern": [
+    "ring",
+    [
+     "own2"
+    ]
+   ],
+   "saving": 4,
+   "tasks": [
+    "543a7ed5",
     "54d9e175",
-    "ac0a08a4",
-    "aedd82e4",
+    "6d75e8bb",
+    "ae3edfdc",
     "b27ca6d3",
-    "be94b721",
-    "e98196ab"
+    "d9fac9be"
    ],
    "type": "T",
-   "uses": 8
+   "uses": 6
   },
   {
    "args": [
     "T"
    ],
-   "name": "own3",
+   "name": "own6",
    "pattern": [
     "paint",
     [
@@ -1361,20 +2518,19 @@
      0
     ]
    ],
-   "saving": 3,
+   "saving": 2,
    "tasks": [
     "54d9e175",
-    "810b9b61",
+    "6d75e8bb",
     "aedd82e4",
-    "b27ca6d3",
-    "d5d6de2d"
+    "b27ca6d3"
    ],
    "type": "G",
-   "uses": 5
+   "uses": 4
   },
   {
    "args": [],
-   "name": "own4",
+   "name": "own7",
    "pattern": [
     "rot180",
     [
@@ -1392,31 +2548,40 @@
    "uses": 4
   },
   {
-   "args": [
-    "T"
-   ],
-   "name": "own5",
+   "args": [],
+   "name": "own8",
    "pattern": [
-    "own3",
+    "holes",
     [
-     "recolour",
-     [
-      "hole",
-      0
-     ],
-     [
-      "k",
-      3
-     ]
+     "x"
     ]
    ],
    "saving": 1,
    "tasks": [
     "810b9b61",
+    "c0f76784",
     "d5d6de2d"
    ],
+   "type": "T",
+   "uses": 3
+  },
+  {
+   "args": [],
+   "name": "own9",
+   "pattern": [
+    "own1",
+    [
+     "own5"
+    ]
+   ],
+   "saving": 1,
+   "tasks": [
+    "543a7ed5",
+    "ae3edfdc",
+    "d9fac9be"
+   ],
    "type": "G",
-   "uses": 2
+   "uses": 3
   }
  ]
 }

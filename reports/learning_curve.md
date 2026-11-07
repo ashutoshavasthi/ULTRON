@@ -5,3 +5,5 @@ One row per round of `python -m ultron learn` (docs/PLAN.md). Practice: tasks ex
 | Round | When | Run | Practice explained (new) | Words | Held out: without | with its words | Gain | Change from last round |
 |---|---|---|---|---|---|---|---|---|
 | 1 | 2026-10-20 09:15 | full (316 held out) | 35 (+35) | 5 | 37 (4) | 39 (6) | +2 | +2 |
+| 2 | 2026-10-20 09:35 | full (316 held out) | 45 (+10) | 8 | 37 (4) | 40 (11) | +3 | +1 |
+| 3 | 2026-10-20 09:55 | full (316 held out) | 46 (+1) | 9 | 37 (4) | 42 (9) | +5 | +2 |
