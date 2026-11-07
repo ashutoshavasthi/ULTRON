@@ -11,6 +11,7 @@
     python -m ultron experiment       designing experiments vs watching (slow, ~4 min)
     python -m ultron score            the scoreboard: is it getting better at learning?
     python -m ultron learn            rounds of the learning loop: Ultron grows its language
+    python -m ultron net train|score  engine 2: the network Ultron trains itself (M2)
 """
 
 import argparse
@@ -150,6 +151,29 @@ def cmd_learn(args):
     for word in rows[-1]["word_list"] if rows else []:
         print("   ", word)
     print(f"language kept in {path}; curve in reports/learning_curve.md")
+
+
+def cmd_net(args):
+    """Engine 2 (docs/PLAN.md, M2): train Ultron's own network, or score the held-out half
+    with the judge (programs, network, both)."""
+    from .arc import judge
+    from .arc.net import train as nettrain
+    path = os.path.join("brain", "net_quick.pt") if args.quick else nettrain.CKPT
+    if args.action == "train":
+        nettrain.train(quick=args.quick, device=args.device, steps=args.steps, path=path)
+        print(f"network saved to {path}; training report in {nettrain.REPORT}")
+        return
+    r = judge.score(quick=args.quick, device=args.device, workers=args.workers, path=path)
+    rule = (f"the network answers when >= {r['k']} of {r['views']} views agree"
+            if r["k"] <= r["views"] else "the network never answers: on the calibration "
+            "puzzles no number of agreeing views reached 95% precision")
+    print(f"held out ({r['held_out']} puzzles; {rule}):")
+    for name, row in r["rows"].items():
+        p = "-" if row["precision"] is None else f"{row['precision']:.0%}"
+        print(f"  {name:9s} {row['right']} right, {row['wrong']} wrong, net {row['net']}, "
+              f"precision {p}")
+    lo, hi = r["gain_over_programs"]
+    print(f"  gain in net of both over programs alone: 95% interval {lo:+d} to {hi:+d}")
 
 
 def cmd_look(args):
@@ -340,6 +364,12 @@ def main(argv=None):
     le.add_argument("--state", default=None, help="where its language is kept")
     le.add_argument("--rescore", action="store_true",
                     help="measure what it has now (held-out answers must earn it); no learning")
+    nt = sub.add_parser("net")
+    nt.add_argument("action", choices=["train", "score"])
+    nt.add_argument("--quick", action="store_true", help="a tiny CPU run: checks the pipeline")
+    nt.add_argument("--device", default="cpu", help="cpu, or cuda on a GPU machine")
+    nt.add_argument("--steps", type=int, default=None)
+    nt.add_argument("--workers", type=int, default=4)
     sc = sub.add_parser("score")
     sc.add_argument("--quick", action="store_true", help="fewer tasks: a fast check")
     sc.add_argument("--workers", type=int, default=4)
@@ -350,7 +380,7 @@ def main(argv=None):
     {"train": cmd_train, "exam": cmd_exam, "ask": cmd_ask, "why": cmd_why,
      "show": cmd_show, "blind": cmd_blind, "experiment": cmd_experiment,
      "look": cmd_look, "stress": cmd_stress, "arc": cmd_arc,
-     "score": cmd_score, "learn": cmd_learn}[args.cmd](args)
+     "score": cmd_score, "learn": cmd_learn, "net": cmd_net}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -59,21 +59,44 @@ It compounds through data, not only through words.
 ## Where it stands
 - **Last logged official scores:** ARC-AGI-1 evaluation 12.75%, ARC-AGI-2 0.83%.
 - **The learning curve:** [reports/learning_curve.md](../reports/learning_curve.md).
-- **First clean compounding:** held-out net 29 → 34 at 100% precision (round 3b).
-- **An early bottleneck signal** (quick runs): almost no missed task is found with 4× the
-  search budget. The wall is what its language can express, not search speed. That points
-  to M2.
+- **M1 is done, and its kill rule triggered** (2026-11-07). After three rounds with 3,000
+  dreams a night and a learned guide:
+  - practice explained 48 (target ≥ 80);
+  - held-out net gain +3, 95% interval +0 to +7 (target ≥ +15);
+  - precision 100%.
 
-## Giving Ultron a GPU (needed for M2)
-Two options; either works:
+  In every round, **0 of 40** missed held-out puzzles were found even with 4× the search.
+  The wall is what its language can express, not search. Program search stays as the
+  high-precision engine; **M2 is the main line**.
+- **M2's code is ready and tested on CPU:**
+  - `ultron/arc/net/`: its own recursive network;
+  - `ultron/arc/judge.py`: the judge.
+
+  The full training run needs the GPU.
+
+## Running M2 on a GPU
+Two ways to get there; either works:
 - **Your own machine with an NVIDIA GPU:** run Claude Code there on a clone of this
   repository, or share the folder with this session through the Claude desktop app
   (Settings → Claude Code → Remote Control).
-- **A cloud GPU machine** (one modern NVIDIA GPU is enough to start): clone the
-  repository, install PyTorch (a library, not a pretrained model), and run Claude Code
-  there.
+- **A cloud GPU machine:** one modern NVIDIA GPU (for example an H100 or A100) is enough
+  to start.
 
-M2's code is written so that small runs and tests also work on CPU.
+Then:
+
+```bash
+git clone https://github.com/ashutoshavasthi/ULTRON && cd ULTRON
+git checkout claude/dreamy-darwin-neiflp
+pip install -e ".[net,dev]"          # PyTorch: a library, not a pretrained model
+python -m ultron net train --device cuda      # about a day on one H100-class GPU
+python -m ultron net score --device cuda      # held out, judged: programs / network / both
+```
+
+- **Cost:** the full setting is about 2×10¹⁹ operations in bfloat16. That's roughly 15–25
+  hours on one H100-class GPU (more on smaller ones). `--steps` makes it shorter.
+- **Scale:** we only go bigger (more views, steps, GPUs) if the held-out curve justifies it.
+- **M2's rule:** below 30% held out after the full run, first compare our network with
+  TRM's published code on the same data, then fix ours or re-plan.
 
 ## Where things are
 - [ARCHITECTURE.md](ARCHITECTURE.md): how the code works.

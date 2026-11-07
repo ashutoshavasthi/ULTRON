@@ -25,6 +25,10 @@ checkpoint is human level on ARC-AGI. The whole plan is one page:
 ## Commands
 - `python -m ultron score [--quick]`: the scoreboard (`reports/scoreboard.md`). It covers the
   held-out learning round, ARC-AGI-1 training and the lessons.
+- `python -m ultron learn [--quick]`: rounds of the learning loop (its language, dreams, guide;
+  curve in `reports/learning_curve.md`).
+- `python -m ultron net train|score [--quick] [--device cuda]`: engine 2, its own network,
+  and the judge (M2; the full run needs a GPU, see docs/PLAN.md).
 - `python -m ultron arc`: score ARC-AGI (training by default).
 - `python -m ultron train`: retrain lessons 0–33 (about 20 minutes, byte-identical).
   Lesson 30 needs a Wikimedia film that some environments can't fetch.
