@@ -15,4 +15,6 @@ Rows above answered whenever any program fit the examples, and their wrong answe
 | Round | When | Run | Practice explained (new) | Words | Held out without: right (wrong) | with its words and intuition | Net (without -> with) | Precision | Change in net from last round |
 |---|---|---|---|---|---|---|---|---|---|
 | 3b | 2026-11-07 03:51 | full (316 held out) | 46 (+0) | 9 | 30 (1) | 34 (0) | 29 -> 34 | 100% | - |
+| 4 | 2026-11-07 04:10 | full (316 held out) | 47 (+1) | 9 | 30 (1) | 32 (0) | 29 -> 32 | 100% | - |
 | 5 | 2026-11-07 04:32 | full (316 held out) | 47 (+0) | 9 | 30 (1) | 32 (0) | 29 -> 32 | 100% | +0 |
+| 6 | 2026-11-07 04:51 | full (316 held out) | 47 (+0) | 9 | 30 (1) | 32 (0) | 29 -> 32 | 100% | +0 |

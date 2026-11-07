@@ -2575,6 +2575,31 @@
    ],
    "words": 9,
    "wrong": 0
+  },
+  {
+   "change": 0,
+   "explained": 47,
+   "held_out": 316,
+   "mode": "full",
+   "net": 32,
+   "new": 0,
+   "right": 32,
+   "round": 6,
+   "strict": true,
+   "when": "2026-11-07 04:51",
+   "word_list": [
+    "own1(T) = paint(x, recolour(_a, 3))",
+    "own2() = things(x)",
+    "own3() = overlay(bottom(x), top(x))",
+    "own4() = own1(ring(own2()))",
+    "own5() = rot180(x)",
+    "own6() = crop(own5(), least(own2(), colour))",
+    "own7(T) = paint(x, _a)",
+    "own8() = holes(x)",
+    "own9() = own7(ring(own2()))"
+   ],
+   "words": 9,
+   "wrong": 0
   }
  ],
  "strict_without": [
