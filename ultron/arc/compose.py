@@ -529,6 +529,8 @@ BASIC = STEPS[:27]
 LIBRARY = [None]        # steps Ultron built itself from these (learn_library), when on
 FINISH = [True]         # check each new set of things / picture as a finished answer
 OWN_LAST = [False]      # try its own steps after the given ones at each size
+ORDER = [None]          # its intuition (loop.py): {step: uses in its own solutions}, most
+                        # used tried first at each size; None keeps the given order
 CELLS_UP_TO = 4         # a local law per cell is tried on pictures made in this many steps
 
 
@@ -730,6 +732,8 @@ def search(train, budget=40_000, max_size=9, want=2, stats=None, steps=None, cel
     own = [(e["name"], tuple(e["args"]), e["type"], None) for e in (LIBRARY[0] or [])]
     base_steps = STEPS if steps is None else steps
     steps = base_steps + own if OWN_LAST[0] else own + base_steps
+    if ORDER[0]:
+        steps = sorted(steps, key=lambda st: -ORDER[0].get(st[0], 0))    # stable on ties
     try:
         for s in range(1, max_size + 1):
             for name, argt, outt, f in steps:
@@ -1006,6 +1010,25 @@ def _fill(pattern, args):
     if pattern[0] in ("x", "k"):
         return pattern
     return (pattern[0],) + tuple(_fill(a, args) for a in pattern[1:])
+
+
+def uses(programs, library=()):
+    """How often each step (given or its own) appears in these programs."""
+    count = {}
+
+    def walk(e):
+        if not isinstance(e, tuple) or not e or e[0] in ("x", "k", "hole"):
+            return
+        if isinstance(e[0], str) and (e[0] in FUNCS or e[0] in {w["name"] for w in library}):
+            count[e[0]] = count.get(e[0], 0) + 1
+        for a in e[1:]:
+            walk(a)
+
+    for prog in programs:
+        walk(prog)
+    for w in library:
+        count[w["name"]] = count.get(w["name"], 0) + w.get("uses", 0)
+    return count
 
 
 def describe_step(e):

@@ -81,6 +81,7 @@ def cmd_arc(args):
         solve.LIBRARY[0] = library.load() or None
         from .arc import compose, loop
         compose.LIBRARY[0] = loop.load_words()          # the words of its language
+        compose.ORDER[0] = loop.load_order()            # and its intuition
     results = []
     for name in args.sets:
         r = harness.score_set(name, args.split, limit=args.limit, budget=args.budget,
@@ -123,19 +124,26 @@ def cmd_score(args):
 
 def cmd_learn(args):
     """Rounds of the learning loop (arc/loop.py): its language is kept and grown, and each
-    round is tested on held-out tasks it never learns from."""
+    round is tested on held-out tasks it never learns from (answering only when it earns
+    it). --rescore measures what it has now under that rule, without learning."""
     from .arc import loop
     path = args.state or (loop.STATE if not args.quick
                           else os.path.join("brain", "language_quick.json"))
-    rows, state = loop.run(rounds=args.rounds, quick=args.quick, workers=args.workers,
-                           state_path=path)
+    if args.rescore:
+        row, state = loop.rescore(quick=args.quick, workers=args.workers, state_path=path)
+        rows = [row]
+    else:
+        rows, state = loop.run(rounds=args.rounds, quick=args.quick, workers=args.workers,
+                               state_path=path)
+    w = state["strict_without"]
     for r in rows:
+        change = "" if r["change"] is None else f" ({r['change']:+d} from last round)"
         print(f"round {r['round']}: practice explained {r['explained']} (+{r['new']}), "
-              f"{r['words']} words; held out {r['right']} right ({r['wrong']} wrong), "
-              f"without words {state['without'][0]}; gain {r['gain']:+d} "
-              f"({r['change']:+d} from last round)")
-    for w in rows[-1]["word_list"] if rows else []:
-        print("   ", w)
+              f"{r['words']} words; held out {r['right']} right ({r['wrong']} wrong), net "
+              f"{r['net']}; without anything grown {w[0]} right ({w[1]} wrong), net "
+              f"{w[0] - w[1]}{change}")
+    for word in rows[-1]["word_list"] if rows else []:
+        print("   ", word)
     print(f"language kept in {path}; curve in reports/learning_curve.md")
 
 
@@ -325,6 +333,8 @@ def main(argv=None):
     le.add_argument("--quick", action="store_true", help="60 practice and 60 held-out tasks")
     le.add_argument("--workers", type=int, default=4)
     le.add_argument("--state", default=None, help="where its language is kept")
+    le.add_argument("--rescore", action="store_true",
+                    help="measure what it has now (held-out answers must earn it); no learning")
     sc = sub.add_parser("score")
     sc.add_argument("--quick", action="store_true", help="fewer tasks: a fast check")
     sc.add_argument("--workers", type=int, default=4)
