@@ -7,3 +7,6 @@ __pycache__/
 brain/language_quick.json
 # its network: too large for git (train it with python -m ultron net train)
 brain/net*.pt
+# the interpreter of the learned words (teach it with python -m ultron words teach)
+brain/words*.pt
+reports/words_g0_quick.*

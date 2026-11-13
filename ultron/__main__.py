@@ -154,7 +154,7 @@ def cmd_learn(args):
 
 
 def cmd_net(args):
-    """Engine 2 (docs/PLAN.md, M2): train Ultron's own network, or score the held-out half
+    """Engine 2 (docs/history/PLAN_M1_M2.md, M2): train Ultron's own network, or score the held-out half
     with the judge (programs, network, both)."""
     from .arc import judge
     from .arc.net import train as nettrain
@@ -174,6 +174,22 @@ def cmd_net(args):
               f"precision {p}")
     lo, hi = r["gain_over_programs"]
     print(f"  gain in net of both over programs alone: 95% interval {lo:+d} to {hi:+d}")
+
+
+def cmd_words(args):
+    """Learned words (docs/MECHANISM.md): teach the interpreter the hand-written words, or
+    run gate G0 (carrying out, and rediscovering words it was never shown)."""
+    from .words import experiments as ex
+    base = args.base or (os.path.join("brain", "words_quick.pt") if args.quick else ex.BASE)
+    if args.action == "teach":
+        ex.teach(quick=args.quick, path=base, steps=args.steps)
+        print(f"interpreter saved to {base}")
+        return
+    result = ex.g0(quick=args.quick, base_path=base, families=args.family or None)
+    report = os.path.join("reports", "words_g0_quick.md") if args.quick else ex.REPORT
+    ex.write(result, report)
+    print(ex.board(result))
+    print(f"report in {report}")
 
 
 def cmd_look(args):
@@ -370,6 +386,13 @@ def main(argv=None):
     nt.add_argument("--device", default="cpu", help="cpu, or cuda on a GPU machine")
     nt.add_argument("--steps", type=int, default=None)
     nt.add_argument("--workers", type=int, default=4)
+    wd = sub.add_parser("words")
+    wd.add_argument("action", choices=["teach", "g0"])
+    wd.add_argument("--quick", action="store_true", help="a tiny run: checks the pipeline")
+    wd.add_argument("--steps", type=int, default=None)
+    wd.add_argument("--base", default=None, help="where the taught interpreter is kept")
+    wd.add_argument("--family", action="append",
+                    help="only this hidden family (may be given more than once)")
     sc = sub.add_parser("score")
     sc.add_argument("--quick", action="store_true", help="fewer tasks: a fast check")
     sc.add_argument("--workers", type=int, default=4)
@@ -380,7 +403,7 @@ def main(argv=None):
     {"train": cmd_train, "exam": cmd_exam, "ask": cmd_ask, "why": cmd_why,
      "show": cmd_show, "blind": cmd_blind, "experiment": cmd_experiment,
      "look": cmd_look, "stress": cmd_stress, "arc": cmd_arc,
-     "score": cmd_score, "learn": cmd_learn, "net": cmd_net}[args.cmd](args)
+     "score": cmd_score, "learn": cmd_learn, "net": cmd_net, "words": cmd_words}[args.cmd](args)
 
 
 if __name__ == "__main__":

@@ -2,16 +2,14 @@
 
 **Ultron is a learner that writes programs in a language it builds itself**, to explain what it
 sees from a few examples. There is no pretrained model and no language model.
-- **The goal:** general intelligence that improves itself, then goes beyond human. The
-  first checkpoint is human level on ARC-AGI.
-- **How:** one loop:
-  1. solve tasks by writing the shortest program that explains them;
-  2. turn recurring pieces into new words of its language;
-  3. learn to write programs faster;
-  4. climb to harder tasks.
-- **Progress:** `python -m ultron score` adds a row to the
-  [scoreboard](reports/scoreboard.md). The last logged ARC-AGI-1 evaluation score is
-  12.75%.
+- **The goal:** general intelligence that improves itself, then goes beyond human.
+- **What it has to prove next:** that its language can gain words that say something new. Its
+  old words were abbreviations of 38 hand-written operations. Its new **learned words** have no
+  code: a small network carries them out, and their meaning is learned from puzzles
+  ([docs/MECHANISM.md](docs/MECHANISM.md)).
+- **Where it stands:** ARC-AGI-1 evaluation 12.75% and ARC-AGI-2 0.83% with hand-written words
+  alone. The first test of learned words is [reports/words_g0.md](reports/words_g0.md).
+- **Why this route:** [docs/RESEARCH.md](docs/RESEARCH.md).
 
 The whole plan is on one page: **[docs/PLAN.md](docs/PLAN.md)**.
 
@@ -107,6 +105,7 @@ python -m ultron ask "find a given spring=S2 x=0.3 m=4"
 python -m ultron ask "find rest given T@0=80 T@1=70 T@2=62"   # where a cooling cup settles
 python -m ultron why "3 + 2"
 python -m ultron blind blind/independent_2.txt       # an independent examiner's test; write your own
+python -m ultron words g0 --quick                    # learned words: a quick check of the pipeline (needs PyTorch)
 ```
 
 - [How it works](docs/ARCHITECTURE.md)
