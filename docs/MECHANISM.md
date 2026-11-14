@@ -48,11 +48,11 @@ Take the puzzles that no program of hand-written words explains.
 
 1. **Start from one puzzle.** A new word begins from a single unexplained puzzle. It is tried in
    two forms at once: bare, and taking a colour.
-2. **Grow on evidence.** The first round is the starting puzzle alone. Each later round, the
-   word trains with the starting puzzle, every puzzle it has confirmed (step 3), and the
-   unconfirmed puzzles it fits best. Those are chosen afresh each round, a few more each time
-   (1, 2, 3, 5, 8), so a puzzle that belongs to some other word drops out as this word sharpens.
-   Past 8, the word must have confirmed puzzles to grow further. Dreams of the hand-written words
+2. **Grow with the puzzles it fits.** The first round is the starting puzzle alone. Each later
+   round, the word trains with the starting puzzle, every puzzle it has confirmed (step 3), and
+   the unconfirmed puzzles it fits best. Those are chosen afresh each round, more each time
+   (1, 2, 3, 5, 8, 12, ...), and only from puzzles it fits about as well as its best few. A puzzle
+   that belongs to some other word fits far worse and stays out. Dreams of the hand-written words
    are mixed into every batch so that nothing already learned is lost.
 3. **Check, with an example never trained on.** Each puzzle keeps one example back. A puzzle
    counts as explained by the word only when that example also comes out exactly right. A word

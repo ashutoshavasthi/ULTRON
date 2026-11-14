@@ -186,6 +186,10 @@ def cmd_words(args):
                  lr=args.lr)
         print(f"interpreter saved to {base}")
         return
+    if args.action == "diagnose":
+        for family in args.family or ["gravity"]:
+            print(ex.diagnose(family, base, quick=args.quick))
+        return
     result = ex.g0(quick=args.quick, base_path=base, families=args.family or None)
     report = os.path.join("reports", "words_g0_quick.md") if args.quick else ex.REPORT
     ex.write(result, report)
@@ -388,7 +392,7 @@ def main(argv=None):
     nt.add_argument("--steps", type=int, default=None)
     nt.add_argument("--workers", type=int, default=4)
     wd = sub.add_parser("words")
-    wd.add_argument("action", choices=["teach", "g0"])
+    wd.add_argument("action", choices=["teach", "g0", "diagnose"])
     wd.add_argument("--quick", action="store_true", help="a tiny run: checks the pipeline")
     wd.add_argument("--steps", type=int, default=None)
     wd.add_argument("--base", default=None, help="where the taught interpreter is kept")

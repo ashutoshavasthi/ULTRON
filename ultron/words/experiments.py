@@ -31,7 +31,7 @@ HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 BASE = os.path.join(HERE, "brain", "words_base.pt")
 REPORT = os.path.join(HERE, "reports", "words_g0.md")
 UNSEEN_COLOURS = (4, 7)       # never used in a colour family's training puzzles
-FULL = dict(side=8, hidden=96, steps=30000, n_free=8, puzzles=120, held=40, rounds=10,
+FULL = dict(side=8, hidden=96, steps=30000, n_free=8, puzzles=120, held=40, rounds=12,
             round_steps=150, per_word=20, chains=200)
 QUICK = dict(side=6, hidden=48, steps=300, n_free=4, puzzles=24, held=8, rounds=3,
              round_steps=30, per_word=5, chains=30)
@@ -134,7 +134,10 @@ def rediscovery(family, base_path=None, quick=False, seed=0, log=print):
     # puzzles whose hidden rule is one word of the family (4 examples: 3 to learn from,
     # 1 as the check), and held-out puzzles on kept-aside pictures: the word alone, and
     # the word with a hand-written word before or after it
-    train = _puzzles([lambda r, w=w: [w] for w in shown], grids, rng, side, cfg["puzzles"], 4)
+    # a family of several separate words (gravity: four sides) gets half the usual number
+    # of puzzles for each word, since each word has to be learned from its own puzzles
+    n_train = cfg["puzzles"] if takes_colour or len(shown) == 1 else cfg["puzzles"] // 2 * len(shown)
+    train = _puzzles([lambda r, w=w: [w] for w in shown], grids, rng, side, n_train, 4)
     direct = _puzzles([lambda r, w=w: [w] for w in shown], aside, rng, side, cfg["held"], 3)
     mixed = _puzzles([lambda r, w=w: [r.choice(KNOWN_G0), w] for w in shown]
                      + [lambda r, w=w: [w, r.choice(KNOWN_G0)] for w in shown],
@@ -201,9 +204,64 @@ def rediscovery(family, base_path=None, quick=False, seed=0, log=print):
     return out
 
 
+def diagnose(family, base_path=None, quick=False, seed=0, log=print):
+    """Why is a family of several words (gravity: down, up, left, right) hard to relearn?
+
+    Ranking: a new word trains on one puzzle alone. Of the 8 other puzzles it then fits
+    best, how many have the same hidden word as that puzzle? (By chance: that word's
+    share of the puzzles.) A poor ranking means the wrong puzzles train together.
+
+    Amount: a new word is handed a clean group of 4, 8, 16 puzzles of one hidden word.
+    How many of them pass their check, and how well does the word match the hidden word
+    on kept-aside pictures? Poor results here mean it simply needs more to learn from."""
+    cfg = QUICK if quick else FULL
+    side = cfg["side"]
+    grids, aside = curriculum.pool(side=side)
+    vocab = Vocab(KNOWN_G0, n_free=cfg["n_free"])
+    rng = random.Random(seed)
+    hidden = HIDDEN_G0[family]
+    puzzles = _puzzles([lambda r, w=w: [w] for w in hidden], grids, rng, side, cfg["puzzles"], 4)
+    of = {}
+    for i, p in enumerate(puzzles):
+        of.setdefault(p["program"][0], []).append(i)
+    slot, word = (0, False), vocab.free(0)
+    out = {"family": family, "ranking": [], "amount": []}
+    for h in hidden[:4]:
+        model, _ = load(base_path or BASE)
+        start = of[h][0]
+        learn.practise(model, vocab, puzzles, [(start, word)], grids, side,
+                       learn.optimiser(model), random.Random(seed), cfg["round_steps"])
+        found = learn.fits(model, vocab, puzzles, [slot], range(len(puzzles)))
+        ranked = sorted((i for i in range(len(puzzles)) if i != start),
+                        key=lambda i: found[i, slot][0])[:8]
+        row = {"start": str(h), "same_word_in_best_8": sum(i in of[h] for i in ranked),
+               "by_chance": round(8 * (len(of[h]) - 1) / (len(puzzles) - 1), 1)}
+        out["ranking"].append(row)
+        log(f"ranking {row}")
+    h = hidden[0]
+    for n in (4, 8, 16):
+        if len(of[h]) < n:
+            break
+        model, _ = load(base_path or BASE)
+        members = [(i, word) for i in of[h][:n]]
+        opt, r = learn.optimiser(model), random.Random(seed)
+        for _ in range(cfg["rounds"] // 2):
+            learn.practise(model, vocab, puzzles, members, grids, side, opt, r, cfg["round_steps"])
+        found = learn.fits(model, vocab, puzzles, [slot], of[h][:n])
+        match = measure.steps_exact(model, vocab, aside, side, per_word=cfg["per_word"],
+                                    words=[h], ids={h: vocab.ids(word)})
+        row = {"word": str(h), "puzzles_given": n,
+               "pass_their_check": sum(found[i, slot][1] and found[i, slot][2] for i in of[h][:n]),
+               "match_on_kept_aside": measure.share(match)}
+        out["amount"].append(row)
+        log(f"amount {row}")
+    return out
+
+
 def write(result, path=REPORT):
     a, b = result["carrying_out"], result["rediscovery"]
     passed = sum(r["match_seen"] >= 0.95 for r in b)
+    chains = a["chains_right"] / max(a["chains"], 1)
     lines = [
         "# Learned words, gate G0 (small pictures, CPU)\n",
         "Produced by `python -m ultron words g0`. The gate and its targets were fixed in "
@@ -214,9 +272,11 @@ def write(result, path=REPORT):
         "## G0-a: carrying out hand-written words\n",
         f"- Single words exact on kept-aside pictures: **{a['single']:.1%}** (target 99%).",
         f"- Programs of six words exact from start to end: **{a['chains_right']}/{a['chains']}"
-        f" = {a['chains_right'] / max(a['chains'], 1):.1%}** (target 90%).\n",
+        f" = {chains:.1%}** (target 90%).",
+        f"- **{'Met' if a['single'] >= 0.99 and chains >= 0.9 else 'Not met'}.**\n",
         "| Family | Exact |", "|---|---|"]
     lines += [f"| {k} | {x}/{y} |" for k, (x, y) in sorted(a["by_family"].items())]
+    lines += [""] + [f"{note}\n" for note in result.get("notes_a", [])]
     lines += [
         "\n## G0-b: rediscovering words it was never shown\n",
         f"Target: a free word matches the hidden word on at least 95% of kept-aside pictures "
@@ -241,6 +301,21 @@ def write(result, path=REPORT):
     lines += ["", "Held-out puzzles are made from kept-aside pictures: half use the hidden "
               "word alone, half put a hand-written word before or after it. \"New\" means no "
               "program of up to three hand-written words imitates the learned word.", ""]
+    lines += [f"{note}\n" for note in result.get("notes_b", [])]
+    for d in result.get("diagnosis", []):
+        lines += [f"## Why {d['family']} is hard: a diagnosis\n", d.get("note", ""), "",
+                  "A new word trains on one puzzle alone. Of the 8 other puzzles it then fits "
+                  "best, how many have the same hidden word?\n",
+                  "| Starting puzzle | Same word among the best 8 | Expected by chance |",
+                  "|---|---|---|"]
+        lines += [f"| {r['start']} | {r['same_word_in_best_8']} | {r['by_chance']} |"
+                  for r in d["ranking"]]
+        lines += ["", "A new word is handed a clean group of puzzles of one hidden word.\n",
+                  "| Hidden word | Puzzles given | Pass their check | Match on kept-aside "
+                  "pictures |", "|---|---|---|---|"]
+        lines += [f"| {r['word']} | {r['puzzles_given']} | {r['pass_their_check']} | "
+                  f"{r['match_on_kept_aside']:.0%} |" for r in d["amount"]]
+        lines += [""]
     with open(path, "w") as f:
         f.write("\n".join(lines))
     with open(path[:-3] + ".json", "w") as f:

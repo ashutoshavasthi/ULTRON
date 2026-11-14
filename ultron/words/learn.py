@@ -88,7 +88,8 @@ def teach(model, vocab, grids, steps, side, batch=64, lr=1e-3, warmup=500, seed=
 # exactly right. A word that fits what it trained on but not the check has memorised the
 # puzzle, and the puzzle is turned away.
 
-GROWTH = (1, 2, 3, 5, 8, 12, 18, 27, 40, 60)     # unconfirmed members allowed, by round
+GROWTH = (1, 2, 3, 5, 8, 12, 18, 27, 40, 60, 90, 135)   # unconfirmed members allowed, by round
+NEAR = 3.0      # ... and only puzzles whose loss is within this factor of its third best
 
 
 def options(vocab, slot, puzzle):
@@ -127,42 +128,59 @@ def fits(model, vocab, puzzles, slots, idx):
     return best
 
 
-def rediscover(model, vocab, puzzles, grids, side, rounds=10, steps=150, batch=32,
+def optimiser(model, lr=3e-4, word_lr=3e-3):
+    """Word vectors learn fast; the rest of the interpreter moves slowly."""
+    words = [p for n, p in model.named_parameters() if n.startswith(("op.", "arg."))]
+    rest = [p for n, p in model.named_parameters() if not n.startswith(("op.", "arg."))]
+    return torch.optim.AdamW([{"params": rest, "lr": lr}, {"params": words, "lr": word_lr}],
+                             weight_decay=0.0, betas=(0.9, 0.95))
+
+
+def practise(model, vocab, puzzles, members, grids, side, opt, rng, steps=150, batch=32,
+             settled=()):
+    """Train on the members' training examples (never their check example). Mixed in, so
+    nothing already learned is lost: as many dreams of the hand-written words, and half
+    as many examples from puzzles that earlier learned words already explain (`settled`).
+    members, settled = [(puzzle index, the word it is taken to be), ...]."""
+    model.train()
+    for _ in range(steps):
+        mine = []
+        for group, n in ((members, batch), (settled, batch // 2)):
+            for _ in range(n if group else 0):
+                i, w = rng.choice(group)
+                g, o = rng.choice(puzzles[i]["train"][:-1])
+                mine.append((g, w, o))
+        both = mine + dream(grids, vocab, rng, side, batch)
+        loss = loss_of(model, tensors(both, vocab, model.size))
+        opt.zero_grad()
+        loss.backward()
+        torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
+        opt.step()
+
+
+def rediscover(model, vocab, puzzles, grids, side, rounds=12, steps=150, batch=32,
                lr=3e-4, word_lr=3e-3, polish=2, seed=0, log=print):
     """Give meaning to free words from unexplained puzzles (the last training example of
     each puzzle is its check and is never trained on).
 
     One word at a time: a new word starts from a single unexplained puzzle, tried both
     bare and taking a colour. Each round it trains with the puzzles it fits best, chosen
-    afresh, a few more each round (GROWTH); past 8 it must have confirmed puzzles to grow
-    further. It trains on its members' training examples (with dreams of the hand-written words
-    mixed in, so nothing is forgotten), and puzzles it has memorised are turned away. The
-    bare or colour form that ends up explaining more puzzles is kept, and practised a
-    little longer on the puzzles it explains. Returns
+    afresh, a few more each round (GROWTH), and only puzzles it fits about as well as its
+    best few (NEAR). It trains on its members' training examples, with dreams of the
+    hand-written words and the puzzles of words already kept mixed in, so nothing is
+    forgotten. Puzzles it has memorised are turned away. The bare or colour form that
+    ends up explaining more puzzles is kept, and practised a little longer on the puzzles
+    it explains. Returns
     {puzzle index: word} for every explained puzzle, and the slots kept."""
     rng = random.Random(seed)
     torch.manual_seed(seed)
-    words = [p for n, p in model.named_parameters() if n.startswith(("op.", "arg."))]
-    rest = [p for n, p in model.named_parameters() if not n.startswith(("op.", "arg."))]
-    opt = torch.optim.AdamW([{"params": rest, "lr": lr}, {"params": words, "lr": word_lr}],
-                            weight_decay=0.0, betas=(0.9, 0.95))
+    opt = optimiser(model, lr, word_lr)
     explained, kept, banned = {}, [], set()
     free_ops = list(range(vocab.n_free))
 
     def train(members):
-        model.train()
-        for _ in range(steps):
-            mine = []
-            for _ in range(batch):
-                i, w = rng.choice(members)
-                g, o = rng.choice(puzzles[i]["train"][:-1])
-                mine.append((g, w, o))
-            both = mine + dream(grids, vocab, rng, side, batch)
-            loss = loss_of(model, tensors(both, vocab, model.size))
-            opt.zero_grad()
-            loss.backward()
-            torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
-            opt.step()
+        settled = [(i, w) for i, w in explained.items() if w is not None]
+        practise(model, vocab, puzzles, members, grids, side, opt, rng, steps, batch, settled)
 
     while len(free_ops) >= 2:
         todo = [i for i in range(len(puzzles)) if i not in explained]
@@ -185,15 +203,20 @@ def rediscover(model, vocab, puzzles, grids, side, rounds=10, steps=150, batch=3
                         if waited[s][i] > 2:                                   # memorised
                             banned.add((i, s))
                 # Who trains with the word this round: the starting puzzle, every puzzle
-                # it has confirmed, and the unconfirmed puzzles it fits best. Those are
-                # chosen afresh each round, so a puzzle of some other word drops out as
-                # this word sharpens. Their number follows GROWTH up to 8; past that, the
-                # word must have confirmed puzzles to grow further.
+                # it has confirmed, and the unconfirmed puzzles it fits best, up to
+                # GROWTH[r] of them. They are chosen afresh each round, and only from
+                # puzzles it fits about as well as its best few (within NEAR times their
+                # typical loss): a puzzle of some other word fits far worse and stays out.
+                # (Measured on gravity, reports/words_g0.md: after training on one puzzle
+                # the 8 best-fitting others were almost all of the same word, but a word
+                # needs many more than 8 puzzles before any pass their check, so growth
+                # cannot wait for confirmations.)
                 n = GROWTH[min(r, len(GROWTH) - 1)]
-                if n > 8:
-                    n = max(8, min(n, 2 * len(sure) + 4))
                 ranked = sorted((i for i in todo if i != start and i not in sure
                                  and (i, s) not in banned), key=lambda i: found[i, s][0])
+                if len(ranked) > 5:
+                    near = NEAR * found[ranked[2], s][0]
+                    ranked = [i for i in ranked if found[i, s][0] <= near]
                 keep = {i: found[i, s][3] for i in [start] + sorted(sure) + ranked[:n - 1]}
                 members[s] = keep
             log(f"  word new{pair[0][0]}/new{pair[1][0]} round {r + 1}: members "
