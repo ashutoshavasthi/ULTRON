@@ -88,6 +88,9 @@ def teach(model, vocab, grids, steps, side, batch=64, lr=1e-3, warmup=500, seed=
 # exactly right. A word that fits what it trained on but not the check has memorised the
 # puzzle, and the puzzle is turned away.
 
+GROWTH = (1, 2, 3, 5, 8, 12, 18, 27, 40, 60)     # unconfirmed members allowed, by round
+
+
 def options(vocab, slot, puzzle):
     """The ways free word `slot` could be the puzzle's rule: bare, or taking one of the
     colours in the puzzle's answers."""
@@ -124,16 +127,18 @@ def fits(model, vocab, puzzles, slots, idx):
     return best
 
 
-def rediscover(model, vocab, puzzles, grids, side, rounds=6, steps=150, batch=32,
-               lr=3e-4, word_lr=3e-3, seed=0, log=print):
+def rediscover(model, vocab, puzzles, grids, side, rounds=10, steps=150, batch=32,
+               lr=3e-4, word_lr=3e-3, polish=2, seed=0, log=print):
     """Give meaning to free words from unexplained puzzles (the last training example of
     each puzzle is its check and is never trained on).
 
     One word at a time: a new word starts from a single unexplained puzzle, tried both
-    bare and taking a colour. Each round the puzzles it fits best join it (2, 4, 8, ...),
-    it trains on its members' training examples (with dreams of the hand-written words
+    bare and taking a colour. Each round it trains with the puzzles it fits best, chosen
+    afresh, a few more each round (GROWTH); past 8 it must have confirmed puzzles to grow
+    further. It trains on its members' training examples (with dreams of the hand-written words
     mixed in, so nothing is forgotten), and puzzles it has memorised are turned away. The
-    bare or colour form that ends up explaining more puzzles is kept. Returns
+    bare or colour form that ends up explaining more puzzles is kept, and practised a
+    little longer on the puzzles it explains. Returns
     {puzzle index: word} for every explained puzzle, and the slots kept."""
     rng = random.Random(seed)
     torch.manual_seed(seed)
@@ -168,27 +173,28 @@ def rediscover(model, vocab, puzzles, grids, side, rounds=6, steps=150, batch=32
         with torch.no_grad():                                   # fresh meanings
             for op, _ in pair:
                 model.op.weight[vocab.op_id[f"new{op}"]].normal_(std=1 / math.sqrt(model.hidden))
-        members = {s: {} for s in pair}
+        members = {s: {start: None} for s in pair}
+        waited = {s: {} for s in pair}
         for r in range(rounds):
             found = fits(model, vocab, puzzles, pair, todo)
             for s in pair:
-                ranked = sorted((i for i in todo if (i, s) not in banned),
-                                key=lambda i: (not found[i, s][1], found[i, s][0]))
-                keep = {i: found[i, s][3] for i in members[s] if (i, s) not in banned}
-                for i in ranked:                          # confirmed puzzles always stay
-                    if found[i, s][1] and found[i, s][2]:
-                        keep[i] = found[i, s][3]
-                for i in members[s]:                      # fits what it trained on, fails
-                    if found[i, s][1] and not found[i, s][2] and r >= 2:      # its check
-                        banned.add((i, s))
-                        keep.pop(i, None)
-                room = 2 ** (r + 1)
-                for i in [start] + ranked:
-                    if room <= 0:
-                        break
-                    if i not in keep and (i, s) not in banned:
-                        keep[i] = found[i, s][3]
-                        room -= 1
+                sure = {i for i in todo if found[i, s][1] and found[i, s][2]}
+                for i in members[s]:              # fits what it trained on but keeps
+                    if found[i, s][1] and not found[i, s][2] and i != start:   # failing its
+                        waited[s][i] = waited[s].get(i, 0) + 1                 # check:
+                        if waited[s][i] > 2:                                   # memorised
+                            banned.add((i, s))
+                # Who trains with the word this round: the starting puzzle, every puzzle
+                # it has confirmed, and the unconfirmed puzzles it fits best. Those are
+                # chosen afresh each round, so a puzzle of some other word drops out as
+                # this word sharpens. Their number follows GROWTH up to 8; past that, the
+                # word must have confirmed puzzles to grow further.
+                n = GROWTH[min(r, len(GROWTH) - 1)]
+                if n > 8:
+                    n = max(8, min(n, 2 * len(sure) + 4))
+                ranked = sorted((i for i in todo if i != start and i not in sure
+                                 and (i, s) not in banned), key=lambda i: found[i, s][0])
+                keep = {i: found[i, s][3] for i in [start] + sorted(sure) + ranked[:n - 1]}
                 members[s] = keep
             log(f"  word new{pair[0][0]}/new{pair[1][0]} round {r + 1}: members "
                 f"{len(members[pair[0]])}/{len(members[pair[1]])}")
@@ -205,6 +211,13 @@ def rediscover(model, vocab, puzzles, grids, side, rounds=6, steps=150, batch=32
             if sum(v is None for v in explained.values()) >= 3:
                 break
             continue
+        for _ in range(polish):          # the word has earned its place: practise it on
+            train(list(sure[best].items()))             # the puzzles it explains
+        if polish:
+            found = fits(model, vocab, puzzles, [best], todo)
+            sure[best] = {i: found[i, best][3] for i in todo
+                          if found[i, best][1] and found[i, best][2]}
+            log(f"  after practice it explains {len(sure[best])} puzzles")
         explained.update(sure[best])
         kept.append(best)
         free_ops.remove(best[0])

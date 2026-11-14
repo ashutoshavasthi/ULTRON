@@ -182,7 +182,8 @@ def cmd_words(args):
     from .words import experiments as ex
     base = args.base or (os.path.join("brain", "words_quick.pt") if args.quick else ex.BASE)
     if args.action == "teach":
-        ex.teach(quick=args.quick, path=base, steps=args.steps)
+        ex.teach(quick=args.quick, path=base, steps=args.steps, start=args.start,
+                 lr=args.lr)
         print(f"interpreter saved to {base}")
         return
     result = ex.g0(quick=args.quick, base_path=base, families=args.family or None)
@@ -391,6 +392,9 @@ def main(argv=None):
     wd.add_argument("--quick", action="store_true", help="a tiny run: checks the pipeline")
     wd.add_argument("--steps", type=int, default=None)
     wd.add_argument("--base", default=None, help="where the taught interpreter is kept")
+    wd.add_argument("--start", default=None,
+                    help="teach: continue from this saved interpreter (after an interruption)")
+    wd.add_argument("--lr", type=float, default=1e-3)
     wd.add_argument("--family", action="append",
                     help="only this hidden family (may be given more than once)")
     sc = sub.add_parser("score")

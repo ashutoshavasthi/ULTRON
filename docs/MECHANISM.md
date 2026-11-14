@@ -48,13 +48,16 @@ Take the puzzles that no program of hand-written words explains.
 
 1. **Start from one puzzle.** A new word begins from a single unexplained puzzle. It is tried in
    two forms at once: bare, and taking a colour.
-2. **Grow.** Each round, the unexplained puzzles the word fits best join it (2, then 4, then 8,
-   and so on). The word and the interpreter train on the members' examples. Dreams of the
-   hand-written words are mixed into every batch so that nothing already learned is lost.
+2. **Grow on evidence.** The first round is the starting puzzle alone. Each later round, the
+   word trains with the starting puzzle, every puzzle it has confirmed (step 3), and the
+   unconfirmed puzzles it fits best. Those are chosen afresh each round, a few more each time
+   (1, 2, 3, 5, 8), so a puzzle that belongs to some other word drops out as this word sharpens.
+   Past 8, the word must have confirmed puzzles to grow further. Dreams of the hand-written words
+   are mixed into every batch so that nothing already learned is lost.
 3. **Check, with an example never trained on.** Each puzzle keeps one example back. A puzzle
    counts as explained by the word only when that example also comes out exactly right. A word
-   that fits the examples it trained on but fails the check has memorised the puzzle, and the
-   puzzle is turned away.
+   that fits the examples it trained on but keeps failing the check has memorised the puzzle, and
+   the puzzle is turned away.
 4. **Earn its place.** The form (bare or colour) that explains more puzzles is kept, and only if
    it explains at least three. A word for one puzzle is that puzzle memorised.
 5. **Repeat** with the puzzles still unexplained, until none are left or no new word earns a

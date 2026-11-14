@@ -31,29 +31,40 @@ HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 BASE = os.path.join(HERE, "brain", "words_base.pt")
 REPORT = os.path.join(HERE, "reports", "words_g0.md")
 UNSEEN_COLOURS = (4, 7)       # never used in a colour family's training puzzles
-FULL = dict(side=8, hidden=96, steps=30000, n_free=8, puzzles=120, held=40, rounds=6,
+FULL = dict(side=8, hidden=96, steps=30000, n_free=8, puzzles=120, held=40, rounds=10,
             round_steps=150, per_word=20, chains=200)
 QUICK = dict(side=6, hidden=48, steps=300, n_free=4, puzzles=24, held=8, rounds=3,
              round_steps=30, per_word=5, chains=30)
 
 
-def teach(quick=False, path=None, steps=None, log=print):
-    """G0-a's training: imitate the hand-written words on dreams, and save the result."""
+def teach(quick=False, path=None, steps=None, start=None, lr=1e-3, log=print):
+    """G0-a's training: imitate the hand-written words on dreams, and save the result.
+
+    The interpreter is saved every twelfth of the run. `start` continues from a saved one
+    (after an interruption), with a fresh optimiser; use a lower `lr` then."""
     cfg = QUICK if quick else FULL
     grids, aside = curriculum.pool(side=cfg["side"])
     vocab = Vocab(KNOWN_G0, n_free=cfg["n_free"])
-    model = Interpreter(len(vocab.ops), len(ARGS), cfg["side"] + 1, hidden=cfg["hidden"])
     path = path or BASE
+    done = 0
+    if start:
+        model, ck = load(start)
+        done = ck.get("steps", 0)
+    else:
+        model = Interpreter(len(vocab.ops), len(ARGS), cfg["side"] + 1, hidden=cfg["hidden"])
+    steps = steps or cfg["steps"]
+    every = max(steps // 12, 1)
+    seen = [0]
 
     def check(m):
-        save(m, path, side=cfg["side"])
+        seen[0] = min(seen[0] + every, steps)
+        save(m, path, side=cfg["side"], steps=done + seen[0], resumed_at=done or None)
         s = measure.steps_exact(m, vocab, aside, cfg["side"], per_word=5)
         return f"single words exact {measure.share(s):.3f}"
 
-    steps = steps or cfg["steps"]
-    model = learn.teach(model, vocab, grids, steps, cfg["side"], check=check,
-                        every=max(steps // 12, 1), log=log)
-    save(model, path, side=cfg["side"], steps=steps)
+    model = learn.teach(model, vocab, grids, steps, cfg["side"], lr=lr, check=check,
+                        every=every, seed=done, log=log)
+    save(model, path, side=cfg["side"], steps=done + steps, resumed_at=done or None)
     return model
 
 
