@@ -73,8 +73,30 @@ python -m ultron words teach           # teach the interpreter (about two hours 
 python -m ultron words g0              # gate G0; writes reports/words_g0.md
 python -m ultron words g0 --quick      # a few minutes: checks the pipeline only
 ```
-On Windows (PowerShell), type the commands one per line. With an NVIDIA GPU, install PyTorch's
-CUDA build first: `pip install torch --index-url https://download.pytorch.org/whl/cu128`.
+
+### The next run, on an NVIDIA GPU (sized for 6 GB)
+G0-a was not met at the CPU size. The `gpu` size is the same gate with a stronger interpreter
+(twice as wide, one more pass, more than three times the training) and more pictures per word in
+the measurement. On Windows (PowerShell), type the commands one per line:
+
+```
+git clone https://github.com/ashutoshavasthi/ULTRON
+cd ULTRON
+git checkout ultron-final
+pip install torch --index-url https://download.pytorch.org/whl/cu128
+pip install -e ".[dev]"
+python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_name(0))"
+python -m ultron words teach --size gpu --device cuda
+python -m ultron words g0 --size gpu --device cuda
+```
+
+- The sixth line must print `True` and the card's name. If it prints `False`, PyTorch was
+  installed without GPU support: use the install command pytorch.org gives for your CUDA version.
+- `teach` prints its progress twelve times and saves the interpreter each time
+  (`brain/words_base_gpu.pt`). If it is interrupted, continue with
+  `python -m ultron words teach --size gpu --device cuda --start brain/words_base_gpu.pt --steps N --lr 2e-4`,
+  where N is the number of steps still to go (of 100,000).
+- `g0` writes `reports/words_g0_gpu.md` after every family.
 
 ## Where things are
 - [RESEARCH.md](RESEARCH.md): what is known, and the ground nobody holds.

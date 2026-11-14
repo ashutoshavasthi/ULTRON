@@ -37,6 +37,10 @@ def dream(grids, vocab, rng, side, n):
     return out
 
 
+def device_of(model):
+    return next(model.parameters()).device
+
+
 def loss_of(model, batch):
     x, op, arg, y = batch
     return F.cross_entropy(model(x, op, arg).reshape(-1, VOCAB), y.reshape(-1))
@@ -68,7 +72,8 @@ def teach(model, vocab, grids, steps, side, batch=64, lr=1e-3, warmup=500, seed=
         for g in opt.param_groups:
             g["lr"] = lr * min(step / warmup, 0.1 + 0.9 * 0.5 * (1 + math.cos(math.pi * step / steps)))
         model.train()
-        loss = loss_of(model, tensors(dream(grids, vocab, rng, side, batch), vocab, model.size))
+        loss = loss_of(model, tensors(dream(grids, vocab, rng, side, batch), vocab, model.size,
+                                      device_of(model)))
         opt.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -112,7 +117,7 @@ def fits(model, vocab, puzzles, slots, idx):
     for a in range(0, len(rows), 256):
         part = rows[a:a + 256]
         samples = [(g, w, o) for i, _, w in part for g, o in puzzles[i]["train"]]
-        x, op, arg, y = tensors(samples, vocab, model.size)
+        x, op, arg, y = tensors(samples, vocab, model.size, device_of(model))
         logits = model(x, op, arg)
         ce = F.cross_entropy(logits.reshape(-1, VOCAB), y.reshape(-1), reduction="none")
         ce = ce.view(len(samples), -1).mean(1)
@@ -151,7 +156,7 @@ def practise(model, vocab, puzzles, members, grids, side, opt, rng, steps=150, b
                 g, o = rng.choice(puzzles[i]["train"][:-1])
                 mine.append((g, w, o))
         both = mine + dream(grids, vocab, rng, side, batch)
-        loss = loss_of(model, tensors(both, vocab, model.size))
+        loss = loss_of(model, tensors(both, vocab, model.size, device_of(model)))
         opt.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)

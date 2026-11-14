@@ -180,21 +180,20 @@ def cmd_words(args):
     """Learned words (docs/MECHANISM.md): teach the interpreter the hand-written words, or
     run gate G0 (carrying out, and rediscovering words it was never shown)."""
     from .words import experiments as ex
-    base = args.base or (os.path.join("brain", "words_quick.pt") if args.quick else ex.BASE)
+    size = "quick" if args.quick else args.size
+    path = args.base or ex.base(size)
     if args.action == "teach":
-        ex.teach(quick=args.quick, path=base, steps=args.steps, start=args.start,
-                 lr=args.lr)
-        print(f"interpreter saved to {base}")
+        ex.teach(size, path, steps=args.steps, start=args.start, lr=args.lr, device=args.device)
+        print(f"interpreter saved to {path}")
         return
     if args.action == "diagnose":
         for family in args.family or ["gravity"]:
-            print(ex.diagnose(family, base, quick=args.quick))
+            print(ex.diagnose(family, path, size, device=args.device))
         return
-    result = ex.g0(quick=args.quick, base_path=base, families=args.family or None)
-    report = os.path.join("reports", "words_g0_quick.md") if args.quick else ex.REPORT
-    ex.write(result, report)
+    result = ex.g0(size, path, families=args.family or None, device=args.device)
+    ex.write(result, ex.report(size))
     print(ex.board(result))
-    print(f"report in {report}")
+    print(f"report in {ex.report(size)}")
 
 
 def cmd_look(args):
@@ -398,7 +397,10 @@ def main(argv=None):
     wd.add_argument("--base", default=None, help="where the taught interpreter is kept")
     wd.add_argument("--start", default=None,
                     help="teach: continue from this saved interpreter (after an interruption)")
-    wd.add_argument("--lr", type=float, default=1e-3)
+    wd.add_argument("--lr", type=float, default=None)
+    wd.add_argument("--size", choices=["cpu", "gpu"], default="cpu",
+                    help="gpu: a stronger interpreter, sized for a 6 GB card")
+    wd.add_argument("--device", default="cpu", help="cpu, or cuda on a GPU machine")
     wd.add_argument("--family", action="append",
                     help="only this hidden family (may be given more than once)")
     sc = sub.add_parser("score")

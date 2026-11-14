@@ -31,27 +31,42 @@ HERE = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 BASE = os.path.join(HERE, "brain", "words_base.pt")
 REPORT = os.path.join(HERE, "reports", "words_g0.md")
 UNSEEN_COLOURS = (4, 7)       # never used in a colour family's training puzzles
-FULL = dict(side=8, hidden=96, steps=30000, n_free=8, puzzles=120, held=40, rounds=12,
-            round_steps=150, per_word=20, chains=200)
-QUICK = dict(side=6, hidden=48, steps=300, n_free=4, puzzles=24, held=8, rounds=3,
-             round_steps=30, per_word=5, chains=30)
+FULL = dict(side=8, hidden=96, layers=2, loops=3, batch=64, lr=1e-3, steps=30000, n_free=8,
+            puzzles=120, held=40, rounds=12, round_steps=150, per_word=20, chains=200)
+QUICK = dict(side=6, hidden=48, layers=2, loops=3, batch=64, lr=1e-3, steps=300, n_free=4,
+             puzzles=24, held=8, rounds=3, round_steps=30, per_word=5, chains=30)
+# The same gate with a stronger interpreter, for a GPU (sized for 6 GB): G0-a was not met at
+# the CPU size, so this is its next test. More pictures per word tighten the measurement.
+GPU = dict(FULL, hidden=192, loops=4, batch=128, lr=5e-4, steps=100000, per_word=50)
+SIZES = {"cpu": FULL, "gpu": GPU, "quick": QUICK}
 
 
-def teach(quick=False, path=None, steps=None, start=None, lr=1e-3, log=print):
+def base(size="cpu"):
+    """Where the taught interpreter of this size is kept."""
+    return BASE if size == "cpu" else BASE.replace(".pt", f"_{size}.pt")
+
+
+def report(size="cpu"):
+    return REPORT if size == "cpu" else REPORT.replace(".md", f"_{size}.md")
+
+
+def teach(size="cpu", path=None, steps=None, start=None, lr=None, device="cpu", log=print):
     """G0-a's training: imitate the hand-written words on dreams, and save the result.
 
     The interpreter is saved every twelfth of the run. `start` continues from a saved one
     (after an interruption), with a fresh optimiser; use a lower `lr` then."""
-    cfg = QUICK if quick else FULL
+    cfg = SIZES[size]
     grids, aside = curriculum.pool(side=cfg["side"])
     vocab = Vocab(KNOWN_G0, n_free=cfg["n_free"])
-    path = path or BASE
+    path = path or base(size)
     done = 0
     if start:
-        model, ck = load(start)
+        model, ck = load(start, device)
         done = ck.get("steps", 0)
     else:
-        model = Interpreter(len(vocab.ops), len(ARGS), cfg["side"] + 1, hidden=cfg["hidden"])
+        model = Interpreter(len(vocab.ops), len(ARGS), cfg["side"] + 1, hidden=cfg["hidden"],
+                            layers=cfg["layers"], loops=cfg["loops"]).to(device)
+    log(f"interpreter: {sum(p.numel() for p in model.parameters()):,} numbers, on {device}")
     steps = steps or cfg["steps"]
     every = max(steps // 12, 1)
     seen = [0]
@@ -62,8 +77,8 @@ def teach(quick=False, path=None, steps=None, start=None, lr=1e-3, log=print):
         s = measure.steps_exact(m, vocab, aside, cfg["side"], per_word=5)
         return f"single words exact {measure.share(s):.3f}"
 
-    model = learn.teach(model, vocab, grids, steps, cfg["side"], lr=lr, check=check,
-                        every=every, seed=done, log=log)
+    model = learn.teach(model, vocab, grids, steps, cfg["side"], batch=cfg["batch"],
+                        lr=lr or cfg["lr"], check=check, every=every, seed=done, log=log)
     save(model, path, side=cfg["side"], steps=done + steps, resumed_at=done or None)
     return model
 
@@ -100,7 +115,9 @@ def fitted_vector(model, vocab, puzzle, steps=80, lr=0.05):
         p.requires_grad_(False)
     n_known = len(vocab.ops) - vocab.n_free
     w = model.op.weight[:n_known].mean(0, keepdim=True).clone().requires_grad_(True)
-    x, _, _, y = tensors([(g, vocab.known[0], o) for g, o in puzzle["train"]], vocab, model.size)
+    dev = learn.device_of(model)
+    x, _, _, y = tensors([(g, vocab.known[0], o) for g, o in puzzle["train"]], vocab,
+                         model.size, dev)
     opt = torch.optim.Adam([w], lr=lr)
     model.eval()
     for _ in range(steps):
@@ -111,18 +128,18 @@ def fitted_vector(model, vocab, puzzle, steps=80, lr=0.05):
     with torch.no_grad():
         fit = bool((model(x, word=w.expand(len(x), -1)).argmax(-1) == y).all())
         tx, _, _, ty = tensors([(puzzle["test"][0], vocab.known[0], puzzle["test"][1])],
-                               vocab, model.size)
+                               vocab, model.size, dev)
         right = bool((model(tx, word=w).argmax(-1) == ty).all())
     for p in model.parameters():
         p.requires_grad_(True)
     return fit, right
 
 
-def rediscovery(family, base_path=None, quick=False, seed=0, log=print):
+def rediscovery(family, base_path=None, size="cpu", seed=0, device="cpu", log=print):
     """G0-b for one hidden family, starting from the taught interpreter."""
-    cfg = QUICK if quick else FULL
+    cfg = SIZES[size]
     side = cfg["side"]
-    model, _ = load(base_path or BASE)
+    model, _ = load(base_path or base(size), device)
     grids, aside = curriculum.pool(side=side)
     vocab = Vocab(KNOWN_G0, n_free=cfg["n_free"])
     rng = random.Random(seed)
@@ -204,7 +221,7 @@ def rediscovery(family, base_path=None, quick=False, seed=0, log=print):
     return out
 
 
-def diagnose(family, base_path=None, quick=False, seed=0, log=print):
+def diagnose(family, base_path=None, size="cpu", seed=0, device="cpu", log=print):
     """Why is a family of several words (gravity: down, up, left, right) hard to relearn?
 
     Ranking: a new word trains on one puzzle alone. Of the 8 other puzzles it then fits
@@ -214,7 +231,7 @@ def diagnose(family, base_path=None, quick=False, seed=0, log=print):
     Amount: a new word is handed a clean group of 4, 8, 16 puzzles of one hidden word.
     How many of them pass their check, and how well does the word match the hidden word
     on kept-aside pictures? Poor results here mean it simply needs more to learn from."""
-    cfg = QUICK if quick else FULL
+    cfg = SIZES[size]
     side = cfg["side"]
     grids, aside = curriculum.pool(side=side)
     vocab = Vocab(KNOWN_G0, n_free=cfg["n_free"])
@@ -227,7 +244,7 @@ def diagnose(family, base_path=None, quick=False, seed=0, log=print):
     slot, word = (0, False), vocab.free(0)
     out = {"family": family, "ranking": [], "amount": []}
     for h in hidden[:4]:
-        model, _ = load(base_path or BASE)
+        model, _ = load(base_path or base(size), device)
         start = of[h][0]
         learn.practise(model, vocab, puzzles, [(start, word)], grids, side,
                        learn.optimiser(model), random.Random(seed), cfg["round_steps"])
@@ -242,7 +259,7 @@ def diagnose(family, base_path=None, quick=False, seed=0, log=print):
     for n in (4, 8, 16):
         if len(of[h]) < n:
             break
-        model, _ = load(base_path or BASE)
+        model, _ = load(base_path or base(size), device)
         members = [(i, word) for i in of[h][:n]]
         opt, r = learn.optimiser(model), random.Random(seed)
         for _ in range(cfg["rounds"] // 2):
@@ -263,7 +280,7 @@ def write(result, path=REPORT):
     passed = sum(r["match_seen"] >= 0.95 for r in b)
     chains = a["chains_right"] / max(a["chains"], 1)
     lines = [
-        "# Learned words, gate G0 (small pictures, CPU)\n",
+        "# Learned words, gate G0 (small pictures)\n",
         "Produced by `python -m ultron words g0`. The gate and its targets were fixed in "
         "advance in [docs/MECHANISM.md](../docs/MECHANISM.md).\n",
         f"Setting: pictures up to {result['cfg']['side']} x {result['cfg']['side']}, taken only "
@@ -338,12 +355,12 @@ def board(result=None, path=REPORT):
             f"(single words exact {result['carrying_out']['single']:.0%})")
 
 
-def g0(quick=False, base_path=None, families=None, log=print):
-    cfg = QUICK if quick else FULL
-    base_path = base_path or BASE
+def g0(size="cpu", base_path=None, families=None, device="cpu", log=print):
+    cfg = SIZES[size]
+    base_path = base_path or base(size)
     if not os.path.exists(base_path):
-        teach(quick, base_path, log=log)
-    model, ck = load(base_path)
+        teach(size, base_path, device=device, log=log)
+    model, ck = load(base_path, device)
     _, aside = curriculum.pool(side=cfg["side"])
     vocab = Vocab(KNOWN_G0, n_free=cfg["n_free"])
     result = {"cfg": {**cfg, "steps": ck.get("steps", cfg["steps"])},
@@ -351,5 +368,6 @@ def g0(quick=False, base_path=None, families=None, log=print):
               "carrying_out": carrying_out(model, vocab, aside, cfg), "rediscovery": []}
     log(json.dumps(result["carrying_out"], default=str))
     for family in families or HIDDEN_G0:
-        result["rediscovery"].append(rediscovery(family, base_path, quick, log=log))
+        result["rediscovery"].append(rediscovery(family, base_path, size, device=device, log=log))
+        write(result, report(size))          # after every family, so a restart loses little
     return result
