@@ -1,0 +1,53 @@
+{
+ "family": "outline",
+ "puzzles": 120,
+ "explained_by_hand_written": 0,
+ "explained_by_learned_words": 120,
+ "to_explain": 120,
+ "words_kept": [
+  "new1 (takes a colour)"
+ ],
+ "stands_for": {
+  "outline(1)": "new1(1)",
+  "outline(2)": "new1(2)",
+  "outline(3)": "new1(3)",
+  "outline(4)": "new1(4)",
+  "outline(5)": "new1(5)",
+  "outline(6)": "new1(6)",
+  "outline(7)": "new1(7)",
+  "outline(8)": "new1(8)",
+  "outline(9)": "new1(9)"
+ },
+ "match_seen": 0.9928571428571429,
+ "match_unseen_colours": 0.775,
+ "match_by_word": {
+  "outline(1)": "20/20",
+  "outline(2)": "20/20",
+  "outline(3)": "20/20",
+  "outline(4)": "20/20",
+  "outline(5)": "20/20",
+  "outline(6)": "20/20",
+  "outline(7)": "11/20",
+  "outline(8)": "19/20",
+  "outline(9)": "20/20"
+ },
+ "held_direct": 40,
+ "held_mixed": 40,
+ "without_words": {
+  "direct": 0,
+  "mixed": 0
+ },
+ "with_words": {
+  "direct": 40,
+  "mixed": 36
+ },
+ "fitted_vector": {
+  "fits_examples": 11,
+  "test_right": 1
+ },
+ "abbreviation_of": {
+  "new1": null
+ },
+ "old_words_still_exact": 0.8041666666666667,
+ "seconds": 740
+}

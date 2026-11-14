@@ -19,7 +19,7 @@ Rows above answered whenever any program fit the examples, and their wrong answe
 | 5 | 2026-11-07 04:32 | full (316 held out) | 47 (+0) | 9 | 30 (1) | 32 (0) | 29 -> 32 | 100% | +0 |
 | 6 | 2026-11-07 04:51 | full (316 held out) | 47 (+0) | 9 | 30 (1) | 32 (0) | 29 -> 32 | 100% | +0 |
 
-## From here on: dreams and a learned guide (M1 in docs/PLAN.md)
+## From here on: dreams and a learned guide (M1 in docs/history/PLAN_M1_M2.md)
 
 Each night Ultron makes puzzles from its own language (dreams) and learns from them and from its real solutions which steps a puzzle needs (its guide). **Interval**: 95% bootstrap interval of the gain in net over knowing nothing; the gain is real when it excludes 0. **Missed**: held-out tasks with no answer; of a sample of them re-searched with 4x the budget, how many were then found (search limits it) or not (its language or eyes limit it). M1's target: practice explained >= 80 and net gain >= +15 at >= 95% precision within 3 rounds; if the gain is < +10 after 3 rounds, program search stops being the main line.
 

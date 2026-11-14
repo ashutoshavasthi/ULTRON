@@ -1,0 +1,9 @@
+ranking {'start': 'gravity(down)', 'same_word_in_best_8': 8, 'by_chance': 1.9}
+ranking {'start': 'gravity(up)', 'same_word_in_best_8': 8, 'by_chance': 1.9}
+ranking {'start': 'gravity(left)', 'same_word_in_best_8': 6, 'by_chance': 1.9}
+ranking {'start': 'gravity(right)', 'same_word_in_best_8': 8, 'by_chance': 1.9}
+amount {'word': 'gravity(down)', 'puzzles_given': 4, 'pass_their_check': 0, 'match_on_kept_aside': 0.15}
+amount {'word': 'gravity(down)', 'puzzles_given': 8, 'pass_their_check': 0, 'match_on_kept_aside': 0.15}
+amount {'word': 'gravity(down)', 'puzzles_given': 16, 'pass_their_check': 4, 'match_on_kept_aside': 0.1}
+{"family": "gravity", "ranking": [{"start": "gravity(down)", "same_word_in_best_8": 8, "by_chance": 1.9}, {"start": "gravity(up)", "same_word_in_best_8": 8, "by_chance": 1.9}, {"start": "gravity(left)", "same_word_in_best_8": 6, "by_chance": 1.9}, {"start": "gravity(right)", "same_word_in_best_8": 8, "by_chance": 1.9}], "amount": [{"word": "gravity(down)", "puzzles_given": 4, "pass_their_check": 0, "match_on_kept_aside": 0.15}, {"word": "gravity(down)", "puzzles_given": 8, "pass_their_check": 0, "match_on_kept_aside": 0.15}, {"word": "gravity(down)", "puzzles_given": 16, "pass_their_check": 4, "match_on_kept_aside": 0.1}]}
+seconds 1426.3000433444977

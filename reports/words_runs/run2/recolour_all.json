@@ -1,0 +1,54 @@
+{
+ "family": "recolour_all",
+ "puzzles": 120,
+ "explained_by_hand_written": 0,
+ "explained_by_learned_words": 117,
+ "to_explain": 120,
+ "words_kept": [
+  "new1 (takes a colour)",
+  "new2 (takes a colour)"
+ ],
+ "stands_for": {
+  "recolour_all(1)": "new1(1)",
+  "recolour_all(2)": "new1(2)",
+  "recolour_all(3)": "new1(3)",
+  "recolour_all(4)": "new1(4)",
+  "recolour_all(5)": "new1(5)",
+  "recolour_all(6)": "new1(6)",
+  "recolour_all(7)": "new1(7)",
+  "recolour_all(8)": "new1(8)",
+  "recolour_all(9)": "new1(9)"
+ },
+ "match_seen": 0.9571428571428572,
+ "match_unseen_colours": 0.9,
+ "match_by_word": {
+  "recolour_all(1)": "18/20",
+  "recolour_all(2)": "19/20",
+  "recolour_all(3)": "19/20",
+  "recolour_all(4)": "18/20",
+  "recolour_all(5)": "19/20",
+  "recolour_all(6)": "19/20",
+  "recolour_all(7)": "18/20",
+  "recolour_all(8)": "20/20",
+  "recolour_all(9)": "20/20"
+ },
+ "held_direct": 40,
+ "held_mixed": 40,
+ "without_words": {
+  "direct": 0,
+  "mixed": 0
+ },
+ "with_words": {
+  "direct": 33,
+  "mixed": 37
+ },
+ "fitted_vector": {
+  "fits_examples": 40,
+  "test_right": 8
+ },
+ "abbreviation_of": {
+  "new1": null
+ },
+ "old_words_still_exact": 0.8416666666666667,
+ "seconds": 2006
+}
