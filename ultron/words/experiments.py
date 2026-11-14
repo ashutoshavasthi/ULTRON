@@ -265,7 +265,7 @@ def write(result, path=REPORT):
     lines = [
         "# Learned words, gate G0 (small pictures, CPU)\n",
         "Produced by `python -m ultron words g0`. The gate and its targets were fixed in "
-        "advance in docs/MECHANISM.md.\n",
+        "advance in [docs/MECHANISM.md](../docs/MECHANISM.md).\n",
         f"Setting: pictures up to {result['cfg']['side']} x {result['cfg']['side']}, taken only "
         f"from the practice half; an interpreter of width {result['cfg']['hidden']} "
         f"({result['parameters']:,} numbers), taught for {result['cfg']['steps']:,} steps.\n",
@@ -280,7 +280,9 @@ def write(result, path=REPORT):
     lines += [
         "\n## G0-b: rediscovering words it was never shown\n",
         f"Target: a free word matches the hidden word on at least 95% of kept-aside pictures "
-        f"for at least 3 of the 5 families. **Met for {passed} of {len(b)}.**\n",
+        f"for at least 3 of the {len(HIDDEN_G0)} families. **Met for {passed} of "
+        f"{len(HIDDEN_G0)}"
+        + (f" ({len(b)} run so far)" if len(b) < len(HIDDEN_G0) else "") + ".**\n",
         "| Hidden family | Puzzles (explained by hand-written words alone) | Explained by "
         "learned words | Words kept | Match on kept-aside pictures | Match on colours never "
         "trained | Held-out puzzles right: without -> with learned words | One vector per "
@@ -332,7 +334,7 @@ def board(result=None, path=REPORT):
     rows = result["rediscovery"]
     met = sum(r["match_seen"] >= 0.95 for r in rows)
     new = sum(p is None for r in rows for p in r["abbreviation_of"].values())
-    return (f"G0: {met} of {len(rows)} hidden words relearned, {new} of them new primitives "
+    return (f"G0: {met} of {len(HIDDEN_G0)} hidden families relearned, {new} new primitives "
             f"(single words exact {result['carrying_out']['single']:.0%})")
 
 

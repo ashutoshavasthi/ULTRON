@@ -102,6 +102,40 @@ left-right flip cannot be built from the taught words. For the three colour fami
   two rounds.
 - Kill rule: no significant gain after three rounds. Then follow the bottleneck report.
 
+## G0's result (2026-11-14)
+
+The full numbers are in [reports/words_g0.md](../reports/words_g0.md).
+
+| Gate | Target | Measured | Verdict |
+|---|---|---|---|
+| G0-a, single words | 99% exact | 87.7% | Not met |
+| G0-a, six-word programs | 90% exact | 49.5% | Not met |
+| G0-b, hidden families relearned | 3 of 5 at a 95% match | 3 of 5 (flip 95%, recolour 96%, outline 99%) | Met, on the second run |
+
+What the runs taught:
+
+- **A word can be learned from puzzles that were never solved.** For the three relearned
+  families, held-out puzzles went from 1 of 240 solved to 223 of 240. One vector fitted per puzzle,
+  the way TRM and the Latent Program Network work, solved 24 of 120.
+- **A learned word can take an argument.** The learner chose the colour-taking form by itself for
+  recolour and outline. On two colours never used in training it still matched 78% to 90%.
+- **The first run failed, and why.** Words learned earlier were not rehearsed while later words
+  trained, so they degraded (recolour 81%, outline 88%). Rehearsing them fixed it.
+- **Gravity and fill-enclosed were not relearned.** For gravity the cause was measured: a new
+  word picks out the right puzzles (8 of its 8 best-fitting puzzles share its direction), but 16
+  clean puzzles are not enough for it to pass their checks. The interpreter is weak on this kind
+  of word even with unlimited practice: sliding, the taught sibling of gravity, is exact on only
+  68% of pictures.
+- **New words cost a little of the old.** Hand-written words were exact on 87.7% of pictures
+  before a family was learned and 80% to 84% after.
+- **The margins are thin.** Each hidden word was checked on 20 pictures. Flip's 19 of 20 sits on
+  the line.
+
+What follows for G1: the interpreter must first be made strong enough to carry out words about
+whole things. That is a wider network trained longer, which is what the GPU is for. Until G0-a is
+met, learned words on real ARC puzzles would rest on an interpreter that makes mistakes one time
+in eight.
+
 ## What G0 cannot show
 
 - The hidden words are operations a person once wrote. Relearning them shows the mechanism can

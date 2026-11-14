@@ -8,7 +8,10 @@ sees from a few examples. There is no pretrained model and no language model.
   code: a small network carries them out, and their meaning is learned from puzzles
   ([docs/MECHANISM.md](docs/MECHANISM.md)).
 - **Where it stands:** ARC-AGI-1 evaluation 12.75% and ARC-AGI-2 0.83% with hand-written words
-  alone. The first test of learned words is [reports/words_g0.md](reports/words_g0.md).
+  alone. In the first test of learned words ([reports/words_g0.md](reports/words_g0.md), small
+  pictures, CPU) it relearned three of five word families it was never shown, each a new
+  primitive; it failed on the other two, and its interpreter is not yet exact enough (87.7%
+  where 99% was the target). Nothing is shown on real ARC puzzles yet.
 - **Why this route:** [docs/RESEARCH.md](docs/RESEARCH.md).
 
 The whole plan is on one page: **[docs/PLAN.md](docs/PLAN.md)**.

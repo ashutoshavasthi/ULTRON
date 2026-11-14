@@ -52,7 +52,19 @@ The full specification is [MECHANISM.md](MECHANISM.md).
 
 ## Where it stands
 - **Last logged official scores:** ARC-AGI-1 evaluation 12.75%, ARC-AGI-2 0.83% (engine 1).
-- **G0:** see [reports/words_g0.md](../reports/words_g0.md).
+- **G0, measured 2026-11-14** ([reports/words_g0.md](../reports/words_g0.md)):
+  - **Relearning hidden words: met, on the second run** (one round of fixes, as allowed).
+    Three of five families reach a 95% match: a flip, a recolour and an outline. With the
+    learned word, held-out puzzles go from 1 of 240 solved to 223 of 240. No program of
+    hand-written words imitates any of the three, so each counts as a new primitive.
+  - **Two families were not relearned:** gravity and fill-enclosed. The measured reason for
+    gravity is the amount to learn from, not the choice of puzzles.
+  - **Carrying out taught words: not met.** Single words are exact on 87.7% of unseen
+    pictures (target 99%) and six-word programs on 49.5% (target 90%). Words that re-map
+    cells or colours are near perfect; words about whole things are not.
+- **What this means:** the mechanism works for simple words on small pictures, on a CPU. It
+  has not been shown on real ARC puzzles. G1 is next, and it needs a stronger interpreter
+  first: wider, trained longer, on the GPU.
 
 ## Running it
 ```bash
