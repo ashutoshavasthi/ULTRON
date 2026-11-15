@@ -121,7 +121,8 @@ What the runs taught:
   recolour and outline. On two colours never used in training it still matched 78% to 90%.
 - **The first run failed, and why.** Words learned earlier were not rehearsed while later words
   trained, so they degraded (recolour 81%, outline 88%). Rehearsing them fixed it.
-- **Gravity and fill-enclosed were not relearned.** For gravity the cause was measured: a new
+- **Gravity and fill-enclosed were not relearned.** Each split into seven small words that
+  matched its hidden word on only 25% and 26% of unseen pictures. For gravity the cause was measured: a new
   word picks out the right puzzles (8 of its 8 best-fitting puzzles share its direction), but 16
   clean puzzles are not enough for it to pass their checks. The interpreter is weak on this kind
   of word even with unlimited practice: sliding, the taught sibling of gravity, is exact on only

@@ -1,0 +1,49 @@
+{
+ "family": "gravity",
+ "puzzles": 240,
+ "explained_by_hand_written": 5,
+ "explained_by_learned_words": 54,
+ "to_explain": 235,
+ "words_kept": [
+  "new0",
+  "new1",
+  "new2",
+  "new4 (takes a colour)",
+  "new3",
+  "new6 (takes a colour)",
+  "new5"
+ ],
+ "stands_for": {
+  "gravity(down)": "new4",
+  "gravity(up)": "new6",
+  "gravity(right)": "new5"
+ },
+ "match_seen": 0.25,
+ "match_unseen_colours": null,
+ "match_by_word": {
+  "gravity(down)": "5/20",
+  "gravity(up)": "5/20",
+  "gravity(right)": "5/20"
+ },
+ "held_direct": 40,
+ "held_mixed": 40,
+ "without_words": {
+  "direct": 4,
+  "mixed": 4
+ },
+ "with_words": {
+  "direct": 4,
+  "mixed": 4
+ },
+ "fitted_vector": {
+  "fits_examples": 36,
+  "test_right": 4
+ },
+ "abbreviation_of": {
+  "new4": null,
+  "new6": null,
+  "new5": null
+ },
+ "old_words_still_exact": 0.8375,
+ "seconds": 8061
+}

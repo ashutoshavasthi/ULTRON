@@ -57,8 +57,10 @@ The full specification is [MECHANISM.md](MECHANISM.md).
     Three of five families reach a 95% match: a flip, a recolour and an outline. With the
     learned word, held-out puzzles go from 1 of 240 solved to 223 of 240. No program of
     hand-written words imitates any of the three, so each counts as a new primitive.
-  - **Two families were not relearned:** gravity and fill-enclosed. The measured reason for
-    gravity is the amount to learn from, not the choice of puzzles.
+  - **Two families were not relearned:** gravity and fill-enclosed. Each split into seven
+    small words matching its hidden word on only about a quarter of unseen pictures, and the
+    learned words solved 8 of 80 and 7 of 80 held-out puzzles. The measured reason for gravity
+    is the amount to learn from, not the choice of puzzles.
   - **Carrying out taught words: not met.** Single words are exact on 87.7% of unseen
     pictures (target 99%) and six-word programs on 49.5% (target 90%). Words that re-map
     cells or colours are near perfect; words about whole things are not.

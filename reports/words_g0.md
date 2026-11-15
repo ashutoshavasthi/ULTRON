@@ -1,4 +1,4 @@
-# Learned words, gate G0 (small pictures, CPU)
+# Learned words, gate G0 (small pictures)
 
 Produced by `python -m ultron words g0`. The gate and its targets were fixed in advance in [docs/MECHANISM.md](../docs/MECHANISM.md).
 
@@ -32,15 +32,17 @@ By the kill rule (more training once, then stop and report), G0-a stands as **no
 
 ## G0-b: rediscovering words it was never shown
 
-Target: a free word matches the hidden word on at least 95% of kept-aside pictures for at least 3 of the 5 families. **Met for 3 of 5 (3 run so far).**
+Target: a free word matches the hidden word on at least 95% of kept-aside pictures for at least 3 of the 5 families. **Met for 3 of 5.**
 
 | Hidden family | Puzzles (explained by hand-written words alone) | Explained by learned words | Words kept | Match on kept-aside pictures | Match on colours never trained | Held-out puzzles right: without -> with learned words | One vector per puzzle: test right | New primitive? |
 |---|---|---|---|---|---|---|---|---|
 | flip_h | 120 (0) | 120/120 | new0 | 95% | - | 1/80 -> 77/80 | 15/40 | new0: new |
 | recolour_all | 120 (0) | 117/120 | new1 (takes a colour), new2 (takes a colour) | 96% | 90% | 0/80 -> 70/80 | 8/40 | new1: new |
+| gravity | 240 (5) | 54/235 | new0, new1, new2, new4 (takes a colour), new3, new6 (takes a colour), new5 | 25% | - | 8/80 -> 8/80 | 4/40 | new4: new; new6: new; new5: new |
+| fill_enclosed | 120 (0) | 62/120 | new1 (takes a colour), new2 (takes a colour), new3 (takes a colour), new4 (takes a colour), new5 (takes a colour), new6 (takes a colour), new7 (takes a colour) | 26% | 30% | 0/80 -> 7/80 | 4/40 | new4: new |
 | outline | 120 (0) | 120/120 | new1 (takes a colour) | 99% | 78% | 0/80 -> 76/80 | 1/40 | new1: new |
 
-Held-out puzzles are made from kept-aside pictures: half use the hidden word alone, half put a hand-written word before or after it. "New" means no program of up to three hand-written words imitates the learned word.
+Held-out puzzles are made from kept-aside pictures: half use the hidden word alone, half put a hand-written word before or after it. "New" means no program of up to three hand-written words imitates the learned word. In a family that was not relearned, such a word is new but does not do the hidden word's job, so it is not counted as a new primitive on the scoreboard.
 
 The families were run one process each, with the same code as `words g0`, so that a machine restart would lose at most one family. Their results are in `reports/words_runs/run2/`.
 
@@ -48,7 +50,7 @@ The families were run one process each, with the same code as `words g0`, so tha
 
 **Verdict: G0-b is met.** 3 of 5 families reach a 95% match, where 3 were needed. The margin is thin: each hidden word is checked on 20 kept-aside pictures, so `flip_h` at 19 of 20 sits exactly on the line (it was 20 of 20 in the first run).
 
-Not in the table: gravity, fill_enclosed. These were still running when this report was written; their words had explained only a few puzzles each (see the diagnosis below).
+**gravity and fill_enclosed were not relearned.** Each split into seven small words, which together explained 54 of 235 and 62 of 120 of their puzzles, but none matched its hidden word on more than about a quarter of kept-aside pictures. For gravity the cause was measured (below). For fill_enclosed it was not; the interpreter's weakness on words about whole things is the likely cause.
 
 Other things this run shows. Learning a new word costs a little of the old ones: single hand-written words were exact on 87.7% of pictures before, and 80% to 84% after a family was learned. On the two colours never used in training, the colour-taking words match 78% to 90%, below their match on trained colours. `recolour_all` ended up split between two learned words (103 and 14 puzzles) where one would do.
 

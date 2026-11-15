@@ -319,7 +319,9 @@ def write(result, path=REPORT):
             f"| {new} |")
     lines += ["", "Held-out puzzles are made from kept-aside pictures: half use the hidden "
               "word alone, half put a hand-written word before or after it. \"New\" means no "
-              "program of up to three hand-written words imitates the learned word.", ""]
+              "program of up to three hand-written words imitates the learned word. In a family "
+              "that was not relearned, such a word is new but does not do the hidden word's job, "
+              "so it is not counted as a new primitive on the scoreboard.", ""]
     lines += [f"{note}\n" for note in result.get("notes_b", [])]
     for d in result.get("diagnosis", []):
         lines += [f"## Why {d['family']} is hard: a diagnosis\n", d.get("note", ""), "",
@@ -350,7 +352,10 @@ def board(result=None, path=REPORT):
             result = json.load(f)
     rows = result["rediscovery"]
     met = sum(r["match_seen"] >= 0.95 for r in rows)
-    new = sum(p is None for r in rows for p in r["abbreviation_of"].values())
+    # a new primitive counts only where its family was relearned: a word nothing imitates
+    # but that does not do its job is not an ability
+    new = sum(p is None for r in rows if r["match_seen"] >= 0.95
+              for p in r["abbreviation_of"].values())
     return (f"G0: {met} of {len(HIDDEN_G0)} hidden families relearned, {new} new primitives "
             f"(single words exact {result['carrying_out']['single']:.0%})")
 

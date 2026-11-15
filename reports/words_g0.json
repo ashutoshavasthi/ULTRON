@@ -2,6 +2,10 @@
  "cfg": {
   "side": 8,
   "hidden": 96,
+  "layers": 2,
+  "loops": 3,
+  "batch": 64,
+  "lr": 0.001,
   "steps": 30000,
   "n_free": 8,
   "puzzles": 120,
@@ -160,6 +164,114 @@
    "seconds": 2006
   },
   {
+   "family": "gravity",
+   "puzzles": 240,
+   "explained_by_hand_written": 5,
+   "explained_by_learned_words": 54,
+   "to_explain": 235,
+   "words_kept": [
+    "new0",
+    "new1",
+    "new2",
+    "new4 (takes a colour)",
+    "new3",
+    "new6 (takes a colour)",
+    "new5"
+   ],
+   "stands_for": {
+    "gravity(down)": "new4",
+    "gravity(up)": "new6",
+    "gravity(right)": "new5"
+   },
+   "match_seen": 0.25,
+   "match_unseen_colours": null,
+   "match_by_word": {
+    "gravity(down)": "5/20",
+    "gravity(up)": "5/20",
+    "gravity(right)": "5/20"
+   },
+   "held_direct": 40,
+   "held_mixed": 40,
+   "without_words": {
+    "direct": 4,
+    "mixed": 4
+   },
+   "with_words": {
+    "direct": 4,
+    "mixed": 4
+   },
+   "fitted_vector": {
+    "fits_examples": 36,
+    "test_right": 4
+   },
+   "abbreviation_of": {
+    "new4": null,
+    "new6": null,
+    "new5": null
+   },
+   "old_words_still_exact": 0.8375,
+   "seconds": 8061
+  },
+  {
+   "family": "fill_enclosed",
+   "puzzles": 120,
+   "explained_by_hand_written": 0,
+   "explained_by_learned_words": 62,
+   "to_explain": 120,
+   "words_kept": [
+    "new1 (takes a colour)",
+    "new2 (takes a colour)",
+    "new3 (takes a colour)",
+    "new4 (takes a colour)",
+    "new5 (takes a colour)",
+    "new6 (takes a colour)",
+    "new7 (takes a colour)"
+   ],
+   "stands_for": {
+    "fill_enclosed(1)": "new4(1)",
+    "fill_enclosed(2)": "new4(2)",
+    "fill_enclosed(3)": "new4(3)",
+    "fill_enclosed(4)": "new4(4)",
+    "fill_enclosed(5)": "new4(5)",
+    "fill_enclosed(6)": "new4(6)",
+    "fill_enclosed(7)": "new4(7)",
+    "fill_enclosed(8)": "new4(8)",
+    "fill_enclosed(9)": "new4(9)"
+   },
+   "match_seen": 0.2642857142857143,
+   "match_unseen_colours": 0.3,
+   "match_by_word": {
+    "fill_enclosed(1)": "6/20",
+    "fill_enclosed(2)": "9/20",
+    "fill_enclosed(3)": "2/20",
+    "fill_enclosed(4)": "8/20",
+    "fill_enclosed(5)": "4/20",
+    "fill_enclosed(6)": "8/20",
+    "fill_enclosed(7)": "4/20",
+    "fill_enclosed(8)": "6/20",
+    "fill_enclosed(9)": "2/20"
+   },
+   "held_direct": 40,
+   "held_mixed": 40,
+   "without_words": {
+    "direct": 0,
+    "mixed": 0
+   },
+   "with_words": {
+    "direct": 7,
+    "mixed": 0
+   },
+   "fitted_vector": {
+    "fits_examples": 40,
+    "test_right": 4
+   },
+   "abbreviation_of": {
+    "new4": null
+   },
+   "old_words_still_exact": 0.8375,
+   "seconds": 7447
+  },
+  {
    "family": "outline",
    "puzzles": 120,
    "explained_by_hand_written": 0,
@@ -221,7 +333,7 @@
   "The families were run one process each, with the same code as `words g0`, so that a machine restart would lose at most one family. Their results are in `reports/words_runs/run2/`.",
   "**This is the second run.** The first (kept in `reports/words_runs/`) met the target for `flip_h` only. `recolour_all` and `outline` were learned but matched 81% and 88%. It was stopped during `fill_enclosed`, whose words explained 5 and 4 of 120 puzzles, once it could no longer reach 3 of 5. One round of fixes followed, as the kill rule allows: puzzles of words already kept are rehearsed while later words train, and a word keeps growing past 60 members.",
   "**Verdict: G0-b is met.** 3 of 5 families reach a 95% match, where 3 were needed. The margin is thin: each hidden word is checked on 20 kept-aside pictures, so `flip_h` at 19 of 20 sits exactly on the line (it was 20 of 20 in the first run).",
-  "Not in the table: gravity, fill_enclosed. These were still running when this report was written; their words had explained only a few puzzles each (see the diagnosis below).",
+  "**gravity and fill_enclosed were not relearned.** Each split into seven small words, which together explained 54 of 235 and 62 of 120 of their puzzles, but none matched its hidden word on more than about a quarter of kept-aside pictures. For gravity the cause was measured (below). For fill_enclosed it was not; the interpreter's weakness on words about whole things is the likely cause.",
   "Other things this run shows. Learning a new word costs a little of the old ones: single hand-written words were exact on 87.7% of pictures before, and 80% to 84% after a family was learned. On the two colours never used in training, the colour-taking words match 78% to 90%, below their match on trained colours. `recolour_all` ended up split between two learned words (103 and 14 puzzles) where one would do."
  ],
  "diagnosis": [
