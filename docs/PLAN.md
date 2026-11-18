@@ -64,6 +64,10 @@ The full specification is [MECHANISM.md](MECHANISM.md).
   - **Carrying out taught words: not met.** Single words are exact on 87.7% of unseen
     pictures (target 99%) and six-word programs on 49.5% (target 90%). Words that re-map
     cells or colours are near perfect; words about whole things are not.
+  - **Second form, 2026-11-18: not met either.** Practising taught words by family and
+    toward mistakes moved accuracy between families (hollow 35% to 85%, frame 87% to 75%)
+    without raising the total (88.3%). The interpreter looks full at this size, so the GPU
+    run below is the next test.
 - **What this means:** the mechanism works for simple words on small pictures, on a CPU. It
   has not been shown on real ARC puzzles. G1 is next, and it needs a stronger interpreter
   first: wider, trained longer, on the GPU.

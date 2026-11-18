@@ -142,6 +142,12 @@ What the runs taught:
 - **The margins are thin.** Each hidden word was checked on 20 pictures. Flip's 19 of 20 sits on
   the line.
 
+**G0-a, second form (2026-11-18): not met.** Drawing taught words by family and toward
+mistakes left single words at 88.3% (first form 87.7%) and six-word programs at 44%. It moved
+accuracy between families instead of adding to it: hollow 35% to 85%, crop 75% to 100%, frame 87%
+to 75%. By the condition fixed in advance, G0-b was not run again. At this width the interpreter
+behaves as if it is full, which points to size rather than diet.
+
 What follows for G1: the interpreter must first be made strong enough to carry out words about
 whole things. That is a wider network trained longer, which is what the GPU is for. Until G0-a is
 met, learned words on real ARC puzzles would rest on an interpreter that makes mistakes one time

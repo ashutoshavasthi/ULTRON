@@ -74,3 +74,53 @@ A new word is handed a clean group of puzzles of one hidden word.
 | gravity(down) | 4 | 0 | 15% |
 | gravity(down) | 8 | 0 | 15% |
 | gravity(down) | 16 | 4 | 10% |
+
+## G0-a, second form: taught words practised by family and toward mistakes
+
+Declared before it ran, with the condition for running G0-b again ([docs/MECHANISM.md](../docs/MECHANISM.md), commit e3f9d74). The first form drew the 48 taught words evenly, so a family of one word got 2% of practice and a family of ten 21%. The second form draws a family first, weighted toward the families still got wrong on learning pictures, then a word of it. Same width (96), seed and 30,000 steps.
+
+The first form's run was interrupted at step 20,000; its curve stops there. Each check uses 10 pictures per word, so differences of a few points are noise. Logs: `reports/words_runs/teach_first_form.log`, `teach_second_form.log`.
+
+Training curve, single words exact on kept-aside pictures (10 per word), same seed and size; only the way words are drawn differs.
+
+| Steps | First form (words drawn evenly) | Second form |
+|---|---|---|
+| 2,500 | 43.5% | 43.3% |
+| 5,000 | 61.7% | 66.9% |
+| 7,500 | 75.0% | 79.6% |
+| 10,000 | 79.0% | 82.1% |
+| 12,500 | 83.3% | 85.2% |
+| 15,000 | 85.0% | 85.6% |
+| 17,500 | 87.5% | 86.9% |
+| 20,000 | 89.4% | 88.7% |
+| 22,500 | - | 89.4% |
+| 25,000 | - | 89.6% |
+| 27,500 | - | 89.2% |
+| 30,000 | - | 89.6% |
+
+- Single words exact: **88.3%** (first form 87.7%; target 99%).
+- Six-word programs exact: **88/200 = 44.0%** (first form 49.5%; target 90%).
+- **Not met.**
+
+| Family | First form | Second form |
+|---|---|---|
+| antitranspose | 20/20 = 100% | 20/20 = 100% |
+| connect | 40/80 = 50% | 51/80 = 64% |
+| crop_content | 15/20 = 75% | 20/20 = 100% |
+| frame_things | 157/180 = 87% | 135/180 = 75% |
+| hollow_things | 7/20 = 35% | 17/20 = 85% |
+| keep_colour | 198/200 = 99% | 197/200 = 98% |
+| remove_colour | 199/200 = 100% | 198/200 = 99% |
+| remove_specks | 35/40 = 88% | 37/40 = 92% |
+| rot180 | 20/20 = 100% | 20/20 = 100% |
+| slide_things | 54/80 = 68% | 55/80 = 69% |
+| symmetrize | 77/80 = 96% | 78/80 = 98% |
+| transpose | 20/20 = 100% | 20/20 = 100% |
+
+**Verdict: not met, and no overall gain.** Single words are exact on 88.3% against 87.7%, within noise. The curves ran ahead by about 5 points early on (66.9% against 61.7% at 5,000 steps) and were level from 15,000 steps.
+
+**Practice moved accuracy between families rather than adding to it.** hollow_things rose from 35% to 85% and crop_content from 75% to 100%; frame_things fell from 87% to 75%, as its share of practice fell from 19% (9 of the 48 words) to between 10% and 16%. Six-word programs fell from 99 to 88 of 200.
+
+**G0-b was not run again.** The condition fixed in advance was single words up by 3 points, or the three weakest families up by 10 points each. Single words rose 0.6 points; of the three weakest, hollow_things and connect rose 50 and 14 points but slide_things only 1.
+
+**What it suggests.** At width 96 the interpreter behaves as if it is full: giving one family more practice costs another. That points to its size rather than its diet, which is what the GPU run tests (`--size gpu`: twice as wide, one more pass, 100,000 steps). The second form's way of drawing words stays the default, so that run gives the one-word families their share from the start. The first form can still be reproduced with `python -m ultron words teach --even`.
