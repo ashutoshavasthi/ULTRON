@@ -1,0 +1,75 @@
+--- slide 1 ---
+VLSI Fabrication: Overview
+It is the complete sequence of processes used to manufacture integrated circuits (ICs) containing millions or billions of transistors on a single semiconductor chip.
+Step 1: Understanding the requirements
+Step 2: Writing the HDL program
+Step 3: Converting HDL to Logic Gates
+Step 4: Layout Design (Place and Route)
+Step 5: Fabrication in the Cleanroom
+Step 6: Testing and Packaging
+Specifications
+--- slide 2 ---
+Semiconductor chip fabrication 
+1. Laying the foundation: from sand to silicon wafers
+Step 1: From Sand to Polysilicon
+
+Step 2: Growing a Single Crystal – The Ingot
+
+Step 3: Slicing the Ingot into Wafers
+
+
+Step 4: Polishing the Wafers
+--- slide 3 ---
+Semiconductor chip fabrication 
+2. Oxidation
+--- slide 4 ---
+Semiconductor chip fabrication 
+2. Creating circuit patterns with photolithography
+Step 1: Coating the Wafer with Photoresist
+
+Step 2: Spin Coating
+
+Step 3: Soft Baking
+
+Step 4: Mask Alignment and Exposure
+
+Step 5: Developing the Pattern
+--- slide 5 ---
+Semiconductor chip fabrication 
+3. Building transistors: Etching and doping
+Step 1: Etching – Removing Unwanted Material
+
+Step 2: Photoresist Removal
+
+Step 3: Doping – Adding Impurities
+
+Step 4: Repetition for Multiple Layers
+--- slide 6 ---
+Semiconductor chip fabrication 
+Techniques for doping:
+
+Diffusion
+
+2.   Ion implantation
+--- slide 7 ---
+Semiconductor chip fabrication 
+4. Packaging the final product
+Step 1: Creating Metal Interconnections (PVD/CVD)
+
+Step 2: Passivation – Protecting the Chip Surface
+
+Step 3: Dicing the Wafer
+
+Step 4: Packaging and Bonding
+
+Step 5: Testing and Final Inspection
+--- slide 8 ---
+Semiconductor chip fabrication 
+5. Connect the chip to the real world. 
+Step 1: Bonding the Chip
+
+Step 2: Mounting on a PCB (Printed Circuit Board)
+
+Step 3: Encapsulation and Cooling
+
+Step 4: Integration and Testing

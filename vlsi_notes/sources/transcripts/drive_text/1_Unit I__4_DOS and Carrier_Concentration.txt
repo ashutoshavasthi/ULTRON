@@ -1,0 +1,72 @@
+--- page 1 ---
+Density of States and Intrinsic Carrier Concentration 
+I. Introduction 
+A. Defining Intrinsic Semiconductors 
+An intrinsic semiconductor is pristine pure, meaning nothing has been added, and it is in 
+equilibrium. In an intrinsic semiconductor, the number of electrons and the number of holes 
+must be exactly the same. This equal concentration is known as the intrinsic carrier 
+concentration (nᵢ), measured per volume (e.g., per centimeter cube). 
+B. The Role of Density of States (DOS) 
+To find the total number of electrons or holes in a semiconductor, two main factors must be 
+considered: 
+1. Probability: The Fermi function provides the probability of finding electrons or holes at a 
+specific energy level. 
+2. Available States: The density of states (DOS) tells you how many states are there for the 
+electrons to occupy or for the holes to occupy. 
+The total number of electrons or holes is always calculated by integrating the product of the 
+probability (Fermi function) and the density of states (available states) over the entire 
+energy landscape. 
+ 
+II. Key Concept: Effective Density of States (N_C and N_V) 
+Term 
+Description 
+Associated Band / Units 
+N_C 
+Effective Density of States 
+at the Conduction Band 
+Conduction Band (E_C), per 
+cm³ 
+N_V 
+Effective Density of States 
+at the Valence Band 
+Valence Band (E_V), per 
+cm³ 
+These values (N_C and N_V) depend on factors like the effective mass of the electron or hole 
+and the temperature (T). 
+III. General Formulas for Carrier Concentration 
+ 
+In general (for both intrinsic and doped semiconductors), the electron (N) and hole (P) densities 
+are given by the product of the effective density of states and a Fermi Dirac integral (which 
+handles the probability function) 
+
+--- page 2 ---
+Electrons (N): 
+ 
+Holes (P): 
+ 
+IV. Simplified Formulas: Boltzmann Approximation 
+Simplified under moderate doping conditions: The complicated Fermi Dirac integral can be 
+simplified into an exponential function (Boltzmann approximation) under conditions of 
+moderate doping. This simplification is valid only when the Fermi level is separated from its 
+respective band edge by at least 3kBT 
+• For electrons: E_C – E_F ≥ 3kBT  
+• For holes: E_F – E_V ≥ 3kBT 
+A. Electron Concentration (N): 
+ 
+B. Hole Concentration (P): 
+ 
+V. Intrinsic Carrier Concentration (n_i) 
+In an intrinsic semiconductor, the electron concentration (N) equals the hole concentration 
+(P), both equal to the intrinsic carrier concentration (nᵢ). 
+ 
+
+--- page 3 ---
+ 
+Key Observations about nᵢ: 
+• Dependence on DOS: nᵢ depends on √(NCNV). 
+• Temperature and Band Gap Dependence: Strong dependence on band gap (EG) and T. 
+• Physical Meaning: nᵢ represents the minimum concentration of electrons and holes that 
+will always be present in the semiconductor at a particular temperature, due to thermal 
+excitation  
+• Example: For silicon at room temperature, approximately, nᵢ ≈ 1.5 × 10^10 cm⁻³ = electron 
+concentration = hole concentration.  

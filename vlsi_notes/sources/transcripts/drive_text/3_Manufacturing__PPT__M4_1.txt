@@ -1,0 +1,211 @@
+--- slide 1 ---
+Oxidation
+Fig. Thermal oxidation furnace.
+Fig. Basic process for oxidation of silicon where oxygen diffuses through the growing layer to complete a chemical reaction at the Si/SiO2 interface.
+--- slide 2 ---
+Oxidation
+Property | Dry Oxide | Wet Oxide
+Oxidising agent | O₂ | H₂O vapor
+Growth rate | Slow | Fast
+Quality | High (dense, uniform, less porous) | Lower (more porous, has –OH)
+Use | Gate oxides | Field/isolation oxides
+Thermal oxidation can be carried out in two environments:
+Dry Oxidation → using pure oxygen gas (O₂)
+Si (solid) + O₂ (gas) → SiO₂ (solid)
+
+Wet Oxidation → using water vapor (H₂O)
+Si (solid) + 2 H₂O (gas) → SiO₂ (solid) + 2 H₂ (gas)
+--- slide 3 ---
+Oxidation
+Applications of Thermally Grown Oxides
+
+Gate Oxides (Thin Oxides) 
+Isolation oxides (thick oxides)
+Masking dopants
+Fig. Approximate range of oxides and thicknesses used in silicon technology
+Fig. SEM of the LOCOS structure
+Fig. HR-TEM image of the interface between Si and SiO2
+--- slide 4 ---
+SiO2 growth kinetics model: The Deal-Grove model
+--- slide 5 ---
+Limiting Factors
+--- slide 6 ---
+Measurement of oxide thickness layer
+--- slide 7 ---
+Photolithography
+Technique used for printing extremely small patterns on a wafer.
+--- slide 8 ---
+Resolution in photolithography
+Rayleigh Resolution Equation:
+Where:
+R = minimum feature size
+λ = wavelength of the light
+NA = numerical aperture of the lens
+k₁ = a constant related to the process
+Strategies to improve resolution:
+Shorter wavelengths (g-line → i-line → DUV 248 nm → 193 nm → EUV 13.5 nm)
+Immersion lithography
+OPC (Optical Proximity Correction)
+Phase-shift masks
+Multiple patterning
+--- slide 9 ---
+Light sources and lenses
+Traditionally Hg vapor lamps have been used which generate many spectral lines from a high intensity plasma inside a glass lamp. 
+
+Electrons are excited to higher energy levels by collisions in the plasma, and photons are emitted when the energy is released. 
+
+Filters can be used to limit exposure wavelengths. 
+
+Intensity uniformity has to be better than several % over the collection area. 
+
+Needs spectral exposure meter for routine calibration due to aging. 
+
+--- slide 10 ---
+Deep Ultraviolet (DUV) Sources (Excimer Lasers)
+--- slide 11 ---
+Extreme UV Light Sources (EUV)
+UV lithography uses extremely short-wavelength light (13.5 nm) for advanced nodes (7 nm, 5 nm, 3 nm).
+
+Tiny molten tin droplets are fired into a vacuum 50,000 times per second.
+
+Each droplet is hit by two infrared laser pulses:
+1st pulse flattens the droplet.
+2nd pulse vaporizes it into superheated tin plasma.
+
+The tin plasma emits EUV radiation at 13.5 nm.
+
+A large collector mirror captures and reflects the EUV light toward the scanner optics.
+
+EUV light cannot pass through lenses, so the system uses only multilayer reflective mirrors in a vacuum.
+
+EUV sources are essential for printing ultra-fine features at modern technology nodes.
+ 
+--- slide 12 ---
+Lenses and Numerical aperture
+NA controls how much light the lens collects → determines resolution.
+
+NA = n sin θ, n is the refractive index and θ is half of the maximum cone angle of light that the lens can accept.
+
+Spherical lenses limited NA to ~0.8.
+
+Aspherical lenses enabled NA > 0.8.
+
+ 
+--- slide 13 ---
+Diffusion
+Diffusion: is a process by which impurity atoms move through a crystal
+Diffusion is the redistribution of atoms from high concentration regions to low concentration regions
+Importance of doping: Vertical + lateral control of dopant distribution
+Impact on device performance: 
+Controlling resistance
+Controlling short channel effects: (a) Controls drain-induced barrier lowering (DIBL) (b) Supresses punch-through. Higher doping reduces DIBL and supresses punch-through by keeping the depletion regions short.
+
+Planar MOSFETs
+--- slide 14 ---
+Diffusion
+Diffusion: is a process by which impurity atoms move through a crystal
+Diffusion is the redistribution of atoms from high concentration regions to low concentration regions
+--- slide 15 ---
+The physics of diffusion
+Fick’s First Law of diffusion:
+
+1. Flux is proportional to the concentration gradient.
+2. The proportionality constant is the diffusivity (D), or diffusion coefficient. Units of D are cm2/sec. 
+--- slide 16 ---
+The physics of diffusion
+Fick’s second law of diffusion:
+It describes how concentration changes over time (dC/dt).
+
+
+If more dopants flow into a small region than flow out, concentration increases.
+
+
+--- slide 17 ---
+Typical Diffusion profile
+Step 1: Pre-deposition (Constant surface concentration)
+
+
+
+
+
+
+
+
+
+Step 2: Drive-In (Constant Dose)
+
+--- slide 18 ---
+Limitations of Fick’s law
+Fick’s Laws work well for low doping concentrations.
+
+However, they do not accurately describe diffusion at high doping concentrations or when other processes (like oxidation) are happening simultaneously.
+
+For these complex scenarios, a deeper, atomistic view of diffusion physics is necessary.
+Temperature Dependence (Arrhenius Dependence): 
+
+Thermal diffusivity (D) has a very strong exponential dependence on temperature. This is called an Arrhenius dependence.
+The diffusivity equation is: 
+--- slide 19 ---
+Atomic Scale Diffusion Mechanisms and role of point-defects
+--- slide 20 ---
+Ion Implantation
+Feature | Diffusion Process | Ion Implantation Technique
+Temperature | High-temperature process. | Low-temperature process.
+Junction Depth | Forms very deep junctions due to diffusivity. | Depth controlled by energy.
+Doping Control | Less precise. | Very precise control over doping concentration.
+Typical Ion Implantation Parameters
+Ions: P, As, Sb, B, In, O
+Dose: 10¹¹ – 10¹⁸ cm⁻²
+Ion energy: 1 – 400 keV
+Uniformity and reproducibility: ± 1%
+Ion flux: 10¹² – 10¹⁴ cm⁻² s⁻¹
+Ion distribution depths: 10 nm – 10 µm
+A process in which a gas is first ionized to create charged ions, which are then accelerated by a high electric field and injected into the target semiconductor wafer to depths ranging from a few nanometers to several hundred nanometers.
+--- slide 21 ---
+Ion Implantation
+Dopant Source and Ionization
+
+Mass Separation
+
+Acceleration Beam Focusing and Neutral Beam Trapping
+
+The Neutral Problem Control Limitation
+
+Neutral Beam Trap
+
+Scanning and Dosing Measurement
+--- slide 22 ---
+Ion trajectory and projected range
+--- slide 23 ---
+Distribution of implant
+1. Lighter ions
+
+Light ions travel more deeply into the wafer
+Projected range (Rₚ) will be more
+Broader distribution of ions around the peak point
+
+
+2. Heavier ions
+Heavy ions cannot go deeper into the wafer
+Projected range (Rₚ) will be less
+Narrow distribution of ions around the peak point
+
+
+--- slide 24 ---
+Distribution of implant
+--- slide 25 ---
+Ion stopping mechanism
+Ions penetrate into substrate
+Collide with lattice atoms
+Gradually lose their energy and stop
+
+Nuclear Stopping
+Collision with nuclei of the lattice atoms
+Scattered significantly
+Causes crystal structure damage
+
+Electronic Stopping
+Collision with electrons of the lattice atoms
+Incident ion path is almost unchanged
+Energy transfer is very small
+Crystal structure damage is negligible

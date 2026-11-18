@@ -1,0 +1,367 @@
+--- page 1 ---
+MOSFET Advanced Concepts: Short Channel Effects, Scaling, and
+Modeling
+I. The Influence of Moore’s Law and Device Scaling
+The ongoing reduction in the size of transistors is driven by Moore’s Law, which predicted that the number
+of transistors per unit area on a chip would double approximately every one and a half years.
+1. Requirement for Doubling: To double the transistor density, the only option is to reduce the physical
+dimensions of the device by half,.
+2. Scaling Definition: Scaling involves the reduction of overall device dimensions, specifically the
+channel length (
+), the width (
+), and the gate oxide thickness (
+),.
+3. Short Channel Effects (SCEs): As dimensions are reduced, certain physical phenomena become much
+more prominent in the electrical characteristics (IV characteristics). These phenomena are known
+collectively as Short Channel Effects (SCEs),. SCEs affect the overall functionality of the system and
+must be understood to ensure Moore’s Law remains valid.
+Scaling Theories (How Dimensions are Reduced)
+Scaling not only involves reducing physical size but also voltages and currents. Two main types of scaling
+theories exist:
+1. Constant Electric Field Scaling Theory: This approach ensures the electric field within the device
+remains constant.
+If the channel length (
+) is reduced (e.g., by half), the drain voltage (
+) must also be reduced
+(e.g., by half).
+Example: If 
+ changes from 1 micron to 0.5 micron, the voltage 
+ must change from 1 volt to
+0.5 volts to maintain the electric field (
+).
+Similarly, reducing the oxide thickness (
+) requires reducing the gate voltage (
+) to maintain
+the transverse electric field.
+2. Constant Voltage Scaling Theory: In this method, the voltages are kept constant even as device
+dimensions shrink. This technique is often preferred over constant field scaling.
+II. Second Order Effects in MOSFETs
+Short Channel Effects include important second-order effects such as the Body Effect and Channel Length
+Modulation (CLM), in addition to other phenomena like DIBL and punch-through.
+1. Body Effect
+The body effect describes how the substrate (bulk) voltage influences the device’s threshold voltage.
+L
+W
+t
+​
+ox
+L
+V
+​
+D
+L
+V
+​
+D
+V
+​/L
+D
+t
+​
+ox
+V
+​
+G
+12/10/25, 4:32 PM
+StackEdit
+https://stackedit.io/app#
+1/4
+
+--- page 2 ---
+Setup: The body is the fourth terminal of the MOSFET. For an N-channel MOS (NMOS) device, the
+body should ideally be kept at the negative-most bias,.
+Reverse Bias Condition: Keeping the bulk voltage (
+) less than 0 ensures the source-bulk and drain-
+bulk junctions remain reverse-biased. If 
+ were greater than 0, it would forward-bias these
+junctions, leading to heavy current flow and potential device burnout.
+Mechanism: The source-to-body voltage (
+) is key. If 
+ is made more negative, 
+becomes more positive. This increase in 
+ causes the depletion region thickness to become
+larger.
+Result: Since the depletion layer is thicker, a larger gate voltage (
+) is needed to “break” this
+channel and create the inversion layer. This results in an increase in the threshold voltage (
+),.
+2. Channel Length Modulation (CLM)
+CLM primarily affects the behavior of the MOSFET in the saturation region.
+Ideal Saturation: Traditionally, in saturation, the drain current (
+) was assumed to be constant,
+independent of the drain-to-source voltage (
+),.
+CLM Mechanism: When 
+ increases, the depletion region between the drain and the bulk expands
+and starts consuming a portion of the channel (it “eats away into the channel”).
+Result: The effective channel length (
+) is reduced: 
+, where 
+ is the length of the
+encroaching depletion region. This effective reduction in 
+ leads to an enhanced or increased on-
+current.
+I-V Characteristics: Instead of 
+ being perfectly constant in saturation, it shows a slight increase as
+ increases,.
+Consequence: Because the current increases with 
+, the MOSFET cannot be considered an ideal
+current source in saturation,. Its output impedance (
+) is therefore a finite value, not infinity,. The
+effect is captured mathematically by adding the term 
+ to the drain current equation,
+where  is the CLM parameter,.
+3. Velocity Saturation
+This phenomenon relates to the speed of charge carriers (electrons) in the channel, especially under high
+electric fields typical of short channels.
+Carrier Velocity: Initially, charge carrier velocity (
+) is proportional to the electric field (
+), 
+.
+Saturation Mechanism: As the electric field increases, velocity increases linearly, then non-linearly,
+and eventually reaches a point called the critical electric field (
+),. Beyond 
+, the velocity
+becomes constant (
+), independent of the electric field,.
+Physical Reason: High velocity causes increased scattering (the charge carrier hits other charge
+carriers), which opposes the force driving the electron,. When the dragging force (from the electric
+field) equals the opposing force (from scattering), velocity saturates.
+Impact on Saturation: Velocity saturation is crucial for short channel devices. It forces the device into
+saturation. In short channel devices, the saturation drain voltage (
+) is lower compared to the
+ value required for saturation in long channel devices,.
+When velocity saturation occurs, the drain current becomes a linear function of 
+ and is
+independent of 
+,.
+V
+​
+B
+V
+​
+B
+V
+​ =
+SB
+V
+​ −
+S
+V
+​
+B
+V
+​
+B
+V
+​
+SB
+V
+​
+SB
+V
+​
+GS
+V
+​
+TH
+I
+​
+D
+V
+​
+DS
+V
+​
+DS
+L
+L
+​ =
+eff
+L −ΔL
+ΔL
+L
+I
+​
+D
+V
+​
+DS
+V
+​
+DS
+Z
+​
+out
+(1 + λV
+​)
+DS
+λ
+V
+​d
+E V
+​ =
+d
+μE
+E
+​
+C
+E
+​
+C
+V
+​
+Dsat
+V
+​
+DSAT
+V
+​ −
+GS
+V
+​
+TH
+V
+​
+GS
+V
+​
+DS
+12/10/25, 4:32 PM
+StackEdit
+https://stackedit.io/app#
+2/4
+
+--- page 3 ---
+4. Drain Induced Barrier Lowering (DIBL)
+DIBL (often referred to as ‘dibble’) is the effect where the drain voltage lowers the energy barrier near the
+source.
+Conduction Band Diagram: Applying a positive voltage to the drain lowers the conduction band
+energy on the drain side.
+Mechanism: Because the channel is short, the drain is physically close to the source. The drain voltage
+influences the energy barrier (or “hump”) that electrons must overcome to enter the channel from the
+source,.
+Result: The drain effectively lowers the barrier at the source end. Since the barrier is lowered, a
+lower gate voltage is required to switch on the device. This means DIBL leads to a reduction in the
+threshold voltage (
+).
+5. Punch Through
+Punch through is a severe issue resulting from extremely short channels.
+Mechanism: When source (
+) and drain (
+) regions are brought too close together over a -type
+substrate, their respective depletion regions may meet and touch.
+Result: This connection creates a direct, unintended electrical path between the source and the drain.
+Current can flow through this path even if the gate voltage is lowered significantly (turned off),
+because a permanent path is available,. This makes it impossible to fully turn off the device.
+III. MOSFET Model Equations for Manual Analysis
+For designing and analyzing circuits, mathematical equations are required to mimic the working conditions
+of a MOSFET. These models use a small set of parameters to calculate the drain current (
+).
+Key Parameters and Regions:
+1. Off Region (Cut-off): When the gate-to-source voltage (
+) is less than or equal to the threshold
+voltage (
+), the drain current (
+) is zero,.
+2. Linear/Resistive Region: At low 
+, the MOSFET behaves like a resistor, and the current follows
+Ohm’s law.
+3. Process Parameter (
+): This is the process trans-conductance parameter, defined as 
+(where 
+ is carrier mobility and 
+ is oxide capacitance),.
+General Drain Current Equation (with CLM):
+When Channel Length Modulation (CLM) is taken into consideration, the drain current in saturation is given
+by an equation that includes the CLM parameter ( ):
+V
+​
+TH
+n+
+n+
+p
+I
+​
+D
+V
+​
+GS
+V
+​
+TH
+I
+​
+D
+V
+​
+DS
+K′
+K =
+′
+μ
+​C
+​
+n
+ox
+μ
+​n
+C
+​
+ox
+λ
+I
+​ ∝
+D
+K
+​
+(V
+​ −
+′ ( L
+W )
+GS
+V
+​)[1 +
+TH
+λV
+​]
+DS
+12/10/25, 4:32 PM
+StackEdit
+https://stackedit.io/app#
+3/4
+
+--- page 4 ---
+.
+Required Parameters for Manual Analysis:
+To calculate the current of a MOSFET using manual analysis, you require five process-dependent
+parameters,:
+1. 
+ (Process Trans-conductance Parameter): Derived from mobility (
+) and oxide capacitance (
+).
+2.  (CLM Parameter): Empirically derived from experimental results,.
+3. 
+ (Threshold Voltage): Known to the designer.
+4.  (Body Coefficient Factor): Depends on substrate bias conditions,.
+5. 
+ (Saturation Drain Voltage): The point at which saturation occurs due to velocity saturation,.
+If these parameters are known, the device current characteristics can be easily calculated.
+K′
+μ
+​n
+C
+​
+ox
+λ
+V
+​
+TH
+γ
+V
+​
+DSAT
+12/10/25, 4:32 PM
+StackEdit
+https://stackedit.io/app#
+4/4

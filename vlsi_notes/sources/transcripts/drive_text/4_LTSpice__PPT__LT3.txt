@@ -1,0 +1,80 @@
+--- page 1 ---
+3
+Outline
+• LT-Spice Installation, Setup
+• Brief on Schematic Window
+• Demo on a Small Circuit
+
+--- page 2 ---
+4
+Operation Framework
+
+--- page 3 ---
+5
+Ltspice Installation, Setup
+•
+https://www.analog.com/en/design-center/design-tools-and-calculators/ltspice-simulator.html
+
+--- page 4 ---
+6
+The Main Schematic Window
+
+--- page 5 ---
+7
+Major Component Location
+•
+You can Delete (F5 or
+Ctrl-X) and Move (F7)
+components, as well as
+Drag (F8) them (keep
+the wires connected)
+• To add a component, click on the corresponding icon
+• Component button contains a slew of predefined components: voltage
+and current sources; transistors; opamps; gates; user-defined stuff
+
+--- page 6 ---
+8
+Usable Feature
+To rotate the
+component prior to
+placing press Ctrl-R
+To mirror the
+component prior to
+placing press Ctrl-E
+
+--- page 7 ---
+9
+Toolbar Summary
+
+--- page 8 ---
+10
+The Basic Circuit Connection
+Right-click to enter
+component value
+
+--- page 9 ---
+13
+P-N Junction Diode
+•
+Forward Bias: External battery makes the anode more positive than
+cathode- current flows in the direction of the arrow in the symbol.
+•
+Reverse Bias: External battery makes the cathode
+more positive than the anode – a tiny current flows
+opposite to the arrow in the symbol.
+
+--- page 10 ---
+14
+Forward Bias
+• As more electrons flow into the depletion region
+reducing the number of positive ions and similarly
+more holes move in reducing the positive ions.
+• This reduces the width of depletion region.
+
+--- page 11 ---
+15
+Reverse Bias
+• The positive side of bias voltage attracts the
+majority carriers of n-type creating more positive
+ions at the junction.
+• This widens depletion region.

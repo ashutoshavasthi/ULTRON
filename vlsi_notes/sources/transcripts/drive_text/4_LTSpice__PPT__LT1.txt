@@ -1,0 +1,115 @@
+--- page 1 ---
+4
+Source: https://www.rohm.com/electronics-basics/spice/what-is-spice
+Introduction to SPICE Simulator
+What is SPICE?
+•
+SPICE is open-source software that simulates the operating
+conditions of analog circuits.
+•
+SPICE- Simulation Program with Integrated Circuit Emphasis.
+History of SPICE
+•
+Developed by the University of California, Berkeley in 1973.
+•
+SPICE has undergone changes as shown in the
+table below to reach its current format.
+
+--- page 2 ---
+5
+Source: https://www.rohm.com/electronics-basics/spice/what-is-spice
+•
+The first version, SPICE1, was coded in
+FORTRAN.
+•
+The most popular SPICE simulator is based on
+SPICE2G.6 and is written in FORTRAN.
+• FORTRAN is a procedural programming
+language developed for scientific computing.
+Year
+SPICE Version
+Language
+1973
+SPICE
+FORTRAN
+1975
+SPICE 2
+FORTRAN
+1981
+SPICE 2G.6
+FORTRAN
+1985
+SPICE 3
+C
+
+--- page 3 ---
+6
+https://techweb.rohm.com/product/simulation/8294/
+What Can You Do With SPICE?
+• It is a general-purpose circuit simulation program that provides linear
+AC analysis, non-linear transient analysis, and nonlinear DC analysis.
+• Analysis is performed by solving combinations of theoretical and
+experimental (device model) equations representing the behavior of
+elements based on Kirchhoff’s current and voltage laws, utilizing
+modified nodal point analysis (Both analysis and synthesis is used). 
+Device Model
+•
+A device model is an analytical expression that was developed based on 
+theoretical and experimental studies.
+
+--- page 4 ---
+7
+https://techweb.rohm.com/product/simulation/8294/
+Types of SPICE Model
+There are two types of SPICE model:
+• device models
+• subcircuit models
+
+--- page 5 ---
+8
+Source: https://www.rohm.com/electronics-basics/spice/what-is-spice
+≪Example of device model description ≫
+
+--- page 6 ---
+9
+Source: https://www.rohm.com/electronics-basics/spice/what-is-spice
+≪Examples of subcircuit model description ≫
+(Schematic and netlist)
+
+--- page 7 ---
+10
+Source: https://www.rohm.com/electronics-basics/spice/what-is-spice
+Typical Instances
+Inst.Name
+Component
+Number of pins (pin order)
+M
+MOSFET
+4 (D G S B)
+D
+Diode
+2 (A K)
+Q
+Transistor
+3 (C B E)
+R
+Resistor
+2
+C
+Capacitor
+2
+L
+Coil
+2
+V
+Voltage source
+2 (+ -)
+I
+Current source
+2 (+ -)
+E
+E power supply
+4 (OUT+ OUT- IN+ IN-)
+G
+G power supply
+4 (OUT+ OUT- IN+ IN-)

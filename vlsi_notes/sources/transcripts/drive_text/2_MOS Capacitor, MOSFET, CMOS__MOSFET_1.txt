@@ -1,0 +1,256 @@
+--- page 1 ---
+MOS Transistor Basics
+I. Introduction to CMOS and Digital Design
+The study of CMOS digital VLSI design focuses primarily on creating electronic circuits based on
+complementary metal oxide semiconductors.
+1. CMOS Definition: CMOS stands for Complementary Metal Oxide Semiconductor.
+2. Basic Building Block: The foundational component used in CMOS digital design is the MOSFET,
+which stands for Metal Oxide Semiconductor Field Effect Transistor.
+3. Digital Logic vs. Analog:
+Digital Logic: You work strictly with only zero’s (0) and one’s (1).
+0 usually represents the ground (GND).
+1 usually represents the applied voltage (VDD).
+Analog Design: Signals are time dependent (like a sine wave 
+). In analog design, the
+behavior of the signal must be known at multiple points in time.
+4. The Goal: Digital VLSI design requires devices that can switch easily between 0 and 1 states at very
+high speeds and with relatively low power dissipation.
+II. MOSFET Function: Working as a Switch
+The primary motivation for studying the MOSFET is its ability to act as an efficient switch.
+1. In a MOSFET, by applying a suitable electrical potential on the Gate terminal, you can manipulate
+(regulate) the amount of current flowing from the Source to the Drain.
+2. Field Effect: The MOSFET is a Field Effect Transistor because the movement (flow) of electrons
+within the device is controlled by the electric field that is present.
+3. Switching States:
+ON State: The MOSFET is conducting current (implying a ‘1’ or high voltage).
+OFF State: The MOSFET is not conducting current (implying a ‘0’ or ground).
+III. MOSFET Structure and Terminals
+The MOSFET is fundamentally a multi-terminal device.
+1. Terminals:
+It is primarily considered a three-terminal device: Source (S), Drain (D), and Gate (G).
+It effectively has four terminals, with the fourth being the Substrate Contact (or Bulk Contact).
+2. Physical Layers (The MOS Structure):
+The term MOS (Metal Oxide Semiconductor) refers to the layers that form the control structure.
+M (Metal/Gate): The top layer, often made of metal or polysilicon (which acts almost like a
+metal), is used for the Gate terminal.
+O (Oxide): A layer of silicon dioxide sits beneath the gate. It acts as an insulator.
+S (Semiconductor/Substrate): The foundation of the device, often a P-type
+semiconductor substrate (for an NMOS device).
+3. Source and Drain Regions (NMOS Example):
+A sin ωT
+12/10/25, 4:24 PM
+StackEdit
+https://stackedit.io/app#
+1/4
+
+--- page 2 ---
+Within the P-type substrate, the Source and Drain regions are heavily doped (meaning a large
+concentration of doping atoms).
+For an NMOS device, these regions are heavily doped with N-type material and are referred to
+as n+.
+Contacts: Metal-semiconductor junctions are needed on the Source and Drain to allow signals
+(currents) to move efficiently, as metal has high conductivity and low resistivity.
+4. Dimensions:
+Oxide Thickness (
+): The thickness of the oxide layer. The 
+ plays a vital role in determining
+the switching voltage because if the oxide thickness is reduced, the electric field strength
+increases, which lowers the required threshold voltage.
+Drawn Length (
+): The length initially defined for the gate.
+Diffusion Length (
+): During fabrication, the Source/Drain doping spreads slightly under the
+gate.
+Effective Length (
+): The actual, shortened channel length: 
+ (since diffusion happens on both the source and drain sides).
+IV. Biasing Conventions
+Biasing means applying appropriate voltages (VG, VS, VD) to the terminals to control the device’s ON/OFF
+state.
+1. Voltage Notation:
+ (Drain-to-Source Voltage).
+ (Gate-to-Source Voltage).
+2. Source Grounding: In most practical cases, the Source (S) terminal is grounded (
+). In this
+scenario, 
+ is simply the applied gate voltage (
+).
+3. Substrate (Bulk) Biasing: The fourth terminal (Bulk/Substrate) also requires a bias voltage (
+), often
+referenced as 
+ (Source-to-Bulk).
+NMOS: The substrate is generally connected to the most negative supply terminal (often
+ground).
+PMOS: The substrate is generally connected to the most positive supply terminal.
+V. Types of MOSFETs
+MOSFETs can be categorized based on their charge carriers and their basic operational mode.
+A. Based on Charge Carriers:
+1. NMOS (N-type MOSFET): Electrons are the primary charge carriers.
+Requires positive gate and drain voltages.
+Uses a P-type substrate with N+ Source/Drain regions.
+2. PMOS (P-type MOSFET): Holes are the primary charge carriers.
+Requires negative gate and drain voltages.
+Uses an N-type substrate with P+ Source/Drain regions.
+B. Based on Operation Mode:
+t
+​
+ox
+t
+​
+ox
+L
+​
+drawn
+L
+​
+D
+L
+​
+effective
+L
+​ =
+effective
+L
+​ −
+drawn
+2 × L
+​
+D
+V
+​ =
+DS
+V
+​ −
+D
+V
+​S
+V
+​ =
+GS
+V
+​ −
+G
+V
+​S
+V =
+S
+0
+V
+​
+GS
+V
+​
+G
+V
+​
+B
+V
+​
+SB
+12/10/25, 4:24 PM
+StackEdit
+https://stackedit.io/app#
+2/4
+
+--- page 3 ---
+1. Enhancement Mode MOSFET:
+"Normally Off" Device: Under zero bias conditions (no voltage applied to any terminal), there is
+no conducting channel between the source and drain, meaning there is no current flow.
+A voltage must be applied to the gate to “enhance” the formation of a channel before current
+can flow.
+2. Depletion Mode MOSFET:
+"Normally On" Device: Even under zero bias conditions, a conducting channel is already present
+between source and drain.
+Current will flow as soon as a drain voltage is applied.
+Note: In this course, we primarily focus on the Enhancement Mode MOSFET.
+VI. The Threshold Voltage (
+) and Channel Formation
+The core concept in controlling a MOSFET is understanding the formation of the conducting channel, which
+is governed by the Threshold Voltage.
+1. Threshold Voltage Definition: 
+ is defined as the specific gate voltage at which the channel is
+formed or the channel is inverted.
+2. Cut-Off Mode (VG = 0): When the gate voltage is zero, the P-type substrate beneath the oxide has a
+large quantity of free charge carriers (holes). There is no path (channel) for electrons to move from
+source to drain, resulting in no current flow.
+3. Inversion (Channel Formation in NMOS):
+Applying Positive VG: As a positive gate voltage is applied, an electric field is created.
+This positive field repels the holes in the P-substrate away from the oxide interface and attracts
+electrons (minority carriers) toward the interface.
+Depletion: Initially, the holes are pushed away, leaving behind a depletion region containing
+only fixed negative ions.
+Inversion: When the gate voltage reaches 
+, enough electrons accumulate near the surface
+to match the concentration of holes that were originally there. This creates an inversion layer
+(an N-type channel).
+Once the channel is formed, applying a small drain voltage will cause electrons to be dragged
+from source to drain, resulting in current flow.
+4. Factors Controlling 
+: The threshold voltage depends heavily on the material-dependent
+properties and doping concentration used during fabrication. For a finished device, 
+ is generally
+considered fixed.
+VII. Current-Voltage (I-V) Characteristics
+1. Drain Current vs. Drain Voltage: The I-V characteristic measures the current flowing out of the drain (
+) as the voltage applied to the drain (
+) is varied.
+2. ON Resistance (
+): When the device is switched ON (
+), it offers resistance to current
+flow, known as the ON resistance.
+3. Controlling 
+: By changing the applied biases (voltages), you can change the 
+ value, which
+allows you to manipulate the final current flowing through the device.
+V
+​
+TH
+V
+​
+TH
+V
+​
+TH
+V
+​
+TH
+V
+​
+TH
+I
+​
+D
+V
+​
+D
+R
+​
+on
+V
+​ >
+G
+V
+​
+TH
+R
+​
+on
+R
+​
+on
+12/10/25, 4:24 PM
+StackEdit
+https://stackedit.io/app#
+3/4
+
+--- page 4 ---
+4. Device Delay ( ): Resistance is critical because the speed (delay, ) of a digital circuit block is often
+defined by the RC time constant (
+). Higher resistance leads to higher delay.
+τ
+τ
+τ = R × C
+12/10/25, 4:24 PM
+StackEdit
+https://stackedit.io/app#
+4/4

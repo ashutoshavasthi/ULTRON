@@ -1,0 +1,198 @@
+--- page 1 ---
+Semiconductor Memories — Architecture, Classification, and Design 
+1. Overview of Semiconductor Memories and VLSI Testing 
+1.1 Role of Semiconductor Memories in VLSI 
+• 
+Definition: A semiconductor memory is an electronic circuit designed to store digital information. The 
+capacity of a memory circuit ranges from small localized registers to very large-capacity storage arrays 
+depending on system requirements. 
+• 
+Basic Building Block: The elementary unit of storage is a 1-bit memory cell. To store multiple bits (e.g., 4-
+bit, 8-bit, or words of arbitrary width), the fundamental 1-bit cell circuit is replicated and organized in an 
+array. 
+• 
+Implementation Technology: Modern semiconductor memories are primarily designed using MOS 
+devices (MOSFETs) to achieve high integration density, reduced power dissipation, and optimized 
+operating speed. 
+1.2 Design for Testability (DFT) in Memory and Logic Circuits 
+• 
+Need for Testing: Once a VLSI circuit is fabricated, physical testing is necessary to confirm that the circuit 
+delivers the expected output for applied test vectors and meets all performance specifications. 
+• 
+Input Vector Explosion: In complex digital circuits with large numbers of inputs (e.g., thousands of input 
+lines), exhaustive testing of all possible input combinations is practically impossible because testing every 
+individual combination requires an impractically long test time. 
+• 
+Random Testing & Sampling: Rather than testing all input combinations exhaustively, testing procedures 
+select random samples or test patterns to verify circuit functionality against expected logic outputs. 
+• 
+Fault Modeling: Testing methodologies analyze what types of physical and electrical faults can occur 
+inside the circuit and employ targeted design-for-testability (DFT) techniques to detect and eliminate 
+these faults. 
+2. Key Performance Metrics for Memory Design 
+When designing semiconductor memories, circuit architects must optimize several interdependent design 
+constraints: 
+Performance Metric 
+Physical Description & Design Considerations 
+Storage Density (Bits per Area) 
+The number of bits stored per unit of silicon area. Historical storage media 
+(magnetic tapes and floppy disks) occupied large physical volumes; modern 
+semiconductor technologies (such as SD cards) achieve high integration 
+density, packing gigabits (e.g., up to 512 GB) onto a single small chip. 
+Cost Per Bit 
+The economic and silicon manufacturing cost required to implement a 
+single bit of storage. Minimizing transistor count per memory cell directly 
+reduces overall cost per bit. 
+
+--- page 2 ---
+Performance Metric 
+Physical Description & Design Considerations 
+Operating Speed / Access Time 
+The time required to reliably read data from or write data into a targeted 
+memory location. 
+Static Power Dissipation 
+The steady-state power consumed by the memory array when unswitched 
+or in standby mode. 
+Dynamic Power Dissipation 
+The power consumed during operational state transitions when internal 
+nodes switch logic levels (i.e., transitioning from 0 →1 or 1 →0). 
+Data Retention Time 
+The duration over which stored data remains valid and uncorrupted within 
+the memory cell. 
+ 
+3. Classification of Semiconductor Memories 
+Semiconductor memories are broadly divided into two major functional classes based on data accessibility 
+and volatility: 
+                         Semiconductor Memories 
+                                    | 
+          +-------------------------+-------------------------+ 
+          |                                                   | 
+  Read-Only Memory (ROM)                            Random Access Memory (RAM) 
+- Non-Volatile                                    - Volatile 
+- Retains data without power                      - Loses data when power is removed 
+- Primarily Read operations                       - Fast Read and Write capability 
+          |                                                   | 
+   +------+------+------+------+                       +------+------+ 
+   |      |      |      |      |                       |             | 
+ Mask    PROM  EPROM  EEPROM Flash                   Static RAM    Dynamic RAM 
+  ROM                                                  (SRAM)        (DRAM) 
+ 
+3.1 Read-Only Memory (ROM) 
+• 
+Operational Characteristics: Traditionally designed for applications where data is written during 
+fabrication or programming and primarily read during normal system operation. 
+• 
+Non-Volatility: ROM is non-volatile; it retains stored information even when the external power supply is 
+disconnected. 
+• 
+Sub-Classifications:Mask-Programmed ROM (Mask ROM): Programmed permanently during 
+manufacturing mask steps. 
+• 
+Programmable ROM (PROM): Field-programmable once by the user. 
+• 
+Erasable Programmable ROM (EPROM): Can be erased and rewritten multiple times. 
+• 
+Electrically Erasable Programmable ROM (EEPROM): Erased and reprogrammed using 
+electrical signals. 
+• 
+Flash Memory: High-density, electrically erasable non-volatile memory widely used in 
+embedded systems and storage cards. 
+
+--- page 3 ---
+• 
+Write Cycle Limitations: While certain modern ROM variants permit user reprogramming, write cycles 
+are typically restricted (e.g., limited to a fixed endurance of write cycles) and significantly slower than 
+normal read cycles. 
+3.2 Random Access Memory (RAM) 
+• 
+Operational Characteristics: Allows arbitrary memory locations to be accessed, read, and written with 
+equal ease and speed during runtime. 
+• 
+Volatility: RAM is volatile; it requires continuous electrical power to sustain stored binary states. When 
+the power supply is cut off, all data held within the internal memory cells is lost. 
+• 
+Sub-Classifications:Static RAM (SRAM): Uses cross-coupled transistor configurations to hold 
+state continuously as long as power is applied. 
+• 
+Dynamic RAM (DRAM): Relies on periodic charge storage and refresh cycles. 
+4. General Memory Array Architecture (Refer to class notes for diagram) 
+To avoid routing dedicated individual select lines to every single bit, semiconductor memories are structured 
+as two-dimensional (2D) matrix arrays: 
+                     Address Bits (Row & Column) 
+                                  | 
+                                  v 
+                        +-------------------+ 
+                        |   Row Decoder     | 
+                        +---------+---------+ 
+                                  |  Word Lines (Rows) 
+                                  v 
+     +--------------------------------------------------------+ 
+     |   [Cell]-------[Cell]-------[Cell]-------[Cell]        | 
+     |     |            |            |            |           | 
+     |   [Cell]-------[Cell]-------[Cell]-------[Cell]        | 
+     |     |            |            |            |           | 
+     |   [Cell]-------[Cell]-------[Cell]-------[Cell]        | 
+     |     |            |            |            |           | 
+     |   [Cell]-------[Cell]-------[Cell]-------[Cell]        | 
+     +-----+------------+------------+------------+-----------+ 
+           |            |            |            | 
+           +------------+------------+------------+ 
+                                |  Bit Lines (Columns) 
+                                v 
+                        +-------------------+ 
+                        |  Column Decoder   | 
+                        +---------+---------+ 
+                                  | 
+                                  v 
+                             Data Output 
+ 
+4.1 Word Lines and Bit Lines 
+• 
+Word Lines (Rows): Horizontal control lines driven by the row decoding logic. Asserting a word line 
+activates all memory cells along that specific row. 
+• 
+Bit Lines (Columns): Vertical lines that transmit data into or out of the activated memory cells. 
+
+--- page 4 ---
+4.2 Address Decoding Scheme 
+• 
+An array dimensioned to store 2𝑁× 2𝑀 bits organizes memory cells into 2𝑁 rows and 2𝑀 columns. 
+• 
+Row Decoder: Takes 𝑁 row address input bits and activates exactly 1 of the 2𝑁 word lines. 
+• 
+Column Decoder: Takes 𝑀 column address input bits and multiplexes/selects the appropriate bit line(s) 
+from the 2𝑀 available columns. 
+• 
+Memory Cell Location: Each intersection point (crossing point) of an activated Word Line and a selected 
+Bit Line defines a distinct 1-bit memory location. To access a bit, the row decoder asserts the 
+corresponding row and the column decoder selects the corresponding column. 
+5. MOS-Based Read-Only Memory (ROM) Array Design 
+5.1 Circuit Structure of a 4 × 4 MOS ROM 
+In a representative 4-bit × 4-bit NOR-based ROM array: 
+• 
+Row Lines (𝑅1, 𝑅2, 𝑅3, 𝑅4): Word lines routed horizontally, connected directly to the gate terminals of 
+NMOS pull-down transistors located at specific cell sites. 
+• 
+Column Lines (𝐶1, 𝐶2, 𝐶3, 𝐶4): Bit lines routed vertically, connected to pull-up load devices at the top of 
+the array. 
+• 
+Load Devices: The columns are tied to 𝑉𝐷𝐷 using active pull-up devices, such as PMOS transistors or 
+depletion-mode NMOS loads. 
+5.2 Read Operation and Data Storage Mechanism 
+• 
+Default State (Pull-Up): When word lines are inactive (low), the NMOS transistors remain OFF, and the 
+pull-up load keeps the bit lines charged high (logic '1'). 
+• 
+Discharge Mechanism (Logic '0'):When a specific word line is selected (e.g., 𝑅1 = 1), it turns 
+ON every NMOS transistor whose gate is connected to 𝑅1. 
+• 
+If an NMOS transistor is physically connected at intersection (𝑅𝑖, 𝐶𝑗), turning ON that 
+transistor forms a conductive path to ground, discharging bit line 𝐶𝑗 from 𝑉𝐷𝐷 to ground 
+(logic '0'). 
+• 
+If no NMOS transistor is connected at intersection (𝑅𝑖, 𝐶𝑘), no discharge path exists; column 
+𝐶𝑘 remains at logic '1'. 
+• 
+Programming the Array: By strategically placing or omitting NMOS pull-down transistors at specific grid 
+intersections during fabrication, fixed binary patterns (0s and 1s) are permanently stored and evaluated 
+across the bit lines during row selection. 

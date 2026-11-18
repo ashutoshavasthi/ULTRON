@@ -1,0 +1,82 @@
+--- page 1 ---
+2
+The SPICE Diode Model
+The equivalent circuit of a diode
+Symbol
+Forward current
+Depletion layer capacitance
+Cjs = zero bias capacitance
+Vbi = p-n junction potential
+N = emission coefficient
+Forward Current (IF)
+Depletion Layer Capacitance (Cj)
+Parasitic Resistance (RS)
+
+--- page 2 ---
+3
+SPICE Device Models: Case Study of Diode Device Model
+.model 1mA_diode D (Is=100pA n=1.679)
+.DC VD 0V 800mV 10mV
+Schematic
+LTSpice As A Curve Tracer: Diode I-V Characteristics
+*
+* Circuit Description
+*
+VD N001 0 0V
+D1 N001 0 1mA_diode
+*
+* diode model statement
+*
+.model 1mA_diode D (Is=100pA n=1.679)
+*
+* unused diode statements
+*
+.model D D
+.lib/Users/roberts/Library/Application
+Support/LTspice/lib/cmp/standard.dio
+*
+* Analysis Requests
+*
+.DC VD 0V 800mV 10mV
+.backanno
+.end
+Netlist
+Results
+
+--- page 3 ---
+4
+Limits to SPICE Device Models: Diode Operation
+• Device models essentially represent the characteristics of theoretical
+equations of the model. Hence characteristics that cannot be
+expressed by theoretical equations are not reflected in simulation
+results. Simulation results must be interpreted keeping this limitation
+in mind.
+RB168MM150
+Datasheet
+Simulation
+Because a device model can represent only theoretical equation
+characteristics, it cannot satisfactorily reproduce irregular characteristics.
+
+--- page 4 ---
+5
+Diode Example:
+A DC Restorer Circuit
+*
+* Circuit Description
+*
+Vi IN 0 PULSE(-3 7 0s 10us 10us 0.490ms 1ms)
+C1 OUT IN 1µ
+D1 0 OUT 1N4148
+* diode model statement
+.lib /Users/roberts/Library/Application Support/LTspice/lib/cmp/standard.dio
+* unused diode statements
+.model D D
+*
+* Analysis Requests
+*
+.TRAN 100u 10m 0m 100u
+.backanno
+.end
+M4_1.pptx
+M5_Photolithography.pptx
+M6_Epitaxy_VPE.pptx

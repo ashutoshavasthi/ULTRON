@@ -1,0 +1,180 @@
+--- page 1 ---
+Thermal Oxidation of Silicon
+I. Fundamentals of Thermal Oxidation
+1. What is Thermal Oxidation?
+It is a process where a silicon (Si) substrate reacts with an oxygen-containing gas in a high-
+temperature environment.
+The reaction produces silicon dioxide (
+).
+The basic reaction involves the oxygen or water vapor flowing into high-temperature furnaces
+reacting with the silicon of the substrate.
+2. Why is Silicon Dioxide Important?
+The silicon/silicon dioxide interface is one of the best electrical interfaces possible, which is a main
+reason why silicon is the dominant semiconductor used today.
+ films are excellent electrical insulators.
+They have a very large band gap of 9 electron volts (eV), compared to 1.1 eV in silicon.
+These oxides have excellent electrical properties, including a very high breakdown field.
+3. Applications of Thermally Grown Oxides
+Gate Dielectrics: Thin oxides are used as gate oxides or gate dielectrics in MOSFETs.
+Isolation: Thicker oxides are used as field oxides or isolation oxides between neighboring transistors.
+A thick isolation oxide prevents parasitic leakage paths by increasing the threshold voltage in
+those regions.
+Dopant Masking: Oxides can be made thick enough to block the introduction of dopants (like
+phosphorus or boron) during thermal diffusion or ion implantation.
+II. The Oxidation Environment and Procedure
+Equipment: Oxides are typically grown in oxidation diffusion furnaces, which contain quartz tubes
+surrounded by heating coils.
+Furnaces can be horizontal or vertical; vertical furnaces have a smaller footprint in the clean
+room and offer more symmetric gas flow around the wafers.
+Procedure:
+1. A boat holding 50 to 100 wafers, stacked closely, is loaded very slowly into the furnace to
+minimize thermal shock.
+2. The cap is closed, and inert gases are flowed in to flush out the air.
+3. The temperature is raised to the operating level, typically around 
+ to 
+.
+4. Oxidation proceeds, and then the temperature is ramped down and the wafers are slowly pulled
+out.
+Temperature Sensitivity: Maintaining uniform temperature is critical because oxidation rates are
+exponentially dependent on temperature (Arrhenius dependence).
+III. Oxide Growth Physics
+SiO
+​2
+SiO
+​2
+900 C
+∘
+1000 C
+∘
+12/12/25, 5:19 PM
+StackEdit
+https://stackedit.io/app#
+1/3
+
+--- page 2 ---
+1. Location and Volume
+The chemical reaction (
+) occurs at the interface between the existing oxide and the
+silicon substrate.
+The oxygen-containing species must diffuse through the already grown oxide to reach this interface.
+As the oxide forms, silicon is consumed from the substrate, and the volume of the 
+ film increases
+by roughly a factor of 2.2.
+2. Dry vs. Wet Oxidation The type of oxygen-containing gas affects the resulting oxide quality and speed:
+Type
+Oxidizing
+Gas
+Properties
+Application Priority
+Dry
+Oxide
+Pure Oxygen
+(O₂)
+More dense and electrically superior.
+Used where quality is
+paramount (e.g., gate
+dielectrics).
+Wet
+Oxide
+Water Vapor
+(H₂O)
+Forms hydroxyl groups, resulting in a more
+open, porous network (less dense and
+electrically inferior).
+Used when a large volume
+is needed quickly.
+3. The Deal-Grove Model (Oxidation Rates) This famous model describes the rate of thermal oxidation
+based on two key processes that determine the rate:
+Flux 
+ (Diffusion): The oxidizing species must diffuse through the existing oxide thickness (
+) to
+reach the interface. This rate is slower when the oxide is thicker.
+Flux 
+ (Reaction): The chemical reaction occurs at the 
+/Si interface.
+The growth rate follows two regimes based on thickness:
+Regime
+Oxide Thickness
+Rate-Limiting Step (Bottleneck)
+Rate Dependence
+Linear
+Very thin
+Limited by the reaction rate at the interface.
+Thickness (
+) grows linearly with time (
+).
+Parabolic
+Thick
+Limited by the diffusion rate through the oxide.
+Si + O
+​ →
+2
+SiO
+​2
+SiO
+​2
+F
+​2
+X
+​
+not
+F
+​3
+SiO
+​2
+X
+​
+not
+X
+​ ∝
+not
+t
+12/12/25, 5:19 PM
+StackEdit
+https://stackedit.io/app#
+2/3
+
+--- page 3 ---
+Thickness squared (
+) grows linearly with time (
+).
+IV. Challenges and Modern Solutions
+The Problem of Tunneling: For advanced MOSFETs, the gate oxide thickness (
+) must be very small
+to increase the gate capacitance (
+). However, when 
+ is made extremely thin, a quantum
+mechanical phenomenon called tunneling occurs.
+Electrons can be thought of as quantum mechanical waves that have a finite probability of
+passing through the oxide barrier, resulting in high leakage currents.
+The Solution: High-K Dielectrics
+Instead of decreasing thickness (
+), modern technology increases capacitance by increasing the
+dielectric constant (
+).
+The industry transitioned away from 
+ (
+) to High-K dielectric materials (e.g., Hf-
+based oxides).
+These High-K materials are typically deposited (not thermally grown) using techniques like
+Atomic Layer Deposition (ALD).
+X
+​
+not
+2
+X
+​ ∝
+not
+2
+t
+D
+C
+D
+D
+K
+SiO
+​2 K ≈4
+12/12/25, 5:19 PM
+StackEdit
+https://stackedit.io/app#
+3/3

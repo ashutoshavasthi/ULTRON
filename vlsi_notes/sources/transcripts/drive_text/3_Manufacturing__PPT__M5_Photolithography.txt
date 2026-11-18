@@ -1,0 +1,68 @@
+--- slide 1 ---
+Evolution of the electronic devices
+--- slide 2 ---
+Progress has been enabled by miniaturization of the transistors on the chip
+--- slide 3 ---
+Moore’s law
+--- slide 4 ---
+Manufacturing of an IC
+--- slide 5 ---
+Photolithography
+Technique used for printing extremely small patterns on a wafer.
+--- slide 6 ---
+Resolution in photolithography
+Rayleigh Resolution Equation:
+Where:
+R = minimum feature size
+λ = wavelength of the light
+NA = numerical aperture of the lens
+k₁ = a constant related to the process
+Strategies to improve resolution:
+Shorter wavelengths (g-line → i-line → DUV 248 nm → 193 nm → EUV 13.5 nm)
+Immersion lithography
+OPC (Optical Proximity Correction)
+Phase-shift masks
+Multiple patterning
+--- slide 7 ---
+Light sources and lenses
+Traditionally Hg vapor lamps have been used which generate many spectral lines from a high intensity plasma inside a glass lamp. 
+
+Electrons are excited to higher energy levels by collisions in the plasma, and photons are emitted when the energy is released. 
+
+Filters can be used to limit exposure wavelengths. 
+
+Intensity uniformity has to be better than several % over the collection area. 
+
+Needs spectral exposure meter for routine calibration due to aging. 
+
+--- slide 8 ---
+Deep Ultraviolet (DUV) Sources (Excimer Lasers)
+--- slide 9 ---
+Extreme UV Light Sources (EUV)
+UV lithography uses extremely short-wavelength light (13.5 nm) for advanced nodes (7 nm, 5 nm, 3 nm).
+
+Tiny molten tin droplets are fired into a vacuum 50,000 times per second.
+
+Each droplet is hit by two infrared laser pulses:
+1st pulse flattens the droplet.
+2nd pulse vaporizes it into superheated tin plasma.
+
+The tin plasma emits EUV radiation at 13.5 nm.
+
+A large collector mirror captures and reflects the EUV light toward the scanner optics.
+
+EUV light cannot pass through lenses, so the system uses only multilayer reflective mirrors in a vacuum.
+
+EUV sources are essential for printing ultra-fine features at modern technology nodes.
+ 
+--- slide 10 ---
+Lenses and Numerical aperture
+NA controls how much light the lens collects → determines resolution.
+
+NA = n sin θ, n is the refractive index and θ is half of the maximum cone angle of light that the lens can accept.
+
+Spherical lenses limited NA to ~0.8.
+
+Aspherical lenses enabled NA > 0.8.
+
+ 

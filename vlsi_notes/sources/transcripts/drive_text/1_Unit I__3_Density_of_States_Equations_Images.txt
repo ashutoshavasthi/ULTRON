@@ -1,0 +1,109 @@
+--- page 1 ---
+Density of States 
+ 
+1. Review: 
+Concept 
+Description 
+Fermi Function f(E) 
+Represents the probability of finding an electron at a specific 
+energy (E). 
+Fermi Level (E_F) 
+A statistical construct where the probability of finding an electron 
+is 50% at any temperature. The position of E_F dictates whether a 
+material is n-type (upper half of band gap) or p-type (lower half of 
+band gap). 
+Effective Mass (m*) 
+Summarizes the effects of the crystal structure and quantum 
+mechanics on electron transport, allowing classical equations to be 
+applied. Both electrons and holes have their own effective mass 
+(m*electron or m*hole). 
+Hole 
+A vacancy left behind when an electron moves from the valence 
+band to the conduction band. It is modeled as a quasi-particle with 
+a positive charge that moves in the direction of the applied field. 
+2. Density of States (DOS), g(E) 
+Density of States is a crucial concept, as the number of electrons or holes in a semiconductor 
+depends on both the Fermi function (probability) and the Density of States (availability). 
+A. Definition 
+Density of States (g(E)) is defined as: The number of available energy states per unit energy 
+per unit volume. 
+B. Significance 
+To find the total number of electrons (n) or holes (p)—which is necessary to calculate 
+current density and understand device operation—one must know the Density of States. 
+C. Units 
+In semiconductor physics, calculations often use CGS units (centimeter, not meter). 
+The standard unit for Density of States is: states per electron volt per centimeter cube (per 
+eV per cm^3). 
+2. Formulas for Density of States, g(E) 
+The final expressions for electrons (in the conduction band) and holes (in the valence band) 
+are essential and given below (derivation not required). 
+
+--- page 2 ---
+A. General Expression (Conduction Band Electrons) 
+For electrons in the conduction band, the DOS is given by the expression (which uses 
+Planck’s constant h, not ħ): 
+ 
+The complete expression for electrons is: 
+ 
+B. Expression for Valence Band Holes 
+For holes in the valence band, the DOS is defined relative to the top of the valence band 
+(Ev): 
+ 
+ 
+4. Graphical Representation of DOS 
+If Density of States (g(E)) is plotted against energy (E): 
+1. Parabolic Dependence: g(E) goes as the square root of E (or E-Ec or Ev-E). As energy 
+increases, the number of available states also increases. 
+
+--- page 3 ---
+2. Starting Point (Ec): For electrons, DOS only begins at the bottom of the conduction band 
+(Ec). Below Ec (i.e., in the band gap), there are no states. 
+3. Hole DOS: Hole DOS starts from the top of the valence band (Ev) and increases as energy 
+moves downward. 
+The relationship results in parabolic-like humps starting at Ec and Ev. 
+5. Carrier Concentration (n and p) 
+The total number of electrons (n) or holes (p) is found by multiplying the Density of States 
+(availability) by the Fermi function (probability) and integrating over the relevant energy 
+band. 
+A. Electron Concentration (n) 
+The total number of electrons (n) in the conduction band (per cm^3) is calculated by 
+integrating the product of the Density of States g(E) and the Fermi function f(E) from the 
+bottom of the conduction band (Ec) to infinity: 
+ 
+ 
+B. Thermal Generation and n 
+Due to the product of g(E) and f(E), there is always a finite number of electrons in the 
+conduction band and holes in the valence band, even in pure (intrinsic) silicon at room 
+temperature (300 K) without any external stimulus. This explains how electrons can jump 
+
+--- page 4 ---
+the large energy gap (e.g., 1.1 eV for silicon) despite having a low thermal energy (kB T ≈ 
+0.026 eV at room temperature). 
+For silicon at room temperature, this concentration is approximately 10^10 electrons per 
+cm^3 and 10^10 holes per cm^3. 
+6. Effective Density of States (Nc and Nv) 
+The complicated integral for n can be mathematically simplified, leading to the introduction 
+of the Effective Density of States (Nc and Nv). 
+A. Simplified Electron Concentration Formula 
+ 
+F1/2 is the Fermi integral of half order. 
+(Ef-Ec)/KBT is the argument of the Fermi integral. 
+B. Conduction Band Effective Density of States (Nc) 
+ 
+It represents the effective density of states corresponding to the bottom of the conduction band, 
+depends on the effective mass of the electron and the temperature. 
+C. Valence Band Effective Density of States (Nv) 
+ 
+It is the density of states at the edge of the valence band, depends on the effective mass of the 
+hole and temperature. 
+7. Intrinsic Semiconductors 
+An intrinsic semiconductor is a pure crystal with no added external impurities. For an 
+intrinsic semiconductor in equilibrium, with no external fields or light applied, the electron 
+concentration (n) must be exactly equal to the hole concentration (p). 
+
+--- page 5 ---
+ 
+Where n_i is the intrinsic carrier concentration. This equality holds because every electron 
+that jumps to the conduction band leaves behind exactly one hole in the valence band. This 
+number n_i is governed by the product of probability (Fermi function) and the availability of 
+states (Density of States). 

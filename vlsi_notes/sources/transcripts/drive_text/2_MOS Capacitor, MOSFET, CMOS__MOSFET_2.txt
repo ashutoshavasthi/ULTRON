@@ -1,0 +1,458 @@
+--- page 1 ---
+MOS Transistor Current-Voltage Characteristics
+I. Introduction and Current Fundamentals
+The goal of studying MOSFET basics is to predict the current versus voltage characteristic of the device,
+specifically how much current flows based on applied gate voltage (
+) or drain voltage (
+).
+A. Types of Current
+We primarily focus on drift current. Drift current is caused by the presence of an electric field acting on
+charge carriers.
+B. Defining Current Flow
+Current flowing ( ) is fundamentally defined as the charge flowing per unit area per unit time.
+1. Fundamental Current Equation: The derived current flow is given by the product of the charge
+density (
+) and the velocity of the charge carriers (
+):
+.
+2. Charge Density (
+): This represents the charge per unit area.
+3. Velocity (
+): The velocity of the charge carrier is determined by the mobility ( ) and the electric field
+(
+):
+.
+The electric field (
+) is related to the voltage change over distance: 
+.
+II. Setting Up the Device and Defining Key Voltages
+A. Initial Conditions and Electric Fields
+1. Initially, the source and drain terminals are grounded.
+2. The application of a gate voltage (
+) creates an electric field in the transverse direction
+(perpendicular to the channel). There is no electric field in the longitudinal direction (source to drain)
+when 
+ and 
+ are grounded.
+B. Threshold Voltage (
+)
+1. The threshold voltage (
+) is defined as the gate voltage at which the channel is just formed.
+VG
+V
+​
+D
+I
+Q
+V
+I = Q × V
+Q
+V
+μ
+E
+V = μ × E
+E
+E = −dV /dX
+V
+​
+G
+V
+​S
+V
+​
+D
+V
+​
+TH
+V
+​
+TH
+12/10/25, 4:29 PM
+StackEdit
+https://stackedit.io/app#
+1/4
+
+--- page 2 ---
+2. The onset of inversion (channel formation) takes place when the gate voltage equals the threshold
+voltage.
+3. For an enhancement mode NMOSFET, 
+ is typically around 0.5 Volts.
+C. Overdrive Voltage
+1. In practical operation, the gate voltage (
+) is usually set greater than the threshold voltage (
+).
+2. The effective voltage available to form or modulate the channel charge is the difference between the
+gate-to-source voltage and the threshold voltage:
+.
+3. This overdrive controls the inversion charge.
+D. Inversion Charge Density (
+)
+Using the simple analogy of a parallel plate capacitor (
+), the charge density (
+) per unit area in
+the channel is proportional to the overdrive voltage.
+Note: 
+ is the oxide capacitance per unit area, and 
+ is the width of the device.
+III. Channel Analysis and Approximations
+A. Applying Drain Voltage (
+) and Channel Potential
+1. When a positive drain voltage (
+) is applied (with the source grounded), a voltage gradient is
+created across the channel.
+2. As you move from the source (
+, 
+) toward the drain (
+, 
+), the channel
+potential (
+) goes on increasing, similar to a potential divider.
+B. Effective Charge Density Reduction
+1. The channel potential (
+) works against the gate voltage.
+2. At any point 
+ along the channel, the effective voltage that determines the charge density is
+reduced by the local channel potential:
+3. Because 
+ increases from source to drain, the charge density (
+) goes on decreasing. This causes
+a thinning of the charge sheet inversion layer.
+C. Pinch-Off
+V
+​
+TH
+V
+​
+GS
+V
+​
+TH
+Overdrive Voltage = V
+​ −
+GS
+V
+​
+TH
+Q
+Q = C × V
+Q
+Q ∝C
+​ ×
+ox
+(V
+​ −
+GS
+V
+​)
+TH
+C
+​
+ox
+W
+V
+​
+DS
+V
+​
+DS
+X = 0 V = 0
+X = L V = VDS
+V
+​
+X
+V
+​
+X
+X
+Q
+​ ∝
+X
+V
+​ −
+GS
+V
+​ −
+TH
+V
+​
+X
+V
+​
+X
+Q
+​
+X
+12/10/25, 4:29 PM
+StackEdit
+https://stackedit.io/app#
+2/4
+
+--- page 3 ---
+1. Applying a positive 
+ reverse-biases the N+ Drain/P-substrate junction.
+2. This reverse bias creates a large depletion region near the drain end.
+3. This expansion of the depletion region into the channel causes the channel to thin down, a
+phenomenon referred to as pinch-off.
+D. Model Approximations
+Two critical approximations are made during the derivation of the current equations:
+1. Gradual Channel Approximation (GCA): This assumes that the electric field along the channel (
+) is
+much smaller compared to the electric field across the channel (
+, transverse direction).
+GCA holds true mainly for long channel devices. If the length (
+) is reduced (e.g., to 0.1 micron),
+the longitudinal electric field increases significantly, and GCA fails.
+2. Charge Sheet Approximation/Model: This assumes that the inversion layer is so thin that its
+thickness is almost zero, meaning the charge exists as a single thin sheet of electrons.
+IV. Regions of Operation and Equations
+The relationship between the Drain Current (
+) and the voltages defines three main regions:
+A. Linear Region (Triode Region)
+This region is defined when the drain-to-source voltage is small, specifically when 
+.
+1. 
+ Equation (Linear Region):
+Aspect Ratio (
+): This is an important parameter of the device geometry.
+2. Characteristics:
+The plot of 
+ versus 
+ follows a parabolic profile due to the 
+ term.
+When 
+ is very small, the 
+ term is negligible, and 
+ is directly proportional to 
+.
+This behavior follows Ohm’s Law, resulting in a straight line on the graph.
+A higher 
+ leads to a higher current (
+).
+3. Device Application: In the linear region, the transistor acts as a resistor. By changing 
+, the device
+can be used as a voltage variable resistor.
+4. ON Resistance (
+): The resistance offered in this region is defined as:
+ is inversely proportional to the overdrive voltage (
+); higher overdrive means
+lower resistance.
+B. Saturation Region
+V
+​
+DS
+E
+​x
+E
+​y
+L
+I
+​
+D
+V
+​ <
+DS
+V
+​ −
+GS
+V
+​
+TH
+I
+​
+D
+I
+​ =
+D
+μ
+​
+​C
+​ (V
+​ −V
+​)V
+​ −
+​
+N L
+W
+ox [
+GS
+TH
+DS
+2
+V
+​
+DS
+2
+]
+W/L
+I
+​
+D
+V
+​
+DS
+V
+​
+DS
+2
+V
+​
+DS
+V
+​/2
+DS
+2
+I
+​
+D
+V
+​
+DS
+V
+​
+GS
+ID
+V
+​
+GS
+R
+​
+ON
+R
+​ =
+ON
+​
+μ C
+​(W/L)(V
+​ −V
+​)
+N
+ox
+GS
+TH
+1
+R
+​
+ON
+V
+​ −
+GS
+V
+​
+TH
+12/10/25, 4:29 PM
+StackEdit
+https://stackedit.io/app#
+3/4
+
+--- page 4 ---
+This region is defined when the pinch-off occurs and the drain voltage starts losing control over the current
+flow. This happens when 
+ reaches or exceeds the overdrive voltage: 
+.
+1. Onset of Saturation (Pinch-Off Voltage): The peak current in the parabolic profile occurs when:
+This point is also referred to as the pinch-off point or saturation point.
+2. 
+ Equation (Saturation Region, 
+): By substituting the pinch-off voltage into the linear
+equation, the maximum drain current is obtained:
+3. Characteristics:
+In saturation, the drain current (
+) is independent of the drain-to-source voltage (
+)
+because the 
+ term is eliminated from the maximum current expression.
+The drain current is constant once saturation is reached.
+4. Device Application: In the saturation region, the transistor acts as an ideal current source. This
+means the current remains fixed even when 
+ varies.
+V. Sub-Threshold Region
+This region concerns the behavior of the device when the gate voltage is below the threshold.
+1. Sub-threshold Operation: Although ideally the current should fall to zero exactly at 
+, in
+reality, there is a smooth transition. Charge carriers still flow, resulting in some continuity in the
+drain current even when 
+ is less than 
+.
+2. Switching Requirement: To fully switch off the device (go into cut-off), the gate voltage must go well
+below threshold.
+3. Sub-threshold Slope (
+): This term defines the amount of gate voltage swing required to cause a
+one-decade drop in the drain current (e.g., from 
+ A to 
+ A).
+4. Units and Ideal Value: Sub-threshold slope is measured in millivolts per decade (mV/decade). The
+ideal value for the sub-threshold slope is 60 milli volts per decade (
+).
+V
+​
+DS
+V
+​ ≥
+DS
+V
+​ −
+GS
+V
+​
+TH
+V
+​ =
+DS
+V
+​ −
+GS
+V
+​
+TH
+I
+​
+D
+I
+​
+D,max
+I
+​ =
+D,max
+μ
+​C
+​
+​(V
+​ −
+N
+ox 2L
+W
+GS
+V
+​)
+TH
+2
+ID
+V
+​
+DS
+V
+​
+DS
+V
+​
+DS
+V
+​ =
+GS
+V
+​
+TH
+V
+​
+GS
+V
+​
+TH
+S
+10−2
+10−3
+S = 60 mV/decade
+12/10/25, 4:29 PM
+StackEdit
+https://stackedit.io/app#
+4/4
