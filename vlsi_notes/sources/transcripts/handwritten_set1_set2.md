@@ -1,6 +1,6 @@
 # Transcript: handwritten notes, sets 1 and 2
 
-Made on 2026-09-29 while reading the original scans page by page. The scans themselves are no longer on disk (see `../../SOURCES_AND_INTENT.md` §3a), so this transcript is the record of their content.
+Made on 2026-09-29 while reading the original scans page by page. The scans were re-uploaded on 2026-11-18 and are in `../class_notes/`; this transcript was checked against them page by page that day, and the details it had left out are added below.
 
 - **A** = `vlsi_notes_till_engineers_day_2026.pdf` (36 pages)
 - **B** = `vlsi_notes_after_engineers_day_till_24926.pdf` (8 pages)
@@ -56,3 +56,17 @@ Notation: `^` is a power, `_` a subscript.
 - **B6:** Biasing: nMOS source GND, VGS, VDS +ve, substrate GND or −ve; pMOS VGS, VDS −ve, substrate to highest potential. Operation: VGS ≤ 0 → cutoff; VGS = VTH → channel (onset of inversion). Vertical E = V/tox.
 - **B7:** I = Q·v. W/L aspect ratio. Overdrive VGS − VTH. Q′ = W Cox(VGS − VTH). With VDS: (VGS − Vth − V(x)). Pinch-off: thinning of inversion charge due to V(x) and encroachment of depletion layer.
 - **B8:** Q = W Cox(VGS − Vth − V(x)); Vd = −μ dV/dx; integrate 0→L, 0→VDS ⇒ ID = μn Cox (W/L)[(VGS − Vth)VDS − VDS²/2]. (End of set B.)
+
+## Details added on 2026-11-18 (checked against the re-uploaded scans)
+
+- **A3:** the band-formation sketch labels the lower (filled) band 4N; the 2p² and 2s² levels split as atoms come closer (E vs r).
+- **A18:** conductivity working: n = ni²/p = 10²⁰/5×10¹⁵ = 0.2×10⁵ cm⁻³; σ = 1.6×10⁻¹⁹(270×10⁵ + 2250×10¹⁵) ≈ 0.36 S/cm. Drift-bar part (c): the page first writes 10¹⁶ × 1350 × 1.6×10⁻¹⁹ = 2160×10⁻³ = 2.16 (this is σ in S/cm, with E left out), then corrects J to 1.08×10⁴ A/cm²; part (d) starts J = I/Area ⇒ 1.08×10⁴ × 0.25 (μm² still to be converted to cm²).
+- **A28/A29:** Is working: 10⁻⁴ × 1.6×10⁻¹⁹ × 2.25×10²⁰ × (10/(5×10⁻⁴ × 10¹⁶) + 18/(10×10⁻⁴ × 10¹⁸)). In part (ii) the page writes 7.26×10⁻¹³ (slip for 10⁻¹⁵) and ln(1.3×10¹⁰ + 1) = V/0.026. In part (iii) a direct calculation of Ip with V = 0.6 V (e^{0.6/0.026} = 1.05×10¹⁰) gives 7.56×10⁻⁵ A and is struck out; the page then uses the ratio Ip/In = 111 with Ip + In = 0.1 mA.
+- **A30:** the assignment solution also has an unfinished line "∵ I_Ge = ni…".
+- **B1:** Qm = charge per unit area on the metal; Qs = charge per unit area on the semiconductor.
+- **B2:** a scribbled-over sketch of the depletion charge diagram is crossed out and redrawn beside it.
+- **B4:** device questions written as: 1. at what VG does the device turn on? 2. RON (ON resistance), 3. speed of the device, τ(delay) = RC.
+- **B5:** the list of four MOSFET types reads "pMOS enhan., pMOS dep., nMOS enhan., nMOS enhan." (the last should be nMOS dep.).
+- **B6:** pMOS biasing is written as "Source → GND", VGS and VDS −ve, substrate to the highest potential (in CMOS the pMOS source is at VDD). A sketch shows the channel forming under the gate with tox marked; Cox is fixed (depends on tox), Cdep varies.
+- **B7:** Q′ = W Cox(VGS − VTH) is labelled "inversion charge, charge per unit length" (from Q = CV).
+- **B8:** a side list shows the local overdrive falling along the channel: VGS − Vth − 0, − 0.1, − 0.2, …, − 1. The first boxed ID lacks W/L; the final boxed result includes it.

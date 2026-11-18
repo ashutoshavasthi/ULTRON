@@ -41,13 +41,13 @@ Attached: `VLSI-1-10-26.pdf`, `Vlsi-MOS29-09.pdf`, and two phone photos of noteb
 
 All files live under `vlsi_notes/sources/`. Checksums are the first 12 hex digits of SHA-256.
 
-### 3a. Handwritten class notes, set 1 and 2 (sent 2026-09-29): **not on disk any more**
-| File | Pages | Content |
-|---|---|---|
-| `vlsi_notes_till_engineers_day_2026.pdf` | 36 | Semiconductors → energy bands → E–k → Fermi–Dirac → doping → carriers → transport → p–n diode → BJT |
-| `vlsi_notes_after_engineers_day_till_24926.pdf` | 8 | MOS capacitor → MOSFET structure, types, biasing → linear-region I–V derivation |
+### 3a. Handwritten class notes, set 1 and 2 (sent 2026-09-29, re-uploaded 2026-11-18)
+| Checksum | File | Pages | Content |
+|---|---|---|---|
+| `d9d1d005a505` | `class_notes/vlsi_notes_till_engineers_day_2026.pdf` | 36 (15.8 MB) | Semiconductors → energy bands → E–k → Fermi–Dirac → doping → carriers → transport → p–n diode → BJT |
+| `e294d8348cec` | `class_notes/vlsi_notes_after_engineers_day_till_24926.pdf` | 8 (3.4 MB) | MOS capacitor → MOSFET structure, types, biasing → linear-region I–V derivation |
 
-The cloud container that held these uploads was reset, so the original PDFs could not be copied into git. **Please re-upload them** (or put them in Drive) so they can be added to `sources/class_notes/`. A full page-by-page transcript made when they were read is preserved in `sources/transcripts/handwritten_set1_set2.md`, and all of their content is in `vlsi_notes.html`.
+These were lost once when a cloud container was reset and were re-uploaded on 2026-11-18. On that date all 44 pages were re-read and checked against `sources/transcripts/handwritten_set1_set2.md` and `vlsi_notes.html` (Chapters 0–10): every topic, formula and worked question is present, and the notes' corrections table (Chapter 13) covers every slip in the handwritten working.
 
 ### 3b. Handwritten class notes, set 3 (sent 2026-11-18)
 | Checksum | File | Size |
@@ -147,4 +147,5 @@ No textbook file has been provided yet. Until one is, "textbook" content in the 
 |---|---|
 | 2026-09-29 | `vlsi_notes.html` v1: Chapters 0 to 13 (semiconductors to MOSFET and CMOS inverter), 28 diagrams, formula sheet, practice bank. Built by `make_figs.py` + `build.py` from `src/`. Published privately at https://claude.ai/artifact/Ua3hdYDtPoYz3kfuD6uJFS |
 | 2026-11-18 | This file; `sources/` archive (set 3 class notes, photos, the full Drive folder); transcript of sets 1 and 2. |
+| 2026-11-18 | Sets 1 and 2 re-uploaded and archived; all 44 pages re-checked against the transcript and Chapters 0–10 (no missing content). |
 | next | Study every Drive file and set-3 note, then extend the notes: Unit I details (DOS, incomplete ionisation, continuity equation, G-R currents), the MOS / MOSFET / CMOS detail, Manufacturing, LTSpice, semiconductor memories. |
