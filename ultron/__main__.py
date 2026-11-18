@@ -183,7 +183,8 @@ def cmd_words(args):
     size = "quick" if args.quick else args.size
     path = args.base or ex.base(size)
     if args.action == "teach":
-        ex.teach(size, path, steps=args.steps, start=args.start, lr=args.lr, device=args.device)
+        ex.teach(size, path, steps=args.steps, start=args.start, lr=args.lr, device=args.device,
+                 even=args.even)
         print(f"interpreter saved to {path}")
         return
     if args.action == "diagnose":
@@ -401,6 +402,8 @@ def main(argv=None):
     wd.add_argument("--size", choices=["cpu", "gpu"], default="cpu",
                     help="gpu: a stronger interpreter, sized for a 6 GB card")
     wd.add_argument("--device", default="cpu", help="cpu, or cuda on a GPU machine")
+    wd.add_argument("--even", action="store_true",
+                    help="teach: draw the taught words evenly (the first form of G0-a)")
     wd.add_argument("--family", action="append",
                     help="only this hidden family (may be given more than once)")
     sc = sub.add_parser("score")

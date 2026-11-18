@@ -50,37 +50,55 @@ def report(size="cpu"):
     return REPORT if size == "cpu" else REPORT.replace(".md", f"_{size}.md")
 
 
-def teach(size="cpu", path=None, steps=None, start=None, lr=None, device="cpu", log=print):
+def teach(size="cpu", path=None, steps=None, start=None, lr=None, device="cpu", even=False,
+          log=print):
     """G0-a's training: imitate the hand-written words on dreams, and save the result.
 
-    The interpreter is saved every twelfth of the run. `start` continues from a saved one
-    (after an interruption), with a fresh optimiser; use a lower `lr` then."""
+    Words are drawn by family and toward the families still got wrong (learn.Sampler);
+    `even` draws the 48 words evenly instead, as the first form of G0-a did. The
+    interpreter and the sampler's weights are saved every twelfth of the run. `start`
+    continues from a saved one (after an interruption), with a fresh optimiser; use a lower
+    `lr` then."""
     cfg = SIZES[size]
     grids, aside = curriculum.pool(side=cfg["side"])
     vocab = Vocab(KNOWN_G0, n_free=cfg["n_free"])
     path = path or base(size)
-    done = 0
+    done, ck = 0, {}
     if start:
         model, ck = load(start, device)
         done = ck.get("steps", 0)
     else:
         model = Interpreter(len(vocab.ops), len(ARGS), cfg["side"] + 1, hidden=cfg["hidden"],
                             layers=cfg["layers"], loops=cfg["loops"]).to(device)
-    log(f"interpreter: {sum(p.numel() for p in model.parameters()):,} numbers, on {device}")
+    sampler = None if even else learn.Sampler(KNOWN_G0, weights=ck.get("sampler"))
+    log(f"interpreter: {sum(p.numel() for p in model.parameters()):,} numbers, on {device}; "
+        f"words drawn {'evenly' if even else 'by family, toward mistakes'}")
     steps = steps or cfg["steps"]
     every = max(steps // 12, 1)
     seen = [0]
 
+    def keep(m, n):
+        save(m, path, side=cfg["side"], steps=n, resumed_at=done or None,
+             sampler=sampler.weights if sampler else None)
+
     def check(m):
         seen[0] = min(seen[0] + every, steps)
-        save(m, path, side=cfg["side"], steps=done + seen[0], resumed_at=done or None)
-        s = measure.steps_exact(m, vocab, aside, cfg["side"], per_word=5)
+        keep(m, done + seen[0])
+        # 10 pictures per word, as in the first run's logged curve (the control)
+        s = measure.steps_exact(m, vocab, aside, cfg["side"], per_word=10)
         return f"single words exact {measure.share(s):.3f}"
 
     model = learn.teach(model, vocab, grids, steps, cfg["side"], batch=cfg["batch"],
-                        lr=lr or cfg["lr"], check=check, every=every, seed=done, log=log)
-    save(model, path, side=cfg["side"], steps=done + steps, resumed_at=done or None)
+                        lr=lr or cfg["lr"], check=check, every=every, seed=done,
+                        sampler=sampler, log=log)
+    keep(model, done + steps)
     return model
+
+
+def sampler_of(ck):
+    """The sampler an interpreter was taught with (None: it was taught with words drawn
+    evenly), so rehearsal while free words learn keeps the same diet."""
+    return learn.Sampler(KNOWN_G0, weights=ck["sampler"]) if ck.get("sampler") else None
 
 
 def carrying_out(model, vocab, aside, cfg):
@@ -139,7 +157,8 @@ def rediscovery(family, base_path=None, size="cpu", seed=0, device="cpu", log=pr
     """G0-b for one hidden family, starting from the taught interpreter."""
     cfg = SIZES[size]
     side = cfg["side"]
-    model, _ = load(base_path or base(size), device)
+    model, ck = load(base_path or base(size), device)
+    sampler = sampler_of(ck)
     grids, aside = curriculum.pool(side=side)
     vocab = Vocab(KNOWN_G0, n_free=cfg["n_free"])
     rng = random.Random(seed)
@@ -172,7 +191,7 @@ def rediscovery(family, base_path=None, size="cpu", seed=0, device="cpu", log=pr
 
     explained, kept = learn.rediscover(model, vocab, todo, grids, side,
                                        rounds=cfg["rounds"], steps=cfg["round_steps"],
-                                       seed=seed, log=log)
+                                       seed=seed, log=log, sampler=sampler)
 
     # which free word came to stand for each hidden word (the one most of its puzzles chose)
     votes = {}
@@ -244,10 +263,11 @@ def diagnose(family, base_path=None, size="cpu", seed=0, device="cpu", log=print
     slot, word = (0, False), vocab.free(0)
     out = {"family": family, "ranking": [], "amount": []}
     for h in hidden[:4]:
-        model, _ = load(base_path or base(size), device)
+        model, ck = load(base_path or base(size), device)
         start = of[h][0]
         learn.practise(model, vocab, puzzles, [(start, word)], grids, side,
-                       learn.optimiser(model), random.Random(seed), cfg["round_steps"])
+                       learn.optimiser(model), random.Random(seed), cfg["round_steps"],
+                       sampler=sampler_of(ck))
         found = learn.fits(model, vocab, puzzles, [slot], range(len(puzzles)))
         ranked = sorted((i for i in range(len(puzzles)) if i != start),
                         key=lambda i: found[i, slot][0])[:8]
@@ -259,11 +279,12 @@ def diagnose(family, base_path=None, size="cpu", seed=0, device="cpu", log=print
     for n in (4, 8, 16):
         if len(of[h]) < n:
             break
-        model, _ = load(base_path or base(size), device)
+        model, ck = load(base_path or base(size), device)
         members = [(i, word) for i in of[h][:n]]
         opt, r = learn.optimiser(model), random.Random(seed)
         for _ in range(cfg["rounds"] // 2):
-            learn.practise(model, vocab, puzzles, members, grids, side, opt, r, cfg["round_steps"])
+            learn.practise(model, vocab, puzzles, members, grids, side, opt, r, cfg["round_steps"],
+                           sampler=sampler_of(ck))
         found = learn.fits(model, vocab, puzzles, [slot], of[h][:n])
         match = measure.steps_exact(model, vocab, aside, side, per_word=cfg["per_word"],
                                     words=[h], ids={h: vocab.ids(word)})

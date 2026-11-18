@@ -124,3 +124,26 @@ def test_a_free_word_is_tried_bare_and_with_each_answer_colour():
     p = {"train": [(G, ops.recolour_all(G, 4))]}
     assert learn.options(vocab, (0, False), p) == [Word("new0")]
     assert learn.options(vocab, (1, True), p) == [Word("new1", 0), Word("new1", 4)]
+
+
+def test_the_sampler_draws_families_evenly_then_toward_mistakes():
+    sampler = learn.Sampler(KNOWN_G0, floor=0.2)
+    rng = random.Random(6)
+    counts = {}
+    for _ in range(12000):
+        f = sampler.draw(rng).op
+        counts[f] = counts.get(f, 0) + 1
+    families = {w.op for w in KNOWN_G0}
+    assert set(counts) == families
+    assert max(counts.values()) < 1.25 * min(counts.values())      # even by family, not word
+    # a family carried out perfectly keeps the floor; one got wholly wrong gets the most
+    score = {w: (5, 5) for w in KNOWN_G0}
+    score.update({w: (0, 5) for w in KNOWN_G0 if w.op == "hollow_things"})
+    sampler.update(score)
+    shares = sampler.shares()
+    assert shares["hollow_things"] == max(shares.values())
+    assert shares["hollow_things"] / shares["rot180"] == pytest.approx(1.2 / 0.2)
+    assert min(sampler.weights.values()) >= 0.2                    # no family is ever dropped
+    # the weights survive a save: a resumed run starts from them
+    again = learn.Sampler(KNOWN_G0, weights=sampler.weights)
+    assert again.weights == sampler.weights

@@ -26,11 +26,54 @@ def tensors(samples, vocab, size, device="cpu"):
     return x, op, arg, y
 
 
-def dream(grids, vocab, rng, side, n):
-    """n exact steps of hand-written words, the words drawn evenly."""
+class Sampler:
+    """Which taught word a dream practises.
+
+    Drawing the 48 words evenly gave a family of one word (hollow_things) 2% of all
+    practice and a family of ten (remove_colour) 21%, and the under-practised families were
+    the ones carried out worst (reports/words_g0.md). Here a family is drawn first, by its
+    weight, then a word of that family evenly. Weights start equal; update() sets each to
+    floor + the share of its words still got wrong, so practice goes where mistakes are and
+    no family is ever dropped (the error-driven curriculum of Neural Programmer-Interpreters).
+    """
+
+    def __init__(self, words, floor=0.2, weights=None):
+        self.families = {}
+        for w in words:
+            self.families.setdefault(w.op, []).append(w)
+        self.floor = floor
+        self.weights = {f: 1.0 for f in self.families}
+        if weights:
+            self.weights.update({f: float(v) for f, v in weights.items() if f in self.families})
+
+    def draw(self, rng):
+        names = list(self.families)
+        f = rng.choices(names, weights=[self.weights[n] for n in names])[0]
+        return rng.choice(self.families[f])
+
+    def update(self, score):
+        """score = {word: (right, total)}, as measure.steps_exact gives it."""
+        for f, words in self.families.items():
+            right = sum(score.get(w, (0, 0))[0] for w in words)
+            total = sum(score.get(w, (0, 0))[1] for w in words)
+            if total:
+                self.weights[f] = self.floor + (total - right) / total
+
+    def shares(self):
+        total = sum(self.weights.values())
+        return {f: w / total for f, w in self.weights.items()}
+
+    def __str__(self):
+        top = sorted(self.shares().items(), key=lambda kv: -kv[1])[:4]
+        return "practice " + ", ".join(f"{f} {s:.0%}" for f, s in top)
+
+
+def dream(grids, vocab, rng, side, n, sampler=None):
+    """n exact steps of hand-written words: drawn by `sampler` if given, else evenly (the
+    first form of G0-a)."""
     out = []
     while len(out) < n:
-        w = rng.choice(vocab.known)
+        w = sampler.draw(rng) if sampler else rng.choice(vocab.known)
         s = curriculum.step(grids, vocab.known, w, rng, side)
         if s is not None:
             out.append((s[0], w, s[1]))
@@ -61,8 +104,12 @@ class Ema:
 
 
 def teach(model, vocab, grids, steps, side, batch=64, lr=1e-3, warmup=500, seed=0,
-          every=2000, check=None, log=print):
-    """Imitate the hand-written words on dreams. Returns the slow copy of the model."""
+          every=2000, check=None, sampler=None, log=print):
+    """Imitate the hand-written words on dreams. Returns the slow copy of the model.
+
+    With a sampler, its weights are re-measured every `every` steps on the pictures it
+    learns from (never the kept-aside ones the gate is measured on)."""
+    from .measure import steps_exact
     rng = random.Random(seed)
     torch.manual_seed(seed)
     opt = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=0.01, betas=(0.9, 0.95))
@@ -72,8 +119,8 @@ def teach(model, vocab, grids, steps, side, batch=64, lr=1e-3, warmup=500, seed=
         for g in opt.param_groups:
             g["lr"] = lr * min(step / warmup, 0.1 + 0.9 * 0.5 * (1 + math.cos(math.pi * step / steps)))
         model.train()
-        loss = loss_of(model, tensors(dream(grids, vocab, rng, side, batch), vocab, model.size,
-                                      device_of(model)))
+        loss = loss_of(model, tensors(dream(grids, vocab, rng, side, batch, sampler), vocab,
+                                      model.size, device_of(model)))
         opt.zero_grad()
         loss.backward()
         torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
@@ -81,7 +128,11 @@ def teach(model, vocab, grids, steps, side, batch=64, lr=1e-3, warmup=500, seed=
         ema.update(model)
         run = loss.item() if step == 1 else 0.98 * run + 0.02 * loss.item()
         if step % every == 0 or step == steps:
+            if sampler:
+                sampler.update(steps_exact(ema.model, vocab, grids, side, per_word=5,
+                                           seed=step))
             note = f" {check(ema.model)}" if check else ""
+            note += f" | {sampler}" if sampler else ""
             log(f"step {step}/{steps} loss {run:.4f} {time.time() - t0:.0f}s{note}")
     return ema.model
 
@@ -142,7 +193,7 @@ def optimiser(model, lr=3e-4, word_lr=3e-3):
 
 
 def practise(model, vocab, puzzles, members, grids, side, opt, rng, steps=150, batch=32,
-             settled=()):
+             settled=(), sampler=None):
     """Train on the members' training examples (never their check example). Mixed in, so
     nothing already learned is lost: as many dreams of the hand-written words, and half
     as many examples from puzzles that earlier learned words already explain (`settled`).
@@ -155,7 +206,7 @@ def practise(model, vocab, puzzles, members, grids, side, opt, rng, steps=150, b
                 i, w = rng.choice(group)
                 g, o = rng.choice(puzzles[i]["train"][:-1])
                 mine.append((g, w, o))
-        both = mine + dream(grids, vocab, rng, side, batch)
+        both = mine + dream(grids, vocab, rng, side, batch, sampler)
         loss = loss_of(model, tensors(both, vocab, model.size, device_of(model)))
         opt.zero_grad()
         loss.backward()
@@ -164,7 +215,7 @@ def practise(model, vocab, puzzles, members, grids, side, opt, rng, steps=150, b
 
 
 def rediscover(model, vocab, puzzles, grids, side, rounds=12, steps=150, batch=32,
-               lr=3e-4, word_lr=3e-3, polish=2, seed=0, log=print):
+               lr=3e-4, word_lr=3e-3, polish=2, seed=0, sampler=None, log=print):
     """Give meaning to free words from unexplained puzzles (the last training example of
     each puzzle is its check and is never trained on).
 
@@ -185,7 +236,8 @@ def rediscover(model, vocab, puzzles, grids, side, rounds=12, steps=150, batch=3
 
     def train(members):
         settled = [(i, w) for i, w in explained.items() if w is not None]
-        practise(model, vocab, puzzles, members, grids, side, opt, rng, steps, batch, settled)
+        practise(model, vocab, puzzles, members, grids, side, opt, rng, steps, batch, settled,
+                 sampler)
 
     while len(free_ops) >= 2:
         todo = [i for i in range(len(puzzles)) if i not in explained]
