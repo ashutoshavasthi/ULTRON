@@ -1,0 +1,14 @@
+interpreter: 303,648 numbers, on cpu; words drawn by family, toward mistakes
+step 2500/30000 loss 0.1175 449s single words exact 0.433 | practice rot180 11%, antitranspose 11%, slide_things 11%, frame_things 11%
+step 5000/30000 loss 0.0658 894s single words exact 0.669 | practice hollow_things 16%, slide_things 13%, crop_content 13%, connect 13%
+step 7500/30000 loss 0.0509 1354s single words exact 0.796 | practice slide_things 18%, frame_things 13%, hollow_things 12%, connect 11%
+step 10000/30000 loss 0.0463 1796s single words exact 0.821 | practice slide_things 15%, frame_things 15%, connect 14%, remove_specks 13%
+step 12500/30000 loss 0.0363 2227s single words exact 0.852 | practice connect 18%, slide_things 17%, frame_things 14%, remove_specks 10%
+step 15000/30000 loss 0.0311 2658s single words exact 0.856 | practice slide_things 21%, frame_things 16%, connect 15%, symmetrize 6%
+step 17500/30000 loss 0.0254 3079s single words exact 0.869 | practice connect 17%, slide_things 13%, hollow_things 11%, frame_things 10%
+step 20000/30000 loss 0.0180 3502s single words exact 0.887 | practice slide_things 18%, connect 15%, frame_things 14%, symmetrize 8%
+step 22500/30000 loss 0.0179 3896s single words exact 0.894 | practice slide_things 17%, frame_things 13%, connect 12%, symmetrize 8%
+step 25000/30000 loss 0.0145 4279s single words exact 0.896 | practice slide_things 17%, connect 14%, frame_things 12%, keep_colour 7%
+step 27500/30000 loss 0.0121 4674s single words exact 0.892 | practice slide_things 15%, connect 13%, remove_specks 12%, frame_things 11%
+step 30000/30000 loss 0.0113 5087s single words exact 0.896 | practice connect 15%, slide_things 12%, frame_things 11%, rot180 7%
+interpreter saved to brain/words_base_v2.pt

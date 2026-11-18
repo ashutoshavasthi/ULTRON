@@ -1,0 +1,37 @@
+{
+ "family": "flip_h",
+ "puzzles": 120,
+ "explained_by_hand_written": 0,
+ "explained_by_learned_words": 120,
+ "to_explain": 120,
+ "words_kept": [
+  "new0"
+ ],
+ "stands_for": {
+  "flip_h": "new0"
+ },
+ "match_seen": 0.95,
+ "match_unseen_colours": null,
+ "match_by_word": {
+  "flip_h": "19/20"
+ },
+ "held_direct": 40,
+ "held_mixed": 40,
+ "without_words": {
+  "direct": 0,
+  "mixed": 1
+ },
+ "with_words": {
+  "direct": 39,
+  "mixed": 38
+ },
+ "fitted_vector": {
+  "fits_examples": 39,
+  "test_right": 15
+ },
+ "abbreviation_of": {
+  "new0": null
+ },
+ "old_words_still_exact": 0.8,
+ "seconds": 782
+}

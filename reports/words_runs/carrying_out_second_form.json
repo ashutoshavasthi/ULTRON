@@ -1,0 +1,55 @@
+{
+ "single": 0.8833333333333333,
+ "by_family": {
+  "rot180": [
+   20,
+   20
+  ],
+  "transpose": [
+   20,
+   20
+  ],
+  "antitranspose": [
+   20,
+   20
+  ],
+  "remove_colour": [
+   198,
+   200
+  ],
+  "keep_colour": [
+   197,
+   200
+  ],
+  "slide_things": [
+   55,
+   80
+  ],
+  "frame_things": [
+   135,
+   180
+  ],
+  "remove_specks": [
+   37,
+   40
+  ],
+  "crop_content": [
+   20,
+   20
+  ],
+  "hollow_things": [
+   17,
+   20
+  ],
+  "connect": [
+   51,
+   80
+  ],
+  "symmetrize": [
+   78,
+   80
+  ]
+ },
+ "chains_right": 88,
+ "chains": 200
+}

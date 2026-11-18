@@ -1,4 +1,4 @@
-"""Engine 2: Ultron's own network (docs/PLAN.md, M2).
+"""Engine 2: Ultron's own network (docs/history/PLAN_M1_M2.md, M2).
 
 A small recursive network, in the spirit of TRM (arXiv 2510.04871), that Ultron trains
 itself, from scratch, and that answers a puzzle directly instead of writing a program

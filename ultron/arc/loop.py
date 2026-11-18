@@ -213,7 +213,7 @@ def round_(state, tasks, practice, held, wake_budget, workers, mode, wake=True):
     return row
 
 
-M1 = ("\n## From here on: dreams and a learned guide (M1 in docs/PLAN.md)\n\n"
+M1 = ("\n## From here on: dreams and a learned guide (M1 in docs/history/PLAN_M1_M2.md)\n\n"
       "Each night Ultron makes puzzles from its own language (dreams) and learns from them and "
       "from its real solutions which steps a puzzle needs (its guide). **Interval**: 95% "
       "bootstrap interval of the gain in net over knowing nothing; the gain is real when it "

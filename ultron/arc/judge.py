@@ -1,4 +1,4 @@
-"""The judge: one set of answers from Ultron's engines (docs/PLAN.md, M2).
+"""The judge: one set of answers from Ultron's engines (docs/history/PLAN_M1_M2.md, M2).
 
 For each test input of a puzzle, at most two answers (the official ARC rule):
   1. its programs (engine 1), when an explanation earns it (it also holds with any one

@@ -30,10 +30,13 @@ HEADER = ("# The scoreboard\n\n"
           "**Gain**: held-out net (right - wrong) with what it grew minus without (and the change "
           "in net from the last round). **ARC-1 "
           "training**: the main solver, official scoring, with precision (right / answered). "
-          "**Lessons**: exams of lessons 0-33 the saved brain still passes.\n\n"
+          "**Lessons**: exams of lessons 0-33 the saved brain still passes. "
+          "**Learned words**: the last run of `python -m ultron words g0` "
+          "([docs/MECHANISM.md](../docs/MECHANISM.md)); a new primitive is a learned word "
+          "that no program of hand-written words imitates.\n\n"
           "| When | Commit | Run | Round | Held out: without | with its words | Gain "
-          "| Words | ARC-1 training | Lessons |\n"
-          "|---|---|---|---|---|---|---|---|---|---|\n")
+          "| Words | ARC-1 training | Lessons | Learned words |\n"
+          "|---|---|---|---|---|---|---|---|---|---|---|\n")
 
 
 def learning_round(quick, workers):
@@ -81,6 +84,14 @@ def lessons(brain_path):
     return {"passed": passed, "of": len(EXAMS), "failed": failed}
 
 
+def _learned_words():
+    try:
+        from .words import experiments
+        return experiments.board()
+    except ImportError:          # no PyTorch here: the words engine can't be read
+        return "needs PyTorch"
+
+
 def run(quick=False, workers=4, skip_lessons=False, brain_path=None):
     started = time.time()
     loop = learning_round(quick, workers)
@@ -98,7 +109,7 @@ def run(quick=False, workers=4, skip_lessons=False, brain_path=None):
            + ("skipped" if les is None else
               f"{les['passed']}/{les['of']}"
               + (f" (not: {', '.join(les['failed'])})" if les["failed"] else ""))
-           + " |\n")
+           + f" | {_learned_words()} |\n")
     os.makedirs("reports", exist_ok=True)
     if not os.path.exists(BOARD):
         with open(BOARD, "w") as f:

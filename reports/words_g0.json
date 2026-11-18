@@ -1,0 +1,571 @@
+{
+ "cfg": {
+  "side": 8,
+  "hidden": 96,
+  "layers": 2,
+  "loops": 3,
+  "batch": 64,
+  "lr": 0.001,
+  "steps": 30000,
+  "n_free": 8,
+  "puzzles": 120,
+  "held": 40,
+  "rounds": 12,
+  "round_steps": 150,
+  "per_word": 20,
+  "chains": 200
+ },
+ "parameters": 303648,
+ "carrying_out": {
+  "single": 0.8770833333333333,
+  "by_family": {
+   "rot180": [
+    20,
+    20
+   ],
+   "transpose": [
+    20,
+    20
+   ],
+   "antitranspose": [
+    20,
+    20
+   ],
+   "remove_colour": [
+    199,
+    200
+   ],
+   "keep_colour": [
+    198,
+    200
+   ],
+   "slide_things": [
+    54,
+    80
+   ],
+   "frame_things": [
+    157,
+    180
+   ],
+   "remove_specks": [
+    35,
+    40
+   ],
+   "crop_content": [
+    15,
+    20
+   ],
+   "hollow_things": [
+    7,
+    20
+   ],
+   "connect": [
+    40,
+    80
+   ],
+   "symmetrize": [
+    77,
+    80
+   ]
+  },
+  "chains_right": 99,
+  "chains": 200
+ },
+ "rediscovery": [
+  {
+   "family": "flip_h",
+   "puzzles": 120,
+   "explained_by_hand_written": 0,
+   "explained_by_learned_words": 120,
+   "to_explain": 120,
+   "words_kept": [
+    "new0"
+   ],
+   "stands_for": {
+    "flip_h": "new0"
+   },
+   "match_seen": 0.95,
+   "match_unseen_colours": null,
+   "match_by_word": {
+    "flip_h": "19/20"
+   },
+   "held_direct": 40,
+   "held_mixed": 40,
+   "without_words": {
+    "direct": 0,
+    "mixed": 1
+   },
+   "with_words": {
+    "direct": 39,
+    "mixed": 38
+   },
+   "fitted_vector": {
+    "fits_examples": 39,
+    "test_right": 15
+   },
+   "abbreviation_of": {
+    "new0": null
+   },
+   "old_words_still_exact": 0.8,
+   "seconds": 782
+  },
+  {
+   "family": "recolour_all",
+   "puzzles": 120,
+   "explained_by_hand_written": 0,
+   "explained_by_learned_words": 117,
+   "to_explain": 120,
+   "words_kept": [
+    "new1 (takes a colour)",
+    "new2 (takes a colour)"
+   ],
+   "stands_for": {
+    "recolour_all(1)": "new1(1)",
+    "recolour_all(2)": "new1(2)",
+    "recolour_all(3)": "new1(3)",
+    "recolour_all(4)": "new1(4)",
+    "recolour_all(5)": "new1(5)",
+    "recolour_all(6)": "new1(6)",
+    "recolour_all(7)": "new1(7)",
+    "recolour_all(8)": "new1(8)",
+    "recolour_all(9)": "new1(9)"
+   },
+   "match_seen": 0.9571428571428572,
+   "match_unseen_colours": 0.9,
+   "match_by_word": {
+    "recolour_all(1)": "18/20",
+    "recolour_all(2)": "19/20",
+    "recolour_all(3)": "19/20",
+    "recolour_all(4)": "18/20",
+    "recolour_all(5)": "19/20",
+    "recolour_all(6)": "19/20",
+    "recolour_all(7)": "18/20",
+    "recolour_all(8)": "20/20",
+    "recolour_all(9)": "20/20"
+   },
+   "held_direct": 40,
+   "held_mixed": 40,
+   "without_words": {
+    "direct": 0,
+    "mixed": 0
+   },
+   "with_words": {
+    "direct": 33,
+    "mixed": 37
+   },
+   "fitted_vector": {
+    "fits_examples": 40,
+    "test_right": 8
+   },
+   "abbreviation_of": {
+    "new1": null
+   },
+   "old_words_still_exact": 0.8416666666666667,
+   "seconds": 2006
+  },
+  {
+   "family": "gravity",
+   "puzzles": 240,
+   "explained_by_hand_written": 5,
+   "explained_by_learned_words": 54,
+   "to_explain": 235,
+   "words_kept": [
+    "new0",
+    "new1",
+    "new2",
+    "new4 (takes a colour)",
+    "new3",
+    "new6 (takes a colour)",
+    "new5"
+   ],
+   "stands_for": {
+    "gravity(down)": "new4",
+    "gravity(up)": "new6",
+    "gravity(right)": "new5"
+   },
+   "match_seen": 0.25,
+   "match_unseen_colours": null,
+   "match_by_word": {
+    "gravity(down)": "5/20",
+    "gravity(up)": "5/20",
+    "gravity(right)": "5/20"
+   },
+   "held_direct": 40,
+   "held_mixed": 40,
+   "without_words": {
+    "direct": 4,
+    "mixed": 4
+   },
+   "with_words": {
+    "direct": 4,
+    "mixed": 4
+   },
+   "fitted_vector": {
+    "fits_examples": 36,
+    "test_right": 4
+   },
+   "abbreviation_of": {
+    "new4": null,
+    "new6": null,
+    "new5": null
+   },
+   "old_words_still_exact": 0.8375,
+   "seconds": 8061
+  },
+  {
+   "family": "fill_enclosed",
+   "puzzles": 120,
+   "explained_by_hand_written": 0,
+   "explained_by_learned_words": 62,
+   "to_explain": 120,
+   "words_kept": [
+    "new1 (takes a colour)",
+    "new2 (takes a colour)",
+    "new3 (takes a colour)",
+    "new4 (takes a colour)",
+    "new5 (takes a colour)",
+    "new6 (takes a colour)",
+    "new7 (takes a colour)"
+   ],
+   "stands_for": {
+    "fill_enclosed(1)": "new4(1)",
+    "fill_enclosed(2)": "new4(2)",
+    "fill_enclosed(3)": "new4(3)",
+    "fill_enclosed(4)": "new4(4)",
+    "fill_enclosed(5)": "new4(5)",
+    "fill_enclosed(6)": "new4(6)",
+    "fill_enclosed(7)": "new4(7)",
+    "fill_enclosed(8)": "new4(8)",
+    "fill_enclosed(9)": "new4(9)"
+   },
+   "match_seen": 0.2642857142857143,
+   "match_unseen_colours": 0.3,
+   "match_by_word": {
+    "fill_enclosed(1)": "6/20",
+    "fill_enclosed(2)": "9/20",
+    "fill_enclosed(3)": "2/20",
+    "fill_enclosed(4)": "8/20",
+    "fill_enclosed(5)": "4/20",
+    "fill_enclosed(6)": "8/20",
+    "fill_enclosed(7)": "4/20",
+    "fill_enclosed(8)": "6/20",
+    "fill_enclosed(9)": "2/20"
+   },
+   "held_direct": 40,
+   "held_mixed": 40,
+   "without_words": {
+    "direct": 0,
+    "mixed": 0
+   },
+   "with_words": {
+    "direct": 7,
+    "mixed": 0
+   },
+   "fitted_vector": {
+    "fits_examples": 40,
+    "test_right": 4
+   },
+   "abbreviation_of": {
+    "new4": null
+   },
+   "old_words_still_exact": 0.8375,
+   "seconds": 7447
+  },
+  {
+   "family": "outline",
+   "puzzles": 120,
+   "explained_by_hand_written": 0,
+   "explained_by_learned_words": 120,
+   "to_explain": 120,
+   "words_kept": [
+    "new1 (takes a colour)"
+   ],
+   "stands_for": {
+    "outline(1)": "new1(1)",
+    "outline(2)": "new1(2)",
+    "outline(3)": "new1(3)",
+    "outline(4)": "new1(4)",
+    "outline(5)": "new1(5)",
+    "outline(6)": "new1(6)",
+    "outline(7)": "new1(7)",
+    "outline(8)": "new1(8)",
+    "outline(9)": "new1(9)"
+   },
+   "match_seen": 0.9928571428571429,
+   "match_unseen_colours": 0.775,
+   "match_by_word": {
+    "outline(1)": "20/20",
+    "outline(2)": "20/20",
+    "outline(3)": "20/20",
+    "outline(4)": "20/20",
+    "outline(5)": "20/20",
+    "outline(6)": "20/20",
+    "outline(7)": "11/20",
+    "outline(8)": "19/20",
+    "outline(9)": "20/20"
+   },
+   "held_direct": 40,
+   "held_mixed": 40,
+   "without_words": {
+    "direct": 0,
+    "mixed": 0
+   },
+   "with_words": {
+    "direct": 40,
+    "mixed": 36
+   },
+   "fitted_vector": {
+    "fits_examples": 11,
+    "test_right": 1
+   },
+   "abbreviation_of": {
+    "new1": null
+   },
+   "old_words_still_exact": 0.8041666666666667,
+   "seconds": 740
+  }
+ ],
+ "notes_a": [
+  "The training run was interrupted at step 20,000 by a machine restart and continued from the saved interpreter for 10,000 more steps at a lower learning rate. Single-word exactness did not improve over that continuation (89% on a smaller sample before it).",
+  "By the kill rule (more training once, then stop and report), G0-a stands as **not met** at this size on a CPU. Words that re-map cells or colours are carried out almost perfectly. Words about whole things (sliding, connecting, hollowing) are not. The next test is a wider interpreter trained longer on a GPU."
+ ],
+ "notes_b": [
+  "The families were run one process each, with the same code as `words g0`, so that a machine restart would lose at most one family. Their results are in `reports/words_runs/run2/`.",
+  "**This is the second run.** The first (kept in `reports/words_runs/`) met the target for `flip_h` only. `recolour_all` and `outline` were learned but matched 81% and 88%. It was stopped during `fill_enclosed`, whose words explained 5 and 4 of 120 puzzles, once it could no longer reach 3 of 5. One round of fixes followed, as the kill rule allows: puzzles of words already kept are rehearsed while later words train, and a word keeps growing past 60 members.",
+  "**Verdict: G0-b is met.** 3 of 5 families reach a 95% match, where 3 were needed. The margin is thin: each hidden word is checked on 20 kept-aside pictures, so `flip_h` at 19 of 20 sits exactly on the line (it was 20 of 20 in the first run).",
+  "**gravity and fill_enclosed were not relearned.** Each split into seven small words, which together explained 54 of 235 and 62 of 120 of their puzzles, but none matched its hidden word on more than about a quarter of kept-aside pictures. For gravity the cause was measured (below). For fill_enclosed it was not; the interpreter's weakness on words about whole things is the likely cause.",
+  "Other things this run shows. Learning a new word costs a little of the old ones: single hand-written words were exact on 87.7% of pictures before, and 80% to 84% after a family was learned. On the two colours never used in training, the colour-taking words match 78% to 90%, below their match on trained colours. `recolour_all` ended up split between two learned words (103 and 14 puzzles) where one would do."
+ ],
+ "diagnosis": [
+  {
+   "family": "gravity",
+   "ranking": [
+    {
+     "start": "gravity(down)",
+     "same_word_in_best_8": 8,
+     "by_chance": 1.9
+    },
+    {
+     "start": "gravity(up)",
+     "same_word_in_best_8": 8,
+     "by_chance": 1.9
+    },
+    {
+     "start": "gravity(left)",
+     "same_word_in_best_8": 6,
+     "by_chance": 1.9
+    },
+    {
+     "start": "gravity(right)",
+     "same_word_in_best_8": 8,
+     "by_chance": 1.9
+    }
+   ],
+   "amount": [
+    {
+     "word": "gravity(down)",
+     "puzzles_given": 4,
+     "pass_their_check": 0,
+     "match_on_kept_aside": 0.15
+    },
+    {
+     "word": "gravity(down)",
+     "puzzles_given": 8,
+     "pass_their_check": 0,
+     "match_on_kept_aside": 0.15
+    },
+    {
+     "word": "gravity(down)",
+     "puzzles_given": 16,
+     "pass_their_check": 4,
+     "match_on_kept_aside": 0.1
+    }
+   ],
+   "note": "Measured on the interpreter as saved at step 20,000 (`python -m ultron words diagnose --family gravity`)."
+  }
+ ],
+ "second_form": {
+  "carrying_out": {
+   "single": 0.8833333333333333,
+   "by_family": {
+    "rot180": [
+     20,
+     20
+    ],
+    "transpose": [
+     20,
+     20
+    ],
+    "antitranspose": [
+     20,
+     20
+    ],
+    "remove_colour": [
+     198,
+     200
+    ],
+    "keep_colour": [
+     197,
+     200
+    ],
+    "slide_things": [
+     55,
+     80
+    ],
+    "frame_things": [
+     135,
+     180
+    ],
+    "remove_specks": [
+     37,
+     40
+    ],
+    "crop_content": [
+     20,
+     20
+    ],
+    "hollow_things": [
+     17,
+     20
+    ],
+    "connect": [
+     51,
+     80
+    ],
+    "symmetrize": [
+     78,
+     80
+    ]
+   },
+   "chains_right": 88,
+   "chains": 200
+  },
+  "before": {
+   "single": 0.8770833333333333,
+   "by_family": {
+    "rot180": [
+     20,
+     20
+    ],
+    "transpose": [
+     20,
+     20
+    ],
+    "antitranspose": [
+     20,
+     20
+    ],
+    "remove_colour": [
+     199,
+     200
+    ],
+    "keep_colour": [
+     198,
+     200
+    ],
+    "slide_things": [
+     54,
+     80
+    ],
+    "frame_things": [
+     157,
+     180
+    ],
+    "remove_specks": [
+     35,
+     40
+    ],
+    "crop_content": [
+     15,
+     20
+    ],
+    "hollow_things": [
+     7,
+     20
+    ],
+    "connect": [
+     40,
+     80
+    ],
+    "symmetrize": [
+     77,
+     80
+    ]
+   },
+   "chains_right": 99,
+   "chains": 200
+  },
+  "curve": [
+   [
+    2500,
+    0.435,
+    0.433
+   ],
+   [
+    5000,
+    0.617,
+    0.669
+   ],
+   [
+    7500,
+    0.75,
+    0.796
+   ],
+   [
+    10000,
+    0.79,
+    0.821
+   ],
+   [
+    12500,
+    0.833,
+    0.852
+   ],
+   [
+    15000,
+    0.85,
+    0.856
+   ],
+   [
+    17500,
+    0.875,
+    0.869
+   ],
+   [
+    20000,
+    0.894,
+    0.887
+   ],
+   [
+    22500,
+    null,
+    0.894
+   ],
+   [
+    25000,
+    null,
+    0.896
+   ],
+   [
+    27500,
+    null,
+    0.892
+   ],
+   [
+    30000,
+    null,
+    0.896
+   ]
+  ],
+  "notes": [
+   "Declared before it ran, with the condition for running G0-b again ([docs/MECHANISM.md](../docs/MECHANISM.md), commit e3f9d74). The first form drew the 48 taught words evenly, so a family of one word got 2% of practice and a family of ten 21%. The second form draws a family first, weighted toward the families still got wrong on learning pictures, then a word of it. Same width (96), seed and 30,000 steps.",
+   "The first form's run was interrupted at step 20,000; its curve stops there. Each check uses 10 pictures per word, so differences of a few points are noise. Logs: `reports/words_runs/teach_first_form.log`, `teach_second_form.log`."
+  ],
+  "notes_after": [
+   "**Verdict: not met, and no overall gain.** Single words are exact on 88.3% against 87.7%, within noise. The curves ran ahead by about 5 points early on (66.9% against 61.7% at 5,000 steps) and were level from 15,000 steps.",
+   "**Practice moved accuracy between families rather than adding to it.** hollow_things rose from 35% to 85% and crop_content from 75% to 100%; frame_things fell from 87% to 75%, as its share of practice fell from 19% (9 of the 48 words) to between 10% and 16%. Six-word programs fell from 99 to 88 of 200.",
+   "**G0-b was not run again.** The condition fixed in advance was single words up by 3 points, or the three weakest families up by 10 points each. Single words rose 0.6 points; of the three weakest, hollow_things and connect rose 50 and 14 points but slide_things only 1.",
+   "**What it suggests.** At width 96 the interpreter behaves as if it is full: giving one family more practice costs another. That points to its size rather than its diet, which is what the GPU run tests (`--size gpu`: twice as wide, one more pass, 100,000 steps). The second form's way of drawing words stays the default, so that run gives the one-word families their share from the start. The first form can still be reproduced with `python -m ultron words teach --even`."
+  ]
+ }
+}

@@ -1,0 +1,59 @@
+{
+ "family": "fill_enclosed",
+ "puzzles": 120,
+ "explained_by_hand_written": 0,
+ "explained_by_learned_words": 62,
+ "to_explain": 120,
+ "words_kept": [
+  "new1 (takes a colour)",
+  "new2 (takes a colour)",
+  "new3 (takes a colour)",
+  "new4 (takes a colour)",
+  "new5 (takes a colour)",
+  "new6 (takes a colour)",
+  "new7 (takes a colour)"
+ ],
+ "stands_for": {
+  "fill_enclosed(1)": "new4(1)",
+  "fill_enclosed(2)": "new4(2)",
+  "fill_enclosed(3)": "new4(3)",
+  "fill_enclosed(4)": "new4(4)",
+  "fill_enclosed(5)": "new4(5)",
+  "fill_enclosed(6)": "new4(6)",
+  "fill_enclosed(7)": "new4(7)",
+  "fill_enclosed(8)": "new4(8)",
+  "fill_enclosed(9)": "new4(9)"
+ },
+ "match_seen": 0.2642857142857143,
+ "match_unseen_colours": 0.3,
+ "match_by_word": {
+  "fill_enclosed(1)": "6/20",
+  "fill_enclosed(2)": "9/20",
+  "fill_enclosed(3)": "2/20",
+  "fill_enclosed(4)": "8/20",
+  "fill_enclosed(5)": "4/20",
+  "fill_enclosed(6)": "8/20",
+  "fill_enclosed(7)": "4/20",
+  "fill_enclosed(8)": "6/20",
+  "fill_enclosed(9)": "2/20"
+ },
+ "held_direct": 40,
+ "held_mixed": 40,
+ "without_words": {
+  "direct": 0,
+  "mixed": 0
+ },
+ "with_words": {
+  "direct": 7,
+  "mixed": 0
+ },
+ "fitted_vector": {
+  "fits_examples": 40,
+  "test_right": 4
+ },
+ "abbreviation_of": {
+  "new4": null
+ },
+ "old_words_still_exact": 0.8375,
+ "seconds": 7447
+}
