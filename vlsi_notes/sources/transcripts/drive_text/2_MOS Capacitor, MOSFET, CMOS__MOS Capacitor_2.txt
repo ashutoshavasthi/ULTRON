@@ -1,0 +1,390 @@
+--- page 1 ---
+MOS Capacitance-Voltage (C-V) Characteristics
+I. Introduction to the MOS Capacitor
+The MOS capacitor is a fundamental structure essential for understanding transistors like the MOSFET
+(Metal-Oxide-Semiconductor Field-Effect Transistor).
+Structure: The device consists of three layers:
+1. Metal: The gate terminal where voltage (
+) is applied.
+2. Oxide: A layer of insulator (dielectric).
+3. Semiconductor: The substrate (we use p-type silicon for our discussion).
+Principle: The voltage applied to the gate (
+) controls how the energy bands in the semiconductor bend,
+which, in turn, changes the charge distribution near the interface, leading to different operating conditions.
+II. Operating Conditions in P-Type Silicon
+In a p-type semiconductor, the majority carriers are holes (positive charges). The gate voltage (
+)
+determines the concentration and type of carriers at the oxide-semiconductor interface.
+Gate Voltage (V )
+Effect on Carriers
+Condition
+Name
+Negative (V < 0)
+Attracts holes (majority carriers) to the interface.
+Accumulation
+Small Positive (V > 0)
+Repels holes away from the interface.
+Depletion
+Strong Positive (V ≫
+0)
+Bends bands strongly, attracting minority carriers
+(electrons).
+Inversion
+A. Accumulation
+1. When a negative voltage is applied to the metal gate, it strongly attracts the holes from the p-type
+silicon bulk toward the interface.
+2. A high density of holes forms a very thin layer right at the interface. This layer is called the
+accumulation layer.
+B. Depletion
+1. When a small positive voltage is applied, the positive potential repels the mobile holes away from the
+interface.
+2. This pushing away of holes creates a region near the interface called the depletion region.
+3. In this region, the holes (mobile positive carriers) are gone, leaving behind the immobile, negatively
+charged ionized acceptor impurities.
+V
+​
+G
+V
+​
+G
+V
+​
+G
+G
+G
+G
+G
+12/10/25, 10:47 PM
+StackEdit
+https://stackedit.io/app#
+1/4
+
+--- page 2 ---
+C. Inversion (Strong Positive 
+)
+1. As the positive gate voltage increases further, the energy bands continue to bend downward.
+2. Weak Inversion: The bands bend until the Fermi level (
+) moves closer to the conduction band (
+) than the valence band (
+). This signals the start of accumulating minority carriers (electrons).
+3. Strong Inversion: The bands bend significantly, causing a large number of electrons (minority carriers
+in p-type silicon) to accumulate at the interface.
+This condition is defined when the electron concentration at the surface becomes equal to the
+hole concentration deep in the bulk.
+These electrons form a negatively charged sheet called the inversion charge.
+The total negative charge in the semiconductor (depletion charge + inversion charge) must be
+balanced by an infinitely thin positive sheet charge applied at the metal gate.
+III. The Capacitance-Voltage (C-V) Curve
+The C-V curve plots the total measured capacitance (
+) of the MOS structure against the applied DC gate
+voltage (
+). Capacitance is measured by applying a small AC signal on top of the DC bias to see how
+charge changes (
+) for a small change in voltage (
+).
+A. Oxide Capacitance (
+)
+The oxide layer acts as a dielectric. Its capacitance, 
+, is constant and is the maximum possible
+capacitance in the system.
+Where 
+ is the dielectric constant of the oxide and 
+ is the thickness of the oxide.
+B. C-V Behavior in Accumulation (Negative 
+)
+1. In accumulation, the interface has a very high density of holes that can respond very quickly (they are
+majority carriers).
+2. Any small AC signal applied to the gate is able to quickly modulate the charge in this accumulated
+layer.
+3. Since the charge is modulated right at the interface, the total measured capacitance (
+) is determined
+only by the oxide layer.
+4. Therefore, the total capacitance equals the maximum oxide capacitance (
+), meaning the
+ratio 
+ is 1.
+C. C-V Behavior in Depletion (Small Positive 
+)
+1. In the depletion phase, a depletion capacitance (
+) is formed, which is in series with the oxide
+capacitance (
+).
+V
+​
+G
+E
+​
+F
+E
+​
+C
+E
+​
+V
+C
+V
+​
+G
+ΔQ
+ΔV
+C
+​
+ox
+C
+​
+ox
+C
+​ =
+ox
+​
+t
+​
+oxide
+ϵ
+​
+oxide
+ϵ
+​
+oxide
+t
+​
+oxide
+V
+​
+G
+C
+C = C
+​
+ox
+C/C
+​
+ox
+V
+​
+G
+C
+​
+D
+C
+​
+ox
+C
+​ =
+total
+C
+​ in series with C
+​
+ox
+D
+12/10/25, 10:47 PM
+StackEdit
+https://stackedit.io/app#
+2/4
+
+--- page 3 ---
+2. The depletion capacitance is inversely proportional to the depletion width (
+):
+3. As the positive 
+ increases, the depletion width (
+) increases.
+4. Because 
+ is increasing, 
+ decreases.
+5. Since the total capacitance is a series combination, the total capacitance also decreases as 
+increases, moving away from the 
+ ratio.
+D. C-V Behavior in Strong Inversion (High Positive 
+)
+As 
+ gets high enough to cause strong inversion, the C-V curve behavior depends heavily on the
+frequency of the small AC signal used for measurement.
+1. Maximum Depletion Width: At the point of strong inversion, the depletion width (
+) reaches its
+maximum value (
+) and stops extending. This is because the high-density inversion layer
+(electrons) forms and screens the electric field from the gate, preventing further depletion expansion.
+The corresponding minimum capacitance (
+) occurs here.
+2. Low Frequency (Slow Signal, e.g., 100 Hz):
+The signal changes so slowly that the minority carriers (electrons) in the inversion layer have
+enough time to be generated (thermally) and move in and out of the interface in response to the
+AC signal.
+Since the charge is modulated right at the interface by the responsive minority carriers, the
+depletion capacitance effectively vanishes.
+The total capacitance rises back up to 
+ (Ratio 
+).
+3. High Frequency (Fast Signal, e.g., kHz or MHz):
+The signal changes too fast, and the minority carriers do not have enough time to generate and
+respond by moving in and out of the inversion layer.
+Instead, the small charge modulation (
+) must be accommodated by the fast-responding
+majority carriers (holes) moving in and out at the edge of the fixed maximum depletion region.
+The capacitance is defined by the series combination of 
+ and the capacitance corresponding
+to the maximum depletion width.
+The total capacitance stays flat at its minimum value, 
+.
+E. Deep Depletion
+1. Deep depletion is a special case that occurs if the DC gate voltage itself is swept extremely quickly
+(not the AC signal).
+2. If the DC voltage changes too fast, the minority carriers do not get enough time to generate and form
+the inversion layer.
+3. Without the inversion layer to screen the electric field, the depletion region keeps getting wider and
+wider, causing the total capacitance to keep decreasing below 
+.
+IV. Important Conditions and Definitions
+W
+​
+D
+C
+​ =
+D
+​
+W
+​
+D
+ϵ
+​
+semiconductor
+V
+​
+G
+W
+​
+D
+W
+​
+D
+C
+​
+D
+V
+​
+G
+C/C
+​ =
+ox
+1
+V
+​
+G
+V
+​
+G
+W
+​
+D
+W
+​
+D,max
+C
+​
+min
+C
+​
+ox
+C/C
+​ =
+ox
+1
+ΔQ
+C
+​
+ox
+C
+​
+min
+C
+​
+min
+12/10/25, 10:47 PM
+StackEdit
+https://stackedit.io/app#
+3/4
+
+--- page 4 ---
+A. Flat Band Condition and Voltage (
+)
+1. Flat Band Condition: The state where the energy bands in the semiconductor are perfectly flat (not
+bent).
+2. Ideal Case: If the work functions of the metal and the semiconductor are exactly matched (difference
+is zero), the bands are flat when 
+ volts.
+3. Realistic Case: If the work functions are not matched, the bands are bent even at 
+. The Flat
+Band Voltage (
+) is the specific positive or negative gate voltage required to make the bands flat.
+B. Flat Band Capacitance (
+) and Debye Length (
+)
+1. Debye Length (
+): Even when the bands are flat (
+), a small AC signal applied to the gate
+is still able to modulate the charge up to a small depth in the semiconductor. This depth is called the
+Debye length, 
+.
+2. Debye Capacitance (
+): The capacitance associated with this depth is 
+.
+3. Flat Band Capacitance (
+): The capacitance measured at the flat band voltage is the series
+combination of the oxide capacitance and the Debye capacitance:
+V
+​
+FB
+V
+​ =
+G
+0
+V
+​ =
+G
+0
+V
+​
+FB
+C
+​
+FB
+L
+​
+D
+L
+​
+D
+V
+​ =
+G
+V
+​
+FB
+L
+​
+D
+C
+​
+Debye
+C
+​ =
+Debye
+ϵ
+​/L
+​
+S
+D
+C
+​
+FB
+C
+​ =
+FB
+C
+​ in series with C
+​
+ox
+Debye
+12/10/25, 10:47 PM
+StackEdit
+https://stackedit.io/app#
+4/4

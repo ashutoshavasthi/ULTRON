@@ -1,0 +1,227 @@
+--- page 1 ---
+CMOS Inverter Basics – I
+1. Introduction to the CMOS Inverter
+The CMOS inverter is considered the “main workout” of all digital VLSI circuit design. Its primary function
+is to perform logic inversion, meaning it quickly changes a logical 1 to a 0, and a logical 0 to a 1.
+Logic Levels:
+1 corresponds to VDD (the applied positive voltage).
+0 corresponds to VGND (Ground).
+Inverting Action: If the input is 1, the output is 0. If the input is 0, the output is 1.
+2. Structure and Functionality
+A basic CMOS inverter consists of two types of transistors:
+1. M2: PMOS (P-type MOSFET): Known as the Pull Up Device (PU), responsible for pulling the output
+voltage from 0 to 1.
+2. M1: NMOS (N-type MOSFET): Known as the Pull Down Device (PD), responsible for pulling the
+output voltage from 1 to 0.
+Component Connections:
+Component
+Connected to
+Purpose
+M2 (PMOS)
+Source
+VDD (Most positive terminal)
+M1 (NMOS)
+Source
+Ground (Most negative
+terminal)
+M1 & M2 Gates
+V (Input signal)
+The gate takes the input signal
+M1 & M2 Drains
+V
+ (Output signal)
+Drains are shorted together to provide the
+output
+How the Inverter Works (Functionality):
+The inverter operates by utilizing the complementary nature of PMOS and NMOS.
+Input (V_in)
+M1 (NMOS)
+M2 (PMOS)
+V_out Result
+Action
+0 (Low)
+OFF (Cutoff)
+ON (Current
+Source)
+1
+(High/VDD)
+M2 charges the load capacitance
+(C_load) from VDD to V_out.
+in
+out
+12/10/25, 4:40 PM
+StackEdit
+https://stackedit.io/app#
+1/4
+
+--- page 2 ---
+Input (V_in)
+M1 (NMOS)
+M2 (PMOS)
+V_out Result
+Action
+1
+(High/VDD)
+ON
+(Saturation)
+OFF (Cutoff)
+0
+(Low/GND)
+M1 discharges the load capacitance
+(C_load) to ground.
+This ensures that one transistor is always OFF while the other is ON, creating a transition path between
+VDD and ground via the output node.
+3. Switch Model and Delay
+The Switch Model simplifies the analysis of the inverter and helps calculate performance factors like delay.
+1. High Input (V_in = VDD):
+M1 (NMOS) is ON and is represented by a resistor (R_N).
+M2 (PMOS) is OFF and is represented by an open switch.
+The circuit discharges the load capacitance (C_L) through 
+.
+2. Low Input (V_in = 0):
+M2 (PMOS) is ON and is represented by a resistor (R_P).
+M1 (NMOS) is OFF and is represented by an open switch.
+The circuit charges the load capacitance (C_L) through 
+.
+Load Capacitance (C_L): This capacitance combines:
+Internal device capacitances (like gate-to-drain capacitances of the PMOS and NMOS).
+The input capacitance of the next stage/inverter driven by the current output.
+Delay Calculation: The charging and discharging of C_L through 
+ or 
+ is modeled by a first-order
+differential equation. The solution to this equation gives the RC time constant (delay), which determines
+the switching speed of the device.
+4. Static Behavior Characteristics
+Static behavior refers to the device operation when the input is held steady at 0 or 1 for a long time (not
+switching).
+A. Power Consumption
+Static Power Consumption is Very Small: In the static condition, there is no direct path between
+VDD and ground (since one transistor is always OFF). This prevents a short-circuit current, resulting in
+very low power dissipation levels.
+B. Impedance and Fan Out
+R
+​
+N
+R
+​
+P
+R
+​
+N
+R
+​
+P
+12/10/25, 4:40 PM
+StackEdit
+https://stackedit.io/app#
+2/4
+
+--- page 3 ---
+High Input Impedance: Input signals are applied to the gate side, which is separated from the channel
+by a dielectric (oxide layer). Because the oxide is an insulator, virtually no current flows into the input,
+making the input impedance (change in voltage / change in current) very high.
+Fan Out: This refers to the capability of a single device to drive a large number of other identical
+devices.
+Static Fan Out: Due to the high input impedance, ideally, a single inverter could drive an infinite
+number of devices in static mode.
+Dynamic Fan Out: In dynamic (transient/switching) mode, high fan out degrades the speed
+(transient response). This is because driving many devices means the total capacitance (C_L) is
+larger, requiring more time to charge or discharge, thereby slowing down the frequency.
+Low Output Impedance: The output node is always connected to a node with very low impedance
+(either VDD or Ground). This low output impedance makes the device less prone to noise and results
+in a high Signal-to-Noise Ratio (SNR).
+C. Ratioless Logic Level (Full Swing)
+The static behavior (getting a full 0 or a full 1 output) is independent of the Aspect Ratio (
+) of
+the PMOS and NMOS devices.
+Full Swing: The inverter is able to achieve a full swing of the signal, meaning the output voltage
+charges fully up to VDD (1) and discharges fully down to 0, without losing any signal strength.
+5. Key Characteristics: VTC, Switching Threshold, Noise Margin, and
+Gain
+A. Voltage Transfer Characteristics (VTC) and Switching Threshold
+The Voltage Transfer Characteristics (VTC) plots how the output voltage (V_out) varies as the input voltage
+(V_in) is changed from 0 to VDD.
+Switching Threshold: This is a crucial characteristic, defined as the input voltage at which the
+transition between 0 to 1 and 1 to 0 takes place. It is calculated directly from the VTC.
+Deriving the VTC: The VTC curve is found by plotting the current-voltage (IV) characteristics of the
+PMOS and NMOS devices and locating the points where the currents flowing through both are
+exactly equal (
+).
+Key Governing Equations (used to relate device voltages to input/output signals):
+ (NMOS Gate-Source Voltage)
+ (NMOS Drain-Source Voltage)
+ (PMOS Gate-Source Voltage)
+ (PMOS Drain-Source Voltage)
+B. Noise Margin
+Noise Margin is the property that quantifies the inverter’s intrinsic capability to reject noise.
+W/L
+I
+​ =
+DSp
+−I
+​
+DSn
+V
+​ =
+GSn
+Vin
+V
+​ =
+DSn
+V
+​
+out
+V
+​ =
+GSp
+V
+​ −
+in
+V
+​
+DD
+V
+​ =
+DSp
+V
+​ −
+out
+V
+​
+DD
+12/10/25, 4:40 PM
+StackEdit
+https://stackedit.io/app#
+3/4
+
+--- page 4 ---
+Noise Sources: Signals inherently contain electrical noise, which can originate from various sources
+such as 
+ noise, short noise, wiring noise, and junction noise.
+The CMOS inverter is intrinsically a very good noise rejecter.
+Designing for high noise margin involves manipulating parameters like the aspect ratio (
+), the
+supply voltage (
+), and the threshold voltage to achieve better noise rejection.
+C. Gain Calculation
+Gain is defined as the rate of change of output voltage with respect to input voltage: Gain = 
+.
+High gain is critical for two reasons:
+1. Analog Applications: High gain allows the CMOS structure to be used as an amplifier for analog
+signal amplification, making it useful in analog design as well as digital design.
+2. Digital Switching Speed: High gain allows the inverter to swing between 1 and 0 much faster,
+resulting in much higher switching speeds for digital applications.
+1/f
+W/L
+V
+​
+DD
+ΔV
+​/ΔV
+​
+out
+in
+12/10/25, 4:40 PM
+StackEdit
+https://stackedit.io/app#
+4/4

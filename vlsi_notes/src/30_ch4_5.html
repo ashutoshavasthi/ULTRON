@@ -1,0 +1,107 @@
+<section class="chapter" id="ch4">
+  <h2><span class="num">CHAPTER 4</span>Doping: Seasoning the Crystal</h2>
+  <p class="tagline">Pure silicon is a poor conductor. Add a pinch of the right impurity and the conductivity jumps by a factor of a million.</p>
+  <span class="chip src">Your notes p.9</span>
+
+  <h3>4.1 Intrinsic (pure) vs extrinsic (doped)</h3>
+  <ul>
+    <li><b>Intrinsic semiconductor:</b> perfectly pure. Every free electron in the CB came from a broken bond and left a hole behind, so <b>n = p = n<sub>i</sub></b>. For Si at 300 K, n<sub>i</sub> ≈ 1.5×10<sup>10</sup> cm<sup>-3</sup> (some textbooks and your notes' questions use 10<sup>10</sup>). Silicon has 5×10<sup>22</sup> atoms/cm<sup>3</sup>, so only 1 atom in 3 trillion has given a free electron.</li>
+    <li><b>Extrinsic semiconductor:</b> impurity atoms deliberately added ("doping").</li>
+  </ul>
+  {{fig:doping|Your page 9: the lattice with one dopant. Phosphorus (5 valence electrons) has one electron too many; boron (3 valence electrons) is one short.}}
+
+  <h3>4.2 n-type doping: pentavalent atoms (donors)</h3>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Silicon atoms hold hands with four neighbours, using four electrons each. Now replace one silicon by phosphorus, which arrives with <b>five</b> hand-holders. Four form the bonds; the <b>fifth is a spare with nobody to hold hands with</b>, so it wanders off easily and can carry electricity. The phosphorus is now missing one electron, so it becomes a stuck-in-place <b>positive ion (P<sup>+</sup>)</b>. It can't move, because it's locked in the crystal.</p></div>
+  <ul>
+    <li>Dopants: phosphorus (P), arsenic (As), antimony (Sb). They are called <b>donors</b> because they donate an electron.</li>
+    <li>Donor concentration: <b>N<sub>D</sub></b> (atoms per cm<sup>3</sup>). Each ionised donor becomes a fixed positive charge <b>N<sub>D</sub><sup>+</sup></b>.</li>
+    <li>Energy picture: the spare electron sits at a <b>donor level E<sub>d</sub></b> just <i>below</i> E<sub>c</sub> (about 45 meV for P in Si). At room temperature (k<sub>B</sub>T = 26 meV) nearly all of them get kicked into the CB.</li>
+    <li>Result: n ≫ p. Electrons are the <b>majority carriers</b>, holes the <b>minority carriers</b>. E<sub>F</sub> moves up toward E<sub>c</sub>.</li>
+  </ul>
+
+  <h3>4.3 p-type doping: trivalent atoms (acceptors)</h3>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Replace one silicon by boron, which brings only <b>three</b> hand-holders. One bond is left with an empty hand, a <b>hole</b>. A neighbouring electron happily jumps in to fill it, which leaves an empty hand behind at the neighbour, and so the hole travels around. The boron has accepted an extra electron, so it becomes a fixed <b>negative ion (B<sup>−</sup>)</b>.</p></div>
+  <ul>
+    <li>Dopants: boron (B), aluminium (Al), gallium (Ga), indium (In). Called <b>acceptors</b>.</li>
+    <li>Concentration <b>N<sub>A</sub></b>; ionised acceptors are fixed negative charges <b>N<sub>A</sub><sup>−</sup></b>.</li>
+    <li>Energy picture: the <b>acceptor level E<sub>a</sub></b> lies just <i>above</i> E<sub>v</sub>. A VB electron easily hops onto it, leaving a hole in the VB.</li>
+    <li>Result: p ≫ n. Holes are the majority carriers. E<sub>F</sub> moves down toward E<sub>v</sub>.</li>
+  </ul>
+
+  <div class="tablewrap"><table>
+    <tr><th></th><th>n-type</th><th>p-type</th></tr>
+    <tr><td>Dopant valence</td><td>5 (pentavalent)</td><td>3 (trivalent)</td></tr>
+    <tr><td>Dopant name</td><td>donor (P, As, Sb)</td><td>acceptor (B, Al, Ga)</td></tr>
+    <tr><td>Concentration symbol</td><td>N<sub>D</sub></td><td>N<sub>A</sub></td></tr>
+    <tr><td>Fixed ion left behind</td><td>positive N<sub>D</sub><sup>+</sup></td><td>negative N<sub>A</sub><sup>−</sup></td></tr>
+    <tr><td>Extra level in the gap</td><td>E<sub>d</sub>, just below E<sub>c</sub></td><td>E<sub>a</sub>, just above E<sub>v</sub></td></tr>
+    <tr><td>Majority / minority</td><td>electrons / holes</td><td>holes / electrons</td></tr>
+    <tr><td>E<sub>F</sub> moves toward</td><td>conduction band</td><td>valence band</td></tr>
+  </table></div>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul><li><b>n-type and p-type crystals are electrically neutral overall.</b> "n" refers to the majority carrier being negative, not the crystal being charged.</li>
+    <li>The ion is <b>immobile</b>; only the electron or hole moves. This is what builds the depletion region later.</li>
+    <li>Doping adds carriers of one sign but the <b>minority</b> carrier count goes <i>down</i> (mass-action law, next chapter).</li></ul></div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: compensation</span>
+    <p>If both donors and acceptors are present, they cancel. The net doping is |N<sub>D</sub> − N<sub>A</sub>|, and the crystal is n-type if N<sub>D</sub> &gt; N<sub>A</sub>, p-type otherwise. This is used in real fabrication (e.g. making an n-well inside a p-substrate).</p></div>
+</section>
+
+<section class="chapter" id="ch5">
+  <h2><span class="num">CHAPTER 5</span>Carrier Concentration: How Many Electrons and Holes?</h2>
+  <p class="tagline">Two simple laws, mass-action and charge neutrality, give you n and p for any doping.</p>
+  <span class="chip src">Your notes p.10 to p.11</span>
+
+  <h3>5.1 Mass-action law</h3>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p>At <b>equilibrium</b>, the product of electron and hole concentrations in a semiconductor is <b>constant at a given temperature</b> and <b>independent of doping</b>.</p></div>
+  <div class="eq"><span class="cap">Mass-action law</span><div class="row"><b>n · p = n<sub>i</sub>²</b> &nbsp;&nbsp;(intrinsic: n = p = n<sub>i</sub>)</div></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Imagine a see-saw with electrons on one side and holes on the other, and a rule that the two counts multiplied together always give the same number. If you pour 1,000 times more electrons in (n-type doping), holes must shrink by 1,000 times. More of one means proportionally less of the other. The reason: extra electrons bump into holes and annihilate them (recombination) until balance is restored.</p></div>
+  <p>Only two things change n<sub>i</sub>: the material (bigger E<sub>g</sub> ⇒ smaller n<sub>i</sub>) and the temperature (hotter ⇒ much larger n<sub>i</sub>):</p>
+  <div class="eq"><div class="row">n<sub>i</sub> ∝ T<sup>3/2</sup> exp( − E<sub>g</sub> / 2k<sub>B</sub>T )</div></div>
+  <p>You will need this exact dependence for your assignment question (Si vs Ge diodes, Chapter 7).</p>
+
+  <h3>5.2 Charge neutrality</h3>
+  <p>A doped crystal is not charged overall. The positive charges must exactly balance the negative charges:</p>
+  <div class="eq"><span class="cap">Charge neutrality</span>
+    <div class="row">positive: holes p + ionised donors N<sub>D</sub><sup>+</sup> &nbsp;&nbsp; negative: electrons n + ionised acceptors N<sub>A</sub><sup>−</sup></div>
+    <div class="row"><b>p + N<sub>D</sub> = n + N<sub>A</sub></b> (assuming full ionisation)</div></div>
+
+  <h3>5.3 The general solution (your derivation)</h3>
+  <ol class="steps">
+    <li>Rewrite neutrality: n + (N<sub>A</sub> − N<sub>D</sub>) − p = 0.</li>
+    <li>Multiply by n: n² + n(N<sub>A</sub> − N<sub>D</sub>) − np = 0.</li>
+    <li>Use np = n<sub>i</sub>²: <b>n² + (N<sub>A</sub> − N<sub>D</sub>) n − n<sub>i</sub>² = 0</b>, a quadratic in n.</li>
+    <li>Quadratic formula (take the + root because n must be positive):</li>
+  </ol>
+  <div class="eq"><div class="row"><b>n = [[ −(N<sub>A</sub> − N<sub>D</sub>) + √( (N<sub>A</sub> − N<sub>D</sub>)² + 4n<sub>i</sub>² ) | 2 ]]</b> &nbsp;&nbsp; then p = n<sub>i</sub>² / n</div></div>
+  <p>Equivalent and easier to remember: with net donor density (N<sub>D</sub> − N<sub>A</sub>),</p>
+  <div class="eq"><div class="row">n = [[ (N<sub>D</sub> − N<sub>A</sub>) + √( (N<sub>D</sub> − N<sub>A</sub>)² + 4n<sub>i</sub>² ) | 2 ]]</div></div>
+
+  <h3>5.4 The two shortcuts you actually use</h3>
+  <div class="two">
+    <div><h4>Case I: strongly n-type (N<sub>D</sub> ≫ N<sub>A</sub>)</h4>
+      <div class="eq"><div class="row"><b>n ≈ N<sub>D</sub></b></div><div class="row"><b>p = n<sub>i</sub>² / N<sub>D</sub></b></div></div></div>
+    <div><h4>Case II: strongly p-type (N<sub>A</sub> ≫ N<sub>D</sub>)</h4>
+      <div class="eq"><div class="row"><b>p ≈ N<sub>A</sub></b></div><div class="row"><b>n = n<sub>i</sub>² / N<sub>A</sub></b></div></div></div>
+  </div>
+  <p>When are they valid? When the net doping is more than about 10× n<sub>i</sub>. Doping of 10<sup>15</sup> to 10<sup>18</sup> cm<sup>-3</sup> in Si at room temperature (n<sub>i</sub> ≈ 10<sup>10</sup>) is far beyond that, so the shortcuts are always fine there. Use the full quadratic only when the net doping is comparable to n<sub>i</sub> (very light doping or very high temperature).</p>
+
+  <details class="q" open><summary>Worked: silicon at 300 K, n<sub>i</sub> = 1.5×10<sup>10</sup> cm<sup>-3</sup>, doped with N<sub>D</sub> = 10<sup>16</sup> cm<sup>-3</sup> and nothing else. Find n, p and E<sub>F</sub> − E<sub>i</sub>.</summary><div class="ans">
+    <ol class="steps">
+    <li>N<sub>D</sub> ≫ n<sub>i</sub>, so <b>n ≈ 10<sup>16</sup> cm<sup>-3</sup></b>.</li>
+    <li>p = n<sub>i</sub>²/n = (2.25×10<sup>20</sup>)/10<sup>16</sup> = <b>2.25×10<sup>4</sup> cm<sup>-3</sup></b>. One hole for every 4.4×10<sup>11</sup> electrons.</li>
+    <li>E<sub>F</sub> − E<sub>i</sub> = k<sub>B</sub>T ln(n/n<sub>i</sub>) = 0.02585 × ln(6.67×10<sup>5</sup>) = 0.02585 × 13.41 = <b>0.347 eV above the mid-gap</b>, so E<sub>F</sub> is close to E<sub>c</sub>, as expected for n-type.</li></ol></div></details>
+  <details class="q" open><summary>Worked: compensated sample, N<sub>D</sub> = 5×10<sup>16</sup>, N<sub>A</sub> = 2×10<sup>16</sup> cm<sup>-3</sup>, n<sub>i</sub> = 1.5×10<sup>10</sup>. Find n and p.</summary><div class="ans">
+    <p>Net = N<sub>D</sub> − N<sub>A</sub> = 3×10<sup>16</sup> ≫ n<sub>i</sub>. So the sample is n-type with n ≈ <b>3×10<sup>16</sup></b> and p = 2.25×10<sup>20</sup>/3×10<sup>16</sup> = <b>7.5×10<sup>3</sup> cm<sup>-3</sup></b>.</p></div></details>
+  <details class="q" open><summary>Worked (when the shortcut fails): n<sub>i</sub> = 10<sup>10</sup>, net doping N<sub>D</sub> − N<sub>A</sub> = 10<sup>10</sup> cm<sup>-3</sup>. Find n and p.</summary><div class="ans">
+    <p>Doping is equal to n<sub>i</sub>, so use the full formula: n = [10<sup>10</sup> + √(10<sup>20</sup> + 4×10<sup>20</sup>)]/2 = [10<sup>10</sup> + 2.236×10<sup>10</sup>]/2 = <b>1.618×10<sup>10</sup></b> cm<sup>-3</sup>. Then p = 10<sup>20</sup>/1.618×10<sup>10</sup> = <b>6.18×10<sup>9</sup></b> cm<sup>-3</sup>. Notice the shortcut (n = 10<sup>10</sup>) would be 38 % wrong here.</p></div></details>
+  <details class="q"><summary>Extra: p-type Si with N<sub>A</sub> = 10<sup>17</sup>, n<sub>i</sub> = 10<sup>10</sup>. If the temperature rises until n<sub>i</sub> = 10<sup>17</sup>, what happens?</summary><div class="ans">
+    <p>At that temperature n<sub>i</sub> equals the doping: the thermally generated carriers match the dopant-provided ones. The material stops behaving like p-type and starts behaving like intrinsic (n ≈ p). Full formula: p = [10<sup>17</sup> + √(10<sup>34</sup> + 4×10<sup>34</sup>)]/2 = 1.618×10<sup>17</sup> and n = 6.18×10<sup>16</sup>. This is why silicon devices fail at very high temperature. A wide-gap material (GaN, SiC) reaches this point much later.</p></div></details>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul><li>The mass-action product n·p = n<sub>i</sub>² only holds at <b>equilibrium</b>. Under light or injection, np &gt; n<sub>i</sub>² (Chapter 6).</li>
+    <li>In the quadratic, take the <b>+</b> root. The − root gives negative n.</li>
+    <li>Units: concentrations are per cm<sup>3</sup> in every formula in your notes, and mobilities are cm²/V·s. Mixing m<sup>3</sup> and cm<sup>3</sup> gives errors of 10<sup>6</sup>.</li></ul></div>
+</section>

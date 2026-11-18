@@ -1,0 +1,192 @@
+--- page 1 ---
+MOSFET SPICE Models for VLSI Design 
+1. Introduction to Circuit Simulation and EDA Tools 
+1.1 The Role of SPICE in VLSI Design 
+• 
+SPICE Definition: SPICE stands for Simulation Program with Integrated Circuit Emphasis, originally 
+developed at the University of California, Berkeley in the 1970s (around 1972). 
+• 
+Purpose: In VLSI design, physical fabrication and post-fabrication testing of integrated circuits are 
+expensive and irreversible; if an integrated circuit fails to meet specifications after fabrication, all silicon 
+and manufacturing resources are lost. 
+• 
+EDA Tool Integration: Device behavior is described mathematically in software known as Electronic 
+Design Automation (EDA) tools. Common industry-standard EDA vendors include Cadence, Synopsys, 
+Mentor Graphics, and Tanner. 
+• 
+Function of Device Models: EDA tools require compact mathematical representations of device 
+behavior—called MOSFET models—to calculate terminal voltages, current equations (especially drain 
+current 𝐼𝐷), charges, and circuit responses under applied inputs. 
+1.2 Model Files and Predictive Technology Models (PTM) 
+• 
+Model Files: A model file is a text-based configuration file that defines physical constants and 
+technology-dependent parameters for a target process. These files serve as inputs to the simulator so the 
+mathematical equations inside the tool can compute current and voltage characteristics. 
+• 
+Predictive Technology Models (PTM): Model libraries (such as PTM) provide standardized model 
+parameter files across various technology generations, ranging from older submicron processes (e.g., 
+0.18 𝜇m) down to deep submicron nodes (e.g., 90 nm, 65 nm, 45 nm, 32 nm, 22 nm, 16 nm). 
+• 
+Consistency Requirement: For a given circuit simulation, all interconnected MOSFET devices must use 
+consistent technology model definitions corresponding to that fabrication process. 
+2. SPICE MOSFET Equivalent Circuit and Parasitic Components 
+A complete SPICE model goes beyond ideal channel equations by incorporating internal parasitic elements 
+and substrate interactions: 
+• 
+Terminal Terminals: Four terminals—Gate (G), Drain (D), Source (S), and Bulk/Body (B). 
+• 
+Extrinsic Resistances: Parasitic series resistances at the drain (𝑅𝐷) and source (𝑅𝑆). 
+• 
+Junction Diodes: Reverse-biased p-n junction diodes between the source-to-bulk and drain-to-bulk 
+junctions. 
+• 
+Parasitic Capacitances:Terminal-to-terminal capacitances: Gate-to-Source (𝐶𝑔𝑠), Gate-to-
+Drain (𝐶𝑔𝑑), Gate-to-Bulk (𝐶𝑔𝑏). 
+• 
+Junction capacitances: Drain-to-Bulk (𝐶𝑑𝑏) and Source-to-Bulk (𝐶𝑠𝑏) depletion capacitances. 
+
+--- page 2 ---
+3. Hierarchy and Evolution of MOSFET SPICE Models 
+As channel lengths scaled down, additional physical phenomena required increasingly sophisticated 
+mathematical models: 
+SPICE Level / Name 
+Model Type 
+Core Characteristics 
+Primary Limitations / Use 
+Case 
+Level 1 
+Shichman-Hodges 
+(Square-Law) 
+Basic square-law 𝐼-𝑉 
+characteristics; uses approximately 
+7 basic parameters. 
+Ideal for hand calculations; 
+inaccurate for submicron 
+geometry (𝐿< 0.8 𝜇m). 
+Level 2 
+Comprehensive 
+Physics-based 
+Analytical formulations including 
+short-channel effects, 
+subthreshold conduction, and 
+field-dependent mobility. 
+Mathematically complex; 
+computationally slow and 
+prone to simulation 
+convergence difficulties. 
+Level 3 
+Semi-Empirical 
+Approximates physical effects 
+using empirical curve-fitting 
+parameters calibrated to 
+experimental silicon data. 
+Faster convergence than 
+Level 2, but loses accuracy 
+below sub-micron regimes. 
+Level 4 / Level 54 
+(BSIM) 
+Deep Submicron 
+Standard 
+Advanced industrial model 
+incorporating over 100 
+parameters; models short-channel 
+and submicron phenomena with 
+high precision. 
+Requires computational 
+automation; unsuitable for 
+hand analysis. 
+ 
+4. Mathematical Formulations of Model Levels 
+4.1 Level-1 SPICE Model (Square-Law Model) 
+The Level 1 model relies on classical square-law behavior: 
+• 
+Linear (Triode) Region: 
+• 
+When 𝑉𝐺𝑆> 𝑉𝑇 and 𝑉𝐷𝑆< 𝑉𝐷𝑆,𝑠𝑎𝑡 (𝑉𝐷𝑆< 𝑉𝐺𝑆−𝑉𝑇): 
+𝐼𝐷= 𝐾′
+2
+𝑊
+𝐿𝑒𝑓𝑓
+[2(𝑉𝐺𝑆−𝑉𝑇)𝑉𝐷𝑆−𝑉𝐷𝑆
+2 ](1 + 𝜆𝑉𝐷𝑆) 
+(where 𝐾′ = 𝜇𝐶𝑜𝑥, and 𝜆 represents channel-length modulation). 
+• 
+Effective Channel Length: 
+• 
+Due to lateral dopant diffusion under the gate oxide, the effective channel length 𝐿𝑒𝑓𝑓 is smaller than the 
+drawn mask length 𝐿: 
+𝐿𝑒𝑓𝑓= 𝐿−2𝐿𝐷 
+• 
+where 𝐿𝐷 is the source/drain overlap length. 
+
+--- page 3 ---
+• 
+Parameters: Level 1 requires around 7 core variables and physical parameters: carrier mobility (𝜇), oxide 
+capacitance (𝐶𝑜𝑥), oxide thickness (𝑡𝑜𝑥), gate width (𝑊), channel length (𝐿), threshold voltage (𝑉𝑇), and 
+terminal voltages (𝑉𝐺𝑆, 𝑉𝐷𝑆). 
+4.2 Key Second-Order Physical Effects in Levels 2 and 3 
+When channel lengths drop below 0.8 𝜇m, hand-calculation assumptions break down and advanced models 
+incorporate the following second-order effects: 
+A. Carrier Velocity Saturation and Scattering 
+• 
+In long-channel devices, drift velocity is proportional to the electric field (𝑣= 𝜇ℰ). 
+• 
+In short-channel devices, high lateral electric fields cause carrier velocity to saturate due to optical 
+phonon scattering (𝑣𝑠𝑎𝑡). Consequently, the drain current saturates at lower values and earlier than 
+predicted by classical channel pinch-off. 
+B. Channel Length Modulation (𝛥𝐿) 
+• 
+In saturation, the depletion region at the drain junction widens, reducing the effective channel length by 
+𝛥𝐿. 
+• 
+Advanced models treat the variation in channel length not merely as a simple empirical constant 𝜆, but 
+as a dynamic function dependent on 𝑉𝐷𝑆, doping profiles, and junction depths. 
+C. Subthreshold Conduction (Weak Inversion) 
+• 
+Weak Inversion Regime: When 𝑉𝐺𝑆< 𝑉𝑇, the transistor does not turn off abruptly. 
+• 
+Conduction Mechanism: Current in the subthreshold regime is governed primarily by carrier diffusion 
+between the source and the drain rather than drift. 
+• 
+Impact of Scaling: In deep submicron transistors, subthreshold leakage current increases significantly and 
+becomes a critical contributor to static power consumption. 
+• 
+Mathematical Representation: Subthreshold drain current exhibits an exponential relationship with 
+applied gate voltage: 
+𝐼𝐷,𝑠𝑢𝑏∝exp (𝑉𝐺𝑆−𝑉𝑇
+𝑛𝑘𝑇/𝑞)[1 −exp (−𝑞𝑉𝐷𝑆
+𝑘𝑇)] 
+• 
+incorporated as semi-empirical expressions in SPICE to model current flow below threshold. 
+5. Modern State-of-the-Art Compact Models 
+5.1 BSIM (Berkeley Short-channel IGFET Model) 
+• 
+Design Philosophy: Developed to provide an accurate, computationally robust model for submicron and 
+deep submicron VLSI design. 
+• 
+Parameter Extraction: Combines physical equations with empirical fitting parameters extracted directly 
+from experimental silicon measurements. 
+• 
+Industrial Adoption: BSIM models (e.g., Level 4 / Level 54 and subsequent BSIM releases) are widely 
+adopted across commercial silicon foundries and standard EDA design flows. 
+
+--- page 4 ---
+5.2 EKV Model (Enz-Krummenacher-Vittoz) 
+• 
+Addressing Regional Discontinuities: Conventional piecewise SPICE models define separate equations for 
+weak inversion (𝑉𝐺𝑆< 𝑉𝑇), moderate inversion, and strong inversion (𝑉𝐺𝑆> 𝑉𝑇). This often causes non-
+physical derivative discontinuities at transition boundaries, degrading simulation convergence. 
+• 
+Unified Equation: The EKV model introduces a single, continuous formulation that spans seamlessly from 
+weak through moderate to strong inversion. 
+• 
+Compactness: Built on a small, physically meaningful set of parameters, making it computationally 
+efficient and well-suited for low-power analog and RF circuit simulation. 
+6. Summary Comparison: Hand Calculation vs. EDA Simulation 
+• 
+Hand Calculations: Limited to Level-1 formulations (~7 parameters) to evaluate basic circuit operating 
+points and first-order functional behavior. 
+• 
+EDA Simulations: Utilize higher-level models (e.g., Level 4 / BSIM with over 100 parameters) to 
+accurately simulate short-channel physics, leakage, parasitic interactions, and fabrication tolerances prior 
+to silicon commitment. 

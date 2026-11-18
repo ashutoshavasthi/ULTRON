@@ -1,0 +1,224 @@
+<section class="chapter" id="ch9">
+  <h2><span class="num">CHAPTER 9</span>The MOS Capacitor</h2>
+  <p class="tagline">The heart of a MOSFET is a capacitor whose bottom plate is a semiconductor. Understand its three states and you understand how a transistor switches on.</p>
+  <span class="chip src">Your second note-set, p.1 to p.3</span>
+
+  <h3>9.1 The family tree: MOS → MOSFET → CMOS</h3>
+  <ul>
+    <li><b>MOS</b> = Metal–Oxide–Semiconductor structure (a capacitor).</li>
+    <li><b>MOSFET</b> = MOS Field-Effect Transistor: MOS capacitor + two n⁺ or p⁺ regions (source and drain).</li>
+    <li><b>CMOS</b> = <b>C</b>omplementary MOS: an nMOS and a pMOS working as a pair. The technology of essentially all modern VLSI chips.</li>
+  </ul>
+
+  <h3>9.2 Ordinary capacitor vs MOS capacitor</h3>
+  {{fig:capacitors|Your page 1: the MIM system vs the MIS (MOS) system.}}
+  <div class="two">
+    <div><h4>MIM (metal–insulator–metal)</h4><p>Both plates are metals. C = ε₀A/d <b>never changes</b>, so C/A = ε/d is a constant.</p></div>
+    <div><h4>MIS / MOS (metal–insulator–semiconductor)</h4><p>Top plate: the gate metal. Insulator: silicon dioxide, SiO<sub>2</sub>. Bottom plate: a p-type or n-type semiconductor. <b>C is not constant; it depends on the gate voltage V<sub>G</sub></b>, because the semiconductor plate can change how deep its charge sits.</p></div>
+  </div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A metal plate is like a solid wall: if you put charge on it, the charge sits right at the surface. A semiconductor plate is like a sponge: the charge can sink in at different depths depending on how hard you squeeze (the voltage). The deeper the charge sits, the farther apart the "plates" effectively are, and the smaller the capacitance.</p></div>
+
+  <h3>9.3 The three states (p-type substrate)</h3>
+  <p>Put a voltage V<sub>G</sub> on the metal gate, with the semiconductor body grounded. Let Q<sub>m</sub> be the charge per unit area on the metal and Q<sub>s</sub> the charge per unit area in the semiconductor (Q<sub>m</sub> + Q<sub>s</sub> = 0 always). We take a <b>p-type</b> substrate, as your notes do.</p>
+  {{fig:mos_states|Your pages 1 to 2 (with the extra labels): what the charges do for negative, small positive and large positive gate voltage.}}
+  <div class="tablewrap"><table>
+    <tr><th>State</th><th>Gate voltage</th><th>Charge on metal Q<sub>m</sub></th><th>What happens in the p-substrate</th><th>Charge in semiconductor</th></tr>
+    <tr><td><b>Accumulation</b> (of majority carriers)</td><td>V<sub>G</sub> <b>negative</b></td><td>− Q<sub>m</sub></td><td>Negative gate attracts holes (majority carriers). Holes pile up at the interface.</td><td>+ Q<sub>s</sub> (holes)</td></tr>
+    <tr><td><b>Depletion</b> (of majority carriers)</td><td>V<sub>G</sub> small <b>positive</b></td><td>+ Q<sub>m</sub></td><td>Positive gate pushes holes away. A region with no holes appears, exposing fixed negative acceptor ions (width w).</td><td>Q<sub>s</sub> = − q N<sub>A</sub> w</td></tr>
+    <tr><td><b>Inversion</b> (p turns to n at the surface)</td><td>V<sub>G</sub> large positive (≥ V<sub>th</sub>)</td><td>+ Q<sub>m</sub></td><td>The field is now so strong that thermally generated electrons (minority carriers) are pulled to the interface and form a thin n-type layer.</td><td>− [ mobile electrons + q N<sub>A</sub> w<sub>m</sub> (fixed ions) ]</td></tr>
+  </table></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>The p-type body is a playground full of swings-with-kids (holes). <b>Accumulation:</b> the gate calls all kids to it; a crowd gathers at the fence. <b>Depletion:</b> the gate now pushes kids away; a kid-free zone appears near the fence, leaving only the chairs (fixed negative ions). <b>Inversion:</b> the push is so strong that the ground itself starts "making" a different type of kid (electrons) which gather at the fence. Now the surface behaves like an n-type material, even though the body is p-type. That thin layer of electrons is the <b>channel</b> of an nMOS transistor.</p></div>
+  <ul>
+    <li>In depletion the charge is only the immobile ions; as V<sub>G</sub> rises the depletion width w grows.</li>
+    <li>Once w reaches its maximum <b>w<sub>m</sub></b>, adding more gate voltage no longer widens the depletion region. Instead the extra charge shows up as mobile electrons in the inversion layer. The gate voltage at which this starts is the <b>threshold voltage V<sub>th</sub></b>.</li>
+    <li>For an <b>n-type</b> substrate everything mirrors: negative V<sub>G</sub> depletes, more negative inverts (holes form the channel), positive V<sub>G</sub> accumulates electrons.</li>
+  </ul>
+
+  <h3>9.4 Capacitance of the MOS structure</h3>
+  <div class="eq"><span class="cap">Two capacitors in series</span>
+    <div class="row">Oxide capacitance (per unit area): <b>C<sub>ox</sub> = [[ ε<sub>ox</sub> | t<sub>ox</sub> ]]</b> — independent of bias; t<sub>ox</sub> = oxide thickness</div>
+    <div class="row">Semiconductor / depletion capacitance: <b>C<sub>s</sub> = C<sub>dep</sub> = [[ ε<sub>s</sub> | w ]]</b> — depends on w, hence on V<sub>G</sub></div>
+    <div class="row"><b>[[1 | C]] = [[1 | C<sub>ox</sub>]] + [[1 | C<sub>s</sub>]]</b></div></div>
+  {{fig:mos_cv|Your page 3: the C–V curve. Normalised to C_ox.}}
+  <ol class="steps">
+    <li><b>Accumulation (V<sub>G</sub> negative):</b> holes sit right at the interface, so the semiconductor acts like a metal plate. C<sub>dep</sub> is huge and C = C<sub>ox</sub> (C/C<sub>ox</sub> = 1).</li>
+    <li><b>Depletion:</b> as V<sub>G</sub> rises, w rises, C<sub>dep</sub> = ε<sub>s</sub>/w falls, so the series combination falls: C decreases.</li>
+    <li><b>At threshold:</b> w = w<sub>m</sub>, C<sub>dep</sub> is at its minimum, and total C is at its minimum <b>C<sub>min</sub></b>.</li>
+    <li><b>Inversion:</b> if the electron layer can follow the signal (low frequency or DC), the electrons act as the plate again and C climbs back up to C<sub>ox</sub>. At high frequency the electrons can't be generated fast enough, so C stays near C<sub>min</sub>. That is why your figure has several dashed curves.</li>
+  </ol>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: real numbers for threshold</span>
+    <div class="eq"><div class="row">Fermi potential: φ<sub>F</sub> = V<sub>T</sub> ln(N<sub>A</sub>/n<sub>i</sub>) &nbsp;&nbsp; Max depletion width: w<sub>m</sub> = √( [[ 4 ε<sub>s</sub> φ<sub>F</sub> | q N<sub>A</sub> ]] )</div>
+    <div class="row"><b>V<sub>th</sub> = V<sub>FB</sub> + 2φ<sub>F</sub> + [[ √( 2 q ε<sub>s</sub> N<sub>A</sub> (2φ<sub>F</sub>) ) | C<sub>ox</sub> ]]</b> (V<sub>FB</sub> = flat-band voltage from work-function differences and oxide charge)</div></div>
+    <p>Strong inversion starts when the surface band-bending equals 2φ<sub>F</sub>, i.e. the surface is as n-type as the bulk is p-type.</p></div>
+  <details class="q" open><summary>Worked: p-type Si, N<sub>A</sub> = 10<sup>17</sup> cm<sup>-3</sup>, n<sub>i</sub> = 1.5×10<sup>10</sup>, oxide t<sub>ox</sub> = 2 nm (ε<sub>ox</sub> = 3.9ε<sub>0</sub> = 3.45×10<sup>-13</sup> F/cm). Find C<sub>ox</sub>, w<sub>m</sub>, C<sub>min</sub>/C<sub>ox</sub>, and V<sub>th</sub> ignoring V<sub>FB</sub>.</summary><div class="ans">
+    <ol class="steps">
+    <li>C<sub>ox</sub> = 3.45×10<sup>-13</sup> / 2×10<sup>-7</sup> cm = <b>1.73×10<sup>-6</sup> F/cm² = 1.73 μF/cm²</b> (17.3 fF/μm²).</li>
+    <li>φ<sub>F</sub> = 0.0259 × ln(10<sup>17</sup>/1.5×10<sup>10</sup>) = 0.0259 × 15.71 = <b>0.407 V</b>.</li>
+    <li>w<sub>m</sub> = √[4 × 1.04×10<sup>-12</sup> × 0.407 / (1.6×10<sup>-19</sup> × 10<sup>17</sup>)] = √(1.06×10<sup>-10</sup>) = 1.03×10<sup>-5</sup> cm = <b>0.103 μm</b>.</li>
+    <li>C<sub>dep,min</sub> = ε<sub>s</sub>/w<sub>m</sub> = 1.04×10<sup>-12</sup>/1.03×10<sup>-5</sup> = 1.01×10<sup>-7</sup> F/cm². Series: C<sub>min</sub> = 1/(1/1.73×10<sup>-6</sup> + 1/1.01×10<sup>-7</sup>) = 9.55×10<sup>-8</sup> ⇒ <b>C<sub>min</sub>/C<sub>ox</sub> ≈ 0.055</b>.</li>
+    <li>Depletion charge: Q<sub>d</sub> = q N<sub>A</sub> w<sub>m</sub> = 1.6×10<sup>-19</sup> × 10<sup>17</sup> × 1.03×10<sup>-5</sup> = 1.65×10<sup>-7</sup> C/cm². V<sub>th</sub> (ignoring V<sub>FB</sub>) = 2φ<sub>F</sub> + Q<sub>d</sub>/C<sub>ox</sub> = 0.814 + 0.095 = <b>0.91 V</b>.</li></ol>
+    <p>Reading: a thinner oxide ⇒ larger C<sub>ox</sub> ⇒ smaller second term in V<sub>th</sub> and stronger control of the channel by the gate.</p></div></details>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul><li>"Accumulation, depletion, inversion" order depends on the substrate polarity: for <b>p-type</b> it goes negative → positive V<sub>G</sub>. For n-type it is reversed.</li>
+    <li>C<sub>ox</sub> is fixed by t<sub>ox</sub>; C<sub>dep</sub> is the one that moves. In depletion they are in series, so the total is always <b>smaller</b> than C<sub>ox</sub>.</li>
+    <li>Larger oxide thickness ⇒ weaker vertical field E = V/t<sub>ox</sub> ⇒ the gate has less control.</li></ul></div>
+</section>
+
+<section class="chapter" id="ch10">
+  <h2><span class="num">CHAPTER 10</span>The MOSFET</h2>
+  <p class="tagline">A voltage-controlled switch that draws almost no current at its gate, is very fast, and burns very little power. Billions of them make a CPU.</p>
+  <span class="chip src">Your second note-set, p.4 to p.8</span>
+  <span class="chip beyond">Sections 10.7 to 10.10 go beyond your notes</span>
+
+  <h3>10.1 What a MOSFET is</h3>
+  <ul>
+    <li><b>MOSFET</b> = Metal-Oxide-Semiconductor Field-Effect Transistor.</li>
+    <li>It can be used as a <b>switch</b>. Switching can be done at (i) <b>very high speed</b> and (ii) <b>low power dissipation</b>.</li>
+    <li>Four terminals: <b>Source (S)</b>, <b>Drain (D)</b>, <b>Gate (G)</b>, <b>Substrate / Bulk (B)</b>.</li>
+    <li>It is a <b>unipolar</b> device: <b>nMOS</b> current is due to electrons only; <b>pMOS</b> current is due to holes only.</li>
+  </ul>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A drawbridge. Source and drain are two banks of a river. When the gate voltage is low the bridge is up: no one crosses. When you raise the gate voltage the bridge comes down: cars (electrons) flow across. And the person cranking the bridge (the gate) never has to carry a car themselves, because they only use an electric field. That's why the gate takes almost no current.</p></div>
+  <p>Three things every engineer asks about a switch (your notes' list):</p>
+  <ol>
+    <li><b>At what V<sub>G</sub> does it turn ON?</b> The threshold voltage V<sub>th</sub>.</li>
+    <li><b>R<sub>ON</sub>:</b> the ON resistance. Lower is better.</li>
+    <li><b>Speed:</b> the delay is <b>τ = R C</b> (resistance times the capacitance it must charge). Lower R<sub>ON</sub> and smaller load C ⇒ faster.</li>
+  </ol>
+
+  <h3>10.2 Physical structure</h3>
+  {{fig:nmos|Your pages 4 to 5: nMOS cross-section. Left: the structure. Right: ON with an inversion channel.}}
+  <ul>
+    <li><b>nMOS:</b> built on a <b>p-type</b> substrate. Two heavily doped <b>n⁺</b> regions form the source and the drain. Between them, a thin SiO<sub>2</sub> layer and the gate on top. A p⁺ contact (B) ties the body to a voltage.</li>
+    <li><b>pMOS:</b> mirror image: an <b>n-type</b> substrate (or well), two <b>p⁺</b> source/drain regions, an n⁺ body contact.</li>
+    <li><b>L</b> = channel length (source to drain), <b>W</b> = channel width (into the page). The <b>aspect ratio W/L</b> is the main design knob.</li>
+    <li>Circuit symbols: nMOS has an arrow into the channel, pMOS has an arrow out (or a bubble on the gate in digital diagrams).</li>
+  </ul>
+  <h4>n-well CMOS process</h4>
+  {{fig:nwell|Your page 5: both transistors on one p-type wafer. The pMOS lives inside an n-well.}}
+  <p>A single wafer can't be both p-type and n-type, so a lightly doped <b>n-well</b> is created inside the p-substrate. The nMOS is built directly in the p-substrate and the pMOS is built inside the n-well. That is the <b>n-well process</b> your notes name.</p>
+
+  <h3>10.3 Types of MOSFET</h3>
+  <div class="two">
+    <div><h4>(i) By charge carrier</h4><p><b>nMOS</b> (electrons) and <b>pMOS</b> (holes).</p></div>
+    <div><h4>(ii) By electrical mode</h4><p><b>Enhancement mode: normally OFF.</b> No channel exists between source and drain at V<sub>GS</sub> = 0; you must <i>create</i> one. This is the type used in CMOS.</p><p><b>Depletion mode: normally ON.</b> A channel already exists at V<sub>GS</sub> = 0; you apply voltage to remove it.</p></div>
+  </div>
+  <p>Combining both classifications gives four devices: <b>nMOS enhancement, nMOS depletion, pMOS enhancement, pMOS depletion</b>. (Your notes list four lines; the lines "pMOS enh, pMOS dep, nMOS enh" are followed by a last line that should read "nMOS dep".)</p>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>nMOS enhancement</th><th>pMOS enhancement</th></tr>
+    <tr><td>Carriers</td><td>electrons</td><td>holes</td></tr>
+    <tr><td>Substrate</td><td>p-type</td><td>n-type</td></tr>
+    <tr><td>V<sub>th</sub></td><td>positive</td><td>negative</td></tr>
+    <tr><td>ON when</td><td>V<sub>GS</sub> ≥ V<sub>th</sub> (gate high)</td><td>V<sub>GS</sub> ≤ V<sub>th</sub> (gate low)</td></tr>
+    <tr><td>Relative speed</td><td>faster (μ<sub>n</sub> &gt; μ<sub>p</sub>)</td><td>slower</td></tr>
+  </table></div>
+
+  <h3>10.4 Biasing</h3>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>nMOS</th><th>pMOS</th></tr>
+    <tr><td>Source</td><td>tied to the <b>lowest</b> potential: ground</td><td>tied to the <b>highest</b> potential (V<sub>DD</sub>)</td></tr>
+    <tr><td>V<sub>GS</sub>, V<sub>DS</sub></td><td>both <b>positive</b></td><td>both <b>negative</b></td></tr>
+    <tr><td>Substrate (body)</td><td>ground, or a negative potential</td><td>the highest potential (V<sub>DD</sub>)</td></tr>
+  </table></div>
+  <div class="callout trap"><span class="lbl">Why the body is tied that way</span>
+    <p>The source–body and drain–body p–n junctions must never be forward biased, otherwise current leaks into the substrate. So the p-substrate of an nMOS goes to the lowest voltage in the circuit, and the n-well of a pMOS goes to the highest. (Your note for pMOS shows source at "GND" in one place; in a CMOS circuit the pMOS source is tied to V<sub>DD</sub>, which is the reference that makes V<sub>GS</sub> and V<sub>DS</sub> negative relative to it. What matters is: <i>V<sub>GS</sub> and V<sub>DS</sub> are negative</i>.)</p></div>
+
+  <h3>10.5 Operation of an nMOS</h3>
+  <ol class="steps">
+    <li><b>Cut-off (OFF).</b> V<sub>G</sub> = 0 V or V<sub>GS</sub> negative. There is no channel/path from source to drain for electrons. The source and drain are two n⁺ islands separated by p-type silicon (two back-to-back diodes), so no current can flow.</li>
+    <li><b>Channel formation.</b> Make V<sub>GS</sub> positive. As in the MOS capacitor (Chapter 9), the surface first depletes, and when <b>V<sub>GS</sub> = V<sub>TH</sub></b> it inverts: a thin layer of electrons appears under the gate, joining source to drain. This is the <b>onset of inversion</b>. The channel is a resistor that the gate voltage controls.</li>
+    <li><b>Vertical field:</b> the gate field across the oxide is 𝓔 = V/t<sub>ox</sub>. A thicker oxide lowers the field for the same V. The oxide capacitance C<sub>ox</sub> is fixed by t<sub>ox</sub>, while C<sub>dep</sub> depends on the state of the depletion region.</li>
+  </ol>
+  <details class="q" open><summary>Quick check from your notes: "At what value of V<sub>G</sub> does the device turn ON?"</summary><div class="ans"><p>When the gate-to-source voltage reaches the threshold voltage: <b>V<sub>GS</sub> ≥ V<sub>TH</sub></b> (for an nMOS enhancement device). Below it: cut-off. Typical V<sub>TH</sub> ≈ 0.3 to 0.7 V in modern CMOS.</p></div></details>
+
+  <h3>10.6 The drain current: your derivation, step by step</h3>
+  <h4>Idea: current = charge per unit length × velocity</h4>
+  <div class="eq"><div class="row"><b>I = Q · v</b> &nbsp;&nbsp; Q = charge per unit length along the channel, v = velocity of carriers</div></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Cars passing a checkpoint per second = (cars on each metre of road) × (how fast they're driving). Charge per length is the "cars per metre"; velocity is the driving speed.</p></div>
+  <ol class="steps">
+    <li><b>Inversion charge.</b> The gate sets up a capacitor with capacitance C<sub>ox</sub> per unit area. The gate only pulls electrons into the channel once V<sub>GS</sub> exceeds V<sub>th</sub>. The voltage that does the work is the <b>overdrive voltage (V<sub>GS</sub> − V<sub>TH</sub>)</b>: the "extra voltage beyond V<sub>TH</sub>". With Q = C V, charge per unit length with channel width W:
+      <div class="eq"><div class="row"><b>Q′ = W C<sub>ox</sub> (V<sub>GS</sub> − V<sub>TH</sub>)</b></div></div></li>
+    <li><b>Effect of drain voltage.</b> With the drain at V<sub>DS</sub>, the channel potential V(x) rises from 0 at the source (x = 0) to V<sub>DS</sub> at the drain (x = L). At position x the gate-to-channel voltage is reduced, so the total voltage experienced by the carriers is (V<sub>GS</sub> − V<sub>th</sub> − V(x)):
+      <div class="eq"><div class="row"><b>Q(x) = W C<sub>ox</sub> ( V<sub>GS</sub> − V<sub>th</sub> − V(x) )</b></div></div>
+      Your notes tabulate it as V<sub>GS</sub> − V<sub>th</sub> − 0, − 0.1, − 0.2, … − 1: the charge thins out towards the drain.</li>
+    <li><b>Velocity.</b> Drift: v<sub>d</sub> = μ𝓔 = − μ dV(x)/dx (the field is the slope of the potential).</li>
+    <li><b>Current.</b> Multiply charge × velocity (the sign is absorbed into the direction of I):
+      <div class="eq"><div class="row"><b>I = W C<sub>ox</sub> ( V<sub>GS</sub> − V<sub>th</sub> − V(x) ) · μ [[ dV(x) | dx ]]</b></div></div></li>
+    <li><b>Integrate along the channel.</b> The same current I flows at every x (steady state), so we can separate variables:
+      <div class="eq"><div class="row">∫<sub>x=0</sub><sup>L</sup> I dx = μ W C<sub>ox</sub> ∫<sub>V(x)=0</sub><sup>V<sub>DS</sub></sup> ( V<sub>GS</sub> − V<sub>th</sub> − V(x) ) dV(x)</div>
+      <div class="row">Limits: at x = 0 the source is grounded, V(x) = 0; at x = L, V = V<sub>DS</sub>.</div>
+      <div class="row">I L = μ W C<sub>ox</sub> [ (V<sub>GS</sub> − V<sub>th</sub>) V<sub>DS</sub> − V<sub>DS</sub>²/2 ]</div></div></li>
+    <li><b>Result:</b>
+      <div class="eq"><span class="cap">Drain current, triode (linear) region</span><div class="row"><b>I<sub>D</sub> = μ<sub>n</sub> C<sub>ox</sub> ( [[W | L]] ) [ ( V<sub>GS</sub> − V<sub>th</sub> ) V<sub>DS</sub> − [[ V<sub>DS</sub>² | 2 ]] ]</b></div></div></li>
+  </ol>
+  <div class="callout trap"><span class="lbl">Careful</span><p>Your first boxed version of the result lacks the W/L factor; the final one includes it. Always include <b>W/L</b>. Units check: μ C<sub>ox</sub> has A/V², times V² gives A. ✔</p></div>
+  <h4>Small V<sub>DS</sub>: the MOSFET as a resistor</h4>
+  <p>For V<sub>DS</sub> ≪ V<sub>GS</sub> − V<sub>th</sub> the V<sub>DS</sub>² term vanishes and I<sub>D</sub> ≈ μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>) V<sub>DS</sub> — linear in V<sub>DS</sub>. So the transistor behaves like a resistor whose value the gate controls:</p>
+  <div class="eq"><div class="row"><b>R<sub>ON</sub> = [[ V<sub>DS</sub> | I<sub>D</sub> ]] ≈ [[ 1 | μ<sub>n</sub> C<sub>ox</sub> (W/L)(V<sub>GS</sub> − V<sub>th</sub>) ]]</b></div></div>
+  <p>Wider transistor (W ↑), shorter channel (L ↓), higher mobility or bigger overdrive ⇒ smaller R<sub>ON</sub> ⇒ faster (τ = RC).</p>
+
+  <h3>10.7 What happens when V<sub>DS</sub> gets larger: pinch-off</h3>
+  <span class="chip src">Definition from your page 7</span>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p><b>Pinch-off:</b> thinning of the inversion charge due to V(x), and encroachment of the depletion layer.</p></div>
+  {{fig:pinchoff|As V_DS grows, the gate-to-channel voltage at the drain end falls until the channel vanishes there.}}
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Think of water flowing down a hose while someone squeezes the end. If you increase the water pressure difference between the two ends, the hose is squeezed most at the far end (where the gate has the weakest hold), until at the far end it's basically closed. But water still flows: it shoots through the last tiny gap at high speed, driven by the strong field there. The far-end gap barely changes, so the flow stops increasing even if you push harder. That's <b>saturation</b>.</p></div>
+  <ul>
+    <li>At the drain end the gate-to-channel voltage is V<sub>GS</sub> − V<sub>DS</sub>. The channel vanishes there when this equals V<sub>th</sub>, i.e. when <b>V<sub>DS</sub> = V<sub>GS</sub> − V<sub>th</sub> = V<sub>ov</sub></b>.</li>
+    <li>For V<sub>DS</sub> larger than that, the pinch-off point moves toward the source. The voltage across the remaining channel stays fixed at V<sub>ov</sub>, so the current stops growing.</li>
+  </ul>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: the three regions</span>
+    {{fig:mos_iv|Output and transfer characteristics of an nMOS (illustrative units, V_th = 1 V).}}
+    <div class="tablewrap"><table>
+      <tr><th>Region</th><th>Condition (nMOS)</th><th>I<sub>D</sub></th></tr>
+      <tr><td><b>Cut-off</b></td><td>V<sub>GS</sub> &lt; V<sub>th</sub></td><td>≈ 0</td></tr>
+      <tr><td><b>Triode / linear</b></td><td>V<sub>GS</sub> ≥ V<sub>th</sub> and V<sub>DS</sub> &lt; V<sub>GS</sub> − V<sub>th</sub></td><td>μ<sub>n</sub>C<sub>ox</sub>(W/L)[(V<sub>GS</sub> − V<sub>th</sub>)V<sub>DS</sub> − V<sub>DS</sub>²/2]</td></tr>
+      <tr><td><b>Saturation</b></td><td>V<sub>GS</sub> ≥ V<sub>th</sub> and V<sub>DS</sub> ≥ V<sub>GS</sub> − V<sub>th</sub></td><td>½ μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)²</td></tr>
+    </table></div>
+    <p><b>Where the saturation formula comes from:</b> put V<sub>DS</sub> = V<sub>GS</sub> − V<sub>th</sub> into the triode formula: (V<sub>ov</sub>)(V<sub>ov</sub>) − V<sub>ov</sub>²/2 = V<sub>ov</sub>²/2. At this point the parabola of I<sub>D</sub> versus V<sub>DS</sub> reaches its peak (derivative zero), and beyond it the current is held flat at that peak value.</p>
+    <p><b>Channel-length modulation:</b> in saturation the pinch-off point moves toward the source, so the effective length shrinks and the current rises slightly with V<sub>DS</sub>: I<sub>D</sub> = ½μ<sub>n</sub>C<sub>ox</sub>(W/L)V<sub>ov</sub>²(1 + λV<sub>DS</sub>). This is the MOSFET twin of the BJT Early effect (λ ≈ 1/V<sub>A</sub>).</p>
+    <p><b>Transconductance</b> (gain of the transistor): g<sub>m</sub> = ∂I<sub>D</sub>/∂V<sub>GS</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)V<sub>ov</sub> = 2I<sub>D</sub>/V<sub>ov</sub>.</p>
+    <p><b>Body effect:</b> if the source is above the body potential by V<sub>SB</sub>, the threshold rises: V<sub>th</sub> = V<sub>th0</sub> + γ(√(2φ<sub>F</sub> + V<sub>SB</sub>) − √(2φ<sub>F</sub>)).</p></div>
+
+  <details class="q" open><summary>Worked (beyond notes but classic): nMOS with μ<sub>n</sub>C<sub>ox</sub> = 100 μA/V², W/L = 10, V<sub>th</sub> = 0.7 V. Find I<sub>D</sub> for (a) V<sub>GS</sub> = 1.7 V, V<sub>DS</sub> = 0.2 V; (b) V<sub>GS</sub> = 1.7 V, V<sub>DS</sub> = 2 V; (c) V<sub>GS</sub> = 0.5 V. Also the R<sub>ON</sub> for small V<sub>DS</sub>.</summary><div class="ans">
+    <ol class="steps">
+    <li>V<sub>ov</sub> = 1.7 − 0.7 = 1.0 V. k′(W/L) = 100 μA/V² × 10 = 1 mA/V².</li>
+    <li>(a) V<sub>DS</sub> = 0.2 &lt; V<sub>ov</sub>: triode. I<sub>D</sub> = 1 mA/V² × [1.0 × 0.2 − 0.2²/2] = 1 × (0.2 − 0.02) = <b>0.18 mA</b>.</li>
+    <li>(b) V<sub>DS</sub> = 2 ≥ V<sub>ov</sub>: saturation. I<sub>D</sub> = ½ × 1 mA/V² × 1.0² = <b>0.5 mA</b> (independent of V<sub>DS</sub>).</li>
+    <li>(c) V<sub>GS</sub> = 0.5 &lt; V<sub>th</sub>: cut-off, <b>I<sub>D</sub> ≈ 0</b>.</li>
+    <li>R<sub>ON</sub> ≈ 1/(1 mA/V² × 1.0 V) = <b>1 kΩ</b>. With a 10 fF load, τ = RC = 1 kΩ × 10 fF = 10 ps.</li></ol></div></details>
+  <details class="q"><summary>Extra (delay): a nMOS switch with R<sub>ON</sub> = 2 kΩ must charge a load of 50 fF. How long until it reaches 63 % of its final value? How does doubling W change it?</summary><div class="ans">
+    <p>τ = R C = 2 kΩ × 50 fF = 100 ps (the 63 % time constant of an RC charge). Doubling W halves R<sub>ON</sub> (R ∝ L/W), so τ = 50 ps if the load doesn't change. In real circuits wider transistors also add capacitance to their own drain and to the previous stage, so the gain is less than 2×.</p></div></details>
+
+  <h3>10.8 Bringing it together: CMOS and the inverter</h3>
+  {{fig:inverter|A CMOS inverter: one pMOS pulling up, one nMOS pulling down.}}
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Two doors on a room, wired so exactly one is open at any time: one door leads to the "1" (power) hallway, the other to the "0" (ground) hallway. When the input is high (1), the bottom door opens and the output is connected to 0. When the input is low (0), the top door opens and the output is connected to 1. Since one door is always shut, there is never a straight path from power to ground, so almost no current is wasted while the input isn't changing. That's why CMOS uses so little power.</p></div>
+  <ul>
+    <li><b>V<sub>in</sub> = 0:</b> nMOS off (V<sub>GS</sub> = 0 &lt; V<sub>th</sub>), pMOS on ⇒ V<sub>out</sub> = V<sub>DD</sub> (logic 1).</li>
+    <li><b>V<sub>in</sub> = V<sub>DD</sub>:</b> nMOS on, pMOS off ⇒ V<sub>out</sub> = 0 (logic 0).</li>
+    <li>Static power ≈ 0 (only tiny leakage). Dynamic power ≈ C V<sub>DD</sub>² f, only when switching.</li>
+    <li>Since μ<sub>p</sub> ≈ μ<sub>n</sub>/2 to /3, the pMOS is made 2 to 3 times wider to balance rise and fall times.</li>
+  </ul>
+
+  <h3>10.9 Why this course is called VLSI</h3>
+  <p>One inverter needs 2 transistors, a NAND gate 4, a flip-flop about 20 to 30, a 64-bit adder thousands. Reaching millions to billions of transistors is only possible because the MOSFET is (i) tiny, (ii) needs no DC gate current, (iii) dissipates almost no static power in CMOS, (iv) can be built by the same lithography process on the same wafer. Scaling W, L and t<sub>ox</sub> down together (<b>Moore's law</b>) is how speed rose and cost per transistor fell for 50 years.</p>
+
+  <h3>10.10 Short-channel effects (for awareness)</h3>
+  <ul>
+    <li><b>Velocity saturation</b> (your Chapter 6): at high lateral field carriers reach v<sub>sat</sub>, so I<sub>D</sub> ∝ V<sub>ov</sub> (linear) instead of V<sub>ov</sub>².</li>
+    <li><b>Drain-induced barrier lowering (DIBL)</b> and <b>punch-through</b>: a high drain voltage reduces the barrier near the source in very short channels.</li>
+    <li><b>Subthreshold leakage</b>: below V<sub>th</sub> the current does not drop to zero but falls exponentially, about 60–100 mV per decade.</li>
+    <li><b>Gate-oxide leakage</b>: as t<sub>ox</sub> shrinks below 2 nm, electrons tunnel through, motivating high-k dielectrics.</li>
+  </ul>
+  <div class="callout trap"><span class="lbl">Exam traps for the MOSFET</span>
+    <ul><li>nMOS turns on with a <b>high</b> gate; pMOS turns on with a <b>low</b> gate. Never mix.</li>
+    <li>Threshold voltage is where inversion <b>begins</b>; the channel doesn't appear at any V<sub>GS</sub> below it.</li>
+    <li>The linear formula holds only while V<sub>DS</sub> &lt; V<sub>GS</sub> − V<sub>th</sub>.</li>
+    <li>μ<sub>n</sub> is not a constant; in the channel it is lower than in bulk silicon because of surface scattering, and it falls at high gate voltage.</li>
+    <li>"Depletion-mode" is not the same as the "depletion region". The mode name refers to a device with a channel present at zero gate bias.</li></ul></div>
+</section>

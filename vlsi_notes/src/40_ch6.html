@@ -1,0 +1,116 @@
+<section class="chapter" id="ch6">
+  <h2><span class="num">CHAPTER 6</span>Charge Transport: Drift, Mobility, Diffusion, Recombination</h2>
+  <p class="tagline">Carriers move for exactly two reasons: they get pushed by a field (drift) or they spread out from crowded to empty regions (diffusion).</p>
+  <span class="chip src">Your notes p.12 to p.19</span>
+
+  <h3>6.1 With no external push: random thermal motion</h3>
+  <div class="callout mine"><span class="lbl">Your notes say (Case 1: no external excitation)</span>
+    <p>In an n-type bar with no field, electrons move at their <b>thermal velocity</b> in every direction and <b>collide</b> with (i) lattice atoms (which exchange energy as <b>phonons</b>) and (ii) <b>impurity ions</b> (N<sub>D</sub><sup>+</sup> or N<sub>A</sub><sup>−</sup>), through Coulomb attraction. Result: <b>net current = 0</b>.</p></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Picture a room full of bouncing balls, each going in a random direction very fast (about 10<sup>7</sup> cm/s for electrons in silicon at room temperature). For every ball going left another goes right, so nothing flows anywhere on average. It's busy but going nowhere.</p></div>
+
+  <h3>6.2 Drift: applying an electric field</h3>
+  {{fig:drift_diffusion|Left: drift. The path still zig-zags but has a small net motion. Right: diffusion from a crowded region to an empty one.}}
+  <div class="callout mine"><span class="lbl">Your notes say (Case II: external electric field)</span>
+    <p>A net current appears: the <b>drift current</b>. The average speed of the net motion is the <b>drift velocity V<sub>d</sub></b>. Velocity = acceleration × time, with acceleration = F/m = qE/m*, and the time is the <b>mean time between collisions τ</b> (τ<sub>1</sub>, τ<sub>2</sub>, τ<sub>3</sub>… averaged).</p></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Now tilt the room slightly so all the balls feel a gentle downhill push. They still bounce around randomly, but every time they start to speed up downhill they hit something and lose that extra speed. On average they creep slowly downhill. That slow creep is the drift velocity, tiny compared with the wild random speed, but it's the whole reason a current flows.</p></div>
+  <div class="eq"><span class="cap">Drift velocity and mobility</span>
+    <div class="row">V<sub>d</sub> = acceleration × τ = [[ qE | m* ]] · τ &nbsp;⇒&nbsp; <b>V<sub>d</sub> = ( [[ qτ | m* ]] ) E = μ E</b></div>
+    <div class="row"><b>μ = [[ qτ | m* ]]</b> (mobility, units cm²/V·s) &nbsp; ← the slope of the V<sub>d</sub> versus E line</div></div>
+  <ul>
+    <li>Long τ (few collisions) ⇒ high mobility.</li>
+    <li>Small m* (light carrier) ⇒ high mobility.</li>
+    <li>Your notes' comparison: <b>m<sub>h</sub>* &gt; m<sub>e</sub>* ⇒ V<sub>d,hole</sub> &lt; V<sub>d,electron</sub> ⇒ μ<sub>n</sub> &gt; μ<sub>p</sub></b>. In silicon at 300 K: μ<sub>n</sub> ≈ 1350 and μ<sub>p</sub> ≈ 450 cm²/V·s (the values your worked questions use). This is why nMOS is faster than pMOS, and why pMOS transistors are drawn ~2–3× wider in CMOS layouts.</li>
+  </ul>
+
+  <h3>6.3 How temperature changes mobility</h3>
+  <p>Two scattering mechanisms fight for control. Each one has its own mobility, and they combine like <b>resistors in parallel</b> (the faster-acting scatterer dominates):</p>
+  <div class="eq"><span class="cap">Matthiessen's rule</span><div class="row"><b>[[1 | μ<sub>total</sub>]] = [[1 | μ<sub>phonon</sub>]] + [[1 | μ<sub>II</sub>]]</b></div></div>
+  {{fig:mobility_T|Your page 14. The hill shape is the sum of the two effects.}}
+  <div class="tablewrap"><table>
+    <tr><th>Mechanism</th><th>What happens when T rises</th><th>Why (your notes)</th></tr>
+    <tr><td>Phonon (lattice) scattering</td><td>μ<sub>phonon</sub> <b>decreases</b></td><td>Temp ↑ ⇒ atoms vibrate more ⇒ more collisions</td></tr>
+    <tr><td>Ionised-impurity scattering (μ<sub>II</sub>)</td><td>μ<sub>II</sub> <b>increases</b></td><td>Temp ↓ ⇒ electron's thermal energy ↓ ⇒ slow electrons are deflected more strongly by the charged ions. So μ<sub>II</sub> ↓ when T ↓</td></tr>
+  </table></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Run past a stranger who is standing still with a big magnet. If you run fast you barely get pulled off course; if you jog slowly the magnet drags you around. That's impurity scattering: fast (hot) electrons zip past. But if it's too hot, the floor itself is shaking violently (phonons) and you keep tripping. Best running conditions are in the middle, so mobility has a peak.</p></div>
+  <p><b>Reading the curve:</b> at low temperature the impurity scattering dominates (μ rises with T); at high temperature phonons dominate (μ falls with T). Because the smaller mobility wins in the reciprocal sum, μ<sub>total</sub> follows whichever is worse, giving the hill.</p>
+
+  <h3>6.4 Drift current density and conductivity</h3>
+  <div class="eq"><span class="cap">Drift current density (units A/cm²)</span>
+    <div class="row">J<sub>drift</sub> = n q μ<sub>n</sub> E + p q μ<sub>p</sub> E = ( n q μ<sub>n</sub> + p q μ<sub>p</sub> ) E = <b>σ E</b></div>
+    <div class="row"><b>σ = q ( n μ<sub>n</sub> + p μ<sub>p</sub> )</b> (conductivity, S/cm) &nbsp;&nbsp; ρ = 1/σ (resistivity, Ω·cm)</div></div>
+  <p>n and p are in cm<sup>-3</sup>, so J = (cm<sup>-3</sup>)(C)(cm²/V·s)(V/cm) = A/cm². For an n-type bar the p-term is negligible, and vice versa.</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Current = how many runners × how much each carries × how fast each runs. n and p are "how many runners", q is "how much each carries", μE is "how fast".</p></div>
+
+  <h3>6.5 Velocity saturation</h3>
+  {{fig:vd_E|Your page 15: linear at small field, then flat at v_sat.}}
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p>Low-E regime: V<sub>d</sub> = μE (slope μ). High-E regime: V<sub>d</sub> flattens at the <b>saturation velocity V<sub>max</sub></b>. Reason: E ↑ ⇒ acceleration ↑ ⇒ K.E. ↑, but scattering also ↑ ⇒ K.E. ↓ (energy is dumped into the lattice).</p></div>
+  <p>Silicon's saturation velocity is about 10<sup>7</sup> cm/s for electrons. Beyond the point where μE reaches v<sub>sat</sub>, raising the field does not raise the speed any more, so the current in a short-channel MOSFET stops growing with voltage. This is important for modern (nanometre) transistors.</p>
+
+  <h3>6.6 Diffusion</h3>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Spray perfume in a corner of a room. Very soon you smell it everywhere. No wind pushed it; the molecules simply jiggle randomly, and since there are far more of them in the corner, more of them wander out than wander in. Net result: a flow from crowded to empty. Charge carriers do the same, and because they carry charge, that flow is a <b>diffusion current</b>.</p></div>
+  <div class="callout mine"><span class="lbl">Your notes say</span>
+    <p>Inject charge carriers into one end of a bar. <b>Diffusion current is due to a concentration gradient</b> of charge carriers. For holes p(x) falling with x (dp/dx negative) the holes diffuse toward +x and hole current flows in +x. For electrons n(x) falling with x (dn/dx negative), electrons diffuse toward +x but the electron <b>current</b> flows toward −x (negative charge).</p></div>
+  <div class="eq"><span class="cap">Diffusion current densities</span>
+    <div class="row"><b>J<sub>n</sub> = + q D<sub>n</sub> [[ dn(x) | dx ]]</b> &nbsp;&nbsp;&nbsp; <b>J<sub>p</sub> = − q D<sub>p</sub> [[ dp(x) | dx ]]</b></div>
+    <div class="row">D<sub>n</sub>, D<sub>p</sub> = diffusion coefficients (diffusivities), cm²/s</div></div>
+  <p>Sign logic: the particle flux always points down the gradient (−D dn/dx). Multiply by charge: electrons (−q) give +qD<sub>n</sub> dn/dx; holes (+q) give −qD<sub>p</sub> dp/dx. So both cases are the same flow of carriers but the electron current points opposite to the electron motion.</p>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: total current</span>
+    <div class="eq"><div class="row">J<sub>n,total</sub> = q μ<sub>n</sub> n E + q D<sub>n</sub> dn/dx &nbsp;&nbsp;&nbsp; J<sub>p,total</sub> = q μ<sub>p</sub> p E − q D<sub>p</sub> dp/dx</div></div>
+    <p>In a real device both mechanisms act at once. In a p–n diode at equilibrium they cancel exactly.</p></div>
+
+  <h3>6.7 Einstein's relation: drift and diffusion are cousins</h3>
+  <p>Both are caused by the same thing: random thermal motion and collisions. So diffusivity and mobility must be linked:</p>
+  <div class="eq"><span class="cap">Einstein relation</span>
+    <div class="row"><b>[[ D<sub>n</sub> | μ<sub>n</sub> ]] = [[ D<sub>p</sub> | μ<sub>p</sub> ]] = [[ k<sub>B</sub>T | q ]] = V<sub>T</sub> ≈ 25.9 mV</b> at 300 K</div>
+    <div class="row">D<sub>n</sub> = μ<sub>n</sub> V<sub>T</sub> &nbsp;&nbsp; D<sub>p</sub> = μ<sub>p</sub> V<sub>T</sub></div></div>
+  <p><b>V<sub>T</sub> = k<sub>B</sub>T/q</b> is the <b>thermal voltage</b>. It shows up everywhere from here on (diode equation, built-in voltage, BJT). Memorise <b>25.9 mV (≈ 26 mV) at 300 K</b>. Example: μ<sub>n</sub> = 1350 ⇒ D<sub>n</sub> = 1350 × 0.0259 = 35 cm²/s; μ<sub>p</sub> = 450 ⇒ D<sub>p</sub> = 11.7 cm²/s.</p>
+
+  <h3>6.8 Generation and recombination</h3>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p><b>Generation</b> is like a popcorn machine making new kernels: light or heat creates electron–hole pairs. <b>Recombination</b> is the opposite: an electron falls into a hole and both disappear (annihilate) releasing energy as heat or light. At equilibrium the two rates are equal, so the numbers stay steady.</p></div>
+  {{fig:srh|Your page 16: recombination through trap levels caused by defects or impurities (Shockley–Read–Hall).}}
+  <p>In silicon most recombination doesn't happen band-to-band (that needs a phonon and is unlikely). Defects and impurities create <b>trap states in the middle of the gap</b>. An electron first drops into the trap (<b>e⁻ capture</b>), then the trap catches a hole (or emits the electron back: <b>e⁻ emission</b>). This is <b>SRH recombination</b>.</p>
+  <div class="eq"><span class="cap">SRH net recombination rate</span>
+    <div class="row"><b>U = [[1 | τ]] · [[ pn − n<sub>i</sub>² | p + n + 2n<sub>i</sub> ]]</b> &nbsp;&nbsp; τ = lifetime of the charge carriers</div></div>
+  <ul>
+    <li><b>Equilibrium (no excitation):</b> pn = n<sub>i</sub>² ⇒ <b>U = 0</b>.</li>
+    <li><b>Non-equilibrium (extra carriers injected):</b> p = p<sub>0</sub> + Δp, n = n<sub>0</sub> + Δn, where p<sub>0</sub>, n<sub>0</sub> are the equilibrium values and Δp, Δn are generated by the external excitation (light, injection).</li>
+    <li>For low-level injection the rate simplifies to: <b>n-type: U = Δp/τ</b> (minority holes), <b>p-type: U = Δn/τ</b> (minority electrons).</li>
+    <li>Your note: the <b>minority-carrier lifetime should be high</b> in devices like solar cells, BJTs and diodes' base regions, so that injected carriers survive long enough to be collected.</li>
+  </ul>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: diffusion length</span>
+    <div class="eq"><div class="row"><b>L<sub>n</sub> = √(D<sub>n</sub> τ<sub>n</sub>)</b> &nbsp;&nbsp; <b>L<sub>p</sub> = √(D<sub>p</sub> τ<sub>p</sub>)</b></div></div>
+    <p>It is the average distance an injected minority carrier travels before recombining. The diode chapter uses L<sub>n</sub>, L<sub>p</sub> heavily. Example: τ = 1 μs and D<sub>p</sub> = 11.7 cm²/s ⇒ L<sub>p</sub> = √(1.17×10<sup>-5</sup>) = 3.4×10<sup>-3</sup> cm = 34 μm.</p></div>
+
+  <h3>6.9 Your worked questions from class (all four, re-solved)</h3>
+  <details class="q" open><summary>Q A. Electron concentration varies as n(x) = n<sub>0</sub> + A x with A = −5×10<sup>15</sup> cm<sup>-4</sup>. At 300 K, μ<sub>n</sub> = 1200 cm²/V·s. Find the diffusion current density.</summary><div class="ans">
+    <ol class="steps">
+    <li>Gradient: dn/dx = A = −5×10<sup>15</sup> cm<sup>-4</sup> (constant, so J is uniform).</li>
+    <li>Einstein: D<sub>n</sub> = μ<sub>n</sub>V<sub>T</sub> = 1200 × 0.0259 = 31.08 cm²/s.</li>
+    <li>J<sub>n</sub> = q D<sub>n</sub> dn/dx = 1.6×10<sup>-19</sup> × 31.08 × (−5×10<sup>15</sup>) = −2.486×10<sup>-2</sup> A/cm².</li></ol>
+    <p><b>J<sub>n</sub> ≈ −248.6×10<sup>-4</sup> A/cm² ≈ −24.9 mA/cm²</b> (your notes write it as −248.64×10<sup>-4</sup>). The negative sign means the current flows toward −x. Since the concentration falls with x, electrons diffuse toward +x, and their current (negative charge) is opposite: toward −x. ✔</p></div></details>
+  <details class="q" open><summary>Q B. p-type Si at 300 K: p = 5×10<sup>15</sup> cm<sup>-3</sup>, n<sub>i</sub> = 10<sup>10</sup> cm<sup>-3</sup>, μ<sub>p</sub> = 450, μ<sub>n</sub> = 1350 cm²/V·s. Find the conductivity.</summary><div class="ans">
+    <ol class="steps">
+    <li>Minority electrons: n = n<sub>i</sub>²/p = 10<sup>20</sup>/5×10<sup>15</sup> = <b>2×10<sup>4</sup> cm<sup>-3</sup></b> (your notes: 0.2×10<sup>5</sup>).</li>
+    <li>σ = q(nμ<sub>n</sub> + pμ<sub>p</sub>) = 1.6×10<sup>-19</sup> (2×10<sup>4</sup>×1350 + 5×10<sup>15</sup>×450).</li>
+    <li>First term = 2.7×10<sup>7</sup>, second = 2.25×10<sup>18</sup>. Sum ≈ 2.25×10<sup>18</sup>.</li>
+    <li>σ = 1.6×10<sup>-19</sup> × 2.25×10<sup>18</sup> = <b>0.36 S/cm</b> (resistivity 2.78 Ω·cm).</li></ol>
+    <p>The minority-electron term is 10<sup>11</sup> times smaller, so it is safely ignored. Doping controls conductivity.</p></div></details>
+  <details class="q" open><summary>Q C. A uniform n-type Si bar, length 2 μm, has 1 V across it. N<sub>D</sub> = 10<sup>16</sup> cm<sup>-3</sup>, μ<sub>n</sub> = 1350 cm²/V·s. Find (a) drift velocity, (b) transit time, (c) drift current density, (d) resistance and drift current if the cross-section is 0.25 μm².</summary><div class="ans">
+    <p>Convert first: L = 2 μm = 2×10<sup>-4</sup> cm; area = 0.25 μm² = 0.25×10<sup>-8</sup> = 2.5×10<sup>-9</sup> cm².</p>
+    <ol class="steps">
+    <li><b>Field:</b> E = V/L = 1/(2×10<sup>-4</sup>) = 5000 V/cm.</li>
+    <li><b>(a)</b> V<sub>d</sub> = μE = 1350 × 5000 = 6.75×10<sup>6</sup> cm/s (your notes: 675×10<sup>4</sup> cm/s).</li>
+    <li><b>(b)</b> t = L/V<sub>d</sub> = 2×10<sup>-4</sup>/6.75×10<sup>6</sup> = <b>2.96×10<sup>-11</sup> s ≈ 30 ps</b>.</li>
+    <li><b>(c)</b> J = N<sub>D</sub> q μ<sub>n</sub> E = 10<sup>16</sup> × 1.6×10<sup>-19</sup> × 1350 × 5000 = <b>1.08×10<sup>4</sup> A/cm²</b>. (The intermediate 2.16 in your notes is σ = 2.16 S/cm.)</li>
+    <li><b>(d)</b> I = J × A = 1.08×10<sup>4</sup> × 2.5×10<sup>-9</sup> = <b>2.7×10<sup>-5</sup> A = 27 μA</b>. R = V/I = 1/27 μA = <b>≈ 37 kΩ</b>. Check with R = L/(σA) = 2×10<sup>-4</sup>/(2.16 × 2.5×10<sup>-9</sup>) = 37 kΩ ✔.</li></ol>
+    <div class="callout trap"><span class="lbl">Trap</span><p>The tiny transit time (30 ps) is why a 2 μm silicon resistor can respond in the GHz range. Also note E = 5000 V/cm is already near the high-field region where velocity starts saturating, so the linear μE value is an idealisation.</p></div></div></details>
+  <details class="q"><summary>Extra: intrinsic silicon at 300 K (n<sub>i</sub> = 1.5×10<sup>10</sup>). Find σ and ρ. Compare with the doped bar above.</summary><div class="ans">
+    <p>σ<sub>i</sub> = q n<sub>i</sub>(μ<sub>n</sub> + μ<sub>p</sub>) = 1.6×10<sup>-19</sup> × 1.5×10<sup>10</sup> × 1800 = 4.3×10<sup>-6</sup> S/cm ⇒ ρ ≈ 2.3×10<sup>5</sup> Ω·cm. The n-type sample (N<sub>D</sub> = 10<sup>16</sup>) has σ = 2.16 S/cm: about <b>500,000 times better</b> from one dopant atom in every five million silicon atoms. That is the meaning of "tunable by many orders of magnitude".</p></div></details>
+</section>

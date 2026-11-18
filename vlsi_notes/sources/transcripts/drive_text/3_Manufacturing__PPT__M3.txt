@@ -1,0 +1,26 @@
+--- slide 1 ---
+--- slide 2 ---
+--- slide 3 ---
+Electronics Grade Silicon – Purification
+- 2C(s) + SiO₂(s) → Si(l) + 2CO(g) (MSG Si 98% pure with Al and Fe as major impurities, reaction carried out at 2000°C)
+- Si(s) + 3HCl(g) → SiHCl₃(g) + H₂(g) Explosive reaction. Trichlorosilane boiling point at 32°C.
+- 2SiHCl₃(g) + 2H₂(g) → 2Si(s) + 6HCl(g) ESG silicon in the form of polysilicon nuggets.
+--- slide 4 ---
+Electronics Grade Silicon – Purification
+1st step is metallurgical grade silicon (MGS) production in submerged electrode arc furnace.
+
+The furnace is charged with quartzite and carbon. MGS is 98% pure. 90% of MGS goes into steel production.
+
+ESG is produced from MGS in an arc furnace.
+
+ESG is the raw material for the preparation of single crystal silicon – it is polycrystalline material of high purity and requires doping elements to be in parts per billion range.
+
+Major impurities – boron, phosphorous, carbon.
+--- slide 5 ---
+Czochralski Technique
+The Czochralski (CZ) process aims to convert Polysilicon (Electronic Grade Silicon, or EGS) into a single silicon crystal.
+--- slide 6 ---
+Czochralski Technique
+--- slide 7 ---
+Czochralski Technique
+--- slide 8 ---

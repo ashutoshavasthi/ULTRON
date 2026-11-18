@@ -1,0 +1,88 @@
+--- page 1 ---
+2
+Elements and devices can be simulated:
+• Passive components - resistors, capacitors, inductors
+• Active devices - diodes, bipolar transistors, MOSFETs
+• Transmission lines
+• Power sources
+
+--- page 2 ---
+3
+https://techweb.rohm.com/product/simulation/8294/
+Analysis Methods
+The SPICE tools handle the various analysis-
+• DC Analysis - Analysis of static characteristics (All DC characteristics
+of the data sheet)
+DC Analysis
+Results window
+MOSFET DC
+DC (V)
+DC analysis is analysis of static characteristics
+VGS 1
+VGS 2
+
+--- page 3 ---
+4
+https://techweb.rohm.com/product/simulation/8294/
+Analysis Methods
+• AC Analysis – Analysis of frequency characteristics (Capacitance,
+gain-phase)
+AC Analysis
+Frequency (Hz)
+AC analysis mainly addresses characteristics relating
+to frequency.
+
+--- page 4 ---
+5
+https://techweb.rohm.com/product/simulation/8294/
+Analysis Methods
+• Transient Analysis – Time response analysis (Oscilloscope)
+Transient Analysis
+Filter step
+Time (mS)
+Transient analysis is the analysis of the time response.
+
+--- page 5 ---
+6
+https://techweb.rohm.com/product/simulation/8294/
+• Monte Carlo – Simulations that reflect variation in circuit elements
+• A general term used for methods in which random numbers are
+employed in simulations and numerical calculations and is used to take
+component variation into consideration.
+• In a Monte Carlo simulation, simulations that reflect the variation in
+the different circuit elements are executed several times, and variation
+in the overall characteristics can be evaluated.
+• This is effective when the characteristics of the
+overall circuit are affected by multiple circuit
+elements.
+
+--- page 6 ---
+9
+• PSpice Lite 9.2 is one of the OrCAD family of products, from
+Cadence Design Systems, Inc.,- offering a complete suite of
+electronic design tools.
+• It is free and includes PSpice for analog circuit simulation and
+PSpice A/D for mixed analog and digital circuit simulation.
+• PSpice Lite 9.2 is limited to 64 nodes, 10 transistors, two
+operational amplifiers and 65 primitive digital devices.
+
+--- page 7 ---
+10
+https://techweb.rohm.com/product/simulation/8294/
+Convergence Properties and Stability of SPICE Simulations
+•
+Newton’s Method – A function is locally approx. by a first-order function, then
+approximated by a first-order function that passes through a solution of the
+previous first-order function, and the process is repeated to find the true solution.
+•
+Solution- Used in SPICE simulation in which nonlinear element characteristics
+are calculated.
+
+--- page 8 ---
+11
+https://techweb.rohm.com/product/simulation/8294/
+RB168MM150
+Datasheet
+Simulation
+Because a device model can represent only theoretical equation characteristics (the basic
+form of characteristics), it cannot satisfactorily reproduce irregular characteristics.

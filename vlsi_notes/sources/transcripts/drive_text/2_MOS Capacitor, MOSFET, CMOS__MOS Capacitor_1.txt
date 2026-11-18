@@ -1,0 +1,239 @@
+--- page 1 ---
+Introduction to the MOS Capacitor
+I. The MOSFET and its Importance
+The MOSFET (Metal Oxide Semiconductor Field Effect Transistor) is recognized as the most common type
+of transistor. MOSFETs are critical components that enable modern technology, including the processors
+and memory devices found in your laptops, computers, and cell phones. Many modern electronic systems
+rely on CMOS (Complementary MOS) devices, which are built upon MOSFET technology.
+II. The Fundamental Building Block: The MOS Capacitor
+To fully understand how a MOSFET works, we must first study its fundamental building block: the MOS
+capacitor,.
+1. MOS System Definition: The structure is called a Metal Oxide Semiconductor system (MOS).
+2. Layers: It consists of three stacked layers: a semiconductor, an oxide (or dielectric) on top of the
+semiconductor, and a metal on top of the oxide.
+3. Capacitor Function: If you connect a metal, an oxide, and another metal, you have a flat-plate
+capacitor. However, the MOS system is a capacitance system because it includes a metal, a
+semiconductor, and an oxide layer in between.
+III. Structure and Assumptions of the MOS Capacitor
+A. Physical Components
+Layer
+Material
+Function / Connection
+Metal (Top)
+Aluminum,
+Nickel, etc.
+This is where the gate voltage (V ) is applied.
+Oxide (Middle)
+Silicon dioxide
+(typically)
+Acts as an insulator/dielectric. It is assumed to be a very
+good insulator with no leakage current. The oxide has a
+thickness denoted by d.
+Semiconductor
+(Bottom)
+P-type or N-type
+doped silicon
+This layer has an ohmic contact, which is usually grounded.
+B. Equilibrium Starting Point (Flat Band Assumption)
+For the initial study, we make a simplifying assumption about the system’s equilibrium state (before any
+voltage is applied, 
+):
+G
+V
+​ =
+G
+0
+12/10/25, 10:43 PM
+StackEdit
+https://stackedit.io/app#
+1/3
+
+--- page 2 ---
+Work Function Alignment: It is assumed that the metal work function (
+) is exactly equal to the
+semiconductor work function,.
+Flat Bands: Because the work functions are equal, the Fermi level (
+) in the metal and the Fermi
+level in the semiconductor are aligned. Consequently, the energy bands in the semiconductor remain
+flat (no movement),.
+C. Key Energy Band Diagram Parameters (P-Type Semiconductor Focus)
+The following concepts are crucial for analyzing the MOS capacitor, assuming the semiconductor is p-type
+doped,:
+P-type Doping: In a p-type semiconductor, the Fermi level (
+) is positioned close to the Valence
+Band (
+).
+Intrinsic Level (
+): This level is located at the mid-gap of the semiconductor band gap,.
+Bulk Potential (
+): This is the distance between the Intrinsic level (
+) and the Fermi level (
+) in
+the bulk of the p-type semiconductor,. It can also be called 
+,. The value of 
+ indicates how
+strongly the material is p-type doped.
+IV. Operating Regions Based on Gate Voltage (
+)
+When an external voltage (
+) is applied to the metal gate, the semiconductor energy bands bend, and
+charge redistributes near the oxide interface,. The difference between the metal Fermi level and the
+semiconductor Fermi level is equal to the applied gate voltage.
+There are three primary operational regions for a p-type semiconductor substrate: accumulation, depletion,
+and inversion (weak and strong).
+A. Accumulation (Applying Negative 
+)
+1. Mechanism: A negative gate voltage is applied (
+),.
+2. Charge Movement: This negative voltage attracts the holes (the majority carriers in p-type material)
+toward the semiconductor-oxide interface.
+3. Result: There is an accumulation of holes at the interface, meaning the hole density is higher there
+than in the bulk,.
+4. Band Bending: The energy bands bend upward,.
+5. Fermi Level: Since the hole density is very high at the surface, the Fermi level (
+) moves closer to
+the Valence Band (
+), significantly reducing the gap between them,.
+B. Depletion (Applying Small Positive 
+)
+1. Mechanism: A small positive voltage is applied to the gate (
+).
+2. Charge Movement: The positive voltage repels the positively charged holes away from the interface.
+ϕ
+​
+m
+E
+​
+F
+E
+​
+F
+E
+​
+V
+E
+​i
+ϕ
+​
+F
+E
+​i
+E
+​
+F
+ψ
+​
+BP
+ϕ
+​
+F
+V
+​
+G
+VG
+V
+​
+G
+V
+​ <
+G
+0
+E
+​
+F
+E
+​
+V
+V
+​
+G
+V
+​ >
+G
+0
+12/10/25, 10:43 PM
+StackEdit
+https://stackedit.io/app#
+2/3
+
+--- page 3 ---
+3. Result: A depletion region is created near the surface, where the hole density is lower than in the
+bulk,. The surface becomes less p-type,.
+4. Band Bending: The energy bands bend downward,.
+5. Surface Effect: The Valence Band moves away from 
+, and the Conduction Band (
+) starts to
+move closer to 
+. This means the surface is starting to show n-type characteristics compared to the
+p-type bulk.
+C. Inversion (Applying Large Positive 
+)
+1. Mechanism: A high positive voltage is applied, increasing the band bending significantly.
+2. Result: The strong downward band bending causes the surface layer to effectively invert its type,
+attracting electrons to the interface,. A channel of electrons is formed,.
+3. Band Bending/Fermi Level: The Intrinsic level (
+) at the surface crosses or touches the Fermi level (
+). This places the Fermi level in the top half of the band gap near the surface, signifying n-type
+behavior,.
+1. Weak Inversion
+Onset: Weak inversion begins when the band bending is just enough for the intrinsic Fermi level (
+)
+at the surface to reach the Fermi level (
+).
+Charge: This creates a small, “barely bending” amount of electrons at the surface,.
+2. Strong Inversion
+Onset: Strong inversion occurs when the band bending is large, resulting in a very high density of
+electrons at the surface,.
+Band Definition: Strong inversion is defined when the intrinsic level (
+) at the surface is located
+above the Fermi level (
+) by the same distance (
+) that 
+ is located below 
+ in the bulk,.
+Charge Density: At strong inversion, the density of electrons created at the surface is exactly equal to
+the density of holes in the bulk p-type material,.
+Total Band Bending: The total band bending required to reach strong inversion is equal to 
+.
+E
+​
+F
+E
+​
+C
+E
+​
+F
+V
+​
+G
+E
+​i
+E
+​
+F
+E
+​i
+E
+​
+F
+E
+​i
+E
+​
+F
+ϕ
+​
+F
+E
+​i
+E
+​
+F
+2ϕ
+​
+F
+12/10/25, 10:43 PM
+StackEdit
+https://stackedit.io/app#
+3/3

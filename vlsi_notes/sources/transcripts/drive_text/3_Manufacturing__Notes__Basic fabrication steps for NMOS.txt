@@ -1,0 +1,148 @@
+--- page 1 ---
+NMOS Fabrication using the Metal Gate Process
+These notes explain the fundamental steps involved in fabricating an NMOS (N-type Metal Oxide
+Semiconductor) transistor on a wafer, focusing on the metal gate process.
+Note: Please refer to the figures online.
+I. Wafer Preparation and Contamination Control
+1. Obtaining the Wafer: Silicon wafers are obtained from a single silicon crystal ingot through various
+operations, including shaping, sawing, mechanical lapping, etching, and chemical mechanical polishing.
+Wafers are fabricated to specific sizes, such as 125 mm, 150 mm, 200 mm, and 300 mm diameters,.
+2. Basic Element: The basic element used to create Integrated Circuits (ICs) is the MOSFET (Metal
+Oxide Semiconductor device).
+3. The Need for Cleaning: Fabrication involves extensive mechanical and chemical processing, resulting
+in contaminants potentially available on the wafer surface,.
+If contaminants incorporate into the device, they will negatively affect device performance,.
+Wafers must be repeatedly cleaned after virtually every step to ensure they are ultra-pure and
+free from processing chemicals (like organic photoresist or etching solutions),.
+II. Major Categories of Fabrication Steps
+The foundational fabrication steps can be grouped into five major categories:
+1. Wafer Preparation: The initial step of obtaining the single-crystal silicon wafer (e.g., using the
+Czochralski technique, or Bridgman technique for Gallium Arsenide).
+2. Oxide Formation: Growing oxide layers, often Silicon Dioxide (
+), which can be done via dry
+oxidation or wet oxidation techniques.
+3. Patterning: The process of transferring a specific geometric pattern onto the wafer. This involves
+photolithography, etching, photoresist, and a photo mask,.
+4. Doping: Introducing impurities to create 
+-doped or 
+-doped regions, typically done using diffusion
+or ion implantation techniques,.
+5. Deposition: Applying layers (dielectric, organic, or metallic) onto the wafer surface using methods like
+Chemical Vapor Deposition (CVD), Sputtering, or Vacuum Deposition,.
+Note: These steps are not always followed sequentially and may be used multiple times throughout the
+fabrication process,.
+III. Detailed Steps of NMOS Fabrication (Metal Gate Process)
+The fabrication process begins with a P-type substrate and involves multiple oxidation, patterning, and
+doping cycles.
+A. Initial Layering and Patterning
+SiO
+​2
+N
+P
+12/12/25, 5:33 PM
+StackEdit
+https://stackedit.io/app#
+1/2
+
+--- page 2 ---
+1. Start with P-type Substrate: A P-type substrate is used, obtained by adding dopant material to the
+melt when growing the single silicon crystal,.
+2. Grow 
+ Mask Layer: The wafer is heated in a high-temperature furnace (900–1200°C) with
+oxygen to grow a layer of 
+ on the surface,. This layer will serve as a mask for doping,.
+3. Apply Positive Photoresist: A layer of positive photoresist (an organic layer) is coated over the 
+.
+Positive Photoresist Function: When exposed to UV light, the exposed sections of this material
+become polymerized (softened). The softened material can then be dissolved and removed by a
+specialized developer solution,.
+4. First Patterning (Source/Drain Definition):
+A photo mask containing specific window openings (patterns) is placed on top of the
+photoresist.
+The wafer is illuminated with UV rays. The light passes only through the windows of the mask,
+selectively exposing and polymerizing the photoresist underneath,.
+The exposed, softened photoresist is removed using a developer solution, creating openings
+(windows) that expose the underlying 
+ layer.
+B. Doping the Source and Drain Regions
+1. Etching 
+: The exposed 
+ in the windows is selectively removed using a chemical etching
+process, typically using Hydrofluoric Acid (HF),. The remaining 
+ and photoresist protect the
+unexposed regions.
+2. Photoresist Stripping: The remaining photoresist is stripped away using a strong chemical solution,
+often called piranha etching (a mixture of 
+ and 
+, commonly in a 3:1 ratio). This leaves
+the 
+ mask intact, with openings down to the P-type substrate,.
+3. Doping 
+ Regions: Doping is performed through the opened windows, either using diffusion or ion
+implantation, to create the 
+ regions (which become the Source and Drain of the transistor),.
+C. Gate Formation and Metallization
+1. Second Oxidation (Passivation): An 
+ layer is grown again over the entire surface, covering the
+ regions and acting as temporary protection.
+2. Second Patterning (Gate Opening): A second patterning process (photolithography) is executed using
+a different photo mask to selectively open a window where the gate will be formed,. The photoresist
+and 
+ in this central region are removed.
+3. Growing Thin Gate Oxide: A very thin 
+ layer is grown in the newly opened gate region. This thin
+layer is essential for the MOSFET operation.
+4. Third Patterning (Contact Openings): A third patterning process is used to remove the thicker 
+from the Source and Drain regions, exposing the silicon beneath, but leaving the thin gate oxide layer
+intact over the channel region,.
+5. Metal Deposition: Metal is deposited over the entire structure to make electrical contacts.
+6. Fourth Patterning (Isolation): Since the initial metal deposition covers everything and would short-
+circuit the terminals, a final patterning process is required. This step selectively removes the excess
+metal (e.g., aluminum) to isolate the Source, Drain, and Gate terminals, creating the finished metal
+contacts,.
+7. Final Passivation (Overglassing): The finished device is covered entirely with an 
+ layer
+(overglassing or passivation), leaving only the defined metal contacts accessible for external wiring.
+SiO
+​2
+SiO
+​2
+SiO
+​2
+SiO
+​2
+SiO
+​2
+SiO
+​2
+SiO
+​2
+H
+​SO
+​
+2
+4
+H
+​O
+​
+2
+2
+SiO
+​2
+N+
+N+
+SiO
+​2
+N+
+SiO
+​2
+SiO
+​2
+SiO
+​2
+SiO
+​2
+12/12/25, 5:33 PM
+StackEdit
+https://stackedit.io/app#
+2/2

@@ -1,0 +1,184 @@
+<section class="chapter" id="ch11">
+  <h2><span class="num">CHAPTER 11</span>The Complete Formula Sheet</h2>
+  <p class="tagline">Everything on one screen. Constants first, then each chapter in order.</p>
+  <h3>Constants (300 K)</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Quantity</th><th>Value</th></tr>
+    <tr><td>Electron charge q</td><td>1.6×10<sup>-19</sup> C (1.602×10<sup>-19</sup>)</td></tr>
+    <tr><td>Boltzmann constant k<sub>B</sub></td><td>1.38×10<sup>-23</sup> J/K = 8.617×10<sup>-5</sup> eV/K</td></tr>
+    <tr><td>k<sub>B</sub>T = thermal energy</td><td>0.02585 eV ≈ 26 meV (at 300 K)</td></tr>
+    <tr><td>V<sub>T</sub> = k<sub>B</sub>T/q</td><td>25.9 mV ≈ 26 mV</td></tr>
+    <tr><td>1 eV</td><td>1.6×10<sup>-19</sup> J</td></tr>
+    <tr><td>Free-electron mass m<sub>0</sub></td><td>9.11×10<sup>-31</sup> kg</td></tr>
+    <tr><td>Si: E<sub>g</sub>, n<sub>i</sub></td><td>1.1 eV, 1.5×10<sup>10</sup> cm<sup>-3</sup> (some questions use 10<sup>10</sup>)</td></tr>
+    <tr><td>Si: μ<sub>n</sub>, μ<sub>p</sub></td><td>1350, 450 cm²/V·s</td></tr>
+    <tr><td>Si: ε<sub>s</sub></td><td>1.04×10<sup>-12</sup> F/cm (11.7 ε₀)</td></tr>
+    <tr><td>SiO<sub>2</sub>: ε<sub>ox</sub></td><td>3.45×10<sup>-13</sup> F/cm (3.9 ε₀)</td></tr>
+    <tr><td>Other E<sub>g</sub></td><td>Ge 0.7, GaAs 1.34, GaN 3.4 eV</td></tr>
+  </table></div>
+  <h3>Bands, statistics, carriers</h3>
+  <div class="eq"><div class="row">k = 2π/λ &nbsp; p = ħk &nbsp; E = ħ²k²/2m* &nbsp; m* = ħ²/(d²E/dk²)</div>
+    <div class="row">f(E) = 1/[1 + exp((E − E<sub>F</sub>)/k<sub>B</sub>T)] &nbsp; n = ∫<sub>Ec</sub><sup>∞</sup> g(E)f(E)dE</div>
+    <div class="row">np = n<sub>i</sub>² &nbsp; p + N<sub>D</sub> = n + N<sub>A</sub> &nbsp; n = [(N<sub>D</sub> − N<sub>A</sub>) + √((N<sub>D</sub> − N<sub>A</sub>)² + 4n<sub>i</sub>²)]/2</div>
+    <div class="row">n-type: n ≈ N<sub>D</sub>, p = n<sub>i</sub>²/N<sub>D</sub> &nbsp;&nbsp; p-type: p ≈ N<sub>A</sub>, n = n<sub>i</sub>²/N<sub>A</sub></div></div>
+  <h3>Transport</h3>
+  <div class="eq"><div class="row">V<sub>d</sub> = μ𝓔, μ = qτ/m* &nbsp; 1/μ = 1/μ<sub>ph</sub> + 1/μ<sub>II</sub></div>
+    <div class="row">J<sub>drift</sub> = q(nμ<sub>n</sub> + pμ<sub>p</sub>)𝓔 = σ𝓔 &nbsp; ρ = 1/σ</div>
+    <div class="row">J<sub>n,diff</sub> = qD<sub>n</sub> dn/dx &nbsp; J<sub>p,diff</sub> = −qD<sub>p</sub> dp/dx</div>
+    <div class="row">D/μ = k<sub>B</sub>T/q = V<sub>T</sub> &nbsp; L = √(Dτ)</div>
+    <div class="row">U<sub>SRH</sub> = (1/τ)(pn − n<sub>i</sub>²)/(p + n + 2n<sub>i</sub>) &nbsp; n-type: U = Δp/τ, p-type: U = Δn/τ</div></div>
+  <h3>p–n junction</h3>
+  <div class="eq"><div class="row">V<sub>0</sub> = V<sub>T</sub> ln(N<sub>A</sub>N<sub>D</sub>/n<sub>i</sub>²) &nbsp; x<sub>n</sub>/x<sub>p</sub> = N<sub>A</sub>/N<sub>D</sub></div>
+    <div class="row">W = √[(2ε<sub>s</sub>/q)(1/N<sub>A</sub> + 1/N<sub>D</sub>)(V<sub>0</sub> + V<sub>R</sub>)] &nbsp; (forward: V<sub>0</sub> − V<sub>F</sub>)</div>
+    <div class="row">x<sub>p</sub> = W N<sub>D</sub>/(N<sub>A</sub> + N<sub>D</sub>) &nbsp; x<sub>n</sub> = W N<sub>A</sub>/(N<sub>A</sub> + N<sub>D</sub>)</div>
+    <div class="row">Q<sub>J</sub> = A q [N<sub>A</sub>N<sub>D</sub>/(N<sub>A</sub> + N<sub>D</sub>)] W = A√[2ε<sub>s</sub>q (N<sub>A</sub>N<sub>D</sub>/(N<sub>A</sub> + N<sub>D</sub>))(V<sub>0</sub> + V<sub>R</sub>)]</div>
+    <div class="row">𝓔 = (1/q) dE<sub>c</sub>/dx &nbsp; p<sub>n</sub>(x<sub>n</sub>) = p<sub>n0</sub>e<sup>V/V<sub>T</sub></sup> &nbsp; n<sub>p</sub>(−x<sub>p</sub>) = n<sub>p0</sub>e<sup>V/V<sub>T</sub></sup></div>
+    <div class="row">I = I<sub>s</sub>(e<sup>V/V<sub>T</sub></sup> − 1) &nbsp; I<sub>s</sub> = Aqn<sub>i</sub>²[D<sub>p</sub>/(L<sub>p</sub>N<sub>D</sub>) + D<sub>n</sub>/(L<sub>n</sub>N<sub>A</sub>)]</div>
+    <div class="row">Zener: V<sub>BR</sub> &lt; 5 V (tunnelling) &nbsp; Avalanche: V<sub>BR</sub> &gt; 8 V (impact ionisation)</div></div>
+  <h3>BJT</h3>
+  <div class="eq"><div class="row">I<sub>E</sub> = I<sub>En</sub> + I<sub>Ep</sub> = I<sub>C</sub> + I<sub>B</sub> &nbsp; B = I<sub>Cn</sub>/I<sub>En</sub> &nbsp; γ<sub>E</sub> = I<sub>En</sub>/(I<sub>En</sub> + I<sub>Ep</sub>)</div>
+    <div class="row">α = I<sub>Cn</sub>/I<sub>E</sub> = B·γ<sub>E</sub> &nbsp; β = I<sub>C</sub>/I<sub>B</sub> = α/(1 − α) &nbsp; α = β/(β + 1)</div>
+    <div class="row">Active: EBJ F, CBJ R &nbsp; Saturation: F, F &nbsp; Cut-off: R, R</div>
+    <div class="row">Design: thin, lightly-doped base; heavily-doped emitter &nbsp; Early: I<sub>C</sub> ∝ (1 + V<sub>CE</sub>/V<sub>A</sub>), r<sub>o</sub> ≈ V<sub>A</sub>/I<sub>C</sub></div></div>
+  <h3>MOS and MOSFET</h3>
+  <div class="eq"><div class="row">C<sub>ox</sub> = ε<sub>ox</sub>/t<sub>ox</sub> &nbsp; C<sub>dep</sub> = ε<sub>s</sub>/w &nbsp; 1/C = 1/C<sub>ox</sub> + 1/C<sub>dep</sub> &nbsp; Q<sub>s</sub> = −qN<sub>A</sub>w</div>
+    <div class="row">Q′ = W C<sub>ox</sub>(V<sub>GS</sub> − V<sub>th</sub>) &nbsp; I = Q·v &nbsp; V<sub>d</sub> = −μ dV/dx</div>
+    <div class="row">Triode: I<sub>D</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)[(V<sub>GS</sub> − V<sub>th</sub>)V<sub>DS</sub> − V<sub>DS</sub>²/2]</div>
+    <div class="row">Saturation (V<sub>DS</sub> ≥ V<sub>ov</sub>): I<sub>D</sub> = ½μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)²(1 + λV<sub>DS</sub>) &nbsp; g<sub>m</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)V<sub>ov</sub></div>
+    <div class="row">R<sub>ON</sub> ≈ 1/[μ<sub>n</sub>C<sub>ox</sub>(W/L)V<sub>ov</sub>] &nbsp; delay τ = RC</div></div>
+</section>
+
+<section class="chapter" id="ch12">
+  <h2><span class="num">CHAPTER 12</span>Practice Bank with Full Solutions</h2>
+  <p class="tagline">Try each question on paper first, then open the answer. Ordered like the course. The last group tests understanding in words.</p>
+  <div class="callout mine"><span class="lbl">How to use it</span><p>Do part A to F once, then redo only the ones you missed two days later. When a question looks new, it is almost always one of your class questions with different numbers.</p></div>
+  <p><button id="toggleAll" type="button" class="chip" style="cursor:pointer;font:inherit;font-weight:600;padding:6px 14px">Open all answers</button></p>
+
+  <h3>A. Bands and Fermi statistics</h3>
+  <details class="q"><summary>A1. Compute the thermal energy k<sub>B</sub>T at 400 K in eV and meV.</summary><div class="ans"><p>k<sub>B</sub>T = 8.617×10<sup>-5</sup> × 400 = 0.03447 eV = <b>34.5 meV</b>. (Scales linearly with T: 300 → 25.85, 400 → 34.5.)</p></div></details>
+  <details class="q"><summary>A2. For N carbon atoms, state the number of outer states and electrons, and how many states are in the valence band and conduction band.</summary><div class="ans"><p>Outer states 8N (2N from 2s, 6N from 2p). Outer electrons 4N. After band formation: VB = 4N states (all filled with 4N electrons), CB = 4N states (empty at 0 K).</p></div></details>
+  <details class="q"><summary>A3. Two semiconductors have E–k curves near the band edge: A with d²E/dk² = 2×10<sup>-38</sup> J·m², B with 0.5×10<sup>-38</sup>. Which has higher mobility (same τ)? Find m*<sub>A</sub>/m*<sub>B</sub>.</summary><div class="ans"><p>m* = ħ²/(d²E/dk²), so m* is inversely proportional to the curvature. m*<sub>A</sub>/m*<sub>B</sub> = 0.5/2 = <b>0.25</b>. A is lighter, so with equal τ, μ = qτ/m* is <b>4× higher for A</b>, and A has the higher current density.</p></div></details>
+  <details class="q"><summary>A4. At 300 K, what is the probability that a state 0.05 eV above E<sub>F</sub> is occupied? What about 0.05 eV below?</summary><div class="ans"><p>Above: f = 1/(1 + e<sup>0.05/0.02585</sup>) = 1/(1 + 6.92) = <b>0.126</b>. Below: 1 − 0.126 = <b>0.874</b>. (Symmetry: f(E<sub>F</sub> + Δ) + f(E<sub>F</sub> − Δ) = 1.)</p></div></details>
+  <details class="q"><summary>A5. Explain why GaAs is used for LEDs but Si is not.</summary><div class="ans"><p>GaAs is a direct-gap semiconductor: an electron and hole at the same k can recombine and release a photon directly. Si is indirect: recombination also needs a phonon to conserve momentum, which is a rare three-body event, so energy mostly goes to heat.</p></div></details>
+
+  <h3>B. Carrier concentration</h3>
+  <details class="q"><summary>B1. Si (n<sub>i</sub> = 1.5×10<sup>10</sup>) is doped with N<sub>D</sub> = 2×10<sup>15</sup> cm<sup>-3</sup>. Find n and p. What type is it?</summary><div class="ans"><p>n ≈ N<sub>D</sub> = <b>2×10<sup>15</sup></b>; p = n<sub>i</sub>²/n = 2.25×10<sup>20</sup>/2×10<sup>15</sup> = <b>1.125×10<sup>5</sup> cm<sup>-3</sup></b>. n ≫ p ⇒ n-type.</p></div></details>
+  <details class="q"><summary>B2. p-type Si with N<sub>A</sub> = 5×10<sup>16</sup>. Find p, n and the position of E<sub>F</sub> relative to E<sub>i</sub>.</summary><div class="ans"><p>p ≈ 5×10<sup>16</sup>; n = 2.25×10<sup>20</sup>/5×10<sup>16</sup> = <b>4500 cm<sup>-3</sup></b>. E<sub>F</sub> − E<sub>i</sub> = −k<sub>B</sub>T ln(p/n<sub>i</sub>) = −0.0259 × ln(3.33×10<sup>6</sup>) = <b>−0.389 eV</b>: 0.39 eV <i>below</i> mid-gap, i.e. only about 0.17 eV above E<sub>v</sub> for a 1.12 eV gap.</p></div></details>
+  <details class="q"><summary>B3. A Si sample has N<sub>D</sub> = 8×10<sup>15</sup> and N<sub>A</sub> = 3×10<sup>15</sup>. Which type is it and what are n, p?</summary><div class="ans"><p>Net N<sub>D</sub> − N<sub>A</sub> = 5×10<sup>15</sup> ≫ n<sub>i</sub>, so <b>n-type</b>, n ≈ 5×10<sup>15</sup>, p = 2.25×10<sup>20</sup>/5×10<sup>15</sup> = <b>4.5×10<sup>4</sup></b>.</p></div></details>
+  <details class="q"><summary>B4. Why does n·p stay equal to n<sub>i</sub>² even after heavy doping, and what happens to the minority-carrier count?</summary><div class="ans"><p>Generation (thermal) and recombination (electron meets hole) reach a balance where the rates are proportional to n·p. Extra electrons from donors increase the recombination rate of holes, so holes fall until np returns to the equilibrium value n<sub>i</sub>². Minority carriers decrease by the same factor by which majority carriers increase.</p></div></details>
+
+  <h3>C. Transport</h3>
+  <details class="q"><summary>C1. n-type Si with N<sub>D</sub> = 10<sup>15</sup> cm<sup>-3</sup>, μ<sub>n</sub> = 1350. Find σ and ρ. Then find the drift velocity and current density for 𝓔 = 100 V/cm.</summary><div class="ans"><p>σ = qN<sub>D</sub>μ<sub>n</sub> = 1.6×10<sup>-19</sup> × 10<sup>15</sup> × 1350 = <b>0.216 S/cm</b>, ρ = <b>4.63 Ω·cm</b>. V<sub>d</sub> = 1350 × 100 = <b>1.35×10<sup>5</sup> cm/s</b> (still ≪ thermal speed ≈ 10<sup>7</sup> cm/s). J = σ𝓔 = 0.216 × 100 = <b>21.6 A/cm²</b>.</p></div></details>
+  <details class="q"><summary>C2. Find the mean free time τ if μ<sub>n</sub> = 1350 cm²/V·s and m* = 0.26 m<sub>0</sub>.</summary><div class="ans"><p>μ = 0.135 m²/V·s in SI. τ = μ m*/q = 0.135 × 0.26 × 9.11×10<sup>-31</sup> / 1.6×10<sup>-19</sup> = <b>2.0×10<sup>-13</sup> s = 0.2 ps</b>. With a thermal speed of 10<sup>7</sup> cm/s, the mean free path is about 20 nm.</p></div></details>
+  <details class="q"><summary>C3. Using Einstein's relation find D<sub>p</sub> for μ<sub>p</sub> = 450 at 300 K, and L<sub>p</sub> if τ<sub>p</sub> = 1 μs.</summary><div class="ans"><p>D<sub>p</sub> = μ<sub>p</sub>V<sub>T</sub> = 450 × 0.0259 = <b>11.7 cm²/s</b>. L<sub>p</sub> = √(D<sub>p</sub>τ<sub>p</sub>) = √(11.7 × 10<sup>-6</sup>) = 3.4×10<sup>-3</sup> cm = <b>34 μm</b>.</p></div></details>
+  <details class="q"><summary>C4. An electron density in Si varies linearly from 10<sup>16</sup> cm<sup>-3</sup> at x = 0 to 10<sup>15</sup> cm<sup>-3</sup> at x = 1 μm. With D<sub>n</sub> = 30 cm²/s find the diffusion current density and its direction.</summary><div class="ans"><p>dn/dx = (10<sup>15</sup> − 10<sup>16</sup>)/10<sup>-4</sup> cm = −9×10<sup>19</sup> cm<sup>-4</sup>. J<sub>n</sub> = qD<sub>n</sub>dn/dx = 1.6×10<sup>-19</sup> × 30 × (−9×10<sup>19</sup>) = <b>−432 A/cm²</b>. Electrons diffuse to +x (down the gradient), so the current flows toward <b>−x</b>.</p></div></details>
+  <details class="q"><summary>C5. Light generates carriers in n-type Si (N<sub>D</sub> = 10<sup>15</sup>) at G = 10<sup>19</sup> cm<sup>-3</sup>s<sup>-1</sup>. If the minority lifetime is 1 μs, find the steady-state excess carriers and the change in minority concentration.</summary><div class="ans"><p>In steady state generation = recombination: G = U = Δp/τ ⇒ Δp = Gτ = 10<sup>19</sup> × 10<sup>-6</sup> = <b>10<sup>13</sup> cm<sup>-3</sup></b>. Equilibrium minority p<sub>0</sub> = 2.25×10<sup>5</sup>, so p ≈ 10<sup>13</sup>, an increase of about <b>4×10<sup>7</sup></b> times. The majority electrons change by only 10<sup>13</sup>/10<sup>15</sup> = 1 %. This is why photodetectors respond to <i>minority</i> carriers.</p></div></details>
+  <details class="q"><summary>C6. Sketch and explain why mobility peaks at an intermediate temperature in a moderately doped Si sample.</summary><div class="ans"><p>Low T: slow carriers are strongly scattered by ionised impurities, μ<sub>II</sub> is small and rising with T. High T: lattice vibrations (phonons) scatter more, μ<sub>ph</sub> falls with T. Since 1/μ = 1/μ<sub>ph</sub> + 1/μ<sub>II</sub>, the smaller one dominates at each end, giving a hill with a maximum where the two are comparable. More doping raises the low-T side (more impurity scattering) and lowers the peak.</p></div></details>
+
+  <h3>D. p–n junction</h3>
+  <details class="q"><summary>D1. Find V<sub>0</sub>, W, x<sub>n</sub>, x<sub>p</sub> for N<sub>A</sub> = N<sub>D</sub> = 10<sup>16</sup> cm<sup>-3</sup>, n<sub>i</sub> = 1.5×10<sup>10</sup>, T = 300 K.</summary><div class="ans"><p>V<sub>0</sub> = 0.0259 ln(10<sup>32</sup>/2.25×10<sup>20</sup>) = 0.0259 × 26.82 = <b>0.695 V</b>. W = √[(2 × 1.04×10<sup>-12</sup>/1.6×10<sup>-19</sup>)(2×10<sup>-16</sup>)(0.695)] = √(1.81×10<sup>-9</sup>) = 4.25×10<sup>-5</sup> cm = <b>0.425 μm</b>. Symmetric doping ⇒ x<sub>n</sub> = x<sub>p</sub> = <b>0.212 μm</b>.</p></div></details>
+  <details class="q"><summary>D2. In a junction with N<sub>A</sub> = 4×10<sup>16</sup> and N<sub>D</sub> = 10<sup>16</sup>, which side has the wider depletion layer, and by what factor?</summary><div class="ans"><p>x<sub>n</sub>/x<sub>p</sub> = N<sub>A</sub>/N<sub>D</sub> = 4. The n-side (lightly doped) has the wider layer, four times the p-side layer. With W = 1 μm, x<sub>n</sub> = 0.8 μm and x<sub>p</sub> = 0.2 μm.</p></div></details>
+  <details class="q"><summary>D3. A silicon diode has V<sub>0</sub> = 0.7 V and W = 0.4 μm at zero bias. What is W at V<sub>R</sub> = 4.3 V?</summary><div class="ans"><p>W ∝ √(V<sub>0</sub> + V<sub>R</sub>). W = 0.4 × √(5.0/0.7) = 0.4 × 2.673 = <b>1.07 μm</b>.</p></div></details>
+  <details class="q"><summary>D4. A diode carries 1 mA at 0.65 V. What voltage is needed for 10 mA? For 100 μA? (T = 300 K)</summary><div class="ans"><p>I ∝ e<sup>V/V<sub>T</sub></sup>, so ΔV = V<sub>T</sub> ln(I<sub>2</sub>/I<sub>1</sub>). ×10 current: ΔV = 0.0259 × 2.303 = 59.6 mV. So 10 mA at <b>0.710 V</b>, and 100 μA at <b>0.590 V</b> (about 60 mV per decade).</p></div></details>
+  <details class="q"><summary>D5. Why does an ideal reverse-biased diode carry −I<sub>s</sub> regardless of the voltage, and why does a real one show a slow rise before breakdown?</summary><div class="ans"><p>In reverse bias the barrier is so high that no majority carriers cross; the only current is the drift of the few thermally generated minority carriers near the junction, whose supply is fixed by temperature (not by voltage), so it saturates at I<sub>s</sub>. In real diodes, thermal generation inside the growing depletion region adds a component that increases with W (and therefore with V<sub>R</sub>), plus surface leakage.</p></div></details>
+  <details class="q"><summary>D6. Classify the breakdown type: (a) V<sub>BR</sub> = 3.3 V heavily doped junction; (b) V<sub>BR</sub> = 40 V lightly doped junction.</summary><div class="ans"><p>(a) Zener (tunnelling; high doping ⇒ very thin depletion region ⇒ huge field at low voltage; V<sub>BR</sub> &lt; 5 V). (b) Avalanche (impact ionisation; wide, lightly doped region ⇒ carriers accelerate over long distance; V<sub>BR</sub> &gt; 8 V).</p></div></details>
+  <details class="q"><summary>D7. For the diode of Section 7.9, what is the hole-injection fraction if N<sub>D</sub> is raised to 10<sup>18</sup> and N<sub>A</sub> lowered to 10<sup>16</sup>?</summary><div class="ans"><p>The ratio I<sub>p</sub>/I<sub>n</sub> = (D<sub>p</sub>/D<sub>n</sub>)(L<sub>n</sub>/L<sub>p</sub>)(N<sub>A</sub>/N<sub>D</sub>) = (10/18)(10/5)(10<sup>16</sup>/10<sup>18</sup>) = 0.556 × 2 × 0.01 = 0.0111. So the electron current now dominates: hole fraction = 0.0111/1.0111 = <b>1.1 %</b>. The majority carrier of the heavily-doped side always carries most of the current.</p></div></details>
+
+  <h3>E. BJT</h3>
+  <details class="q"><summary>E1. An npn BJT has I<sub>E</sub> = 5 mA and α = 0.99. Find I<sub>C</sub>, I<sub>B</sub>, β.</summary><div class="ans"><p>I<sub>C</sub> = αI<sub>E</sub> = <b>4.95 mA</b>. I<sub>B</sub> = I<sub>E</sub> − I<sub>C</sub> = <b>0.05 mA</b>. β = 4.95/0.05 = <b>99</b> (α/(1−α) = 0.99/0.01 ✔).</p></div></details>
+  <details class="q"><summary>E2. A BJT with β = 150 has I<sub>B</sub> = 50 μA. Find I<sub>C</sub>, I<sub>E</sub>, α.</summary><div class="ans"><p>I<sub>C</sub> = 150 × 50 μA = <b>7.5 mA</b>; I<sub>E</sub> = 7.55 mA; α = 150/151 = <b>0.9934</b>.</p></div></details>
+  <details class="q"><summary>E3. B = 0.99 and γ<sub>E</sub> = 0.98. Find α and β. Which one would you improve first to increase β, and why?</summary><div class="ans"><p>α = 0.99 × 0.98 = <b>0.9702</b>; β = 0.9702/0.0298 = <b>32.6</b>. Either factor matters equally at first order; but the emitter injection efficiency is usually easiest to fix (increase the emitter/base doping ratio), while B improves with a thinner base. Making γ<sub>E</sub> = 0.995 would give α = 0.985 and β ≈ 66: doubling the gain.</p></div></details>
+  <details class="q"><summary>E4. State the bias on EBJ and CBJ for (a) an amplifier, (b) a closed switch, (c) an open switch.</summary><div class="ans"><p>(a) Active: EBJ forward, CBJ reverse. (b) Saturation: both forward. (c) Cut-off: both reverse.</p></div></details>
+  <details class="q"><summary>E5. A BJT has V<sub>A</sub> = 80 V and I<sub>C</sub> = 2 mA. Find the output resistance and the change in I<sub>C</sub> if V<sub>CE</sub> increases by 8 V.</summary><div class="ans"><p>r<sub>o</sub> ≈ V<sub>A</sub>/I<sub>C</sub> = 80/2 mA = <b>40 kΩ</b>. ΔI<sub>C</sub> = ΔV<sub>CE</sub>/r<sub>o</sub> = 8/40 kΩ = <b>0.2 mA</b> (a 10 % increase).</p></div></details>
+  <details class="q"><summary>E6. Why must the base of a BJT be thin and lightly doped while the emitter is thick and heavily doped?</summary><div class="ans"><p>Thin base: injected electrons cross before recombining ⇒ base transport factor B → 1 and small base current. Light base doping: few holes to recombine with ⇒ smaller I<sub>B,rec</sub>, and fewer holes to be injected back into the emitter. Heavy emitter doping: the electron injection current from the emitter far exceeds the hole current back into it ⇒ γ<sub>E</sub> → 1. Together α → 1 and β is large.</p></div></details>
+
+  <h3>F. MOS and MOSFET</h3>
+  <details class="q"><summary>F1. Find C<sub>ox</sub> for t<sub>ox</sub> = 5 nm SiO<sub>2</sub>. What happens to C<sub>ox</sub> and the field if t<sub>ox</sub> is halved at the same V<sub>G</sub>?</summary><div class="ans"><p>C<sub>ox</sub> = 3.45×10<sup>-13</sup>/5×10<sup>-7</sup> = <b>6.9×10<sup>-7</sup> F/cm² (0.69 μF/cm²)</b>. Halving t<sub>ox</sub> doubles C<sub>ox</sub> and doubles the oxide field V/t<sub>ox</sub>. Higher C<sub>ox</sub> ⇒ more inversion charge and more current for the same overdrive; the price is oxide reliability and tunnelling leakage.</p></div></details>
+  <details class="q"><summary>F2. For an n-type MOS capacitor (n-substrate), name the state at (a) large positive V<sub>G</sub>, (b) small negative V<sub>G</sub>, (c) large negative V<sub>G</sub>.</summary><div class="ans"><p>(a) Accumulation (electrons attracted to the interface). (b) Depletion (electrons repelled, uncovered donor ions +). (c) Inversion (holes collect at the surface, forming a p-type channel: the pMOS channel).</p></div></details>
+  <details class="q"><summary>F3. nMOS: μ<sub>n</sub>C<sub>ox</sub> = 200 μA/V², W/L = 5, V<sub>th</sub> = 0.5 V. Find I<sub>D</sub> at V<sub>GS</sub> = 1.5 V for V<sub>DS</sub> = 0.4 V, 0.8 V, 3 V. Also g<sub>m</sub> in saturation.</summary><div class="ans"><p>k′W/L = 1 mA/V²; V<sub>ov</sub> = 1.0 V. V<sub>DS</sub> = 0.4: triode: 1 × (1×0.4 − 0.08) = <b>0.32 mA</b>. V<sub>DS</sub> = 0.8: triode: 1 × (0.8 − 0.32) = <b>0.48 mA</b>. V<sub>DS</sub> = 3: saturation (3 ≥ 1): ½ × 1 × 1² = <b>0.5 mA</b>. g<sub>m</sub> = k′(W/L)V<sub>ov</sub> = <b>1 mS</b>. Notice the current rises quickly then flattens at 0.5 mA, the peak of the triode parabola at V<sub>DS</sub> = V<sub>ov</sub>.</p></div></details>
+  <details class="q"><summary>F4. Derive, in five lines, the triode current of an nMOS.</summary><div class="ans"><ol class="steps"><li>Q(x) = W C<sub>ox</sub>(V<sub>GS</sub> − V<sub>th</sub> − V(x)).</li><li>v = μ𝓔 = μ dV/dx (magnitude).</li><li>I = Q v = W C<sub>ox</sub>(V<sub>GS</sub> − V<sub>th</sub> − V) μ dV/dx.</li><li>Integrate ∫<sub>0</sub><sup>L</sup> I dx = μ W C<sub>ox</sub> ∫<sub>0</sub><sup>V<sub>DS</sub></sup> (V<sub>GS</sub> − V<sub>th</sub> − V) dV.</li><li>I L = μ W C<sub>ox</sub>[(V<sub>GS</sub> − V<sub>th</sub>)V<sub>DS</sub> − V<sub>DS</sub>²/2] ⇒ I<sub>D</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)[…].</li></ol></div></details>
+  <details class="q"><summary>F5. Why do pMOS transistors in a CMOS inverter have W about 2 to 3 times larger than the nMOS?</summary><div class="ans"><p>Holes have a lower mobility (μ<sub>p</sub> ≈ μ<sub>n</sub>/2 to /3) so for equal W/L the pMOS conducts less current and charges the load slower. Making W<sub>p</sub> ≈ 2 to 3 × W<sub>n</sub> equalises the drive currents and gives equal rise and fall times.</p></div></details>
+  <details class="q"><summary>F6. An nMOS switch (R<sub>ON</sub> = 1 kΩ) drives a 20 fF load. What is τ? What limits how small you can make τ?</summary><div class="ans"><p>τ = RC = 1 kΩ × 20 fF = <b>20 ps</b>. Increasing W lowers R<sub>ON</sub> but also raises the transistor's own parasitic capacitance and the load presented to the previous stage. Velocity saturation and interconnect resistance also set limits.</p></div></details>
+
+  <h3>G. Explain-in-words questions (viva / short-answer)</h3>
+  <details class="q"><summary>G1. Why is the Fermi level called an "imaginary construct"?</summary><div class="ans"><p>Because it is just the energy at which f(E) = ½. There need not be any allowed state at that energy; in a semiconductor E<sub>F</sub> usually sits inside the forbidden gap.</p></div></details>
+  <details class="q"><summary>G2. Why is there no net current at thermal equilibrium even though carriers keep diffusing and drifting?</summary><div class="ans"><p>At every point the diffusion current is exactly cancelled by an equal and opposite drift current (in the junction: I<sub>diffusion</sub> = I<sub>drift</sub> = I<sub>s</sub>). This is equivalent to E<sub>F</sub> being flat throughout the device.</p></div></details>
+  <details class="q"><summary>G3. What two things must be true for a hole to be a useful concept?</summary><div class="ans"><p>The valence band must be nearly full (so tracking the few empty states is simpler), and the empty state must respond to fields like a particle with positive charge and positive effective mass. Both hold in a semiconductor.</p></div></details>
+  <details class="q"><summary>G4. Why does the depletion region penetrate more into the lightly doped side?</summary><div class="ans"><p>The uncovered charge on both sides must be equal: q N<sub>D</sub> x<sub>n</sub> = q N<sub>A</sub> x<sub>p</sub>. Fewer ions per unit volume on the light side, so a larger thickness is needed to hold the same total charge.</p></div></details>
+  <details class="q"><summary>G5. Why does a MOSFET need almost no gate current?</summary><div class="ans"><p>The gate is separated from the channel by an insulating oxide, forming a capacitor. Only charging current flows while the gate voltage changes; in DC the oxide blocks current. Field effect: the field, not a current, controls the channel.</p></div></details>
+  <details class="q"><summary>G6. Compare BJT and MOSFET in one table.</summary><div class="ans"><div class="tablewrap"><table>
+    <tr><th></th><th>BJT</th><th>MOSFET</th></tr>
+    <tr><td>Control</td><td>base current (current-controlled)</td><td>gate voltage (voltage-controlled)</td></tr>
+    <tr><td>Input current</td><td>I<sub>B</sub> ≠ 0</td><td>≈ 0 (insulated gate)</td></tr>
+    <tr><td>Carriers</td><td>both electrons and holes (bipolar)</td><td>one type (unipolar)</td></tr>
+    <tr><td>I–V law</td><td>exponential I<sub>C</sub> ∝ e<sup>V<sub>BE</sub>/V<sub>T</sub></sup></td><td>square law I<sub>D</sub> ∝ (V<sub>GS</sub> − V<sub>th</sub>)²</td></tr>
+    <tr><td>Static power in logic</td><td>high</td><td>≈ 0 in CMOS</td></tr>
+    <tr><td>Packing density</td><td>low</td><td>very high ⇒ VLSI</td></tr>
+    <tr><td>Best at</td><td>high-speed analog, high gm per area</td><td>digital logic, memory, low power</td></tr></table></div></div></details>
+</section>
+
+<section class="chapter" id="ch13">
+  <h2><span class="num">CHAPTER 13</span>Cram Sheet: Traps, Comparisons and Corrections</h2>
+  <h3>13.1 The 15 things most likely to lose marks</h3>
+  <ol>
+    <li>Band gaps: Ge 0.7, Si 1.1, GaAs 1.34, GaN 3.4 eV. Si and Ge are <b>indirect</b>; GaAs and GaN are <b>direct</b>.</li>
+    <li>k<sub>B</sub>T = 25.87 meV at 300 K, V<sub>T</sub> = 25.9 mV. Use eV vs J consistently.</li>
+    <li>At T = 0 K: f = 1 below E<sub>F</sub>, ½ at E<sub>F</sub>, 0 above.</li>
+    <li>m* ∝ 1/curvature; more curvature = lighter = more mobile = more current.</li>
+    <li>μ<sub>n</sub> &gt; μ<sub>p</sub> because m<sub>h</sub>* &gt; m<sub>e</sub>*.</li>
+    <li>Mobility vs T is a hill: impurity scattering at low T, phonons at high T; Matthiessen's rule adds reciprocals.</li>
+    <li>Diffusion: J<sub>n</sub> = +qD<sub>n</sub>dn/dx, J<sub>p</sub> = −qD<sub>p</sub>dp/dx. Einstein: D = μV<sub>T</sub>.</li>
+    <li>np = n<sub>i</sub>² only at equilibrium; U = 0 there.</li>
+    <li>Depletion region: x<sub>n</sub>/x<sub>p</sub> = N<sub>A</sub>/N<sub>D</sub>; more into the lighter side. Bias enters as (V<sub>0</sub> ± V).</li>
+    <li>Flat E<sub>F</sub> = no current; sloped bands = field.</li>
+    <li>I<sub>s</sub> has D/(L N) with the <i>opposite</i> side's doping; smaller n<sub>i</sub> (larger E<sub>g</sub>) ⇒ smaller I<sub>s</sub> ⇒ larger forward voltage (Si &gt; Ge).</li>
+    <li>Zener &lt; 5 V (tunnelling, heavy doping); avalanche &gt; 8 V (impact ionisation, light doping).</li>
+    <li>BJT: active = F/R; α = Bγ; β = α/(1−α); thin light base, heavy emitter; Early voltage from base-width modulation.</li>
+    <li>MOS capacitor (p-substrate): negative V<sub>G</sub> accumulation, small + depletion, large + inversion. 1/C = 1/C<sub>ox</sub> + 1/C<sub>dep</sub>; C<sub>min</sub> at w = w<sub>m</sub>.</li>
+    <li>MOSFET triode current has <b>W/L</b> and the <b>V<sub>DS</sub>²/2</b> term; saturation begins at V<sub>DS</sub> = V<sub>GS</sub> − V<sub>th</sub>.</li>
+  </ol>
+  <h3>13.2 Diode vs BJT vs MOSFET junction summary</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Device</th><th>Layers</th><th>Junctions</th><th>Controls with</th><th>Key parameters</th></tr>
+    <tr><td>Diode</td><td>p–n</td><td>1</td><td>voltage across it</td><td>V<sub>0</sub>, I<sub>s</sub>, V<sub>BR</sub></td></tr>
+    <tr><td>BJT</td><td>n–p–n or p–n–p</td><td>2 (EBJ, CBJ)</td><td>base current</td><td>α, β, V<sub>A</sub></td></tr>
+    <tr><td>MOS capacitor</td><td>metal–oxide–semiconductor</td><td>none (insulator)</td><td>gate voltage</td><td>C<sub>ox</sub>, V<sub>th</sub>, w<sub>m</sub></td></tr>
+    <tr><td>MOSFET</td><td>MOS + source + drain</td><td>2 (S–B, D–B)</td><td>gate voltage</td><td>V<sub>th</sub>, μC<sub>ox</sub>(W/L), R<sub>ON</sub></td></tr>
+  </table></div>
+  <h3>13.3 Small corrections I found in the handwritten notes</h3>
+  <p>These are places where your handwriting has a slip. The physics above uses the corrected version. Check them against what your teacher wrote on the board.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Where</th><th>What the notes show</th><th>Correct / consistent version</th></tr>
+    <tr><td>Semiconductor E–k question (p.6)</td><td>Masses 0.2 m<sub>0</sub> and 0.06 m<sub>0</sub> struck out; plot 1 has the higher curvature</td><td>Higher curvature ⇒ lower m*. If numbers are given, the smaller m* is the higher-current material.</td></tr>
+    <tr><td>Drift bar Q (p.18/19)</td><td>J written as 2.16 A/cm² then 1.08×10<sup>4</sup></td><td>2.16 is σ in S/cm. J = σ𝓔 = 2.16 × 5000 = 1.08×10<sup>4</sup> A/cm².</td></tr>
+    <tr><td>Diode Q (p.29)</td><td>I<sub>s</sub> = 7.26×10<sup>-15</sup> A, next line 7.26×10<sup>-13</sup></td><td>10<sup>-15</sup> is right (gives V = 0.605 V).</td></tr>
+    <tr><td>Diode current split (p.29)</td><td>I<sub>n</sub> = 0.0009 mA</td><td>0.1/112 = 0.00089 mA; I<sub>p</sub> = 0.0991 mA. Fine to round.</td></tr>
+    <tr><td>MOSFET I<sub>D</sub> (p.8)</td><td>First box lacks W/L</td><td>I<sub>D</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)[…]. The second box is the right one.</td></tr>
+    <tr><td>MOSFET types (p.5)</td><td>Last list line reads "n MOS enhan." twice</td><td>The four types are nMOS enh., nMOS dep., pMOS enh., pMOS dep.</td></tr>
+    <tr><td>pMOS biasing (p.6)</td><td>Source "GND", substrate "highest potential"</td><td>In CMOS the pMOS source and body are at V<sub>DD</sub>. Its V<sub>GS</sub>, V<sub>DS</sub> are negative.</td></tr>
+    <tr><td>Depletion widths (p.21 to 22)</td><td>Both "ω" and "W" used</td><td>Same thing: W = x<sub>n</sub> + x<sub>p</sub>.</td></tr>
+  </table></div>
+  <h3>13.4 Five-day plan to top the test</h3>
+  <ol class="steps">
+    <li><b>Day 1:</b> Chapters 0 to 3. Redo the f(E) questions and E–k questions. Draw the band pictures from memory.</li>
+    <li><b>Day 2:</b> Chapters 4 to 6. Solve all four class questions plus C1 to C6 without looking.</li>
+    <li><b>Day 3:</b> Chapter 7. Derive I = I<sub>s</sub>(e<sup>V/V<sub>T</sub></sup> − 1) out loud. Do D1 to D7.</li>
+    <li><b>Day 4:</b> Chapters 8 and 9. Do E1 to E6, draw the C–V curve, explain accumulation, depletion and inversion.</li>
+    <li><b>Day 5:</b> Chapter 10, then the formula sheet and section 13.1. Do F1 to F6 and G1 to G6 timed.</li>
+  </ol>
+  <div class="callout kid"><span class="lbl">Final pep talk, like I'm 10</span>
+    <p>Every device in this course is just one idea repeated: <b>carriers are pushed (drift) or spread (diffusion), and something blocks or opens their path</b>. In the diode the blocker is the depletion region; in the BJT it is a thin base; in the MOSFET it is a gate-controlled channel. If you can draw the band picture and say who is pushing whom, you can answer nearly any question.</p></div>
+</section>
+<script>
+(function(){
+  var b=document.getElementById('toggleAll');
+  if(!b)return;
+  var open=false;
+  b.addEventListener('click',function(){
+    open=!open;
+    var ds=document.querySelectorAll('#ch12 details.q');
+    for(var i=0;i<ds.length;i++){ds[i].open=open;}
+    b.textContent=open?'Close all answers':'Open all answers';
+  });
+})();
+</script>

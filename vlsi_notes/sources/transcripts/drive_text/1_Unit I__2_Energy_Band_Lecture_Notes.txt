@@ -1,0 +1,252 @@
+--- page 1 ---
+Energy Bands and Material 
+Classification 
+1. The Crystalline Structure and Energy Bands 
+Crystalline Material 
+A material where atoms are arranged periodically in all directions 
+(x, y, z). The arrangement must look uniform and the same in any 
+position of the lattice. Only crystalline materials technically allow 
+for the definition of a band gap. 
+Energy Band 
+Formation 
+As individual atoms are brought close together, their discrete 
+energy levels (e.g., 2s, 2p levels) split up, eventually forming 
+continuous energy bands. 
+Energy Band Gap 
+(E_g) 
+The energy difference between the highest filled band (valence 
+band) and the empty band (conduction band). 
+Valence Band (VB) 
+This band is fully filled with electrons. Electrons in a completely 
+filled band cannot carry current because they lack empty states 
+to move into. 
+Conduction Band (CB) 
+This band is typically empty. When electrons are excited from the 
+VB to the CB, they can flow under the application of an electric 
+field, thus carrying current. 
+Current Flow 
+Current can flow only when electrons are excited to the CB, or 
+when empty states (created by the excited electrons) are present 
+in the VB. 
+ 
+ 
+2. Classification of Materials based on Band Gap 
+Materials are primarily differentiated by the size and existence of their energy band gaps: 
+
+--- page 2 ---
+Material 
+Band Gap 
+Tuning 
+Example 
+Metal 
+No band gap; Band gap does not exist. The highest 
+filled states are immediately adjacent to available 
+empty states, allowing immediate transport of 
+electrons without excitation. 
+No 
+Au, Ag, 
+Zn 
+Insulator 
+Large, ~8eV; Band gap is very high. It is almost 
+impossible to excite electrons from VB to CB 
+thermally. 
+No 
+Al2O3 
+~8eV 
+Semiconductor 
+Moderate; Band gap is appreciable but not too large. 
+Electrons can be excited from VB to CB. 
+Conductivity can be tuned (changed) by controlling 
+the number of excited electrons in the CB. 
+Yes 
+Si 1.1eV, 
+Ge 0.7eV 
+ 
+3. Electron Volt and Thermal Energy 
+A. The Electron Volt (eV) 
+The unit used to measure energy 
+ 
+B. Thermal Energy 
+At any temperature above 0 Kelvin (such as room temperature), thermal energy is present, 
+causing atoms to vibrate. 
+ 
+Calculation at Room Temperature (T ≈ 300 K): 
+1. Boltzmann constant (k): 1.38 × 10⁻²³ SI unit. 
+2. Thermal energy in Joules: k × T = (1.38 × 10⁻²³) × 300. 
+3. Converting to eV (by dividing by 1.6 × 10⁻¹⁹): 
+kT ≈ 0.0259 eV ≈ 26 milli electron volt (meV) 
+ 
+
+--- page 3 ---
+ 
+Significance: This thermal energy is very small compared to the silicon band gap (1.1 eV). 
+Despite the low thermal energy, electrons can still be excited from VB to CB, a process that 
+depends on the statistical distribution of carriers. 
+---------------------------------------------------------------------------------------------------------------------- 
+4. Reciprocal Space and the E-k Diagram 
+ 
+To understand electron movement in crystals, we shift from real space (distance) to 
+reciprocal space (momentum). 
+Concept 
+Formula / Description 
+Wave Vector (k) 
+k is a reciprocal space vector, representing 
+momentum direction. 
+Momentum (p) 
+p = ħk (where ħ = h / 2π) 
+E-k Relation (Free Space) 
+E = ħ²k² / 2m 
+ 
+A. Wave Vector (k) and Momentum (p) 
+1. Reciprocal Space: The Fourier transform of real space (distance). Its unit is 1/distance (e.g., 
+1/centimeter). 
+2. Wave Vector (k): Defined mathematically as: k = 2π / λ Where λ is the wavelength 
+(electrons are treated as both particles and waves). This quantity k represents the 
+momentum of the electron. 
+ 
+3. Reduced Planck Constant (ħ): ħ = h / 2π (where h is Planck's constant). 
+4. Momentum Formula (De Broglie): p = ħk 
+
+--- page 4 ---
+ This equation shows that the wave vector k is directly proportional to the electron 
+momentum p. 
+ 
+B. Energy and Momentum Relation (Free Electron) 
+The kinetic energy (E) of a particle is related to its momentum (p) and mass (m) by E = p² / 
+2m. 
+Formula for Kinetic Energy (E-k relation):  
+ 
+If Energy (E) is plotted against the wave vector (k), the resulting graph is a parabola (E ∝ k²). 
+This parabolic relation is only true for a free electron moving in a vacuum. 
+• E-k Diagram: A plot of Energy (E) on the y-axis versus Wave Vector (k) on the x-axis, 
+showing a parabolic shape. 
+ 
+5. Electrons in a Real Crystal and Effective Mass 
+A. Effect of crystal lattice  
+1. Periodic Potential: In a crystal, the electrons are not free. The periodic arrangement of 
+atoms introduces a periodic potential. 
+2. Quantum Mechanical Solution: To determine the motion of the electron, Schrödinger’s 
+equation must be solved. 
+
+--- page 5 ---
+3. E-k Diagram Distortion: Due to the interaction with the periodic potential, the E-k 
+diagram becomes distorted. 
+4. Band Gaps in E-k Space: The distortion leads to discontinuities or gaps. These appear 
+periodically at integer multiples of π/a (where a is the lattice constant). 
+ 
+B. The First Brillouin Zone 
+ 
+• Range of k from -π/a to +π/a. 
+• Device physics and electron transport are explained within this zone. 
+• Near k=0, the relation is approximately parabolic, where most electrons occupy low energy 
+states. 
+ C. Effective Mass (m*) 
+A. Definition and Formula 
+• Effective Mass (m*): The mass an electron experiences while moving inside the periodic 
+potential of a semiconductor crystal. It is generally different from the free electron mass (m₀). 
+• Near k=0, the E-k relation still holds, provided m is replaced by m*: E = ħ²k² / 2m* 
+• Formula for Effective Mass (Derived from Curvature): The effective mass is mathematically 
+defined as the inverse of the second derivative of the E-k relation, multiplied by ħ²: 
+m* = ħ² / (d²E / dk²) 
+The term d²E / dk² represents the curvature of the E-k plot. 
+
+--- page 6 ---
+B. Significance and Role of Effective Mass 
+1. Condensation of Quantum Mechanics: m* takes into account the entire band structure 
+information of the material (which comes from solving the complex Schrödinger equation). 
+2. Allows Newton’s law (F = ma) to be applied to electrons. 
+3. Transport Dependence (Curvature and Mobility): Higher curvature → lower m* → higher 
+mobility. 
+   ◦ m* is inversely proportional to the curvature of the E-k diagram. 
+   ◦ A material with higher curvature has a lower effective mass. 
+   ◦ A lower effective mass leads to higher electron mobility. 
+   ◦ Higher mobility is desirable as it results in higher current and superior transport for high-
+speed devices. 
+ 
+6. The Concept of Holes (Quasi-Particles) 
+Holes are as important as electrons in semiconductor research. 
+A. Definition and Formation 
+1. Valence Band (VB) and Conduction Band (CB): The VB is completely filled with 
+electrons. Because it is filled, electrons cannot move and carry current. The CB is nearly 
+empty. 
+2. Excitation: When an electron is excited from the VB to the CB (e.g., by heat or light), it is 
+free to move and carry current. 
+3. Hole as a Vacancy: The excited electron leaves behind a vacancy (an empty space) in the 
+VB. This vacancy is called a hole. 
+
+--- page 7 ---
+4. Hole Definition: A hole is essentially the absence of an electron. 
+B. Modeling and Transport 
+1. Quasi-Particle: Although a hole is an absence of an electron, for convenience in 
+semiconductor device analysis, it is modeled as a particle (a quasi-particle). 
+2. Current Flow: When an electric field is applied, nearby electrons in the VB jump into the 
+empty hole space. 
+3. Charge and Direction: 
+   ◦ Electrons move opposite to the electric field direction. 
+   ◦ Due to the sequential jumping of electrons, the hole (the empty space) appears to move 
+in the same direction as the electric field. 
+   ◦ Therefore, the hole is modeled as having a positive charge. 
+4. Energy Band: Holes move in the Valence Band. 
+7. E-K Diagram for Holes (Band Structure) 
+A. Hole E-K Diagram and Effective Mass 
+1. Hole Energy: Holes have their own E-K diagram which corresponds to the Valence Band.  
+2. Hole Effective Mass (mₕ*): Holes have their own effective masses. This mass is calculated 
+from the inverse of the curvature of the hole E-K diagram. 
+   mₕ* ∝ 1 / (d²E / dk²) 
+3. Band Structure vs. Band Diagram: 
+   ◦ The overall E-K plot showing both electron (CB) and hole (VB) bands is called the band 
+structure E-K diagram. 
+   ◦ The simple plot of Energy vs. real space (distance) is called the band diagram. 
+
+--- page 8 ---
+ 
+8. Direct vs. Indirect Bandgap Semiconductors 
+A. Energy Band Gap (Eg) 
+The energy band gap (Eg) is defined as the smallest energy separation between the highest 
+point of the Valence Band and the lowest point of the Conduction Band. 
+ 
+B. Direct Bandgap Semiconductors 
+1. Definition: The bottommost point of the Conduction Band and the topmost point of the 
+Valence Band occur at the same K value (often K=0). 
+2. Momentum Transition: Excitation or recombination requires no change in momentum (ΔK 
+= 0). 
+3. Efficiency: This is a very efficient process. 
+4. Applications: These materials can efficiently emit light (used for LEDs) because electrons 
+and holes can recombine directly, releasing a photon. They also have a very high absorption 
+coefficient for light. 
+
+--- page 9 ---
+5. Examples: Gallium Arsenide (GaAs), Gallium Nitride (GaN). 
+C. Indirect Bandgap Semiconductors 
+1. Definition: The lowest point of the CB and the highest point of the VB are not at the same K 
+value (ΔK ≠ 0). 
+2. Momentum Transition: A transition requires a large change in momentum (ΔK). 
+3. Phonon Assistance: This transition is inefficient and requires the assistance of atomic 
+vibrations (called phonons) to change the momentum. 
+4. Applications: These materials cannot efficiently emit light (because the energy is often 
+given to atomic vibrations instead of a photon). While absorption is possible (e.g., silicon solar 
+cells), the absorption coefficient is much lower. 
+5. Examples: Silicon (Si), Germanium (Ge). 
+9. Fermi-Dirac Statistics and Probability 
+A. The Fermi Function 
+The probability that an energy state Eᵢ is occupied by an electron is given by the Fermi 
+function, f(E): 
+f(Eᵢ) = 1 / (1 + exp((Eᵢ – E_F) / (k_B T))) 
+• E_F: Fermi level (or Fermi energy). 
+• k_B: Boltzmann constant (not the momentum vector k). 
+• T: Temperature in Kelvin. 
+ 
+
+--- page 10 ---
+B. The Fermi Level (E_F) 
+1. Definition: The Fermi level is a statistical construct. 
+2. Statistical Property: It is the energy level where the probability of finding an electron is 
+exactly 50% (0.5). 
+   ◦ This 50% probability holds true at any temperature. 
+3. Importance: The Fermi level is the most important concept for semiconductor device 
+analysis. 
+C. Electron and Hole Probability 
+1. Electron Probability: f(E) is the probability of finding an electron. 
+2. Hole Probability: 1 - f(E) is the probability of finding a hole (or the probability of a state 
+being empty). 
+ 

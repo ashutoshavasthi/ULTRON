@@ -1,0 +1,155 @@
+--- slide 1 ---
+Thin Film Deposition
+Thin films form the different material layers required during IC fabrication.
+Different layers in IC fabrication
+Dielectric: SiO2/Si₃N₄
+Semiconductors
+Metals
+Polymers
+--- slide 2 ---
+Deposition Techniques
+▼
+▼
+Chemical Vapor Deposition
+(CVD)
+Physical Vapor Deposition
+(PVD)
+Reactant gases enter the chamber and react at the
+wafer surface, depositing a solid film.
+Examples: APCVD, LPCVD and PECVD.
+Vaporized material condenses on the wafer to
+form a solid film.
+Examples: evaporation and sputter deposition.
+--- slide 3 ---
+Epitaxy
+Epitaxial and polysilicon film growth
+➢
+Deposits a monocrystalline film.
+➢
+Greek roots: epi means “above”, and taxis
+means “ordered”.
+➢
+Uses gaseous or liquid precursors.
+➢
+The substrate seeds the film’s crystal structure.
+➢
+Temperature and substrate determine the
+physical structure of the deposited film.
+--- slide 4 ---
+Types of Epitaxy
+Homoepitaxy:
+➢
+Grow films purer than the substrate.
+➢
+Create layers with different doping levels.
+Heteroepitaxy:
+➢
+Integrate crystalline layers of
+different materials.
+➢
+Engineer band structures for electronic
+and optoelectronic devices.
+--- slide 5 ---
+Advantages of Epitaxy
+Applications
+➢
+High-purity, monocrystalline silicon in the
+device region.
+➢
+Lower temperatures than implantation and diffusion
+allow sharper doping profiles.
+➢
+A wide range of thicknesses and doping profiles,
+with opportunities for band-gap engineering.
+➢
+Suitable for engineered semiconductor structures:
+▪  HBTs: heterojunction bipolar transistors
+   (H. Kroemer, Nobel Prize 2000)
+▪  HEMTs: high-electron-mobility transistors
+   based on a two-dimensional electron gas (2DEG)
+Engineered wafers
+– Clean, flat layers on less ideal Si substrates
+– Layers on SOI structures
+– Silicon on sapphire
+– Higher-purity layers on lower-quality SiC
+CMOS structures
+– Layers with different doping
+– A p layer on p⁺ substrate to reduce latch-up
+Bipolar transistors
+Epitaxy enables buried-layer structures.
+III–V devices
+Interface quality matters for HBTs, LEDs
+and lasers.
+--- slide 6 ---
+Types of Epitaxy
+▼
+▼
+▼
+Vapor Phase Epitaxy
+Liquid Phase Epitaxy
+Molecular Beam Epitaxy
+A gaseous precursor supplies the
+material. Chemical reactions
+produce the epitaxial layer.
+Crystals grow from a melt
+on the substrate.
+An evaporated particle beam
+condenses on the substrate
+under very high vacuum
+(10⁻⁸ Pa).
+--- slide 7 ---
+Vapor Phase Epitaxy
+Steps involved in a CVD process
+➢
+Crystallization from the vapor phase.
+➢
+Uses chemical vapor deposition.
+➢
+Controls thickness, doping and crystallinity.
+➢
+High-temperature epitaxy: 800–1100 °C.
+➢
+Offers flexibility in device fabrication.
+Chemical Vapor Deposition
+1.
+Reactants reach the deposition region.
+2.
+Reactants cross the boundary layer from the
+main gas stream to the wafer surface.
+3.
+Reactants adsorb on the wafer.
+4.
+Surface reactions include decomposition,
+chemical reaction, migration to kinks and
+ledges, incorporation, emission and
+redeposition.
+5.
+Byproducts desorb from the surface.
+6.
+Byproducts cross the boundary layer.
+7.
+Byproducts leave the deposition region.
+Steps 2–5 are most important for growth rate.
+Steps 3–5 form the “surface reaction” processes.
+--- slide 8 ---
+Chemical vapor deposition (CVD) systems
+(b)
+Atmospheric cold-wall system for
+epitaxial silicon deposition
+SiCl₄ + 2H₂ → Si + 4HCl
+(Horizontal Reactor)
+Low-pressure hot-wall system for
+polycrystalline and amorphous
+films, including polysilicon and
+silicon dioxide.
+Pancake Reactor
+Barrel Reactor
+--- slide 9 ---
+Basic Chemical Reactions in Si Epitaxial Growth
+Various sources for Si deposition
+1.  Silicon tetrachloride (SiCl₄) (~1200 °C)
+2.  Trichlorosilane (SiHCl₃) (~1150 °C)
+3.  Dichlorosilane (SiH₂Cl₂) (~1100 °C)
+4.  Silane (SiH₄) (~1050 °C)
+Effect of SiCl₄ concentration on Si epitaxial growth
+(S. M. Sze, p. 355)

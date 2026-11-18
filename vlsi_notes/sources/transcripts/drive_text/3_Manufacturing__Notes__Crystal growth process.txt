@@ -1,0 +1,132 @@
+--- page 1 ---
+Czochralski (CZ) Technique for Single Silicon Crystal Growth
+These notes summarize the process of drawing a single silicon crystal from polysilicon using the Czochralski
+(CZ) technique, which is a key process in VLSI manufacturing.
+I. Introduction and Raw Material
+1. Purpose: The Czochralski technique (CZ) is one of two primary mechanisms (the other being the Float
+Zone method) used to draw a single silicon crystal from raw polysilicon.
+2. Raw Material: The raw material is Polysilicon, which is Electronic Grade Silicon (EGS). This EGS is
+ultra-pure, reaching approximately 99.999999999% purity.
+3. Preparation: The polysilicon rod is broken or crushed into small pieces. These pieces are referred to as
+the charge,.
+4. Alternate Name: The CZ technique is also known as the Liquid Solid Mono Component Growth
+System.
+5. Historical Note: This technique was invented in 1918.
+II. Components of the CZ System
+Component
+Material
+Function / Key Feature
+Crucible (Inner
+Jacket)
+Quartz or
+Silica (SiO₂)
+Holds the silicon charge. Must be made of silicon-related
+material to minimize contamination. Disadvantage: Cannot be
+reused as it cracks upon cooling. Risk: Incorporates oxygen (O₂)
+into the molten silicon, which can be a contaminant but
+sometimes advantageous (improves mechanical strength).
+Graphite
+Crucible (Outer
+Jacket /
+Susceptor)
+Graphite
+(Carbon)
+Surrounds the inner silica crucible. Risk: Potential contamination
+of molten silicon due to carbon.
+Heater
+Graphite
+Heats the charge to its melting point. Heating Method: Primarily
+uses RF (Radio Frequency) Induction Heating, though resistance
+thermal heating can also be used.
+Chamber
+Quartz
+Houses the entire system. Initially evacuated to remove
+atmospheric gases.
+Ambient Control
+Inert Gas
+(Argon)
+After evacuation, argon gas is inserted to maintain the required
+atmospheric pressure necessary for the growth process.
+Crucible Shaft
+Not specified
+(supports the
+crucible)
+Rotates the crucible clockwise. This rotation is crucial for
+maintaining a uniform temperature throughout the molten
+silicon melt.
+12/12/25, 5:29 PM
+StackEdit
+https://stackedit.io/app#
+1/3
+
+--- page 2 ---
+Component
+Material
+Function / Key Feature
+Pulling Shaft
+(Seed Shaft /
+Puller Shaft)
+Not specified
+Rotates counter-clockwise (anti-clockwise). Holds the seed
+crystal.
+Seed Crystal
+Single crystal
+of silicon
+A small, solid silicon crystal with a specific crystal orientation
+(e.g., ⟨111⟩ or ⟨100⟩) attached to the seed holder.
+III. Working Mechanism
+The process converts the solid polysilicon charge into a single-crystal ingot.
+1. Preparation: The charge is placed in the crucible, the chamber is evacuated, and then Argon gas is
+introduced to set the working pressure,.
+2. Melting: The graphite heater raises the temperature of the charge up to the melting point of silicon,
+which is around 
+,. The solid charge converts into the molten, liquid phase.
+3. Seeding: The pulling shaft lowers the solid seed crystal down until it just touches the surface of the
+molten silicon and begins to melt slowly,.
+4. Growth (Pulling): As soon as the seed crystal starts melting, the shaft slowly begins to pull the crystal
+upward,.
+5. Solidification: Molten silicon sticks to the surface of the seed crystal. As the seed is pulled up, the
+silicon cools down rapidly and solidifies progressively at the solid-liquid interface, forming the single
+crystal,.
+IV. Key Process Controls
+Two factors are critical for determining the quality and shape of the resulting crystal:
+1. Rotation: The crucible and the pulling shaft rotate in opposite directions (counter-rotation). This
+maintains the molten silicon at a uniform temperature throughout the crucible, preventing the
+formation of local hot or cold regions,.
+2. Pulling Rate: The rate at which the seed crystal is withdrawn must be strictly maintained.
+The pulling rate dictates the diameter of the single silicon crystal that grows,.
+A typical pulling rate is a few millimeters per minute (
+),.
+If the pulling rate is too slow, the seed crystal may completely melt down, preventing crystal
+growth.
+3. Orientation Template: The crystal that grows automatically takes on the same crystal orientation as
+the seed crystal used (e.g., if the seed is 111, the resulting crystal will be 111),.
+V. Outcomes and Disadvantages
+1. Product: The resulting cylindrical single silicon crystal is called an ingot.
+2. Advantage of CZ: The CZ technique is popular because it is capable of growing large diameter single
+silicon crystals. Typical diameters range from 8 to 16 inches.
+1412 C
+∘
+mm/min
+12/12/25, 5:29 PM
+StackEdit
+https://stackedit.io/app#
+2/3
+
+--- page 3 ---
+3. Final Steps: The ingot is eventually cut into very thin, disk-shaped wafers (typically 
+ to 
+thick).
+4. Disadvantages (Impurity Incorporation): The primary drawback of this method is the contamination
+of the molten silicon:
+Oxygen: Incorporated from the silica (
+) crucible.
+Carbon: Incorporated from the graphite susceptor,.
+0.50
+0.75 mm
+SiO
+​2
+12/12/25, 5:29 PM
+StackEdit
+https://stackedit.io/app#
+3/3

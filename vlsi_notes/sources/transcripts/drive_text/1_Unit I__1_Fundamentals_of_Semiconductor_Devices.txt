@@ -1,0 +1,69 @@
+--- page 1 ---
+Fundamentals of Semiconductor Devices 
+I. Properties of Semiconductors 
+A. Definition 
+A semiconductor is a material whose conductivity lies between that of a metal (conductor) and an insulator 
+(such as wood or glass). 
+B. The Unique Property: Tunable Conductivity 
+The key property of semiconductors is that their conductivity can be tuned or tailored by many orders of 
+magnitude. 
+• Unlike metals, where conductivity is difficult to change (except by raising temperature). 
+• Unlike insulators (like glass), which will not conduct electricity no matter what is done. 
+• This tunability allows devices to be made that cater to specific needs. 
+C. Role as a Switch and Amplifier 
+Semiconductors possess the unique capability to function both as a switch and an amplifier. 
+• Switching Action: They can allow a very high current to flow (like a conductor in the ON state) AND can 
+block very large voltages (like an insulator in the OFF state). 
+• This ability to block voltage and switch states is not found in metals. 
+• Amplification: They can be used as an amplifier, which enlarges the signal and provides gain, useful in 
+devices like RF devices. 
+II. Applications and Importance 
+Device/Application 
+Examples 
+Electronic Core 
+Transistors, processors, memory devices, logic 
+devices 
+Power/Energy 
+EV inverters/chargers, Solar cells 
+Optoelectronics 
+LEDs, Laser diodes, Photodetectors 
+High Speed 
+Radar, satellite communication 
+The transistor is one of the most fundamental building blocks of all electronic circuits. A transistor is a device 
+where the current flowing between two terminals (A and B) is controlled not by the voltage applied between 
+A and B, but by the voltage applied at a third control point (C). 
+The complexity and functionality of devices have increased immensely due to the shrinking size of transistors. 
+
+--- page 2 ---
+Moore's Law: The number of transistors in a chip doubles approximately every two years, leading to 
+exponential increases in computing power and a decrease in cost per transistor. This is achieved because 
+transistors are constantly becoming smaller (shrinking sizes), allowing more components to be 
+accommodated in the same chip area 
+III. Classification of Semiconductors 
+1. Elemental: Silicon (Si), Germanium (Ge). 
+2. Compound: Gallium Arsenide (GaAs), etc. 
+IV. Energy Bands and the Band Diagram 
+Energy bands are ranges of allowed energy levels that electrons in a solid can occupy due to the overlap of 
+atomic orbitals when atoms are brought close together to form a crystal. 
+• 
+Valence Band (VB): The highest range of energies where electrons are normally present at 0 K.  
+• 
+Conduction Band (CB): The range of energies higher than the valence band where electrons can move 
+freely and contribute to electrical conduction. 
+• 
+Band Gap (Eg): The forbidden region (no allowed energy states) between the conduction band and 
+the valence band. 
+A. Formation of Energy Bands 
+ 
+The energy bands arise from the interaction of atoms when they are closely packed in a crystal. 
+• Isolated atom: For a single, isolated atom, electrons exist in discrete energy levels or shells (like 1s, 2s, 2p) 
+• Atoms brought closer:  In a real crystal, atoms are separated by a fixed spacing called the lattice constant. 
+When isolated atoms are brought close together (distance r decreases) towards this equilibrium spacing (req), 
+their valence orbitals start to interact. 
+• Merging & splitting: The discrete energy levels interact with each other and split into two new bands, the 
+valence band and the conduction band.   
+• Result: At the equilibrium spacing, the electrons fully occupy the lower band (the Valence Band). The upper 
+band remains completely empty (the Conduction Band). 
+B. Energy Band Gap 
+Gap between VB and CB: 
+ 
