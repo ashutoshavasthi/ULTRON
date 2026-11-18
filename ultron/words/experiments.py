@@ -296,6 +296,61 @@ def diagnose(family, base_path=None, size="cpu", seed=0, device="cpu", log=print
     return out
 
 
+def _g0b_table(rows):
+    lines = ["| Hidden family | Puzzles (explained by hand-written words alone) | Explained by "
+             "learned words | Words kept | Match on kept-aside pictures | Match on colours never "
+             "trained | Held-out puzzles right: without -> with learned words | One vector per "
+             "puzzle: test right | New primitive? |", "|---|---|---|---|---|---|---|---|---|"]
+    for r in rows:
+        held = r["held_direct"] + r["held_mixed"]
+        wo = r["without_words"]["direct"] + r["without_words"]["mixed"]
+        wi = r["with_words"]["direct"] + r["with_words"]["mixed"]
+        new = "; ".join(f"{op}: {'new' if p is None else 'abbreviates ' + p}"
+                        for op, p in r["abbreviation_of"].items()) or "-"
+        unseen = "-" if r["match_unseen_colours"] is None else f"{r['match_unseen_colours']:.0%}"
+        lines.append(
+            f"| {r['family']} | {r['puzzles']} ({r['explained_by_hand_written']}) | "
+            f"{r['explained_by_learned_words']}/{r['to_explain']} | "
+            f"{', '.join(r['words_kept']) or 'none'} | {r['match_seen']:.0%} | {unseen} | "
+            f"{wo}/{held} -> {wi}/{held} | {r['fitted_vector']['test_right']}/{r['held_direct']} "
+            f"| {new} |")
+    return lines
+
+
+def _second_form(f):
+    """The section for G0-a's second form (taught words practised by family and toward
+    mistakes), measured against the first."""
+    a, before = f["carrying_out"], f["before"]
+    chains = a["chains_right"] / max(a["chains"], 1)
+    lines = ["## G0-a, second form: taught words practised by family and toward mistakes\n",
+             *[f"{note}\n" for note in f.get("notes", [])],
+             "Training curve, single words exact on kept-aside pictures (10 per word), same "
+             "seed and size; only the way words are drawn differs.\n",
+             "| Steps | First form (words drawn evenly) | Second form |", "|---|---|---|"]
+    lines += [f"| {n:,} | {'-' if c is None else f'{c:.1%}'} | {'-' if v is None else f'{v:.1%}'} |"
+              for n, c, v in f["curve"]]
+    lines += ["", f"- Single words exact: **{a['single']:.1%}** (first form {before['single']:.1%}; "
+              "target 99%).",
+              f"- Six-word programs exact: **{a['chains_right']}/{a['chains']} = {chains:.1%}** "
+              f"(first form {before['chains_right'] / max(before['chains'], 1):.1%}; target 90%).",
+              f"- **{'Met' if a['single'] >= 0.99 and chains >= 0.9 else 'Not met'}.**\n",
+              "| Family | First form | Second form |", "|---|---|---|"]
+    for k in sorted(a["by_family"]):
+        x, y = a["by_family"][k]
+        bx, by = before["by_family"].get(k, (0, 0))
+        lines.append(f"| {k} | {bx}/{by} = {bx / max(by, 1):.0%} | {x}/{y} = {x / max(y, 1):.0%} |")
+    lines += [""]
+    if f.get("rediscovery"):
+        b = f["rediscovery"]
+        met = sum(r["match_seen"] >= 0.95 for r in b)
+        lines += ["### G0-b again, with the second-form interpreter\n",
+                  f"**{met} of {len(HIDDEN_G0)} families reach a 95% match"
+                  + (f" ({len(b)} run so far)" if len(b) < len(HIDDEN_G0) else "") + ".**\n",
+                  *_g0b_table(b), ""]
+    lines += [f"{note}\n" for note in f.get("notes_after", [])]
+    return lines
+
+
 def write(result, path=REPORT):
     a, b = result["carrying_out"], result["rediscovery"]
     passed = sum(r["match_seen"] >= 0.95 for r in b)
@@ -321,23 +376,7 @@ def write(result, path=REPORT):
         f"for at least 3 of the {len(HIDDEN_G0)} families. **Met for {passed} of "
         f"{len(HIDDEN_G0)}"
         + (f" ({len(b)} run so far)" if len(b) < len(HIDDEN_G0) else "") + ".**\n",
-        "| Hidden family | Puzzles (explained by hand-written words alone) | Explained by "
-        "learned words | Words kept | Match on kept-aside pictures | Match on colours never "
-        "trained | Held-out puzzles right: without -> with learned words | One vector per "
-        "puzzle: test right | New primitive? |", "|---|---|---|---|---|---|---|---|---|"]
-    for r in b:
-        held = r["held_direct"] + r["held_mixed"]
-        wo = r["without_words"]["direct"] + r["without_words"]["mixed"]
-        wi = r["with_words"]["direct"] + r["with_words"]["mixed"]
-        new = "; ".join(f"{op}: {'new' if p is None else 'abbreviates ' + p}"
-                        for op, p in r["abbreviation_of"].items()) or "-"
-        unseen = "-" if r["match_unseen_colours"] is None else f"{r['match_unseen_colours']:.0%}"
-        lines.append(
-            f"| {r['family']} | {r['puzzles']} ({r['explained_by_hand_written']}) | "
-            f"{r['explained_by_learned_words']}/{r['to_explain']} | "
-            f"{', '.join(r['words_kept']) or 'none'} | {r['match_seen']:.0%} | {unseen} | "
-            f"{wo}/{held} -> {wi}/{held} | {r['fitted_vector']['test_right']}/{r['held_direct']} "
-            f"| {new} |")
+        *_g0b_table(b)]
     lines += ["", "Held-out puzzles are made from kept-aside pictures: half use the hidden "
               "word alone, half put a hand-written word before or after it. \"New\" means no "
               "program of up to three hand-written words imitates the learned word. In a family "
@@ -358,6 +397,8 @@ def write(result, path=REPORT):
         lines += [f"| {r['word']} | {r['puzzles_given']} | {r['pass_their_check']} | "
                   f"{r['match_on_kept_aside']:.0%} |" for r in d["amount"]]
         lines += [""]
+    if result.get("second_form"):
+        lines += _second_form(result["second_form"])
     with open(path, "w") as f:
         f.write("\n".join(lines))
     with open(path[:-3] + ".json", "w") as f:

@@ -1,0 +1,26 @@
+# G0-a, first form (taught words drawn evenly), seed 0, width 96.
+# Lines 1-8: the run, checked on 10 kept-aside pictures per word, until a machine restart at step 20,000.
+# Then: the continuation from that saved interpreter (10,000 steps, lr 3e-4); its step numbers count
+# from 20,000 and its check used 5 pictures per word.
+step 2500/30000 loss 0.1226 674s steps exact 0.435
+step 5000/30000 loss 0.0689 1250s steps exact 0.617
+step 7500/30000 loss 0.0491 1862s steps exact 0.750
+step 10000/30000 loss 0.0360 2476s steps exact 0.790
+step 12500/30000 loss 0.0288 3321s steps exact 0.833
+step 15000/30000 loss 0.0232 4370s steps exact 0.850
+step 17500/30000 loss 0.0189 4950s steps exact 0.875
+step 20000/30000 loss 0.0185 5560s steps exact 0.894
+# continuation:
+step 833/10000 loss 0.0138 171s single words exact 0.858
+step 1666/10000 loss 0.0132 340s single words exact 0.858
+step 2499/10000 loss 0.0118 501s single words exact 0.871
+step 3332/10000 loss 0.0132 663s single words exact 0.871
+step 4165/10000 loss 0.0123 830s single words exact 0.863
+step 4998/10000 loss 0.0104 1005s single words exact 0.863
+step 5831/10000 loss 0.0098 1179s single words exact 0.867
+step 6664/10000 loss 0.0089 1351s single words exact 0.867
+step 7497/10000 loss 0.0091 1513s single words exact 0.871
+step 8330/10000 loss 0.0079 1677s single words exact 0.871
+step 9163/10000 loss 0.0076 1840s single words exact 0.867
+step 9996/10000 loss 0.0081 2003s single words exact 0.858
+step 10000/10000 loss 0.0081 2004s single words exact 0.858

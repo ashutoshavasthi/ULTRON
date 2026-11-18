@@ -38,6 +38,7 @@ mean something that no combination of the hand-written words can say.
 | Dreams | Hand-written words run on real pictures from the practice half: every step has an exact answer | `curriculum.py` |
 | Interpreter | A two-layer transformer used three times over; the word's vector is added to every cell | `interpreter.py` |
 | Teaching | The interpreter imitates the hand-written words on dreams | `learn.teach` |
+| Practice diet | Which taught word each dream practises: a family first, weighted toward the families still got wrong, then a word of it | `learn.Sampler` |
 | Free words | Words with no meaning yet, given one from unexplained puzzles (below) | `learn.rediscover` |
 | Search | The shortest program of both kinds of word that explains a puzzle exactly | `search.py` |
 | New or abbreviation | Can a program of hand-written words imitate the learned word? | `crystallise.py` |
@@ -94,6 +95,15 @@ left-right flip cannot be built from the taught words. For the three colour fami
   word of that family. Target: a free word matches the hidden word on at least 95% of kept-aside
   pictures, for at least 3 of the 5 families. Kill rule: fewer than 3 of 5 after one round of
   fixes means the mechanism does not work in this form. Report it plainly.
+- **G0-a, second form (declared 2026-11-18, before it ran).** The first form was not met and
+  its one fix was used. A cause was then found in the code: the 48 taught words were drawn
+  evenly, so a family of one word (hollow_things) got 2% of practice and a family of ten got
+  21%, and the under-practised families were the ones carried out worst. The second form draws
+  a family first, weighted toward the families still got wrong (measured on learning pictures,
+  never the kept-aside ones), then a word of it. Same targets, same size, same seed, 30,000
+  steps; compared step by step with the first form's logged curve. If single words rise by at
+  least 3 points, or the three weakest families by at least 10 points each, G0-b is run again
+  with the new interpreter. The first form's result stays in the record.
 
 ### G1: full-size pictures, real ARC, one 8 GB GPU
 - Train on the practice half (317 puzzles) plus dreams.
