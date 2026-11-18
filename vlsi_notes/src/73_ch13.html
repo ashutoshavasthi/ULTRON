@@ -1,0 +1,252 @@
+<section class="chapter" id="ch13">
+  <h2><span class="num">CHAPTER 13</span>Unit I and the MOS Capacitor: Everything Extra in the Drive</h2>
+  <p class="tagline">Chapters 1 to 9 cover what was written on the board. The instructor's typed Drive notes go further in many places. This chapter adds every one of those extras, in syllabus order, so nothing in the Drive can surprise you.</p>
+  <span class="chip src">Drive: Unit I files 1 to 14; MOS Capacitor_1, MOS Capacitor_2</span>
+
+  <h3>13.1 Crystals, Brillouin zone and band structure vs band diagram</h3>
+  <ul>
+    <li>Only a <b>crystalline</b> material (atoms repeating periodically in x, y, z) has a well-defined band gap. A completely full valence band carries <b>no current</b>, because there are no empty states for electrons to move into.</li>
+    <li>Example gaps from the Drive: metals have no gap (Au, Ag, Zn); an <b>insulator ≈ 8 eV</b> (Al<sub>2</sub>O<sub>3</sub>; SiO<sub>2</sub> ≈ 9 eV); Si 1.1, Ge 0.7 eV. Room-temperature kT = 0.0259 eV.</li>
+    <li>E = ħ²k²/2m is exact only for a free electron in vacuum. In a crystal the periodic potential (solved with the Schrödinger equation) distorts the parabola and opens gaps at k = ±π/a, ±2π/a, … (Chapter 2 figure). The range <b>−π/a ≤ k ≤ +π/a</b> is the <b>first Brillouin zone</b>; everything else repeats it. Near k = 0 the band is still roughly parabolic, which is why the effective mass works.</li>
+    <li><b>Why m* matters</b> (Drive): it packs all the quantum mechanics into one number so we can use plain F = ma for electrons in a crystal. Higher curvature ⇒ lower m* ⇒ higher mobility ⇒ higher current and higher speed.</li>
+    <li><b>Band structure (E vs k)</b> shows allowed energies against momentum: used for direct/indirect gaps and m*. <b>Band diagram (E vs x)</b> shows E<sub>c</sub>, E<sub>v</sub>, E<sub>F</sub> against position in a device: used for junctions and MOS. Don't mix the two pictures.</li>
+    <li><b>Direct gap</b> materials (GaAs, GaN) have a <b>high absorption coefficient</b> and emit light efficiently. <b>Indirect</b> ones (Si, Ge) need a phonon, so they absorb weakly and hardly emit; Si solar cells still work, they just need to be thicker.</li>
+    <li>Moore's law (Drive, file 1): transistor count per chip doubles about every two years while the cost per transistor falls.</li>
+  </ul>
+
+  <h3>13.2 Density of states and the carrier integrals</h3>
+  <p>Your notes (set A p.8) wrote n = ∫ g(E) f(E) dE. The Drive gives the actual shapes:</p>
+  {{fig:dos_carriers|Multiply the number of seats g(E) by the chance each is taken f(E): the shaded areas are n and p.}}
+  <div class="eq"><span class="cap">Density of states (states per eV per cm³)</span>
+    <div class="row">g<sub>c</sub>(E) = [[4π(2m<sub>n</sub>*)<sup>3/2</sup>|h³]] √(E − E<sub>c</sub>) for E ≥ E<sub>c</sub> &nbsp;&nbsp;&nbsp; g<sub>v</sub>(E) = [[4π(2m<sub>p</sub>*)<sup>3/2</sup>|h³]] √(E<sub>v</sub> − E) for E ≤ E<sub>v</sub></div>
+    <div class="row">Inside the gap g = 0, so there are no electrons there even where f = 0.5.</div></div>
+  <p>Doing the integral gives n = N<sub>c</sub>F<sub>1/2</sub>(η), where F<sub>1/2</sub> is the <b>Fermi–Dirac integral of order ½</b>. If E<sub>F</sub> is at least <b>3kT</b> away from the band edge, the Fermi function's tail is a plain exponential (the <b>Boltzmann approximation</b>) and the integral becomes simple:</p>
+  <div class="eq"><span class="cap">Non-degenerate carrier concentrations</span>
+    <div class="row"><b>n = N<sub>c</sub> exp[−(E<sub>c</sub> − E<sub>F</sub>)/kT] &nbsp;&nbsp;&nbsp; p = N<sub>v</sub> exp[−(E<sub>F</sub> − E<sub>v</sub>)/kT]</b></div>
+    <div class="row">Effective densities of states: N<sub>c</sub> = 2(2πm<sub>n</sub>*kT/h²)<sup>3/2</sup>, N<sub>v</sub> = 2(2πm<sub>p</sub>*kT/h²)<sup>3/2</sup>; Si at 300 K: N<sub>c</sub> ≈ 2.8×10<sup>19</sup>, N<sub>v</sub> ≈ 1.04×10<sup>19</sup> cm<sup>-3</sup> (both ∝ T<sup>3/2</sup>)</div>
+    <div class="row">Multiply: np = N<sub>c</sub>N<sub>v</sub>e<sup>−E<sub>g</sub>/kT</sup> = n<sub>i</sub>² ⇒ <b>n<sub>i</sub> = √(N<sub>c</sub>N<sub>v</sub>) exp(−E<sub>g</sub>/2kT)</b> (this is why mass action holds)</div></div>
+  <details class="q" open><summary>Worked: (a) compute n<sub>i</sub> for Si. (b) Where is E<sub>F</sub> in Si with n = 10<sup>16</sup> cm<sup>-3</sup>? Is the Boltzmann approximation valid?</summary><div class="ans">
+    <p>(a) √(2.8×10<sup>19</sup> × 1.04×10<sup>19</sup>) = 1.71×10<sup>19</sup>; E<sub>g</sub>/2kT = 1.12/0.0518 = 21.6; e<sup>−21.6</sup> = 4.1×10<sup>-10</sup> ⇒ n<sub>i</sub> ≈ <b>7×10<sup>9</sup> cm<sup>-3</sup></b>. Textbooks quote 1×10<sup>10</sup> or 1.5×10<sup>10</sup> depending on the m* and E<sub>g</sub> values used; use whatever the question gives.</p>
+    <p>(b) E<sub>c</sub> − E<sub>F</sub> = kT ln(N<sub>c</sub>/n) = 0.0259 × ln(2800) = 0.0259 × 7.94 = <b>0.206 eV</b> below E<sub>c</sub>. That is 8kT &gt; 3kT ⇒ Boltzmann is fine.</p></div></details>
+  <p>The Drive stresses that <b>n<sub>i</sub> cannot be reduced</b>: it is the minimum carrier concentration that heat always creates. Higher n<sub>i</sub> means more <b>leakage current and noise</b>: Ge (0.68 eV) is leaky, GaN (3.4 eV) has a vanishingly small n<sub>i</sub>.</p>
+
+  <h3>13.3 Temperature: freeze-out, extrinsic, intrinsic</h3>
+  {{fig:n_vs_T|Electron concentration of n-type Si against temperature (computed with incomplete ionisation and n<sub>i</sub>(T)).}}
+  <ol class="steps">
+    <li><b>Freeze-out (≈ 10 to 50 K up to ~100 K):</b> kT ≪ E<sub>c</sub> − E<sub>D</sub>, so donors keep their electrons; n falls exponentially as T drops.</li>
+    <li><b>Extrinsic (includes room temperature):</b> donors ~100 % ionised, <b>n ≈ N<sub>D</sub></b>, independent of T. This is the region devices are designed for.</li>
+    <li><b>Intrinsic (very high T; for Si roughly 500 to 700 °C at moderate doping):</b> n<sub>i</sub> ∝ e<sup>−E<sub>g</sub>/2kT</sup> outgrows N<sub>D</sub>; the doping no longer controls the conductivity. Wide-gap GaN and SiC stay extrinsic to much higher temperatures, so they are used for hot, high-power electronics.</li>
+  </ol>
+
+  <h3>13.4 Heavy doping and incomplete ionisation</h3>
+  <ul>
+    <li><b>Degenerate semiconductor:</b> at very high doping E<sub>F</sub> comes within 3kT (≈ 78 meV at 300 K) of the band edge or even enters the band (E<sub>F</sub> &gt; E<sub>c</sub>). The Boltzmann formula fails. The Drive gives the <b>Joyce–Dixon approximation</b>: (E<sub>F</sub> − E<sub>c</sub>)/kT = ln(n/N<sub>c</sub>) + (1/√8)(n/N<sub>c</sub>), solved numerically.</li>
+    <li><b>Band-gap narrowing:</b> heavy doping distorts the lattice potential so E<sub>g</sub> shrinks (Si 1.1 → ~1.0 eV) and the band edges grow <b>band tails</b>.</li>
+    <li><b>Incomplete ionisation:</b> a dopant is fully ionised only if its level is within about kT of the band. At 3 to 4 kT it is only partly ionised. Example from the Drive: Mg acceptors in GaN are only 1 to 5 % ionised (10<sup>17</sup> Mg gives about 10<sup>15</sup> holes), a real problem for blue/white LEDs.</li>
+  </ul>
+  <div class="eq"><span class="cap">Ionisation fractions</span>
+    <div class="row"><b>[[N<sub>D</sub><sup>+</sup>|N<sub>D</sub>]] = [[1|1 + 2 exp[(E<sub>F</sub> − E<sub>D</sub>)/kT]]]</b> (factor 2: spin) &nbsp;&nbsp;&nbsp; <b>[[N<sub>A</sub><sup>−</sup>|N<sub>A</sub>]] = [[1|1 + 4 exp[(E<sub>A</sub> − E<sub>F</sub>)/kT]]]</b> (factor 4: spin × heavy/light holes)</div>
+    <div class="row">Charge neutrality must use the ionised numbers: p + N<sub>D</sub><sup>+</sup> = n + N<sub>A</sub><sup>−</sup>.</div></div>
+  <details class="q" open><summary>Worked: what fraction of donors is ionised when E<sub>F</sub> = E<sub>D</sub>? When E<sub>F</sub> is 3kT below E<sub>D</sub>? When 2kT above?</summary><div class="ans">
+    <p>E<sub>F</sub> = E<sub>D</sub>: 1/(1 + 2) = <b>33 %</b> (the Drive's number). 3kT below: 1/(1 + 2e<sup>−3</sup>) = <b>91 %</b>. 2kT above: 1/(1 + 2e<sup>2</sup>) = <b>6 %</b>.</p></div></details>
+
+  <h3>13.5 Scattering and mobility, the details</h3>
+  <ul>
+    <li>Scattering is not a billiard-ball hit: a disturbance in the periodic potential deflects the electron. Two sources: <b>phonons</b> (lattice vibrations; modes are <b>acoustic and optical</b>, each <b>transverse and longitudinal</b>), stronger at high T; and <b>ionised impurities</b> (Coulomb), stronger at low T and high doping.</li>
+    <li>The drift cycle: accelerate, gain energy, scatter, lose energy, repeat. Velocity = random thermal part (no current) + drift part (only with a field; the field can be internal, from a band slope).</li>
+    <li><b>μ = qτ/m*</b> (cm²/V·s): mobility is the slope of v vs E, ∝ τ and ∝ 1/m* (holes are heavier, so slower).</li>
+    <li>Low field: v = μE. High field: v saturates, dv/dE = 0, and mobility no longer matters. Many short-channel transistors work in this regime (Chapter 11).</li>
+    <li>The Drive warns that this temperature dependence matters for design: CMOS logic timing can fail when mobility drops on a hot chip.</li>
+  </ul>
+  <details class="q"><summary>Worked: electrons in Si have μ<sub>n</sub> = 1350 cm²/V·s and m* = 0.26m<sub>0</sub>. Find the mean time between collisions.</summary><div class="ans">
+    <p>τ = μm*/q = (0.135 m²/V·s × 0.26 × 9.11×10<sup>-31</sup> kg)/1.6×10<sup>-19</sup> C = <b>2.0×10<sup>-13</sup> s = 0.2 ps</b>. (Convert μ to SI first: 1350 cm²/V·s = 0.135 m²/V·s.)</p></div></details>
+
+  <h3>13.6 Einstein's relation: the derivation, and the built-in field of non-uniform doping</h3>
+  <p>Your notes state D<sub>n</sub>/μ<sub>n</sub> = kT/q. The Drive derives it:</p>
+  <ol class="steps">
+    <li>Take an n-type bar in equilibrium whose doping falls from left to right. E<sub>F</sub> is flat (equilibrium), so E<sub>c</sub> − E<sub>F</sub> grows to the right: the bands tilt.</li>
+    <li>A tilted band means a field: <b>E = (1/q) dE<sub>c</sub>/dx</b> (as on your set-A p.23). This is the <b>built-in field of non-uniform doping</b>.</li>
+    <li>n(x) = N<sub>c</sub> exp[(E<sub>F</sub> − E<sub>c</sub>(x))/kT] ⇒ dn/dx = −(n/kT) dE<sub>c</sub>/dx.</li>
+    <li>In equilibrium the total current is zero, so drift balances diffusion in magnitude: qD<sub>n</sub>|dn/dx| = qμ<sub>n</sub>nE ⇒ qD<sub>n</sub>(n/kT)(dE<sub>c</sub>/dx) = μ<sub>n</sub>n(dE<sub>c</sub>/dx).</li>
+    <li>Cancel: <b>D<sub>n</sub>/μ<sub>n</sub> = kT/q</b>. Although derived at equilibrium, it holds generally.</li>
+  </ol>
+
+  <h3>13.7 Traps and Shockley–Read–Hall statistics</h3>
+  <p>Physical defects (dislocations, missing lines of atoms, vacancies, dangling bonds, impurities, interstitials) create discrete states at E<sub>T</sub> inside the gap. They matter in p–n junctions, BJTs, LEDs and solar cells. Four processes happen at a trap:</p>
+  <div class="tablewrap"><table>
+    <tr><th>Process</th><th>What happens</th><th>Rate (Drive)</th></tr>
+    <tr><td>r<sub>a</sub></td><td>electron capture (CB → empty trap)</td><td>σ<sub>n</sub>v<sub>th</sub>nN<sub>t</sub>(1 − f)</td></tr>
+    <tr><td>r<sub>b</sub></td><td>electron emission (full trap → CB)</td><td>e<sub>n</sub>N<sub>t</sub>f</td></tr>
+    <tr><td>r<sub>c</sub></td><td>hole capture (full trap's electron drops to VB)</td><td>σ<sub>p</sub>v<sub>th</sub>pN<sub>t</sub>f</td></tr>
+    <tr><td>r<sub>d</sub></td><td>hole emission (VB electron jumps up to the empty trap)</td><td>e<sub>p</sub>N<sub>t</sub>(1 − f)</td></tr>
+  </table></div>
+  <p>σ = <b>capture cross-section</b> (cm²), v<sub>th</sub> = thermal velocity (≈ 10<sup>7</sup> cm/s), so σv<sub>th</sub> is the volume an electron sweeps per second; f = trap occupancy (a Fermi function at E<sub>t</sub>). In steady state r<sub>a</sub> − r<sub>b</sub> = r<sub>c</sub> − r<sub>d</sub>, and solving gives your SRH formula U = (pn − n<sub>i</sub>²)/[τ(p + n + 2n<sub>i</sub>)] for mid-gap traps, with</p>
+  <div class="eq"><div class="row"><b>τ = [[1|σ v<sub>th</sub> N<sub>t</sub>]]</b> &nbsp;&nbsp; more traps ⇒ shorter lifetime ⇒ faster recombination. (The Drive writes n for the density; physically it is the trap density N<sub>t</sub>.)</div></div>
+  <p>Recombination can be <b>radiative</b> (energy leaves as light, band-to-band in direct-gap materials) or <b>non-radiative</b> (energy leaves as heat/phonons, typical of traps).</p>
+  <details class="q"><summary>Worked: σ = 10<sup>-15</sup> cm², v<sub>th</sub> = 10<sup>7</sup> cm/s, N<sub>t</sub> = 10<sup>14</sup> cm<sup>-3</sup>. Find τ. What happens if contamination raises N<sub>t</sub> to 10<sup>16</sup>?</summary><div class="ans">
+    <p>τ = 1/(10<sup>-15</sup> × 10<sup>7</sup> × 10<sup>14</sup>) = <b>1 μs</b>. At N<sub>t</sub> = 10<sup>16</sup>: τ = <b>10 ns</b>, 100× shorter. This is why fabs fight metal contamination.</p></div></details>
+
+  <h3>13.8 Optical generation and the continuity equation</h3>
+  <p>A photon can create an electron–hole pair only if its energy reaches the gap: hν = hc/λ ≥ E<sub>g</sub> ⇒ <b>λ ≤ hc/E<sub>g</sub></b> (cut-off wavelength). Handy form: <b>λ(μm) = 1.24/E<sub>g</sub>(eV)</b>. Si: 1.24/1.12 = 1.1 μm, so Si detects visible and near-IR light. G<sub>L</sub> = optical generation rate (cm<sup>-3</sup>s<sup>-1</sup>).</p>
+  <p>The <b>continuity equation</b> is bookkeeping for a thin slice A·dx: (rate of change of carriers) = (flow in − flow out) + (generation) − (recombination):</p>
+  <div class="eq"><span class="cap">Continuity equation (electrons)</span>
+    <div class="row"><b>[[∂n|∂t]] = [[1|q]] [[∂J<sub>n</sub>|∂x]] + G<sub>L</sub> − U</b> &nbsp;&nbsp; (for minority electrons in p-type, U = Δn/τ)</div>
+    <div class="row">Steady state, no field (diffusion only): <b>D<sub>n</sub> [[d²Δn|dx²]] + G<sub>L</sub> − [[Δn|τ]] = 0</b></div>
+    <div class="row">With G<sub>L</sub> = 0: d²Δn/dx² = Δn/L<sub>n</sub>², &nbsp; <b>L<sub>n</sub> = √(D<sub>n</sub>τ<sub>n</sub>)</b> &nbsp;⇒&nbsp; Δn(x) = A<sub>1</sub>e<sup>x/L<sub>n</sub></sup> + A<sub>2</sub>e<sup>−x/L<sub>n</sub></sup></div></div>
+  {{fig:continuity|The Drive's two examples: decay in time after the light is switched off, and decay in space away from where carriers are injected.}}
+  <ul>
+    <li><b>Example 1, uniform illumination</b> (no gradient, steady): G<sub>L</sub> = Δn/τ ⇒ <b>Δn = G<sub>L</sub>τ</b>.</li>
+    <li><b>Example 2, light switched off at t = 0</b> (uniform): dΔn/dt = −Δn/τ ⇒ <b>Δn(t) = G<sub>L</sub>τ e<sup>−t/τ</sup></b>. Watching this decay is how lifetime is measured.</li>
+    <li>L<sub>n</sub> is the average distance an excess electron diffuses before it recombines; it is the L<sub>n</sub>, L<sub>p</sub> in your diode current (set A p.26).</li>
+  </ul>
+  <details class="q" open><summary>Worked: p-type Si, μ<sub>n</sub> = 1350 cm²/V·s, τ<sub>n</sub> = 1 μs, uniformly lit with G<sub>L</sub> = 10<sup>20</sup> cm<sup>-3</sup>s<sup>-1</sup>. Find Δn, D<sub>n</sub>, L<sub>n</sub>, and Δn 2 μs after the light goes off.</summary><div class="ans">
+    <ol class="steps"><li>Δn = G<sub>L</sub>τ = 10<sup>20</sup> × 10<sup>-6</sup> = <b>10<sup>14</sup> cm<sup>-3</sup></b>.</li>
+    <li>D<sub>n</sub> = μ<sub>n</sub>kT/q = 1350 × 0.0259 = <b>35 cm²/s</b>.</li>
+    <li>L<sub>n</sub> = √(35 × 10<sup>-6</sup>) = 5.9×10<sup>-3</sup> cm = <b>59 μm</b>.</li>
+    <li>After 2 μs = 2τ: Δn = 10<sup>14</sup> e<sup>−2</sup> = <b>1.35×10<sup>13</sup> cm<sup>-3</sup></b>.</li></ol></div></details>
+
+  <h3>13.9 The p–n junction in equilibrium: derivations</h3>
+  <p><b>Assumptions</b> (Drive): moderate doping (no band tails or Joyce–Dixon), full ionisation, no light or external fields, and the <b>depletion approximation</b> (absolutely no mobile carriers inside W, perfectly neutral outside). The neutral regions have no field; E<sub>F</sub> is constant everywhere, which forces the bands to bend.</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10: the "cemented floor" (Drive)</span>
+    <p>Imagine E<sub>c</sub> is a floor made of cement. Electrons are marbles that roll downhill on it. Across the junction the floor slopes down toward the n-side, so marbles that wander to the p-side roll back. The slope is the built-in field (pointing n → p), and its height is qV<sub>bi</sub>. Holes are bubbles that float <i>up</i> the E<sub>v</sub> floor, so they are pushed back to the p-side.</p></div>
+  <div class="eq"><span class="cap">Built-in voltage, the Drive's derivation</span>
+    <div class="row">n-side: E<sub>c</sub> − E<sub>F</sub> = kT ln(N<sub>c</sub>/N<sub>D</sub>) &nbsp;&nbsp; p-side: E<sub>F</sub> − E<sub>v</sub> = kT ln(N<sub>v</sub>/N<sub>A</sub>)</div>
+    <div class="row">qV<sub>bi</sub> = E<sub>g</sub> − (E<sub>c</sub> − E<sub>F</sub>)<sub>n</sub> − (E<sub>F</sub> − E<sub>v</sub>)<sub>p</sub> = E<sub>g</sub> − kT ln[N<sub>c</sub>N<sub>v</sub>/(N<sub>A</sub>N<sub>D</sub>)]</div>
+    <div class="row">Use n<sub>i</sub>² = N<sub>c</sub>N<sub>v</sub>e<sup>−E<sub>g</sub>/kT</sup> ⇒ ln(N<sub>c</sub>N<sub>v</sub>) = ln n<sub>i</sub>² + E<sub>g</sub>/kT; the E<sub>g</sub> terms cancel ⇒ <b>V<sub>bi</sub> = (kT/q) ln(N<sub>A</sub>N<sub>D</sub>/n<sub>i</sub>²)</b> (your set-A p.21 formula)</div>
+    <div class="row">More doping or a wider gap (smaller n<sub>i</sub>) ⇒ larger V<sub>bi</sub>; maximum ≈ E<sub>g</sub>/q at degenerate doping. V<sub>bi</sub> <b>cannot be measured with a voltmeter</b> (contact potentials cancel it).</div></div>
+  <div class="eq"><span class="cap">Poisson's equation and the field (n-side, 0 ≤ x ≤ W<sub>n</sub>)</span>
+    <div class="row">d²V/dx² = −ρ/ε<sub>s</sub> with ρ = qN<sub>D</sub> ⇒ field is a straight line: <b>|E(x)| = [[qN<sub>D</sub>|ε<sub>s</sub>]](W<sub>n</sub> − x)</b>, zero at the depletion edge</div>
+    <div class="row"><b>|E<sub>max</sub>| = [[qN<sub>D</sub>W<sub>n</sub>|ε<sub>s</sub>]] = [[qN<sub>A</sub>W<sub>p</sub>|ε<sub>s</sub>]]</b> at the junction (x = 0) &nbsp;&nbsp; ⇒ N<sub>A</sub>W<sub>p</sub> = N<sub>D</sub>W<sub>n</sub></div>
+    <div class="row">Potential drops: V<sub>n</sub> = qN<sub>D</sub>W<sub>n</sub>²/2ε<sub>s</sub>, V<sub>p</sub> = qN<sub>A</sub>W<sub>p</sub>²/2ε<sub>s</sub>, V<sub>bi</sub> = V<sub>n</sub> + V<sub>p</sub> = ½|E<sub>max</sub>|W ⇒ the W formula of your set-A p.22</div></div>
+  <details class="q" open><summary>Worked: Si p⁺n junction, N<sub>A</sub> = 10<sup>17</sup>, N<sub>D</sub> = 10<sup>15</sup> cm<sup>-3</sup>, n<sub>i</sub> = 1.5×10<sup>10</sup>. Find V<sub>bi</sub>, W, W<sub>n</sub>, W<sub>p</sub>, E<sub>max</sub>, and W at 5 V reverse bias.</summary><div class="ans">
+    <ol class="steps"><li>V<sub>bi</sub> = 0.0259 ln(10<sup>32</sup>/2.25×10<sup>20</sup>) = 0.0259 × 26.82 = <b>0.695 V</b>.</li>
+    <li>W = √[(2 × 1.04×10<sup>-12</sup> × 0.695/1.6×10<sup>-19</sup>)(10<sup>-17</sup> + 10<sup>-15</sup>)] = √(9.13×10<sup>-9</sup>) = <b>0.955 μm</b>.</li>
+    <li>W<sub>n</sub> = W·N<sub>A</sub>/(N<sub>A</sub> + N<sub>D</sub>) = <b>0.946 μm</b>; W<sub>p</sub> = <b>9.5 nm</b>: the depletion lies almost entirely in the lightly doped side.</li>
+    <li>E<sub>max</sub> = 2V<sub>bi</sub>/W = 1.39/9.55×10<sup>-5</sup> = <b>1.45×10<sup>4</sup> V/cm</b>.</li>
+    <li>At V<sub>R</sub> = 5 V replace V<sub>bi</sub> by V<sub>bi</sub> + V<sub>R</sub> = 5.695 V: W = 0.955 × √(5.695/0.695) = <b>2.73 μm</b>.</li></ol></div></details>
+  <p>Very high doping on both sides (≈ 10<sup>18</sup> and above) makes W only 10 to 20 nm, thin enough for electrons to tunnel straight through: the <b>tunnel diode</b>.</p>
+
+  <h3>13.10 The biased junction: quasi-Fermi levels, long and short diodes</h3>
+  <ul>
+    <li>Under bias there is no single E<sub>F</sub>. Each carrier type gets its own <b>quasi-Fermi level</b>, E<sub>Fn</sub> and E<sub>Fp</sub>. Their separation across the junction equals <b>qV<sub>a</sub></b>; they merge into one E<sub>F</sub> at V<sub>a</sub> = 0. In general <b>np = n<sub>i</sub>² e<sup>(E<sub>Fn</sub> − E<sub>Fp</sub>)/kT</sup></b>, which is where your p<sub>n</sub>(x<sub>n</sub>) = p<sub>n0</sub>e<sup>V/V<sub>T</sub></sup> comes from.</li>
+    <li>Barrier under bias: <b>q(V<sub>bi</sub> − V<sub>a</sub>)</b>. Drive example: 0.76 − 0.4 = 0.36 V forward; 0.76 + 2 = 2.76 V at 2 V reverse.</li>
+    <li><b>Long diode</b> (neutral region ≫ L<sub>p</sub>): excess carriers decay exponentially, as in your notes. <b>Short diode</b> (neutral region ≪ L<sub>p</sub>): almost no recombination, so the profile is a <b>straight line</b> and L<sub>p</sub> is replaced by the region length in J<sub>0</sub>. The BJT base is a short diode.</li>
+    <li><b>Total current is the same at every x</b> (Kirchhoff). Far from the junction the minority diffusion current has died away, so the current is carried by <b>majority-carrier drift</b> in the quasi-neutral regions. That's why your notes (p.27) add the drift picture.</li>
+    <li><b>J<sub>0</sub> ∝ n<sub>i</sub>²</b>: Ge leaks a lot, GaN very little, so wide-gap diodes are better rectifiers (power devices, low dark current in photodetectors). In reverse bias the minority concentration at the depletion edge is ≈ 0; the tiny J<sub>0</sub> is made of thermally generated minority carriers that wander to the edge and are swept across.</li>
+  </ul>
+
+  <h3>13.11 Generation–recombination currents and the ideality factor</h3>
+  <p>The ideal-diode law assumed no recombination inside the depletion region. Real junctions contain traps there, where p and n are both small, which is exactly where SRH is most effective. So <b>J<sub>total</sub> = J<sub>ideal</sub> + J<sub>GR</sub></b>. Sign of U: <b>U &gt; 0 = net recombination (forward bias); U &lt; 0 = net generation (reverse bias)</b>.</p>
+  <div class="eq"><span class="cap">Recombination current (forward)</span>
+    <div class="row">Assume mid-gap traps and p ≈ n at the worst point; with pn = n<sub>i</sub>²e<sup>qV<sub>a</sub>/kT</sup> ⇒ p ≈ n ≈ n<sub>i</sub>e<sup>qV<sub>a</sub>/2kT</sup></div>
+    <div class="row">U<sub>max</sub> ≈ [[n<sub>i</sub>²e<sup>qV/kT</sup>|τ · 2n<sub>i</sub>e<sup>qV/2kT</sup>]] = [[n<sub>i</sub>|2τ]] e<sup>qV/2kT</sup> &nbsp;⇒&nbsp; <b>J<sub>rec</sub> ≈ [[qn<sub>i</sub>W|2τ]] e<sup>qV<sub>a</sub>/2kT</sup></b></div></div>
+  <div class="eq"><span class="cap">Generation current (reverse)</span>
+    <div class="row">p, n ≪ n<sub>i</sub> ⇒ U ≈ −n<sub>i</sub>/2τ (net generation from traps, not light) ⇒ <b>J<sub>gen</sub> = [[qn<sub>i</sub>W|2τ]]</b> &nbsp;&nbsp; J<sub>rev</sub> = −(J<sub>0</sub> + J<sub>gen</sub>)</div>
+    <div class="row">J<sub>gen</sub> ∝ W ∝ √(V<sub>bi</sub> + V<sub>R</sub>), so real reverse current <b>creeps up</b> with V<sub>R</sub> until breakdown.</div></div>
+  <div class="eq"><span class="cap">Ideality factor η</span>
+    <div class="row"><b>J ∝ e<sup>qV/ηkT</sup></b>: ideal diffusion η = 1; recombination η = 2. Low V: J<sub>rec</sub> dominates (slope 1/2kT on a log plot). High V: diffusion dominates (slope 1/kT). Poor material (badly grown GaN) can show η = 5 to 10.</div></div>
+  {{fig:diode_gr|Left: forward current on a log scale with the η = 2 and η = 1 parts. Right: reverse current rising with V<sub>R</sub> because of generation in the widening depletion region.}}
+  <details class="q" open><summary>Worked: the diode of §13.9 (W = 0.955 μm at zero bias; say 0.5 μm effective) with τ = 1 μs. Compare J<sub>gen</sub> with the diffusion J<sub>0</sub> (hole side: D<sub>p</sub> = 12 cm²/s, L<sub>p</sub> = √(D<sub>p</sub>τ)).</summary><div class="ans">
+    <ol class="steps"><li>J<sub>gen</sub> = qn<sub>i</sub>W/2τ = 1.6×10<sup>-19</sup> × 1×10<sup>10</sup> × 0.5×10<sup>-4</sup> / 2×10<sup>-6</sup> = <b>4×10<sup>-8</sup> A/cm²</b> (using n<sub>i</sub> = 10<sup>10</sup>).</li>
+    <li>L<sub>p</sub> = √(12 × 10<sup>-6</sup>) = 34.6 μm. J<sub>0</sub> ≈ qn<sub>i</sub>²D<sub>p</sub>/(L<sub>p</sub>N<sub>D</sub>) = 1.6×10<sup>-19</sup> × 10<sup>20</sup> × 12/(3.46×10<sup>-3</sup> × 10<sup>15</sup>) = <b>5.5×10<sup>-11</sup> A/cm²</b>.</li>
+    <li>J<sub>gen</sub>/J<sub>0</sub> ≈ 700. <b>In silicon at room temperature the real reverse current is mostly generation current</b>, because J<sub>gen</sub> ∝ n<sub>i</sub> while J<sub>0</sub> ∝ n<sub>i</sub>².</li></ol></div></details>
+  <div class="tablewrap"><table>
+    <tr><th>Material (Drive)</th><th>E<sub>g</sub> (eV)</th><th>Turn-on voltage ≈ V<sub>bi</sub></th></tr>
+    <tr><td>Ge</td><td>0.7</td><td>~0.4 V</td></tr><tr><td>Si</td><td>1.1</td><td>0.7 to 0.8 V</td></tr>
+    <tr><td>GaAs</td><td>1.42</td><td>1.0 to 1.1 V</td></tr><tr><td>GaN</td><td>3.4</td><td>~3.2 V</td></tr></table></div>
+  <p>This table is the answer to your Si-vs-Ge assignment (set A p.30) in numbers: the same 20 mA needs more voltage (and more power) in a wider-gap diode.</p>
+
+  <h3>13.12 Breakdown, in depth</h3>
+  <ul>
+    <li>Breakdown happens only in reverse, where almost the whole voltage drops across the depletion region. It is <b>not destructive</b> unless the current is allowed to grow without limit (Zener diodes work there on purpose).</li>
+    <li><b>Zener (tunnelling):</b> both sides heavily doped ⇒ W very thin ⇒ VB electrons on the p-side tunnel straight into empty CB states on the n-side through a thin triangular barrier. <b>V<sub>BR</sub> ≲ 4E<sub>g</sub>/q</b> (≈ 4.4 V for Si; your notes: &lt; 5 V).</li>
+    <li><b>Avalanche (impact ionisation):</b> lighter doping, wider W; a carrier gains enough energy to knock a new electron–hole pair out of the lattice, and the new carriers do the same: a chain reaction. <b>V<sub>BR</sub> ≳ 6E<sub>g</sub>/q</b> (&gt; 6.6 V for Si; your notes: &gt; 8 V). The most common mechanism.</li>
+    <li>Impact-ionisation coefficient α<sub>n</sub> = (1/n)(dn/dx) (new pairs per cm). <b>Multiplication factor M = 1/(1 − ∫<sub>0</sub><sup>W</sup>α dx)</b>; breakdown when the integral reaches 1 (M → ∞).</li>
+    <li><b>Critical field</b> F<sub>crit</sub>: Si ≈ 4×10<sup>5</sup> V/cm, GaN ≈ 3×10<sup>6</sup> V/cm, weakly dependent on doping. The field is triangular, so <b>V<sub>BR</sub> = ½ W F<sub>max</sub></b>. For W = 1 μm: Si ½ × 10<sup>-4</sup> × 4×10<sup>5</sup> = 20 V; GaN ≈ 150 V (the Drive quotes 180 V with a slightly larger F<sub>crit</sub>). That is why GaN and SiC are used for high-power switches.</li>
+  </ul>
+  <details class="q"><summary>Worked: one-sided Si junction with N<sub>D</sub> = 10<sup>16</sup> cm<sup>-3</sup> on the light side. Estimate the avalanche breakdown voltage.</summary><div class="ans">
+    <p>At breakdown E<sub>max</sub> = qN<sub>D</sub>W/ε<sub>s</sub> = F<sub>crit</sub> and V<sub>BR</sub> = ½WF<sub>crit</sub> ⇒ <b>V<sub>BR</sub> = ε<sub>s</sub>F<sub>crit</sub>²/(2qN<sub>D</sub>)</b> = 1.04×10<sup>-12</sup> × (4×10<sup>5</sup>)²/(2 × 1.6×10<sup>-19</sup> × 10<sup>16</sup>) = <b>52 V</b>. Lighter doping ⇒ higher breakdown voltage.</p></div></details>
+
+  <h3>13.13 Junction capacitance and C–V profiling</h3>
+  <p>The depletion region is a parallel-plate capacitor whose gap W changes with voltage: <b>C<sub>j</sub> = ε<sub>s</sub>A/W</b> = ΔQ/ΔV. Reverse bias ↑ ⇒ W ↑ ⇒ C ↓ (the basis of the varactor). For a one-sided p⁺n junction, putting W into C gives a straight line:</p>
+  <div class="eq"><span class="cap">C–V profiling (per unit area)</span>
+    <div class="row"><b>[[1|C²]] = [[2(V<sub>bi</sub> − V<sub>A</sub>)|qε<sub>s</sub>N<sub>D</sub>]]</b> &nbsp;&nbsp; |slope| = 2/(qε<sub>s</sub>N<sub>D</sub>) ⇒ <b>N<sub>D</sub></b> of the lightly doped side &nbsp;&nbsp; intercept on the V axis ⇒ <b>V<sub>bi</sub></b></div>
+    <div class="row">(If C is the total capacitance, put A² in the denominator: 1/C² = 2(V<sub>bi</sub> − V<sub>A</sub>)/(qε<sub>s</sub>N<sub>D</sub>A²).)</div></div>
+  {{fig:cv_profiling|Measure C at several reverse biases, plot 1/C² against V: the slope gives the doping and the intercept gives V<sub>bi</sub>, which can't be measured any other way.}}
+
+  <h3>13.14 One junction, four jobs: LED, photodetector, solar cell</h3>
+  {{fig:diode_quadrants|Dark and illuminated I–V curves of the same p–n junction and the four quadrants (Drive file 9).}}
+  <div class="tablewrap"><table>
+    <tr><th>Quadrant</th><th>Bias</th><th>Device</th><th>Key facts</th></tr>
+    <tr><td>Q1</td><td>forward</td><td><b>LED</b></td><td>Needs a <b>direct</b> gap (GaAs, GaN; not Si or Ge). Radiative band-to-band recombination emits <b>λ = hc/E<sub>g</sub> ≈ 1242/E<sub>g</sub> nm</b> (E<sub>g</sub> in eV). Bias slightly above turn-on (e.g. 2.2 to 2.3 V for a 2 V LED). Simple junctions are inefficient: carriers cross too fast and the p and n regions re-absorb photons; fix with wider-gap cladding layers.</td></tr>
+    <tr><td>Q2</td><td>—</td><td>not used</td><td></td></tr>
+    <tr><td>Q3</td><td>reverse (or zero), lit</td><td><b>Photodetector</b></td><td>A photon with E ≥ E<sub>g</sub> makes a pair in the depletion region; the field sweeps the electron to n and the hole to p. <b>Dark current</b> = J<sub>0</sub> + generation; signal = <b>photocurrent</b>; sensitivity = photo/dark ratio. Biased near breakdown it multiplies its own current: the <b>avalanche photodiode (APD)</b>.</td></tr>
+    <tr><td>Q4</td><td>self-biased by a load</td><td><b>Solar cell</b></td><td>Same mechanism, but the cell delivers power, like a battery. <b>I<sub>SC</sub></b> = short-circuit current (at V = 0, equal to the photocurrent); <b>V<sub>OC</sub></b> = open-circuit voltage; efficiency from the maximum-power point (<b>fill factor</b>). Sunlight peaks around 500 to 550 nm, so choose the gap to match.</td></tr>
+  </table></div>
+  <details class="q" open><summary>Worked: (a) emission wavelength of GaN and GaAs LEDs. (b) A solar cell has I<sub>0</sub> = 1 pA and I<sub>ph</sub> = 2 mA. Find V<sub>OC</sub>.</summary><div class="ans">
+    <p>(a) GaN: 1242/3.4 = <b>365 nm</b> (near-UV/violet; the Drive's number). GaAs: 1242/1.42 = <b>875 nm</b> (infrared). Wider gap ⇒ shorter wavelength ⇒ higher turn-on voltage.</p>
+    <p>(b) At open circuit the net current is zero: I<sub>0</sub>(e<sup>V/V<sub>T</sub></sup> − 1) = I<sub>ph</sub> ⇒ V<sub>OC</sub> = V<sub>T</sub> ln(I<sub>ph</sub>/I<sub>0</sub> + 1) = 0.0259 × ln(2×10<sup>9</sup>) = 0.0259 × 21.4 = <b>0.555 V</b>.</p></div></details>
+
+  <h3>13.15 The MOS capacitor in band-diagram language</h3>
+  {{fig:mos_bands|p-type MOS capacitor: bands bend up in accumulation and down in depletion; strong inversion is when the surface band bending ψ<sub>s</sub> reaches 2φ<sub>F</sub>.}}
+  <ul>
+    <li><b>Ideal flat band:</b> metal and semiconductor work functions equal (φ<sub>m</sub> = φ<sub>s</sub>), so at V<sub>G</sub> = 0 the Fermi levels line up and the bands are flat. A gate voltage separates the two Fermi levels by qV<sub>G</sub>.</li>
+    <li><b>Bulk potential φ<sub>F</sub></b> (ψ<sub>BP</sub>): qφ<sub>F</sub> = E<sub>i</sub> − E<sub>F</sub> in the bulk, a measure of how p-type the substrate is: φ<sub>F</sub> = V<sub>T</sub> ln(N<sub>A</sub>/n<sub>i</sub>).</li>
+    <li><b>Accumulation</b> (V<sub>G</sub> &lt; 0): holes pile up, bands bend <b>up</b> at the surface (E<sub>v</sub> moves toward E<sub>F</sub>).</li>
+    <li><b>Depletion</b> (small V<sub>G</sub> &gt; 0): holes pushed away, bands bend <b>down</b>; the surface becomes less p-type.</li>
+    <li><b>Weak inversion</b> starts when E<sub>i</sub> at the surface reaches E<sub>F</sub> (band bending = φ<sub>F</sub>: surface is intrinsic).</li>
+    <li><b>Strong inversion</b>: E<sub>i</sub> at the surface is φ<sub>F</sub> <i>below</i> E<sub>F</sub>, so the surface is as n-type as the bulk is p-type. <b>Total band bending ψ<sub>s</sub> = 2φ<sub>F</sub></b>. This is the threshold condition used in Chapter 9.</li>
+    <li><b>Flat-band voltage V<sub>FB</sub></b>: in a real device (φ<sub>m</sub> ≠ φ<sub>s</sub>, charge in the oxide) the bands are not flat at zero bias; V<sub>FB</sub> is the gate voltage that flattens them. V<sub>th</sub> = V<sub>FB</sub> + 2φ<sub>F</sub> + Q<sub>d</sub>/C<sub>ox</sub>.</li>
+  </ul>
+  <div class="callout mine"><span class="lbl">The C–V curve, all four cases (MOS Capacitor_2)</span>
+    <ul>
+      <li>C is measured with a small AC signal on top of the DC bias: C = ΔQ/ΔV.</li>
+      <li><b>Accumulation:</b> majority holes respond instantly at the interface ⇒ C = C<sub>ox</sub> (the maximum).</li>
+      <li><b>Depletion:</b> C<sub>dep</sub> = ε<sub>s</sub>/W<sub>D</sub> in series with C<sub>ox</sub>; V<sub>G</sub> ↑ ⇒ W<sub>D</sub> ↑ ⇒ C ↓.</li>
+      <li><b>Strong inversion:</b> W<sub>D</sub> stops at W<sub>D,max</sub> (the inversion layer screens the field) ⇒ C<sub>min</sub>.
+        <b>Low frequency (~100 Hz):</b> minority electrons have time to be generated and follow the signal ⇒ C climbs back to C<sub>ox</sub>.
+        <b>High frequency (kHz to MHz):</b> they can't follow; only holes at the edge of W<sub>max</sub> respond ⇒ C stays at C<sub>min</sub>.</li>
+      <li><b>Deep depletion:</b> if the <b>DC</b> bias is swept very fast, no inversion layer has time to form; W keeps growing past W<sub>max</sub> and C falls <b>below</b> C<sub>min</sub>.</li>
+      <li><b>At flat band</b> the capacitance is not C<sub>ox</sub>: the AC signal still moves charge to a small depth, the <b>Debye length</b> L<sub>D</sub> = √(ε<sub>s</sub>kT/(q²N<sub>A</sub>)). C<sub>Debye</sub> = ε<sub>s</sub>/L<sub>D</sub>, and <b>C<sub>FB</sub> = C<sub>ox</sub> in series with C<sub>Debye</sub></b>.</li>
+    </ul></div>
+  <details class="q"><summary>Worked: N<sub>A</sub> = 10<sup>16</sup> cm<sup>-3</sup>, t<sub>ox</sub> = 10 nm. Find L<sub>D</sub>, C<sub>Debye</sub> and C<sub>FB</sub>/C<sub>ox</sub>.</summary><div class="ans">
+    <ol class="steps"><li>L<sub>D</sub> = √(ε<sub>s</sub>V<sub>T</sub>/(qN<sub>A</sub>)) = √(1.04×10<sup>-12</sup> × 0.0259/(1.6×10<sup>-19</sup> × 10<sup>16</sup>)) = 4.1×10<sup>-6</sup> cm = <b>41 nm</b>.</li>
+    <li>C<sub>Debye</sub> = 1.04×10<sup>-12</sup>/4.1×10<sup>-6</sup> = 2.53×10<sup>-7</sup> F/cm²; C<sub>ox</sub> = 3.45×10<sup>-13</sup>/10<sup>-6</sup> = 3.45×10<sup>-7</sup> F/cm².</li>
+    <li>C<sub>FB</sub> = 1/(1/3.45 + 1/2.53) × 10<sup>-7</sup> = 1.46×10<sup>-7</sup> ⇒ <b>C<sub>FB</sub>/C<sub>ox</sub> ≈ 0.42</b>.</li></ol></div></details>
+
+  <h3>13.16 The BJT, quantitatively (BJT1, BJT2)</h3>
+  <ul>
+    <li><b>Applications</b> (Drive): switching in power electronics (block 1000 V or pass 10 A from a tiny control signal; DC–DC converters, inverters, motor drives, EV chargers), logic, memory, and amplifiers (power amplifiers, low-noise amplifiers at GHz).</li>
+    <li>Four steps in an npn: <b>injection</b> (E → B), <b>transport and recombination</b> in the base, <b>collection</b> (the reverse-biased CB field sweeps electrons into C), <b>control</b>: I<sub>C</sub> is set by V<sub>BE</sub> (injection) and base transport, <b>not by V<sub>C</sub></b>.</li>
+    <li><b>Control mechanism:</b> a small change in I<sub>B</sub> changes V<sub>BE</sub> a little, and because I<sub>E</sub> is exponential in V<sub>BE</sub>, I<sub>C</sub> changes a lot: amplification.</li>
+    <li>Base current I<sub>B</sub> = I<sub>Ep</sub> (holes back-injected into the emitter) + I<sub>B,rec</sub> (holes lost to recombination in the base). I<sub>C</sub> = I<sub>nc</sub> + I<sub>BC,rev</sub> (pA, neglected).</li>
+  </ul>
+  {{fig:bjt_profile|Minority electrons in a short base fall almost linearly from the emitter edge to ≈ 0 at the reverse-biased collector edge (dashed: the exact sinh shape).}}
+  <div class="eq"><span class="cap">Exact currents (n = electrons in the base, e = holes in the emitter; W = W<sub>Bn</sub>)</span>
+    <div class="row">Boundary conditions: n<sub>b</sub>(0) = (n<sub>i</sub>²/N<sub>AB</sub>)e<sup>qV<sub>BE</sub>/kT</sup>; &nbsp; n<sub>b</sub>(W) ≈ 0</div>
+    <div class="row">I<sub>E</sub> = [ qA[[D<sub>n</sub>|L<sub>n</sub>]][[n<sub>i</sub>²|N<sub>AB</sub>]] coth([[W|L<sub>n</sub>]]) + qA[[D<sub>e</sub>|L<sub>e</sub>]][[n<sub>i</sub>²|N<sub>DE</sub>]] ] (e<sup>qV<sub>BE</sub>/kT</sup> − 1)</div>
+    <div class="row">I<sub>C</sub> = qA[[D<sub>n</sub>|L<sub>n</sub>]][[n<sub>i</sub>²|N<sub>AB</sub>]] [[1|sinh(W/L<sub>n</sub>)]] (e<sup>qV<sub>BE</sub>/kT</sup> − 1)</div>
+    <div class="row">I<sub>B,rec</sub> ≈ qA[[D<sub>n</sub>|2L<sub>n</sub>²]][[n<sub>i</sub>²|N<sub>AB</sub>]] W (e<sup>qV<sub>BE</sub>/kT</sup> − 1)</div></div>
+  <div class="eq"><span class="cap">Figures of merit</span>
+    <div class="row"><b>γ ≈ 1 − [[N<sub>AB</sub>D<sub>e</sub>W|N<sub>DE</sub>D<sub>n</sub>L<sub>e</sub>]]</b> &nbsp;&nbsp; <b>B = [[1|cosh(W/L<sub>n</sub>)]] ≈ 1 − [[W²|2L<sub>n</sub>²]]</b> &nbsp;&nbsp; α = Bγ &nbsp;&nbsp; β = α/(1 − α)</div>
+    <div class="row">β limited by back-injection: <b>β ≈ [[D<sub>n</sub>L<sub>e</sub>N<sub>DE</sub>|D<sub>e</sub>WN<sub>AB</sub>]]</b> &nbsp;&nbsp; β limited by base recombination: <b>β ≈ [[2L<sub>n</sub>²|W²]]</b></div>
+    <div class="row">Maximise β: <b>raise N<sub>DE</sub>, lower N<sub>AB</sub>, shrink W</b> (your set-A p.35 conclusions, now as formulas)</div></div>
+  <details class="q" open><summary>Worked: W = 1 μm, L<sub>n</sub> = 10 μm, L<sub>e</sub> = 1 μm, D<sub>n</sub> = 20, D<sub>e</sub> = 2 cm²/s, N<sub>DE</sub> = 10<sup>19</sup>, N<sub>AB</sub> = 10<sup>17</sup> cm<sup>-3</sup>. Find B, γ, α, β.</summary><div class="ans">
+    <ol class="steps"><li>B = 1/cosh(0.1) = <b>0.995</b> (recombination-limited β alone would be 2 × 100 = 200).</li>
+    <li>γ = 1 − (10<sup>17</sup> × 2 × 1)/(10<sup>19</sup> × 20 × 1) = 1 − 0.001 = <b>0.999</b> (injection-limited β alone would be 1000).</li>
+    <li>α = 0.995 × 0.999 = <b>0.994</b> ⇒ β = 0.994/0.006 ≈ <b>166</b>. Base recombination is the main limit here; a thinner base would help most.</li></ol></div></details>
+  <ul>
+    <li><b>CB configuration:</b> input I<sub>E</sub>, output I<sub>C</sub>, gain α &lt; 1 (5 mA in, 4.9 mA out); output curves I<sub>C</sub> vs V<sub>CB</sub>, flat, stepping with I<sub>E</sub>. <b>CE configuration:</b> input I<sub>B</sub> (μA), output I<sub>C</sub> (mA), gain β (5 μA in, 0.5 to 5 mA out); curves I<sub>C</sub> vs V<sub>CE</sub>.</li>
+    <li><b>Early effect and its trade-off:</b> the base is lightly doped, so the CB depletion region spreads into it as V<sub>CB</sub> rises, W<sub>Bn</sub> falls and I<sub>C</sub> rises (sloped curves meeting at −V<sub>A</sub>; ideal V<sub>A</sub> = ∞). The <b>Gummel number Q<sub>G</sub> ≈ N<sub>AB</sub>W<sub>Bn</sub></b> (majority charge in the base) sets it: <b>V<sub>A</sub> ∝ Q<sub>G</sub>/C<sub>BC</sub></b>. A heavily doped base gives a big V<sub>A</sub> but lowers γ and β: the <b>β vs V<sub>A</sub> trade-off</b>. To raise V<sub>A</sub> without hurting β, make C<sub>BC</sub> small, i.e. a wide BC depletion region: <b>the collector is the most lightly doped region</b>.</li>
+  </ul>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul>
+      <li>Boltzmann formulas need E<sub>F</sub> at least 3kT from the band edge; otherwise the material is degenerate.</li>
+      <li>Donor factor 2, acceptor factor 4 in the ionisation formulas.</li>
+      <li>λ<sub>cut-off</sub> = 1.24/E<sub>g</sub> μm: a <b>larger</b> gap means a <b>shorter</b> wavelength.</li>
+      <li>Recombination current has η = 2 (e<sup>qV/2kT</sup>), diffusion η = 1.</li>
+      <li>Zener needs <b>heavy</b> doping on both sides; avalanche happens in <b>lightly</b> doped junctions and has the higher V<sub>BR</sub>.</li>
+      <li>High-frequency C–V stays at C<sub>min</sub> in inversion; low-frequency returns to C<sub>ox</sub>; deep depletion goes below C<sub>min</sub>.</li>
+      <li>BJT doping order: emitter heaviest, base medium/light, <b>collector lightest</b>.</li>
+    </ul></div>
+</section>

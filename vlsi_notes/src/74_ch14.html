@@ -1,0 +1,221 @@
+<section class="chapter" id="ch14">
+  <h2><span class="num">CHAPTER 14</span>Manufacturing: From Sand to a Working Chip</h2>
+  <p class="tagline">How the transistors of Chapters 9 to 12 are actually made: crystal growth, oxidation, doping by diffusion and implantation, lithography, thin films and epitaxy, and the complete NMOS process.</p>
+  <span class="chip src">Drive: 3_Manufacturing notes (Crystal growth, Oxidation, Doping, Lithography, NMOS steps)</span>
+  <span class="chip src">Drive: slides M1 to M6</span>
+
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Making a chip is like printing a city with a very fancy stamp, many times over. First you need a perfect blank page: a slice of pure silicon crystal (made from sand). Then, layer by layer, you <b>grow</b> glass on it (oxidation), <b>sprinkle</b> special atoms into chosen spots (doping), <b>draw</b> the pattern for the next layer with light through a stencil (lithography), <b>carve</b> away what you don't want (etching) and <b>paint</b> on new layers like metal wires (deposition). Repeat 20 to 80 times and you have billions of transistors.</p></div>
+
+  <h3>14.1 The big picture (M1, M2)</h3>
+  <p><b>Design to chip:</b> requirements → hardware description (HDL) → logic gates (synthesis) → layout (place and route) → cleanroom fabrication → testing and packaging.</p>
+  <p><b>Fabrication in one line:</b> sand → polysilicon → ingot → slice → polish → [oxidise → photolithography (coat resist → spin → soft-bake → align and expose through the mask → develop) → etch → strip resist → dope] × many layers → metal interconnects (PVD/CVD) → passivation → dicing → packaging and bonding → test.</p>
+  <div class="tablewrap"><table>
+    <tr><th>The five process categories (NMOS notes)</th><th>Techniques</th></tr>
+    <tr><td>1. Wafer preparation</td><td>CZ crystal growth (Bridgman for GaAs, float zone), sawing, lapping, etching, CMP polishing</td></tr>
+    <tr><td>2. Oxide formation</td><td>dry or wet thermal oxidation</td></tr>
+    <tr><td>3. Patterning</td><td>lithography (resist, mask, exposure, development) and etching</td></tr>
+    <tr><td>4. Doping</td><td>thermal diffusion, ion implantation</td></tr>
+    <tr><td>5. Deposition</td><td>CVD, sputtering, vacuum evaporation</td></tr>
+  </table></div>
+  <p>The steps are not strictly in this order; they repeat and interleave. Wafers are cleaned after almost every step.</p>
+
+  <h3>14.2 The silicon crystal (M3)</h3>
+  <ul>
+    <li><b>Unit cells:</b> simple cubic, body-centred cubic (BCC), face-centred cubic (FCC).</li>
+    <li><b>Silicon = the diamond lattice:</b> two interpenetrating FCC lattices, one shifted from the other by a/4 along x, y and z. Each atom has 4 nearest neighbours (the 4 covalent bonds of Chapter 4).</li>
+    <li><b>Miller indices</b> name crystal planes: take the plane's intercepts on x, y, z (in units of a), take reciprocals, and clear fractions to the smallest whole numbers. Wafers are cut along <b>(100)</b> or <b>(111)</b>; (100) is used for MOS because it has the fewest interface traps. A direction is written in square brackets, e.g. [111].</li>
+    <li><b>Defects</b> (all harmful): point defects (<b>vacancy</b>, <b>interstitial</b>), line defects (<b>dislocations</b>), area defects (<b>stacking faults</b>), volume defects (<b>precipitates</b>). Chapter 13's traps come from these.</li>
+  </ul>
+  <details class="q" open><summary>Worked: a plane cuts the axes at x = 1, y = 2, z = ∞ (parallel to z). Find its Miller indices.</summary><div class="ans">
+    <p>Intercepts (1, 2, ∞) → reciprocals (1, ½, 0) → multiply by 2 → <b>(2 1 0)</b>. A plane cutting only x at 1 (parallel to y and z) is (1 0 0); one cutting all three at 1 is (1 1 1).</p></div></details>
+
+  <h3>14.3 From sand to electronic-grade silicon (M3)</h3>
+  <ol class="steps">
+    <li><b>Metallurgical-grade Si (MGS), 98 % pure:</b> quartzite sand reduced with carbon in a submerged-electrode arc furnace at ~2000 °C: <b>SiO<sub>2</sub> + 2C → Si + 2CO</b>. Impurities Al, Fe. (90 % of MGS goes to the steel industry.)</li>
+    <li><b>Trichlorosilane:</b> <b>Si + 3HCl → SiHCl<sub>3</sub> + H<sub>2</sub></b>. SiHCl<sub>3</sub> boils at 32 °C, so it is purified by fractional distillation.</li>
+    <li><b>Electronic-grade Si (EGS):</b> in a Siemens CVD reactor, <b>2SiHCl<sub>3</sub> + 2H<sub>2</sub> → 2Si + 6HCl</b> deposits polysilicon nuggets with impurities at the parts-per-billion level (mainly B, P, C). EGS is about <b>99.999999999 %</b> pure ("eleven nines").</li>
+  </ol>
+
+  <h3>14.4 Growing the single crystal: the Czochralski method</h3>
+  {{fig:cz|The Czochralski puller described in your Drive notes and slide M3.}}
+  <ul>
+    <li>Invented in <b>1918</b>; also called the "liquid–solid mono-component growth system". Essentially all IC wafers are CZ wafers. The other method is <b>float zone</b> (higher purity, no crucible); <b>Bridgman</b> is used for GaAs.</li>
+    <li><b>Parts:</b> quartz (silica) crucible inside a graphite susceptor, graphite heater (RF induction or resistance), a chamber that is evacuated and then filled with <b>argon</b>, a crucible shaft rotating <b>clockwise</b> and a seed/pull shaft rotating <b>anticlockwise</b> holding a <b>seed crystal</b> of orientation ⟨100⟩ or ⟨111⟩.</li>
+    <li><b>Steps:</b> load the crushed EGS ("the charge"), evacuate, fill with Ar, melt at about <b>1412 to 1417 °C</b> (Si melts at 1414 °C), dip the seed, then pull slowly while rotating; silicon freezes onto the seed copying its orientation.</li>
+    <li><b>Control parameters:</b> <b>pull rate</b> (a few mm/min; it <b>sets the diameter</b>: too slow and the seed melts back), <b>melt temperature</b>, and <b>rotation rate</b> (counter-rotation keeps the melt temperature uniform, no hot or cold spots).</li>
+    <li><b>Product:</b> an ingot 8 to 16 inches (200 to 450 mm) in diameter, sliced into wafers 0.5 to 0.8 mm thick. Bigger wafers mean more chips per run.</li>
+    <li><b>Disadvantages:</b> <b>oxygen</b> from the quartz crucible (≈ 10<sup>18</sup> cm<sup>-3</sup>; a contaminant, but it also strengthens the wafer) and <b>carbon</b> from the graphite (≈ 10<sup>16</sup> cm<sup>-3</sup>). The crucible cracks on cooling and can't be reused.</li>
+  </ul>
+  <div class="callout mine"><span class="lbl">Wafer specifications (slide M2)</span>
+  <div class="tablewrap"><table>
+    <tr><th>Diameter (mm)</th><th>125</th><th>150</th><th>200</th><th>300</th><th>450</th></tr>
+    <tr><td>Thickness (mm)</td><td>0.60–0.65</td><td>0.65–0.70</td><td>0.715–0.735</td><td>0.755–0.775</td><td>0.78–0.80</td></tr>
+    <tr><td>Primary flat (mm)</td><td>40–45</td><td>55–60</td><td colspan="3">none: a notch is used instead</td></tr>
+    <tr><td>Bow (μm)</td><td>70</td><td>60</td><td>30</td><td>&lt;30</td><td>&lt;30</td></tr>
+    <tr><td>Total thickness variation (μm)</td><td>65</td><td>50</td><td>10</td><td>&lt;10</td><td>&lt;10</td></tr>
+    <tr><td>Orientation</td><td colspan="5">(100) or (111), ±1°</td></tr>
+  </table></div>
+  <p>Wafer preparation after the ingot: grind to diameter, mark the flat/notch, saw (wire saw), lap, etch away the damaged layer, and polish to a mirror finish by <b>chemical–mechanical polishing (CMP)</b>.</p></div>
+
+  <h3>14.5 Thermal oxidation</h3>
+  <p>Silicon heated in O<sub>2</sub> or steam grows its own glass, SiO<sub>2</sub>. The Si/SiO<sub>2</sub> interface is one of the cleanest electrical interfaces known, which is a key reason silicon (not Ge or GaAs) dominates electronics. SiO<sub>2</sub> has a band gap of ~9 eV and a high breakdown field.</p>
+  <div class="two">
+    <div><h4>Uses of the oxide</h4><ul><li><b>Gate dielectric</b> (thin, highest quality)</li><li><b>Field / isolation oxide</b> (thick; raises the parasitic V<sub>th</sub> so no channel forms between neighbouring devices; LOCOS = local oxidation of silicon)</li><li><b>Mask against dopants</b> (dopants diffuse far more slowly in SiO<sub>2</sub>)</li></ul></div>
+    <div><h4>Dry vs wet</h4>
+      <div class="tablewrap"><table><tr><th></th><th>Dry</th><th>Wet</th></tr>
+      <tr><td>Reaction</td><td>Si + O<sub>2</sub> → SiO<sub>2</sub></td><td>Si + 2H<sub>2</sub>O → SiO<sub>2</sub> + 2H<sub>2</sub></td></tr>
+      <tr><td>Rate</td><td>slow</td><td>fast</td></tr>
+      <tr><td>Quality</td><td>dense, electrically superior</td><td>porous (OH groups), inferior</td></tr>
+      <tr><td>Used for</td><td>gate oxide</td><td>thick field oxide</td></tr></table></div></div>
+  </div>
+  <p><b>Furnace procedure:</b> load a quartz boat of 50 to 100 wafers into a quartz tube furnace (horizontal, or vertical for a smaller footprint and symmetric gas flow) <b>slowly</b> to avoid thermal shock; flush with inert gas; ramp to <b>~900 to 1200 °C</b>; oxidise; ramp down; pull out slowly. The rate is exponential in temperature (Arrhenius), so temperature uniformity is critical.</p>
+  <p><b>Where the oxide grows:</b> at the <b>Si/SiO<sub>2</sub> interface</b>, not on top. The oxidant must diffuse <b>through the oxide already there</b>, then react with silicon. Silicon is consumed: the oxide is about <b>2.2 times</b> the thickness of the silicon it eats, i.e. <b>44 % of the final oxide thickness is consumed silicon</b>.</p>
+  <div class="eq"><span class="cap">Deal–Grove model (M4)</span>
+    <div class="row">F<sub>1</sub> = h<sub>G</sub>(C<sub>G</sub> − C<sub>S</sub>) gas to surface &nbsp;&nbsp; F<sub>2</sub> = D(C* − C<sub>i</sub>)/x<sub>0</sub> diffusion through the oxide &nbsp;&nbsp; F<sub>3</sub> = k<sub>s</sub>C<sub>i</sub> reaction at the interface &nbsp;&nbsp; steady state F<sub>1</sub> = F<sub>2</sub> = F<sub>3</sub></div>
+    <div class="row"><b>x<sub>0</sub>² + A x<sub>0</sub> = B(t + τ)</b> &nbsp;&nbsp; B = parabolic rate constant, B/A = linear rate constant, τ accounts for any initial oxide</div>
+    <div class="row">Thin oxide (short t): <b>x<sub>0</sub> ≈ (B/A)(t + τ)</b>, linear, <b>reaction-limited</b> &nbsp;&nbsp; Thick oxide (long t): <b>x<sub>0</sub>² ≈ B(t + τ)</b>, parabolic, <b>diffusion-limited</b> (C<sub>i</sub> ≈ 0)</div></div>
+  {{fig:deal_grove|Deal–Grove growth curve with its linear and parabolic limits (A = 0.165 μm, B = 0.0117 μm²/h, typical of dry O<sub>2</sub> near 1000 °C).}}
+  <details class="q" open><summary>Worked: with A = 0.165 μm, B = 0.0117 μm²/h and no initial oxide, how thick is the oxide after 2 h and after 10 h? How much silicon did the 2 h oxide consume?</summary><div class="ans">
+    <ol class="steps"><li>Solve the quadratic: x<sub>0</sub> = [−A + √(A² + 4Bt)]/2.</li>
+    <li>t = 2 h: √(0.0272 + 0.0936) = 0.348 ⇒ x<sub>0</sub> = (0.348 − 0.165)/2 = <b>0.091 μm = 91 nm</b>.</li>
+    <li>t = 10 h: √(0.0272 + 0.468) = 0.704 ⇒ x<sub>0</sub> = <b>0.27 μm</b>. Five times the time gives only three times the oxide: growth slows as the oxide thickens.</li>
+    <li>Si consumed at 2 h: 0.44 × 91 = <b>40 nm</b>.</li></ol></div></details>
+  <ul>
+    <li><b>Oxide thickness by colour:</b> light reflecting from the top and bottom of the film interferes. Destructive interference when <b>2n<sub>ox</sub>d = (m + ½)λ</b> removes some colours, so each thickness has a characteristic colour (a colour chart is used for quick checks, e.g. ~1000 Å looks violet).</li>
+    <li>Deal–Grove fails for very thin dry oxides (it underestimates the fast initial growth).</li>
+    <li><b>The thin-oxide limit:</b> below ~2 nm electrons tunnel through the gate oxide (gate leakage). Modern chips replace SiO<sub>2</sub> with <b>high-k</b> (hafnium-based) oxides, <b>deposited by atomic-layer deposition (ALD)</b> rather than grown: C<sub>ox</sub> = κε<sub>0</sub>/t, so a larger κ (SiO<sub>2</sub> κ ≈ 3.9) gives the same C<sub>ox</sub> with a physically thicker, non-leaky film.</li>
+  </ul>
+
+  <h3>14.6 Doping by thermal diffusion</h3>
+  <p>Why doping control matters (Drive): source/drain doping sets the <b>parasitic resistance</b> (lower R ⇒ more drive current); channel doping controls short-channel effects (higher doping suppresses <b>punch-through and DIBL</b>, Chapter 11); doping must be controlled vertically and laterally, which is hard in FinFETs and nanosheets.</p>
+  <ul>
+    <li>The 1960s–80s method: wafers in a quartz furnace at <b>800 to 1000 °C</b> (up to ~1200 °C) with a dopant source: <b>POCl<sub>3</sub></b> (phosphorus oxychloride) for n-type, <b>boron</b> sources for p-type. SiO<sub>2</sub> windows define where dopant enters.</li>
+    <li><b>Only substitutional dopants are electrically active</b> (sitting on a Si lattice site); interstitial ones are inactive.</li>
+    <li><b>Atomic mechanisms:</b> vacancy-assisted (A + V ⇌ AV: the dopant hops into a neighbouring empty site) and interstitialcy / kick-out (A + I ⇌ AI).</li>
+    <li>The maximum concentration that dissolves is the <b>solid solubility limit</b>.</li>
+  </ul>
+  <div class="eq"><span class="cap">Fick's laws and Arrhenius</span>
+    <div class="row">1st law: <b>J = −D [[∂C|∂x]]</b> &nbsp;&nbsp; 2nd law: <b>[[∂C|∂t]] = D [[∂²C|∂x²]]</b> &nbsp;&nbsp; <b>D = D<sub>0</sub> exp(−E<sub>a</sub>/kT)</b> &nbsp;&nbsp; diffusion length <b>√(Dt)</b></div>
+    <div class="row">(Fick's laws are accurate only at low concentrations; they fail at very high doping and during oxidation.)</div></div>
+  {{fig:diffusion_profiles|The two-step diffusion process. Left: pre-deposition, constant surface concentration. Right: drive-in, fixed total dose.}}
+  <div class="two">
+    <div><h4>Step 1: pre-deposition</h4><p>Unlimited source at the surface ⇒ surface concentration fixed at C<sub>s</sub> (the solubility limit).</p><p><b>C(x,t) = C<sub>s</sub> erfc[x/(2√(Dt))]</b></p><p>Dose introduced: <b>Q = 2C<sub>s</sub>√(Dt/π)</b> (∝ C<sub>s</sub>√(Dt)).</p></div>
+    <div><h4>Step 2: drive-in</h4><p>Source removed; a fixed dose Q spreads deeper and the surface concentration falls.</p><p><b>C(x,t) = [[Q|√(πDt)]] exp[−x²/(4Dt)]</b> (Gaussian)</p><p>Junction depth where C = background C<sub>B</sub>: <b>x<sub>j</sub> = 2√(Dt ln[Q/(C<sub>B</sub>√(πDt))])</b>.</p></div>
+  </div>
+  <details class="q" open><summary>Worked: pre-deposition with C<sub>s</sub> = 10<sup>20</sup> cm<sup>-3</sup>, D = 10<sup>-14</sup> cm²/s for 1 h; then drive-in with D = 5×10<sup>-13</sup> cm²/s for 2 h into a substrate with C<sub>B</sub> = 10<sup>16</sup> cm<sup>-3</sup>. Find the dose, the final surface concentration and the junction depth.</summary><div class="ans">
+    <ol class="steps"><li>Pre-dep: Dt = 10<sup>-14</sup> × 3600 = 3.6×10<sup>-11</sup> cm² (√(Dt) = 0.06 μm). Q = 2 × 10<sup>20</sup> × √(3.6×10<sup>-11</sup>/π) = <b>6.8×10<sup>14</sup> cm<sup>-2</sup></b>.</li>
+    <li>Drive-in: Dt = 5×10<sup>-13</sup> × 7200 = 3.6×10<sup>-9</sup> cm²; √(πDt) = 1.06×10<sup>-4</sup> cm. Surface C = Q/√(πDt) = <b>6.4×10<sup>18</sup> cm<sup>-3</sup></b> (it fell from 10<sup>20</sup>).</li>
+    <li>x<sub>j</sub> = 2√(3.6×10<sup>-9</sup> × ln(6.4×10<sup>18</sup>/10<sup>16</sup>)) = 2√(3.6×10<sup>-9</sup> × 6.46) = 3.05×10<sup>-4</sup> cm = <b>3.0 μm</b>.</li></ol></div></details>
+
+  <h3>14.7 Ion implantation</h3>
+  <p>The modern method (since the 1980s): dopant ions are accelerated and fired into the wafer. Precise, done at <b>low temperature</b>, and almost any film can be the mask (metal, thick SiO<sub>2</sub>, photoresist). The profile peaks <b>below</b> the surface.</p>
+  <div class="callout mine"><span class="lbl">The implanter, in beam order (Drive)</span>
+    <ol class="steps">
+      <li><b>Ion source / ioniser:</b> electrons or a plasma ionise the dopant gas.</li>
+      <li><b>Mass separator (analysing magnet):</b> bends each ion by its mass/charge; only the wanted species passes the slit.</li>
+      <li><b>Accelerator:</b> sets the ion energy, and the energy sets the <b>depth</b> (keV to MeV).</li>
+      <li><b>Scanning and focusing:</b> X/Y electrostatic plates sweep the beam over the wafer.</li>
+      <li><b>Neutral beam trap:</b> neutral atoms can't be steered, so the beam is bent slightly and neutrals go straight into a trap.</li>
+      <li><b>Faraday cup:</b> collects the charge to measure the <b>dose</b>.</li>
+    </ol>
+    <p>Typical parameters (M4): ions P, As, Sb, B, In, O; <b>dose 10<sup>11</sup> to 10<sup>18</sup> cm<sup>-2</sup></b>; energy 1 to 400 keV; uniformity ±1 %; flux 10<sup>12</sup> to 10<sup>14</sup> cm<sup>-2</sup>s<sup>-1</sup>; depths 10 nm to 10 μm.</p></div>
+  <div class="eq"><span class="cap">Implant profile</span>
+    <div class="row"><b>C(x) = C<sub>p</sub> exp[ −[[(x − R<sub>p</sub>)²|2ΔR<sub>p</sub>²]] ]</b> &nbsp;&nbsp; R<sub>p</sub> = projected range (mean depth), ΔR<sub>p</sub> = straggle (standard deviation)</div>
+    <div class="row">Dose: <b>Q = ∫C dx = √(2π) ΔR<sub>p</sub> C<sub>p</sub></b> ⇒ C<sub>p</sub> = Q/(√(2π)ΔR<sub>p</sub>) ≈ 0.4Q/ΔR<sub>p</sub></div></div>
+  {{fig:implant|Same dose, same energy: light boron goes deep and spreads out; heavy antimony stays shallow and narrow.}}
+  <ul>
+    <li><b>Stopping:</b> ions lose energy by <b>nuclear stopping</b> (collisions with Si nuclei: large deflections, they knock atoms out of place, <b>crystal damage</b>) and <b>electronic stopping</b> (drag by electrons: path almost unchanged, small energy loss, negligible damage). Light ions lose energy mostly electronically ⇒ deep; heavy ions mostly by nuclear collisions ⇒ shallow and damaging.</li>
+    <li><b>Annealing is mandatory:</b> a heat treatment that repairs the lattice damage and moves implanted dopants from interstitial to substitutional sites (<b>activation</b>).</li>
+    <li><b>Mask thickness:</b> must be enough that the concentration that gets through is below the substrate background: d ≥ R<sub>p</sub> + ΔR<sub>p</sub>√(2 ln(C<sub>p</sub>/C<sub>B</sub>)) (with the range values for the mask material).</li>
+  </ul>
+  <details class="q" open><summary>Worked: a 10<sup>15</sup> cm<sup>-2</sup> implant with R<sub>p</sub> = 0.3 μm, ΔR<sub>p</sub> = 0.07 μm. Find the peak concentration. How thick must a mask (assume the same R<sub>p</sub>, ΔR<sub>p</sub>) be so that less than 10<sup>15</sup> cm<sup>-3</sup> gets through?</summary><div class="ans">
+    <ol class="steps"><li>C<sub>p</sub> = 10<sup>15</sup>/(2.507 × 7×10<sup>-6</sup> cm) = <b>5.7×10<sup>19</sup> cm<sup>-3</sup></b>.</li>
+    <li>ln(5.7×10<sup>19</sup>/10<sup>15</sup>) = 10.95 ⇒ √(2 × 10.95) = 4.68.</li>
+    <li>d = 0.3 + 0.07 × 4.68 = <b>0.63 μm</b>.</li></ol></div></details>
+  <div class="tablewrap"><table>
+    <tr><th>Feature (Drive comparison)</th><th>Thermal diffusion</th><th>Ion implantation</th></tr>
+    <tr><td>Temperature</td><td>high (800 to 1200 °C)</td><td>low (room temperature), but needs an anneal</td></tr>
+    <tr><td>Peak concentration</td><td>at the surface</td><td>below the surface, at R<sub>p</sub></td></tr>
+    <tr><td>Profile</td><td>erfc (pre-dep) / Gaussian (drive-in)</td><td>Gaussian around R<sub>p</sub></td></tr>
+    <tr><td>Depth set by</td><td>D and t (√(Dt))</td><td>ion energy (keV to MeV)</td></tr>
+    <tr><td>Dose control</td><td>limited (solubility)</td><td>precise (Faraday cup)</td></tr>
+    <tr><td>Mask</td><td>SiO<sub>2</sub></td><td>SiO<sub>2</sub>, photoresist, metal</td></tr>
+    <tr><td>Damage</td><td>minimal (near equilibrium)</td><td>lattice damage, repaired by annealing</td></tr>
+    <tr><td>Equipment</td><td>simple furnace</td><td>complex, expensive</td></tr>
+  </table></div>
+
+  <h3>14.8 Photolithography</h3>
+  <p><b>The cycle</b> (repeated for every layer): deposit the film → coat with photoresist (spin-coat for uniform thickness) → soft-bake → align the mask and expose with UV (stepper/scanner) → develop → etch or implant through the openings → strip the resist. History (Drive): Moore's 1965 observation of doubling every ~2 years at similar cost; the first commercial monolithic IC (1961) had <b>4 transistors</b>; Nvidia Hopper (2022) has <b>80 billion</b>.</p>
+  {{fig:litho_resist|Positive vs negative resist, same mask.}}
+  <div class="two">
+    <div><h4>Positive resist</h4><p>Exposed areas become <b>soluble</b> and wash away ⇒ the pattern left is the <b>same as the mask</b>. Higher resolution, better dimension (CD) control and alignment. The industry standard.</p></div>
+    <div><h4>Negative resist</h4><p>Exposed areas <b>cross-link</b> and become insoluble; the unexposed areas wash away ⇒ the pattern is the <b>inverse</b> of the mask. Better etch resistance, thicker films, but lower resolution (it swells in the developer).</p></div>
+  </div>
+  <div class="eq"><span class="cap">Rayleigh resolution</span>
+    <div class="row"><b>R = k<sub>1</sub> [[λ|NA]]</b> &nbsp;&nbsp; NA = n sin θ (numerical aperture of the lens; θ = half-angle of the light cone) &nbsp;&nbsp; k<sub>1</sub> = process factor (≥ 0.25)</div>
+    <div class="row">Smaller features need: <b>↓λ, ↑NA, ↓k<sub>1</sub></b></div></div>
+  <ul>
+    <li><b>↓λ:</b> mercury lamps (g-line 436 nm, i-line 365 nm; many lines need filters; lamp ageing needs recalibration; chromatic aberration) → excimer lasers: <b>DUV 248 nm (KrF), 193 nm (ArF)</b> → <b>EUV 13.5 nm</b> for 7/5/3 nm nodes. EUV light is made by hitting tin droplets (50,000 per second) with two infrared laser pulses (one flattens the droplet, the next vaporises it into a plasma). EUV is absorbed by everything, including glass and air, so it needs <b>reflective multilayer mirrors in vacuum</b> instead of lenses.</li>
+    <li><b>↑NA:</b> large aspheric lenses (beyond ~0.8), then <b>immersion lithography</b>: water between the lens and wafer raises n, so NA up to <b>~1.35</b>. 193 nm immersion is the industry workhorse.</li>
+    <li><b>↓k<sub>1</sub>:</b> computational lithography and <b>optical proximity correction (OPC)</b> (pre-distort the mask so the printed shape comes out right; sub-resolution assist features; free-form OPC), off-axis (annular, dipole) illumination with programmable micromirror illuminators (FlexRay), <b>phase-shift masks</b>, and <b>multiple patterning</b> (split one dense layer into two or more exposures).</li>
+  </ul>
+  <details class="q" open><summary>Worked: find the resolution of (a) 193 nm immersion with NA = 1.35 and k<sub>1</sub> = 0.3, (b) EUV with NA = 0.33 and k<sub>1</sub> = 0.4.</summary><div class="ans">
+    <p>(a) R = 0.3 × 193/1.35 = <b>43 nm</b>. (b) R = 0.4 × 13.5/0.33 = <b>16 nm</b>. EUV gains mostly from the 14× shorter wavelength, even though its NA is lower.</p></div></details>
+
+  <h3>14.9 Thin films and epitaxy (M6)</h3>
+  <p>Films on a chip are dielectrics (SiO<sub>2</sub>, Si<sub>3</sub>N<sub>4</sub>), semiconductors (polysilicon, epitaxial Si), metals and polymers.</p>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>CVD (chemical vapour deposition)</th><th>PVD (physical vapour deposition)</th></tr>
+    <tr><td>How</td><td>reactant gases react on the hot wafer surface and leave a solid film</td><td>a solid source is vaporised and condenses on the wafer</td></tr>
+    <tr><td>Types</td><td>APCVD (atmospheric), LPCVD (low pressure), PECVD (plasma-enhanced), VPE</td><td>evaporation (thermal, e-beam), sputtering (DC, RF)</td></tr>
+    <tr><td>Coverage</td><td>excellent step coverage, conformal</td><td>line-of-sight, shadowing</td></tr>
+    <tr><td>Typical films</td><td>dielectrics, epitaxial and polysilicon</td><td>metals, silicides, contacts</td></tr>
+  </table></div>
+  <p><b>Epitaxy</b> ("epi" = upon, "taxis" = ordered): growing a single-crystal film that continues the substrate's crystal.</p>
+  <ul>
+    <li><b>Homoepitaxy</b>: same material (Si on Si), to get a purer layer with different doping. <b>Heteroepitaxy</b>: different material (e.g. AlGaAs on GaAs), for band engineering.</li>
+    <li><b>Why:</b> a high-purity device layer; growth at a lower temperature than diffusion, so doping steps stay sharp; free choice of thickness and doping; heterojunction bipolar transistors (Kroemer, Nobel Prize 2000); HEMTs with a 2-D electron gas; SOI, silicon-on-sapphire, SiC; a lightly doped p layer on a p⁺ substrate to <b>reduce latch-up</b> in CMOS; buried layers in bipolar ICs.</li>
+    <li><b>Types:</b> <b>VPE</b> (vapour phase: a CVD process at 800 to 1100 °C), <b>LPE</b> (liquid phase, from a melt), <b>MBE</b> (molecular beam epitaxy: atomic beams in ultra-high vacuum ~10<sup>-8</sup> Pa, monolayer control).</li>
+    <li><b>The seven CVD steps:</b> (1) gas transport to the reactor, (2) diffusion across the boundary layer, (3) adsorption on the surface, (4) surface reaction, (5) desorption of by-products, (6) diffusion of by-products back across the boundary layer, (7) removal. Steps 2 to 5 set the growth rate; 3 to 5 are the surface reaction.</li>
+    <li><b>Reactors:</b> horizontal atmospheric cold-wall (RF-heated graphite susceptor; SiCl<sub>4</sub> + 2H<sub>2</sub> → Si + 4HCl), low-pressure hot-wall (polysilicon, SiO<sub>2</sub>), pancake, barrel.</li>
+    <li><b>Si sources and temperatures:</b> SiCl<sub>4</sub> ~1200 °C, SiHCl<sub>3</sub> ~1150 °C, SiH<sub>2</sub>Cl<sub>2</sub> ~1100 °C, SiH<sub>4</sub> ~1050 °C. The reverse reaction SiCl<sub>4</sub> + Si ⇌ 2SiCl<sub>2</sub> etches: growth rate vs SiCl<sub>4</sub> mole fraction peaks near y ≈ 0.1 and becomes <b>etching above y ≈ 0.27</b>.</li>
+  </ul>
+
+  <h3>14.10 Putting it together: the metal-gate NMOS process</h3>
+  {{fig:nmos_flow|Key cross-sections of the NMOS flow in your Drive notes.}}
+  <div class="callout mine"><span class="lbl">The 20 steps of slide M2 (four masks)</span>
+    <ol>
+      <li>Start with a p-type substrate.</li>
+      <li>Grow a thick SiO<sub>2</sub> layer (900 to 1200 °C).</li>
+      <li>Coat with positive photoresist.</li>
+      <li><b>Mask 1</b> (source/drain windows): lithography.</li>
+      <li>UV changes the exposed resist.</li>
+      <li>Developer removes the exposed resist.</li>
+      <li>Etch the uncovered SiO<sub>2</sub> with <b>HF</b> (hydrofluoric acid).</li>
+      <li>Strip the remaining resist with <b>piranha</b> (H<sub>2</sub>SO<sub>4</sub> : H<sub>2</sub>O<sub>2</sub> ≈ 3 : 1).</li>
+      <li>Form the <b>n⁺ source and drain</b> by diffusion or implantation.</li>
+      <li>Cover the wafer with SiO<sub>2</sub> again.</li>
+      <li>Coat with positive resist.</li>
+      <li><b>Mask 2</b>: lithography for the gate region (and contact openings).</li>
+      <li>Expose.</li>
+      <li>Develop/remove the exposed resist.</li>
+      <li>Etch the SiO<sub>2</sub> over the gate region.</li>
+      <li>Grow the <b>thin gate oxide</b>.</li>
+      <li><b>Mask 3</b>: remove the thin oxide over the source/drain contacts, keeping it over the gate.</li>
+      <li>Deposit metal (<b>Al</b>) over everything.</li>
+      <li><b>Mask 4</b>: pattern the Al to separate source, gate and drain.</li>
+      <li><b>Passivation / overglassing</b> to protect the chip, leaving the bond pads open.</li>
+    </ol></div>
+  <p>A CMOS process adds an <b>n-well</b> (Chapter 10 figure) for the pMOS, p⁺ implants for its source/drain, field-oxide isolation and, in modern processes, a polysilicon (or metal) self-aligned gate, followed by many layers of copper interconnect.</p>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul>
+      <li>Oxide grows at the <b>Si/SiO<sub>2</sub> interface</b>, consuming 0.44 of its thickness in Si; it does not just sit on top.</li>
+      <li>Thin oxide: <b>linear</b>, reaction-limited. Thick oxide: <b>parabolic</b>, diffusion-limited.</li>
+      <li>Pre-deposition = constant <b>surface concentration</b> (erfc). Drive-in = constant <b>dose</b> (Gaussian).</li>
+      <li>Implant: <b>light ion deeper</b>; energy sets depth; always needs an <b>anneal</b>.</li>
+      <li>Positive resist: exposed part dissolves, pattern = mask. Negative: the opposite.</li>
+      <li>R = k<sub>1</sub>λ/NA: immersion raises NA; EUV lowers λ.</li>
+      <li>CZ: crucible clockwise, seed anticlockwise; pull rate sets the diameter; O from the crucible, C from the susceptor.</li>
+    </ul></div>
+</section>

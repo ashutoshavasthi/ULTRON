@@ -1,0 +1,148 @@
+<section class="chapter" id="ch12">
+  <h2><span class="num">CHAPTER 12</span>The CMOS Inverter and Static CMOS Logic</h2>
+  <p class="tagline">The inverter is the "main workout" of digital VLSI (your Drive's words). Master its structure, switch model, static behaviour, VTC, noise margins, delay and power, then build NAND, NOR and any gate from it.</p>
+  <span class="chip src">Your class notes 1-10-26 and two notebook photos</span>
+  <span class="chip src">Drive: CMOS_1; board notes 1112-1600 (static CMOS design)</span>
+
+  <h3>12.1 Structure: pull-up and pull-down</h3>
+  {{fig:cmos_switch|Left: the CMOS inverter from your notes. Middle and right: its switch model (your photo), with each ON transistor replaced by a resistor.}}
+  <ul>
+    <li><b>M2 = pMOS</b>, source to V<sub>DD</sub>: the <b>pull-up network (PUN)</b>. It can connect the output to logic 1.</li>
+    <li><b>M1 = nMOS</b>, source to GND: the <b>pull-down network (PDN)</b>. It can connect the output to logic 0.</li>
+    <li>The two <b>gates are tied together</b> to V<sub>in</sub>; the two <b>drains are tied together</b> to V<sub>out</sub>; <b>C<sub>load</sub></b> hangs from V<sub>out</sub> to ground.</li>
+    <li>Logic levels: <b>0 = GND, 1 = V<sub>DD</sub></b>. This is <b>static CMOS technology</b>.</li>
+    <li>Device reminders from your notes: the nMOS is an n-channel enhancement MOSFET, ON for V<sub>GS</sub> &gt; V<sub>tn</sub> (positive). The pMOS is a p-channel enhancement MOSFET (p⁺ source/drain in an n-substrate or n-well), ON for V<sub>GS</sub> &lt; V<sub>tp</sub> (negative), i.e. when its gate is at least |V<sub>tp</sub>| below its source.</li>
+  </ul>
+  <div class="tablewrap"><table>
+    <tr><th>Case (your notes)</th><th>V<sub>in</sub></th><th>nMOS M1: V<sub>GSn</sub></th><th>pMOS M2: V<sub>GSp</sub></th><th>M1</th><th>M2</th><th>V<sub>out</sub></th></tr>
+    <tr><td>1</td><td>0 V (logic 0)</td><td>0 &lt; V<sub>tn</sub></td><td>−V<sub>DD</sub> (very negative)</td><td>OFF</td><td>ON</td><td><b>V<sub>DD</sub> (logic 1)</b>; M2 charges C<sub>L</sub></td></tr>
+    <tr><td>2</td><td>V<sub>DD</sub> (logic 1)</td><td>V<sub>DD</sub> &gt; V<sub>tn</sub></td><td>0</td><td>ON</td><td>OFF</td><td><b>0 (logic 0)</b>; M1 discharges C<sub>L</sub></td></tr>
+  </table></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A see-saw with two doors. One door opens to a room full of "1"s (V<sub>DD</sub>), the other to a room full of "0"s (ground). The input pushes the see-saw: push down (input 0) and the top door opens, so the output fills up to 1. Push up (input 1) and the bottom door opens, so the output drains to 0. Because the see-saw can never have both doors open at rest, water never pours straight from the top room to the bottom room. That's why CMOS wastes almost no power when it is just sitting there.</p></div>
+
+  <h3>12.2 The switch model and delay</h3>
+  <p>Your photo and the Drive replace each transistor with a switch in series with its on-resistance (Chapter 11, R<sub>on</sub>):</p>
+  <ul>
+    <li><b>V<sub>in</sub> = 0:</b> pMOS = resistor R<sub>p</sub> from V<sub>DD</sub> to V<sub>out</sub>; nMOS = open switch. C<sub>L</sub> charges up through R<sub>p</sub>.</li>
+    <li><b>V<sub>in</sub> = V<sub>DD</sub>:</b> pMOS open; nMOS = resistor R<sub>n</sub> to ground. C<sub>L</sub> discharges through R<sub>n</sub>.</li>
+  </ul>
+  <p>Your notes say "you can calculate the time constant": each case is a first-order RC circuit (the Drive: "first-order ODE").</p>
+  <div class="eq"><span class="cap">Delay of the inverter</span>
+    <div class="row">Discharge: V<sub>out</sub>(t) = V<sub>DD</sub> e<sup>−t/R<sub>n</sub>C<sub>L</sub></sup> &nbsp;&nbsp; time constant <b>τ<sub>n</sub> = R<sub>n</sub>C<sub>L</sub></b> (high to low)</div>
+    <div class="row">Charge: V<sub>out</sub>(t) = V<sub>DD</sub>(1 − e<sup>−t/R<sub>p</sub>C<sub>L</sub></sup>) &nbsp;&nbsp; <b>τ<sub>p</sub> = R<sub>p</sub>C<sub>L</sub></b> (low to high)</div>
+    <div class="row">Time to reach 50 %: e<sup>−t/τ</sup> = ½ ⇒ t = τ ln 2 = <b>0.69τ</b> &nbsp;⇒&nbsp; <b>t<sub>pHL</sub> = 0.69R<sub>n</sub>C<sub>L</sub>, t<sub>pLH</sub> = 0.69R<sub>p</sub>C<sub>L</sub></b>, t<sub>p</sub> = (t<sub>pHL</sub> + t<sub>pLH</sub>)/2</div></div>
+  <p><b>What is C<sub>L</sub>?</b> (Drive) The internal capacitances of the inverter itself (the gate–drain and drain–body capacitances of both transistors), the wiring, and the <b>input (gate) capacitance of every gate it drives</b>.</p>
+  <details class="q" open><summary>Worked: R<sub>n</sub> = 5 kΩ, R<sub>p</sub> = 10 kΩ, C<sub>L</sub> = 20 fF. Find t<sub>pHL</sub>, t<sub>pLH</sub>, t<sub>p</sub>. How should the pMOS be resized to equalise them?</summary><div class="ans">
+    <ol class="steps"><li>t<sub>pHL</sub> = 0.69 × 5 kΩ × 20 fF = <b>69 ps</b>.</li>
+    <li>t<sub>pLH</sub> = 0.69 × 10 kΩ × 20 fF = <b>138 ps</b>.</li>
+    <li>t<sub>p</sub> = (69 + 138)/2 = <b>103.5 ps</b>.</li>
+    <li>R ∝ L/W, so doubling the pMOS width halves R<sub>p</sub> to 5 kΩ and makes t<sub>pLH</sub> = 69 ps (ignoring the extra capacitance the wider pMOS adds).</li></ol></div></details>
+
+  <h3>12.3 Static behaviour: the three properties in your notes</h3>
+  <ol class="steps">
+    <li><b>Zero (very small) static power dissipation.</b> In either steady state one transistor is OFF, so there is no DC path from V<sub>DD</sub> to GND. Only tiny leakage (sub-threshold, junction) flows.</li>
+    <li><b>High input impedance.</b> The input drives only gates, and the gate oxide is an insulator: no DC input current. Hence the Drive's <b>static fan-out</b> is ideally infinite: one inverter could hold any number of following gates at the right DC level. But every extra gate adds capacitance, so the <b>dynamic fan-out</b> is limited by speed.</li>
+    <li><b>Low output impedance.</b> The output is always connected to V<sub>DD</sub> or GND through an ON transistor (a few kΩ). It is "stiff": noise injected onto the output is quickly pulled back, giving good noise immunity.</li>
+  </ol>
+  <p>The Drive adds a fourth: <b>ratioless logic with full (rail-to-rail) swing.</b> V<sub>OH</sub> = V<sub>DD</sub> and V<sub>OL</sub> = 0 exactly, whatever the W/L of the two transistors. (Sizing changes speed and the switching point, not the final levels.) The pseudo-nMOS gate of §12.7 is <i>ratioed</i>: its V<sub>OL</sub> depends on the size ratio.</p>
+
+  <h3>12.4 The voltage transfer characteristic (VTC)</h3>
+  {{fig:cmos_vtc|Left: VTC of a matched inverter with regions A to E. Right: the current drawn from the supply, which is only non-zero while the input is in transition.}}
+  <p>The VTC is V<sub>out</sub> plotted against V<sub>in</sub> as V<sub>in</sub> sweeps 0 → V<sub>DD</sub> (your notes: the curve falls from V<sub>DD</sub> to 0). To find any point, use the Drive's rule: <b>the same current flows through both transistors</b> (I<sub>Dn</sub> = I<sub>Dp</sub>, a load-line intersection), with</p>
+  <div class="eq"><div class="row"><b>V<sub>GSn</sub> = V<sub>in</sub>, &nbsp; V<sub>DSn</sub> = V<sub>out</sub>, &nbsp; V<sub>GSp</sub> = V<sub>in</sub> − V<sub>DD</sub>, &nbsp; V<sub>DSp</sub> = V<sub>out</sub> − V<sub>DD</sub></b></div></div>
+  <div class="tablewrap"><table>
+    <tr><th>Region</th><th>V<sub>in</sub> range</th><th>nMOS</th><th>pMOS</th><th>V<sub>out</sub></th></tr>
+    <tr><td>A</td><td>0 to V<sub>tn</sub></td><td>cut-off</td><td>linear (R<sub>p</sub>)</td><td>V<sub>DD</sub></td></tr>
+    <tr><td>B</td><td>V<sub>tn</sub> to just below V<sub>M</sub></td><td>saturation</td><td>linear</td><td>slightly below V<sub>DD</sub>, falling</td></tr>
+    <tr><td>C</td><td>≈ V<sub>M</sub></td><td>saturation</td><td>saturation</td><td>drops steeply (highest gain)</td></tr>
+    <tr><td>D</td><td>just above V<sub>M</sub> to V<sub>DD</sub> − |V<sub>tp</sub>|</td><td>linear</td><td>saturation</td><td>small, falling</td></tr>
+    <tr><td>E</td><td>V<sub>DD</sub> − |V<sub>tp</sub>| to V<sub>DD</sub></td><td>linear (R<sub>n</sub>)</td><td>cut-off</td><td>0</td></tr>
+  </table></div>
+
+  <h4>Switching threshold V<sub>M</sub></h4>
+  <p>Your notes: V<sub>M</sub> is where the VTC crosses the line V<sub>out</sub> = V<sub>in</sub>. At that point both transistors are in saturation, so equate the two saturation currents with V<sub>in</sub> = V<sub>out</sub> = V<sub>M</sub>:</p>
+  <ol class="steps">
+    <li>½k<sub>n</sub>(V<sub>M</sub> − V<sub>tn</sub>)² = ½k<sub>p</sub>(V<sub>DD</sub> − V<sub>M</sub> − |V<sub>tp</sub>|)², where k<sub>n</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)<sub>n</sub>, k<sub>p</sub> = μ<sub>p</sub>C<sub>ox</sub>(W/L)<sub>p</sub>.</li>
+    <li>Take square roots with r = √(k<sub>p</sub>/k<sub>n</sub>): V<sub>M</sub> − V<sub>tn</sub> = r(V<sub>DD</sub> − V<sub>M</sub> − |V<sub>tp</sub>|).</li>
+    <li>Solve: <b>V<sub>M</sub> = [[V<sub>tn</sub> + r(V<sub>DD</sub> − |V<sub>tp</sub>|)|1 + r]]</b></li>
+  </ol>
+  <p>If k<sub>n</sub> = k<sub>p</sub> (r = 1) and V<sub>tn</sub> = |V<sub>tp</sub>|, then <b>V<sub>M</sub> = V<sub>DD</sub>/2</b>: a symmetric inverter. Since μ<sub>n</sub> ≈ 2 to 3 μ<sub>p</sub>, this needs <b>(W/L)<sub>p</sub> = (μ<sub>n</sub>/μ<sub>p</sub>)(W/L)<sub>n</sub> ≈ 2 to 3 × (W/L)<sub>n</sub></b>. A stronger nMOS pulls V<sub>M</sub> down; a stronger pMOS pushes it up.</p>
+  <details class="q" open><summary>Worked: V<sub>DD</sub> = 1.8 V, V<sub>tn</sub> = |V<sub>tp</sub>| = 0.4 V, μ<sub>n</sub>C<sub>ox</sub> = 200 μA/V², μ<sub>p</sub>C<sub>ox</sub> = 80 μA/V², (W/L)<sub>n</sub> = 2. Find V<sub>M</sub> for (W/L)<sub>p</sub> = 2, and the (W/L)<sub>p</sub> for V<sub>M</sub> = 0.9 V.</summary><div class="ans">
+    <ol class="steps"><li>k<sub>n</sub> = 400 μA/V²; k<sub>p</sub> = 160 μA/V² ⇒ r = √0.4 = 0.632.</li>
+    <li>V<sub>M</sub> = (0.4 + 0.632 × 1.4)/1.632 = (0.4 + 0.885)/1.632 = <b>0.79 V</b> (below V<sub>DD</sub>/2: the nMOS is stronger).</li>
+    <li>For V<sub>M</sub> = V<sub>DD</sub>/2 we need r = 1, k<sub>p</sub> = k<sub>n</sub>: 80 × (W/L)<sub>p</sub> = 400 ⇒ <b>(W/L)<sub>p</sub> = 5</b> = 2.5 × (W/L)<sub>n</sub>.</li></ol></div></details>
+
+  <h4>Noise margins</h4>
+  <p>Real signals carry noise (the Drive lists 1/f, shot, wiring and junction noise). The inverter must still read a slightly wrong "0" as 0 and a slightly wrong "1" as 1. The boundaries are the two points where the VTC slope is −1:</p>
+  <div class="eq"><span class="cap">Noise margins</span>
+    <div class="row">V<sub>IL</sub> = largest input still read as 0 &nbsp;&nbsp; V<sub>IH</sub> = smallest input read as 1 &nbsp;&nbsp; (both at dV<sub>out</sub>/dV<sub>in</sub> = −1)</div>
+    <div class="row"><b>NM<sub>L</sub> = V<sub>IL</sub> − V<sub>OL</sub> &nbsp;&nbsp;&nbsp; NM<sub>H</sub> = V<sub>OH</sub> − V<sub>IH</sub></b> &nbsp;&nbsp; (CMOS: V<sub>OH</sub> = V<sub>DD</sub>, V<sub>OL</sub> = 0)</div></div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: closed forms for a matched inverter (k<sub>n</sub> = k<sub>p</sub>, V<sub>tn</sub> = |V<sub>tp</sub>| = V<sub>t</sub>)</span>
+    <div class="eq"><div class="row"><b>V<sub>IL</sub> = [[3V<sub>DD</sub> + 2V<sub>t</sub>|8]] &nbsp;&nbsp; V<sub>IH</sub> = [[5V<sub>DD</sub> − 2V<sub>t</sub>|8]] &nbsp;&nbsp; NM<sub>L</sub> = NM<sub>H</sub> = [[3V<sub>DD</sub> + 2V<sub>t</sub>|8]]</b></div></div>
+    <p>Derivation sketch for V<sub>IL</sub>: in region B the nMOS is saturated and the pMOS linear. Write ½k(V<sub>in</sub> − V<sub>t</sub>)² = k[(V<sub>DD</sub> − V<sub>in</sub> − V<sub>t</sub>)(V<sub>DD</sub> − V<sub>out</sub>) − ½(V<sub>DD</sub> − V<sub>out</sub>)²], differentiate with respect to V<sub>in</sub>, set dV<sub>out</sub>/dV<sub>in</sub> = −1, and solve the two equations together. V<sub>IH</sub> follows by symmetry. Example: V<sub>DD</sub> = 1.8 V, V<sub>t</sub> = 0.4 V ⇒ V<sub>IL</sub> = 0.775 V, V<sub>IH</sub> = 1.025 V, both margins 0.775 V (43 % of V<sub>DD</sub>).</p></div>
+
+  <h4>Gain</h4>
+  <p>Gain A<sub>v</sub> = dV<sub>out</sub>/dV<sub>in</sub> is the slope of the VTC, largest (most negative) at V<sub>M</sub>. Your photo example: <b>A<sub>v</sub> = 100</b>, so a <b>10<sup>-3</sup> V</b> change at the input gives <b>ΔV<sub>out</sub> = 100 × 10<sup>-3</sup> = 0.1 V</b> (in magnitude; the output moves the opposite way). The Drive's point: high gain makes the transition sharp, which gives large noise margins and fast regeneration of degraded logic levels; biased at V<sub>M</sub>, the inverter is also an analog amplifier.</p>
+
+  <h3>12.5 Power dissipation</h3>
+  <div class="eq"><span class="cap">CMOS power</span>
+    <div class="row"><b>Dynamic:</b> each 0 → 1 → 0 cycle takes C<sub>L</sub>V<sub>DD</sub>² from the supply (½C<sub>L</sub>V<sub>DD</sub>² burnt in the pMOS while charging, ½ stored then burnt in the nMOS while discharging) ⇒ <b>P<sub>dyn</sub> = α C<sub>L</sub> V<sub>DD</sub>² f</b> (α = activity factor, fraction of cycles that switch)</div>
+    <div class="row"><b>Short-circuit:</b> while V<sub>in</sub> is between V<sub>tn</sub> and V<sub>DD</sub> − |V<sub>tp</sub>|, both devices conduct (the spike in the right panel of the figure). Small if input edges are fast.</div>
+    <div class="row"><b>Static:</b> leakage only, P<sub>stat</sub> = I<sub>leak</sub>V<sub>DD</sub> (sub-threshold, Chapter 11, plus junction leakage).</div></div>
+  <p>Because P<sub>dyn</sub> ∝ V<sub>DD</sub>², lowering the supply is the most powerful way to save power; that is why supplies fell from 5 V to about 1 V.</p>
+  <details class="q" open><summary>Worked: an inverter drives 50 fF at 500 MHz with V<sub>DD</sub> = 1.8 V and switches every cycle (α = 1). Find the dynamic power. What if V<sub>DD</sub> is cut to 1.2 V?</summary><div class="ans">
+    <p>P = 50×10<sup>-15</sup> × 1.8² × 5×10<sup>8</sup> = 50×10<sup>-15</sup> × 3.24 × 5×10<sup>8</sup> = <b>81 μW</b>. At 1.2 V: × (1.2/1.8)² = × 0.444 ⇒ <b>36 μW</b> (56 % less).</p></div></details>
+
+  <h3>12.6 Sizing for equal rise and fall (board notes)</h3>
+  <p>The board notes define t<sub>PLH</sub> (output 0 → 1) and t<sub>PHL</sub> (1 → 0) and design for <b>t<sub>PLH</sub> = t<sub>PHL</sub></b>. Equal delays need equal resistances, i.e. equal current drive:</p>
+  <div class="eq"><div class="row">μ<sub>n</sub>C<sub>ox</sub>(W/L)<sub>n</sub> = μ<sub>p</sub>C<sub>ox</sub>(W/L)<sub>p</sub> &nbsp;⇒&nbsp; <b>(W/L)<sub>p</sub> = [[μ<sub>n</sub>|μ<sub>p</sub>]] (W/L)<sub>n</sub> ≈ 2 to 3 × (W/L)<sub>n</sub></b></div></div>
+  <p>This is the same condition as V<sub>M</sub> = V<sub>DD</sub>/2 above: a symmetric inverter is symmetric in both its VTC and its timing.</p>
+
+  <h3>12.7 Static CMOS gates: the design method</h3>
+  {{fig:cmos_gates|The gates designed on your board: NAND, NOR, the complex gate Y = (AB + CD)′, and pseudo-nMOS.}}
+  <div class="callout mine"><span class="lbl">The method from your board notes</span>
+    <ol class="steps">
+      <li><b>Design the PDN (nMOS) from the un-inverted function:</b> an <b>OR</b> (A + B) = nMOS in <b>parallel</b>; an <b>AND</b> (AB) = nMOS in <b>series</b>. The PDN conducts (pulls Y to 0) exactly when the function inside the bar is 1.</li>
+      <li><b>The PUN (pMOS) is the dual:</b> every parallel connection in the PDN becomes series in the PUN, and every series becomes parallel. The same input drives one nMOS and one pMOS.</li>
+      <li><b>The output is the inverted function.</b> Static CMOS can only make inverting gates directly (NAND, NOR, AOI, OAI). An AND = NAND + inverter.</li>
+    </ol>
+    <p>An N-input static CMOS gate uses <b>2N transistors</b>. At every input combination exactly one of PUN/PDN conducts, so the gate keeps all the inverter's properties: no static current and full swing.</p></div>
+  <div class="two">
+    <div><h4>Example 1: 2-input NOR, Y = (A + B)′</h4>
+      <p>PDN: M3 (A) ∥ M4 (B). PUN: M1 (A) in series with M2 (B).</p>
+      <div class="tablewrap"><table><tr><th>A</th><th>B</th><th>ON</th><th>Y</th></tr>
+        <tr><td>0</td><td>0</td><td>M1, M2 (path to V<sub>DD</sub>); M3, M4 off</td><td>1</td></tr>
+        <tr><td>0</td><td>1</td><td>M4 (path to GND); M2 off</td><td>0</td></tr>
+        <tr><td>1</td><td>0</td><td>M3; M1 off</td><td>0</td></tr>
+        <tr><td>1</td><td>1</td><td>M3, M4; M1, M2 off</td><td>0</td></tr></table></div></div>
+    <div><h4>Example 2: 2-input NAND, Y = (AB)′</h4>
+      <p>PUN: M1 (A) ∥ M2 (B). PDN: M3 (A) in series with M4 (B).</p>
+      <div class="tablewrap"><table><tr><th>A</th><th>B</th><th>ON</th><th>Y</th></tr>
+        <tr><td>0</td><td>0</td><td>M1, M2</td><td>1</td></tr>
+        <tr><td>0</td><td>1</td><td>M1 (and M4, but M3 open)</td><td>1</td></tr>
+        <tr><td>1</td><td>0</td><td>M2 (and M3, but M4 open)</td><td>1</td></tr>
+        <tr><td>1</td><td>1</td><td>M3, M4 (series path to GND)</td><td>0</td></tr></table></div></div>
+  </div>
+  <p><b>Example 3 (board): Y = (AB + CD)′.</b> PDN: (A series B) in parallel with (C series D). PUN, the dual: (A ∥ B) in series with (C ∥ D). 8 transistors. Check: A = B = 1 turns on the A–B nMOS chain ⇒ Y = 0; at the same time pMOS A and B are both off, so the upper PUN block is open ⇒ no path to V<sub>DD</sub>. ✓</p>
+  <p><b>Pseudo-nMOS technique (board):</b> replace the whole PUN with a <b>single pMOS whose gate is grounded</b> (always ON) and keep the nMOS PDN. A 2-input NOR then needs 3 transistors instead of 4 (N + 1 instead of 2N). The cost: whenever the PDN is ON, current flows straight from V<sub>DD</sub> to GND through the always-on pMOS (<b>static power</b>), and V<sub>OL</sub> is not 0 but set by the pMOS/nMOS resistance ratio (<b>ratioed logic</b>). The 4×4 NOR ROM in Chapter 16 uses exactly this pull-up.</p>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: sizing gates for equal delay</span>
+    <p>Series transistors add their resistances. To make a NAND as fast as a reference inverter with (W/L)<sub>n</sub> = 1 and (W/L)<sub>p</sub> = 2.5, the two series nMOS must each be twice as wide (W/L = 2); the parallel pMOS can stay at 2.5 (worst case is only one of them ON). For a NOR, the two series pMOS must each be 5. Large series pMOS stacks are slow and big, which is why <b>NAND gates are preferred over NOR gates</b> in CMOS.</p></div>
+  <details class="q" open><summary>Practice: design Y = (A(B + C))′. Give the PDN, the PUN, the transistor count and the output for A = 1, B = 0, C = 1.</summary><div class="ans">
+    <ol class="steps"><li>Inside the bar: A AND (B OR C). PDN: nMOS A in <b>series</b> with (nMOS B ∥ nMOS C).</li>
+    <li>PUN (dual): pMOS A in <b>parallel</b> with (pMOS B in series with pMOS C).</li>
+    <li>6 transistors (3 inputs × 2).</li>
+    <li>A = 1, B = 0, C = 1: nMOS A on and nMOS C on ⇒ path to GND ⇒ <b>Y = 0</b>. Check the PUN: pMOS A off, and the B–C series pair is broken because pMOS C is off ⇒ no path to V<sub>DD</sub>. ✓ (A(B + C) = 1 ⇒ Y = 0.)</li></ol></div></details>
+  <details class="q"><summary>Practice: how many transistors does a static CMOS 3-input NOR need? Which network has the series stack, and why is it the slow one?</summary><div class="ans">
+    <p>6 transistors. The <b>PUN</b> has three pMOS in series (the PDN has three nMOS in parallel). Series resistances add, and pMOS already has the lower mobility, so the 0 → 1 output transition through three series pMOS is the slowest. To compensate each pMOS would need to be about 3 × 2.5 = 7.5 times the unit nMOS width.</p></div></details>
+
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul>
+      <li>pMOS is the <b>pull-up</b> (to V<sub>DD</sub>); nMOS is the <b>pull-down</b>. pMOS passes a strong 1, nMOS passes a strong 0.</li>
+      <li>V<sub>M</sub> is where V<sub>out</sub> = V<sub>in</sub>, not where V<sub>out</sub> = V<sub>DD</sub>/2 (they coincide only for a symmetric inverter).</li>
+      <li>In the PDN, AND ⇒ series, OR ⇒ parallel. The PUN is the <b>dual</b>, not a copy.</li>
+      <li>"Zero static power" means no DC current at rest. Power is still burnt every time the output switches: αCV<sub>DD</sub>²f.</li>
+      <li>Noise margins use the slope = −1 points, not the threshold V<sub>M</sub>.</li>
+      <li>Delay to 50 % is 0.69RC, not RC (RC is the 63 % time).</li>
+    </ul></div>
+</section>

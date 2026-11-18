@@ -1,0 +1,177 @@
+<section class="chapter" id="ch11">
+  <h2><span class="num">CHAPTER 11</span>The MOSFET in Depth: Regions, Scaling and Short-Channel Effects</h2>
+  <p class="tagline">Chapter 10 stopped at the linear-region current. Here is everything after it: saturation, every region of operation, the on-resistance, sub-threshold current, scaling, and the five "second-order" effects your class listed.</p>
+  <span class="chip src">Your third note-set (Vlsi-MOS29-09, p.6 to p.14)</span>
+  <span class="chip src">Instructor's Drive: MOSFET_1, MOSFET_2, MOSFET_3</span>
+
+  <h3>11.1 Two electric fields inside every MOSFET</h3>
+  <p>Your notes (p.11) draw two arrows inside the device:</p>
+  <div class="two">
+    <div><h4>E<sub>y</sub>: the vertical (transverse) field</h4><p>Made by the gate, pointing down into the substrate. It creates and holds the channel. <b>E<sub>y</sub> ∝ V<sub>GS</sub>/t<sub>ox</sub></b>.</p></div>
+    <div><h4>E<sub>x</sub>: the horizontal (longitudinal) field</h4><p>Made by the drain, pointing along the channel. It pushes the electrons from source to drain. <b>E<sub>x</sub> ∝ V<sub>DS</sub>/L</b>.</p></div>
+  </div>
+  <p>For a <b>long-channel</b> device, <b>E<sub>x</sub> ≪ E<sub>y</sub></b>. This is the <b>gradual channel approximation (GCA)</b>: the channel charge at each point x is set only by the vertical field there, so we can write Q(x) = W C<sub>ox</sub>(V<sub>GS</sub> − V<sub>th</sub> − V(x)) exactly as you did on p.8. The Drive notes add a second simplification, the <b>charge-sheet approximation</b>: the inversion layer is treated as having zero thickness. Both hold for long channels and break down when L shrinks to about 0.1 μm, which is where the short-channel effects of §11.8 begin.</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>The gate is a magnet held <i>above</i> a road: it decides how many cars (electrons) are on the road. The drain is a slope <i>along</i> the road: it decides how fast they roll. As long as the road is long, the slope is gentle and the magnet is in charge. Make the road very short and the slope becomes a cliff: now the drain starts bossing the cars around too, and the simple formulas stop working.</p></div>
+
+  <h3>11.2 From the triode formula to saturation</h3>
+  <p>Start from your boxed equation ① (p.8):</p>
+  <div class="eq"><div class="row"><b>I<sub>D</sub> = μ<sub>n</sub>C<sub>ox</sub> [[W|L]] [ (V<sub>GS</sub> − V<sub>th</sub>)V<sub>DS</sub> − [[V<sub>DS</sub>²|2]] ]</b> &nbsp; ①</div></div>
+  <p>Fix V<sub>GS</sub> and raise V<sub>DS</sub>. The formula is a downward parabola in V<sub>DS</sub>. Your notes (p.9) find its peak by setting the slope to zero:</p>
+  <ol class="steps">
+    <li>[[dI<sub>D</sub>|dV<sub>DS</sub>]] = μ<sub>n</sub>C<sub>ox</sub>(W/L)[(V<sub>GS</sub> − V<sub>th</sub>) − V<sub>DS</sub>] = 0</li>
+    <li>⇒ <b>V<sub>DS,sat</sub> = V<sub>GS</sub> − V<sub>th</sub></b> (the saturation voltage, equal to the overdrive).</li>
+    <li>Put it back into ①: (V<sub>GS</sub> − V<sub>th</sub>)(V<sub>GS</sub> − V<sub>th</sub>) − (V<sub>GS</sub> − V<sub>th</sub>)²/2 = ½(V<sub>GS</sub> − V<sub>th</sub>)².</li>
+  </ol>
+  <div class="eq"><span class="cap">Saturation current (your p.9)</span>
+    <div class="row"><b>I<sub>D,max</sub> = I<sub>D,sat</sub> = [[1|2]] μ<sub>n</sub>C<sub>ox</sub> [[W|L]] (V<sub>GS</sub> − V<sub>th</sub>)²</b></div>
+    <div class="row">For V<sub>DS</sub> ≥ V<sub>GS</sub> − V<sub>th</sub> the current stays at this value: <b>constant, independent of V<sub>DS</sub></b>.</div></div>
+  <p><b>Why it stays flat (and doesn't follow the parabola back down):</b> at V<sub>DS</sub> = V<sub>GS</sub> − V<sub>th</sub> the gate-to-channel voltage at the drain end is exactly V<sub>th</sub>, so the channel just disappears there: <b>pinch-off</b>. Raising V<sub>DS</sub> further only moves the pinch-off point a tiny bit toward the source; the voltage across the remaining channel stays at V<sub>GS</sub> − V<sub>th</sub>, so the current through it stays the same. Electrons reaching the pinch-off point are swept across the short depletion gap to the drain by its strong field. The falling half of the parabola is not physical.</p>
+  <p><b>Effect of V<sub>GS</sub> (p.9):</b> a bigger V<sub>GS</sub> gives a bigger overdrive, so both V<sub>DS,sat</sub> and the plateau rise. Your sketch shows V<sub>GS</sub> = 2 V and 4 V; with V<sub>th</sub> = 1 V the plateaus are in the ratio (3/1)² = <b>9 : 1</b>, not 2 : 1. Doubling V<sub>GS</sub> does not double the current; the overdrive is what gets squared.</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A funnel feeding a bottle. Tilting the funnel more (raising V<sub>DS</sub>) makes water run faster, until the neck of the funnel is the bottleneck. After that, tilting more changes nothing: the neck (the pinch-off point) lets through a fixed amount. To get more water you need a wider neck, and that is what a bigger V<sub>GS</sub> does.</p></div>
+
+  <h3>11.3 All the regions of operation</h3>
+  {{fig:mos_regions|Left: one output curve split into your four "on" regions (μ<sub>n</sub>C<sub>ox</sub>W/L = 1 mA/V², V<sub>th</sub> = 1 V). Right: the same device on a log current scale, showing the sub-threshold region below V<sub>th</sub>.}}
+  <div class="callout mine"><span class="lbl">Your regions-of-operation table (p.9 to p.11), completed</span>
+  <div class="tablewrap"><table>
+    <tr><th>Region</th><th>Biasing (nMOS)</th><th>Channel</th><th>Drain current</th><th>Physical meaning</th></tr>
+    <tr><td><b>1. Cut-off</b></td><td>V<sub>GS</sub> &lt; V<sub>th</sub></td><td>none</td><td>I<sub>D</sub> = 0 (ideal)</td><td>MOSFET OFF</td></tr>
+    <tr><td><b>2. Sub-threshold</b></td><td>V<sub>GS</sub> ≲ V<sub>th</sub></td><td>weak inversion</td><td>I<sub>D</sub> ∝ exp[(V<sub>GS</sub> − V<sub>th</sub>)/(nV<sub>T</sub>)]</td><td>very small (leakage) current</td></tr>
+    <tr><td><b>3. Deep triode / linear</b></td><td>V<sub>GS</sub> &gt; V<sub>th</sub>, V<sub>DS</sub> ≪ V<sub>GS</sub> − V<sub>th</sub></td><td>strong inversion, uniform channel</td><td>I<sub>D</sub> ≈ μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)V<sub>DS</sub> &nbsp;②</td><td>voltage-variable resistor</td></tr>
+    <tr><td><b>4. Non-linear (triode)</b></td><td>V<sub>GS</sub> &gt; V<sub>th</sub>, V<sub>DS</sub> &lt; V<sub>GS</sub> − V<sub>th</sub></td><td>strong inversion, tapering</td><td>full formula ①</td><td>curving (non-linear) resistor</td></tr>
+    <tr><td><b>5. Saturation</b></td><td>V<sub>GS</sub> &gt; V<sub>th</sub>, V<sub>DS</sub> ≥ V<sub>GS</sub> − V<sub>th</sub></td><td>pinched off at the drain</td><td>½μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)²</td><td><b>ideal current source</b></td></tr>
+  </table></div>
+  <p>Your table writes the same condition "V<sub>DS</sub> &lt; V<sub>GS</sub> − V<sub>th</sub>" for rows 3 and 4. The difference is <i>how much</i> smaller: row 3 is the part where V<sub>DS</sub>²/2 is negligible (a rule of thumb is V<sub>DS</sub> &lt; 0.1 to 0.2 × (V<sub>GS</sub> − V<sub>th</sub>)), so the curve is still a straight line.</p></div>
+  <p><b>pMOS:</b> the same table with every voltage reversed in sign: V<sub>GS</sub> &lt; V<sub>tp</sub> (both negative) to turn on, and saturation when V<sub>DS</sub> ≤ V<sub>GS</sub> − V<sub>tp</sub>. The easy way is to use magnitudes: I<sub>SD</sub> = ½μ<sub>p</sub>C<sub>ox</sub>(W/L)(|V<sub>GS</sub>| − |V<sub>tp</sub>|)² for |V<sub>DS</sub>| ≥ |V<sub>GS</sub>| − |V<sub>tp</sub>|, with current flowing from source to drain (p.6: "for operating pMOS: V<sub>GS</sub> −ve, V<sub>DS</sub> −ve").</p>
+  <div class="callout trap"><span class="lbl">How to decide the region in an exam</span>
+    <ol><li>Is V<sub>GS</sub> &gt; V<sub>th</sub>? If no: cut-off (I<sub>D</sub> ≈ 0, or sub-threshold if asked).</li>
+    <li>Compute the overdrive V<sub>ov</sub> = V<sub>GS</sub> − V<sub>th</sub>.</li>
+    <li>Compare V<sub>DS</sub> with V<sub>ov</sub>: smaller ⇒ triode (use ①); equal or bigger ⇒ saturation.</li>
+    <li>If the question gives a circuit and you don't know V<sub>DS</sub> yet: <b>assume saturation</b>, compute I<sub>D</sub>, find V<sub>DS</sub>, then check V<sub>DS</sub> ≥ V<sub>ov</sub>. If the check fails, redo with ①.</li></ol></div>
+
+  <h3>11.4 The on-resistance R<sub>on</sub></h3>
+  <p>Your p.10 drops the V<sub>DS</sub>²/2 term in the deep-triode region and gets equation ②, which is Ohm's law:</p>
+  <div class="eq"><span class="cap">On-resistance (your p.10; Drive MOSFET_2)</span>
+    <div class="row"><b>R<sub>on</sub> = [[V<sub>DS</sub>|I<sub>D</sub>]] = [[1|μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)]]</b></div>
+    <div class="row">R<sub>on</sub> ∝ 1/(overdrive) and ∝ L/W. Change V<sub>GS</sub> and the resistance changes: a <b>voltage-variable resistor</b>.</div></div>
+  <p>This is the resistance in the "switch model" of Chapter 12 and in the delay τ = R<sub>on</sub>C. It is why designers want a high mobility (nMOS is better than pMOS), a thin oxide (big C<sub>ox</sub>), a short L and a large overdrive.</p>
+  <details class="q" open><summary>Worked: μ<sub>n</sub>C<sub>ox</sub> = 200 μA/V², W/L = 5, V<sub>th</sub> = 0.5 V. Find R<sub>on</sub> for V<sub>GS</sub> = 1.0 V and for V<sub>GS</sub> = 1.8 V. What V<sub>GS</sub> gives 1 kΩ?</summary><div class="ans">
+    <ol class="steps"><li>k = μ<sub>n</sub>C<sub>ox</sub>(W/L) = 200 × 5 = 1000 μA/V² = 1 mA/V².</li>
+    <li>V<sub>GS</sub> = 1.0 V: overdrive 0.5 V ⇒ R<sub>on</sub> = 1/(10<sup>-3</sup> × 0.5) = <b>2 kΩ</b>.</li>
+    <li>V<sub>GS</sub> = 1.8 V: overdrive 1.3 V ⇒ R<sub>on</sub> = 1/(1.3×10<sup>-3</sup>) = <b>769 Ω</b>.</li>
+    <li>For 1 kΩ: overdrive = 1/(k × 1000) = 1 V ⇒ <b>V<sub>GS</sub> = 1.5 V</b>.</li></ol>
+    <p>Check of the "small V<sub>DS</sub>" assumption: this R<sub>on</sub> is only valid while V<sub>DS</sub> stays well below the overdrive (say below 0.1 V here).</p></div></details>
+
+  <h3>11.5 Sub-threshold conduction</h3>
+  <p>Below V<sub>th</sub> the channel is in <b>weak inversion</b>: there are few electrons, and they move mainly by <b>diffusion</b> (not drift) from the source, over a potential barrier, to the drain, just like electrons crossing a forward-biased p–n junction. That is why the current is exponential:</p>
+  <div class="eq"><span class="cap">Sub-threshold current (your p.9; Drive LTSpice notes)</span>
+    <div class="row"><b>I<sub>D,sub</sub> ∝ exp[ [[V<sub>GS</sub> − V<sub>th</sub>|n V<sub>T</sub>]] ] · [ 1 − exp(−V<sub>DS</sub>/V<sub>T</sub>) ]</b></div>
+    <div class="row">n = ideality (slope) factor, 1 to 1.5 &nbsp;&nbsp; V<sub>T</sub> = kT/q ≈ 26 mV. The second bracket ≈ 1 once V<sub>DS</sub> &gt; ~100 mV.</div>
+    <div class="row"><b>Sub-threshold slope S = n V<sub>T</sub> ln 10 ≈ n × 60 mV/decade</b> (at 300 K)</div></div>
+  <p><b>Where 60 mV comes from:</b> to raise the current 10×, the exponent must grow by ln 10 = 2.303, so ΔV<sub>GS</sub> = 2.303 × nV<sub>T</sub> = 2.303 × 26 mV × n ≈ 60n mV. The Drive notes define S exactly this way: "gate voltage needed to change I<sub>D</sub> by one decade (e.g. 10<sup>-2</sup> → 10<sup>-3</sup> A)", <b>ideal 60 mV/decade</b>. No MOSFET at room temperature can switch more sharply than this, because it is set by the thermal spread of electron energies.</p>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A tap that never closes completely. Turning the handle below the "off" mark makes the drip slower and slower, ten times slower for every 60 mV, but it never reaches exactly zero. A chip has billions of these dripping taps, which is why a phone's battery drains slowly even when the screen is off. This drip is a big part of <b>static power</b>.</p></div>
+  <details class="q" open><summary>Worked: a transistor has S = 80 mV/decade and I<sub>D</sub> = 1 μA at V<sub>GS</sub> = V<sub>th</sub>. What is the leakage at V<sub>GS</sub> = 0 if V<sub>th</sub> = 0.4 V? What V<sub>th</sub> would be needed for 1 pA?</summary><div class="ans">
+    <ol class="steps"><li>Going from V<sub>th</sub> down to 0 is 400 mV = 400/80 = 5 decades.</li>
+    <li>I<sub>off</sub> = 1 μA × 10<sup>-5</sup> = <b>10 pA</b>.</li>
+    <li>1 pA is 6 decades below 1 μA ⇒ V<sub>th</sub> = 6 × 80 = <b>480 mV</b>.</li></ol>
+    <p>This is the core trade-off of low-power design: a lower V<sub>th</sub> gives a faster transistor (more overdrive) but exponentially more leakage.</p></div></details>
+
+  <h3>11.6 The hand-calculation model and its five parameters</h3>
+  <p>From the Drive (MOSFET_3): for manual analysis the MOSFET is described by just five numbers.</p>
+  <div class="tablewrap"><table>
+    <tr><th>Parameter</th><th>Meaning</th><th>Typical value</th></tr>
+    <tr><td><b>k′ = μ<sub>n</sub>C<sub>ox</sub></b></td><td>process transconductance parameter (fixed by the process)</td><td>100 to 300 μA/V² (nMOS); about 1/2 to 1/3 of that for pMOS</td></tr>
+    <tr><td><b>V<sub>T</sub></b> (V<sub>th</sub>)</td><td>threshold voltage at V<sub>SB</sub> = 0</td><td>0.3 to 0.7 V</td></tr>
+    <tr><td><b>λ</b></td><td>channel-length modulation</td><td>0.02 to 0.2 V<sup>-1</sup></td></tr>
+    <tr><td><b>γ</b></td><td>body-effect coefficient</td><td>0.2 to 0.6 V<sup>½</sup></td></tr>
+    <tr><td><b>V<sub>DSAT</sub></b></td><td>velocity-saturation limit on V<sub>DS,sat</sub></td><td>a few tenths of a volt in short channels</td></tr>
+  </table></div>
+  <p>Device transconductance parameter <b>k = k′(W/L)</b>. Also from the Drive: the channel is shorter than drawn because the source and drain diffuse sideways under the gate: <b>L<sub>eff</sub> = L<sub>drawn</sub> − 2L<sub>D</sub></b> (L<sub>D</sub> = lateral diffusion). Use L<sub>eff</sub> in W/L for accurate work.</p>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: transconductance g<sub>m</sub></span>
+    <p>In saturation, g<sub>m</sub> = ∂I<sub>D</sub>/∂V<sub>GS</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>) = √(2k I<sub>D</sub>) = 2I<sub>D</sub>/(V<sub>GS</sub> − V<sub>th</sub>). The LTSpice experiment in your Drive (Chapter 15) measures exactly this from the I<sub>D</sub>–V<sub>GS</sub> curve. Output resistance in saturation r<sub>o</sub> = 1/(λI<sub>D</sub>) (§11.8). Intrinsic gain = g<sub>m</sub>r<sub>o</sub>.</p></div>
+
+  <h3>11.7 Device scaling</h3>
+  <p>Moore's law (the Drive quotes doubling every 1.5 to 2 years) is achieved by <b>scaling</b>: shrinking L, W and t<sub>ox</sub>. Halving each dimension fits four times as many transistors in the same area. The question is what to do with the voltages. Your notes (p.12) list two methods:</p>
+  <div class="two">
+    <div><h4>1. Constant-field scaling</h4><p>Shrink the voltages by the same factor as the dimensions, so the fields stay the same. Your example: E<sub>x</sub> = V<sub>DS</sub>/L → (V<sub>DS</sub>/2)/(L/2) and E<sub>y</sub> = V<sub>GS</sub>/t<sub>ox</sub> → (V<sub>GS</sub>/3)/(t<sub>ox</sub>/3): unchanged. (The Drive: L 1 → 0.5 μm needs V<sub>DS</sub> 1 → 0.5 V.)</p></div>
+    <div><h4>2. Constant-voltage scaling</h4><p>Shrink the dimensions but keep the supply voltage. Your notes: "generally used"; the Drive: "often preferred". The practical reason: chips must keep talking to other chips at standard voltages (5 V, 3.3 V, 1.8 V), so the supply can't fall freely.</p></div>
+  </div>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: what each method does to the device (scale factor S &gt; 1)</span>
+  <div class="tablewrap"><table>
+    <tr><th>Quantity</th><th>Constant field</th><th>Constant voltage</th></tr>
+    <tr><td>L, W, t<sub>ox</sub>, junction depth</td><td>1/S</td><td>1/S</td></tr>
+    <tr><td>V<sub>DD</sub>, V<sub>th</sub></td><td>1/S</td><td>1</td></tr>
+    <tr><td>Substrate doping N<sub>A</sub></td><td>S</td><td>S²</td></tr>
+    <tr><td>Electric field</td><td>1</td><td><b>S</b> (dangerous)</td></tr>
+    <tr><td>C<sub>ox</sub> = ε<sub>ox</sub>/t<sub>ox</sub></td><td>S</td><td>S</td></tr>
+    <tr><td>Gate capacitance C = C<sub>ox</sub>WL</td><td>1/S</td><td>1/S</td></tr>
+    <tr><td>Drain current I<sub>D</sub> ∝ C<sub>ox</sub>(W/L)V²</td><td>1/S</td><td>S</td></tr>
+    <tr><td>Delay τ ∝ CV/I</td><td>1/S</td><td>1/S²</td></tr>
+    <tr><td>Power per transistor P = VI</td><td>1/S²</td><td>S</td></tr>
+    <tr><td>Area per transistor</td><td>1/S²</td><td>1/S²</td></tr>
+    <tr><td>Power density P/area</td><td><b>1</b></td><td><b>S³</b> (the chip overheats)</td></tr>
+  </table></div>
+  <p>Constant-voltage scaling is faster but raises the fields by S, which causes velocity saturation, hot carriers, DIBL and oxide breakdown, and raises power density by S³. Real industry did constant-voltage scaling until about the 1990s and then lowered V<sub>DD</sub> slowly ("general scaling").</p></div>
+  <details class="q" open><summary>Worked: a 1 μm process with V<sub>DD</sub> = 5 V and t<sub>ox</sub> = 20 nm is scaled to 0.5 μm. Give t<sub>ox</sub>, V<sub>DD</sub>, current, delay and power per transistor under each method.</summary><div class="ans">
+    <p>S = 2. Both methods: t<sub>ox</sub> = 10 nm, gate capacitance halves, area quarters.</p>
+    <p><b>Constant field:</b> V<sub>DD</sub> = 2.5 V; I<sub>D</sub> ×½; delay ×½; power ×¼; power density unchanged.</p>
+    <p><b>Constant voltage:</b> V<sub>DD</sub> = 5 V; I<sub>D</sub> ×2; delay ×¼; power ×2; power density ×8; fields ×2 (now the short-channel effects below bite).</p></div></details>
+
+  <h3>11.8 Second-order and short-channel effects</h3>
+  <p>These are the five effects listed in your notes (p.12 to p.14), in the same order, with the Drive's explanations added.</p>
+  {{fig:mos_sce|Left: channel-length modulation (the saturated lines extrapolate back to −V<sub>A</sub> = −1/λ). Middle: velocity saturation. Right: drain-induced barrier lowering.}}
+
+  <h4>1. Body effect</h4>
+  <p>The substrate (body, B) is the fourth terminal. Your notes: <b>nMOS body → most negative potential; pMOS body → most positive potential</b>. Reason (Drive): the source–body and drain–body p–n junctions must stay reverse-biased; if the nMOS body went positive they would forward-bias, a large current would flow and the device could burn out.</p>
+  <p>If the source sits above the body (V<sub>SB</sub> &gt; 0, e.g. the upper transistor in a series stack), the source–body junction is more reverse-biased, the depletion region under the channel is thicker and holds more negative charge, so the gate must work harder to invert the surface: <b>V<sub>th</sub> rises</b>.</p>
+  <div class="eq"><span class="cap">Body effect</span>
+    <div class="row"><b>V<sub>th</sub> = V<sub>th0</sub> + γ ( √(2φ<sub>F</sub> + V<sub>SB</sub>) − √(2φ<sub>F</sub>) )</b> &nbsp;&nbsp; γ = [[√(2qε<sub>s</sub>N<sub>A</sub>)|C<sub>ox</sub>]]</div></div>
+  <details class="q" open><summary>Worked: V<sub>th0</sub> = 0.5 V, γ = 0.4 V<sup>½</sup>, 2φ<sub>F</sub> = 0.7 V. Find V<sub>th</sub> for V<sub>SB</sub> = 1 V and 2 V.</summary><div class="ans">
+    <p>V<sub>SB</sub> = 1 V: V<sub>th</sub> = 0.5 + 0.4(√1.7 − √0.7) = 0.5 + 0.4(1.304 − 0.837) = 0.5 + 0.187 = <b>0.687 V</b>.</p>
+    <p>V<sub>SB</sub> = 2 V: 0.5 + 0.4(√2.7 − 0.837) = 0.5 + 0.4(1.643 − 0.837) = <b>0.822 V</b>. The rise is sub-linear (square root).</p></div></details>
+
+  <h4>2. Channel-length modulation (CLM)</h4>
+  <p>In saturation the pinch-off point moves toward the source as V<sub>DS</sub> rises (the drain depletion region "eats into" the channel), so the effective length becomes L − ΔL. A shorter channel carries more current (I<sub>D</sub> ∝ 1/L, your p.13), so the saturated curves tilt upward instead of being flat:</p>
+  <div class="eq"><span class="cap">CLM (your p.13)</span>
+    <div class="row"><b>I<sub>D</sub> = [[1|2]] μ<sub>n</sub>C<sub>ox</sub> [[W|L]] (V<sub>GS</sub> − V<sub>th</sub>)² (1 + λV<sub>DS</sub>)</b></div>
+    <div class="row">λ = CLM parameter (V<sup>-1</sup>) &nbsp;&nbsp; <b>V<sub>A</sub> = 1/λ</b> (the MOSFET's "Early voltage") &nbsp;&nbsp; <b>r<sub>o</sub> = 1/(λI<sub>D</sub>)</b> = finite output resistance</div></div>
+  <p>The device is no longer an ideal current source. λ is larger (worse) for shorter channels, because the same ΔL is a bigger fraction of a small L. This is the exact twin of base-width modulation and the Early effect in the BJT (your set-A p.36).</p>
+  <details class="q" open><summary>Worked: an nMOS in saturation carries 1 mA at V<sub>DS</sub> = 1 V with λ = 0.1 V<sup>-1</sup>. Find the current at V<sub>DS</sub> = 3 V, V<sub>A</sub> and r<sub>o</sub>.</summary><div class="ans">
+    <ol class="steps"><li>1 mA = I<sub>0</sub>(1 + 0.1 × 1) ⇒ I<sub>0</sub> = 0.909 mA.</li>
+    <li>At 3 V: I<sub>D</sub> = 0.909 × 1.3 = <b>1.18 mA</b> (18 % more).</li>
+    <li>V<sub>A</sub> = 1/λ = <b>10 V</b>; r<sub>o</sub> ≈ 1/(λI<sub>D</sub>) = 1/(0.1 × 1 mA) = <b>10 kΩ</b>.</li></ol></div></details>
+
+  <h4>3. Velocity saturation</h4>
+  <p>Recall Chapter 6: drift velocity v<sub>d</sub> = μE only at low fields; at high field it levels off at v<sub>sat</sub> (≈ 10<sup>7</sup> cm/s in Si) because scattering (optical phonons) balances the push. In a short channel, E<sub>x</sub> = V<sub>DS</sub>/L is huge even for small V<sub>DS</sub>, so carriers hit v<sub>sat</sub> long before pinch-off. Your notes (p.13 to p.14):</p>
+  <div class="eq"><span class="cap">Velocity saturation (your p.14)</span>
+    <div class="row">v<sub>d</sub> = [[μE|1 + E/E<sub>c</sub>]] for E &lt; E<sub>c</sub>; &nbsp; v<sub>d</sub> = v<sub>sat</sub> for E &gt; E<sub>c</sub> &nbsp;&nbsp; (E<sub>c</sub> = critical field, v<sub>sat</sub> ≈ μE<sub>c</sub>)</div>
+    <div class="row"><b>I<sub>D,short</sub> = μ<sub>n</sub>C<sub>ox</sub>[[W|L]][(V<sub>GS</sub> − V<sub>th</sub>)V<sub>DS</sub> − [[V<sub>DS</sub>²|2]]] × [[1|1 + V<sub>DS</sub>/(E<sub>c</sub>L)]]</b></div>
+    <div class="row">Deep velocity saturation: <b>I<sub>D</sub> ≈ W C<sub>ox</sub> v<sub>sat</sub> (V<sub>GS</sub> − V<sub>th</sub> − V<sub>DSAT</sub>)</b>: <b>linear</b> in the overdrive, not squared.</div></div>
+  <p>Consequences (Drive MOSFET_3): V<sub>DSAT</sub> &lt; V<sub>GS</sub> − V<sub>th</sub> (the device saturates early), and I<sub>D</sub> becomes linear in (V<sub>GS</sub> − V<sub>th</sub>) and almost independent of L. Shrinking L no longer increases the current as much as the long-channel formula promises.</p>
+  <details class="q" open><summary>Worked: μ<sub>n</sub> = 400 cm²/V·s in the channel, v<sub>sat</sub> = 10<sup>7</sup> cm/s. Find E<sub>c</sub>, and the current-reduction factor at V<sub>DS</sub> = 1 V for L = 1 μm and L = 100 nm.</summary><div class="ans">
+    <ol class="steps"><li>E<sub>c</sub> = v<sub>sat</sub>/μ = 10<sup>7</sup>/400 = <b>2.5×10<sup>4</sup> V/cm</b> (2.5 V/μm).</li>
+    <li>L = 1 μm: E<sub>c</sub>L = 2.5 V ⇒ factor 1/(1 + 1/2.5) = <b>0.71</b>.</li>
+    <li>L = 100 nm: E<sub>c</sub>L = 0.25 V ⇒ factor 1/(1 + 1/0.25) = <b>0.20</b>: the current is only one fifth of the long-channel prediction.</li></ol></div></details>
+
+  <h4>4. Punch-through</h4>
+  <p>The source–substrate and drain–substrate depletion regions grow toward each other. In a very short channel (or at high V<sub>DS</sub>) they <b>touch</b>, creating a direct path for electrons from source to drain under the gate. Current flows even when the device should be OFF, and the gate can no longer stop it. Remedy (Drive, doping notes): higher channel doping shortens the depletion widths and suppresses punch-through (and DIBL).</p>
+
+  <h4>5. Drain-induced barrier lowering (DIBL)</h4>
+  <p>Electrons in the source face a potential barrier (the hump in the right panel of the figure) that the gate controls. In a long channel only the gate sets this barrier. In a short channel the drain is close enough that a high V<sub>DS</sub> also pulls the barrier down. Lower barrier ⇒ easier to turn on ⇒ <b>V<sub>th</sub> falls as V<sub>DS</sub> rises</b> (your p.14), so off-state leakage rises.</p>
+  <div class="callout beyond"><span class="lbl">Beyond your notes</span>
+    <p>DIBL is usually modelled as V<sub>th</sub> = V<sub>th0</sub> − η<sub>DIBL</sub>V<sub>DS</sub>, with η<sub>DIBL</sub> ≈ 0.05 to 0.15 V/V in short devices. Other short-channel effects you may meet: <b>V<sub>th</sub> roll-off</b> (V<sub>th</sub> falls as L shrinks), <b>hot-carrier injection</b> (energetic carriers damage the oxide), <b>gate-oxide tunnelling</b> (t<sub>ox</sub> below ~2 nm, solved by high-k dielectrics, Chapter 14) and <b>mobility degradation</b> by the vertical field. FinFETs and nanosheet (gate-all-around) transistors wrap the gate around the channel to give the gate back its control.</p></div>
+  <div class="callout kid"><span class="lbl">Explain like I'm 10: the five effects in one story</span>
+    <p>The gate is a teacher controlling a doorway between two classrooms (source and drain). <b>Body effect:</b> the floor tilts, so the teacher must shout louder to open the door. <b>CLM:</b> the drain side keeps creeping closer, so the corridor gets shorter and a few more kids get through. <b>Velocity saturation:</b> kids can only run so fast, however steep the corridor. <b>DIBL:</b> the corridor is so short that the drain classroom's noise opens the door a little by itself. <b>Punch-through:</b> the two classrooms' walls collapse into each other and kids walk straight through, door or no door.</p></div>
+
+  <div class="callout trap"><span class="lbl">Exam traps for this chapter</span>
+    <ul>
+      <li>Saturation in a MOSFET means <b>current saturates</b> (flat). In a BJT, "saturation" is the region where both junctions are forward-biased and the transistor is a closed switch. Don't mix them.</li>
+      <li>V<sub>DS,sat</sub> = V<sub>GS</sub> − V<sub>th</sub>, not V<sub>GS</sub>.</li>
+      <li>Body effect: V<sub>SB</sub> ↑ ⇒ V<sub>th</sub> ↑. DIBL: V<sub>DS</sub> ↑ ⇒ V<sub>th</sub> ↓. Opposite directions, both asked.</li>
+      <li>CLM makes the curves slope up in <b>saturation</b>; it doesn't change the triode region formula (to first order).</li>
+      <li>Your p.14 writes the velocity-saturation factor as 1/(1 + V<sub>DS</sub>/E<sub>c</sub>). Write <b>1/(1 + V<sub>DS</sub>/(E<sub>c</sub>L))</b>: V<sub>DS</sub>/L is the field.</li>
+      <li>The sub-threshold slope can never be below 60 mV/decade at 300 K for a normal MOSFET; "lower S" means a better (sharper) switch.</li>
+    </ul></div>
+</section>

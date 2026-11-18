@@ -171,7 +171,7 @@
     <li>At the drain end the gate-to-channel voltage is V<sub>GS</sub> − V<sub>DS</sub>. The channel vanishes there when this equals V<sub>th</sub>, i.e. when <b>V<sub>DS</sub> = V<sub>GS</sub> − V<sub>th</sub> = V<sub>ov</sub></b>.</li>
     <li>For V<sub>DS</sub> larger than that, the pinch-off point moves toward the source. The voltage across the remaining channel stays fixed at V<sub>ov</sub>, so the current stops growing.</li>
   </ul>
-  <div class="callout beyond"><span class="lbl">Beyond your notes: the three regions</span>
+  <div class="callout beyond"><span class="lbl">The three regions (now also in your third note-set; every region in detail in Chapter 11)</span>
     {{fig:mos_iv|Output and transfer characteristics of an nMOS (illustrative units, V_th = 1 V).}}
     <div class="tablewrap"><table>
       <tr><th>Region</th><th>Condition (nMOS)</th><th>I<sub>D</sub></th></tr>
@@ -195,6 +195,7 @@
     <p>τ = R C = 2 kΩ × 50 fF = 100 ps (the 63 % time constant of an RC charge). Doubling W halves R<sub>ON</sub> (R ∝ L/W), so τ = 50 ps if the load doesn't change. In real circuits wider transistors also add capacitance to their own drain and to the previous stage, so the gain is less than 2×.</p></div></details>
 
   <h3>10.8 Bringing it together: CMOS and the inverter</h3>
+  <p><i>A first look. Your 1-10-26 notes and the Drive cover the inverter in full: see Chapter 12.</i></p>
   {{fig:inverter|A CMOS inverter: one pMOS pulling up, one nMOS pulling down.}}
   <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
     <p>Two doors on a room, wired so exactly one is open at any time: one door leads to the "1" (power) hallway, the other to the "0" (ground) hallway. When the input is high (1), the bottom door opens and the output is connected to 0. When the input is low (0), the top door opens and the output is connected to 1. Since one door is always shut, there is never a straight path from power to ground, so almost no current is wasted while the input isn't changing. That's why CMOS uses so little power.</p></div>
@@ -208,7 +209,7 @@
   <h3>10.9 Why this course is called VLSI</h3>
   <p>One inverter needs 2 transistors, a NAND gate 4, a flip-flop about 20 to 30, a 64-bit adder thousands. Reaching millions to billions of transistors is only possible because the MOSFET is (i) tiny, (ii) needs no DC gate current, (iii) dissipates almost no static power in CMOS, (iv) can be built by the same lithography process on the same wafer. Scaling W, L and t<sub>ox</sub> down together (<b>Moore's law</b>) is how speed rose and cost per transistor fell for 50 years.</p>
 
-  <h3>10.10 Short-channel effects (for awareness)</h3>
+  <h3>10.10 Short-channel effects (for awareness; full treatment in Chapter 11)</h3>
   <ul>
     <li><b>Velocity saturation</b> (your Chapter 6): at high lateral field carriers reach v<sub>sat</sub>, so I<sub>D</sub> ∝ V<sub>ov</sub> (linear) instead of V<sub>ov</sub>².</li>
     <li><b>Drain-induced barrier lowering (DIBL)</b> and <b>punch-through</b>: a high drain voltage reduces the barrier near the source in very short channels.</li>

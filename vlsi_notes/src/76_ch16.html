@@ -1,0 +1,105 @@
+<section class="chapter" id="ch16">
+  <h2><span class="num">CHAPTER 16</span>Semiconductor Memories</h2>
+  <p class="tagline">How billions of bits are stored on a chip: what defines a good memory, ROM vs RAM, how the array is organised and addressed, the NOR ROM from your board notes, and the SRAM and DRAM cells.</p>
+  <span class="chip src">Drive: board notes 1112-1600; Semiconductor_Memories_Lecture_Notes</span>
+
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>A memory chip is a giant apartment block where each flat holds one bit (a 0 or a 1). To visit a flat you need its floor number (the <b>row</b>, picked by the <b>word line</b>) and its door number (the <b>column</b>, reached through the <b>bit line</b>). A <b>ROM</b> is a block where the furniture was cemented in when it was built: you can look, not change. A <b>RAM</b> lets you move furniture any time, but if the power goes off (the lights go out) everyone forgets where everything was.</p></div>
+
+  <h3>16.1 What a memory is and how it is judged</h3>
+  <ul>
+    <li><b>Memory</b> = an electronic circuit that can store data. <b>Bit</b> = the smallest unit of data that can be stored. The basic building block is a <b>1-bit cell</b>, replicated in an array. Modern memories are built from MOSFETs for density, low power and speed.</li>
+  </ul>
+  <div class="tablewrap"><table>
+    <tr><th>Performance metric (board + typed notes)</th><th>Meaning</th></tr>
+    <tr><td><b>Area efficiency / storage density</b></td><td>bits per unit area (tape and floppy were huge; an SD card holds up to 512 GB on a fingernail)</td></tr>
+    <tr><td><b>Cost per bit</b></td><td>fewer transistors per cell ⇒ cheaper bits</td></tr>
+    <tr><td><b>Access time</b></td><td>time to read or write a chosen location; it defines the speed of the memory</td></tr>
+    <tr><td><b>Power: static</b></td><td>standby power when nothing switches (leakage, refresh)</td></tr>
+    <tr><td><b>Power: dynamic</b></td><td>power spent when nodes switch 0 ↔ 1</td></tr>
+    <tr><td><b>Data retention time</b></td><td>how long stored data stays valid</td></tr>
+  </table></div>
+  <p>The board sums it up as <b>area, speed, power</b>: the same three-way trade-off as all of VLSI.</p>
+  <div class="callout beyond"><span class="lbl">Testing (typed notes: design for testability)</span>
+    <p>After fabrication every chip must be tested against expected outputs. With thousands of inputs, testing every combination is impossible (<b>input-vector explosion</b>: n inputs give 2<sup>n</sup> combinations), so tests use <b>random samples / chosen test patterns</b> and <b>fault models</b> (what physical defects can occur and what wrong outputs they would cause). Designing the chip so it is easy to test is <b>design for testability (DFT)</b>.</p></div>
+
+  <h3>16.2 Classification</h3>
+  <p>The board classifies memories by (i) <b>type of data storage</b> and (ii) <b>type of data access</b>:</p>
+  <div class="two">
+    <div><h4>Read-only memory (ROM)</h4><ol><li>Only retrieval of data (mostly reads)</li><li>Data stored at the time of fabrication or programming</li><li><b>Non-volatile</b>: keeps data with the power off</li></ol>
+      <p><b>Mask-programmed ROM</b> (fixed by a mask during manufacture) · <b>PROM</b> (programmable once by the user in the field) · <b>EPROM</b> (erasable, with UV light, and re-writable many times) · <b>EEPROM</b> (electrically erasable) · <b>Flash</b> (high-density electrically erasable; SD cards, SSDs). Programmable kinds have limited write endurance and writes are much slower than reads.</p></div>
+    <div><h4>Read/write memory (RAM)</h4><ol><li>Allows re-writing of data</li><li><b>Volatile</b>: loses data when power is removed</li><li>Random access: no need to go through locations in sequence; fast reads and writes</li></ol>
+      <p><b>SRAM</b> (static RAM: cross-coupled transistors hold the bit as long as power is on) · <b>DRAM</b> (dynamic RAM: the bit is charge on a capacitor that leaks and must be periodically <b>refreshed</b>).</p></div>
+  </div>
+
+  <h3>16.3 Memory organisation</h3>
+  {{fig:mem_array|A random-access memory: the row decoder fires one word line; the column decoder picks the bit line; the cell at the crossing is read or written.}}
+  <ul>
+    <li><b>Memory cell</b>: each stores one bit. Cells are placed in an <b>array (the memory core)</b> surrounded by <b>peripherals</b> (decoders, sense amplifiers, drivers, timing).</li>
+    <li><b>Row decoder</b>: N address bits A<sub>1</sub>…A<sub>N</sub> select <b>one of 2<sup>N</sup> word lines</b> (an N-input decoder has 2<sup>N</sup> outputs).</li>
+    <li><b>Word lines</b> = <b>horizontal</b> lines connecting all the cells in a row. <b>Bit lines</b> = <b>vertical</b> lines used to read or write a specific cell.</li>
+    <li><b>Column decoder</b>: M address bits pick one of <b>2<sup>M</sup> bit lines</b>.</li>
+    <li><b>Storage capacity = 2<sup>N</sup> × 2<sup>M</sup> bits</b> (the board writes 2<sup>m</sup> × 2<sup>n</sup>).</li>
+    <li><b>To read or write a cell, both its word line and its bit line must be activated.</b></li>
+  </ul>
+  <details class="q" open><summary>Worked: a 1 Mbit memory is organised as a square array. How many rows and columns, and how many address bits go to each decoder? What is the total address width?</summary><div class="ans">
+    <p>1 Mbit = 2<sup>20</sup> bits. Square: 2<sup>10</sup> × 2<sup>10</sup> = <b>1024 rows × 1024 columns</b>. Row decoder N = <b>10</b> bits, column decoder M = <b>10</b> bits, total <b>20 address bits</b>. Why square? It keeps the word and bit lines (and so their capacitance and delay) as short as possible.</p></div></details>
+
+  <h3>16.4 ROM circuits: the 4 × 4 NOR ROM (your board)</h3>
+  {{fig:nor_rom|The 4-bit × 4-bit NOR-based ROM drawn on the board. Transistor positions copied from the board: R1 → C1, C3; R2 → C1, C2; R3 → C2, C3; R4 → C1, C4.}}
+  <ol class="steps">
+    <li>Each column (bit line C1 to C4) has a <b>pMOS pull-up with its gate grounded</b> (always ON): the pseudo-nMOS load of Chapter 12. With no row selected, every column sits at <b>1</b>.</li>
+    <li>Rows R1 to R4 (word lines, driven by the row decoder) go to the gates of the nMOS cells. Exactly one row is 1 at a time.</li>
+    <li>At a crossing (R<sub>i</sub>, C<sub>j</sub>): <b>an nMOS present</b> ⇒ when R<sub>i</sub> = 1 it turns on and pulls C<sub>j</sub> to <b>0</b>. <b>No transistor</b> ⇒ C<sub>j</sub> stays <b>1</b>.</li>
+    <li>Each column is a NOR of the rows that have transistors on it (any of them high ⇒ 0), hence "NOR ROM".</li>
+    <li>The data is <b>programmed by placing or omitting transistors at fabrication</b> (a mask-programmed ROM).</li>
+  </ol>
+  <div class="tablewrap"><table>
+    <tr><th>Selected row</th><th>Transistors on</th><th>C1</th><th>C2</th><th>C3</th><th>C4</th><th>Stored word</th></tr>
+    <tr><td>R1 = 1</td><td>C1, C3</td><td>0</td><td>1</td><td>0</td><td>1</td><td><b>0101</b> (board ✓)</td></tr>
+    <tr><td>R2 = 1</td><td>C1, C2</td><td>0</td><td>0</td><td>1</td><td>1</td><td><b>0011</b></td></tr>
+    <tr><td>R3 = 1</td><td>C2, C3</td><td>1</td><td>0</td><td>0</td><td>1</td><td><b>1001</b> (board ✓)</td></tr>
+    <tr><td>R4 = 1</td><td>C1, C4</td><td>0</td><td>1</td><td>1</td><td>0</td><td><b>0110</b></td></tr>
+  </table></div>
+  <details class="q" open><summary>Practice: design a 4 × 4 NOR ROM storing R1 = 1010, R2 = 0111, R3 = 1111, R4 = 0000. Where do the transistors go? How many are needed?</summary><div class="ans">
+    <p>Put a transistor wherever the stored bit is <b>0</b>. R1 = 1010 ⇒ C2, C4. R2 = 0111 ⇒ C1. R3 = 1111 ⇒ none. R4 = 0000 ⇒ C1, C2, C3, C4. Total <b>7 nMOS</b> + 4 pull-ups.</p></div></details>
+  <div class="callout beyond"><span class="lbl">Beyond your notes: NAND ROM, and the programmable ROMs</span>
+    <p>In a <b>NAND ROM</b> the cell transistors of a column are in series; unselected rows are held high (all on) and the selected row goes <b>low</b>. It is denser (no ground contact per cell) but slower. <b>EPROM/EEPROM/Flash</b> cells are MOSFETs with an extra <b>floating gate</b> buried in the oxide: trapping electrons on it raises V<sub>th</sub>, so the cell no longer turns on when its word line rises, storing a different bit. EPROMs are erased by UV light; EEPROM and Flash are erased electrically by tunnelling (Flash erases a whole block at once, which makes it dense and cheap).</p></div>
+
+  <h3>16.5 RAM cells: SRAM and DRAM</h3>
+  {{fig:sram_dram|Left: the six-transistor SRAM cell. Right: the one-transistor one-capacitor DRAM cell.}}
+  <div class="callout beyond"><span class="lbl">Beyond your notes: how the cells work (the typed notes name them; standard detail added)</span>
+  <div class="two">
+    <div><h4>SRAM (6T)</h4>
+      <ul><li>Two CMOS inverters connected in a loop (cross-coupled): Q feeds the second inverter, which feeds back Q̄ into the first. The loop has two stable states, so it <b>holds a bit as long as power is on</b> with no refresh.</li>
+      <li>Two nMOS <b>access transistors</b> connect Q and Q̄ to the bit lines BL and BL̄ when the word line WL = 1.</li>
+      <li><b>Read:</b> precharge BL and BL̄ high, raise WL; the side storing 0 pulls its bit line down a little; a <b>sense amplifier</b> detects the difference.</li>
+      <li><b>Write:</b> drive BL/BL̄ to the new value strongly and raise WL; the drivers overpower the inverters.</li>
+      <li>Fast, no refresh, but <b>6 transistors per bit</b> ⇒ large and expensive. Used for caches and registers.</li></ul></div>
+    <div><h4>DRAM (1T1C)</h4>
+      <ul><li>One access transistor and one storage capacitor C<sub>S</sub>: charged = 1, empty = 0.</li>
+      <li><b>Write:</b> raise WL and drive BL to V<sub>DD</sub> or 0.</li>
+      <li><b>Read:</b> precharge BL to V<sub>DD</sub>/2, raise WL; C<sub>S</sub> shares its charge with the much bigger bit-line capacitance C<sub>BL</sub>, moving BL slightly up or down: ΔV = (V<sub>S</sub> − V<sub>DD</sub>/2)·C<sub>S</sub>/(C<sub>S</sub> + C<sub>BL</sub>). Reading destroys the stored charge, so the sense amplifier <b>writes it back</b>.</li>
+      <li>Charge leaks through the transistor and junction (Chapter 13 generation current), so every cell is <b>refreshed every few milliseconds</b>.</li>
+      <li>Only 1 transistor per bit ⇒ the densest, cheapest RAM. Used for main memory.</li></ul></div>
+  </div></div>
+  <details class="q" open><summary>Worked: a DRAM cell has C<sub>S</sub> = 25 fF, the bit line C<sub>BL</sub> = 250 fF, V<sub>DD</sub> = 1.2 V, precharge 0.6 V. What bit-line swing does the sense amplifier see when reading a 1 (cell at 1.2 V) and a 0?</summary><div class="ans">
+    <p>ΔV = (V<sub>S</sub> − 0.6) × 25/(25 + 250) = (V<sub>S</sub> − 0.6) × 0.0909. Reading a 1: (0.6) × 0.0909 = <b>+55 mV</b>. Reading a 0: (−0.6) × 0.0909 = <b>−55 mV</b>. These tiny signals are why DRAM needs sensitive sense amplifiers, and why C<sub>S</sub> can't be shrunk freely.</p></div></details>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>Mask ROM</th><th>Flash</th><th>SRAM</th><th>DRAM</th></tr>
+    <tr><td>Volatile?</td><td>no</td><td>no</td><td>yes</td><td>yes</td></tr>
+    <tr><td>Cell</td><td>0 or 1 transistor</td><td>1 floating-gate transistor</td><td>6 transistors</td><td>1 transistor + 1 capacitor</td></tr>
+    <tr><td>Write</td><td>at fabrication</td><td>slow, limited cycles</td><td>fast</td><td>fast</td></tr>
+    <tr><td>Refresh</td><td>no</td><td>no</td><td>no</td><td><b>yes</b></td></tr>
+    <tr><td>Density / cost per bit</td><td>very high / low</td><td>very high / lowest</td><td>low / high</td><td>high / low</td></tr>
+    <tr><td>Typical use</td><td>fixed firmware, look-up tables</td><td>SSDs, SD cards, phones</td><td>CPU caches</td><td>main memory</td></tr>
+  </table></div>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul>
+      <li>Word lines are <b>rows</b> (horizontal), bit lines are <b>columns</b> (vertical).</li>
+      <li>N address bits select 2<sup>N</sup> lines; capacity = 2<sup>N</sup> × 2<sup>M</sup> bits.</li>
+      <li>In a NOR ROM a transistor at a crossing stores a <b>0</b>; no transistor stores a <b>1</b>.</li>
+      <li>ROM is non-volatile; RAM is volatile. "Random access" means any location in the same time, not "random data".</li>
+      <li>SRAM: no refresh, 6T, fast, big. DRAM: refresh, 1T1C, dense, destructive read.</li>
+    </ul></div>
+</section>

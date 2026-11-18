@@ -1,0 +1,94 @@
+<section class="chapter" id="ch15">
+  <h2><span class="num">CHAPTER 15</span>Circuit Simulation: SPICE, LTspice and MOSFET Models</h2>
+  <p class="tagline">Before spending millions on masks, every chip is simulated. This chapter covers what SPICE is, how it solves a circuit, the MOSFET model levels, the netlist and analyses, and the lab experiment from class.</p>
+  <span class="chip src">Drive: 4_LTSpice (Class Notes, Notes_MOSFET_SPICE_Models, slides LT1 to LT5)</span>
+
+  <div class="callout kid"><span class="lbl">Explain like I'm 10</span>
+    <p>Building a real chip is like baking a giant cake that takes three months and costs a fortune, and you can't fix it once it's baked. So first you bake it in a video game. SPICE is that game: you describe the circuit as a list of parts and connections, and it calculates every voltage and current. If the game cake comes out flat, you change the recipe for free.</p></div>
+
+  <h3>15.1 What SPICE is</h3>
+  <ul>
+    <li><b>SPICE = Simulation Program with Integrated Circuit Emphasis</b>, from UC Berkeley, <b>1973</b> (open source). Versions: <b>1973 SPICE1 (FORTRAN), 1975 SPICE2, 1981 SPICE 2G.6, 1985 SPICE3 (rewritten in C)</b>.</li>
+    <li>Why simulate: fabrication is expensive and irreversible, so verify first. Commercial EDA vendors: Cadence, Synopsys, Mentor Graphics (Siemens), Tanner. Free tools: LTspice (Analog Devices, download from analog.com), PSpice Lite (Cadence OrCAD; limited to 64 nodes, 10 transistors, 2 op-amps, 65 digital primitives).</li>
+    <li>A general-purpose circuit simulator for <b>non-linear DC, non-linear transient and linear AC</b> analysis. It writes the circuit equations with KCL and KVL using <b>modified nodal analysis</b> and solves non-linear devices iteratively with <b>Newton's method</b> (linearise, solve, repeat until the answer stops changing: "convergence").</li>
+    <li>A <b>device model</b> is an analytical expression built from theory and measurement. Two kinds: <b>device (primitive) models</b> (.model) and <b>subcircuit models</b> (.subckt, a block built from other parts). A model reproduces only the behaviour its equations contain, not every quirk on a datasheet.</li>
+  </ul>
+
+  <h3>15.2 The netlist: instance letters and analyses</h3>
+  <div class="tablewrap"><table>
+    <tr><th>Letter</th><th>Element</th><th>Pins (order)</th></tr>
+    <tr><td><b>M</b></td><td>MOSFET</td><td>D G S B (4 pins)</td></tr>
+    <tr><td><b>Q</b></td><td>BJT</td><td>C B E</td></tr>
+    <tr><td><b>D</b></td><td>diode</td><td>A K (anode, cathode)</td></tr>
+    <tr><td><b>R, C, L</b></td><td>resistor, capacitor, inductor</td><td>2 pins</td></tr>
+    <tr><td><b>V, I</b></td><td>voltage / current source</td><td>+ −</td></tr>
+    <tr><td><b>E</b></td><td>voltage-controlled voltage source (VCVS)</td><td>4 pins</td></tr>
+    <tr><td><b>G</b></td><td>voltage-controlled current source (VCCS)</td><td>4 pins</td></tr>
+  </table></div>
+  <div class="two">
+    <div><h4>Analyses</h4><ul>
+      <li><b>.op / .dc</b>: static operating point and DC sweeps (datasheet DC curves)</li>
+      <li><b>.ac</b>: small-signal frequency response (gain, phase, capacitance effects)</li>
+      <li><b>.tran</b>: time response, like an oscilloscope</li>
+      <li><b>Monte Carlo</b>: random component variation, run many times to see the spread</li></ul></div>
+    <div><h4>LTspice survival kit (LT3)</h4><ul>
+      <li>F5 or Ctrl-X: delete; F7: move; F8: drag (keeps wires attached)</li>
+      <li>Ctrl-R: rotate; Ctrl-E: mirror</li>
+      <li>Right-click a part to enter its value or model</li>
+      <li>.include a model file; put dot-commands on the schematic as "SPICE directives"</li></ul></div>
+  </div>
+
+  <h3>15.3 The SPICE diode model (LT4)</h3>
+  <ul>
+    <li>Equivalent circuit: the ideal exponential diode current I<sub>F</sub>, a junction capacitance C<sub>j</sub> and a series resistance R<sub>S</sub>.</li>
+    <li><b>C<sub>j</sub> = C<sub>j0</sub>/(1 − V/V<sub>bi</sub>)<sup>M</sup></b> (M = grading coefficient; ½ for an abrupt junction, matching Chapter 13).</li>
+    <li><b>N = emission coefficient</b> = the ideality factor η of Chapter 13: I = I<sub>S</sub>(e<sup>V/NV<sub>T</sub></sup> − 1).</li>
+    <li>Class example: <code>.model 1mA_diode D (Is=100pA n=1.679)</code> with <code>.DC VD 0V 800mV 10mV</code>: the simulator used as a curve tracer.</li>
+    <li>A <b>DC restorer (clamper)</b> example: a PULSE(−3 7 …) source, 1 μF and a 1N4148, analysed with <code>.TRAN 100u 10m</code>.</li>
+  </ul>
+
+  <h3>15.4 The MOSFET model in SPICE</h3>
+  {{fig:spice_eqckt|The Level-1 MOSFET equivalent circuit from your class notes: the current source I<sub>D</sub> between internal nodes D′ and S′, series resistances, gate capacitances, and the two reverse-biased body diodes with their depletion capacitances.}}
+  <ul>
+    <li>I<sub>D</sub> = f(constants μ<sub>n</sub>, μ<sub>p</sub>, C<sub>ox</sub>, V<sub>th</sub>; variables V<sub>GS</sub>, V<sub>DS</sub>), placed between the internal drain D′ and source S′.</li>
+    <li><b>R<sub>D</sub>, R<sub>S</sub></b>: series resistances of the drain and source regions.</li>
+    <li><b>C<sub>gd</sub>, C<sub>gs</sub>, C<sub>gb</sub></b>: gate (MOS) capacitances. In Level 1 they follow the <b>Meyer model</b>, different in triode and saturation and smoothed at the boundary.</li>
+    <li><b>D–B and S–B diodes</b> (always reverse-biased in normal use) with their depletion capacitances <b>C<sub>db</sub>, C<sub>sb</sub></b>.</li>
+    <li>Level 1 in SPICE form: <b>I<sub>D</sub> = (K′/2)(W/L<sub>eff</sub>)[2(V<sub>GS</sub> − V<sub>T</sub>)V<sub>DS</sub> − V<sub>DS</sub>²](1 + λV<sub>DS</sub>)</b>, with K′ = μC<sub>ox</sub> and <b>L<sub>eff</sub> = L − 2L<sub>D</sub></b>. This is exactly your triode formula ① with CLM (Chapter 11). Effective sizes use parameters such as LD, WD, XL, XW, LMLT, WMLT.</li>
+  </ul>
+  <div class="tablewrap"><table>
+    <tr><th>Model</th><th>Basis</th><th>Parameters</th><th>Good for</th><th>Limitations</th></tr>
+    <tr><td><b>Level 1</b> (Shichman–Hodges)</td><td>square law, GCA</td><td>~7 (K′/μ, C<sub>ox</sub>/t<sub>ox</sub>, V<sub>T</sub>, λ, γ, φ, W, L)</td><td>hand calculation, fast large digital simulations</td><td>no sub-threshold, no SCEs; accurate only for L ≳ 4 μm (some notes: ≳ 0.8 μm); predicts saturation output resistance poorly</td></tr>
+    <tr><td><b>Level 2</b></td><td>physics-based</td><td>more</td><td>adds SCEs, sub-threshold, bulk-charge effects, field-dependent mobility</td><td>complex, slow, convergence problems</td></tr>
+    <tr><td><b>Level 3</b></td><td>semi-empirical (fitted to measurements)</td><td>more</td><td>same accuracy as Level 2 with better convergence</td><td>loses accuracy at sub-micron</td></tr>
+    <tr><td><b>BSIM</b> (Level 4, 7/49/54…; Berkeley Short-channel IGFET Model)</td><td>physical + fitted</td><td>&gt; 100</td><td>deep sub-micron; industry standard; needed below ~0.8 μm</td><td>not for hand analysis</td></tr>
+    <tr><td><b>EKV</b> (Enz–Krummenacher–Vittoz)</td><td>single continuous equation</td><td>compact</td><td>weak to strong inversion with no jump in derivatives; low-power analog/RF</td><td></td></tr>
+  </table></div>
+  <p><b>Model generations</b> (LT5): 1st (Levels 1, 2, 3); 2nd (BSIM, BSIM2, HSPICE Level 28); 3rd (BSIM3 / Level 7/49, adding stress, sub-threshold, noise, gate tunnelling and temperature effects). The second-order effects that need BSIM3 below 0.8 μm (class notes): short-channel threshold shift, sub-threshold conduction, velocity saturation, charge-controlled capacitances.</p>
+  <ul>
+    <li><b>Model file</b> = a text file of technology parameters (.model or .lib), loaded with <code>.include</code>. <b>PTM (Predictive Technology Models)</b> provide files for 180 nm down to 90/65/45/32/22/16 nm. All devices in one circuit must use the same technology.</li>
+    <li>Rule of thumb from the Drive: <b>hand calculations use Level 1; EDA sign-off uses BSIM</b>.</li>
+  </ul>
+
+  <h3>15.5 Experiment 6: nMOS characteristics and the inverter in LTspice</h3>
+  <div class="callout mine"><span class="lbl">The lab exactly as in your class notes</span>
+    <ol class="steps">
+      <li>Place an <b>nmos4</b> symbol (4 terminals). Set <b>L = 0.18 μm (180 nm), W = 10 μm</b>; <code>.include</code> the 180 nm model file.</li>
+      <li>Source V2 on the drain (V<sub>DS</sub>), V1 on the gate (V<sub>GS</sub>); source and body grounded.</li>
+      <li>Nested DC sweep: V<sub>DS</sub> from 0 to 1.8 V in 0.01 V steps, for V<sub>GS</sub> = 0 to 1.8 V in 0.3 V steps:<br><code>.dc V2 0 1.8 0.01 V1 0 1.8 0.3</code></li>
+      <li>Plot I<sub>D</sub> (Id(M1)): a family of output curves like Chapter 11's figure.</li>
+      <li>Transfer curve: sweep V<sub>GS</sub> at fixed V<sub>DS</sub> and find <b>g<sub>m</sub> = ∂I<sub>D</sub>/∂V<sub>GS</sub></b> (LTspice can plot d(Id(M1))).</li>
+      <li>Build the CMOS inverter (add a pmos4 with its source and body at V<sub>DD</sub> = 1.8 V), sweep V<sub>in</sub> with .dc to get the <b>VTC</b> (Chapter 12), then apply a PULSE input with .tran to see the <b>transient</b> (propagation delay).</li>
+    </ol></div>
+  <details class="q" open><summary>Practice: write the SPICE lines for (a) an nMOS M1 with drain node d, gate g, source and body at 0, model NMOS180, W = 10 μm, L = 0.18 μm; (b) a sweep of V<sub>DS</sub> 0 to 1.8 V for V<sub>GS</sub> = 0.6, 1.2, 1.8 V; (c) a 10 ns transient.</summary><div class="ans">
+    <p>(a) <code>M1 d g 0 0 NMOS180 W=10u L=0.18u</code> (pin order D G S B).</p>
+    <p>(b) <code>VDS d 0 0</code>, <code>VGS g 0 0</code>, <code>.dc VDS 0 1.8 0.01 VGS 0.6 1.8 0.6</code>.</p>
+    <p>(c) <code>.tran 10n</code> (or <code>.tran 0.01n 10n</code> to set the step), with a source such as <code>VIN in 0 PULSE(0 1.8 1n 50p 50p 2n 4n)</code>.</p></div></details>
+  <div class="callout trap"><span class="lbl">Exam traps</span>
+    <ul>
+      <li>MOSFET pin order is <b>D G S B</b>; BJT is <b>C B E</b>.</li>
+      <li>SPICE solves non-linear circuits with Newton's method; non-convergence means the iteration did not settle.</li>
+      <li>Level 1 = Shichman–Hodges square law: no sub-threshold current, no short-channel effects.</li>
+      <li>"N" in a diode model is the emission coefficient (ideality factor), not a doping.</li>
+    </ul></div>
+</section>

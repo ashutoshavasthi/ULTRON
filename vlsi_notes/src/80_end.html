@@ -1,5 +1,5 @@
-<section class="chapter" id="ch11">
-  <h2><span class="num">CHAPTER 11</span>The Complete Formula Sheet</h2>
+<section class="chapter" id="ch17">
+  <h2><span class="num">CHAPTER 17</span>The Complete Formula Sheet</h2>
   <p class="tagline">Everything on one screen. Constants first, then each chapter in order.</p>
   <h3>Constants (300 K)</h3>
   <div class="tablewrap"><table>
@@ -14,6 +14,9 @@
     <tr><td>Si: μ<sub>n</sub>, μ<sub>p</sub></td><td>1350, 450 cm²/V·s</td></tr>
     <tr><td>Si: ε<sub>s</sub></td><td>1.04×10<sup>-12</sup> F/cm (11.7 ε₀)</td></tr>
     <tr><td>SiO<sub>2</sub>: ε<sub>ox</sub></td><td>3.45×10<sup>-13</sup> F/cm (3.9 ε₀)</td></tr>
+    <tr><td>Si: N<sub>c</sub>, N<sub>v</sub></td><td>2.8×10<sup>19</sup>, 1.04×10<sup>19</sup> cm<sup>-3</sup></td></tr>
+    <tr><td>ε<sub>0</sub>; hc</td><td>8.854×10<sup>-14</sup> F/cm; 1.24 eV·μm (λ(nm) = 1242/E(eV))</td></tr>
+    <tr><td>Si: v<sub>sat</sub>, F<sub>crit</sub></td><td>≈ 10<sup>7</sup> cm/s, ≈ 4×10<sup>5</sup> V/cm</td></tr>
     <tr><td>Other E<sub>g</sub></td><td>Ge 0.7, GaAs 1.34, GaN 3.4 eV</td></tr>
   </table></div>
   <h3>Bands, statistics, carriers</h3>
@@ -46,12 +49,42 @@
     <div class="row">Triode: I<sub>D</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)[(V<sub>GS</sub> − V<sub>th</sub>)V<sub>DS</sub> − V<sub>DS</sub>²/2]</div>
     <div class="row">Saturation (V<sub>DS</sub> ≥ V<sub>ov</sub>): I<sub>D</sub> = ½μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)²(1 + λV<sub>DS</sub>) &nbsp; g<sub>m</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)V<sub>ov</sub></div>
     <div class="row">R<sub>ON</sub> ≈ 1/[μ<sub>n</sub>C<sub>ox</sub>(W/L)V<sub>ov</sub>] &nbsp; delay τ = RC</div></div>
+  <h3>MOSFET regions, scaling and short-channel effects (Ch. 11)</h3>
+  <div class="eq"><div class="row">V<sub>DS,sat</sub> = V<sub>GS</sub> − V<sub>th</sub> &nbsp; I<sub>D,sat</sub> = ½μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)² (from dI<sub>D</sub>/dV<sub>DS</sub> = 0)</div>
+    <div class="row">Deep triode: I<sub>D</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)V<sub>DS</sub> &nbsp; R<sub>on</sub> = 1/[μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> − V<sub>th</sub>)]</div>
+    <div class="row">Sub-threshold: I<sub>D</sub> ∝ e<sup>(V<sub>GS</sub> − V<sub>th</sub>)/nV<sub>T</sub></sup> &nbsp; S = nV<sub>T</sub> ln10 ≈ 60n mV/decade</div>
+    <div class="row">k′ = μ<sub>n</sub>C<sub>ox</sub>, k = k′W/L &nbsp; L<sub>eff</sub> = L<sub>drawn</sub> − 2L<sub>D</sub> &nbsp; g<sub>m</sub> = √(2kI<sub>D</sub>) = 2I<sub>D</sub>/V<sub>ov</sub></div>
+    <div class="row">Body: V<sub>th</sub> = V<sub>th0</sub> + γ(√(2φ<sub>F</sub> + V<sub>SB</sub>) − √(2φ<sub>F</sub>)), γ = √(2qε<sub>s</sub>N<sub>A</sub>)/C<sub>ox</sub> &nbsp; DIBL: V<sub>th</sub> falls as V<sub>DS</sub> rises</div>
+    <div class="row">CLM: × (1 + λV<sub>DS</sub>), V<sub>A</sub> = 1/λ, r<sub>o</sub> = 1/(λI<sub>D</sub>) &nbsp; Velocity sat.: v = μE/(1 + E/E<sub>c</sub>), I<sub>D</sub> × 1/(1 + V<sub>DS</sub>/E<sub>c</sub>L), I<sub>D,sat</sub> ≈ WC<sub>ox</sub>v<sub>sat</sub>(V<sub>GS</sub> − V<sub>th</sub> − V<sub>DSAT</sub>)</div>
+    <div class="row">Constant-field scaling by S: dimensions, V ÷S; I ÷S; delay ÷S; power ÷S²; power density 1. Constant-voltage: I ×S; delay ÷S²; power ×S; density ×S³</div></div>
+  <h3>CMOS inverter and gates (Ch. 12)</h3>
+  <div class="eq"><div class="row">t<sub>pHL</sub> = 0.69R<sub>n</sub>C<sub>L</sub> &nbsp; t<sub>pLH</sub> = 0.69R<sub>p</sub>C<sub>L</sub> &nbsp; t<sub>p</sub> = average</div>
+    <div class="row">V<sub>M</sub> = [V<sub>tn</sub> + r(V<sub>DD</sub> − |V<sub>tp</sub>|)]/(1 + r), r = √(k<sub>p</sub>/k<sub>n</sub>) &nbsp; symmetric when (W/L)<sub>p</sub> = (μ<sub>n</sub>/μ<sub>p</sub>)(W/L)<sub>n</sub></div>
+    <div class="row">NM<sub>L</sub> = V<sub>IL</sub> − V<sub>OL</sub>, NM<sub>H</sub> = V<sub>OH</sub> − V<sub>IH</sub> (slope −1 points) &nbsp; matched: V<sub>IL</sub> = (3V<sub>DD</sub> + 2V<sub>t</sub>)/8, V<sub>IH</sub> = (5V<sub>DD</sub> − 2V<sub>t</sub>)/8</div>
+    <div class="row">P<sub>dyn</sub> = αC<sub>L</sub>V<sub>DD</sub>²f &nbsp; energy per 0→1→0 cycle = C<sub>L</sub>V<sub>DD</sub>² &nbsp; A<sub>v</sub> = dV<sub>out</sub>/dV<sub>in</sub></div>
+    <div class="row">PDN: AND = series, OR = parallel; PUN = dual; output inverted; 2N transistors (pseudo-nMOS N + 1)</div></div>
+  <h3>Unit I and MOS extras (Ch. 13)</h3>
+  <div class="eq"><div class="row">n = N<sub>c</sub>e<sup>−(E<sub>c</sub> − E<sub>F</sub>)/kT</sup>, p = N<sub>v</sub>e<sup>−(E<sub>F</sub> − E<sub>v</sub>)/kT</sup> (valid if ≥ 3kT from the edge) &nbsp; n<sub>i</sub> = √(N<sub>c</sub>N<sub>v</sub>)e<sup>−E<sub>g</sub>/2kT</sup></div>
+    <div class="row">N<sub>D</sub><sup>+</sup>/N<sub>D</sub> = 1/(1 + 2e<sup>(E<sub>F</sub> − E<sub>D</sub>)/kT</sup>) &nbsp; N<sub>A</sub><sup>−</sup>/N<sub>A</sub> = 1/(1 + 4e<sup>(E<sub>A</sub> − E<sub>F</sub>)/kT</sup>) &nbsp; μ = qτ/m* &nbsp; τ = 1/(σv<sub>th</sub>N<sub>t</sub>)</div>
+    <div class="row">λ<sub>c</sub>(μm) = 1.24/E<sub>g</sub>(eV) &nbsp; ∂n/∂t = (1/q)∂J<sub>n</sub>/∂x + G<sub>L</sub> − U &nbsp; L = √(Dτ) &nbsp; Δn = G<sub>L</sub>τ &nbsp; Δn(t) = G<sub>L</sub>τe<sup>−t/τ</sup></div>
+    <div class="row">E<sub>max</sub> = qN<sub>D</sub>W<sub>n</sub>/ε<sub>s</sub> = 2V<sub>bi</sub>/W &nbsp; J<sub>rec</sub> = (qn<sub>i</sub>W/2τ)e<sup>qV/2kT</sup> &nbsp; J<sub>gen</sub> = qn<sub>i</sub>W/2τ &nbsp; J ∝ e<sup>qV/ηkT</sup></div>
+    <div class="row">V<sub>BR</sub> = ½WF<sub>crit</sub> = ε<sub>s</sub>F<sub>crit</sub>²/(2qN) &nbsp; M = 1/(1 − ∫α dx) &nbsp; 1/C² = 2(V<sub>bi</sub> − V)/(qε<sub>s</sub>N<sub>D</sub>) &nbsp; V<sub>OC</sub> = V<sub>T</sub>ln(I<sub>ph</sub>/I<sub>0</sub> + 1)</div>
+    <div class="row">φ<sub>F</sub> = V<sub>T</sub>ln(N<sub>A</sub>/n<sub>i</sub>); strong inversion ψ<sub>s</sub> = 2φ<sub>F</sub> &nbsp; L<sub>D</sub> = √(ε<sub>s</sub>kT/q²N<sub>A</sub>), C<sub>FB</sub> = C<sub>ox</sub> in series with C<sub>Debye</sub></div>
+    <div class="row">BJT: γ ≈ 1 − N<sub>AB</sub>D<sub>e</sub>W/(N<sub>DE</sub>D<sub>n</sub>L<sub>e</sub>) &nbsp; B = 1/cosh(W/L<sub>n</sub>) ≈ 1 − W²/2L<sub>n</sub>² &nbsp; β ≈ 2L<sub>n</sub>²/W² or D<sub>n</sub>L<sub>e</sub>N<sub>DE</sub>/(D<sub>e</sub>WN<sub>AB</sub>) &nbsp; Q<sub>G</sub> = N<sub>AB</sub>W</div></div>
+  <h3>Manufacturing (Ch. 14)</h3>
+  <div class="eq"><div class="row">EGS: SiO<sub>2</sub> + 2C → Si + 2CO; Si + 3HCl → SiHCl<sub>3</sub> + H<sub>2</sub>; 2SiHCl<sub>3</sub> + 2H<sub>2</sub> → 2Si + 6HCl</div>
+    <div class="row">Dry: Si + O<sub>2</sub> → SiO<sub>2</sub>; wet: Si + 2H<sub>2</sub>O → SiO<sub>2</sub> + 2H<sub>2</sub> &nbsp; Si consumed = 0.44 x<sub>ox</sub> &nbsp; Deal–Grove x² + Ax = B(t + τ)</div>
+    <div class="row">Fick: J = −D∂C/∂x, ∂C/∂t = D∂²C/∂x², D = D<sub>0</sub>e<sup>−E<sub>a</sub>/kT</sup> &nbsp; pre-dep C<sub>s</sub>erfc(x/2√Dt), Q = 2C<sub>s</sub>√(Dt/π) &nbsp; drive-in (Q/√(πDt))e<sup>−x²/4Dt</sup></div>
+    <div class="row">Implant: C(x) = C<sub>p</sub>e<sup>−(x − R<sub>p</sub>)²/2ΔR<sub>p</sub>²</sup>, Q = √(2π)ΔR<sub>p</sub>C<sub>p</sub> &nbsp; Lithography: R = k<sub>1</sub>λ/NA, NA = n sinθ &nbsp; oxide colour 2n<sub>ox</sub>d = (m + ½)λ</div></div>
+  <h3>SPICE and memories (Ch. 15, 16)</h3>
+  <div class="eq"><div class="row">Level 1: I<sub>D</sub> = (K′/2)(W/L<sub>eff</sub>)[2(V<sub>GS</sub> − V<sub>T</sub>)V<sub>DS</sub> − V<sub>DS</sub>²](1 + λV<sub>DS</sub>) &nbsp; C<sub>j</sub> = C<sub>j0</sub>/(1 − V/V<sub>bi</sub>)<sup>M</sup> &nbsp; pins: M = D G S B, Q = C B E</div>
+    <div class="row">Memory capacity 2<sup>N</sup> × 2<sup>M</sup> bits; N row-address bits → 2<sup>N</sup> word lines &nbsp; DRAM read ΔV = (V<sub>S</sub> − V<sub>pre</sub>)C<sub>S</sub>/(C<sub>S</sub> + C<sub>BL</sub>)</div></div>
 </section>
 
-<section class="chapter" id="ch12">
-  <h2><span class="num">CHAPTER 12</span>Practice Bank with Full Solutions</h2>
-  <p class="tagline">Try each question on paper first, then open the answer. Ordered like the course. The last group tests understanding in words.</p>
-  <div class="callout mine"><span class="lbl">How to use it</span><p>Do part A to F once, then redo only the ones you missed two days later. When a question looks new, it is almost always one of your class questions with different numbers.</p></div>
+<section class="chapter" id="ch18">
+  <h2><span class="num">CHAPTER 18</span>Practice Bank with Full Solutions</h2>
+  <p class="tagline">Try each question on paper first, then open the answer. Ordered like the course: A to F for Chapters 1 to 10, H to M for Chapters 11 to 16. The last group (N) tests understanding in words.</p>
+  <div class="callout mine"><span class="lbl">How to use it</span><p>Do parts A to M once, then redo only the ones you missed two days later. When a question looks new, it is almost always one of your class questions with different numbers.</p></div>
   <p><button id="toggleAll" type="button" class="chip" style="cursor:pointer;font:inherit;font-weight:600;padding:6px 14px">Open all answers</button></p>
 
   <h3>A. Bands and Fermi statistics</h3>
@@ -100,13 +133,70 @@
   <details class="q"><summary>F5. Why do pMOS transistors in a CMOS inverter have W about 2 to 3 times larger than the nMOS?</summary><div class="ans"><p>Holes have a lower mobility (μ<sub>p</sub> ≈ μ<sub>n</sub>/2 to /3) so for equal W/L the pMOS conducts less current and charges the load slower. Making W<sub>p</sub> ≈ 2 to 3 × W<sub>n</sub> equalises the drive currents and gives equal rise and fall times.</p></div></details>
   <details class="q"><summary>F6. An nMOS switch (R<sub>ON</sub> = 1 kΩ) drives a 20 fF load. What is τ? What limits how small you can make τ?</summary><div class="ans"><p>τ = RC = 1 kΩ × 20 fF = <b>20 ps</b>. Increasing W lowers R<sub>ON</sub> but also raises the transistor's own parasitic capacitance and the load presented to the previous stage. Velocity saturation and interconnect resistance also set limits.</p></div></details>
 
-  <h3>G. Explain-in-words questions (viva / short-answer)</h3>
-  <details class="q"><summary>G1. Why is the Fermi level called an "imaginary construct"?</summary><div class="ans"><p>Because it is just the energy at which f(E) = ½. There need not be any allowed state at that energy; in a semiconductor E<sub>F</sub> usually sits inside the forbidden gap.</p></div></details>
-  <details class="q"><summary>G2. Why is there no net current at thermal equilibrium even though carriers keep diffusing and drifting?</summary><div class="ans"><p>At every point the diffusion current is exactly cancelled by an equal and opposite drift current (in the junction: I<sub>diffusion</sub> = I<sub>drift</sub> = I<sub>s</sub>). This is equivalent to E<sub>F</sub> being flat throughout the device.</p></div></details>
-  <details class="q"><summary>G3. What two things must be true for a hole to be a useful concept?</summary><div class="ans"><p>The valence band must be nearly full (so tracking the few empty states is simpler), and the empty state must respond to fields like a particle with positive charge and positive effective mass. Both hold in a semiconductor.</p></div></details>
-  <details class="q"><summary>G4. Why does the depletion region penetrate more into the lightly doped side?</summary><div class="ans"><p>The uncovered charge on both sides must be equal: q N<sub>D</sub> x<sub>n</sub> = q N<sub>A</sub> x<sub>p</sub>. Fewer ions per unit volume on the light side, so a larger thickness is needed to hold the same total charge.</p></div></details>
-  <details class="q"><summary>G5. Why does a MOSFET need almost no gate current?</summary><div class="ans"><p>The gate is separated from the channel by an insulating oxide, forming a capacitor. Only charging current flows while the gate voltage changes; in DC the oxide blocks current. Field effect: the field, not a current, controls the channel.</p></div></details>
-  <details class="q"><summary>G6. Compare BJT and MOSFET in one table.</summary><div class="ans"><div class="tablewrap"><table>
+  <h3>H. The MOSFET in depth (Chapter 11)</h3>
+  <details class="q"><summary>H1. nMOS with μ<sub>n</sub>C<sub>ox</sub>(W/L) = 2 mA/V², V<sub>th</sub> = 0.6 V, V<sub>GS</sub> = 1.4 V. Find the region and I<sub>D</sub> for V<sub>DS</sub> = 0.3 V and 1.5 V.</summary><div class="ans"><p>V<sub>ov</sub> = 0.8 V. V<sub>DS</sub> = 0.3 &lt; 0.8 ⇒ triode: 2 × (0.8 × 0.3 − 0.045) = <b>0.39 mA</b>. V<sub>DS</sub> = 1.5 ≥ 0.8 ⇒ saturation: ½ × 2 × 0.64 = <b>0.64 mA</b>.</p></div></details>
+  <details class="q"><summary>H2. pMOS: μ<sub>p</sub>C<sub>ox</sub> = 60 μA/V², W/L = 20, V<sub>tp</sub> = −0.5 V. Source at 1.8 V, gate at 0.6 V, drain at 0.9 V. Region and current?</summary><div class="ans"><p>Use magnitudes: |V<sub>GS</sub>| = 1.2 V, overdrive 1.2 − 0.5 = 0.7 V, |V<sub>DS</sub>| = 0.9 V ≥ 0.7 ⇒ <b>saturation</b>. k<sub>p</sub> = 60 × 20 = 1.2 mA/V². I<sub>SD</sub> = ½ × 1.2 × 0.49 = <b>0.294 mA</b>, flowing from source to drain.</p></div></details>
+  <details class="q"><summary>H3. An nMOS (k = 0.4 mA/V², V<sub>th</sub> = 0.5 V, V<sub>GS</sub> = 1.5 V) has R<sub>D</sub> from V<sub>DD</sub> = 3 V to the drain. Find I<sub>D</sub> and V<sub>DS</sub> for R<sub>D</sub> = 5 kΩ and 20 kΩ.</summary><div class="ans"><p><b>5 kΩ:</b> assume saturation: I<sub>D</sub> = ½ × 0.4 × 1² = 0.2 mA; V<sub>DS</sub> = 3 − 0.2 × 5 = 2 V ≥ 1 V ✓. <b>I<sub>D</sub> = 0.2 mA, V<sub>DS</sub> = 2 V.</b></p>
+    <p><b>20 kΩ:</b> saturation would give V<sub>DS</sub> = 3 − 4 = −1 V: impossible, so the device is in triode. Solve 0.4(V<sub>DS</sub> − V<sub>DS</sub>²/2) = (3 − V<sub>DS</sub>)/20 ⇒ 4V<sub>DS</sub>² − 9V<sub>DS</sub> + 3 = 0 ⇒ V<sub>DS</sub> = (9 − √33)/8 = <b>0.41 V</b>, I<sub>D</sub> = (3 − 0.41)/20 = <b>0.13 mA</b>. Check 0.41 &lt; 1 ✓.</p></div></details>
+  <details class="q"><summary>H4. A process has n = 1.5. Find the sub-threshold slope. With V<sub>th</sub> = 0.45 V, by how many decades does the current drop from V<sub>GS</sub> = V<sub>th</sub> to V<sub>GS</sub> = 0?</summary><div class="ans"><p>S = 1.5 × 0.0259 × ln10 = <b>89 mV/decade</b>. 450/89 = <b>5 decades</b> (a factor of 10<sup>5</sup>).</p></div></details>
+  <details class="q"><summary>H5. In saturation an nMOS carries 1.0 mA at V<sub>DS</sub> = 1 V and 1.1 mA at V<sub>DS</sub> = 3 V. Find λ, V<sub>A</sub> and r<sub>o</sub>.</summary><div class="ans"><p>1.1/1.0 = (1 + 3λ)/(1 + λ) ⇒ 1.1 + 1.1λ = 1 + 3λ ⇒ <b>λ = 0.053 V<sup>-1</sup></b>, <b>V<sub>A</sub> = 19 V</b>. r<sub>o</sub> = ΔV/ΔI = 2 V/0.1 mA = <b>20 kΩ</b>.</p></div></details>
+  <details class="q"><summary>H6. V<sub>th0</sub> = 0.4 V, γ = 0.5 V<sup>½</sup>, 2φ<sub>F</sub> = 0.8 V. What V<sub>SB</sub> raises V<sub>th</sub> to 0.6 V?</summary><div class="ans"><p>0.2 = 0.5(√(0.8 + V<sub>SB</sub>) − 0.894) ⇒ √(0.8 + V<sub>SB</sub>) = 1.294 ⇒ <b>V<sub>SB</sub> = 0.88 V</b>.</p></div></details>
+  <details class="q"><summary>H7. A process is scaled by S = 1.4 (one "node") with constant-field scaling. What happens to area, delay, power per gate and power density? What if voltage is held constant instead?</summary><div class="ans"><p>Constant field: area × 1/1.96 = <b>0.51</b>, delay × <b>0.71</b>, power × <b>0.51</b>, power density × <b>1</b>. Constant voltage: delay × 1/1.96 = 0.51, power × 1.4, power density × 1.4³ = <b>2.7</b>, fields × 1.4.</p></div></details>
+  <details class="q"><summary>H8. With E<sub>c</sub> = 4 V/μm, compare the velocity-saturation factor 1/(1 + V<sub>DS</sub>/E<sub>c</sub>L) at V<sub>DS</sub> = 1 V for L = 2 μm and L = 50 nm. Why does the short device's current become linear in V<sub>ov</sub>?</summary><div class="ans"><p>L = 2 μm: E<sub>c</sub>L = 8 V ⇒ factor 1/1.125 = <b>0.89</b>. L = 50 nm: E<sub>c</sub>L = 0.2 V ⇒ 1/6 = <b>0.17</b>. Carriers move at v<sub>sat</sub> regardless of the field, so I = (charge per length) × v<sub>sat</sub> = WC<sub>ox</sub>V<sub>ov</sub>v<sub>sat</sub>: linear in V<sub>ov</sub>.</p></div></details>
+
+  <h3>I. CMOS inverter and gates (Chapter 12)</h3>
+  <details class="q"><summary>I1. V<sub>DD</sub> = 3.3 V, V<sub>tn</sub> = |V<sub>tp</sub>| = 0.5 V. Find V<sub>M</sub> when k<sub>n</sub> = k<sub>p</sub> and when k<sub>n</sub> = 4k<sub>p</sub>.</summary><div class="ans"><p>k<sub>n</sub> = k<sub>p</sub>: <b>V<sub>M</sub> = 1.65 V</b> (= V<sub>DD</sub>/2). k<sub>n</sub> = 4k<sub>p</sub>: r = 0.5 ⇒ V<sub>M</sub> = (0.5 + 0.5 × 2.8)/1.5 = <b>1.27 V</b>; the stronger nMOS pulls the threshold down.</p></div></details>
+  <details class="q"><summary>I2. Matched inverter, V<sub>DD</sub> = 3.3 V, V<sub>t</sub> = 0.6 V. Find V<sub>IL</sub>, V<sub>IH</sub>, NM<sub>L</sub>, NM<sub>H</sub>.</summary><div class="ans"><p>V<sub>IL</sub> = (9.9 + 1.2)/8 = <b>1.39 V</b>; V<sub>IH</sub> = (16.5 − 1.2)/8 = <b>1.91 V</b>; NM<sub>L</sub> = 1.39 − 0 = <b>1.39 V</b>; NM<sub>H</sub> = 3.3 − 1.91 = <b>1.39 V</b>.</p></div></details>
+  <details class="q"><summary>I3. R<sub>n</sub> = 8 kΩ, R<sub>p</sub> = 20 kΩ, C<sub>L</sub> = 15 fF. Find t<sub>pHL</sub>, t<sub>pLH</sub>, t<sub>p</sub>, and the pMOS width factor that balances them.</summary><div class="ans"><p>t<sub>pHL</sub> = 0.69 × 8k × 15f = <b>83 ps</b>; t<sub>pLH</sub> = 0.69 × 20k × 15f = <b>207 ps</b>; t<sub>p</sub> = <b>145 ps</b>. Widen the pMOS by 20/8 = <b>2.5×</b>.</p></div></details>
+  <details class="q"><summary>I4. A chip has 10<sup>7</sup> gates, each driving 2 fF, V<sub>DD</sub> = 1 V, clock 2 GHz, activity 0.1. Dynamic power?</summary><div class="ans"><p>P = 0.1 × 10<sup>7</sup> × 2×10<sup>-15</sup> × 1² × 2×10<sup>9</sup> = <b>4 W</b>.</p></div></details>
+  <details class="q"><summary>I5. Design static CMOS gates for (a) Y = ((A + B)C)′ and (b) Y = (AB + C)′.</summary><div class="ans"><p>(a) PDN: (A ∥ B) in series with C. PUN: (A series B) in parallel with C. 6 transistors.</p><p>(b) PDN: (A series B) in parallel with C. PUN: (A ∥ B) in series with C. 6 transistors.</p></div></details>
+  <details class="q"><summary>I6. How many transistors for a 4-input NOR in static CMOS and in pseudo-nMOS? Give one advantage and two disadvantages of pseudo-nMOS.</summary><div class="ans"><p>Static CMOS <b>8</b>; pseudo-nMOS <b>5</b>. Advantage: fewer transistors and less input capacitance (and no slow 4-high pMOS stack). Disadvantages: static current whenever the output is low; V<sub>OL</sub> &gt; 0 (ratioed), so smaller noise margin.</p></div></details>
+  <details class="q"><summary>I7. Your notebook photo: A<sub>v</sub> = 100. What output change does a 2 mV input change cause at the switching point? Why is high gain good for logic?</summary><div class="ans"><p>|ΔV<sub>out</sub>| = 100 × 2 mV = <b>0.2 V</b> (in the opposite direction). High gain means a narrow transition region, so wide noise margins and quick restoration of degraded levels.</p></div></details>
+  <details class="q"><summary>I8. List the static properties of the CMOS inverter and explain each in one line.</summary><div class="ans"><p>(1) Zero static power: one transistor is always off. (2) High input impedance: the input is an insulated gate. (3) Low output impedance: the output is always tied to a rail through an ON device. (4) Full swing, ratioless: V<sub>OH</sub> = V<sub>DD</sub>, V<sub>OL</sub> = 0 regardless of sizing.</p></div></details>
+
+  <h3>J. Unit I and MOS extras (Chapter 13)</h3>
+  <details class="q"><summary>J1. Estimate n<sub>i</sub> of Si at 400 K (N<sub>c</sub>, N<sub>v</sub> ∝ T<sup>3/2</sup>, E<sub>g</sub> = 1.12 eV).</summary><div class="ans"><p>√(N<sub>c</sub>N<sub>v</sub>) at 400 K = 1.71×10<sup>19</sup> × (4/3)<sup>1.5</sup> = 2.63×10<sup>19</sup>. kT = 0.0345 eV; E<sub>g</sub>/2kT = 16.25 ⇒ e<sup>−16.25</sup> = 8.8×10<sup>-8</sup>. n<sub>i</sub> ≈ <b>2.3×10<sup>12</sup> cm<sup>-3</sup></b>, about 300 times its 300 K value.</p></div></details>
+  <details class="q"><summary>J2. Si doped with P (E<sub>c</sub> − E<sub>D</sub> = 45 meV) at N<sub>D</sub> = 10<sup>16</sup>, 300 K. What fraction of donors is ionised?</summary><div class="ans"><p>E<sub>c</sub> − E<sub>F</sub> ≈ 0.206 eV, so E<sub>F</sub> − E<sub>D</sub> = 0.045 − 0.206 = −0.161 eV. Fraction = 1/(1 + 2e<sup>−0.161/0.0259</sup>) = 1/(1 + 0.004) = <b>99.6 %</b>: full ionisation is a good assumption.</p></div></details>
+  <details class="q"><summary>J3. Cut-off wavelength of Ge (0.66 eV). Can a Si photodiode detect 1.55 μm light?</summary><div class="ans"><p>Ge: 1.24/0.66 = <b>1.88 μm</b>. Si cuts off at 1.1 μm, so <b>no</b>: 1.55 μm photons (0.8 eV) are below its gap. That is why Ge or InGaAs detectors are used for fibre-optic light.</p></div></details>
+  <details class="q"><summary>J4. After the light is switched off, Δn falls to 10 % of its value in 4.6 μs. Find τ.</summary><div class="ans"><p>e<sup>−t/τ</sup> = 0.1 ⇒ t = τ ln 10 ⇒ τ = 4.6/2.303 = <b>2 μs</b>.</p></div></details>
+  <details class="q"><summary>J5. A p⁺n diode's 1/C² (per area²) vs V plot has slope −1.2×10<sup>15</sup> cm⁴F<sup>-2</sup>V<sup>-1</sup> and meets the V axis at 0.8 V. Find N<sub>D</sub> and V<sub>bi</sub>.</summary><div class="ans"><p>N<sub>D</sub> = 2/(qε<sub>s</sub>|slope|) = 2/(1.6×10<sup>-19</sup> × 1.04×10<sup>-12</sup> × 1.2×10<sup>15</sup>) = <b>1.0×10<sup>16</sup> cm<sup>-3</sup></b>; <b>V<sub>bi</sub> = 0.8 V</b>.</p></div></details>
+  <details class="q"><summary>J6. The forward current of a diode rises ×10 for every 120 mV. Find η and the dominant current mechanism.</summary><div class="ans"><p>Ideal is 59.6 mV/decade (η = 1). 120/59.6 = <b>η ≈ 2</b> ⇒ <b>recombination current in the depletion region</b> dominates (typical at low forward bias).</p></div></details>
+  <details class="q"><summary>J7. Repeat the BJT example of §13.16 with the base width halved (W = 0.5 μm). What happens to β?</summary><div class="ans"><p>B = 1/cosh(0.05) = 0.99875; γ = 1 − 0.0005 = 0.9995 (W also enters γ). α ≈ 0.99825 ⇒ β ≈ <b>570</b> (vs 166). A thinner base sharply raises β, at the cost of a lower Early voltage and easier punch-through.</p></div></details>
+  <details class="q"><summary>J8. A red LED emits at 620 nm. Estimate its band gap and turn-on voltage.</summary><div class="ans"><p>E<sub>g</sub> = 1242/620 = <b>2.0 eV</b>; turn-on ≈ <b>1.8 to 2.0 V</b> (close to E<sub>g</sub>/q, slightly below).</p></div></details>
+  <details class="q"><summary>J9. For N<sub>A</sub> = 10<sup>17</sup> cm<sup>-3</sup>, find φ<sub>F</sub> and the band bending at the onset of strong inversion. Describe the surface at that point.</summary><div class="ans"><p>φ<sub>F</sub> = 0.0259 ln(10<sup>17</sup>/1.5×10<sup>10</sup>) = <b>0.407 V</b>; ψ<sub>s</sub> = 2φ<sub>F</sub> = <b>0.81 V</b>. The surface electron density equals the bulk hole density (10<sup>17</sup>): the surface is as n-type as the bulk is p-type.</p></div></details>
+  <details class="q"><summary>J10. Explain why a GaN diode leaks far less in reverse than a Si diode, and why a GaN power device can block more voltage in the same thickness.</summary><div class="ans"><p>Reverse current ∝ n<sub>i</sub>² (diffusion) and ∝ n<sub>i</sub> (generation); n<sub>i</sub> ∝ e<sup>−E<sub>g</sub>/2kT</sup> is astronomically smaller for 3.4 eV than for 1.1 eV. Blocking: V<sub>BR</sub> = ½WF<sub>crit</sub>, and F<sub>crit</sub> is ~3 MV/cm for GaN vs 0.4 MV/cm for Si, so ~7× more voltage for the same W.</p></div></details>
+
+  <h3>K. Manufacturing (Chapter 14)</h3>
+  <details class="q"><summary>K1. A plane cuts the axes at x = 2, y = 3 and is parallel to z. Miller indices?</summary><div class="ans"><p>(2, 3, ∞) → (½, ⅓, 0) → ×6 → <b>(3 2 0)</b>.</p></div></details>
+  <details class="q"><summary>K2. With A = 0.165 μm and B = 0.0117 μm²/h, how long does a 0.2 μm oxide take? How much silicon is consumed?</summary><div class="ans"><p>t = (x² + Ax)/B = (0.04 + 0.033)/0.0117 = <b>6.2 h</b>. Si consumed = 0.44 × 0.2 = <b>88 nm</b>.</p></div></details>
+  <details class="q"><summary>K3. Give the reactions for dry and wet oxidation and say which is used for the gate oxide and why.</summary><div class="ans"><p>Dry: Si + O<sub>2</sub> → SiO<sub>2</sub>. Wet: Si + 2H<sub>2</sub>O → SiO<sub>2</sub> + 2H<sub>2</sub>. <b>Dry</b> for the gate: slower but denser, fewer defects and traps, better breakdown. Wet is for thick field oxides where speed matters.</p></div></details>
+  <details class="q"><summary>K4. A boron implant: dose 5×10<sup>14</sup> cm<sup>-2</sup>, ΔR<sub>p</sub> = 0.05 μm. Peak concentration? Why must it be annealed?</summary><div class="ans"><p>C<sub>p</sub> = 5×10<sup>14</sup>/(2.507 × 5×10<sup>-6</sup>) = <b>4.0×10<sup>19</sup> cm<sup>-3</sup></b>. Annealing repairs the lattice damage from nuclear stopping and moves the B atoms onto substitutional sites where they are electrically active.</p></div></details>
+  <details class="q"><summary>K5. (a) Resolution of 248 nm lithography with NA = 0.8, k<sub>1</sub> = 0.35. (b) What NA is needed for 50 nm features at 193 nm with k<sub>1</sub> = 0.3? Is that possible in air?</summary><div class="ans"><p>(a) R = 0.35 × 248/0.8 = <b>109 nm</b>. (b) NA = 0.3 × 193/50 = <b>1.16</b> &gt; 1, impossible in air (n = 1); it needs <b>immersion</b> (water, n = 1.44).</p></div></details>
+  <details class="q"><summary>K6. Pre-deposition vs drive-in: boundary condition, profile, and what happens to the surface concentration and dose in each.</summary><div class="ans"><p>Pre-dep: constant surface concentration C<sub>s</sub> (unlimited source), erfc profile, dose grows as √t. Drive-in: fixed dose (source removed), Gaussian profile, surface concentration falls as 1/√t while the junction deepens.</p></div></details>
+  <details class="q"><summary>K7. In the NMOS process, what do HF and piranha do, and how many masks are used?</summary><div class="ans"><p>HF etches SiO<sub>2</sub> through the resist openings; piranha (H<sub>2</sub>SO<sub>4</sub> + H<sub>2</sub>O<sub>2</sub>) strips the photoresist. <b>Four masks</b>: S/D windows, gate region, contact openings, metal pattern.</p></div></details>
+  <details class="q"><summary>K8. In CZ growth, what sets the ingot diameter, why are the crucible and seed counter-rotated, and what are the two main contaminants?</summary><div class="ans"><p>The <b>pull rate</b> (and melt temperature) sets the diameter. Counter-rotation stirs the melt for a uniform temperature (no hot/cold spots) and uniform doping. Contaminants: <b>oxygen</b> from the quartz crucible and <b>carbon</b> from the graphite parts.</p></div></details>
+  <details class="q"><summary>K9. CVD vs PVD: one difference in mechanism and one in step coverage. Name three epitaxy methods.</summary><div class="ans"><p>CVD: gases react chemically on the surface; conformal, good step coverage. PVD: a solid is vaporised (evaporation, sputtering) and condenses; line-of-sight, shadowing. Epitaxy: <b>VPE, LPE, MBE</b>.</p></div></details>
+
+  <h3>L. SPICE and LTspice (Chapter 15)</h3>
+  <details class="q"><summary>L1. Write a netlist for a CMOS inverter (nMOS NMOS180 W = 1 μm, pMOS PMOS180 W = 2.5 μm, L = 0.18 μm, V<sub>DD</sub> = 1.8 V) and a DC sweep of its VTC.</summary><div class="ans"><p><code>VDD vdd 0 1.8</code><br><code>VIN in 0 0</code><br><code>MP out in vdd vdd PMOS180 W=2.5u L=0.18u</code><br><code>MN out in 0 0 NMOS180 W=1u L=0.18u</code><br><code>.include models180.lib</code><br><code>.dc VIN 0 1.8 0.01</code></p></div></details>
+  <details class="q"><summary>L2. A diode model has Is = 100 pA and n = 1.679. Find its current at 0.6 V.</summary><div class="ans"><p>I = 10<sup>-10</sup> × e<sup>0.6/(1.679 × 0.0259)</sup> = 10<sup>-10</sup> × e<sup>13.8</sup> ≈ <b>98 μA</b> (close to the "1 mA diode" name only near 0.7 V).</p></div></details>
+  <details class="q"><summary>L3. Which MOSFET model would you use for (a) hand calculation, (b) a 45 nm sign-off simulation, (c) a low-power analog circuit in weak inversion? Why?</summary><div class="ans"><p>(a) <b>Level 1</b> (square law, few parameters). (b) <b>BSIM</b> (captures short-channel effects; &gt; 100 parameters). (c) <b>EKV</b> (one continuous expression from weak to strong inversion), or BSIM.</p></div></details>
+  <details class="q"><summary>L4. Name the four main SPICE analyses and what each is for.</summary><div class="ans"><p>DC (operating point, sweeps, transfer curves), AC (small-signal frequency response), transient (time waveforms), Monte Carlo (statistical variation of components).</p></div></details>
+
+  <h3>M. Semiconductor memories (Chapter 16)</h3>
+  <details class="q"><summary>M1. A 4 Mbit square array: rows, columns, row and column address bits.</summary><div class="ans"><p>2<sup>22</sup> bits = 2<sup>11</sup> × 2<sup>11</sup> ⇒ <b>2048 × 2048</b>; <b>11 + 11</b> address bits.</p></div></details>
+  <details class="q"><summary>M2. In the board's 4×4 NOR ROM, what word is read when R2 is selected? Where would you add a transistor to make R2 read 0001?</summary><div class="ans"><p>R2 has transistors at C1 and C2 ⇒ <b>0011</b>. For 0001 add a transistor at <b>(R2, C3)</b>.</p></div></details>
+  <details class="q"><summary>M3. A DRAM bit line is 300 fF, V<sub>DD</sub> = 1.2 V, precharge 0.6 V. What cell capacitance gives a 100 mV read signal?</summary><div class="ans"><p>0.6 × C<sub>S</sub>/(C<sub>S</sub> + 300) = 0.1 ⇒ 0.5C<sub>S</sub> = 30 ⇒ <b>C<sub>S</sub> = 60 fF</b>.</p></div></details>
+  <details class="q"><summary>M4. Compare SRAM and DRAM on cell size, refresh, speed and use. Why is the DRAM read destructive?</summary><div class="ans"><p>SRAM: 6T, no refresh, fastest, caches. DRAM: 1T1C, needs refresh, slower, densest, main memory. Reading connects C<sub>S</sub> to the bit line and its charge is shared away, so the sense amplifier must rewrite it.</p></div></details>
+  <details class="q"><summary>M5. Classify: mask ROM, PROM, EPROM, EEPROM, Flash, SRAM, DRAM as volatile or non-volatile, and give the one-line difference between EPROM and EEPROM.</summary><div class="ans"><p>Non-volatile: mask ROM, PROM, EPROM, EEPROM, Flash. Volatile: SRAM, DRAM. EPROM is erased with UV light (whole chip); EEPROM is erased electrically (byte by byte).</p></div></details>
+
+  <h3>N. Explain-in-words questions (viva / short-answer)</h3>
+  <details class="q"><summary>N1. Why is the Fermi level called an "imaginary construct"?</summary><div class="ans"><p>Because it is just the energy at which f(E) = ½. There need not be any allowed state at that energy; in a semiconductor E<sub>F</sub> usually sits inside the forbidden gap.</p></div></details>
+  <details class="q"><summary>N2. Why is there no net current at thermal equilibrium even though carriers keep diffusing and drifting?</summary><div class="ans"><p>At every point the diffusion current is exactly cancelled by an equal and opposite drift current (in the junction: I<sub>diffusion</sub> = I<sub>drift</sub> = I<sub>s</sub>). This is equivalent to E<sub>F</sub> being flat throughout the device.</p></div></details>
+  <details class="q"><summary>N3. What two things must be true for a hole to be a useful concept?</summary><div class="ans"><p>The valence band must be nearly full (so tracking the few empty states is simpler), and the empty state must respond to fields like a particle with positive charge and positive effective mass. Both hold in a semiconductor.</p></div></details>
+  <details class="q"><summary>N4. Why does the depletion region penetrate more into the lightly doped side?</summary><div class="ans"><p>The uncovered charge on both sides must be equal: q N<sub>D</sub> x<sub>n</sub> = q N<sub>A</sub> x<sub>p</sub>. Fewer ions per unit volume on the light side, so a larger thickness is needed to hold the same total charge.</p></div></details>
+  <details class="q"><summary>N5. Why does a MOSFET need almost no gate current?</summary><div class="ans"><p>The gate is separated from the channel by an insulating oxide, forming a capacitor. Only charging current flows while the gate voltage changes; in DC the oxide blocks current. Field effect: the field, not a current, controls the channel.</p></div></details>
+  <details class="q"><summary>N6. Compare BJT and MOSFET in one table.</summary><div class="ans"><div class="tablewrap"><table>
     <tr><th></th><th>BJT</th><th>MOSFET</th></tr>
     <tr><td>Control</td><td>base current (current-controlled)</td><td>gate voltage (voltage-controlled)</td></tr>
     <tr><td>Input current</td><td>I<sub>B</sub> ≠ 0</td><td>≈ 0 (insulated gate)</td></tr>
@@ -115,11 +205,17 @@
     <tr><td>Static power in logic</td><td>high</td><td>≈ 0 in CMOS</td></tr>
     <tr><td>Packing density</td><td>low</td><td>very high ⇒ VLSI</td></tr>
     <tr><td>Best at</td><td>high-speed analog, high gm per area</td><td>digital logic, memory, low power</td></tr></table></div></div></details>
+  <details class="q"><summary>N7. Why is the pull-up made of pMOS and the pull-down of nMOS, and not the other way round?</summary><div class="ans"><p>An nMOS turns off when its source rises to V<sub>DD</sub> − V<sub>tn</sub>, so it can only pass a weak 1; a pMOS can only pass a weak 0. Putting pMOS to V<sub>DD</sub> and nMOS to GND lets each pass the level it passes strongly, giving full-swing outputs.</p></div></details>
+  <details class="q"><summary>N8. Why was constant-voltage scaling preferred, and what problem does it create?</summary><div class="ans"><p>Supply voltages are standards shared by many chips, so they could not drop every generation. Keeping V fixed while shrinking dimensions raises the electric fields (×S) and power density (×S³): velocity saturation, hot carriers, DIBL, oxide breakdown and heat.</p></div></details>
+  <details class="q"><summary>N9. Why does the oxide grow at the Si/SiO<sub>2</sub> interface, and why does growth slow down?</summary><div class="ans"><p>The oxidant must diffuse through the oxide to reach silicon, where it reacts. As the oxide thickens the diffusion path lengthens, so the flux falls: growth changes from linear (reaction-limited) to parabolic (diffusion-limited).</p></div></details>
+  <details class="q"><summary>N10. Why does ion implantation need an anneal but diffusion does not?</summary><div class="ans"><p>Implanted ions arrive with high energy, knock Si atoms out of place (crystal damage) and mostly stop in interstitial sites, where they are inactive. Annealing repairs the lattice and makes them substitutional. Diffusion happens slowly at high temperature, near equilibrium, so atoms already sit on lattice sites.</p></div></details>
+  <details class="q"><summary>N11. Why must DRAM be refreshed but SRAM need not be?</summary><div class="ans"><p>DRAM stores the bit as charge on a tiny capacitor that leaks away through the junction and the off transistor in milliseconds. SRAM stores it in a feedback loop of two inverters, which actively restores the levels as long as power is on.</p></div></details>
+  <details class="q"><summary>N12. Name three reasons silicon dominates over Ge and GaAs for VLSI.</summary><div class="ans"><p>(1) It grows an excellent native oxide (SiO<sub>2</sub>) with a near-perfect interface. (2) Its 1.1 eV gap keeps leakage low at operating temperature (Ge leaks). (3) Abundant, cheap, mechanically strong, available as huge defect-free CZ wafers.</p></div></details>
 </section>
 
-<section class="chapter" id="ch13">
-  <h2><span class="num">CHAPTER 13</span>Cram Sheet: Traps, Comparisons and Corrections</h2>
-  <h3>13.1 The 15 things most likely to lose marks</h3>
+<section class="chapter" id="ch19">
+  <h2><span class="num">CHAPTER 19</span>Cram Sheet: Traps, Comparisons and Corrections</h2>
+  <h3>19.1 The 30 things most likely to lose marks</h3>
   <ol>
     <li>Band gaps: Ge 0.7, Si 1.1, GaAs 1.34, GaN 3.4 eV. Si and Ge are <b>indirect</b>; GaAs and GaN are <b>direct</b>.</li>
     <li>k<sub>B</sub>T = 25.87 meV at 300 K, V<sub>T</sub> = 25.9 mV. Use eV vs J consistently.</li>
@@ -136,17 +232,34 @@
     <li>BJT: active = F/R; α = Bγ; β = α/(1−α); thin light base, heavy emitter; Early voltage from base-width modulation.</li>
     <li>MOS capacitor (p-substrate): negative V<sub>G</sub> accumulation, small + depletion, large + inversion. 1/C = 1/C<sub>ox</sub> + 1/C<sub>dep</sub>; C<sub>min</sub> at w = w<sub>m</sub>.</li>
     <li>MOSFET triode current has <b>W/L</b> and the <b>V<sub>DS</sub>²/2</b> term; saturation begins at V<sub>DS</sub> = V<sub>GS</sub> − V<sub>th</sub>.</li>
+      <li>Saturation starts at V<sub>DS</sub> = V<sub>GS</sub> − V<sub>th</sub>; I<sub>D,sat</sub> = ½k(V<sub>ov</sub>)². Assume saturation, then check.</li>
+    <li>Body effect: V<sub>SB</sub> ↑ ⇒ V<sub>th</sub> ↑. DIBL: V<sub>DS</sub> ↑ ⇒ V<sub>th</sub> ↓. CLM: I<sub>D</sub>(1 + λV<sub>DS</sub>), V<sub>A</sub> = 1/λ.</li>
+    <li>Sub-threshold slope ≥ 60 mV/decade at 300 K. Velocity saturation makes I<sub>D</sub> linear in V<sub>ov</sub>.</li>
+    <li>Constant-field scaling keeps power density constant; constant-voltage scaling raises it by S³.</li>
+    <li>CMOS inverter: pMOS pull-up, nMOS pull-down; zero static power, high Z<sub>in</sub>, low Z<sub>out</sub>, full swing.</li>
+    <li>V<sub>M</sub> where V<sub>out</sub> = V<sub>in</sub>, both transistors saturated; V<sub>DD</sub>/2 needs (W/L)<sub>p</sub> ≈ 2 to 3 (W/L)<sub>n</sub>.</li>
+    <li>Noise margins from the slope = −1 points: NM<sub>L</sub> = V<sub>IL</sub> − V<sub>OL</sub>, NM<sub>H</sub> = V<sub>OH</sub> − V<sub>IH</sub>. Delay 0.69RC. P = αCV<sub>DD</sub>²f.</li>
+    <li>PDN: AND series, OR parallel; PUN is the dual; output inverted.</li>
+    <li>Ionisation: donor factor 2, acceptor factor 4. Boltzmann needs 3kT clearance. λ<sub>c</sub> = 1.24/E<sub>g</sub> μm.</li>
+    <li>Recombination current η = 2 (forward, low V); generation current ∝ W (reverse creeps up).</li>
+    <li>Zener ≈ &lt; 4E<sub>g</sub>/q (heavy doping), avalanche &gt; 6E<sub>g</sub>/q (light doping); V<sub>BR</sub> = ½WF<sub>crit</sub>.</li>
+    <li>1/C² vs V: slope ⇒ N<sub>D</sub>, intercept ⇒ V<sub>bi</sub>. HF C–V stays at C<sub>min</sub>; LF returns to C<sub>ox</sub>; deep depletion goes below.</li>
+    <li>Oxide: 44 % consumed Si; thin linear, thick parabolic. Pre-dep erfc (fixed C<sub>s</sub>), drive-in Gaussian (fixed Q). Light ions go deeper; implants need annealing.</li>
+    <li>Positive resist: pattern = mask. R = k<sub>1</sub>λ/NA. CZ: pull rate sets diameter; O and C contamination.</li>
+    <li>Memory: word lines = rows, bit lines = columns; capacity 2<sup>N</sup>×2<sup>M</sup>; NOR ROM transistor = 0; DRAM 1T1C refresh, SRAM 6T no refresh.</li>
   </ol>
-  <h3>13.2 Diode vs BJT vs MOSFET junction summary</h3>
+  <h3>19.2 Diode vs BJT vs MOSFET junction summary</h3>
   <div class="tablewrap"><table>
     <tr><th>Device</th><th>Layers</th><th>Junctions</th><th>Controls with</th><th>Key parameters</th></tr>
     <tr><td>Diode</td><td>p–n</td><td>1</td><td>voltage across it</td><td>V<sub>0</sub>, I<sub>s</sub>, V<sub>BR</sub></td></tr>
     <tr><td>BJT</td><td>n–p–n or p–n–p</td><td>2 (EBJ, CBJ)</td><td>base current</td><td>α, β, V<sub>A</sub></td></tr>
     <tr><td>MOS capacitor</td><td>metal–oxide–semiconductor</td><td>none (insulator)</td><td>gate voltage</td><td>C<sub>ox</sub>, V<sub>th</sub>, w<sub>m</sub></td></tr>
     <tr><td>MOSFET</td><td>MOS + source + drain</td><td>2 (S–B, D–B)</td><td>gate voltage</td><td>V<sub>th</sub>, μC<sub>ox</sub>(W/L), R<sub>ON</sub></td></tr>
+    <tr><td>CMOS inverter</td><td>pMOS (n-well) + nMOS</td><td>4 (S–B, D–B of each)</td><td>input voltage</td><td>V<sub>M</sub>, NM<sub>L</sub>, NM<sub>H</sub>, t<sub>p</sub>, P = αCV<sub>DD</sub>²f</td></tr>
+    <tr><td>Memory cells</td><td>NOR ROM: 0/1 nMOS · SRAM: 6T · DRAM: 1T1C</td><td>—</td><td>word line + bit line</td><td>density, access time, retention</td></tr>
   </table></div>
-  <h3>13.3 Small corrections I found in the handwritten notes</h3>
-  <p>These are places where your handwriting has a slip. The physics above uses the corrected version. Check them against what your teacher wrote on the board.</p>
+  <h3>19.3 Small corrections and inconsistencies in the notes and Drive files</h3>
+  <p>These are places where your handwriting (sets 1 to 3) or the Drive material has a slip or two sources disagree. The physics above uses the corrected version. Check them against what your teacher wrote on the board.</p>
   <div class="tablewrap"><table>
     <tr><th>Where</th><th>What the notes show</th><th>Correct / consistent version</th></tr>
     <tr><td>Semiconductor E–k question (p.6)</td><td>Masses 0.2 m<sub>0</sub> and 0.06 m<sub>0</sub> struck out; plot 1 has the higher curvature</td><td>Higher curvature ⇒ lower m*. If numbers are given, the smaller m* is the higher-current material.</td></tr>
@@ -157,17 +270,28 @@
     <tr><td>MOSFET types (p.5)</td><td>Last list line reads "n MOS enhan." twice</td><td>The four types are nMOS enh., nMOS dep., pMOS enh., pMOS dep.</td></tr>
     <tr><td>pMOS biasing (p.6)</td><td>Source "GND", substrate "highest potential"</td><td>In CMOS the pMOS source and body are at V<sub>DD</sub>. Its V<sub>GS</sub>, V<sub>DS</sub> are negative.</td></tr>
     <tr><td>Depletion widths (p.21 to 22)</td><td>Both "ω" and "W" used</td><td>Same thing: W = x<sub>n</sub> + x<sub>p</sub>.</td></tr>
+      <tr><td>Set 3, regions table (p.11)</td><td>Rows "deep-triode/linear" and "non-linear" carry the same condition V<sub>DS</sub> &lt; V<sub>GS</sub> − V<sub>th</sub></td><td>Deep triode is the part with V<sub>DS</sub> ≪ V<sub>GS</sub> − V<sub>th</sub> (V<sub>DS</sub>²/2 negligible); non-linear is the rest of the triode region.</td></tr>
+    <tr><td>Set 3, velocity saturation (p.14)</td><td>I<sub>D</sub> × 1/(1 + V<sub>DS</sub>/E<sub>c</sub>)</td><td>1/(1 + V<sub>DS</sub>/(E<sub>c</sub>L)): the field is V<sub>DS</sub>/L.</td></tr>
+    <tr><td>Set 3, sub-threshold row (p.9)</td><td>Condition V<sub>GS</sub> ≤ V<sub>th</sub>, same as cut-off</td><td>Sub-threshold is the region just below V<sub>th</sub> where weak inversion gives an exponential current; "cut-off" is the idealisation I<sub>D</sub> = 0.</td></tr>
+    <tr><td>Set 3, scaling example (p.12)</td><td>Lateral scaled by 2, vertical by 3</td><td>Fine: each field stays constant. In standard constant-field scaling all dimensions and voltages use one factor S.</td></tr>
+    <tr><td>Drive, trap statistics</td><td>τ ∝ 1/(σv<sub>th</sub>n)</td><td>τ = 1/(σv<sub>th</sub>N<sub>t</sub>): N<sub>t</sub> is the trap density.</td></tr>
+    <tr><td>Drive, Si melting point</td><td>1412 °C (notes) and 1417 °C (slide M3)</td><td>The accepted value is 1414 °C; either number is fine in an answer.</td></tr>
+    <tr><td>Breakdown voltages</td><td>Class: Zener &lt; 5 V, avalanche &gt; 8 V. Drive: ≈ 4E<sub>g</sub>/q and &gt; 6E<sub>g</sub>/q</td><td>Consistent for Si (4.4 V and 6.6 V); between them both mechanisms mix.</td></tr>
+    <tr><td>Drive, Level-1 validity</td><td>"accurate down to 4 μm" (LT5) and "inaccurate below 0.8 μm" (model notes)</td><td>Both appear; quote whichever your teacher used. The point is that Level 1 has no short-channel effects.</td></tr>
+    <tr><td>Drive, GaN breakdown for W = 1 μm</td><td>180 V</td><td>½WF<sub>crit</sub> with F<sub>crit</sub> = 3 MV/cm gives 150 V; 180 V corresponds to ~3.6 MV/cm.</td></tr>
   </table></div>
-  <h3>13.4 Five-day plan to top the test</h3>
+  <h3>19.4 Seven-day plan to top the test</h3>
   <ol class="steps">
-    <li><b>Day 1:</b> Chapters 0 to 3. Redo the f(E) questions and E–k questions. Draw the band pictures from memory.</li>
-    <li><b>Day 2:</b> Chapters 4 to 6. Solve all four class questions plus C1 to C6 without looking.</li>
-    <li><b>Day 3:</b> Chapter 7. Derive I = I<sub>s</sub>(e<sup>V/V<sub>T</sub></sup> − 1) out loud. Do D1 to D7.</li>
-    <li><b>Day 4:</b> Chapters 8 and 9. Do E1 to E6, draw the C–V curve, explain accumulation, depletion and inversion.</li>
-    <li><b>Day 5:</b> Chapter 10, then the formula sheet and section 13.1. Do F1 to F6 and G1 to G6 timed.</li>
+    <li><b>Day 1:</b> Chapters 0 to 3, plus §13.1 to 13.2. Redo the f(E), E–k and DOS questions. Draw the band pictures from memory.</li>
+    <li><b>Day 2:</b> Chapters 4 to 6, plus §13.3 to 13.8. Practice B, C and J1 to J4 without looking.</li>
+    <li><b>Day 3:</b> Chapter 7, plus §13.9 to 13.14. Derive I = I<sub>s</sub>(e<sup>V/V<sub>T</sub></sup> − 1) and V<sub>bi</sub> out loud. Practice D and J5 to J10.</li>
+    <li><b>Day 4:</b> Chapters 8 and 9, plus §13.15 to 13.16. Draw the C–V curves (LF, HF, deep depletion). Practice E and F1, F2.</li>
+    <li><b>Day 5:</b> Chapters 10 and 11. Fill in the regions table from memory; solve every worked example. Practice F3 to F6 and H.</li>
+    <li><b>Day 6:</b> Chapters 12, 15 and 16. Design NAND, NOR, (AB + CD)′ and the NOR ROM on paper. Practice I, L and M.</li>
+    <li><b>Day 7:</b> Chapter 14, then the formula sheet (Chapter 17) and §19.1 to 19.3. Practice K, then N1 to N12 timed as a viva.</li>
   </ol>
   <div class="callout kid"><span class="lbl">Final pep talk, like I'm 10</span>
-    <p>Every device in this course is just one idea repeated: <b>carriers are pushed (drift) or spread (diffusion), and something blocks or opens their path</b>. In the diode the blocker is the depletion region; in the BJT it is a thin base; in the MOSFET it is a gate-controlled channel. If you can draw the band picture and say who is pushing whom, you can answer nearly any question.</p></div>
+    <p>Every device in this course is just one idea repeated: <b>carriers are pushed (drift) or spread (diffusion), and something blocks or opens their path</b>. In the diode the blocker is the depletion region; in the BJT it is a thin base; in the MOSFET it is a gate-controlled channel; in CMOS logic it is one of two doors that is always shut; and in the factory every step just decides where those carriers and barriers end up. If you can draw the band picture and say who is pushing whom, you can answer nearly any question.</p></div>
 </section>
 <script>
 (function(){
@@ -176,7 +300,7 @@
   var open=false;
   b.addEventListener('click',function(){
     open=!open;
-    var ds=document.querySelectorAll('#ch12 details.q');
+    var ds=document.querySelectorAll('#ch18 details.q');
     for(var i=0;i<ds.length;i++){ds[i].open=open;}
     b.textContent=open?'Close all answers':'Open all answers';
   });

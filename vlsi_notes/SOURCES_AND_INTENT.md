@@ -32,7 +32,7 @@ Attached: `VLSI-1-10-26.pdf`, `Vlsi-MOS29-09.pdf`, and two phone photos of noteb
 2. **Explain like I'm 10** for every concept, then go to full mastery (derivations and numbers).
 3. **Real questions**: reproduce and solve every question from the notes; add more in the same style.
 4. Use the **book / reference material** (now: the instructor's Drive folder) and mark what comes from where.
-5. Keep **one complete document** (`vlsi_notes.html`, printable to PDF).
+5. Keep **one complete document** (`vlsi_notes.html`, printable to PDF). Build: `python3 make_figs.py && python3 make_figs2.py && python3 build.py` (needs matplotlib).
 6. **Keep a copy of every source and every instruction in git** (this file plus `sources/`).
 
 ---
@@ -148,4 +148,4 @@ No textbook file has been provided yet. Until one is, "textbook" content in the 
 | 2026-09-29 | `vlsi_notes.html` v1: Chapters 0 to 13 (semiconductors to MOSFET and CMOS inverter), 28 diagrams, formula sheet, practice bank. Built by `make_figs.py` + `build.py` from `src/`. Published privately at https://claude.ai/artifact/Ua3hdYDtPoYz3kfuD6uJFS |
 | 2026-11-18 | This file; `sources/` archive (set 3 class notes, photos, the full Drive folder); transcript of sets 1 and 2. |
 | 2026-11-18 | Sets 1 and 2 re-uploaded and archived; all 44 pages re-checked against the transcript and Chapters 0–10 (no missing content). |
-| next | Study every Drive file and set-3 note, then extend the notes: Unit I details (DOS, incomplete ionisation, continuity equation, G-R currents), the MOS / MOSFET / CMOS detail, Manufacturing, LTSpice, semiconductor memories. |
+| 2026-11-18 | `vlsi_notes.html` v2, the complete notes: 20 chapters (0–19). New Chapters 11 (MOSFET regions, R<sub>on</sub>, sub-threshold, scaling, body effect, CLM, velocity saturation, punch-through, DIBL), 12 (CMOS inverter: switch model, static behaviour, VTC, V<sub>M</sub>, noise margins, gain, delay, power; static CMOS NAND/NOR/complex gates, pseudo-nMOS), 13 (every Drive extra for Unit I and the MOS capacitor), 14 (Manufacturing), 15 (SPICE/LTspice), 16 (Semiconductor memories). Formula sheet, practice bank (90 questions with solutions) and cram sheet (30 traps, corrections table for sets 1–3 and the Drive, seven-day plan) extended to cover everything. 23 new diagrams in `make_figs2.py`. |
